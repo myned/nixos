@@ -26,13 +26,14 @@ in
         inactive_tab_font_style = "normal";
         confirm_os_window_close = 0;
         cursor_blink_interval = 0;
+        placement_strategy = "top-left"; # Partially fix padding
         scrollback_lines = -1;
         strip_trailing_spaces = "smart";
         tab_bar_style = "powerline";
         touch_scroll_multiplier = 3;
         url_style = "straight";
         wayland_enable_ime = "no";
-        window_padding_width = "0 5 5 5"; # top right bottom left
+        window_padding_width = "2.5 5"; # top/bottom left/right
 
         # Solarized Dark colors
         # https://ethanschoonover.com/solarized/
