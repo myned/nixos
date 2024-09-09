@@ -71,6 +71,7 @@ with lib;
       tio.enable = true;
       vscode.enable = true;
       waybar.enable = true;
+      wireshark.enable = true;
       wofi.enable = true;
       #// wpaperd.enable = true;
     })
