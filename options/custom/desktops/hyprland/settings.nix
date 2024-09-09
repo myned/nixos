@@ -162,8 +162,8 @@ in
         key_press_enables_dpms = true;
         middle_click_paste = false;
 
-        # BUG: Possibly still causes hard freezes
-        vrr = 2; # VRR in fullscreen
+        # BUG: Still causes hard freezes
+        #// vrr = 2; # VRR in fullscreen
       };
 
       # https://wiki.hyprland.org/Configuring/Variables/#input
