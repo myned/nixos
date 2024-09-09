@@ -93,13 +93,6 @@ in
 
       # Release binds
       bindr = [
-        ### Applications
-        "SUPER, Super_L, exec, ${pkill} wofi || ${wofi} --show drun"
-        "SUPER+CTRL, Super_L, exec, ${pkill} wofi || calc"
-        "SUPER+SHIFT, Super_L, exec, ${pkill} wofi || ${wofi} --show run"
-        "SUPER+SHIFT+CTRL, Super_L, exec, ${pkill} wofi || ${networkmanager_dmenu}"
-        "SUPER+ALT, Super_L, exec, ${pkill} wofi || ${rofi-rbw}"
-
         ### Layouts
         "SUPER+CTRL, Control_L, layoutmsg, swapwithmaster master"
         "SUPER+SHIFT+CTRL, Control_L, layoutmsg, addmaster"
@@ -109,6 +102,8 @@ in
         "SUPER+SHIFT, Shift_L, workspace, previous"
 
         # Special workspaces
+        "SUPER, Super_L, togglespecialworkspace, scratchpad"
+        "SUPER+SHIFT, Super_L, movetoworkspacesilent, special:scratchpad"
         "SUPER+ALT, Alt_L, togglespecialworkspace, wallpaper"
       ];
 
@@ -144,11 +139,19 @@ in
         "SUPER, O, exec, ${libreoffice}"
         "SUPER, P, exec, ${hyprpicker} --autocopy"
         "SUPER+SHIFT, P, exec, ${hyprpicker} --autocopy --format rgb"
-        "SUPER+SHIFT, T, exec, ${kitty}"
+        "SUPER+CTRL, T, exec, ${kitty}"
+        "SUPER+SHIFT+CTRL, T, exec, ${pkill} kitty"
         "SUPER, V, exec, ${kitty} --app-id clipboard --override font_size=12 ${clipse}"
         "SUPER+SHIFT, V, exec, ${clipse} -clear && ${notify-send} clipse 'Clipboard cleared' --urgency low"
+        "SUPER, Space, exec, ${pkill} wofi || ${wofi} --show drun"
+        "SUPER+SHIFT, Space, exec, ${pkill} wofi || ${wofi} --show run"
+        "SUPER+CTRL, Space, exec, ${pkill} wofi || calc"
+        "SUPER+ALT, Space, exec, ${pkill} wofi || ${rofi-rbw}"
+        "SUPER+SHIFT+CTRL, Space, exec, ${pkill} wofi || ${networkmanager_dmenu}"
 
         # Kill applications
+        "SUPER, Q, killactive"
+        "SUPER+SHIFT, Q, exec, ${kill} -9 $(${hyprctl} -j activewindow | ${jq} .pid)"
         "SUPER+SHIFT, A, exec, ${waydroid} session stop"
         "SUPER+SHIFT, S, exec, ${pkill} steam"
         "SUPER+SHIFT+CTRL, G, exec, ${pkill} gamescope"
@@ -168,8 +171,6 @@ in
         "CTRL+ALT, Space, exec, lifx toggle"
 
         ### Windows
-        "SUPER, Q, killactive"
-        "SUPER+SHIFT, Q, exec, ${kill} -9 $(${hyprctl} -j activewindow | ${jq} .pid)"
         "SUPER, Escape, togglefloating"
         "SUPER+SHIFT, Escape, centerwindow"
         "SUPER, Return, fullscreen, 1" # Maximize
@@ -234,12 +235,15 @@ in
 
         # Special workspaces
         "SUPER, A, togglespecialworkspace, android"
+        "SUPER+SHIFT, A, movetoworkspacesilent, android"
         "SUPER, M, togglespecialworkspace, music"
+        "SUPER+SHIFT, M, movetoworkspacesilent, music"
         "SUPER, S, togglespecialworkspace, steam"
+        "SUPER+SHIFT, S, movetoworkspacesilent, steam"
         "SUPER, T, togglespecialworkspace, terminal"
+        "SUPER+SHIFT, T, movetoworkspacesilent, terminal"
         "SUPER, W, togglespecialworkspace, vm"
-        "SUPER, Space, togglespecialworkspace, scratchpad"
-        "SUPER+SHIFT, Space, movetoworkspacesilent, special:scratchpad"
+        "SUPER+SHIFT, W, movetoworkspacesilent, vm"
       ];
     };
   };
