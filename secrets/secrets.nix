@@ -62,7 +62,7 @@ in
   "sbc/borgmatic/borgbase.mypi3".publicKeys = sbc;
   "sbc/create_ap/passphrase".publicKeys = sbc;
   "sbc/create_ap/ssid".publicKeys = sbc;
-  "sbc/netdata/child.conf".publicKeys = common;
+  "sbc/netdata/child.conf".publicKeys = sbc;
   "sbc/users/myned.pass".publicKeys = sbc;
   "sbc/users/root.pass".publicKeys = sbc;
 
@@ -76,7 +76,7 @@ in
   "server/mastodon/.env".publicKeys = server;
   "server/mastodon/db.env".publicKeys = server;
   "server/matrix-conduit/conduwuit.toml".publicKeys = server;
-  "server/netdata/parent.conf".publicKeys = common;
+  "server/netdata/parent.conf".publicKeys = server;
   "server/nextcloud/.env".publicKeys = server;
   "server/nextcloud/db.env".publicKeys = server;
   "server/searxng/.env".publicKeys = server;
