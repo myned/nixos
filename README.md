@@ -1,3 +1,7 @@
+# WARNING
+
+## This configuration is not meant for public usage
+
 # Install
 
 ## Remote (with NixOS Anywhere)
@@ -14,12 +18,10 @@
 
 4. Create machine-specific modules in `machines/MACHINE/`
 
-   a. If [Home Manager](https://github.com/nix-community/home-manager), home configuration in `home.nix`
-
-   b. System configuration and hostname in `system.nix`
+   b. Machine configuration and hostname in `default.nix`
 
    ```nix
-   { networking.hostName = "MACHINE"; }
+   { custom.hostname = "MACHINE"; }
    ```
 
    c. [Disko](https://github.com/nix-community/disko) layout in `disko.nix`
@@ -38,12 +40,10 @@
    nixos-generate-config --show-hardware-config --no-filesystems --root /mnt
    ```
 
-   e. Import modules in `default.nix`
-
 5. Choose profile and add machine-specific modules to `flake.in.nix`
 
    ```nix
-   MACHINE = linux [ ./profiles/PROFILE ./machines/MACHINE ];
+   MACHINE = BRANCH [ ./profiles/PROFILE ./machines/MACHINE ];
    ```
 
 6. Generate `flake.nix` with [flakegen](https://github.com/jorsn/flakegen)
