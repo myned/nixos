@@ -21,6 +21,7 @@ in
           grace = 5 * 60; # Seconds
           hide_cursor = true;
           immediate_render = true;
+          no_fade_in = true; # Fix suspend interrupting animation
         };
 
         background = {
