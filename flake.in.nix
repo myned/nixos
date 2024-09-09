@@ -61,13 +61,13 @@
       bitwarden-menu = flake "github:firecat53/bitwarden-menu" // unstable "nixpkgs";
       fw-fanctrl = flake "github:TamtamHero/fw-fanctrl/packaging/nix" // unstable "nixpkgs";
       hypridle = flake "github:hyprwm/hypridle" // unstable "nixpkgs";
-      hyprland = flake "git+https://github.com/hyprwm/Hyprland?submodules=1" // unstable "nixpkgs";
-      # hyprland =
-      #   flake "git+https://github.com/hyprwm/Hyprland?ref=refs/tags/v0.41.2&submodules=1"
-      #   // unstable "nixpkgs";
-      # hyprland =
-      #   flake "git+https://github.com/UjinT34/Hyprland?ref=vrr-cursor-fix&submodules=1"
-      #   // unstable "nixpkgs";
+      #// hyprland = flake "git+https://github.com/hyprwm/Hyprland?submodules=1" // unstable "nixpkgs";
+      hyprland =
+        flake "git+https://github.com/hyprwm/Hyprland?ref=refs/tags/v0.43.0&submodules=1"
+        // unstable "nixpkgs";
+      #// hyprland =
+      #//   flake "git+https://github.com/UjinT34/Hyprland?ref=vrr-cursor-fix&submodules=1"
+      #//   // unstable "nixpkgs";
       hyprland-contrib = flake "github:hyprwm/contrib" // unstable "nixpkgs";
       hyprland-plugins =
         flake "github:hyprwm/hyprland-plugins" // unstable "nixpkgs" // follows "hyprland";
