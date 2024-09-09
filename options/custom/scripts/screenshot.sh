@@ -15,9 +15,9 @@ function round() {
 # TODO: Use proper flags
 # TODO: Add clipboard support
 if [[ "${1-}" == '-e' ]]; then
-  grimblast --freeze save area - | round | swappy --file -
+  grimblast save area - | swappy --file -
 elif [[ "${1-}" == '-d' ]]; then
-  grimblast --freeze save output - | round > "$XDG_SCREENSHOTS_DIR/$(date +'%F %H.%M.%S').png"
+  grimblast save output - > "$XDG_SCREENSHOTS_DIR/$(date +'%F %H-%M-%S').png"
 else
-  grimblast --freeze save area - | round > "$XDG_SCREENSHOTS_DIR/$(date +'%F %H.%M.%S').png"
+  grimblast save area - > "$XDG_SCREENSHOTS_DIR/$(date +'%F %H-%M-%S').png"
 fi
