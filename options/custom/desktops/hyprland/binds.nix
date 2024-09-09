@@ -64,6 +64,12 @@ in
         "CTRL+ALT, Delete, exec, ${loginctl} terminate-session ''"
         "SUPER, L, exec, ${hyprlock} --immediate & ${sleep} 1 && ${hyprctl} dispatch dpms off"
 
+        # Laptop lid switches
+        # https://wiki.hyprland.org/Configuring/Binds/#switches
+        #?? hyprctl devices
+        ", switch:on:Lid Switch, dpms, off" # Close
+        ", switch:off:Lid Switch, dpms, on" # Open
+
         ### Scripts
         "SUPER, Delete, exec, inhibit"
       ];
