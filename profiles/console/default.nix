@@ -33,7 +33,7 @@
       folders = lib.getAttrs [
         "SYNC/.ignore"
         "SYNC/game"
-      ] options.custom.syncthing.folders.default;
+      ] options.custom.services.syncthing.folders.default;
     };
 
     settings = {

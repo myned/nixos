@@ -549,10 +549,11 @@ in
       ".mozilla/firefox/default/chrome/firefox-gnome-theme".source = inputs.firefox-gnome-theme;
 
       # Imperative symlinks intended to be synced
-      "Downloads/stg".source = mkIf config.custom.full (
-        config.home-manager.users.${config.custom.username}.lib.file.mkOutOfStoreSymlink
-          "/home/myned/SYNC/common/config/extensions/Simple Tab Groups"
-      );
+      "Downloads/stg" = mkIf config.custom.full {
+        source =
+          config.home-manager.users.${config.custom.username}.lib.file.mkOutOfStoreSymlink
+            "/home/myned/SYNC/common/config/extensions/Simple Tab Groups";
+      };
 
       # Work around icon dissociation due to missing --name flag in actions
       # https://github.com/micheleg/dash-to-dock/issues/1968

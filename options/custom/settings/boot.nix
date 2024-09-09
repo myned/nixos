@@ -49,7 +49,7 @@ in
         systemd-boot = mkIf cfg.systemd-boot {
           enable = true;
           configurationLimit = 15;
-          consoleMode = cfg.console-mode;
+          consoleMode = mkIf (!isInt cfg.console-mode || cfg.console-mode <= 2) cfg.console-mode;
           editor = false; # Disable cmdline
 
           # HACK: consoleMode does not accept undocumented device modes (e.g. 3 4 5)
