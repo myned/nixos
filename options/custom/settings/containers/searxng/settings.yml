@@ -1,0 +1,200 @@
+# https://docs.searxng.org/admin/settings
+search:
+  autocomplete: duckduckgo
+  autocomplete_min: 3
+
+server:
+  method: GET
+
+ui:
+  static_use_hash: true
+  infinite_scroll: true
+  default_locale: en
+
+# https://github.com/searxng/searxng/blob/master/searx/preferences.py
+preferences:
+  lock:
+    #// - categories
+    - language
+    - locale
+    - autocomplete
+    - image_proxy
+    - method
+    - safesearch
+    - theme
+    - results_on_new_tab
+    - doi_resolver
+    - simple_style
+    - center_alignment
+    - advanced_search
+    - query_in_title
+    - infinite_scroll
+    - search_on_category_select
+
+# https://docs.searxng.org/admin/plugins.html
+enabled_plugins:
+  # General
+  - Basic Calculator
+  - Hostnames plugin
+  - Open Access DOI rewrite
+  - Unit converter plugin
+
+  # Privacy
+  - Tracker URL remover
+
+  # Special
+  - Hash plugin
+  - Self Information
+  - Tor check plugin
+
+hostnames:
+  replace:
+    '(.*\.)?reddit\.com$': 'reddit.bjork.tech'
+    '(.*\.)?redd\.it$': 'reddit.bjork.tech'
+
+# https://docs.searxng.org/admin/settings/settings_categories_as_tabs.html#settings-categories-as-tabs
+categories_as_tabs:
+  general:
+  images:
+  videos:
+  news:
+  #// map:
+  music:
+  it:
+  science:
+  #// files:
+  social media:
+
+# https://docs.searxng.org/admin/settings/settings_engine.html
+engines:
+  # General
+  - name: brave
+    disabled: false
+  - name: currency
+    disabled: false
+  #// - name: duckduckgo
+  #//   disabled: false
+  - name: google
+    disabled: false
+  - name: qwant
+    disabled: false
+  - name: wikipedia
+    disabled: false
+
+  # Images
+  - name: duckduckgo images
+    disabled: false
+  - name: qwant images
+    disabled: false
+
+  # Videos
+  - name: youtube
+    disabled: false
+
+  # News
+  - name: brave.news
+    disabled: false
+  - name: duckduckgo news
+    disabled: false
+  - name: qwant news
+    disabled: false
+
+  # Music
+  - name: bandcamp
+    disabled: false
+  - name: genius
+    disabled: false
+  - name: soundcloud
+    disabled: false
+  - name: youtube
+    disabled: false
+
+  # IT
+  - name: arch linux wiki
+    disabled: false
+  - name: caddy.community
+    disabled: false
+  - name: codeberg
+    disabled: false
+  - name: docker hub
+    disabled: false
+  - name: github
+    disabled: false
+  - name: gitlab
+    disabled: false
+  - name: mdn
+    disabled: false
+  - name: pypi
+    disabled: false
+  - name: sourcehut
+    disabled: false
+  - name: stackoverflow
+    disabled: false
+  - name: superuser
+    disabled: false
+
+  # Science
+  - name: arxiv
+    disabled: false
+  - name: google scholar
+    disabled: false
+  - name: pubmed
+    disabled: false
+
+  # Social Media
+  - name: lemmy communities
+    disabled: false
+  - name: lemmy posts
+    disabled: false
+
+# https://docs.searxng.org/user/configured_engines.html
+use_default_settings:
+  engines:
+    keep_only:
+      # General
+      - brave
+      - currency
+      #// - duckduckgo
+      - google
+      - qwant
+      - wikipedia
+
+      # Images
+      - duckduckgo images
+      - qwant images
+
+      # Videos
+      - youtube
+
+      # News
+      - brave.news
+      - duckduckgo news
+      - qwant news
+
+      # Music
+      - bandcamp
+      - genius
+      - soundcloud
+      - youtube
+
+      # IT
+      - arch linux wiki
+      - caddy.community
+      - codeberg
+      - docker hub
+      - github
+      - gitlab
+      - mdn
+      - pypi
+      - sourcehut
+      - stackoverflow
+      - superuser
+
+      # Science
+      - arxiv
+      - google scholar
+      - pubmed
+
+      # Social Media
+      - lemmy communities
+      - lemmy posts

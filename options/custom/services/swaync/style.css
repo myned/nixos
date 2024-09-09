@@ -1,0 +1,53 @@
+/*** SwayNotificationCenter
+https://docs.gtk.org/gtk3/css-overview.html
+https://docs.gtk.org/gtk3/css-properties.html
+https://github.com/ErikReider/SwayNotificationCenter/blob/main/data/style/style.scss
+***/
+
+@define-color cc-bg #002b36;
+
+@define-color noti-border-color #073642;
+@define-color noti-bg #002b36;
+@define-color noti-bg-opaque #002b36;
+@define-color noti-bg-darker #002b36;
+@define-color noti-bg-hover #073642;
+@define-color noti-bg-hover-opaque #073642;
+@define-color noti-bg-focus #002b36;
+
+@define-color text-color #93a1a1;
+@define-color text-color-disabled #586e75;
+
+.notification.low {
+  border: 2px solid #6c71c4;
+}
+
+.notification.normal {
+  border: 2px solid #d33682;
+}
+
+.notification.critical {
+  border: 2px solid #dc322f;
+}
+
+.notification-content {
+  padding: 16px;
+}
+
+.text-box .summary,
+.text-box .time {
+  font-size: 18px;
+}
+
+.text-box .body {
+  font-size: 16px;
+}
+
+.control-center {
+  border: 2px solid #073642;
+  margin: 10px; /* Gap size */
+  padding: 16px;
+}
+
+.control-center .notification {
+  box-shadow: none;
+}

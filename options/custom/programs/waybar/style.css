@@ -1,0 +1,116 @@
+/*** Waybar
+https://github.com/Alexays/Waybar/wiki/Styling
+https://github.com/Alexays/Waybar/blob/master/resources/style.css
+https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
+
+//??
+GTK_DEBUG=interactive waybar
+#custom-module { }
+***/
+
+* {
+  border-radius: 50px;
+  color: #93a1a1;
+  font: 18px 'Iosevka NFP SemiBold';
+  margin: 0;
+  padding: 0;
+}
+
+button:hover,
+label:hover {
+  background: #073642;
+}
+
+tooltip {
+  opacity: 0;
+  /* background: #002b36; */
+}
+
+.active {
+  background: rgba(88, 110, 117, 0.25);
+}
+
+.horizontal > box {
+  background: #002b36;
+  border: 2px #073642 solid;
+  margin: 0 10px 10px;
+  padding: 4px;
+}
+
+.module {
+  padding: 4px 12px;
+}
+
+#waybar {
+  background: transparent;
+}
+
+#battery.critical {
+  color: #dc322f;
+}
+
+#battery.warning {
+  color: #b58900;
+}
+
+#battery.charging {
+  color: #859900;
+}
+
+#bluetooth.connected {
+  color: #268bd2;
+}
+
+#bluetooth.disabled {
+  color: #dc322f;
+}
+
+#custom-inhibitor.enabled {
+  color: #cb4b16;
+}
+
+#custom-vm.online {
+  color: #268bd2;
+}
+
+#custom-vm.paused {
+  color: #b58900;
+}
+
+#custom-vm.unknown {
+  color: #dc322f;
+}
+
+#custom-vpn.connected {
+  color: #d33682;
+}
+
+#network.disabled {
+  color: #dc322f;
+}
+
+#network.disconnected {
+  color: #b58900;
+}
+
+#tray .active {
+  background: none;
+}
+
+#wireplumber.muted {
+  color: #dc322f;
+}
+
+#workspaces {
+  background: #073642;
+  padding: 0;
+}
+
+#workspaces > button {
+  margin: 0 1px;
+  padding: 4px 8px;
+}
+
+#workspaces > button:hover {
+  background: rgba(88, 110, 117, 0.25);
+}

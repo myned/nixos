@@ -1,0 +1,7 @@
+# https://docs.searxng.org/admin/searx.limiter.html
+[real_ip]
+x_for = 1 # Client behind a reverse proxy
+
+[botdetection.ip_limit]
+filter_link_local = true # Limit local addresses
+link_token = true # Suspicious if client does not request token

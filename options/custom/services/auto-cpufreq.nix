@@ -1,0 +1,47 @@
+{ config, lib, ... }:
+
+with lib;
+
+let
+  cfg = config.custom.services.auto-cpufreq;
+in
+{
+  options.custom.services.auto-cpufreq = {
+    enable = mkOption { default = false; };
+
+    max = {
+      battery = mkOption { default = null; }; # GHz
+      charger = mkOption { default = null; }; # GHz
+    };
+  };
+
+  config = mkIf cfg.enable {
+    # https://github.com/AdnanHodzic/auto-cpufreq
+    #?? auto-cpufreq --stats
+    #?? cpu-power freqency-info
+    #?? grep '' /sys/devices/system/cpu/cpu0/cpufreq/*
+    services = {
+      auto-cpufreq = {
+        enable = true;
+
+        # https://github.com/AdnanHodzic/auto-cpufreq/blob/master/auto-cpufreq.conf-example
+        settings = {
+          battery = {
+            energy_performance_preference = "balance_power";
+            governor = "powersave";
+            scaling_max_freq = mkIf (isFloat cfg.max.battery) (builtins.floor (cfg.max.battery * 1000 * 1000)); # KHz
+            #// turbo = "never"; # Only works with acpi-cpufreq
+          };
+
+          charger = {
+            energy_performance_preference = "balance_performance";
+            governor = "powersave";
+            scaling_max_freq = mkIf (isFloat cfg.max.charger) (builtins.floor (cfg.max.charger * 1000 * 1000)); # KHz
+          };
+        };
+      };
+
+      power-profiles-daemon.enable = false; # Conflicts with auto-cpufreq
+    };
+  };
+}
