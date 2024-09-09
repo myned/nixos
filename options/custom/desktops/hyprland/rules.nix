@@ -111,7 +111,10 @@ in
             "suppressevent maximize"
             "syncfullscreen"
           ])
-          (floating true [ "bordercolor rgb(073642)" ])
+          (floating true [
+            "bordercolor rgb(073642)"
+            "workspace special:scratchpad"
+          ])
           (fullscreen true [ "idleinhibit focus" ])
           (pinned true [ "bordercolor rgb(073642) rgb(073642)" ])
 
@@ -124,6 +127,7 @@ in
           (tag "browser" [
             "group new lock"
             "tile"
+            "workspace unset"
           ])
           (tag "clipboard" [
             "move ${clipboard.x} ${clipboard.y}"
@@ -135,10 +139,12 @@ in
             "move ${dropdown.x} ${dropdown.y}"
             "pin"
             "size ${dropdown.w} ${dropdown.h}"
+            "workspace special:dropdown"
           ])
           (tag "editor" [
             "group invade"
             "tile"
+            "workspace unset"
           ])
           (tag "files" [
             "size 1000 625"
@@ -164,9 +170,13 @@ in
           (tag "social" [
             "group"
             "tile"
+            "workspace unset"
           ])
           (tag "steam" [ "workspace special:steam" ])
-          (tag "terminal" [ "tile" ])
+          (tag "terminal" [
+            "tile"
+            "workspace unset"
+          ])
           (tag "vm" [ "workspace special:vm" ])
           (tag "wine" [
             "noborder"
@@ -188,7 +198,10 @@ in
           (class "Element" [ "tag +social" ])
           (class "foot" [ "tag +terminal" ])
           (class "kitty" [ "tag +terminal" ])
-          (class "libreoffice.+" [ "tile" ])
+          (class "libreoffice.+" [
+            "tile"
+            "workspace unset"
+          ])
           (class "moe\\.launcher\\.the-honkers-railway-launcher" [
             "size 1280 730"
             "tag +game"

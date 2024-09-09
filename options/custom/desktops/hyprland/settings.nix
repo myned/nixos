@@ -122,7 +122,7 @@ in
         "col.shadow_inactive" = "rgba(0000001a)";
         "col.shadow" = "rgba(00000040)";
         blur.enabled = false;
-        dim_special = 0.5;
+        dim_special = 0;
         rounding = 12;
         shadow_range = 50;
         shadow_render_power = 4; # Distance falloff
@@ -176,6 +176,7 @@ in
         repeat_rate = 40;
         sensitivity = 0.5;
         #// scroll_factor = 0.75;
+        special_fallthrough = true; # Alternative to toggle script
 
         touchpad = {
           clickfinger_behavior = true; # Multi-finger clicks
