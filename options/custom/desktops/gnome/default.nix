@@ -30,6 +30,6 @@ in
 
     # Remove default packages
     # https://wiki.nixos.org/wiki/GNOME#Excluding_GNOME_Applications
-    environment.gnome.excludePackages = [ pkgs.gnome.gnome-shell-extensions ];
+    environment.gnome.excludePackages = [ pkgs.gnome-shell-extensions ];
   };
 }
