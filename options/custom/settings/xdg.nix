@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 
@@ -24,11 +23,6 @@ in
     # https://wiki.archlinux.org/title/XDG_Desktop_Portal
     xdg.portal = {
       enable = true;
-      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-      config.common.default = [
-        "hyprland"
-        "gtk"
-      ]; # Prefer hyprland over gtk portal
 
       # Use portal for xdg-open
       # https://github.com/NixOS/nixpkgs/issues/160923

@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 
@@ -22,6 +23,17 @@ in
 
     # https://github.com/hyprwm/Hyprland
     programs.hyprland.enable = true;
+
+    xdg.portal = {
+      enable = true;
+      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+
+      # Prefer hyprland over gtk portal
+      config.common.default = [
+        "hyprland"
+        "gtk"
+      ];
+    };
 
     # https://wiki.hyprland.org
     home-manager.users.${config.custom.username}.wayland.windowManager.hyprland = {
