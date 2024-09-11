@@ -149,12 +149,6 @@ in
         forcepoweroff = mkBoolean false;
       };
 
-      "org/virt-manager/virt-manager/connections" = {
-        #?? [as]
-        autoconnect = mkArray type.string [ "qemu:///system" ];
-        uris = mkArray type.string [ "qemu:///system" ];
-      };
-
       "org/virt-manager/virt-manager/console" = {
         auto-redirect = mkBoolean false;
         resize-guest = mkInt32 1;

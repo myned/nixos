@@ -340,7 +340,7 @@ in {
         text = ''
           #! /usr/bin/env ${bash}
 
-          case "$(virsh --connect qemu:///system domstate myndows)" in
+          case "$(virsh domstate myndows)" in
             'running')
               ${echo} 
               ${echo} Online

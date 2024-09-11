@@ -3,8 +3,6 @@
 # Start/resume VM if needed and launch viewer
 #?? man xfreerdp
 
-function virsh() { command virsh --connect qemu:///system "$@"; }
-
 state="$(virsh domstate myndows)"
 
 if [[ "$state" == 'paused' ]]; then

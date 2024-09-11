@@ -19,13 +19,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    # https://github.com/virt-manager/virt-manager
-    programs.virt-manager.enable = cfg.libvirt;
-
-    users.users.${config.custom.username}.extraGroups =
-      lib.optionals cfg.libvirt [ "libvirtd" ]
-      ++ lib.optionals cfg.virtualbox [ "vboxusers" ];
-
     virtualisation = {
       # https://wiki.nixos.org/wiki/Libvirt
       # https://libvirt.org
@@ -75,6 +68,16 @@ in
         enableExtensionPack = true;
       };
     };
+
+    # https://github.com/virt-manager/virt-manager
+    programs.virt-manager.enable = cfg.libvirt;
+
+    # https://libvirt.org/uri.html#default-uri-choice
+    environment.sessionVariables.LIBVIRT_DEFAULT_URI = mkIf cfg.libvirt "qemu:///system";
+
+    users.users.${config.custom.username}.extraGroups =
+      lib.optionals cfg.libvirt ["libvirtd"]
+      ++ lib.optionals cfg.virtualbox ["vboxusers"];
 
     systemd = mkIf cfg.libvirt {
       # Fix resume messages polluting tty
