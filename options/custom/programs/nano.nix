@@ -20,6 +20,7 @@ in
         set autoindent
         set magic
         set minibar
+        set linenumbers
         set tabsize 2
         set tabstospaces
         set trimblanks
