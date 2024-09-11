@@ -215,6 +215,9 @@ in
 
       # https://wiki.hyprland.org/Configuring/Keywords/#per-device-input-configs
       #?? device = { name = NAME ... }
+      # https://wiki.hyprland.org/Configuring/Variables/#custom-accel-profiles
+      # https://wayland.freedesktop.org/libinput/doc/latest/pointer-acceleration.html#the-custom-acceleration-profile
+      #?? custom <STEP> <POINTS...>
       # TODO: Combine same devices
       # FIXME: Hotplugging may result in different id
       device = [
@@ -238,8 +241,8 @@ in
 
         {
           name = "logitech-m570";
-          accel_profile = "adaptive";
-          sensitivity = -0.9;
+          accel_profile = "custom 1 0 1 3";
+          sensitivity = -0.1;
         }
 
         {
