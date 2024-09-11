@@ -6,7 +6,7 @@
 workspace="$(hyprctl activewindow -j | jq -r .workspace.name)"
 
 if [[ "$workspace" == "special:scratchpad" ]]; then
-  hyprctl dispatch movetoworkspacesilent +0
+  hyprctl dispatch movetoworkspacesilent 0
 else
   hyprctl dispatch movetoworkspacesilent special:scratchpad
 fi
