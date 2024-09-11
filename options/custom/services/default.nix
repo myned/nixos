@@ -6,6 +6,7 @@ with lib;
   config.custom.services = mkMerge [
     (mkIf config.custom.default {
       #// agenix.enable = true;
+      #// netbird.enable = true;
       tailscale.enable = true;
     })
 
