@@ -67,9 +67,9 @@ in
     home = {
       # Extension dependencies
       packages = with pkgs; [
+        alejandra # nix-ide
         blueprint-compiler # blueprint-gtk
         nixd # nix-ide
-        nixfmt-rfc-style # nix-ide
         shfmt # shell-format
       ];
 

@@ -26,11 +26,11 @@ in
           # CLI applications
           config.boot.kernelPackages.cpupower # Install for current kernel
 
+          alejandra
           fd
           fzf
           jq
           lm_sensors # sensors
-          nixfmt-rfc-style # nixfmt
           nix-output-monitor # nom
           nix-tree
           nmap

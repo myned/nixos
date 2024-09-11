@@ -101,8 +101,10 @@
 
   outputs = inputs: {
     # TODO: Use forAllSystems
+    # FIXME: nixd always uses nixfmt when importing flakes
     # https://nix.dev/manual/nix/2.18/command-ref/new-cli/nix3-fmt
-    formatter.x86_64-linux = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.nixfmt-rfc-style;
+    # https://github.com/kamadorueda/alejandra/blob/main/STYLE.md
+    formatter.x86_64-linux = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.alejandra;
 
     nixosConfigurations =
       let
