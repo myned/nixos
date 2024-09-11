@@ -157,6 +157,7 @@ in {
           };
 
           # https://github.com/Alexays/Waybar/wiki/Module:-Hyprland
+          # https://www.nerdfonts.com/cheat-sheet
           "hyprland/workspaces" = {
             show-special = true;
             format = "{icon}";
@@ -165,8 +166,9 @@ in {
               dropdown = "󰞷";
               game = "󰊴";
               music = "󰝚";
+              office = "󰈙";
               pip = "󰹙";
-              scratchpad = "󰎚";
+              scratchpad = "";
               steam = "󰓓";
               terminal = "";
               vm = "󰢹";
