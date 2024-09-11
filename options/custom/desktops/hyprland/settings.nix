@@ -76,8 +76,9 @@ in
         # https://github.com/Alexays/Waybar/issues/2882
         "${sleep} 2 && ${systemctl} --user restart waybar"
 
-        "[tag +browser] ${firefox-esr}"
-      ] ++ optionals config.custom.wallpaper [ "wallpaper" ];
+          "[group new lock; tile] ${firefox-esr}"
+        ]
+        ++ optionals config.custom.wallpaper ["wallpaper"];
 
       # https://wiki.hyprland.org/Configuring/Variables/#xwayland
       xwayland = {
