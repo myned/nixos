@@ -55,14 +55,14 @@ in
 
   services.keyd.keyboards.default.settings.main.rightcontrol = "layer(altgr)"; # No Ctrl_R
 
-  # Enable hibernation with a swapfile on btrfs
-  # https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Hibernation_into_swap_file
-  #?? findmnt -no UUID -T /swap/swapfile
-  #?? sudo btrfs inspect-internal map-swapfile -r /swap/swapfile
   boot = {
+    # Enable hibernation with a swapfile on btrfs
+    # https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Hibernation_into_swap_file
+    #?? findmnt -no UUID -T /swap/swapfile
     resumeDevice = "/dev/disk/by-uuid/f9416347-eff5-45d5-8dc3-93414c11ba6f";
 
     kernelParams = [
+      #?? sudo btrfs inspect-internal map-swapfile -r /swap/swapfile
       "resume_offset=533760"
 
       # Fix battery drain with suspend-then-hibernate

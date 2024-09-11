@@ -10,10 +10,20 @@
     height = 1440;
   };
 
-  boot.kernelParams = [
-    # https://gitlab.freedesktop.org/drm/amd/-/issues/2516#note_2119750
-    #// "gpu_sched.sched_policy=0" # Attempt to fix stutter
-  ];
+  boot = {
+    # Enable hibernation with a swapfile on btrfs
+    # https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Hibernation_into_swap_file
+    #?? findmnt -no UUID -T /swap/swapfile
+    resumeDevice = "/dev/disk/by-uuid/5df5028b-a3ba-4f07-80ef-fd5abd542a81";
+
+    kernelParams = [
+      #?? sudo btrfs inspect-internal map-swapfile -r /swap/swapfile
+      "resume_offset=533760"
+
+      # https://gitlab.freedesktop.org/drm/amd/-/issues/2516#note_2119750
+      #// "gpu_sched.sched_policy=0" # Attempt to fix stutter
+    ];
+  };
 
   #  _._     _,-'""`-._
   # (,-.`._,'(       |\`-/|
