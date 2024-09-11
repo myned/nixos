@@ -181,7 +181,7 @@ in
         focus_on_close = 1; # Focus window under mouse
         follow_mouse = 1; # Hover focus
         mouse_refocus = false;
-        repeat_delay = 400;
+        repeat_delay = 300;
         repeat_rate = 40;
         sensitivity = 0.5;
         #// scroll_factor = 0.75;
