@@ -55,6 +55,7 @@
         coturn.enable = true;
         forgejo.enable = true;
         foundryvtt.enable = true;
+        #// headscale.enable = true;
         mastodon.enable = true;
         nextcloud.enable = true;
         redlib.enable = true;
