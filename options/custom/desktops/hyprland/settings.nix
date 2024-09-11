@@ -112,9 +112,9 @@ in
       #?? animation = NAME, ONOFF, SPEED, CURVE, [STYLE]
       animation = [
         "global, 1, 5, default"
-        "windows, 1, 5, default, slide"
-        "layers, 1, 5, default, slide"
         "specialWorkspace, 1, 5, default, fade"
+        "windows, 1, 5, default, slide"
+        "layers, 0"
       ];
 
       # https://wiki.hyprland.org/Configuring/Variables/#decoration
