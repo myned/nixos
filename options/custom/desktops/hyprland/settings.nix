@@ -178,6 +178,7 @@ in
       input = {
         accel_profile = "flat";
         float_switch_override_focus = 0; # Disable float to tile hover focus
+        focus_on_close = 1; # Focus window under mouse
         follow_mouse = 1; # Hover focus
         mouse_refocus = false;
         repeat_delay = 400;
