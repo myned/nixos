@@ -166,6 +166,14 @@ in
         #// vrr = 2; # VRR in fullscreen
       };
 
+      # https://wiki.hyprland.org/Configuring/Variables/#binds
+      binds = {
+        allow_workspace_cycles = true;
+        disable_keybind_grabbing = true;
+        ignore_group_lock = true;
+        scroll_event_delay = 0;
+      };
+
       # https://wiki.hyprland.org/Configuring/Variables/#input
       input = {
         accel_profile = "flat";
