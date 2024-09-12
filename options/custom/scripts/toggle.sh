@@ -1,7 +1,5 @@
 #! /usr/bin/env bash
 
-set -x
-
 # Toggle pinned window, launch if needed
 #?? toggle --type TYPE --expression EXPRESSION --workspace WORKSPACE [COMMAND]
 #!! Regex may need to be double-escaped
