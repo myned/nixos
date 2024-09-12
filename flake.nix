@@ -113,7 +113,7 @@
       url = "github:nix-community/nixd";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    nixpkgs-local.url = "git+file:///home/myned/.dev/nixpkgs?ref=7849cd48822de4dc0515c787b20dc85de30acdca";
+    nixpkgs-local.url = "git+file:///home/myned/SYNC/dev/repo/nixpkgs";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixpkgs-staging-next.url = "github:NixOS/nixpkgs/staging-next";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
