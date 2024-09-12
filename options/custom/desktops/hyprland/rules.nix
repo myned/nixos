@@ -167,6 +167,7 @@ in {
         flatten [
           ### Defaults
           (class ".*" ["float" "suppressevent maximize" "syncfullscreen"])
+          (floating false ["noshadow"])
           (floating true ["bordercolor rgb(073642)"])
           (fullscreen true ["idleinhibit focus"])
           (pinned true ["bordercolor rgb(073642) rgb(073642)"])
