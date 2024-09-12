@@ -5,17 +5,13 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   cfg = config.custom.programs.anyrun;
-in
-{
-  options.custom.programs.anyrun.enable = mkOption { default = false; };
+in {
+  options.custom.programs.anyrun.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
-    imports = [ inputs.anyrun.home-managerModules.default ];
+    imports = [inputs.anyrun.homeManagerModules.default];
 
     # https://github.com/Kirottu/anyrun
     programs.anyrun = {
@@ -27,8 +23,7 @@ in
           applications
           dictionary
           #// kidex # File search
-          #// randr # Hyprland only\{
-
+          #// randr # Hyprland only
           rink # Calculator
           shell
           #// stdin # Entries from input, aka dmenu
