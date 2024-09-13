@@ -177,7 +177,7 @@ in {
           (tag.dropdown ["move ${dropdown.x} ${dropdown.y}" "pin" "size ${dropdown.w} ${dropdown.h}"])
           (tag.editor ["group invade" "tile"])
           (tag.files ["size 1000 625"])
-          (tag.game ["group barred" "idleinhibit always" "noborder" "noshadow" "renderunfocused" "workspace name:game"])
+          (tag.game ["fullscreen" "group barred" "idleinhibit always" "noborder" "noshadow" "renderunfocused" "workspace name:game"])
           (tag.music ["tile" "workspace special:music"])
           (tag.office ["tile" "workspace special:office"])
           (tag.pip ["keepaspectratio" "move ${pip.x} ${pip.y}" "pin" "size ${pip.w} ${pip.h}"])
