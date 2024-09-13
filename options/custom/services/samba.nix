@@ -1,12 +1,12 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.services.samba;
-in
 {
-  options.custom.services.samba.enable = mkOption { default = false; };
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.services.samba;
+in {
+  options.custom.services.samba.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     # https://wiki.nixos.org/wiki/Samba

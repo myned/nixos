@@ -4,14 +4,10 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   cfg = config.custom.programs.rbw;
-in
-{
-  options.custom.programs.rbw.enable = mkOption { default = false; };
+in {
+  options.custom.programs.rbw.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     # https://github.com/doy/rbw

@@ -1,12 +1,12 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.programs.librewolf;
-in
 {
-  options.custom.programs.librewolf.enable = mkOption { default = false; };
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.programs.librewolf;
+in {
+  options.custom.programs.librewolf.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     # https://codeberg.org/librewolf

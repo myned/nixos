@@ -5,39 +5,33 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   cat = "${pkgs.coreutils}/bin/cat";
   tailscale = "${config.services.tailscale.package}/bin/tailscale";
 
   cfg = config.custom.services.tailscale;
-in
-{
+in {
   # TODO: Enact recommendations
   # https://tailscale.com/kb/1320/performance-best-practices
   # https://github.com/tailscale/tailscale
   #!! Configuration is imperative
   #?? sudo tailscale up --ssh --advertise-exit-node --accept-routes --operator=$USER --reset --qr
   options.custom.services.tailscale = {
-    enable = mkOption { default = false; };
-    cert = mkOption { default = false; };
+    enable = mkOption {default = false;};
+    cert = mkOption {default = false;};
   };
 
   # TODO: Use caddy plugin for provisioning when supported by NixOS
   # https://github.com/NixOS/nixpkgs/pull/317881
   # https://github.com/tailscale/caddy-tailscale
   config = mkIf cfg.enable {
-    age.secrets =
-      let
-        secret = filename: {
-          file = "${inputs.self}/secrets/${filename}";
-        };
-      in
-      {
-        "common/tailscale/tailnet" = secret "common/tailscale/tailnet";
+    age.secrets = let
+      secret = filename: {
+        file = "${inputs.self}/secrets/${filename}";
       };
+    in {
+      "common/tailscale/tailnet" = secret "common/tailscale/tailnet";
+    };
 
     services.tailscale = {
       enable = true;
@@ -46,10 +40,9 @@ in
     };
 
     # Provision Tailscale certificates in the background per machine
-    systemd =
-      let
-        hostname = config.custom.hostname;
-      in
+    systemd = let
+      hostname = config.custom.hostname;
+    in
       mkIf cfg.cert {
         #!! Needs to be run on the machine
         # tailscale cert always writes to /var/lib/tailscale/certs/ regardless of flags
@@ -62,7 +55,7 @@ in
         ];
 
         timers."tailscale-cert-${hostname}" = {
-          wantedBy = [ "timers.target" ];
+          wantedBy = ["timers.target"];
 
           timerConfig = {
             OnCalendar = "daily";

@@ -4,14 +4,10 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   cfg = config.custom.programs.rofi;
-in
-{
-  options.custom.programs.rofi.enable = mkOption { default = false; };
+in {
+  options.custom.programs.rofi.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     #!! Creates package derivation
@@ -30,8 +26,8 @@ in
         # Build against rofi-wayland due to ABI incompatibility with upstream
         # https://github.com/lbonn/rofi/issues/96
         # https://github.com/NixOS/nixpkgs/issues/298539
-        (rofi-calc.override { rofi-unwrapped = rofi-wayland-unwrapped; }) # Calculator
-        (rofi-top.override { rofi-unwrapped = rofi-wayland-unwrapped; }) # System monitor
+        (rofi-calc.override {rofi-unwrapped = rofi-wayland-unwrapped;}) # Calculator
+        (rofi-top.override {rofi-unwrapped = rofi-wayland-unwrapped;}) # System monitor
       ];
 
       #?? rofi-theme-selector

@@ -1,8 +1,9 @@
-{ config, lib, ... }:
-
-with lib;
-
 {
+  config,
+  lib,
+  ...
+}:
+with lib; {
   config.custom.programs = mkMerge [
     (mkIf config.custom.default {
       direnv.enable = true;

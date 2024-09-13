@@ -4,23 +4,19 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   fastfetch = "${pkgs.fastfetch}/bin/fastfetch";
 
   cfg = config.custom.programs.fastfetch;
-in
-{
+in {
   options.custom.programs.fastfetch = {
-    enable = mkOption { default = false; };
-    greet = mkOption { default = false; };
+    enable = mkOption {default = false;};
+    greet = mkOption {default = false;};
   };
 
   config = mkIf cfg.enable {
     # https://github.com/fastfetch-cli/fastfetch
-    environment.systemPackages = [ pkgs.fastfetch ];
+    environment.systemPackages = [pkgs.fastfetch];
 
     # System info greeting
     programs.fish.interactiveShellInit = mkIf cfg.greet ''

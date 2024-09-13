@@ -1,12 +1,12 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.settings.accounts;
-in
 {
-  options.custom.settings.accounts.enable = mkOption { default = false; };
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.settings.accounts;
+in {
+  options.custom.settings.accounts.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     accounts = {

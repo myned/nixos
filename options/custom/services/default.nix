@@ -1,8 +1,9 @@
-{ config, lib, ... }:
-
-with lib;
-
 {
+  config,
+  lib,
+  ...
+}:
+with lib; {
   config.custom.services = mkMerge [
     (mkIf config.custom.default {
       #// agenix.enable = true;

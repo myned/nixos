@@ -4,10 +4,7 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   grep = "${pkgs.gnugrep}/bin/grep";
   hyprctl = "${
     config.home-manager.users.${config.custom.username}.wayland.windowManager.hyprland.finalPackage
@@ -21,9 +18,8 @@ let
   systemctl = "${pkgs.systemd}/bin/systemctl";
 
   cfg = config.custom.services.hypridle;
-in
-{
-  options.custom.services.hypridle.enable = mkOption { default = false; };
+in {
+  options.custom.services.hypridle.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     # https://github.com/hyprwm/hypridle

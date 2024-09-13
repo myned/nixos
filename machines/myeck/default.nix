@@ -19,5 +19,5 @@
     };
   };
 
-  systemd.tmpfiles.rules = [ "z /mnt/external 0755 myned users" ];
+  systemd.tmpfiles.rules = ["z /mnt/external 0755 myned users"];
 }

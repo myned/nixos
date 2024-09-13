@@ -4,10 +4,7 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   chayang = "${pkgs.chayang}/bin/chayang";
   hyprctl = "${
     config.home-manager.users.${config.custom.username}.wayland.windowManager.hyprland.package
@@ -20,9 +17,8 @@ let
   systemctl = "${pkgs.systemd}/bin/systemctl";
 
   cfg = config.custom.services.swayidle;
-in
-{
-  options.custom.services.swayidle.enable = mkOption { default = false; };
+in {
+  options.custom.services.swayidle.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     # https://github.com/swaywm/swayidle

@@ -1,12 +1,12 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.programs.htop;
-in
 {
-  options.custom.programs.htop.enable = mkOption { default = false; };
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.programs.htop;
+in {
+  options.custom.programs.htop.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     # https://github.com/htop-dev/htop
@@ -71,25 +71,25 @@ in
         }
         // (
           with config.home-manager.users.${config.custom.username}.lib.htop;
-          leftMeters [
-            (bar "LeftCPUs4")
-            (text "Blank")
-            (bar "CPU")
-            (bar "MemorySwap")
-            (text "System")
-            (text "DateTime")
-          ]
+            leftMeters [
+              (bar "LeftCPUs4")
+              (text "Blank")
+              (bar "CPU")
+              (bar "MemorySwap")
+              (text "System")
+              (text "DateTime")
+            ]
         )
         // (
           with config.home-manager.users.${config.custom.username}.lib.htop;
-          rightMeters [
-            (bar "RightCPUs4")
-            (text "Blank")
-            (bar "NetworkIO")
-            (bar "DiskIO")
-            (text "Hostname")
-            (text "Uptime")
-          ]
+            rightMeters [
+              (bar "RightCPUs4")
+              (text "Blank")
+              (bar "NetworkIO")
+              (bar "DiskIO")
+              (text "Hostname")
+              (text "Uptime")
+            ]
         );
     };
 

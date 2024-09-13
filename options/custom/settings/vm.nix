@@ -5,17 +5,13 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   cfg = config.custom.settings.vm;
-in
-{
+in {
   options.custom.settings.vm = {
-    enable = mkOption { default = false; };
-    libvirt = mkOption { default = true; };
-    virtualbox = mkOption { default = false; };
+    enable = mkOption {default = false;};
+    libvirt = mkOption {default = true;};
+    virtualbox = mkOption {default = false;};
   };
 
   config = mkIf cfg.enable {
@@ -35,7 +31,8 @@ in
             (pkgs.OVMF.override {
               secureBoot = true;
               tpmSupport = true;
-            }).fd
+            })
+            .fd
           ];
         };
 
@@ -83,23 +80,21 @@ in
       # Fix resume messages polluting tty
       services.libvirt-guests.serviceConfig.StandardOutput = "journal";
 
-      tmpfiles.rules =
-        let
-          firmware = pkgs.runCommandLocal "qemu-firmware" { } ''
-            mkdir $out
-            cp ${pkgs.qemu}/share/qemu/firmware/*.json $out
-            substituteInPlace $out/*.json --replace ${pkgs.qemu} /run/current-system/sw
-          '';
-        in
-        [
-          # HACK: Fix libvirt not automatically locating firmware
-          # https://github.com/NixOS/nixpkgs/issues/115996#issuecomment-2224296279
-          # https://libvirt.org/formatdomain.html#bios-bootloader
-          "L+ /var/lib/qemu/firmware - - - - ${firmware}"
+      tmpfiles.rules = let
+        firmware = pkgs.runCommandLocal "qemu-firmware" {} ''
+          mkdir $out
+          cp ${pkgs.qemu}/share/qemu/firmware/*.json $out
+          substituteInPlace $out/*.json --replace ${pkgs.qemu} /run/current-system/sw
+        '';
+      in [
+        # HACK: Fix libvirt not automatically locating firmware
+        # https://github.com/NixOS/nixpkgs/issues/115996#issuecomment-2224296279
+        # https://libvirt.org/formatdomain.html#bios-bootloader
+        "L+ /var/lib/qemu/firmware - - - - ${firmware}"
 
-          # HACK: Manually link image to default directory
-          "L+ /var/lib/libvirt/images/virtio-win.iso - - - - ${inputs.virtio-win}"
-        ];
+        # HACK: Manually link image to default directory
+        "L+ /var/lib/libvirt/images/virtio-win.iso - - - - ${inputs.virtio-win}"
+      ];
     };
   };
 }

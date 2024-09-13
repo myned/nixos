@@ -1,12 +1,12 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.programs.element-desktop;
-in
 {
-  options.custom.programs.element-desktop.enable = mkOption { default = false; };
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.programs.element-desktop;
+in {
+  options.custom.programs.element-desktop.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     # Element Desktop custom themes

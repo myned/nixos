@@ -1,23 +1,23 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.settings.environment;
-in
 {
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.settings.environment;
+in {
   options.custom.settings.environment = {
-    enable = mkOption { default = false; };
-    builder = mkOption { default = config.custom.full; };
-    timezone = mkOption { default = "America/Chicago"; };
-    wayland = mkOption { default = config.custom.minimal; };
+    enable = mkOption {default = false;};
+    builder = mkOption {default = config.custom.full;};
+    timezone = mkOption {default = "America/Chicago";};
+    wayland = mkOption {default = config.custom.minimal;};
   };
 
   config = mkIf cfg.enable {
     time.timeZone = cfg.timezone;
 
     # https://wiki.nixos.org/wiki/Cross_Compiling
-    boot.binfmt.emulatedSystems = mkIf cfg.builder [ "aarch64-linux" ]; # Emulate architecture
+    boot.binfmt.emulatedSystems = mkIf cfg.builder ["aarch64-linux"]; # Emulate architecture
     #// nixpkgs.buildPlatform = "x86_64-linux"; # Binary caches often not available
 
     environment = {

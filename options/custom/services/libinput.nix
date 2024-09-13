@@ -1,12 +1,12 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.services.libinput;
-in
 {
-  options.custom.services.libinput.enable = mkOption { default = false; };
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.services.libinput;
+in {
+  options.custom.services.libinput.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     # https://gitlab.freedesktop.org/libinput/libinput

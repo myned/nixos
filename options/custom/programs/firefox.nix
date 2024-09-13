@@ -5,14 +5,10 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   cfg = config.custom.programs.firefox;
-in
-{
-  options.custom.programs.firefox.enable = mkOption { default = false; };
+in {
+  options.custom.programs.firefox.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     # TODO: Switch to librewolf when supported by module
@@ -116,13 +112,12 @@ in
         # https://mozilla.github.io/policy-templates/#extensionsettings
         #?? https://addons.mozilla.org/en-US/firefox
         #?? about:support#addons
-        ExtensionSettings =
-          let
-            extension = id: {
-              install_url = "https://addons.mozilla.org/firefox/downloads/latest/${id}/latest.xpi";
-              installation_mode = "normal_installed";
-            };
-          in
+        ExtensionSettings = let
+          extension = id: {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/${id}/latest.xpi";
+            installation_mode = "normal_installed";
+          };
+        in
           mkMerge [
             (mkIf config.custom.minimal {
               "uBlock0@raymondhill.net" = extension "ublock-origin"; # uBlock Origin
@@ -194,59 +189,57 @@ in
         #!! Only certain preferences are supported via policies
         # https://mozilla.github.io/policy-templates/#preferences
         #?? about:config
-        Preferences =
-          let
-            locked = value: {
-              Value = value;
-              Status = "locked";
-            };
-          in
-          {
-            "accessibility.browsewithcaret" = locked false;
-            "accessibility.typeaheadfind" = locked false;
-            "browser.aboutConfig.showWarning" = locked false;
-            "browser.contentblocking.category" = locked "standard";
-            "browser.crashReports.unsubmittedCheck.autoSubmit2" = locked false;
-            "browser.ctrlTab.sortByRecentlyUsed" = locked false;
-            "browser.download.always_ask_before_handling_new_types" = locked false;
-            "browser.download.useDownloadDir" = locked true;
-            "browser.link.open_newwindow" = locked 3; # New tab
-            "browser.link.open_newwindow.restriction" = locked 0; # Popups in new tab
-            "browser.newtabpage.enabled" = locked true;
-            "browser.preferences.defaultPerformanceSettings.enabled" = locked true;
-            "browser.quitShortcut.disabled" = locked true;
-            "browser.search.widget.inNavBar" = locked false;
-            "browser.startup.homepage" = locked "about:home";
-            "browser.startup.page" = locked 3; # Previous session
-            "browser.tabs.closeTabByDblclick" = locked true;
-            "browser.tabs.closeWindowWithLastTab" = locked false;
-            "browser.tabs.insertAfterCurrent" = locked false;
-            "browser.tabs.insertRelatedAfterCurrent" = locked false;
-            "browser.tabs.loadInBackground" = locked true;
-            "browser.tabs.warnOnClose" = locked false;
-            "browser.tabs.warnOnCloseOtherTabs" = locked false;
-            "browser.theme.dark-private-windows" = locked false;
-            "browser.toolbars.bookmarks.showOtherBookmarks" = locked false;
-            "browser.uidensity" = locked 0;
-            "browser.warnOnQuitShortcut" = locked true;
-            "dom.security.https_only_mode" = locked true;
-            "extensions.formautofill.addresses.enabled" = locked false;
-            "extensions.formautofill.creditCards.enabled" = locked false;
-            "general.autoScroll" = locked false;
-            "general.smoothScroll" = locked true;
-            "layers.acceleration.force-enabled" = locked true;
-            "layout.css.always_underline_links" = locked false;
-            "layout.css.backdrop-filter.enabled" = locked true;
-            "layout.spellcheckDefault" = locked 0; # Disabled
-            "media.eme.enabled" = locked true; # DRM
-            "media.hardwaremediakeys.enabled" = locked true;
-            "media.hardware-video-decoding.enabled" = locked false; # !! Disable video acceleration
-            #// "media.rdd-process.enabled" = locked false; # RDD sandbox #!! Insecure
-            "toolkit.legacyUserProfileCustomizations.stylesheets" = locked true;
-            "ui.key.menuAccessKey" = locked 0; # Disable menu key
-            "widget.gtk.overlay-scrollbars.enabled" = locked true;
-            "widget.gtk.rounded-bottom-corners.enabled" = locked true;
+        Preferences = let
+          locked = value: {
+            Value = value;
+            Status = "locked";
           };
+        in {
+          "accessibility.browsewithcaret" = locked false;
+          "accessibility.typeaheadfind" = locked false;
+          "browser.aboutConfig.showWarning" = locked false;
+          "browser.contentblocking.category" = locked "standard";
+          "browser.crashReports.unsubmittedCheck.autoSubmit2" = locked false;
+          "browser.ctrlTab.sortByRecentlyUsed" = locked false;
+          "browser.download.always_ask_before_handling_new_types" = locked false;
+          "browser.download.useDownloadDir" = locked true;
+          "browser.link.open_newwindow" = locked 3; # New tab
+          "browser.link.open_newwindow.restriction" = locked 0; # Popups in new tab
+          "browser.newtabpage.enabled" = locked true;
+          "browser.preferences.defaultPerformanceSettings.enabled" = locked true;
+          "browser.quitShortcut.disabled" = locked true;
+          "browser.search.widget.inNavBar" = locked false;
+          "browser.startup.homepage" = locked "about:home";
+          "browser.startup.page" = locked 3; # Previous session
+          "browser.tabs.closeTabByDblclick" = locked true;
+          "browser.tabs.closeWindowWithLastTab" = locked false;
+          "browser.tabs.insertAfterCurrent" = locked false;
+          "browser.tabs.insertRelatedAfterCurrent" = locked false;
+          "browser.tabs.loadInBackground" = locked true;
+          "browser.tabs.warnOnClose" = locked false;
+          "browser.tabs.warnOnCloseOtherTabs" = locked false;
+          "browser.theme.dark-private-windows" = locked false;
+          "browser.toolbars.bookmarks.showOtherBookmarks" = locked false;
+          "browser.uidensity" = locked 0;
+          "browser.warnOnQuitShortcut" = locked true;
+          "dom.security.https_only_mode" = locked true;
+          "extensions.formautofill.addresses.enabled" = locked false;
+          "extensions.formautofill.creditCards.enabled" = locked false;
+          "general.autoScroll" = locked false;
+          "general.smoothScroll" = locked true;
+          "layers.acceleration.force-enabled" = locked true;
+          "layout.css.always_underline_links" = locked false;
+          "layout.css.backdrop-filter.enabled" = locked true;
+          "layout.spellcheckDefault" = locked 0; # Disabled
+          "media.eme.enabled" = locked true; # DRM
+          "media.hardwaremediakeys.enabled" = locked true;
+          "media.hardware-video-decoding.enabled" = locked false; # !! Disable video acceleration
+          #// "media.rdd-process.enabled" = locked false; # RDD sandbox #!! Insecure
+          "toolkit.legacyUserProfileCustomizations.stylesheets" = locked true;
+          "ui.key.menuAccessKey" = locked 0; # Disable menu key
+          "widget.gtk.overlay-scrollbars.enabled" = locked true;
+          "widget.gtk.rounded-bottom-corners.enabled" = locked true;
+        };
 
         SearchBar = "unified";
 
@@ -552,7 +545,7 @@ in
       "Downloads/stg" = mkIf config.custom.full {
         source =
           config.home-manager.users.${config.custom.username}.lib.file.mkOutOfStoreSymlink
-            "/home/myned/SYNC/common/config/extensions/Simple Tab Groups";
+          "/home/myned/SYNC/common/config/extensions/Simple Tab Groups";
       };
 
       # Work around icon dissociation due to missing --name flag in actions

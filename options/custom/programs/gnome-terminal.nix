@@ -1,12 +1,12 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.programs.gnome-terminal;
-in
 {
-  options.custom.programs.gnome-terminal.enable = mkOption { default = false; };
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.programs.gnome-terminal;
+in {
+  options.custom.programs.gnome-terminal.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     # https://gitlab.gnome.org/GNOME/gnome-terminal

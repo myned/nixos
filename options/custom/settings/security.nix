@@ -1,12 +1,12 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.settings.security;
-in
 {
-  options.custom.settings.security.enable = mkOption { default = false; };
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.settings.security;
+in {
+  options.custom.settings.security.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     # Bypass password prompts

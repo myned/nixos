@@ -1,12 +1,12 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.programs.nix-index;
-in
 {
-  options.custom.programs.nix-index.enable = mkOption { default = false; };
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.programs.nix-index;
+in {
+  options.custom.programs.nix-index.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     # https://github.com/nix-community/nix-index

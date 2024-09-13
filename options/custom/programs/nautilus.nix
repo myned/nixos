@@ -4,14 +4,10 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   cfg = config.custom.programs.nautilus;
-in
-{
-  options.custom.programs.nautilus.enable = mkOption { default = false; };
+in {
+  options.custom.programs.nautilus.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     services.gvfs.enable = true; # Trash dependency

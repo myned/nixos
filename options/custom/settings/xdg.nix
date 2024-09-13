@@ -3,10 +3,7 @@
   lib,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   evince = "org.gnome.Evince.desktop";
   firefox-esr =
     config.home-manager.users.${config.custom.username}.programs.firefox.package.desktopItem.name;
@@ -15,9 +12,8 @@ let
   nautilus = "org.gnome.Nautilus.desktop";
 
   cfg = config.custom.settings.xdg;
-in
-{
-  options.custom.settings.xdg.enable = mkOption { default = false; };
+in {
+  options.custom.settings.xdg.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     # https://wiki.archlinux.org/title/XDG_Desktop_Portal

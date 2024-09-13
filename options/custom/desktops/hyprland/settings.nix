@@ -4,10 +4,7 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   clipse = "${pkgs.clipse}/bin/clipse";
   firefox-esr = "${
     config.home-manager.users.${config.custom.username}.programs.firefox.finalPackage
@@ -22,9 +19,8 @@ let
   }/bin/waybar";
 
   cfg = config.custom.desktops.hyprland.settings;
-in
-{
-  options.custom.desktops.hyprland.settings.enable = mkOption { default = false; };
+in {
+  options.custom.desktops.hyprland.settings.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
@@ -51,12 +47,12 @@ in
       #?? envd = VARIABLE, VALUE
       # HACK: Mapped home-manager variables to envd in lieu of upstream fix
       # https://github.com/nix-community/home-manager/issues/2659
-      envd =
-        with builtins;
+      envd = with builtins;
         attrValues (
           mapAttrs (
             name: value: "${name}, ${toString value}"
-          ) config.home-manager.users.${config.custom.username}.home.sessionVariables
+          )
+          config.home-manager.users.${config.custom.username}.home.sessionVariables
         )
         ++ [
           "EDITOR, gnome-text-editor"
@@ -66,15 +62,16 @@ in
       #// exec = [ ];
 
       # https://wiki.hyprland.org/Configuring/Keywords/#executing
-      exec-once = [
-        "${rm} ~/.config/qalculate/qalc.dmenu.history" # Clear calc history
-        "${clipse} -clear" # Clear clipboard history
-        "${clipse} -listen" # Monitor clipboard
-        sway-audio-idle-inhibit # Inhibit idle while audio is playing
+      exec-once =
+        [
+          "${rm} ~/.config/qalculate/qalc.dmenu.history" # Clear calc history
+          "${clipse} -clear" # Clear clipboard history
+          "${clipse} -listen" # Monitor clipboard
+          sway-audio-idle-inhibit # Inhibit idle while audio is playing
 
-        # TODO: Remove when systemd service fixed
-        # https://github.com/Alexays/Waybar/issues/2882
-        "${sleep} 2 && ${systemctl} --user restart waybar"
+          # TODO: Remove when systemd service fixed
+          # https://github.com/Alexays/Waybar/issues/2882
+          "${sleep} 2 && ${systemctl} --user restart waybar"
 
           "[group new lock; tile] ${firefox-esr}"
         ]
@@ -143,7 +140,10 @@ in
           "col.inactive" = "rgba(6c71c440)";
           "col.locked_active" = "rgb(d33682)";
           "col.locked_inactive" = "rgba(d3368240)";
-          font_size = if config.custom.hidpi then 16 else 10;
+          font_size =
+            if config.custom.hidpi
+            then 16
+            else 10;
           height = 5;
           render_titles = false;
           text_color = "rgb(93a1a1)";

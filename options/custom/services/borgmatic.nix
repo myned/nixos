@@ -5,15 +5,11 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   cat = "${pkgs.coreutils}/bin/cat";
 
   cfg = config.custom.services.borgmatic;
-in
-{
+in {
   # https://wiki.nixos.org/wiki/Borg_backup
   # https://github.com/borgmatic-collective/borgmatic
   #!! Imperative initialization
@@ -21,9 +17,9 @@ in
   #?? sudo borgmatic key export
   #?? sudo borgmatic -v 1 create --progress --stats
   options.custom.services.borgmatic = {
-    enable = mkOption { default = false; };
-    repositories = mkOption { default = [ ]; };
-    sources = mkOption { default = [ ]; };
+    enable = mkOption {default = false;};
+    repositories = mkOption {default = [];};
+    sources = mkOption {default = [];};
   };
 
   config = mkIf cfg.enable {
@@ -68,12 +64,10 @@ in
       };
     };
 
-    age.secrets =
-      let
-        secret = filename: { file = "${inputs.self}/secrets/${filename}"; };
-      in
-      {
-        "${config.custom.profile}/borgmatic/borgbase.${config.custom.hostname}" = secret "${config.custom.profile}/borgmatic/borgbase.${config.custom.hostname}";
-      };
+    age.secrets = let
+      secret = filename: {file = "${inputs.self}/secrets/${filename}";};
+    in {
+      "${config.custom.profile}/borgmatic/borgbase.${config.custom.hostname}" = secret "${config.custom.profile}/borgmatic/borgbase.${config.custom.hostname}";
+    };
   };
 }

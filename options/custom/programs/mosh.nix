@@ -1,12 +1,12 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.programs.mosh;
-in
 {
-  options.custom.programs.mosh.enable = mkOption { default = false; };
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.programs.mosh;
+in {
+  options.custom.programs.mosh.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     # https://wiki.nixos.org/wiki/Mosh

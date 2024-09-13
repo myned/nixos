@@ -1,5 +1,5 @@
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [./hardware-configuration.nix];
 
   custom.hostname = "mypi3";
 

@@ -1,12 +1,12 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.services.swaync;
-in
 {
-  options.custom.services.swaync.enable = mkOption { default = false; };
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.services.swaync;
+in {
+  options.custom.services.swaync.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     # https://github.com/ErikReider/SwayNotificationCenter

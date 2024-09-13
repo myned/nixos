@@ -1,12 +1,12 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.settings.dconf.apps;
-in
 {
-  options.custom.settings.dconf.apps.enable = mkOption { default = false; };
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.settings.dconf.apps;
+in {
+  options.custom.settings.dconf.apps.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     # https://nix-community.github.io/home-manager/index.xhtml#sec-option-types

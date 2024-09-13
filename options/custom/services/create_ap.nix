@@ -5,10 +5,7 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   bash = "${pkgs.bash}/bin/bash";
   cat = "${pkgs.coreutils}/bin/cat";
   sleep = "${pkgs.coreutils}/bin/sleep";
@@ -18,23 +15,20 @@ let
   }/bin/create_ap";
 
   cfg = config.custom.services.create_ap;
-in
-{
+in {
   options.custom.services.create_ap = {
-    enable = mkOption { default = false; };
-    internet = mkOption { default = "eth0"; };
-    wifi = mkOption { default = "wlan0"; };
+    enable = mkOption {default = false;};
+    internet = mkOption {default = "eth0";};
+    wifi = mkOption {default = "wlan0";};
   };
 
   config = mkIf cfg.enable {
-    age.secrets =
-      let
-        secret = filename: { file = "${inputs.self}/secrets/${filename}"; };
-      in
-      {
-        "${config.custom.profile}/create_ap/passphrase" = secret "${config.custom.profile}/create_ap/passphrase";
-        "${config.custom.profile}/create_ap/ssid" = secret "${config.custom.profile}/create_ap/ssid";
-      };
+    age.secrets = let
+      secret = filename: {file = "${inputs.self}/secrets/${filename}";};
+    in {
+      "${config.custom.profile}/create_ap/passphrase" = secret "${config.custom.profile}/create_ap/passphrase";
+      "${config.custom.profile}/create_ap/ssid" = secret "${config.custom.profile}/create_ap/ssid";
+    };
 
     # https://github.com/lakinduakash/linux-wifi-hotspot
     services.create_ap = {
@@ -58,12 +52,11 @@ in
     systemd.services.create_ap.serviceConfig = {
       ExecStartPre = "${sleep} 15s"; # Some cards like Intel force regulatory domain discovery
 
-      ExecStart =
-        let
-          configFile = pkgs.writeText "create_ap.conf" (
-            generators.toKeyValue { } config.services.create_ap.settings
-          );
-        in
+      ExecStart = let
+        configFile = pkgs.writeText "create_ap.conf" (
+          generators.toKeyValue {} config.services.create_ap.settings
+        );
+      in
         mkForce (
           concatStringsSep " " [
             "${bash} -c"

@@ -1,18 +1,18 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.services.syncthing;
-in
 {
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.services.syncthing;
+in {
   # https://github.com/syncthing/syncthing
   # https://wiki.nixos.org/wiki/Syncthing
   # https://docs.syncthing.net/users/config.html
   options.custom.services.syncthing = {
-    enable = mkOption { default = false; };
-    configDir = mkOption { default = "${cfg.dataDir}/.config/syncthing"; };
-    dataDir = mkOption { default = "/home/${cfg.user}"; };
+    enable = mkOption {default = false;};
+    configDir = mkOption {default = "${cfg.dataDir}/.config/syncthing";};
+    dataDir = mkOption {default = "/home/${cfg.user}";};
     devices = mkOption {
       default = [
         "myarm"
@@ -20,12 +20,12 @@ in
         "myork"
       ];
     };
-    ignorePerms = mkOption { default = false; };
-    mount = mkOption { default = null; };
-    order = mkOption { default = "alphabetic"; };
-    type = mkOption { default = "sendreceive"; };
-    user = mkOption { default = config.custom.username; };
-    group = mkOption { default = "users"; };
+    ignorePerms = mkOption {default = false;};
+    mount = mkOption {default = null;};
+    order = mkOption {default = "alphabetic";};
+    type = mkOption {default = "sendreceive";};
+    user = mkOption {default = config.custom.username;};
+    group = mkOption {default = "users";};
 
     versioning = mkOption {
       default = {
@@ -36,41 +36,41 @@ in
 
     # Per folder attributes override config
     folders = mkOption {
-      default =
-        let
-          #?? "FOLDER" = folder "ID" [ "DEVICES" ]
-          folder = id: devices: { inherit id devices; };
-        in
-        {
-          "SYNC/.backup" = folder "oxdvq-dfzjk" [ ];
-          "SYNC/.ignore" = folder "qpvfw-j127s" [
-            "myeck"
-            "myxel"
-          ];
-          "SYNC/android" = folder "y3omj-gpjch" [ "myxel" ];
-          "SYNC/common" = folder "fcsij-g7cnw" [ "myxel" ];
-          "SYNC/dev" = folder "fsmar-4wsd3" [ "myxel" ];
-          "SYNC/edu" = folder "4nyqw-jfkq2" [ "myxel" ];
-          "SYNC/game" = folder "xvdpp-mxlki" [
-            "myeck"
+      default = let
+        #?? "FOLDER" = folder "ID" [ "DEVICES" ]
+        folder = id: devices: {inherit id devices;};
+      in {
+        "SYNC/.backup" = folder "oxdvq-dfzjk" [];
+        "SYNC/.ignore" = folder "qpvfw-j127s" [
+          "myeck"
+          "myxel"
+        ];
+        "SYNC/android" = folder "y3omj-gpjch" ["myxel"];
+        "SYNC/common" = folder "fcsij-g7cnw" ["myxel"];
+        "SYNC/dev" = folder "fsmar-4wsd3" ["myxel"];
+        "SYNC/edu" = folder "4nyqw-jfkq2" ["myxel"];
+        "SYNC/game" = folder "xvdpp-mxlki" [
+          "myeck"
+          "zendows"
+        ];
+        "SYNC/linux" = folder "ieikk-bnm7u" ["myxel"];
+        "SYNC/mac" = folder "yjmt6-z7u4m" [];
+        "SYNC/owo" = folder "ervqc-ebnzz" ["myxel"];
+        "SYNC/windows" = folder "2hmna-vfap9" [];
+        "ZEL/android" =
+          folder "gn2l3-2hxtu" [
             "zendows"
-          ];
-          "SYNC/linux" = folder "ieikk-bnm7u" [ "myxel" ];
-          "SYNC/mac" = folder "yjmt6-z7u4m" [ ];
-          "SYNC/owo" = folder "ervqc-ebnzz" [ "myxel" ];
-          "SYNC/windows" = folder "2hmna-vfap9" [ ];
-          "ZEL/android" =
-            folder "gn2l3-2hxtu" [
-              "zendows"
-              "zexel"
-            ]
-            // {
-              type = "receiveonly";
-            };
-          "ZEL/music" = folder "nytcx-uwqs7" [ "zendows" ] // {
+            "zexel"
+          ]
+          // {
             type = "receiveonly";
           };
-        };
+        "ZEL/music" =
+          folder "nytcx-uwqs7" ["zendows"]
+          // {
+            type = "receiveonly";
+          };
+      };
     };
   };
 
@@ -79,7 +79,7 @@ in
       enable = true;
       configDir = cfg.configDir;
       dataDir = cfg.dataDir;
-      extraFlags = [ "-no-default-folder" ]; # Disable automatic creation of Sync folder
+      extraFlags = ["-no-default-folder"]; # Disable automatic creation of Sync folder
       guiAddress = "0.0.0.0:8384"; # Open to all interfaces
       openDefaultPorts = true; # Open transfer/discovery ports
       user = cfg.user;
@@ -138,15 +138,20 @@ in
         };
 
         # Simplify boilerplate folders
-        folders = concatMapAttrs (name: folder: {
-          "~/${name}" = {
-            ignorePerms = cfg.ignorePerms;
-            label = name;
-            order = cfg.order;
-            type = cfg.type;
-            versioning = cfg.versioning;
-          } // folder // { devices = cfg.devices ++ folder.devices or [ ]; };
-        }) cfg.folders;
+        folders =
+          concatMapAttrs (name: folder: {
+            "~/${name}" =
+              {
+                ignorePerms = cfg.ignorePerms;
+                label = name;
+                order = cfg.order;
+                type = cfg.type;
+                versioning = cfg.versioning;
+              }
+              // folder
+              // {devices = cfg.devices ++ folder.devices or [];};
+          })
+          cfg.folders;
       };
     };
 
@@ -154,8 +159,8 @@ in
     # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/networking/syncthing.nix#L646
     #?? systemctl status
     systemd.services.syncthing = mkIf (isString cfg.mount) {
-      after = [ cfg.mount ];
-      bindsTo = [ cfg.mount ]; # Start/stop service on mount/unmount
+      after = [cfg.mount];
+      bindsTo = [cfg.mount]; # Start/stop service on mount/unmount
     };
   };
 }

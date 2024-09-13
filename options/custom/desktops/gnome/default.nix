@@ -4,16 +4,12 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   cfg = config.custom.desktops.gnome;
-in
-{
+in {
   options.custom.desktops.gnome = {
-    enable = mkOption { default = false; };
-    gdm = mkOption { default = true; };
+    enable = mkOption {default = false;};
+    gdm = mkOption {default = true;};
   };
 
   config = mkIf cfg.enable {
@@ -30,6 +26,6 @@ in
 
     # Remove default packages
     # https://wiki.nixos.org/wiki/GNOME#Excluding_GNOME_Applications
-    environment.gnome.excludePackages = [ pkgs.gnome-shell-extensions ];
+    environment.gnome.excludePackages = [pkgs.gnome-shell-extensions];
   };
 }

@@ -1,12 +1,12 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.programs.rofi-rbw;
-in
 {
-  options.custom.programs.rofi-rbw.enable = mkOption { default = false; };
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.programs.rofi-rbw;
+in {
+  options.custom.programs.rofi-rbw.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     # https://github.com/fdw/rofi-rbw

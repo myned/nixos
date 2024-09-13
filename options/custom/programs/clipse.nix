@@ -4,14 +4,10 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   cfg = config.custom.programs.clipse;
-in
-{
-  options.custom.programs.clipse.enable = mkOption { default = false; };
+in {
+  options.custom.programs.clipse.enable = mkOption {default = false;};
 
   config = {
     # https://github.com/savedra1/clipse

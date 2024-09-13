@@ -5,25 +5,19 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   cfg = config.custom.settings.containers.headscale;
-in
-{
-  options.custom.settings.containers.headscale.enable = mkOption { default = false; };
+in {
+  options.custom.settings.containers.headscale.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
-    age.secrets =
-      let
-        secret = filename: {
-          file = "${inputs.self}/secrets/${filename}";
-        };
-      in
-      {
-        "${config.custom.profile}/headscale/.env" = secret "${config.custom.profile}/headscale/.env";
+    age.secrets = let
+      secret = filename: {
+        file = "${inputs.self}/secrets/${filename}";
       };
+    in {
+      "${config.custom.profile}/headscale/.env" = secret "${config.custom.profile}/headscale/.env";
+    };
 
     #?? arion-headscale pull
     environment.shellAliases.arion-headscale = "sudo arion --prebuilt-file ${config.virtualisation.arion.projects.headscale.settings.out.dockerComposeYaml}";
@@ -39,7 +33,7 @@ in
         headscale.service = {
           command = "serve";
           container_name = "headscale";
-          env_file = [ config.age.secrets."${config.custom.profile}/headscale/.env".path ];
+          env_file = [config.age.secrets."${config.custom.profile}/headscale/.env".path];
           image = "headscale/headscale:v0.23.0-beta.4";
           restart = "unless-stopped";
 

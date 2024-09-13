@@ -4,27 +4,21 @@
   lib,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   cfg = config.custom.services.geoclue2;
-in
-{
-  options.custom.services.geoclue2.enable = mkOption { default = false; };
+in {
+  options.custom.services.geoclue2.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
-    age.secrets =
-      let
-        secret = filename: {
-          file = "${inputs.self}/secrets/${filename}";
-          owner = "geoclue";
-          group = "geoclue";
-        };
-      in
-      {
-        "desktop/geoclue2/geolocation" = secret "desktop/geoclue2/geolocation";
+    age.secrets = let
+      secret = filename: {
+        file = "${inputs.self}/secrets/${filename}";
+        owner = "geoclue";
+        group = "geoclue";
       };
+    in {
+      "desktop/geoclue2/geolocation" = secret "desktop/geoclue2/geolocation";
+    };
 
     # https://gitlab.freedesktop.org/geoclue/geoclue
     # FIXME: geoclue2 relies on MLS, which is retired

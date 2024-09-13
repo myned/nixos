@@ -1,12 +1,12 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.programs.fuzzel;
-in
 {
-  options.custom.programs.fuzzel.enable = mkOption { default = false; };
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.programs.fuzzel;
+in {
+  options.custom.programs.fuzzel.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     # https://codeberg.org/dnkl/fuzzel

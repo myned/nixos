@@ -4,12 +4,9 @@
   lib,
   pkgs,
   ...
-}:
-
-let
+}: let
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
-in
-{
+in {
   imports = [
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
 
@@ -35,7 +32,7 @@ in
 
   home-manager.users.${config.custom.username} = with lib; {
     wayland.windowManager.hyprland.settings = {
-      exec-once = [ "${brightnessctl} set 0%" ];
+      exec-once = ["${brightnessctl} set 0%"];
 
       master = {
         mfact = mkForce 0.5;

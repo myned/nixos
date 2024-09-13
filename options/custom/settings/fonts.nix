@@ -4,14 +4,10 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   cfg = config.custom.settings.fonts;
-in
-{
-  options.custom.settings.fonts.enable = mkOption { default = false; };
+in {
+  options.custom.settings.fonts.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     # https://wiki.nixos.org/wiki/Fonts
@@ -20,7 +16,7 @@ in
 
       packages = with pkgs; [
         # Monospace
-        (nerdfonts.override { fonts = [ "Iosevka" ]; })
+        (nerdfonts.override {fonts = ["Iosevka"];})
 
         # Sans Serif
         (google-fonts.override {
@@ -41,10 +37,10 @@ in
 
       #?? fc-list --brief | grep family: | sort
       fontconfig.defaultFonts = {
-        emoji = [ "Noto Color Emoji" ];
-        monospace = [ "Iosevka NFP SemiBold" ];
-        sansSerif = [ "Outfit" ];
-        serif = [ "Liberation Serif" ];
+        emoji = ["Noto Color Emoji"];
+        monospace = ["Iosevka NFP SemiBold"];
+        sansSerif = ["Outfit"];
+        serif = ["Liberation Serif"];
       };
     };
 

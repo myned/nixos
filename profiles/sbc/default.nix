@@ -8,7 +8,7 @@
 
       borgmatic = {
         enable = true;
-        sources = [ "/containers" ];
+        sources = ["/containers"];
 
         repositories = [
           {

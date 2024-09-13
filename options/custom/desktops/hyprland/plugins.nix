@@ -4,22 +4,18 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   hyprctl = "${pkgs.hyprland}/bin/hyprctl";
 
   cfg = config.custom.desktops.hyprland.plugins;
-in
-{
-  options.custom.desktops.hyprland.plugins.enable = mkOption { default = false; };
+in {
+  options.custom.desktops.hyprland.plugins.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     wayland.windowManager.hyprland = {
       # https://github.com/hyprwm/hyprland-plugins/tree/main/hyprbars
       # https://wiki.hyprland.org/Plugins/Using-Plugins
-      plugins = with pkgs.hyprlandPlugins; [ hyprbars ];
+      plugins = with pkgs.hyprlandPlugins; [hyprbars];
 
       settings = {
         #!! Static rules

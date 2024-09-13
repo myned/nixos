@@ -1,12 +1,12 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.programs.ssh;
-in
 {
-  options.custom.programs.ssh.enable = mkOption { default = false; };
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.programs.ssh;
+in {
+  options.custom.programs.ssh.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     # Disable prompt for new hosts

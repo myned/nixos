@@ -1,12 +1,12 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.settings.dconf.gnome;
-in
 {
-  options.custom.settings.dconf.gnome.enable = mkOption { default = false; };
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.settings.dconf.gnome;
+in {
+  options.custom.settings.dconf.gnome.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     dconf.settings = with config.home-manager.users.${config.custom.username}.lib.gvariant; {
@@ -60,39 +60,39 @@ in
 
       "org/gnome/desktop/wm/keybindings" = {
         #?? [as]
-        activate-window-menu = mkArray type.string [ ];
-        begin-move = mkArray type.string [ ];
-        begin-resize = mkArray type.string [ ];
-        close = mkArray type.string [ "<Super>q" ];
-        cycle-group = mkArray type.string [ ];
-        cycle-group-backward = mkArray type.string [ ];
-        cycle-panels = mkArray type.string [ ];
-        cycle-panels-backward = mkArray type.string [ ];
-        cycle-windows = mkArray type.string [ ];
-        cycle-windows-backward = mkArray type.string [ ];
-        maximize = mkArray type.string [ ];
-        minimize = mkArray type.string [ ];
-        move-to-monitor-down = mkArray type.string [ ];
-        move-to-monitor-left = mkArray type.string [ ];
-        move-to-monitor-right = mkArray type.string [ ];
-        move-to-monitor-up = mkArray type.string [ ];
-        move-to-workspace-1 = mkArray type.string [ ];
-        move-to-workspace-last = mkArray type.string [ ];
-        move-to-workspace-left = mkArray type.string [ "<Shift><Super>z" ];
-        move-to-workspace-right = mkArray type.string [ "<Shift><Super>x" ];
-        panel-run-dialog = mkArray type.string [ ];
-        switch-group = mkArray type.string [ ];
-        switch-group-backward = mkArray type.string [ ];
-        switch-input-source = mkArray type.string [ ];
-        switch-input-source-backward = mkArray type.string [ ];
-        switch-panels = mkArray type.string [ ];
-        switch-panels-backward = mkArray type.string [ ];
-        switch-to-workspace-1 = mkArray type.string [ ];
-        switch-to-workspace-last = mkArray type.string [ ];
-        switch-to-workspace-left = mkArray type.string [ "<Super>z" ];
-        switch-to-workspace-right = mkArray type.string [ "<Super>x" ];
-        toggle-maximized = mkArray type.string [ ];
-        unmaximize = mkArray type.string [ ];
+        activate-window-menu = mkArray type.string [];
+        begin-move = mkArray type.string [];
+        begin-resize = mkArray type.string [];
+        close = mkArray type.string ["<Super>q"];
+        cycle-group = mkArray type.string [];
+        cycle-group-backward = mkArray type.string [];
+        cycle-panels = mkArray type.string [];
+        cycle-panels-backward = mkArray type.string [];
+        cycle-windows = mkArray type.string [];
+        cycle-windows-backward = mkArray type.string [];
+        maximize = mkArray type.string [];
+        minimize = mkArray type.string [];
+        move-to-monitor-down = mkArray type.string [];
+        move-to-monitor-left = mkArray type.string [];
+        move-to-monitor-right = mkArray type.string [];
+        move-to-monitor-up = mkArray type.string [];
+        move-to-workspace-1 = mkArray type.string [];
+        move-to-workspace-last = mkArray type.string [];
+        move-to-workspace-left = mkArray type.string ["<Shift><Super>z"];
+        move-to-workspace-right = mkArray type.string ["<Shift><Super>x"];
+        panel-run-dialog = mkArray type.string [];
+        switch-group = mkArray type.string [];
+        switch-group-backward = mkArray type.string [];
+        switch-input-source = mkArray type.string [];
+        switch-input-source-backward = mkArray type.string [];
+        switch-panels = mkArray type.string [];
+        switch-panels-backward = mkArray type.string [];
+        switch-to-workspace-1 = mkArray type.string [];
+        switch-to-workspace-last = mkArray type.string [];
+        switch-to-workspace-left = mkArray type.string ["<Super>z"];
+        switch-to-workspace-right = mkArray type.string ["<Super>x"];
+        toggle-maximized = mkArray type.string [];
+        unmaximize = mkArray type.string [];
       };
 
       "org/gnome/desktop/wm/preferences" = {
@@ -119,12 +119,12 @@ in
         workspaces-only-on-primary = mkBoolean true;
 
         #?? [as]
-        experimental-features = mkArray type.string [ "variable-refresh-rate" ];
+        experimental-features = mkArray type.string ["variable-refresh-rate"];
       };
 
       "org/gnome/mutter/wayland/keybindings" = {
         #?? [as]
-        restore-shortcuts = mkArray type.string [ ];
+        restore-shortcuts = mkArray type.string [];
       };
 
       "org/gnome/settings-daemon/plugins/color" = {
@@ -135,12 +135,12 @@ in
 
       "org/gnome/settings-daemon/plugins/media-keys" = {
         #?? [as]
-        help = mkArray type.string [ ];
-        logout = mkArray type.string [ ];
-        magnifier = mkArray type.string [ ];
-        magnifier-zoom-in = mkArray type.string [ ];
-        magnifier-zoom-out = mkArray type.string [ ];
-        screenreader = mkArray type.string [ ];
+        help = mkArray type.string [];
+        logout = mkArray type.string [];
+        magnifier = mkArray type.string [];
+        magnifier-zoom-in = mkArray type.string [];
+        magnifier-zoom-out = mkArray type.string [];
+        screenreader = mkArray type.string [];
       };
 
       "org/gnome/settings-daemon/plugins/power" = {
@@ -169,13 +169,13 @@ in
 
       "org/gnome/shell/keybindings" = {
         #?? [as]
-        focus-active-notification = mkArray type.string [ ];
-        screenshot = mkArray type.string [ ];
-        screenshot-window = mkArray type.string [ ];
-        show-screen-recording-ui = mkArray type.string [ ];
-        toggle-application-view = mkArray type.string [ ];
-        toggle-quick-settings = mkArray type.string [ ];
-        toggle-message-tray = mkArray type.string [ ];
+        focus-active-notification = mkArray type.string [];
+        screenshot = mkArray type.string [];
+        screenshot-window = mkArray type.string [];
+        show-screen-recording-ui = mkArray type.string [];
+        toggle-application-view = mkArray type.string [];
+        toggle-quick-settings = mkArray type.string [];
+        toggle-message-tray = mkArray type.string [];
       };
 
       "org/gnome/system/location" = {

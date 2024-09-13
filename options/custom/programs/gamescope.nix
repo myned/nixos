@@ -1,12 +1,12 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.programs.gamescope;
-in
 {
-  options.custom.programs.gamescope.enable = mkOption { default = false; };
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.programs.gamescope;
+in {
+  options.custom.programs.gamescope.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     # https://github.com/ValveSoftware/gamescope

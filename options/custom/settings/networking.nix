@@ -1,20 +1,20 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.settings.networking;
-in
 {
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.settings.networking;
+in {
   options.custom.settings.networking = {
-    enable = mkOption { default = false; };
-    dns = mkOption { default = config.custom.default; };
-    ipv4 = mkOption { default = null; };
-    ipv6 = mkOption { default = null; };
-    networkd = mkOption { default = !cfg.networkmanager; };
-    networkmanager = mkOption { default = config.custom.minimal; };
-    static = mkOption { default = false; }; # Falls back to DHCP/RA
-    wifi = mkOption { default = config.custom.minimal; };
+    enable = mkOption {default = false;};
+    dns = mkOption {default = config.custom.default;};
+    ipv4 = mkOption {default = null;};
+    ipv6 = mkOption {default = null;};
+    networkd = mkOption {default = !cfg.networkmanager;};
+    networkmanager = mkOption {default = config.custom.minimal;};
+    static = mkOption {default = false;}; # Falls back to DHCP/RA
+    wifi = mkOption {default = config.custom.minimal;};
 
     interface = mkOption {
       default = [
@@ -39,7 +39,7 @@ in
       };
     };
 
-    users.users.${config.custom.username}.extraGroups = mkIf cfg.networkmanager [ "networkmanager" ];
+    users.users.${config.custom.username}.extraGroups = mkIf cfg.networkmanager ["networkmanager"];
 
     # Declarative networking
     #?? networkctl

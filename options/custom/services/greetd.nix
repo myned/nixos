@@ -4,18 +4,14 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   Hyprland = "${config.programs.hyprland.package}/bin/Hyprland";
   systemd-cat = "${pkgs.systemd}/bin/systemd-cat";
   tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
 
   cfg = config.custom.services.greetd;
-in
-{
-  options.custom.services.greetd.enable = mkOption { default = false; };
+in {
+  options.custom.services.greetd.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     # https://sr.ht/~kennylevinsen/greetd

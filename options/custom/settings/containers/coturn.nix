@@ -4,25 +4,19 @@
   lib,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   cfg = config.custom.settings.containers.coturn;
-in
-{
-  options.custom.settings.containers.coturn.enable = mkOption { default = false; };
+in {
+  options.custom.settings.containers.coturn.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
-    age.secrets =
-      let
-        secret = filename: {
-          file = "${inputs.self}/secrets/${filename}";
-        };
-      in
-      {
-        "${config.custom.profile}/coturn/coturn.conf" = secret "${config.custom.profile}/coturn/coturn.conf";
+    age.secrets = let
+      secret = filename: {
+        file = "${inputs.self}/secrets/${filename}";
       };
+    in {
+      "${config.custom.profile}/coturn/coturn.conf" = secret "${config.custom.profile}/coturn/coturn.conf";
+    };
 
     #?? arion-coturn pull
     environment.shellAliases.arion-coturn = "sudo arion --prebuilt-file ${config.virtualisation.arion.projects.coturn.settings.out.dockerComposeYaml}";

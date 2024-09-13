@@ -1,12 +1,12 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.programs.tmux;
-in
 {
-  options.custom.programs.tmux.enable = mkOption { default = false; };
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.programs.tmux;
+in {
+  options.custom.programs.tmux.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     # https://wiki.nixos.org/wiki/Tmux

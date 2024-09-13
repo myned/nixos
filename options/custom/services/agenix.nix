@@ -4,17 +4,13 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   cat = "${pkgs.coreutils}/bin/cat";
   sed = "${pkgs.gnused}/bin/sed";
 
   cfg = config.custom.services.agenix;
-in
-{
-  options.custom.services.agenix.enable = mkOption { default = false; };
+in {
+  options.custom.services.agenix.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     xdg.configFile."hypr/hyprland.conf".force = true;
@@ -40,7 +36,7 @@ in
       };
 
       Install = {
-        WantedBy = [ "default.target" ];
+        WantedBy = ["default.target"];
       };
     };
   };

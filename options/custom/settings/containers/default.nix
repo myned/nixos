@@ -5,18 +5,14 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   cfg = config.custom.settings.containers;
-in
-{
+in {
   options.custom.settings.containers = {
-    enable = mkOption { default = false; };
-    boot = mkOption { default = false; };
-    directory = mkOption { default = "/containers"; };
-    docker = mkOption { default = true; };
+    enable = mkOption {default = false;};
+    boot = mkOption {default = false;};
+    directory = mkOption {default = "/containers";};
+    docker = mkOption {default = true;};
   };
 
   config = mkIf cfg.enable {
@@ -24,10 +20,16 @@ in
       # https://github.com/hercules-ci/arion
       # https://docs.hercules-ci.com/arion/options
       # https://docs.hercules-ci.com/arion/deployment#_nixos_module
-      arion.backend = if cfg.docker then "docker" else "podman-socket";
+      arion.backend =
+        if cfg.docker
+        then "docker"
+        else "podman-socket";
 
       # https://wiki.nixos.org/wiki/NixOS_Containers
-      oci-containers.backend = if cfg.docker then "docker" else "podman";
+      oci-containers.backend =
+        if cfg.docker
+        then "docker"
+        else "podman";
 
       # https://github.com/containers/common/blob/main/docs/containers.conf.5.md
       containers = {
@@ -61,8 +63,7 @@ in
       };
     };
 
-    environment.systemPackages =
-      with pkgs;
+    environment.systemPackages = with pkgs;
       [
         # https://github.com/hercules-ci/arion/issues/210
         #?? arion-CONTAINER
@@ -78,7 +79,13 @@ in
         podman-tui
       ];
 
-    systemd.tmpfiles.rules = [ "d /containers 0700 root root" ]; # Custom directory for containers
-    users.users.${config.custom.username}.extraGroups = [ (if cfg.docker then "docker" else "podman") ];
+    systemd.tmpfiles.rules = ["d /containers 0700 root root"]; # Custom directory for containers
+    users.users.${config.custom.username}.extraGroups = [
+      (
+        if cfg.docker
+        then "docker"
+        else "podman"
+      )
+    ];
   };
 }

@@ -1,17 +1,17 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.services.auto-cpufreq;
-in
 {
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.services.auto-cpufreq;
+in {
   options.custom.services.auto-cpufreq = {
-    enable = mkOption { default = false; };
+    enable = mkOption {default = false;};
 
     max = {
-      battery = mkOption { default = null; }; # GHz
-      charger = mkOption { default = null; }; # GHz
+      battery = mkOption {default = null;}; # GHz
+      charger = mkOption {default = null;}; # GHz
     };
   };
 

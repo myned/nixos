@@ -1,12 +1,12 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.services.fprintd;
-in
 {
-  options.custom.services.fprintd.enable = mkOption { default = false; };
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.services.fprintd;
+in {
+  options.custom.services.fprintd.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     # https://wiki.archlinux.org/title/Fprint

@@ -3,14 +3,10 @@
   lib,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   cfg = config.custom.settings.containers.redlib;
-in
-{
-  options.custom.settings.containers.redlib.enable = mkOption { default = false; };
+in {
+  options.custom.settings.containers.redlib.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     #?? arion-redlib pull
@@ -23,7 +19,7 @@ in
         redlib.service = {
           container_name = "redlib";
           image = "quay.io/redlib/redlib:latest";
-          ports = [ "127.0.0.1:8888:8080" ];
+          ports = ["127.0.0.1:8888:8080"];
           restart = "unless-stopped";
 
           environment = {

@@ -1,8 +1,9 @@
-{ config, lib, ... }:
-
-with lib;
-
 {
+  config,
+  lib,
+  ...
+}:
+with lib; {
   config.custom.settings = mkMerge [
     (mkIf config.custom.default {
       boot.enable = true;

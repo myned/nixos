@@ -4,14 +4,10 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   cfg = config.custom.programs.path-of-building;
-in
-{
-  options.custom.programs.path-of-building.enable = mkOption { default = false; };
+in {
+  options.custom.programs.path-of-building.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     xdg.desktopEntries.path-of-building = {

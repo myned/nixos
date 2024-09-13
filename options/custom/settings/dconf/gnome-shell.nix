@@ -1,12 +1,12 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.settings.dconf.gnome-shell;
-in
 {
-  options.custom.settings.dconf.gnome-shell.enable = mkOption { default = false; };
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.settings.dconf.gnome-shell;
+in {
+  options.custom.settings.dconf.gnome-shell.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     dconf.settings = with config.home-manager.users.${config.custom.username}.lib.gvariant; {
@@ -16,7 +16,7 @@ in
 
         #!! Concatenated with home-manager extensions
         #?? [as]
-        enabled-extensions = mkArray type.string [ "rounded-window-corners@fxgn" ];
+        enabled-extensions = mkArray type.string ["rounded-window-corners@fxgn"];
       };
 
       # Auto Move Windows
@@ -39,7 +39,7 @@ in
         duration-timer = mkInt32 4;
 
         #?? [as]
-        toggle-shortcut = mkArray type.string [ "<Super>Delete" ];
+        toggle-shortcut = mkArray type.string ["<Super>Delete"];
       };
 
       # Clipboard Indicator
@@ -51,11 +51,11 @@ in
         preview-size = mkInt32 100;
 
         #?? [as]
-        clear-history = mkArray type.string [ ];
-        next-entry = mkArray type.string [ ];
-        prev-entry = mkArray type.string [ ];
-        private-mode-binding = mkArray type.string [ ];
-        toggle-menu = mkArray type.string [ "<Super>v" ];
+        clear-history = mkArray type.string [];
+        next-entry = mkArray type.string [];
+        prev-entry = mkArray type.string [];
+        private-mode-binding = mkArray type.string [];
+        toggle-menu = mkArray type.string ["<Super>v"];
       };
 
       # Dash to Dock
@@ -167,15 +167,15 @@ in
         window-position = mkString "bottom";
 
         #?? [as]
-        ddterm-toggle-hotkey = mkArray type.string [ "<Control>space" ];
-        shortcut-move-tab-next = mkArray type.string [ "" ];
-        shortcut-move-tab-prev = mkArray type.string [ "" ];
-        shortcut-next-tab = mkArray type.string [ "" ];
-        shortcut-prev-tab = mkArray type.string [ "" ];
-        shortcut-toggle-maximize = mkArray type.string [ "" ];
-        shortcut-win-new-tab = mkArray type.string [ "<Shift><Control>t" ];
-        shortcut-window-size-dec = mkArray type.string [ "" ];
-        shortcut-window-size-inc = mkArray type.string [ "" ];
+        ddterm-toggle-hotkey = mkArray type.string ["<Control>space"];
+        shortcut-move-tab-next = mkArray type.string [""];
+        shortcut-move-tab-prev = mkArray type.string [""];
+        shortcut-next-tab = mkArray type.string [""];
+        shortcut-prev-tab = mkArray type.string [""];
+        shortcut-toggle-maximize = mkArray type.string [""];
+        shortcut-win-new-tab = mkArray type.string ["<Shift><Control>t"];
+        shortcut-window-size-dec = mkArray type.string [""];
+        shortcut-window-size-inc = mkArray type.string [""];
 
         palette = mkArray type.string [
           "rgb(7,54,66)"
@@ -257,22 +257,22 @@ in
         active-window-hint-color = mkString "rgb(211,54,130)";
 
         #?? [as]
-        center-window = mkArray type.string [ ];
-        favorite-layouts = mkArray type.string [ "0" ];
-        restore-window = mkArray type.string [ "<Super>BackSpace" ];
-        tile-edit-mode = mkArray type.string [ ];
-        tile-maximize = mkArray type.string [ "<Super>Return" ];
-        tile-maximize-vertically = mkArray type.string [ ];
-        tile-maximize-horizontally = mkArray type.string [ ];
-        tile-bottom-half = mkArray type.string [ "<Super>r" ];
-        tile-bottomleft-quarter = mkArray type.string [ ];
-        tile-bottomright-quarter = mkArray type.string [ ];
-        tile-left-half = mkArray type.string [ "<Super>a" ];
-        tile-right-half = mkArray type.string [ "<Super>s" ];
-        tile-top-half = mkArray type.string [ "<Super>w" ];
-        tile-topleft-quarter = mkArray type.string [ ];
-        tile-topright-quarter = mkArray type.string [ ];
-        toggle-always-on-top = mkArray type.string [ ];
+        center-window = mkArray type.string [];
+        favorite-layouts = mkArray type.string ["0"];
+        restore-window = mkArray type.string ["<Super>BackSpace"];
+        tile-edit-mode = mkArray type.string [];
+        tile-maximize = mkArray type.string ["<Super>Return"];
+        tile-maximize-vertically = mkArray type.string [];
+        tile-maximize-horizontally = mkArray type.string [];
+        tile-bottom-half = mkArray type.string ["<Super>r"];
+        tile-bottomleft-quarter = mkArray type.string [];
+        tile-bottomright-quarter = mkArray type.string [];
+        tile-left-half = mkArray type.string ["<Super>a"];
+        tile-right-half = mkArray type.string ["<Super>s"];
+        tile-top-half = mkArray type.string ["<Super>w"];
+        tile-topleft-quarter = mkArray type.string [];
+        tile-topright-quarter = mkArray type.string [];
+        toggle-always-on-top = mkArray type.string [];
       };
     };
   };

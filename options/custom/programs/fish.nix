@@ -1,12 +1,12 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.programs.fish;
-in
 {
-  options.custom.programs.fish.enable = mkOption { default = false; };
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.programs.fish;
+in {
+  options.custom.programs.fish.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     # https://wiki.nixos.org/wiki/Fish

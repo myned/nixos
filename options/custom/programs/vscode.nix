@@ -5,14 +5,10 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   cfg = config.custom.programs.vscode;
-in
-{
-  options.custom.programs.vscode.enable = mkOption { default = false; };
+in {
+  options.custom.programs.vscode.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     # https://wiki.nixos.org/wiki/VSCodium

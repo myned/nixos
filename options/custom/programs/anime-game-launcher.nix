@@ -1,12 +1,12 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.programs.anime-game-launcher;
-in
 {
-  options.custom.programs.anime-game-launcher.enable = mkOption { default = false; };
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.programs.anime-game-launcher;
+in {
+  options.custom.programs.anime-game-launcher.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     # https://github.com/an-anime-team

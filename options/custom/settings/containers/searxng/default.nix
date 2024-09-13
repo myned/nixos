@@ -4,25 +4,19 @@
   lib,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   cfg = config.custom.settings.containers.searxng;
-in
-{
-  options.custom.settings.containers.searxng.enable = mkOption { default = false; };
+in {
+  options.custom.settings.containers.searxng.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
-    age.secrets =
-      let
-        secret = filename: {
-          file = "${inputs.self}/secrets/${filename}";
-        };
-      in
-      {
-        "${config.custom.profile}/searxng/.env" = secret "${config.custom.profile}/searxng/.env";
+    age.secrets = let
+      secret = filename: {
+        file = "${inputs.self}/secrets/${filename}";
       };
+    in {
+      "${config.custom.profile}/searxng/.env" = secret "${config.custom.profile}/searxng/.env";
+    };
 
     #?? arion-searxng pull
     environment.shellAliases.arion-searxng = "sudo arion --prebuilt-file ${config.virtualisation.arion.projects.searxng.settings.out.dockerComposeYaml}";
@@ -35,10 +29,10 @@ in
         # https://github.com/searxng/searxng-docker
         searxng.service = {
           container_name = "searxng";
-          depends_on = [ "cache" ];
-          env_file = [ config.age.secrets."${config.custom.profile}/searxng/.env".path ];
+          depends_on = ["cache"];
+          env_file = [config.age.secrets."${config.custom.profile}/searxng/.env".path];
           image = "searxng/searxng:latest";
-          ports = [ "127.0.0.1:8000:8080" ];
+          ports = ["127.0.0.1:8000:8080"];
           restart = "unless-stopped";
 
           volumes = [

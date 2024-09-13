@@ -5,14 +5,10 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   cfg = config.custom.services.flatpak;
-in
-{
-  options.custom.services.flatpak.enable = mkOption { default = false; };
+in {
+  options.custom.services.flatpak.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     # https://wiki.nixos.org/wiki/Flatpak

@@ -4,14 +4,10 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   cfg = config.custom.programs.mangohud;
-in
-{
-  options.custom.programs.mangohud.enable = mkOption { default = false; };
+in {
+  options.custom.programs.mangohud.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     # https://github.com/flightlessmango/MangoHud

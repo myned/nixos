@@ -3,86 +3,75 @@
   inputs,
   lib,
   ...
-}:
-
-{
-  age.secrets =
-    let
-      secret = filename: {
-        file = "${inputs.self}/secrets/${filename}";
-      };
-    in
-    {
-      "common/nix/access-tokens.conf" = secret "common/nix/access-tokens.conf";
+}: {
+  age.secrets = let
+    secret = filename: {
+      file = "${inputs.self}/secrets/${filename}";
     };
+  in {
+    "common/nix/access-tokens.conf" = secret "common/nix/access-tokens.conf";
+  };
 
   ### NixOS
-  nixpkgs =
-    let
-      config = {
-        allowUnfree = true;
+  nixpkgs = let
+    config = {
+      allowUnfree = true;
 
-        allowInsecurePredicate =
-          pkg:
-          let
-            name = lib.getName pkg;
-          in
-          # HACK: Allow all insecure electron versions
-          name == "electron"
+      allowInsecurePredicate = pkg: let
+        name = lib.getName pkg;
+      in
+        # HACK: Allow all insecure electron versions
+        name
+        == "electron"
+        # HACK: Some Matrix clients rely on libolm, which is deprecated
+        # https://github.com/NixOS/nixpkgs/pull/334638
+        || name == "cinny"
+        || name == "cinny-unwrapped"
+        || name == "fluffychat-linux"
+        || name == "olm"
+        || name == "openssl"; # Cisco Packet Tracer
+    };
+  in {
+    inherit config;
 
-          # HACK: Some Matrix clients rely on libolm, which is deprecated
-          # https://github.com/NixOS/nixpkgs/pull/334638
-          || name == "cinny"
-          || name == "cinny-unwrapped"
-          || name == "fluffychat-linux"
-          || name == "olm"
-          || name == "openssl"; # Cisco Packet Tracer
-      };
-    in
-    {
-      inherit config;
-
-      overlays = [
-        (
-          final: prev:
-          let
-            nixpkgs =
-              branch:
-              import inputs."nixpkgs-${branch}" {
-                inherit config;
-                system = prev.system;
-              };
-
-            stable = nixpkgs "stable";
-            unstable = nixpkgs "unstable";
-            staging-next = nixpkgs "staging-next";
-            local = nixpkgs "local";
-          in
-          {
-            # Overlay nixpkgs branches
-            #?? nixpkgs.BRANCH.PACKAGE
-            inherit stable unstable staging-next;
-
-            # Hypr*
-            hypridle = inputs.hypridle.packages.${prev.system}.default;
-            hyprland = inputs.hyprland.packages.${prev.system}.default;
-            hyprlock = inputs.hyprlock.packages.${prev.system}.default;
-
-            # TODO: Remove when merged into unstable
-            # https://github.com/NixOS/nixpkgs/pull/338836
-            xdg-desktop-portal-hyprland =
-              inputs.xdg-desktop-portal-hyprland.packages.${prev.system}.xdg-desktop-portal-hyprland;
-
-            hyprlandPlugins = {
-              hyprbars = inputs.hyprland-plugins.packages.${prev.system}.hyprbars;
+    overlays = [
+      (
+        final: prev: let
+          nixpkgs = branch:
+            import inputs."nixpkgs-${branch}" {
+              inherit config;
+              system = prev.system;
             };
 
-            # Development
-            ciscoPacketTracer8 = local.ciscoPacketTracer8;
-          }
-        )
-      ];
-    };
+          stable = nixpkgs "stable";
+          unstable = nixpkgs "unstable";
+          staging-next = nixpkgs "staging-next";
+          local = nixpkgs "local";
+        in {
+          # Overlay nixpkgs branches
+          #?? nixpkgs.BRANCH.PACKAGE
+          inherit stable unstable staging-next;
+
+          # Hypr*
+          hypridle = inputs.hypridle.packages.${prev.system}.default;
+          hyprland = inputs.hyprland.packages.${prev.system}.default;
+          hyprlock = inputs.hyprlock.packages.${prev.system}.default;
+
+          # TODO: Remove when merged into unstable
+          # https://github.com/NixOS/nixpkgs/pull/338836
+          xdg-desktop-portal-hyprland =
+            inputs.xdg-desktop-portal-hyprland.packages.${prev.system}.xdg-desktop-portal-hyprland;
+
+          hyprlandPlugins = {
+            hyprbars = inputs.hyprland-plugins.packages.${prev.system}.hyprbars;
+          };
+
+          # Development
+          ciscoPacketTracer8 = local.ciscoPacketTracer8;
+        }
+      )
+    ];
+  };
 
   nix = {
     #!! Override upstream nix

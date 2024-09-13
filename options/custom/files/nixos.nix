@@ -1,12 +1,12 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.files.nixos;
-in
 {
-  options.custom.files.nixos.enable = mkOption { default = false; };
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.files.nixos;
+in {
+  options.custom.files.nixos.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     # https://www.freedesktop.org/software/systemd/man/latest/tmpfiles.d.html

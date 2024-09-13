@@ -1,12 +1,12 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.services.keyd;
-in
 {
-  options.custom.services.keyd.enable = mkOption { default = false; };
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.services.keyd;
+in {
+  options.custom.services.keyd.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     # https://github.com/rvaiya/keyd

@@ -5,21 +5,16 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   cfg = config.custom.settings.packages;
-in
-{
+in {
   options.custom.settings.packages = {
-    enable = mkOption { default = false; };
-    extra = mkOption { default = [ ]; };
+    enable = mkOption {default = false;};
+    extra = mkOption {default = [];};
   };
 
   config = mkIf cfg.enable (
-    with pkgs;
-    {
+    with pkgs; {
       environment.systemPackages =
         cfg.extra
         ++ [
@@ -56,7 +51,7 @@ in
           # TODO: Remove when v14 released on nixpkgs
           # https://github.com/sonic2kk/steamtinkerlaunch/issues/992
           # Build from latest commit
-          (steamtinkerlaunch.overrideAttrs { src = inputs.steamtinkerlaunch; })
+          (steamtinkerlaunch.overrideAttrs {src = inputs.steamtinkerlaunch;})
 
           # Dependencies
           p7zip # steamtinkerlaunch (Special K)
@@ -165,17 +160,18 @@ in
           # https://wiki.nixos.org/wiki/Python#Package_unavailable_in_Nixpkgs
           # https://wiki.nixos.org/wiki/Packaging/Python
           (python311.withPackages (
-            ps: with ps; [
-              # lifx-cli
-              # https://github.com/Rawa/lifx-cli
-              (buildPythonPackage {
-                pname = "lifx-cli";
-                version = "master";
-                src = inputs.lifx-cli;
-                doCheck = false;
-                propagatedBuildInputs = with python311Packages; [ requests ];
-              })
-            ]
+            ps:
+              with ps; [
+                # lifx-cli
+                # https://github.com/Rawa/lifx-cli
+                (buildPythonPackage {
+                  pname = "lifx-cli";
+                  version = "master";
+                  src = inputs.lifx-cli;
+                  doCheck = false;
+                  propagatedBuildInputs = with python311Packages; [requests];
+                })
+              ]
           ))
         ];
     }

@@ -4,7 +4,6 @@ let
   #?? cd secrets/
   #?? agenix --edit file.age
   #?? agenix --rekey
-
   # Users that imperatively encrypt age files
   #!! Imperative client key generation
   #?? ssh-keygen -f ~/.ssh/id_ed25519 -N ''
@@ -38,8 +37,7 @@ let
   desktop = users ++ desktops;
   sbc = users ++ sbcs;
   server = users ++ servers;
-in
-{
+in {
   # TODO: Move secrets into each profile
   #?? config.age.secrets."PROFILE/SECRET".path
 

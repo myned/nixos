@@ -1,12 +1,12 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.programs.hyprlock;
-in
 {
-  options.custom.programs.hyprlock.enable = mkOption { default = false; };
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.programs.hyprlock;
+in {
+  options.custom.programs.hyprlock.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     programs.hyprlock.enable = true; # Grant PAM access

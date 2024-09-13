@@ -4,19 +4,15 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   cfg = config.custom.programs.swaylock;
-in
-{
-  options.custom.programs.swaylock.enable = mkOption { default = false; };
+in {
+  options.custom.programs.swaylock.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     # Allow swaylock to unlock the session
     # https://wiki.nixos.org/wiki/Sway#Swaylock_cannot_be_unlocked_with_the_correct_password
-    security.pam.services.swaylock = { };
+    security.pam.services.swaylock = {};
 
     # https://github.com/swaywm/swaylock
     home-manager.users.${config.custom.username}.programs.swaylock = {

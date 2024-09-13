@@ -1,14 +1,14 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
+{
+  config,
+  lib,
+  ...
+}:
+with lib; let
   wofi = "${config.home-manager.users.${config.custom.username}.programs.wofi.package}/bin/wofi";
 
   cfg = config.custom.services.clipcat;
-in
-{
-  options.custom.services.clipcat.enable = mkOption { default = false; };
+in {
+  options.custom.services.clipcat.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     # BUG: Random high CPU usage

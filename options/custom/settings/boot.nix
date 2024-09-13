@@ -4,25 +4,29 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   sed = "${pkgs.gnused}/bin/sed";
 
   cfg = config.custom.settings.boot;
-in
-{
+in {
   options.custom.settings.boot = {
-    enable = mkOption { default = false; };
-    console-mode = mkOption { default = "max"; };
-    grub = mkOption { default = false; };
+    enable = mkOption {default = false;};
+    console-mode = mkOption {default = "max";};
+    grub = mkOption {default = false;};
     kernel = mkOption {
-      default = if config.custom.full then pkgs.linuxPackages_zen else pkgs.linuxPackages;
+      default =
+        if config.custom.full
+        then pkgs.linuxPackages_zen
+        else pkgs.linuxPackages;
     };
-    systemd-boot = mkOption { default = config.custom.minimal; };
-    timeout = mkOption { default = if config.custom.minimal then 2 else 10; };
-    u-boot = mkOption { default = false; };
+    systemd-boot = mkOption {default = config.custom.minimal;};
+    timeout = mkOption {
+      default =
+        if config.custom.minimal
+        then 2
+        else 10;
+    };
+    u-boot = mkOption {default = false;};
   };
 
   config = mkIf cfg.enable {

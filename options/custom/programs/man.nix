@@ -1,12 +1,12 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.programs.man;
-in
 {
-  options.custom.programs.man.enable = mkOption { default = false; };
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.programs.man;
+in {
+  options.custom.programs.man.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     # Enable as much offline docs as possible

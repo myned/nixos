@@ -4,14 +4,10 @@
   pkgs,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   cfg = config.custom.settings.gtk;
-in
-{
-  options.custom.settings.gtk.enable = mkOption { default = false; };
+in {
+  options.custom.settings.gtk.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     home.pointerCursor = {

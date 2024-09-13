@@ -1,14 +1,14 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
+{
+  config,
+  lib,
+  ...
+}:
+with lib; let
   wofi = "${config.home-manager.users.${config.custom.username}.programs.wofi.package}/bin/wofi";
 
   cfg = config.custom.programs.bitwarden-menu;
-in
-{
-  options.custom.programs.bitwarden-menu.enable = mkOption { default = false; };
+in {
+  options.custom.programs.bitwarden-menu.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     # https://github.com/firecat53/bitwarden-menu

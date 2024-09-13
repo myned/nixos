@@ -4,26 +4,20 @@
   lib,
   ...
 }:
-
-with lib;
-
-let
+with lib; let
   cfg = config.custom.settings.containers.nextcloud;
-in
-{
-  options.custom.settings.containers.nextcloud.enable = mkOption { default = false; };
+in {
+  options.custom.settings.containers.nextcloud.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
-    age.secrets =
-      let
-        secret = filename: {
-          file = "${inputs.self}/secrets/${filename}";
-        };
-      in
-      {
-        "${config.custom.profile}/nextcloud/.env" = secret "${config.custom.profile}/nextcloud/.env";
-        "${config.custom.profile}/nextcloud/db.env" = secret "${config.custom.profile}/nextcloud/db.env";
+    age.secrets = let
+      secret = filename: {
+        file = "${inputs.self}/secrets/${filename}";
       };
+    in {
+      "${config.custom.profile}/nextcloud/.env" = secret "${config.custom.profile}/nextcloud/.env";
+      "${config.custom.profile}/nextcloud/db.env" = secret "${config.custom.profile}/nextcloud/db.env";
+    };
 
     #?? arion-nextcloud pull
     environment.shellAliases.arion-nextcloud = "sudo arion --prebuilt-file ${config.virtualisation.arion.projects.nextcloud.settings.out.dockerComposeYaml}";
@@ -35,9 +29,9 @@ in
         # https://github.com/nextcloud/docker
         nextcloud.service = {
           container_name = "nextcloud";
-          env_file = [ config.age.secrets."${config.custom.profile}/nextcloud/.env".path ];
+          env_file = [config.age.secrets."${config.custom.profile}/nextcloud/.env".path];
           image = "nextcloud:29-apache";
-          ports = [ "127.0.0.1:8181:80" ];
+          ports = ["127.0.0.1:8181:80"];
           restart = "unless-stopped";
 
           volumes = [
@@ -69,12 +63,12 @@ in
           container_name = "nextcloud-cache";
           image = "redis:latest";
           restart = "unless-stopped";
-          volumes = [ "${config.custom.settings.containers.directory}/nextcloud/cache:/data" ];
+          volumes = ["${config.custom.settings.containers.directory}/nextcloud/cache:/data"];
         };
 
         db.service = {
           container_name = "nextcloud-db";
-          env_file = [ config.age.secrets."${config.custom.profile}/nextcloud/db.env".path ];
+          env_file = [config.age.secrets."${config.custom.profile}/nextcloud/db.env".path];
           image = "postgres:15";
           restart = "unless-stopped";
 

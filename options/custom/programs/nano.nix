@@ -1,12 +1,12 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
-  cfg = config.custom.programs.nano;
-in
 {
-  options.custom.programs.nano.enable = mkOption { default = false; };
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.programs.nano;
+in {
+  options.custom.programs.nano.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     # https://wiki.archlinux.org/title/Nano
