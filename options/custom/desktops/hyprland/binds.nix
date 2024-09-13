@@ -92,6 +92,7 @@ in {
       # Release binds
       bindr = [
         (key "Alt_L" "Super+Alt" "togglespecialworkspace" "wallpaper")
+        (key "Alt_L" "Super+Alt+Shift" "movetoworkspacesilent" "special:wallpaper")
         (key "Control_L" "Super+Ctrl" "layoutmsg" "swapwithmaster master")
         (key "Control_L" "Super+Ctrl+Alt+Shift" "layoutmsg" "removemaster")
         (key "Control_L" "Super+Ctrl+Shift" "layoutmsg" "addmaster")
@@ -204,12 +205,14 @@ in {
         (key "F" "Super" "exec" nautilus)
         (key "G" "Super" "workspace" "name:game")
         (key "G" "Super+Alt" "workspace" "name:gamescope")
-        (key "G" "Super+Shift" "movetoworkspacesilent" "name:game")
         (key "G" "Super+Ctrl+Alt" "exec" "${pkill} gamescope")
+        (key "G" "Super+Shift" "movetoworkspacesilent" "name:game")
         (key "K" "Super" "exec" obsidian)
         (key "M" "Super" "togglespecialworkspace" "music")
         (key "M" "Super+Shift" "movetoworkspacesilent" "music")
         (key "O" "Super" "togglespecialworkspace" "office")
+        (key "O" "Super+Ctrl" "exec" "libreoffice")
+        (key "O" "Super+Shift" "movetoworkspacesilent" "special:office")
         (key "P" "Super" "exec" "${hyprpicker} --autocopy")
         (key "P" "Super+Shift" "exec" "${hyprpicker} --autocopy --format rgb")
         (key "Q" "Ctrl+Alt" "exec" "${kill} -9 $(${hyprctl} -j activewindow | ${jq} .pid)")
@@ -226,13 +229,13 @@ in {
         (key "V" "Super" "exec" "${kitty} --app-id clipboard --override font_size=12 ${clipse}")
         (key "V" "Super+Shift" "exec" "${clipse} -clear && ${notify-send} clipse 'Clipboard cleared' --urgency low")
         (key "W" "Super" "togglespecialworkspace" "vm")
-        (key "W" "Super+Shift" "exec" "vm -x ${
+        (key "W" "Super+Ctrl" "exec" "vm -x ${
           if config.custom.hidpi
           then "/scale:140 +f"
           else ""
         }")
-        (key "W" "Super+Shift" "movetoworkspacesilent" "vm")
         (key "W" "Super+Ctrl+Shift" "exec" "vm ${virt-manager} --show-domain-console myndows")
+        (key "W" "Super+Shift" "movetoworkspacesilent" "vm")
         (key "X" "Super" "workspace" "+1")
         (key "X" "Super+Shift" "movetoworkspacesilent" "+1")
         (key "Z" "Super" "workspace" "-1")
