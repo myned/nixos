@@ -16,27 +16,29 @@ in {
     services.samba = {
       enable = true;
       openFirewall = true;
+      nmbd.enable = false;
+      nsswins = false;
 
-      shares = {
+      # https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html
+      settings = {
         Public.path = "/home/${config.custom.username}/Public";
         SYNC.path = "/home/${config.custom.username}/SYNC";
+
+        global = {
+          "allow insecure wide links" = "yes";
+          "browseable" = "no";
+          "follow symlinks" = "yes";
+          "force user" = config.custom.username;
+          "hostname lookups" = "yes";
+          "hosts allow" = "192.168.111.";
+          "inherit owner" = "unix only";
+          "inherit permissions" = "yes";
+          "logging" = "systemd";
+          "map to guest" = "bad password";
+          "wide links" = "yes";
+          "writeable" = "yes";
+        };
       };
-
-      extraConfig = ''
-        logging = systemd
-
-        hosts allow = 127.0.0.1 myndows 192.168.111.
-
-        browseable = yes
-        writeable = yes
-        force user = ${config.custom.username}
-        map to guest = bad password
-        inherit owner = unix only
-        inherit permissions = yes
-        follow symlinks = yes
-        wide links = yes
-        allow insecure wide links = yes
-      '';
     };
   };
 }
