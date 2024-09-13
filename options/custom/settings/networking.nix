@@ -71,9 +71,12 @@ in {
     services.resolved = mkIf cfg.dns {
       enable = true;
       dnsovertls = "opportunistic"; # Fallback only
-      #// llmnr = "false";
       #// domains = [ "~." ]; # All interfaces
-      #// extraConfig = "MulticastDNS=false"; # mDNS
+
+      # Multicast DNS causes single name resolution to hang and prevents libvirt NSS from functioning
+      # https://github.com/NixOS/nixpkgs/issues/322022
+      extraConfig = "MulticastDNS=false"; # mDNS
+      llmnr = "false";
 
       # https://controld.com/free-dns
       #?? host verify.controld.com
@@ -97,6 +100,7 @@ in {
       "mymachines"
       "libvirt_guest"
       "libvirt"
+      #// "wins"
       "resolve"
       "dns"
     ]);
