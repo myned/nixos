@@ -16,7 +16,7 @@ in
 
       clean = {
         enable = true;
-        extraArgs = "--keep-since ${if config.custom.minimal then "7" else "30"}d";
+        extraArgs = "--keep-since 7d";
       };
     };
   };
