@@ -44,7 +44,11 @@ fi
 current_workspace="$(hyprctl -j clients | jq -r "first(.[] | select(.$type | test(\"$expression\")).workspace.name)")"
 
 if [[ "$current_workspace" == "$workspace" ]]; then
-  hyprctl dispatch movetoworkspacesilent "0,$type:$expression" # Move to current workspace first, otherwise some windows freeze
+  # HACK: Move to current workspace before pinning, otherwise some windows freeze
+  # https://github.com/hyprwm/Hyprland/issues/7609
+  # https://github.com/hyprwm/Hyprland/issues/7191
+  hyprctl dispatch movetoworkspacesilent "0,$type:$expression"
+
   hyprctl dispatch pin "$type:$expression" # Pin
 
   if "$focus"; then
