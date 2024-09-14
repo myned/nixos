@@ -7,8 +7,8 @@
 with lib; let
   gamescope = "${config.programs.gamescope.package}/bin/gamescope";
   kitty = "${config.home-manager.users.${config.custom.username}.programs.kitty.package}/bin/kitty";
-  libreoffice = "${config.custom.programs.libreoffice.package}/bin/libreoffice";
   loupe = "${pkgs.loupe}/bin/loupe";
+  onlyoffice = "${pkgs.onlyoffice-bin}/bin/onlyoffice-desktopeditors";
   pgrep = "${pkgs.procps}/bin/pgrep";
   steam = "${config.programs.steam.package}/bin/steam";
   virt-manager = "${pkgs.virt-manager}/bin/virt-manager";
@@ -28,7 +28,7 @@ in {
 
         "special:android, on-created-empty:${waydroid} app launch com.YoStarEN.Arknights"
         "special:music, on-created-empty:${youtube-music}"
-        "special:office, on-created-empty:${libreoffice}"
+        "special:office, on-created-empty:${onlyoffice}"
         "special:steam, on-created-empty:${steam}"
         "special:terminal, on-created-empty:${kitty}"
         "special:vm, on-created-empty:${pgrep} -x vm || ${virt-manager}"
@@ -136,6 +136,7 @@ in {
           ];
           office = rules: [
             (class "libreoffice.+" rules)
+            (class "ONLYOFFICE Desktop Editors" rules)
           ];
           pip = rules: [
             (title "Picture.in.[Pp]icture" rules)

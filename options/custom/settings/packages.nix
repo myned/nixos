@@ -98,6 +98,7 @@ in {
           lutris
           nheko
           obsidian
+          onlyoffice-bin
           path-of-building
           pika-backup
           protonup-qt

@@ -21,6 +21,7 @@ with lib; let
   networkmanager_dmenu = "${pkgs.networkmanager_dmenu}/bin/networkmanager_dmenu";
   notify-send = "${pkgs.libnotify}/bin/notify-send";
   obsidian = "${pkgs.obsidian}/bin/obsidian";
+  onlyoffice = "${pkgs.onlyoffice-bin}/bin/onlyoffice-desktopeditors";
   pkill = "${pkgs.procps}/bin/pkill";
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   rofi-rbw = "${pkgs.rofi-rbw}/bin/rofi-rbw";
@@ -211,7 +212,7 @@ in {
         (key "M" "Super" "togglespecialworkspace" "music")
         (key "M" "Super+Shift" "movetoworkspacesilent" "music")
         (key "O" "Super" "togglespecialworkspace" "office")
-        (key "O" "Super+Ctrl" "exec" "libreoffice")
+        (key "O" "Super+Ctrl" "exec" "${onlyoffice}")
         (key "O" "Super+Shift" "movetoworkspacesilent" "special:office")
         (key "P" "Super" "exec" "${hyprpicker} --autocopy")
         (key "P" "Super+Shift" "exec" "${hyprpicker} --autocopy --format rgb")
