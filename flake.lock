@@ -739,6 +739,27 @@
         "type": "github"
       }
     },
+    "flake-parts_5": {
+      "inputs": {
+        "nixpkgs-lib": [
+          "walker",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1719994518,
+        "narHash": "sha256-pQMhCCHyQGRzdfAkdJ4cIWiw+JNuWsTX7f0ZYSyz0VY=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "9227223f6d922fee3c7b190b2cc238a99527bbb7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
     "flake-root": {
       "locked": {
         "lastModified": 1713493429,
@@ -1978,20 +1999,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-local": {
-      "locked": {
-        "dirtyRev": "7f114dae532fbba5ae881311097f343ffee740bd-dirty",
-        "dirtyShortRev": "7f114dae532f-dirty",
-        "lastModified": 1726169832,
-        "narHash": "sha256-DxNm8sN46fwH6xNbeKf6gtbKLKWMvjHGs6Yq5riCvpk=",
-        "type": "git",
-        "url": "file:///home/myned/SYNC/dev/repo/nixpkgs"
-      },
-      "original": {
-        "type": "git",
-        "url": "file:///home/myned/SYNC/dev/repo/nixpkgs"
-      }
-    },
     "nixpkgs-regression": {
       "locked": {
         "lastModified": 1643052045,
@@ -2234,13 +2241,13 @@
         "nix-vscode-extensions": "nix-vscode-extensions",
         "nixd": "nixd",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs-local": "nixpkgs-local",
         "nixpkgs-stable": "nixpkgs-stable_3",
         "nixpkgs-staging-next": "nixpkgs-staging-next",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "steamtinkerlaunch": "steamtinkerlaunch",
         "thunderbird-gnome-theme": "thunderbird-gnome-theme",
         "virtio-win": "virtio-win",
+        "walker": "walker",
         "xdg-desktop-portal-hyprland": "xdg-desktop-portal-hyprland"
       }
     },
@@ -2549,6 +2556,27 @@
       "original": {
         "type": "file",
         "url": "https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.262-2/virtio-win.iso"
+      }
+    },
+    "walker": {
+      "inputs": {
+        "flake-parts": "flake-parts_5",
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1725430478,
+        "narHash": "sha256-W30JZlSiFIUALwFtjIDG5E6LtuUTjHvAVrNlKpuSEt0=",
+        "owner": "abenz1267",
+        "repo": "walker",
+        "rev": "e4a58cd93691d3d9ace67a691bd74d54032c89b0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "abenz1267",
+        "repo": "walker",
+        "type": "github"
       }
     },
     "xdg-desktop-portal-hyprland": {
