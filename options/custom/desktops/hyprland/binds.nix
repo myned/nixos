@@ -17,6 +17,7 @@ with lib; let
   kill = "${pkgs.procps}/bin/kill";
   kitty = "${config.home-manager.users.${config.custom.username}.programs.kitty.package}/bin/kitty";
   loginctl = "${pkgs.systemd}/bin/loginctl";
+  menu = "~/.local/bin/menu";
   nautilus = "${pkgs.nautilus}/bin/nautilus";
   networkmanager_dmenu = "${pkgs.networkmanager_dmenu}/bin/networkmanager_dmenu";
   notify-send = "${pkgs.libnotify}/bin/notify-send";
@@ -98,11 +99,11 @@ in {
         (key "Control_L" "Super+Ctrl+Alt+Shift" "layoutmsg" "removemaster")
         (key "Control_L" "Super+Ctrl+Shift" "layoutmsg" "addmaster")
         (key "Shift_L" "Super+Shift" "workspace" "previous")
-        (key "Super_L" "Super" "exec" "${pkill} wofi || ${wofi} --show drun")
-        (key "Super_L" "Super+Alt" "exec" "${pkill} wofi || ${rofi-rbw}")
-        (key "Super_L" "Super+Ctrl" "exec" "${pkill} wofi || calc")
-        (key "Super_L" "Super+Ctrl+Shift" "exec" "${pkill} wofi || ${networkmanager_dmenu}")
-        (key "Super_L" "Super+Shift" "exec" "${pkill} wofi || ${wofi} --show run")
+        (key "Super_L" "Super" "exec" "${menu}")
+        (key "Super_L" "Super+Alt" "exec" "${menu} --passwords")
+        (key "Super_L" "Super+Ctrl" "exec" "${menu} --calculator")
+        (key "Super_L" "Super+Ctrl+Shift" "exec" "${menu} --networks")
+        (key "Super_L" "Super+Shift" "exec" "${menu} --runner")
       ];
 
       # Regular binds

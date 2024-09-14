@@ -97,6 +97,11 @@ in {
               jq
               libnotify
             ])
+            (bash "menu" [
+              networkmanager_dmenu
+              rofi-rbw
+              walker
+            ])
             (bash "minimize" [
               hyprland
               jq
