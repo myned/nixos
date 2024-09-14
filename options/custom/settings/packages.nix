@@ -97,6 +97,7 @@ in {
           logseq
           loupe
           lutris
+          newsflash
           nheko
           obsidian
           onlyoffice-bin
