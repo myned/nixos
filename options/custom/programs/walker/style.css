@@ -1,0 +1,53 @@
+/***
+/* !! Inherits system GTK theme
+https://github.com/abenz1267/walker/blob/master/internal/config/themes/bare.css
+https://docs.gtk.org/gtk4/css-properties.html
+***/
+
+/* Transparent background overlay */
+#window {
+  background: none;
+}
+
+/* Visible window overlay */
+#box {
+  background: #002b36;
+  border: 2px #073642 solid;
+  border-radius: 25px;
+  font: larger sans-serif;
+  padding: 4px;
+}
+
+/* Input box */
+#search entry {
+  border-radius: 25px;
+  padding: 4px;
+}
+
+/* Input box icons */
+#search entry image {
+  opacity: 0;
+}
+
+/* List */
+#list {
+  background: none;
+}
+
+/* List entry */
+#list child {
+  border-radius: 25px;
+  margin: 4px 0;
+  padding: 8px;
+}
+
+/* List entry icon */
+#list child #icon {
+  margin-right: 8px;
+}
+
+/* List entry subtext */
+#list child #sub {
+  font-size: x-small;
+  opacity: 0.5;
+}

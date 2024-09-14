@@ -9,6 +9,7 @@ with lib; let
   git = config.home-manager.users.${config.custom.username}.programs.git.package;
   hyprland =
     config.home-manager.users.${config.custom.username}.wayland.windowManager.hyprland.finalPackage;
+  walker = config.home-manager.users.${config.custom.username}.programs.walker.package;
   wofi = config.home-manager.users.${config.custom.username}.programs.wofi.package;
 in {
   config.home-manager.users.${config.custom.username}.home.file = let

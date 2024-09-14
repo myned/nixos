@@ -129,6 +129,10 @@
       flake = false;
       url = "https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.262-2/virtio-win.iso";
     };
+    walker = {
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "github:abenz1267/walker";
+    };
     xdg-desktop-portal-hyprland = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:hyprwm/xdg-desktop-portal-hyprland";

@@ -30,8 +30,8 @@ with lib; let
   swayosd-client = "${pkgs.swayosd}/bin/swayosd-client";
   systemctl = "${pkgs.systemd}/bin/systemctl";
   virt-manager = "${config.programs.virt-manager.package}/bin/virt-manager";
+  walker = "${config.home-manager.users.${config.custom.username}.programs.walker.package}/bin/walker";
   waydroid = "${pkgs.waydroid}/bin/waydroid";
-  wofi = "${config.home-manager.users.${config.custom.username}.programs.wofi.package}/bin/wofi";
 
   cfg = config.custom.desktops.hyprland.binds;
 in {

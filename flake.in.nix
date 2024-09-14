@@ -74,9 +74,8 @@
     nix-flatpak = flake "github:gmodena/nix-flatpak?ref=v0.4.1";
     nix-vscode-extensions = flake "github:nix-community/nix-vscode-extensions" // unstable "nixpkgs";
     nixd = flake "github:nix-community/nixd" // unstable "nixpkgs";
-    xdg-desktop-portal-hyprland =
-      flake "github:hyprwm/xdg-desktop-portal-hyprland"
-      // unstable "nixpkgs";
+    walker = flake "github:abenz1267/walker" // unstable "nixpkgs";
+    xdg-desktop-portal-hyprland = flake "github:hyprwm/xdg-desktop-portal-hyprland" // unstable "nixpkgs";
 
     # Server flakes
     conduwuit = flake "github:Myned/conduwuit" // unstable "nixpkgs";

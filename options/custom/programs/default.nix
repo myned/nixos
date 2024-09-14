@@ -71,6 +71,7 @@ with lib; {
       #// thunderbird.enable = true;
       tio.enable = true;
       vscode.enable = true;
+      walker.enable = true;
       waybar.enable = true;
       wireshark.enable = true;
       wofi.enable = true;

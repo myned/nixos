@@ -25,6 +25,7 @@ in {
           fd
           fzf
           jq
+          libqalculate # qalc
           lm_sensors # sensors
           nix-output-monitor # nom
           nix-tree
