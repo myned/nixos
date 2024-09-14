@@ -84,7 +84,7 @@
     nixpkgs-staging-next = flake "github:NixOS/nixpkgs/staging-next";
 
     ### Development
-    nixpkgs-local = flake "git+file:///home/myned/SYNC/dev/repo/nixpkgs";
+    #// nixpkgs-local = flake "git+file:///home/myned/SYNC/dev/repo/nixpkgs";
     #// hyprland = flake "git+file:///home/myned/SYNC/dev/repo/Hyprland?submodules=1";
 
     ### Source code

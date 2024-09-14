@@ -46,7 +46,7 @@
           stable = nixpkgs "stable";
           unstable = nixpkgs "unstable";
           staging-next = nixpkgs "staging-next";
-          local = nixpkgs "local";
+          #// local = nixpkgs "local";
         in {
           # Overlay nixpkgs branches
           #?? nixpkgs.BRANCH.PACKAGE
@@ -67,7 +67,7 @@
           };
 
           # Development
-          ciscoPacketTracer8 = local.ciscoPacketTracer8;
+          #// ciscoPacketTracer8 = local.ciscoPacketTracer8;
         }
       )
     ];
