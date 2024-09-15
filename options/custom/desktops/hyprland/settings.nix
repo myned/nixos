@@ -197,6 +197,7 @@ in {
 
       # https://wiki.hyprland.org/Configuring/Variables/#cursor
       cursor = {
+        hide_on_key_press = true;
         hotspot_padding = 10;
         min_refresh_rate = 60; # !! Hardware dependent
         no_break_fs_vrr = true;
