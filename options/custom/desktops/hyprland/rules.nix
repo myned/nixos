@@ -38,40 +38,70 @@ in {
       # https://wiki.hyprland.org/Configuring/Window-Rules
       #?? windowrulev2 = RULE, WINDOW
       windowrulev2 = with config.custom; let
-        ### Hardware-dependent rules
-        # Convert truncated float to string
-        tr = num: toString (builtins.floor num);
+        # HACK: Attempts to account for hypr-specific scale, gaps, borders, and bar padding
+        ### Static geometry rules
+        tr = num: toString (builtins.floor num); # Convert truncated float to string
 
         # Bottom center
         clipboard = rec {
           x = tr (width / scale / 2 - (toInt w) / 2);
-          y = tr (height / scale - (toInt h) - gap - border - padding);
+          y = tr (height
+            / scale
+            - (toInt h)
+            - gap
+            - padding
+            + (
+              if ultrawide
+              then - border # Cause unknown
+              else 0
+            ));
           w = "600";
-          h = tr (height / scale * 0.5 * scale);
+          h = tr (height / scale * 0.75); # 75%
         };
 
         # Bottom center
         dropdown = rec {
           x = tr (width / scale / 2 - (toInt w) / 2);
-          y = tr (height / scale - (toInt h) - gap - border - padding);
-          w = tr (width
+          y = tr (height
+            / scale
+            - (toInt h)
+            - gap
+            - padding
+            + (
+              if ultrawide
+              then - border # Cause unknown
+              else 0
+            ));
+          w = tr (
+            width
             / scale
             * (
               if ultrawide
-              then 0.5
+              then 0.5 # 50%
               else 1
             )
-            - gap
-            - gap / 2
-            + 1);
-          h = tr (height / scale * 0.2 * scale);
+            + (
+              if ultrawide
+              then - gap / 2 * 2 # Center layout padding between windows
+              else 0
+            )
+            - gap * 2
+            - border * 2
+          );
+          h = tr (height
+            / scale
+            * (
+              if ultrawide
+              then 0.2 # 20%
+              else 0.3 # 30%
+            ));
         };
 
         # Top right
         pip = rec {
           x = tr (width / scale - (toInt w) - gap - border);
           y = tr (gap + border);
-          w = tr (width / scale * 0.25 - gap - gap + 1);
+          w = tr (width / scale * 0.25 - gap - gap / 2 - border * 2); # 25%
           h = tr ((toInt w) * 9 / 16); # 16:9 aspect ratio
         };
 
