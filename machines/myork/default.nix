@@ -25,7 +25,7 @@ in {
 
       auto-cpufreq.max = {
         battery = 3; # GHz
-        charger = 3.5; # GHz
+        #// charger = 3.5; # GHz
       };
     };
   };
