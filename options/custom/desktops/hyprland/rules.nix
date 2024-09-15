@@ -83,9 +83,8 @@ in {
             + (
               if ultrawide
               then - gap / 2 * 2 # Center layout padding between windows
-              else 0
+              else - gap * 2
             )
-            - gap * 2
             - border * 2
           );
           h = tr (height
