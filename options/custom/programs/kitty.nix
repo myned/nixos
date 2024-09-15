@@ -26,6 +26,8 @@ in {
         inactive_tab_font_style = "normal";
         confirm_os_window_close = 0;
         cursor_blink_interval = 0;
+        cursor_shape = "beam";
+        cursor_shape_unfocused = "underline";
         placement_strategy = "top-left"; # Partially fix padding
         scrollback_lines = -1;
         strip_trailing_spaces = "smart";
