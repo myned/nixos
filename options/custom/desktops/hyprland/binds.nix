@@ -16,9 +16,9 @@ with lib; let
   jq = "${pkgs.jq}/bin/jq";
   kill = "${pkgs.procps}/bin/kill";
   kitty = "${config.home-manager.users.${config.custom.username}.programs.kitty.package}/bin/kitty";
-  left = "~/.local/bin/left";
+  left = config.home-manager.users.${config.custom.username}.home.file.".local/bin/left".source;
   loginctl = "${pkgs.systemd}/bin/loginctl";
-  menu = "~/.local/bin/menu";
+  menu = config.home-manager.users.${config.custom.username}.home.file.".local/bin/menu".source;
   nautilus = "${pkgs.nautilus}/bin/nautilus";
   networkmanager_dmenu = "${pkgs.networkmanager_dmenu}/bin/networkmanager_dmenu";
   notify-send = "${pkgs.libnotify}/bin/notify-send";

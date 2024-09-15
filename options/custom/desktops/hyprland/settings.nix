@@ -9,7 +9,7 @@ with lib; let
   firefox-esr = "${
     config.home-manager.users.${config.custom.username}.programs.firefox.finalPackage
   }/bin/firefox-esr";
-  left = "~/.local/bin/left";
+  left = config.home-manager.users.${config.custom.username}.home.file.".local/bin/left".source;
   pkill = "${pkgs.procps}/bin/pkill";
   rm = "${pkgs.coreutils}/bin/rm";
   sleep = "${pkgs.coreutils}/bin/sleep";

@@ -13,13 +13,16 @@ with lib; let
   hyprctl = "${
     config.home-manager.users.${config.custom.username}.wayland.windowManager.hyprland.finalPackage
   }/bin/hyprctl";
+  inhibit = config.home-manager.users.${config.custom.username}.home.file.".local/bin/inhibit".source;
   jq = "${pkgs.jq}/bin/jq";
   loginctl = "${pkgs.systemd}/bin/loginctl";
+  network = config.home-manager.users.${config.custom.username}.home.file.".local/bin/network".source;
   nm-connection-editor = "${pkgs.networkmanagerapplet}/bin/nm-connection-editor";
   pgrep = "${pkgs.procps}/bin/pgrep";
   ping = "${pkgs.iputils}/bin/ping";
   pkill = "${pkgs.procps}/bin/pkill";
   playerctl = "${pkgs.playerctl}/bin/playerctl";
+  power = config.home-manager.users.${config.custom.username}.home.file.".local/bin/power".source;
   rfkill = "${pkgs.util-linux}/bin/rfkill";
   sleep = "${pkgs.coreutils}/bin/sleep";
   swaync-client = "${
@@ -29,6 +32,8 @@ with lib; let
   systemctl = "${pkgs.systemd}/bin/systemctl";
   systemd-inhibit = "${pkgs.systemd}/bin/systemd-inhibit";
   tailscale = "${pkgs.tailscale}/bin/tailscale";
+  vm = config.home-manager.users.${config.custom.username}.home.file.".local/bin/vm".source;
+  vpn = config.home-manager.users.${config.custom.username}.home.file.".local/bin/vpn".source;
   wttrbar = "${pkgs.wttrbar}/bin/wttrbar";
 
   cfg = config.custom.programs.waybar;
@@ -126,13 +131,13 @@ in {
           "custom/inhibitor" = {
             interval = 5;
             exec = "~/.config/waybar/scripts/inhibitor.sh";
-            on-click = "~/.local/bin/inhibit";
+            on-click = inhibit;
           };
 
           "custom/vm" = {
             interval = 5;
             exec = "~/.config/waybar/scripts/vm.sh";
-            on-click = "~/.local/bin/vm -x ${
+            on-click = "${vm} -x ${
               if config.custom.hidpi
               then "/scale:140"
               else ""
@@ -142,7 +147,7 @@ in {
           "custom/vpn" = {
             interval = 5;
             exec = "~/.config/waybar/scripts/vpn.sh";
-            on-click = "~/.local/bin/vpn mypi3";
+            on-click = "${vpn} mypi3";
           };
 
           # https://github.com/Alexays/Waybar/wiki/Module:-Idle-Inhibitor
@@ -281,7 +286,7 @@ in {
             };
 
             on-click = nm-connection-editor;
-            on-click-right = "~/.local/bin/network"; # Toggle networking on/off
+            on-click-right = network; # Toggle networking on/off
           };
 
           # https://github.com/Alexays/Waybar/wiki/Module:-Battery
@@ -306,7 +311,7 @@ in {
               warning = 30;
             };
 
-            on-click = "~/.local/bin/power"; # Toggle power-saver mode
+            on-click = power; # Toggle power-saver mode
           };
         };
       };
