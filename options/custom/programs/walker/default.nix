@@ -51,6 +51,7 @@ in {
           };
 
           dmenu = {
+            keep_sort = true; # Disable sorting entries
             placeholder = "Input";
             switcher_only = true;
           };
