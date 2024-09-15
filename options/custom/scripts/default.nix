@@ -20,6 +20,10 @@ in {
       ".local/bin/${name}".source =
         pkgs.writeShellApplication {
           inherit name;
+
+          # https://github.com/NixOS/nixpkgs/pull/261115
+          #// excludeShellChecks = ["SC2154"]; # argc evaluates variables at runtime
+
           runtimeInputs = dependencies;
           text = builtins.readFile ./${name}.sh;
         }
@@ -82,11 +86,6 @@ in {
               fprintd
               libnotify
             ])
-            (bash "flakegen" [
-              git
-              libnotify
-              nix
-            ])
             (bash "inhibit" [
               coreutils
               libnotify
@@ -111,17 +110,19 @@ in {
               libnotify
               networkmanager
             ])
+            (bash "nixos" [
+              argc
+              coreutils
+              git
+              nh
+              nix
+              nixos-rebuild
+              nvd
+              systemd
+            ])
             (bash "power" [
               libnotify
               power-profiles-daemon
-            ])
-            (bash "rebuild" [
-              libnotify
-              nixos-rebuild
-            ])
-            (bash "repl" [
-              libnotify
-              nixos-rebuild
             ])
             (bash "screenshot" [
               coreutils
@@ -130,20 +131,11 @@ in {
               libnotify
               swappy
             ])
-            (bash "target" [
-              libnotify
-              nixos-rebuild
-            ])
             (bash "toggle" [
               gnugrep
               hyprland
               jq
               libnotify
-            ])
-            (bash "upgrade" [
-              libnotify
-              nix
-              nixos-rebuild
             ])
             (bash "vm" [
               coreutils
