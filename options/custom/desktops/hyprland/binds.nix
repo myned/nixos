@@ -16,6 +16,7 @@ with lib; let
   jq = "${pkgs.jq}/bin/jq";
   kill = "${pkgs.procps}/bin/kill";
   kitty = "${config.home-manager.users.${config.custom.username}.programs.kitty.package}/bin/kitty";
+  left = "~/.local/bin/left";
   loginctl = "${pkgs.systemd}/bin/loginctl";
   menu = "~/.local/bin/menu";
   nautilus = "${pkgs.nautilus}/bin/nautilus";
@@ -127,7 +128,7 @@ in {
         # TODO: Toggle trackball hand
         #// (key "Delete" "Super" "exec" "left")
 
-        (key "Delete" "Super+Shift" "exec" "vrr")
+        (key "Delete" "Super+Shift" "exec" "${left} kensington-orbit-wireless-tb-mouse")
         (key "Down" "Super" "movewindow" "d")
         (key "Down" "Super+Shift" "movewindoworgroup" "d")
         (key "Equal" "Super" "exec" "audio Normalizer")
