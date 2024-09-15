@@ -7,35 +7,41 @@ command=walker
 
 while (("$#" > 0)); do
   case "$1" in
-    -a | --applications)
+    --applications)
       command="walker --modules applications"
       ;;
-    -c | --calculator)
+    --calculator)
       command="walker --modules calc"
       ;;
-    -f | --files)
+    --clipboard)
+      command="walker --modules clipboard"
+      ;;
+    --files)
       command="walker --modules finder"
       ;;
-    -i | --input)
+    --input)
       command="walker --dmenu"
       ;;
-    -n | --networks)
+    --networks)
       command="networkmanager_dmenu"
       ;;
-    -p | --passwords)
+    --passwords)
       command="rofi-rbw"
       ;;
-    -r | --runner)
+    --runner)
       command="walker --modules runner"
       ;;
-    -s | --ssh)
+    --search)
+      command="walker --modules websearch"
+      ;;
+    --ssh)
       command="walker --modules ssh"
       ;;
-    -u | --unicode)
+    --unicode)
       command="walker --modules emojis"
       ;;
-    -w | --web)
-      command="walker --modules websearch"
+    --windows)
+      command="walker --modules windows"
       ;;
     --)
       shift

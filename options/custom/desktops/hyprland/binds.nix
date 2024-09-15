@@ -26,6 +26,7 @@ with lib; let
   pkill = "${pkgs.procps}/bin/pkill";
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   rofi-rbw = "${pkgs.rofi-rbw}/bin/rofi-rbw";
+  rm = "${pkgs.coreutils}/bin/rm";
   sleep = "${pkgs.coreutils}/bin/sleep";
   steam = "${config.programs.steam.package}/bin/steam";
   swayosd-client = "${pkgs.swayosd}/bin/swayosd-client";
@@ -228,8 +229,8 @@ in {
         (key "T" "Super" "togglespecialworkspace" "terminal")
         (key "T" "Super+Shift" "movetoworkspacesilent" "terminal")
         (key "T" "Super+Shift" "exec" kitty)
-        (key "V" "Super" "exec" "${kitty} --app-id clipboard --override font_size=12 ${clipse}")
-        (key "V" "Super+Shift" "exec" "${clipse} -clear && ${notify-send} clipse 'Clipboard cleared' --urgency low")
+        (key "V" "Super" "exec" "${menu} --clipboard")
+        (key "V" "Super+Shift" "exec" "${rm} ~/.cache/walker/clipboard.gob; ${notify-send} walker 'Clipboard cleared' --urgency low")
         (key "W" "Super" "togglespecialworkspace" "vm")
         (key "W" "Super+Ctrl" "exec" "vm -x ${
           if config.custom.hidpi

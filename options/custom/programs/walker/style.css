@@ -21,6 +21,7 @@ https://docs.gtk.org/gtk4/css-properties.html
 /* Input box */
 #search entry {
   border-radius: 25px;
+  margin-bottom: 4px;
   padding: 4px;
 }
 
@@ -37,7 +38,7 @@ https://docs.gtk.org/gtk4/css-properties.html
 /* List entry */
 #list child {
   border-radius: 25px;
-  margin: 4px 0;
+  margin: 2px 8px;
   padding: 8px;
 }
 

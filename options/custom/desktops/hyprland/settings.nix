@@ -64,10 +64,9 @@ in {
       # https://wiki.hyprland.org/Configuring/Keywords/#executing
       exec-once =
         [
-          "${rm} ~/.config/qalculate/qalc.dmenu.history" # Clear calc history
-          "${clipse} -clear" # Clear clipboard history
-          "${clipse} -listen" # Monitor clipboard
+          "${rm} ~/.cache/walker/clipboard.gob" # Clear clipboard
           sway-audio-idle-inhibit # Inhibit idle while audio is playing
+          left # Left-handed at boot
 
           # TODO: Remove when systemd service fixed
           # https://github.com/Alexays/Waybar/issues/2882
