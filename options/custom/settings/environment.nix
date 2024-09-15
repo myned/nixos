@@ -35,20 +35,6 @@ in {
       };
 
       shellAliases = {
-        backup = "sudo borgmatic -v 1 create --progress --stats";
-        extract = "sudo borgmatic -v 1 extract --progress";
-        restore = "sudo borgmatic -v 1 restore";
-        list = "sudo borgmatic -v 1 list";
-        init = "sudo borgmatic init -e repokey-blake2";
-        key = "sudo borgmatic key export";
-
-        reboot = "sudo systemctl reboot";
-        restart = "sudo systemctl reboot";
-        poweroff = "sudo systemctl poweroff";
-        shutdown = "sudo systemctl poweroff";
-
-        rsync = "rsync --info=progress2";
-
         # https://github.com/aksiksi/compose2nix?tab=readme-ov-file#usage
         # https://github.com/aksiksi/compose2nix?tab=readme-ov-file#agenix
         compose2nix = concatStringsSep " " [
