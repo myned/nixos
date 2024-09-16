@@ -52,6 +52,10 @@
           #?? nixpkgs.BRANCH.PACKAGE
           inherit stable unstable staging-next;
 
+          # BUG: Build tests often fail on unstable
+          # https://github.com/NixOS/nixpkgs/issues/333946
+          fprintd = stable.fprintd;
+
           # Hypr*
           hypridle = inputs.hypridle.packages.${prev.system}.default;
           hyprland = inputs.hyprland.packages.${prev.system}.default;
