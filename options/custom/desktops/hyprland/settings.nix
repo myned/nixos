@@ -60,19 +60,17 @@ in {
         ];
 
       # https://wiki.hyprland.org/Configuring/Keywords/#executing
-      #// exec = [ ];
+      exec = [
+        left # Left-handed at boot
+        "${systemctl} --user restart walker"
+        "${sleep} 2 && ${systemctl} --user restart waybar"
+      ];
 
       # https://wiki.hyprland.org/Configuring/Keywords/#executing
       exec-once =
         [
-          "${rm} ~/.cache/walker/clipboard.gob" # Clear clipboard
           sway-audio-idle-inhibit # Inhibit idle while audio is playing
-          left # Left-handed at boot
-
-          # TODO: Remove when systemd service fixed
-          # https://github.com/Alexays/Waybar/issues/2882
-          "${sleep} 2 && ${systemctl} --user restart waybar"
-
+          "${rm} ~/.cache/walker/clipboard.gob" # Clear clipboard
           "[group new lock; tile] ${firefox-esr}"
         ]
         ++ optionals config.custom.wallpaper ["wallpaper"];
