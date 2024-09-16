@@ -61,11 +61,6 @@
           hyprland = inputs.hyprland.packages.${prev.system}.default;
           hyprlock = inputs.hyprlock.packages.${prev.system}.default;
 
-          # TODO: Remove when merged into unstable
-          # https://github.com/NixOS/nixpkgs/pull/338836
-          xdg-desktop-portal-hyprland =
-            inputs.xdg-desktop-portal-hyprland.packages.${prev.system}.xdg-desktop-portal-hyprland;
-
           hyprlandPlugins = {
             hyprbars = inputs.hyprland-plugins.packages.${prev.system}.hyprbars;
           };

@@ -132,10 +132,6 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:abenz1267/walker";
     };
-    xdg-desktop-portal-hyprland = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:hyprwm/xdg-desktop-portal-hyprland";
-    };
   };
   outputs = inputs: inputs.flakegen ./flake.in.nix inputs;
 }
