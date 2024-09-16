@@ -101,7 +101,7 @@ in {
         (key "Control_L" "Super+Ctrl+Alt+Shift" "layoutmsg" "removemaster")
         (key "Control_L" "Super+Ctrl+Shift" "layoutmsg" "addmaster")
         (key "Shift_L" "Super+Shift" "workspace" "previous")
-        (key "Super_L" "Super" "exec" "${menu}")
+        (key "Super_L" "Super" "exec" "${menu} --applications")
         (key "Super_L" "Super+Alt" "exec" "${menu} --passwords")
         (key "Super_L" "Super+Ctrl" "exec" "${menu} --calculator")
         (key "Super_L" "Super+Ctrl+Shift" "exec" "${menu} --networks")

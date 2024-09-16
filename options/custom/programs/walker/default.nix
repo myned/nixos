@@ -47,7 +47,6 @@ in {
             #// actions = false; # Desktop file actions
 
             switcher_only = false;
-            weight = 10;
           };
 
           dmenu = {
