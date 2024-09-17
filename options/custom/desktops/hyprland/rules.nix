@@ -28,7 +28,7 @@ in {
 
         "special:android, on-created-empty:${waydroid} app launch com.YoStarEN.Arknights"
         "special:music, on-created-empty:${youtube-music}"
-        "special:office, on-created-empty:${onlyoffice}"
+        "special:office, on-created-empty:[tile] ${onlyoffice}"
         "special:steam, on-created-empty:${steam}"
         "special:terminal, on-created-empty:${kitty}"
         "special:vm, on-created-empty:${pgrep} -x vm || ${virt-manager}"
@@ -209,7 +209,7 @@ in {
           (tag.files ["size 1000 625"])
           (tag.game ["fullscreen" "group barred" "idleinhibit always" "noborder" "noshadow" "renderunfocused" "workspace name:game"])
           (tag.music ["tile" "workspace special:music"])
-          (tag.office ["tile" "workspace special:office"])
+          (tag.office ["workspace special:office"])
           (tag.pip ["keepaspectratio" "move ${pip.x} ${pip.y}" "pin" "size ${pip.w} ${pip.h}"])
           (tag.social ["group" "tile"])
           (tag.steam ["workspace special:steam"])
