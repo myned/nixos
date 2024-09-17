@@ -61,7 +61,7 @@ in {
 
       # https://wiki.hyprland.org/Configuring/Keywords/#executing
       exec = [
-        left # Left-handed at boot
+        left # Set left-pawed state
         "${systemctl} --user restart walker"
         "${sleep} 2 && ${systemctl} --user restart waybar"
       ];
