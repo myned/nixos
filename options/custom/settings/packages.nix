@@ -17,7 +17,7 @@ in {
     with pkgs; {
       environment.systemPackages =
         cfg.extra
-        ++ [
+        ++ optionals config.custom.default [
           # CLI applications
           config.boot.kernelPackages.cpupower # Install for current kernel
 
