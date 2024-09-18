@@ -17,7 +17,6 @@ with lib; {
       fwupd.enable = true;
       geoclue2.enable = true;
       kdeconnect.enable = true;
-      keyd.enable = true;
       libinput.enable = true;
       logind.enable = true;
       pipewire.enable = true;
@@ -40,6 +39,7 @@ with lib; {
       greetd.enable = true;
       hypridle.enable = true;
       #// hyprpaper.enable = true;
+      keyd.enable = true;
       #// mako.enable = true;
       #// network-manager-applet.enable = true;
       samba.enable = true;
