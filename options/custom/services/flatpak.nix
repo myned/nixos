@@ -20,10 +20,16 @@ in {
 
       #!! Installation occurs in background as a oneshot service
       #?? flatpak search NAME
-      packages = [
-        "app.drey.Biblioteca"
-        "com.github.tchx84.Flatseal"
-      ];
+      packages =
+        optionals config.custom.default [
+          "com.github.tchx84.Flatseal"
+        ]
+        ++ optionals config.custom.minimal [
+          "net.retrodeck.retrodeck"
+        ]
+        ++ optionals config.custom.full [
+          "app.drey.Biblioteca"
+        ];
     };
 
     # Theme packages must be installed system-wide for flatpaks
