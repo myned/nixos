@@ -43,6 +43,7 @@ in {
 
   ### Common
   "common/nix/access-tokens.conf".publicKeys = common;
+  "common/geoclue2/geolocation".publicKeys = common;
   "common/tailscale/tailnet".publicKeys = common;
 
   ### Console
@@ -52,7 +53,6 @@ in {
   ### Desktop
   "desktop/bitwarden/client_id".publicKeys = desktop;
   "desktop/bitwarden/client_secret".publicKeys = desktop;
-  "desktop/geoclue2/geolocation".publicKeys = desktop;
   "desktop/users/myned.pass".publicKeys = desktop;
   "desktop/users/root.pass".publicKeys = desktop;
 

@@ -17,7 +17,7 @@ in {
         group = "geoclue";
       };
     in {
-      "desktop/geoclue2/geolocation" = secret "desktop/geoclue2/geolocation";
+      "common/geoclue2/geolocation" = secret "common/geoclue2/geolocation";
     };
 
     # https://gitlab.freedesktop.org/geoclue/geoclue
@@ -39,7 +39,7 @@ in {
     # Manually use static source from coordinates
     # https://github.com/NixOS/nixpkgs/issues/311595#issuecomment-2247989491
     environment.etc = {
-      "geolocation".source = config.age.secrets."desktop/geoclue2/geolocation".path;
+      "geolocation".source = config.age.secrets."common/geoclue2/geolocation".path;
 
       "geoclue/conf.d/00-config.conf".text = ''
         [static-source]
