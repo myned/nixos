@@ -32,7 +32,7 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDPlG7FWZ5Us4Ix5fGMHn2DJU1/ma/7kQu39cPKKQMXJ root@myarm"
   ];
 
-  common = users ++ desktops ++ sbcs ++ servers;
+  common = users ++ consoles ++ desktops ++ sbcs ++ servers;
   console = users ++ consoles;
   desktop = users ++ desktops;
   sbc = users ++ sbcs;
