@@ -82,20 +82,6 @@ in {
           "/r" = any "/run";
           "/rc" = any "/run/current-system";
 
-          reboot = any "systemctl reboot";
-          restart = any "systemctl reboot";
-          poweroff = any "systemctl poweroff";
-          shutdown = any "systemctl poweroff";
-
-          backup = any "borgmatic -v 1 create --progress --stats";
-          extract = any "borgmatic -v 1 extract --progress";
-          init = any "borgmatic init -e repokey-blake2";
-          key = any "borgmatic key export";
-          list = any "borgmatic -v 1 list";
-          restore = any "borgmatic -v 1 restore";
-
-          rsync = any "rsync --info=progress2";
-
           jc = any "journalctl";
           jcs = any "journalctl --system";
           jcse = any "journalctl --system --pager-end";
@@ -174,6 +160,20 @@ in {
           s = "ssh";
 
           ip = "tailscale ip --4";
+
+          reboot = "systemctl reboot";
+          restart = "systemctl reboot";
+          poweroff = "systemctl poweroff";
+          shutdown = "systemctl poweroff";
+
+          backup = "borgmatic -v 1 create --progress --stats";
+          extract = "borgmatic -v 1 extract --progress";
+          init = "borgmatic init -e repokey-blake2";
+          key = "borgmatic key export";
+          list = "borgmatic -v 1 list";
+          restore = "borgmatic -v 1 restore";
+
+          rsync = "rsync --info=progress2";
 
           n = "nixos";
           nb = "nixos build";
