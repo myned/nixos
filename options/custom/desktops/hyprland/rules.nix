@@ -237,7 +237,7 @@ in {
           (fields {
             class = "^steam$";
             title = "^notificationtoasts$"; # Steam notifications
-          } [])
+          } ["pin" "suppressevent activatefocus"])
           (fields {
             class = "^steam$";
             title = "^Steam$"; # Main window
