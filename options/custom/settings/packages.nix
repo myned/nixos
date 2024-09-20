@@ -73,6 +73,7 @@ in {
           flare-signal
           fluffychat
           #// fractal
+          fragments
           gcolor3
           gitg
           github-desktop
