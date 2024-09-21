@@ -34,5 +34,12 @@ in {
 
     ### Misc
     wallpaper = mkOption {default = false;};
+
+    font = {
+      emoji = mkOption {default = "Noto Color Emoji";};
+      monospace = mkOption {default = "Iosevka NFP SemiBold";};
+      sans-serif = mkOption {default = "Lexend";};
+      serif = mkOption {default = "Liberation Serif";};
+    };
   };
 }

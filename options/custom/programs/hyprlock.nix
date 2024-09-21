@@ -49,7 +49,7 @@ in {
 
         label = {
           color = "rgb(fdf6e3)";
-          font_family = "monospace";
+          font_family = config.custom.font.monospace;
           font_size = 48;
           halign = "center";
           position = "0, 200";

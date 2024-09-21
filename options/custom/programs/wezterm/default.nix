@@ -21,6 +21,8 @@ in {
         local act = wezterm.action
         local config = wezterm.config_builder()
 
+        config.font = wezterm.font('${config.custom.font.monospace}')
+
         -- # TODO: Remove when using Wayland
         config.font_size = ${toString (14 * config.custom.scale)}
 

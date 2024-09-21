@@ -156,7 +156,7 @@ in {
         disable_hyprland_logo = true;
         disable_splash_rendering = true;
         focus_on_activate = true;
-        font_family = "monospace";
+        font_family = config.custom.font.monospace;
         force_default_wallpaper = 0;
         key_press_enables_dpms = true;
         middle_click_paste = false;

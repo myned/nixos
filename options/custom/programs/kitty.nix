@@ -15,7 +15,7 @@ in {
       enable = true;
 
       font = {
-        name = "monospace";
+        name = config.custom.font.monospace;
         size = 14;
       };
 

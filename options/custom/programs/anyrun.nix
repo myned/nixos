@@ -47,7 +47,7 @@ in {
         *:focus { outline: none; }
 
         #window {
-          font: 16px monospace;
+          font: 16px ${config.custom.font.monospace};
           background: none;
         }
 

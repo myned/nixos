@@ -25,7 +25,7 @@ in {
         fill-tabs = mkBoolean true;
         floating-controls = mkBoolean true;
         floating-controls-hover-area = mkUint32 10;
-        font = mkString "monospace 14";
+        font = mkString "${config.custom.font.monospace} 14";
         headerbar-drag-area = mkBoolean false;
         notify-process-completion = mkBoolean false;
         opacity = mkUint32 100;
@@ -71,7 +71,7 @@ in {
         cursor-blink = mkBoolean false;
         gtk-enable-primary-paste = mkBoolean false;
         color-scheme = mkString "prefer-dark";
-        monospace-font-name = mkString "monospace 14";
+        monospace-font-name = mkString "${config.custom.font.monospace} 14";
       };
 
       # GNOME Files

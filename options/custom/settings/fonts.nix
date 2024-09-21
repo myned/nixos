@@ -37,10 +37,10 @@ in {
 
       #?? fc-list --brief | grep family: | sort
       fontconfig.defaultFonts = {
-        emoji = ["Noto Color Emoji"];
-        monospace = ["Iosevka NFP SemiBold"];
-        sansSerif = ["Outfit"];
-        serif = ["Liberation Serif"];
+        emoji = [config.custom.font.emoji];
+        monospace = [config.custom.font.monospace];
+        sansSerif = [config.custom.font.sans-serif];
+        serif = [config.custom.font.serif];
       };
     };
 

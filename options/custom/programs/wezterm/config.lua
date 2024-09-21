@@ -9,10 +9,6 @@ config.enable_wayland = false
 
 -- # BUG: Font weight does not render properly with WebGpu
 -- https://github.com/wez/wezterm/issues/3032
--- # BUG: fontconfig is broken in unstable
--- https://github.com/NixOS/nixpkgs/pull/338815
--- config.font = wezterm.font('monospace')
-config.font = wezterm.font('Iosevka NFP SemiBold')
 
 config.force_reverse_video_cursor = true -- Invert colors
 

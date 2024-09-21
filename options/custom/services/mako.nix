@@ -21,7 +21,7 @@ in {
       anchor = "top-center";
       backgroundColor = "#073642";
       borderColor = "#002b36";
-      font = "sans-serif 12";
+      font = "${config.custom.font.sans-serif} 12";
       layer = "overlay";
       margin = "20";
       padding = "10";

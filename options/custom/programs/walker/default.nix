@@ -74,7 +74,13 @@ in {
 
       # https://github.com/abenz1267/walker/wiki/Theming
       theme = {
-        style = builtins.readFile ./style.css;
+        style = ''
+          #box {
+            font: larger ${config.custom.font.sans-serif};
+          }
+
+          ${builtins.readFile ./style.css}
+        '';
 
         # https://github.com/abenz1267/walker/blob/master/internal/config/layout.default.json
         layout.ui.window.box = rec {

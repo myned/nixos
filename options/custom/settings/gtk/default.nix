@@ -27,7 +27,7 @@ in {
       };
 
       font = {
-        name = "sans-serif";
+        name = config.custom.font.sans-serif;
         size = 12;
       };
 

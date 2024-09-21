@@ -72,15 +72,15 @@ in {
           "gnomeTheme.bookmarksToolbarUnderTabs" = true;
           "gnomeTheme.systemIcons" = true;
 
-          "font.default.x-unicode" = "sans-serif";
-          "font.default.x-western" = "sans-serif";
-          "font.name-list.emoji" = "emoji"; # System emoji
-          "font.name.monospace.x-unicode" = "monospace";
-          "font.name.monospace.x-western" = "monospace";
-          "font.name.sans-serif.x-unicode" = "sans-serif";
-          "font.name.sans-serif.x-western" = "sans-serif";
-          "font.name.serif.x-unicode" = "sans-serif";
-          "font.name.serif.x-western" = "sans-serif";
+          "font.default.x-unicode" = config.custom.font.sans-serif;
+          "font.default.x-western" = config.custom.font.sans-serif;
+          "font.name-list.emoji" = config.custom.font.emoji; # System emoji
+          "font.name.monospace.x-unicode" = config.custom.font.monospace;
+          "font.name.monospace.x-western" = config.custom.font.monospace;
+          "font.name.sans-serif.x-unicode" = config.custom.font.sans-serif;
+          "font.name.sans-serif.x-western" = config.custom.font.sans-serif;
+          "font.name.serif.x-unicode" = config.custom.font.sans-serif;
+          "font.name.serif.x-western" = config.custom.font.sans-serif;
           "full-screen-api.ignore-widgets" = false; # Fake fullscreen
           "full-screen-api.warning.delay" = -1;
           "full-screen-api.warning.timeout" = 0;
