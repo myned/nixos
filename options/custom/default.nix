@@ -38,7 +38,7 @@ in {
     font = {
       emoji = mkOption {default = "Noto Color Emoji";};
       monospace = mkOption {default = "Iosevka NFP SemiBold";};
-      sans-serif = mkOption {default = "Lexend";};
+      sans-serif = mkOption {default = "Outfit";};
       serif = mkOption {default = "Liberation Serif";};
     };
   };
