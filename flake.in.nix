@@ -140,7 +140,6 @@
                     inputs.arion.nixosModules.arion
                     inputs.disko.nixosModules.disko
                     inputs.fw-fanctrl.nixosModules.default
-                    inputs.nix-flatpak.nixosModules.nix-flatpak
                   ];
 
                   home-manager.users.${config.custom.username}.imports = [
