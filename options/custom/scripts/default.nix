@@ -125,6 +125,7 @@ in {
               power-profiles-daemon
             ])
             (bash "screenshot" [
+              argc
               coreutils
               grimblast
               imagemagick

@@ -138,10 +138,10 @@ in {
         (key "Left" "Super" "movewindow" "l")
         (key "Left" "Super+Shift" "movewindoworgroup" "l")
         (key "Minus" "Super" "exec" "audio")
-        (key "Print" "Shift" "exec" "screenshot -d")
-        (key "Print" "Super" "exec" "screenshot -e")
-        (key "Print" "Super+Shift" "exec" "screenshot -ed")
-        (key "Print" null "exec" "screenshot")
+        (key "Print" "Shift" "exec" "screenshot display")
+        (key "Print" "Super" "exec" "screenshot selection --edit")
+        (key "Print" "Super+Shift" "exec" "screenshot display --edit")
+        (key "Print" null "exec" "screenshot selection")
         (key "Return" "Super" "fullscreen" "1") # Maximize
         (key "Return" "Super+Shift" "fullscreen" "0") # Fullscreen
         (key "Right" "Super" "movewindow" "r")
