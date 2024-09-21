@@ -38,6 +38,9 @@ in {
 
       theme = {
         name = "adw-gtk3-dark";
+
+        # BUG: Forces theme on GTK 4
+        # https://github.com/nix-community/home-manager/issues/5133
         #// package = pkgs.adw-gtk3;
       };
     };
