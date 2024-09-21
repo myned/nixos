@@ -156,6 +156,7 @@ in {
           ];
           game = rules: [
             (class "moe\\.launcher\\.the-honkers-railway-launcher" (rules ++ ["size 1280 730"])) # Honkai: Star Rail
+            (class "net.retrodeck.retrodeck" rules) # Emulators
             (class "steam_app_.+" rules) # Proton
           ];
           music = rules: [
