@@ -84,7 +84,7 @@ in {
 
         # https://github.com/abenz1267/walker/blob/master/internal/config/layout.default.json
         layout.ui.window.box = rec {
-          height = 250 / config.custom.scale;
+          height = 300 / config.custom.scale;
           width = 1000 / config.custom.scale;
 
           scroll.list = {
