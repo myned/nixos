@@ -11,52 +11,12 @@ in {
   config = mkIf cfg.enable {
     # https://wiki.nixos.org/wiki/Fish
     # https://github.com/fish-shell/fish-shell
-    programs.fish = {
-      enable = true;
-
-      promptInit = ''
-        # Disable greeting
-        set -g fish_greeting
-
-        # Prompt
-        function fish_prompt --description 'Write out the prompt'
-          set -l last_status $status
-          set -l normal (set_color normal)
-          set -l status_color (set_color brgreen)
-          set -l cwd_color (set_color $fish_color_cwd)
-          set -l vcs_color (set_color brpurple)
-          set -l prompt_status ""
-
-          # Since we display the prompt on a new line allow the directory names to be longer.
-          set -q fish_prompt_pwd_dir_length
-          or set -lx fish_prompt_pwd_dir_length 0
-
-          # Color the prompt differently when we're root
-          set -l suffix '❯'
-          if functions -q fish_is_root_user; and fish_is_root_user
-              if set -q fish_color_cwd_root
-                  set cwd_color (set_color $fish_color_cwd_root)
-              end
-              set suffix '#'
-          end
-
-          # Color the prompt in red on error
-          if test $last_status -ne 0
-              set status_color (set_color $fish_color_error)
-              set prompt_status $status_color "[" $last_status "]" $normal
-          end
-
-          echo -s (prompt_login) ' ' $cwd_color (prompt_pwd) $vcs_color (fish_vcs_prompt) $normal ' ' $prompt_status
-          echo -n -s $status_color $suffix ' ' $normal
-        end
-      '';
-    };
+    programs.fish.enable = true;
 
     home-manager.users = {
-      # Inherit root abbreviations from user
-      root.programs.fish = {
-        enable = true;
-        shellAbbrs = config.home-manager.users.${config.custom.username}.programs.fish.shellAbbrs;
+      # Inherit root configuration from user
+      root.programs.fish = with config.home-manager.users.${config.custom.username}.programs.fish; {
+        inherit enable interactiveShellInit shellAbbrs;
       };
 
       ${config.custom.username}.programs.fish = let
@@ -82,77 +42,77 @@ in {
           "/r" = any "/run";
           "/rc" = any "/run/current-system";
 
-          jc = any "journalctl";
-          jcs = any "journalctl --system";
-          jcse = any "journalctl --system --pager-end";
-          jcseu = any "journalctl --system --pager-end --unit";
-          jcsf = any "journalctl --system --follow";
-          jcsfu = any "journalctl --system --follow --unit";
-          jcsi = any "journalctl --system --identifier";
-          jcst = any "journalctl --system --target";
-          jcsu = any "journalctl --system --unit";
-          jcu = any "journalctl --user";
-          jcue = any "journalctl --user --pager-end";
-          jcueu = any "journalctl --user --pager-end --unit";
-          jcuf = any "journalctl --user --follow";
-          jcufu = any "journalctl --user --follow --unit";
-          jcui = any "journalctl --user --identifier";
-          jcut = any "journalctl --user --target";
-          jcuu = any "journalctl --user --unit";
+          jc = "journalctl";
+          jcs = "journalctl --system";
+          jcse = "journalctl --system --pager-end";
+          jcseu = "journalctl --system --pager-end --unit";
+          jcsf = "journalctl --system --follow";
+          jcsfu = "journalctl --system --follow --unit";
+          jcsi = "journalctl --system --identifier";
+          jcst = "journalctl --system --target";
+          jcsu = "journalctl --system --unit";
+          jcu = "journalctl --user";
+          jcue = "journalctl --user --pager-end";
+          jcueu = "journalctl --user --pager-end --unit";
+          jcuf = "journalctl --user --follow";
+          jcufu = "journalctl --user --follow --unit";
+          jcui = "journalctl --user --identifier";
+          jcut = "journalctl --user --target";
+          jcuu = "journalctl --user --unit";
 
-          sc = any "systemctl";
-          scp = any "systemctl poweroff";
-          scr = any "systemctl reboot";
-          scs = any "systemctl --system";
-          scsd = any "systemctl --system disable";
-          scsdn = any "systemctl --system disable --now";
-          scse = any "systemctl --system reenable";
-          scsen = any "systemctl --system reenable --now";
-          scsh = any "systemctl --system show";
-          scsl = any "systemctl --system list-unit-files";
-          scsm = any "systemctl --system mask";
-          scsr = any "systemctl --system restart";
-          scsrr = any "systemctl --system reload-or-restart";
-          scss = any "systemctl --system status";
-          scst = any "systemctl --system stop";
-          scsu = any "systemctl --system unmask";
-          scu = any "systemctl --user";
-          scud = any "systemctl --user disable";
-          scudn = any "systemctl --user disable --now";
-          scue = any "systemctl --user reenable";
-          scuen = any "systemctl --user reenable --now";
-          scuh = any "systemctl --user show";
-          scul = any "systemctl --user list-unit-files";
-          scum = any "systemctl --user mask";
-          scur = any "systemctl --user restart";
-          scurr = any "systemctl --user reload-or-restart";
-          scus = any "systemctl --user status";
-          scut = any "systemctl --user stop";
-          scuu = any "systemctl --user unmask";
+          sc = "systemctl";
+          scp = "systemctl poweroff";
+          scr = "systemctl reboot";
+          scs = "systemctl --system";
+          scsd = "systemctl --system disable";
+          scsdn = "systemctl --system disable --now";
+          scse = "systemctl --system reenable";
+          scsen = "systemctl --system reenable --now";
+          scsh = "systemctl --system show";
+          scsl = "systemctl --system list-unit-files";
+          scsm = "systemctl --system mask";
+          scsr = "systemctl --system restart";
+          scsrr = "systemctl --system reload-or-restart";
+          scss = "systemctl --system status";
+          scst = "systemctl --system stop";
+          scsu = "systemctl --system unmask";
+          scu = "systemctl --user";
+          scud = "systemctl --user disable";
+          scudn = "systemctl --user disable --now";
+          scue = "systemctl --user reenable";
+          scuen = "systemctl --user reenable --now";
+          scuh = "systemctl --user show";
+          scul = "systemctl --user list-unit-files";
+          scum = "systemctl --user mask";
+          scur = "systemctl --user restart";
+          scurr = "systemctl --user reload-or-restart";
+          scus = "systemctl --user status";
+          scut = "systemctl --user stop";
+          scuu = "systemctl --user unmask";
 
-          d = any "docker";
-          dc = any "docker compose";
-          dcd = any "docker compose down";
-          dce = any "docker compose exec";
-          dcl = any "docker compose logs";
-          dcp = any "docker compose pull";
-          dcu = any "docker compose up";
-          dcuf = any "docker compose up --force-recreate";
-          de = any "docker exec";
-          dei = any "docker exec --interactive";
-          deit = any "docker exec --interactive --tty";
-          det = any "docker exec --tty";
-          di = any "docker images";
-          dk = any "docker kill";
-          dn = any "docker network";
-          dnl = any "docker network ls";
-          dp = any "docker pull";
-          dps = any "docker ps";
-          dpsa = any "docker ps --all --size";
-          dr = any "docker rm";
-          ds = any "docker system";
-          dsp = any "docker system prune";
-          dspav = any "docker system prune --all --volumes";
+          d = "docker";
+          dc = "docker compose";
+          dcd = "docker compose down";
+          dce = "docker compose exec";
+          dcl = "docker compose logs";
+          dcp = "docker compose pull";
+          dcu = "docker compose up";
+          dcuf = "docker compose up --force-recreate";
+          de = "docker exec";
+          dei = "docker exec --interactive";
+          deit = "docker exec --interactive --tty";
+          det = "docker exec --tty";
+          di = "docker images";
+          dk = "docker kill";
+          dn = "docker network";
+          dnl = "docker network ls";
+          dp = "docker pull";
+          dps = "docker ps";
+          dpsa = "docker ps --all --size";
+          dr = "docker rm";
+          ds = "docker system";
+          dsp = "docker system prune";
+          dspav = "docker system prune --all --volumes";
 
           c = "clear";
           e = "exit";
@@ -202,6 +162,42 @@ in {
         };
 
         interactiveShellInit = ''
+          ### Prompt
+          # Disable greeting
+          set -g fish_greeting
+
+          function fish_prompt --description 'Write out the prompt'
+            set -l last_status $status
+            set -l normal (set_color normal)
+            set -l status_color (set_color brgreen)
+            set -l cwd_color (set_color $fish_color_cwd)
+            set -l vcs_color (set_color brpurple)
+            set -l prompt_status ""
+
+            # Since we display the prompt on a new line allow the directory names to be longer.
+            set -q fish_prompt_pwd_dir_length
+            or set -lx fish_prompt_pwd_dir_length 0
+
+            # Color the prompt differently when we're root
+            set -l suffix '❯'
+            if functions -q fish_is_root_user; and fish_is_root_user
+                if set -q fish_color_cwd_root
+                    set cwd_color (set_color $fish_color_cwd_root)
+                end
+                set suffix '#'
+            end
+
+            # Color the prompt in red on error
+            if test $last_status -ne 0
+                set status_color (set_color $fish_color_error)
+                set prompt_status $status_color "[" $last_status "]" $normal
+            end
+
+            echo -s (prompt_login) ' ' $cwd_color (prompt_pwd) $vcs_color (fish_vcs_prompt) $normal ' ' $prompt_status
+            echo -n -s $status_color $suffix ' ' $normal
+          end
+
+          ### Interactive
           # Default is brblack (bright0)
           set -g fish_color_autosuggestion brgreen
 
@@ -231,10 +227,6 @@ in {
 
           function activate -d 'Activate Python venv'
             source .venv/bin/activate.fish
-          end
-
-          function arknights -d 'Launch Arknights'
-            waydroid app launch com.YoStarEN.Arknights
           end
         '';
       };
