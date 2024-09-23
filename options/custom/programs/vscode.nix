@@ -17,58 +17,70 @@ in {
     programs.vscode = {
       enable = true;
       mutableExtensionsDir = false;
-      package = pkgs.vscodium;
+
+      # Extension dependencies
+      # https://wiki.nixos.org/wiki/Visual_Studio_Code#Use_VS_Code_extensions_without_additional_configuration
+      package = pkgs.vscodium.fhsWithPackages (ps:
+        with ps; [
+          alejandra # nix-ide
+          blueprint-compiler # blueprint-gtk
+          nixd # nix-ide
+          shfmt # shell-format
+        ]);
 
       # https://github.com/nix-community/nix-vscode-extensions
       #?? nixos-rebuild repl > inputs.nix-vscode-extensions.extensions.${pkgs.system}.*
-      extensions = with inputs.nix-vscode-extensions.extensions.${pkgs.system}.vscode-marketplace; [
-        # Some extensions go missing from open-vsx, so use official marketplace
-        # https://github.com/nix-community/nix-vscode-extensions?tab=readme-ov-file#note
-        aaron-bond.better-comments
-        antfu.iconify
-        antfu.unocss
-        bedsteler20.gnome-magic
-        bilelmoussaoui.flatpak-vscode
-        bmalehorn.vscode-fish
-        bmewburn.vscode-intelephense-client
-        bodil.blueprint-gtk
-        bradlc.vscode-tailwindcss
-        cormoran.disable-default-keybinding
-        csstools.postcss
-        dbaeumer.vscode-eslint
-        #// eamodio.gitlens
-        esbenp.prettier-vscode
-        foxundermoon.shell-format
-        ginfuru.ginfuru-better-solarized-dark-theme
-        gruntfuggly.todo-tree
-        jnoortheen.nix-ide
-        koihik.vscode-lua-format
-        mhutchie.git-graph
-        mkhl.direnv
-        ms-python.black-formatter
-        ms-python.debugpy
-        ms-python.isort
-        ms-python.python
-        natizyskunk.sftp
-        pkief.material-icon-theme
-        pkief.material-product-icons
-        sirmspencer.vscode-autohide
-        sketchbuch.vsc-workspace-sidebar
-        svelte.svelte-vscode
-        timonwong.shellcheck
-        vincaslt.highlight-matching-tag
-      ];
+      extensions = let
+        # Use configured version of vscode
+        # https://github.com/nix-community/nix-vscode-extensions?tab=readme-ov-file#extensions
+        #?? extension = with (repo "REPOSITORY"); AUTHOR.EXTENSION
+        repo = repo:
+          with inputs.nix-vscode-extensions.extensions.${pkgs.system};
+            (forVSCodeVersion config.home-manager.users.${config.custom.username}.programs.vscode.package.version).${repo};
+      in
+        with (repo "open-vsx");
+          [
+            aaron-bond.better-comments
+            antfu.iconify
+            antfu.unocss
+            bedsteler20.gnome-magic
+            bilelmoussaoui.flatpak-vscode
+            bmalehorn.vscode-fish
+            bmewburn.vscode-intelephense-client
+            bradlc.vscode-tailwindcss
+            csstools.postcss
+            dbaeumer.vscode-eslint
+            #// eamodio.gitlens
+            esbenp.prettier-vscode
+            foxundermoon.shell-format
+            ginfuru.ginfuru-better-solarized-dark-theme
+            gruntfuggly.todo-tree
+            jnoortheen.nix-ide
+            koihik.vscode-lua-format
+            mhutchie.git-graph
+            mkhl.direnv
+            ms-python.black-formatter
+            ms-python.debugpy
+            ms-python.isort
+            ms-python.python
+            natizyskunk.sftp
+            pkief.material-icon-theme
+            pkief.material-product-icons
+            sketchbuch.vsc-workspace-sidebar
+            svelte.svelte-vscode
+            timonwong.shellcheck
+            vincaslt.highlight-matching-tag
+          ]
+          ++ (with (repo "vscode-marketplace"); [
+            # Some extensions go missing from open-vsx, so use official marketplace as fallback
+            # https://github.com/nix-community/nix-vscode-extensions?tab=readme-ov-file#note
+            bodil.blueprint-gtk
+            cormoran.disable-default-keybinding
+            sirmspencer.vscode-autohide
+          ]);
     };
 
     home = {
-      # Extension dependencies
-      packages = with pkgs; [
-        alejandra # nix-ide
-        blueprint-compiler # blueprint-gtk
-        nixd # nix-ide
-        shfmt # shell-format
-      ];
-
       # https://github.com/nix-community/nixd/blob/main/nixd/docs/features.md
       sessionVariables.NIXD_FLAGS = "--inlay-hints=false"; # Disable package versions in the editor
 
