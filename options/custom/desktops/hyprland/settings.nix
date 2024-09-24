@@ -68,13 +68,13 @@ in {
 
       # https://wiki.hyprland.org/Configuring/Keywords/#executing
       exec-once =
-        [
+        optionals config.custom.wallpaper ["wallpaper"]
+        ++ [
           sway-audio-idle-inhibit # Inhibit idle while audio is playing
           "${clipse} --clear" # Clear clipboard history
           "${clipse} --listen" # Monitor clipboard
           "[group new lock; tile] ${firefox-esr}"
-        ]
-        ++ optionals config.custom.wallpaper ["wallpaper"];
+        ];
 
       # https://wiki.hyprland.org/Configuring/Variables/#xwayland
       xwayland = {
