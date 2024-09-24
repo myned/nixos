@@ -31,6 +31,11 @@ in {
         ignore_mouse = true; # Hover interrupts keyboard selections
         search.placeholder = "";
 
+        disabled = [
+          # BUG: Applications such as GNOME Files require multiple copy operations to register
+          "clipboard"
+        ];
+
         # https://github.com/abenz1267/walker/wiki/Modules
         # https://www.nerdfonts.com/cheat-sheet
         builtins = {

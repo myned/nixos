@@ -70,7 +70,8 @@ in {
       exec-once =
         [
           sway-audio-idle-inhibit # Inhibit idle while audio is playing
-          "${rm} ~/.cache/walker/clipboard.gob" # Clear clipboard
+          "${clipse} --clear" # Clear clipboard history
+          "${clipse} --listen" # Monitor clipboard
           "[group new lock; tile] ${firefox-esr}"
         ]
         ++ optionals config.custom.wallpaper ["wallpaper"];

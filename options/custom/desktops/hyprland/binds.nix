@@ -236,8 +236,8 @@ in {
         (key "T" "Super" "togglespecialworkspace" "terminal")
         (key "T" "Super+Shift" "movetoworkspacesilent" "special:terminal")
         (key "T" "Super+Shift" "exec" kitty)
-        (key "V" "Super" "exec" "${menu} --clipboard")
-        (key "V" "Super+Shift" "exec" "${rm} ~/.cache/walker/clipboard.gob; ${notify-send} walker 'Clipboard cleared' --urgency low")
+        (key "V" "Super" "exec" "${kitty} --app-id clipboard --override font_size=12 ${clipse}")
+        (key "V" "Super+Shift" "exec" "${clipse} --clear && ${notify-send} clipse 'Clipboard cleared' --urgency low")
         (key "W" "Super" "togglespecialworkspace" "vm")
         (key "W" "Super+Ctrl" "exec" "${vm} -x ${
           if config.custom.hidpi
