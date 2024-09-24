@@ -6,6 +6,7 @@
   ...
 }:
 with lib; let
+  audio = "~/.local/bin/audio";
   clipse = "${pkgs.clipse}/bin/clipse";
   codium = "${config.home-manager.users.${config.custom.username}.programs.vscode.package}/bin/codium";
   firefox-esr = "${config.home-manager.users.${config.custom.username}.programs.firefox.finalPackage}/bin/firefox-esr";
@@ -13,6 +14,7 @@ with lib; let
   hyprctl = "${pkgs.hyprland}/bin/hyprctl";
   hyprlock = "${config.home-manager.users.${config.custom.username}.programs.hyprlock.package}/bin/hyprlock";
   hyprpicker = "${pkgs.hyprpicker}/bin/hyprpicker";
+  inhibit = "~/.local/bin/inhibit";
   jq = "${pkgs.jq}/bin/jq";
   kill = "${pkgs.procps}/bin/kill";
   kitty = "${config.home-manager.users.${config.custom.username}.programs.kitty.package}/bin/kitty";
@@ -28,13 +30,17 @@ with lib; let
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   rofi-rbw = "${pkgs.rofi-rbw}/bin/rofi-rbw";
   rm = "${pkgs.coreutils}/bin/rm";
+  screenshot = "~/.local/bin/screenshot";
   sleep = "${pkgs.coreutils}/bin/sleep";
   steam = "${config.programs.steam.package}/bin/steam";
   swayosd-client = "${pkgs.swayosd}/bin/swayosd-client";
   systemctl = "${pkgs.systemd}/bin/systemctl";
+  toggle = "~/.local/bin/toggle";
   virt-manager = "${config.programs.virt-manager.package}/bin/virt-manager";
+  vm = "~/.local/bin/vm";
   walker = "${config.home-manager.users.${config.custom.username}.programs.walker.package}/bin/walker";
   waydroid = "${pkgs.waydroid}/bin/waydroid";
+  zoom = "~/.local/bin/zoom";
 
   cfg = config.custom.desktops.hyprland.binds;
 in {
@@ -62,7 +68,8 @@ in {
       bindl = [
         (key "Delete" "Ctrl" "exec" "${hyprctl} reload")
         (key "Delete" "Ctrl+Alt" "exec" "${loginctl} terminate-session ''")
-        (key "Delete" "Super" "exec" "inhibit")
+        (key "Slash" "Super" "exec" inhibit)
+
         (key "L" "Super" "exec" "${hyprlock} --immediate & ${sleep} 1 && ${hyprctl} dispatch dpms off")
 
         # Laptop lid switches
@@ -124,30 +131,29 @@ in {
         (key "Bracketleft" "Super+Shift" "splitratio" "-0.1")
         (key "Bracketright" "Super" "layoutmsg" "orientationnext")
         (key "Bracketright" "Super+Shift" "splitratio" "+0.1")
-
-        # TODO: Toggle trackball hand
-        #// (key "Delete" "Super" "exec" "left")
-
+        (key "Delete" "Super" "exec" "${swayosd-client} --output-volume mute")
         (key "Delete" "Super+Shift" "exec" "${left} kensington-orbit-wireless-tb-mouse")
         (key "Down" "Super" "movewindow" "d")
         (key "Down" "Super+Shift" "movewindoworgroup" "d")
-        (key "Equal" "Super" "exec" "audio Normalizer")
+        (key "Equal" "Super" "exec" "${swayosd-client} --output-volume raise")
+        (key "Equal" "Super+Shift" "exec" "${zoom} +0.1")
         (key "Escape" "Super" "togglefloating" null)
         (key "Escape" "Super+Alt" "exec" "lifx state --color red")
         (key "Escape" "Super+Shift" "centerwindow" null)
         (key "Left" "Super" "movewindow" "l")
         (key "Left" "Super+Shift" "movewindoworgroup" "l")
-        (key "Minus" "Super" "exec" "audio")
-        (key "Print" "Shift" "exec" "screenshot display")
-        (key "Print" "Super" "exec" "screenshot selection --edit")
-        (key "Print" "Super+Shift" "exec" "screenshot display --edit")
-        (key "Print" null "exec" "screenshot selection")
+        (key "Minus" "Super" "exec" "${swayosd-client} --output-volume lower")
+        (key "Minus" "Super+Shift" "exec" "${zoom} -0.1")
+        (key "Print" "Shift" "exec" "${screenshot} display")
+        (key "Print" "Super" "exec" "${screenshot} selection --edit")
+        (key "Print" "Super+Shift" "exec" "${screenshot} display --edit")
+        (key "Print" null "exec" "${screenshot} selection")
         (key "Return" "Super" "fullscreen" "1") # Maximize
         (key "Return" "Super+Shift" "fullscreen" "0") # Fullscreen
         (key "Right" "Super" "movewindow" "r")
         (key "Right" "Super+Shift" "movewindoworgroup" "r")
         (key "Space" "Ctrl" "exec" (concatStringsSep " " [
-          "toggle"
+          "${toggle}"
           "--focus"
           "--type class"
           "--expression '^dropdown$'"
@@ -157,7 +163,7 @@ in {
         ]))
         (key "Space" "Ctrl+Alt" "exec" "lifx toggle")
         (key "Space" "Ctrl+Shift" "exec" (concatStringsSep " " [
-          "toggle"
+          "${toggle}"
           "--type title"
           "--expression '^Picture.in.[Pp]icture$'"
           "--workspace special:pip"
@@ -170,8 +176,8 @@ in {
         (key "Up" "Super" "movewindow" "u")
         (key "Up" "Super+Shift" "movewindoworgroup" "u")
 
-        (key "0" "Super" "workspace" "10")
-        (key "0" "Super+Shift" "movetoworkspacesilent" "10")
+        (key "0" "Super" "exec" "${audio}")
+        (key "0" "Super+Shift" "exec" "${zoom}")
         (key "1" "Ctrl+Alt" "exec" "lifx state --brightness 0.01")
         (key "1" "Super" "workspace" "1")
         (key "1" "Super+Alt" "exec" "lifx state --kelvin 1500")
@@ -202,7 +208,7 @@ in {
         (key "9" "Super+Shift" "movetoworkspacesilent" "9")
         (key "A" "Ctrl+Alt" "exec" "${waydroid} session stop")
         (key "A" "Super" "togglespecialworkspace" "android")
-        (key "A" "Super+Shift" "movetoworkspacesilent" "android")
+        (key "A" "Super+Shift" "movetoworkspacesilent" "special:android")
         (key "B" "Super" "exec" "[group new lock; tile] ${firefox-esr}")
         (key "C" "Super" "exec" codium)
         (key "E" "Super" "exec" gnome-text-editor)
@@ -213,7 +219,7 @@ in {
         (key "G" "Super+Shift" "movetoworkspacesilent" "name:game")
         (key "K" "Super" "exec" obsidian)
         (key "M" "Super" "togglespecialworkspace" "music")
-        (key "M" "Super+Shift" "movetoworkspacesilent" "music")
+        (key "M" "Super+Shift" "movetoworkspacesilent" "special:music")
         (key "O" "Super" "togglespecialworkspace" "office")
         (key "O" "Super+Ctrl" "exec" "${onlyoffice}")
         (key "O" "Super+Shift" "movetoworkspacesilent" "special:office")
@@ -224,22 +230,22 @@ in {
         (key "Q" "Super" "killactive" null)
         (key "S" "Ctrl+Alt" "exec" "${pkill} steam")
         (key "S" "Super" "togglespecialworkspace" "steam")
-        (key "S" "Super+Shift" "movetoworkspacesilent" "steam")
+        (key "S" "Super+Shift" "movetoworkspacesilent" "special:steam")
         (key "S" "Super+Shift" "exec" steam)
         (key "T" "Ctrl+Alt" "exec" "${pkill} kitty")
         (key "T" "Super" "togglespecialworkspace" "terminal")
-        (key "T" "Super+Shift" "movetoworkspacesilent" "terminal")
+        (key "T" "Super+Shift" "movetoworkspacesilent" "special:terminal")
         (key "T" "Super+Shift" "exec" kitty)
         (key "V" "Super" "exec" "${menu} --clipboard")
         (key "V" "Super+Shift" "exec" "${rm} ~/.cache/walker/clipboard.gob; ${notify-send} walker 'Clipboard cleared' --urgency low")
         (key "W" "Super" "togglespecialworkspace" "vm")
-        (key "W" "Super+Ctrl" "exec" "vm -x ${
+        (key "W" "Super+Ctrl" "exec" "${vm} -x ${
           if config.custom.hidpi
           then "/scale:140 +f"
           else ""
         }")
-        (key "W" "Super+Ctrl+Shift" "exec" "vm ${virt-manager} --show-domain-console myndows")
-        (key "W" "Super+Shift" "movetoworkspacesilent" "vm")
+        (key "W" "Super+Ctrl+Shift" "exec" "${vm} ${virt-manager} --show-domain-console myndows")
+        (key "W" "Super+Shift" "movetoworkspacesilent" "special:vm")
         (key "X" "Super" "workspace" "+1")
         (key "X" "Super+Shift" "movetoworkspacesilent" "+1")
         (key "Z" "Super" "workspace" "-1")
