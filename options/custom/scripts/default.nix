@@ -92,6 +92,7 @@ in {
               systemd
             ])
             (bash "left" [
+              argc
               hyprland
               jq
               libnotify

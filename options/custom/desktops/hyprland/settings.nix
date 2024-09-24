@@ -61,7 +61,7 @@ in {
 
       # https://wiki.hyprland.org/Configuring/Keywords/#executing
       exec = [
-        left # Set left-pawed state
+        "${left} --init --scroll kensington-orbit-wireless-tb-mouse" # Enforce left-pawed state
         "${sleep} 5 && ${systemctl} --user restart walker"
         "${sleep} 5 && ${systemctl} --user restart waybar"
       ];

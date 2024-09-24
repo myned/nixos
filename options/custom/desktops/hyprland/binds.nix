@@ -132,7 +132,7 @@ in {
         (key "Bracketright" "Super" "layoutmsg" "orientationnext")
         (key "Bracketright" "Super+Shift" "splitratio" "+0.1")
         (key "Delete" "Super" "exec" "${swayosd-client} --output-volume mute")
-        (key "Delete" "Super+Shift" "exec" "${left} kensington-orbit-wireless-tb-mouse")
+        (key "Delete" "Super+Shift" "exec" "${left} --scroll kensington-orbit-wireless-tb-mouse")
         (key "Down" "Super" "movewindow" "d")
         (key "Down" "Super+Shift" "movewindoworgroup" "d")
         (key "Equal" "Super" "exec" "${swayosd-client} --output-volume raise")
