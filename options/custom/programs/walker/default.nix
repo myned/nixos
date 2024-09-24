@@ -28,7 +28,10 @@ in {
       # https://github.com/abenz1267/walker/blob/master/internal/config/config.default.json
       config = {
         activation_mode.disabled = true; # Key chords
-        ignore_mouse = true; # Hover interrupts keyboard selections
+
+        # BUG: Hover interrupts keyboard selections
+        ignore_mouse = true;
+
         search.placeholder = "";
 
         disabled = [
@@ -39,17 +42,17 @@ in {
         # https://github.com/abenz1267/walker/wiki/Modules
         # https://www.nerdfonts.com/cheat-sheet
         builtins = {
-          calculator.switcher_only = false;
+          calc.switcher_only = true;
           clipboard.switcher_only = true;
           commands.switcher_only = true;
           custom_commands.switcher_only = true;
-          runner.switcher_only = true;
+          runner.switcher_only = false;
           ssh.switcher_only = true;
           windows.switcher_only = true;
 
           applications = {
-            # BUG: Ghost entries are still visible
-            #// actions = false; # Desktop file actions
+            # BUG: Ghost entries are still visible with single module
+            actions = false; # Desktop file actions
 
             switcher_only = false;
           };
@@ -71,6 +74,9 @@ in {
           };
 
           websearch = {
+            # TODO: Implement custom search engine
+            engines = ["duckduckgo"];
+
             placeholder = "Search";
             switcher_only = true;
           };
