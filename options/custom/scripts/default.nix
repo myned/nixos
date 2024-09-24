@@ -166,6 +166,12 @@ in {
               swww
               tailscale
             ])
+            (bash "zoom" [
+              argc
+              bc
+              hyprland
+              jq
+            ])
           ]
           ++ (with pkgs.python3Packages; [
             # Python files with extension .py
