@@ -41,7 +41,10 @@ if (("$left")); then
   fi
 
   touch "${argc_file:-}"
-  notify-send "> left" "Left-pawed" --urgency low
+
+  if [[ ! "${argc_init:-}" ]]; then
+    notify-send "> left" "Left-pawed" --urgency low
+  fi
 else
   hyprctl keyword "device[${argc_device:-}]:left_handed" false
 
@@ -50,5 +53,8 @@ else
   fi
 
   rm --force "${argc_file:-}"
-  notify-send "> left" "Right-pawed" --urgency low
+
+  if [[ ! "${argc_init:-}" ]]; then
+    notify-send "> left" "Right-pawed" --urgency low
+  fi
 fi
