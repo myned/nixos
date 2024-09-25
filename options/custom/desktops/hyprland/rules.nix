@@ -224,6 +224,10 @@ in {
 
           #!! Expressions are not wrapped in ^$
           (fields {
+            class = "^1Password$";
+            title = "^1Password$";
+          } ["center"])
+          (fields {
             class = "^com\\.github\\.wwmm\\.easyeffects$";
             title = "^Easy Effects$"; # Main window
           } ["size 50% 50%"])

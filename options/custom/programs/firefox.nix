@@ -124,6 +124,7 @@ in {
             })
 
             (mkIf config.custom.full {
+              "{d634138d-c276-4fc8-924b-40a0ea21d284}" = extension "1password-x-password-manager"; # 1Password: Password Manager
               #// "firefox@betterttv.net" = extension "betterttv"; # BetterTTV
               "{446900e4-71c2-419f-a6a7-df9c091e268b}" = extension "bitwarden-password-manager"; # Bitwarden
               #// "FirefoxColor@mozilla.com" = extension "firefox-color"; # Firefox Color

@@ -37,6 +37,7 @@ with lib; {
     })
 
     (mkIf config.custom.full {
+      "1password".enable = true;
       adb.enable = true;
       ags.enable = true;
       #// anyrun.enable = true;
