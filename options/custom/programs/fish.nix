@@ -42,6 +42,62 @@ in {
           "/r" = any "/run";
           "/rc" = any "/run/current-system";
 
+          ip = "tailscale ip --4";
+
+          reboot = "systemctl reboot";
+          restart = "systemctl reboot";
+          poweroff = "systemctl poweroff";
+          shutdown = "systemctl poweroff";
+
+          backup = "borgmatic -v 1 create --progress --stats";
+          extract = "borgmatic -v 1 extract --progress";
+          init = "borgmatic init -e repokey-blake2";
+          key = "borgmatic key export";
+          list = "borgmatic -v 1 list";
+          restore = "borgmatic -v 1 restore";
+
+          rsync = "rsync --info progress2";
+
+          a = "adb";
+          as = "adb shell";
+          asa = "adb shell sh /sdcard/Android/data/com.llamalab.automate/cache/start.sh"; # Automate
+
+          c = "clear";
+          e = "exit";
+          m = "mosh";
+          s = "ssh";
+
+          d = "docker";
+          dc = "docker compose";
+          dcd = "docker compose down";
+          dce = "docker compose exec";
+          dcl = "docker compose logs";
+          dcp = "docker compose pull";
+          dcu = "docker compose up";
+          dcuf = "docker compose up --force-recreate";
+          de = "docker exec";
+          dei = "docker exec --interactive";
+          deit = "docker exec --interactive --tty";
+          det = "docker exec --tty";
+          di = "docker images";
+          dk = "docker kill";
+          dn = "docker network";
+          dnl = "docker network ls";
+          dp = "docker pull";
+          dps = "docker ps";
+          dpsa = "docker ps --all --size";
+          dr = "docker rm";
+          ds = "docker system";
+          dsp = "docker system prune";
+          dspav = "docker system prune --all --volumes";
+
+          g = "git";
+          gb = "git bisect";
+          gbb = "git bisect bad";
+          gbg = "git bisect good";
+          gc = "git clone";
+          gs = "git status";
+
           jc = "journalctl";
           jcs = "journalctl --system";
           jcse = "journalctl --system --pager-end";
@@ -59,6 +115,19 @@ in {
           jcui = "journalctl --user --identifier";
           jcut = "journalctl --user --target";
           jcuu = "journalctl --user --unit";
+
+          k = "kitten";
+          ks = "kitten ssh";
+
+          n = "nixos";
+          nb = "nixos build";
+          nbb = "nixos build boot";
+          nbs = "nixos build switch";
+          nbt = "nixos build test";
+          nd = "nixos diff";
+          ng = "nixos generate";
+          nl = "nixos list";
+          nr = "nixos repl";
 
           sc = "systemctl";
           scp = "systemctl poweroff";
@@ -90,75 +159,10 @@ in {
           scut = "systemctl --user stop";
           scuu = "systemctl --user unmask";
 
-          d = "docker";
-          dc = "docker compose";
-          dcd = "docker compose down";
-          dce = "docker compose exec";
-          dcl = "docker compose logs";
-          dcp = "docker compose pull";
-          dcu = "docker compose up";
-          dcuf = "docker compose up --force-recreate";
-          de = "docker exec";
-          dei = "docker exec --interactive";
-          deit = "docker exec --interactive --tty";
-          det = "docker exec --tty";
-          di = "docker images";
-          dk = "docker kill";
-          dn = "docker network";
-          dnl = "docker network ls";
-          dp = "docker pull";
-          dps = "docker ps";
-          dpsa = "docker ps --all --size";
-          dr = "docker rm";
-          ds = "docker system";
-          dsp = "docker system prune";
-          dspav = "docker system prune --all --volumes";
-
-          c = "clear";
-          e = "exit";
-          m = "mosh";
-          s = "ssh";
-
-          ip = "tailscale ip --4";
-
-          reboot = "systemctl reboot";
-          restart = "systemctl reboot";
-          poweroff = "systemctl poweroff";
-          shutdown = "systemctl poweroff";
-
-          backup = "borgmatic -v 1 create --progress --stats";
-          extract = "borgmatic -v 1 extract --progress";
-          init = "borgmatic init -e repokey-blake2";
-          key = "borgmatic key export";
-          list = "borgmatic -v 1 list";
-          restore = "borgmatic -v 1 restore";
-
-          rsync = "rsync --info=progress2";
-
-          n = "nixos";
-          nb = "nixos build";
-          nbb = "nixos build boot";
-          nbs = "nixos build switch";
-          nbt = "nixos build test";
-          nd = "nixos diff";
-          ng = "nixos generate";
-          nl = "nixos list";
-          nr = "nixos repl";
-
-          g = "git";
-          gb = "git bisect";
-          gbb = "git bisect bad";
-          gbg = "git bisect good";
-          gc = "git clone";
-          gs = "git status";
-
           ta = "tmux attach";
           td = "tmux detach";
           tk = "tmux kill-session";
           tl = "tmux list-sessions";
-
-          k = "kitten";
-          ks = "kitten ssh";
         };
 
         interactiveShellInit = ''
