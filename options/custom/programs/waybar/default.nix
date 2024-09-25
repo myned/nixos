@@ -10,9 +10,7 @@ with lib; let
   bluetoothctl = "${pkgs.bluez}/bin/bluetoothctl";
   easyeffects = "${pkgs.easyeffects}/bin/easyeffects";
   echo = "${pkgs.coreutils}/bin/echo";
-  hyprctl = "${
-    config.home-manager.users.${config.custom.username}.wayland.windowManager.hyprland.finalPackage
-  }/bin/hyprctl";
+  hyprctl = "${config.programs.hyprland.package}/bin/hyprctl";
   inhibit = config.home-manager.users.${config.custom.username}.home.file.".local/bin/inhibit".source;
   jq = "${pkgs.jq}/bin/jq";
   loginctl = "${pkgs.systemd}/bin/loginctl";

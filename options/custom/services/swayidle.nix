@@ -6,9 +6,7 @@
 }:
 with lib; let
   chayang = "${pkgs.chayang}/bin/chayang";
-  hyprctl = "${
-    config.home-manager.users.${config.custom.username}.wayland.windowManager.hyprland.package
-  }/bin/hyprctl";
+  hyprctl = "${config.programs.hyprland.package}/bin/hyprctl";
   loginctl = "${pkgs.systemd}/bin/loginctl";
   pgrep = "${pkgs.procps}/bin/pgrep";
   swaylock = "${

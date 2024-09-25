@@ -5,7 +5,7 @@
   ...
 }:
 with lib; let
-  hyprctl = "${pkgs.hyprland}/bin/hyprctl";
+  hyprctl = "${config.programs.hyprland.package}/bin/hyprctl";
 
   cfg = config.custom.desktops.hyprland.plugins;
 in {

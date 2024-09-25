@@ -6,6 +6,7 @@
 }:
 with lib; let
   gamescope = "${config.programs.gamescope.package}/bin/gamescope";
+  hyprctl = "${config.programs.hyprland.package}/bin/hyprctl";
   kitty = "${config.home-manager.users.${config.custom.username}.programs.kitty.package}/bin/kitty";
   loupe = "${pkgs.loupe}/bin/loupe";
   onlyoffice = "${pkgs.onlyoffice-bin}/bin/onlyoffice-desktopeditors";

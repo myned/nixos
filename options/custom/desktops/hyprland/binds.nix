@@ -11,7 +11,7 @@ with lib; let
   codium = "${config.home-manager.users.${config.custom.username}.programs.vscode.package}/bin/codium";
   firefox-esr = "${config.home-manager.users.${config.custom.username}.programs.firefox.finalPackage}/bin/firefox-esr";
   gnome-text-editor = "${pkgs.gnome-text-editor}/bin/gnome-text-editor";
-  hyprctl = "${pkgs.hyprland}/bin/hyprctl";
+  hyprctl = "${config.programs.hyprland.package}/bin/hyprctl";
   hyprlock = "${config.home-manager.users.${config.custom.username}.programs.hyprlock.package}/bin/hyprlock";
   hyprpicker = "${pkgs.hyprpicker}/bin/hyprpicker";
   inhibit = "~/.local/bin/inhibit";

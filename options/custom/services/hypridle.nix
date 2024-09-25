@@ -6,9 +6,7 @@
 }:
 with lib; let
   grep = "${pkgs.gnugrep}/bin/grep";
-  hyprctl = "${
-    config.home-manager.users.${config.custom.username}.wayland.windowManager.hyprland.finalPackage
-  }/bin/hyprctl";
+  hyprctl = "${config.programs.hyprland.package}/bin/hyprctl";
   hyprlock = "${
     config.home-manager.users.${config.custom.username}.programs.hyprlock.package
   }/bin/hyprlock";
