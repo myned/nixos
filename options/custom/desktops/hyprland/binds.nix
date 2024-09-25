@@ -38,6 +38,7 @@ with lib; let
   toggle = "~/.local/bin/toggle";
   virt-manager = "${config.programs.virt-manager.package}/bin/virt-manager";
   vm = "~/.local/bin/vm";
+  vrr = "~/.local/bin/vrr";
   walker = "${config.home-manager.users.${config.custom.username}.programs.walker.package}/bin/walker";
   waydroid = "${pkgs.waydroid}/bin/waydroid";
   zoom = "~/.local/bin/zoom";
@@ -66,9 +67,9 @@ in {
 
       # Lockscreen binds
       bindl = [
+        (key "Apostrophe" "Super" "exec" inhibit)
         (key "Delete" "Ctrl" "exec" "${hyprctl} reload")
         (key "Delete" "Ctrl+Alt" "exec" "${loginctl} terminate-session ''")
-        (key "Slash" "Super" "exec" inhibit)
 
         (key "L" "Super" "exec" "${hyprlock} --immediate & ${sleep} 1 && ${hyprctl} dispatch dpms off")
 
@@ -131,8 +132,7 @@ in {
         (key "Bracketleft" "Super+Shift" "splitratio" "-0.1")
         (key "Bracketright" "Super" "layoutmsg" "orientationnext")
         (key "Bracketright" "Super+Shift" "splitratio" "+0.1")
-        (key "Delete" "Super" "exec" "${swayosd-client} --output-volume mute")
-        (key "Delete" "Super+Shift" "exec" "${left} --scroll kensington-orbit-wireless-tb-mouse")
+        (key "Delete" "Super" "exec" "${swayosd-client} --output-volume mute-toggle")
         (key "Down" "Super" "movewindow" "d")
         (key "Down" "Super+Shift" "movewindoworgroup" "d")
         (key "Equal" "Super" "exec" "${swayosd-client} --output-volume raise")
@@ -141,6 +141,7 @@ in {
         (key "Escape" "Super+Alt" "exec" "lifx state --color red")
         (key "Escape" "Super+Shift" "centerwindow" null)
         (key "Left" "Super" "movewindow" "l")
+        (key "Left" "Super+Alt" "exec" "${left} --scroll kensington-orbit-wireless-tb-mouse")
         (key "Left" "Super+Shift" "movewindoworgroup" "l")
         (key "Minus" "Super" "exec" "${swayosd-client} --output-volume lower")
         (key "Minus" "Super+Shift" "exec" "${zoom} -0.1")
@@ -152,6 +153,7 @@ in {
         (key "Return" "Super+Shift" "fullscreen" "0") # Fullscreen
         (key "Right" "Super" "movewindow" "r")
         (key "Right" "Super+Shift" "movewindoworgroup" "r")
+        (key "Slash" "Super" "exec" vrr)
         (key "Space" "Ctrl" "exec" (concatStringsSep " " [
           "${toggle}"
           "--focus"
