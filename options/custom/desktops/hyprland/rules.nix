@@ -8,6 +8,7 @@ with lib; let
   gamescope = "${config.programs.gamescope.package}/bin/gamescope";
   hyprctl = "${config.programs.hyprland.package}/bin/hyprctl";
   kitty = "${config.home-manager.users.${config.custom.username}.programs.kitty.package}/bin/kitty";
+  launch = "~/.local/bin/launch";
   loupe = "${pkgs.loupe}/bin/loupe";
   onlyoffice = "${pkgs.onlyoffice-bin}/bin/onlyoffice-desktopeditors";
   pgrep = "${pkgs.procps}/bin/pgrep";
@@ -30,6 +31,7 @@ in {
         "special:android, on-created-empty:${waydroid} app launch com.YoStarEN.Arknights"
         "special:music, on-created-empty:${youtube-music}"
         "special:office, on-created-empty:[tile] ${onlyoffice}"
+        "special:password, on-created-empty:${launch} --tile ${_1password}"
         "special:steam, on-created-empty:${steam}"
         "special:terminal, on-created-empty:${kitty}"
         "special:vm, on-created-empty:${pgrep} -x vm || ${virt-manager}"

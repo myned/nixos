@@ -91,6 +91,12 @@ in {
               libnotify
               systemd
             ])
+            (bash "launch" [
+              argc
+              coreutils
+              hyprland
+              jq
+            ])
             (bash "left" [
               argc
               hyprland
