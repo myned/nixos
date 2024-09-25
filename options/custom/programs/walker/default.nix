@@ -116,5 +116,9 @@ in {
         };
       };
     };
+
+    # HACK: Allow child processes to live, otherwise applications launched through service are killed on stop
+    # https://www.freedesktop.org/software/systemd/man/latest/systemd.kill.html#KillMode=
+    systemd.user.services.walker.Service.KillMode = "process";
   };
 }
