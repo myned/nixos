@@ -246,7 +246,7 @@ in {
 
         # https://mozilla.github.io/policy-templates/#searchengines-this-policy-is-only-available-on-the-esr
         SearchEngines = {
-          Default = "SearXNG";
+          Default = "Duck"; # Default name cannot be removed
 
           Add = [
             {
