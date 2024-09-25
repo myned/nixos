@@ -14,5 +14,14 @@ in {
     programs.ssh.extraConfig = ''
       StrictHostKeyChecking no
     '';
+
+    home-manager.users.${config.custom.username}.programs.ssh = {
+      enable = true;
+
+      extraConfig = ''
+        Host *
+          IdentityAgent ~/.1password/agent.sock
+      '';
+    };
   };
 }

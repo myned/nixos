@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.programs."1password";
+  cfg = config.custom.programs._1password;
 in {
-  options.custom.programs."1password".enable = mkOption {default = false;};
+  options.custom.programs._1password.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     programs = {

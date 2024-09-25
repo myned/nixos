@@ -5,6 +5,7 @@
   ...
 }:
 with lib; let
+  _1password = "${config.programs._1password-gui.package}/bin/1password";
   gamescope = "${config.programs.gamescope.package}/bin/gamescope";
   hyprctl = "${config.programs.hyprland.package}/bin/hyprctl";
   kitty = "${config.home-manager.users.${config.custom.username}.programs.kitty.package}/bin/kitty";
@@ -171,6 +172,10 @@ in {
             (class "libreoffice.+" rules)
             (class "ONLYOFFICE Desktop Editors" rules)
           ];
+          password = rules: [
+            (class "1Password" rules)
+            (class "Bitwarden" rules)
+          ];
           pip = rules: [
             (title "Picture.in.[Pp]icture" rules)
           ];
@@ -214,6 +219,7 @@ in {
           (tag.game ["fullscreen" "group barred" "idleinhibit always" "noborder" "noshadow" "renderunfocused" "workspace name:game"])
           (tag.music ["tile" "workspace special:music"])
           (tag.office ["workspace special:office"])
+          (tag.password ["center" "workspace special:password"])
           (tag.pip ["keepaspectratio" "move ${pip.x} ${pip.y}" "pin" "size ${pip.w} ${pip.h}"])
           (tag.social ["group" "tile"])
           (tag.steam ["workspace special:steam"])
@@ -226,10 +232,6 @@ in {
           (class "Tap Wizard 2.x86_64" ["workspace 0"])
 
           #!! Expressions are not wrapped in ^$
-          (fields {
-            class = "^1Password$";
-            title = "^1Password$";
-          } ["center"])
           (fields {
             class = "^com\\.github\\.wwmm\\.easyeffects$";
             title = "^Easy Effects$"; # Main window

@@ -170,6 +170,7 @@ in {
               game = "󰊴";
               music = "󰝚";
               office = "󰈙";
+              password = "󰌾";
               pip = "󰹙";
               scratchpad = "";
               steam = "󰓓";

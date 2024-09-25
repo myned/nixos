@@ -5,6 +5,7 @@
   ...
 }:
 with lib; let
+  _1password = "${config.programs._1password-gui.package}/bin/1password";
   clipse = "${pkgs.clipse}/bin/clipse";
   firefox-esr = "${
     config.home-manager.users.${config.custom.username}.programs.firefox.finalPackage
@@ -73,6 +74,7 @@ in {
           sway-audio-idle-inhibit # Inhibit idle while audio is playing
           "${clipse} --clear" # Clear clipboard history
           "${clipse} --listen" # Monitor clipboard
+          "${_1password} --silent" # Launch password manager in background
           "[group new lock; tile] ${firefox-esr}"
         ];
 

@@ -153,6 +153,8 @@ in {
         (key "Return" "Super+Shift" "fullscreen" "0") # Fullscreen
         (key "Right" "Super" "movewindow" "r")
         (key "Right" "Super+Shift" "movewindoworgroup" "r")
+        (key "Semicolon" "Super" "exec" "${hyprpicker} --autocopy")
+        (key "Semicolon" "Super+Shift" "exec" "${hyprpicker} --autocopy --format rgb")
         (key "Slash" "Super" "exec" vrr)
         (key "Space" "Ctrl" "exec" (concatStringsSep " " [
           "${toggle}"
@@ -225,8 +227,9 @@ in {
         (key "O" "Super" "togglespecialworkspace" "office")
         (key "O" "Super+Ctrl" "exec" "${onlyoffice}")
         (key "O" "Super+Shift" "movetoworkspacesilent" "special:office")
-        (key "P" "Super" "exec" "${hyprpicker} --autocopy")
-        (key "P" "Super+Shift" "exec" "${hyprpicker} --autocopy --format rgb")
+        (key "P" "Ctrl+Alt" "exec" "${pkill} 1password")
+        (key "P" "Super" "togglespecialworkspace" "password")
+        (key "P" "Super+Shift" "movetoworkspacesilent" "special:password")
         (key "Q" "Ctrl+Alt" "exec" "${kill} -9 $(${hyprctl} -j activewindow | ${jq} .pid)")
         (key "Q" "Ctrl+Alt+Shift" "exec" "close") # Quit all windows
         (key "Q" "Super" "killactive" null)
