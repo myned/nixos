@@ -233,8 +233,9 @@ in {
           "layout.css.backdrop-filter.enabled" = locked true;
           "layout.spellcheckDefault" = locked 0; # Disabled
           "media.eme.enabled" = locked true; # DRM
+          "media.ffmpeg.vaapi.enabled" = locked true;
           "media.hardwaremediakeys.enabled" = locked true;
-          "media.hardware-video-decoding.enabled" = locked false; # !! Disable video acceleration
+          "media.hardware-video-decoding.enabled" = locked true;
           #// "media.rdd-process.enabled" = locked false; # RDD sandbox #!! Insecure
           "toolkit.legacyUserProfileCustomizations.stylesheets" = locked true;
           "ui.key.menuAccessKey" = locked 0; # Disable menu key
