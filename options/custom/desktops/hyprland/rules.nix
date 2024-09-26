@@ -230,6 +230,7 @@ in {
           ### Overrides
           (class "steam_app_1473350" ["workspace 0"]) # (the) Gnorp Apologue
           (class "Tap Wizard 2.x86_64" ["workspace 0"])
+          (class "Xdg-desktop-portal-gtk" ["noborder" "noshadow"])
 
           #!! Expressions are not wrapped in ^$
           (fields {

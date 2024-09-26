@@ -75,6 +75,10 @@ in {
       };
 
       # GNOME Files
+      "org/gtk/settings/file-chooser" = {
+        show-hidden = mkBoolean true;
+      };
+
       "org/gtk/gtk4/settings/file-chooser" = {
         show-hidden = mkBoolean true;
       };
