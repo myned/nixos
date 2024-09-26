@@ -163,6 +163,10 @@ in {
             (class "net.retrodeck.retrodeck" rules) # Emulators
             (class "steam_app_.+" rules) # Proton
           ];
+          media = rules: [
+            (class "org\\.gnome\\.Loupe" rules)
+            (class "totem" rules)
+          ];
           music = rules: [
             (class "Spotify" rules)
             (class "YouTube Music" rules)
@@ -218,6 +222,7 @@ in {
           (tag.editor ["group invade" "tile"])
           (tag.files ["size 1000 625"])
           (tag.game ["fullscreen" "group barred" "idleinhibit always" "noborder" "noshadow" "renderunfocused" "workspace name:game"])
+          (tag.media ["tile" "workspace special:scratchpad"])
           (tag.music ["tile" "workspace special:music"])
           (tag.office ["workspace special:office"])
           (tag.password ["center" "workspace special:password"])
