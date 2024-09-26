@@ -184,6 +184,7 @@ in {
             (class "discord" rules)
             (class "Element" rules)
             (class "org\\.telegram\\.desktop" rules)
+            (class "signal" rules)
           ];
           steam = rules: [
             (class "SDL Application" rules) # Steam

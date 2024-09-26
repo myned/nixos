@@ -108,6 +108,7 @@ in {
           protonvpn-gui
           pwvucontrol
           remmina
+          signal-desktop
           snapshot
           spotify
           syncthingtray
