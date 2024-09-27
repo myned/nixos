@@ -9,7 +9,7 @@ with lib; let
   gamescope = "${config.programs.gamescope.package}/bin/gamescope";
   hyprctl = "${config.programs.hyprland.package}/bin/hyprctl";
   kitty = "${config.home-manager.users.${config.custom.username}.programs.kitty.package}/bin/kitty";
-  launch = "~/.local/bin/launch";
+  launch = config.home-manager.users.${config.custom.username}.home.file.".local/bin/launch".source;
   loupe = "${pkgs.loupe}/bin/loupe";
   onlyoffice = "${pkgs.onlyoffice-bin}/bin/onlyoffice-desktopeditors";
   pgrep = "${pkgs.procps}/bin/pgrep";

@@ -8,18 +8,14 @@ with lib; let
   _1password = "${config.programs._1password-gui.package}/bin/1password";
   audio = config.home-manager.users.${config.custom.username}.home.file.".local/bin/audio".source;
   clipse = "${pkgs.clipse}/bin/clipse";
-  firefox-esr = "${
-    config.home-manager.users.${config.custom.username}.programs.firefox.finalPackage
-  }/bin/firefox-esr";
+  firefox-esr = "${config.home-manager.users.${config.custom.username}.programs.firefox.finalPackage}/bin/firefox-esr";
   left = config.home-manager.users.${config.custom.username}.home.file.".local/bin/left".source;
   pkill = "${pkgs.procps}/bin/pkill";
   rm = "${pkgs.coreutils}/bin/rm";
   sleep = "${pkgs.coreutils}/bin/sleep";
   sway-audio-idle-inhibit = "${pkgs.sway-audio-idle-inhibit}/bin/sway-audio-idle-inhibit";
   systemctl = "${pkgs.systemd}/bin/systemctl";
-  waybar = "${
-    config.home-manager.users.${config.custom.username}.programs.waybar.package
-  }/bin/waybar";
+  waybar = "${config.home-manager.users.${config.custom.username}.programs.waybar.package}/bin/waybar";
 
   cfg = config.custom.desktops.hyprland.settings;
 in {

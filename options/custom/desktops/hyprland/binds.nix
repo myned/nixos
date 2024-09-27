@@ -14,7 +14,7 @@ with lib; let
   hyprctl = "${config.programs.hyprland.package}/bin/hyprctl";
   hyprlock = "${config.home-manager.users.${config.custom.username}.programs.hyprlock.package}/bin/hyprlock";
   hyprpicker = "${pkgs.hyprpicker}/bin/hyprpicker";
-  inhibit = "~/.local/bin/inhibit";
+  inhibit = config.home-manager.users.${config.custom.username}.home.file.".local/bin/inhibit".source;
   jq = "${pkgs.jq}/bin/jq";
   kill = "${pkgs.procps}/bin/kill";
   kitty = "${config.home-manager.users.${config.custom.username}.programs.kitty.package}/bin/kitty";
@@ -37,11 +37,11 @@ with lib; let
   systemctl = "${pkgs.systemd}/bin/systemctl";
   toggle = "~/.local/bin/toggle";
   virt-manager = "${config.programs.virt-manager.package}/bin/virt-manager";
-  vm = "~/.local/bin/vm";
-  vrr = "~/.local/bin/vrr";
+  vm = config.home-manager.users.${config.custom.username}.home.file.".local/bin/vm".source;
+  vrr = config.home-manager.users.${config.custom.username}.home.file.".local/bin/vrr".source;
   walker = "${config.home-manager.users.${config.custom.username}.programs.walker.package}/bin/walker";
   waydroid = "${pkgs.waydroid}/bin/waydroid";
-  zoom = "~/.local/bin/zoom";
+  zoom = config.home-manager.users.${config.custom.username}.home.file.".local/bin/zoom".source;
 
   cfg = config.custom.desktops.hyprland.binds;
 in {
