@@ -180,7 +180,7 @@ in {
         (key "Up" "Super" "movewindow" "u")
         (key "Up" "Super+Shift" "movewindoworgroup" "u")
 
-        (key "0" "Super" "exec" "${audio}")
+        (key "0" "Super" "exec" "${audio} --bypass")
         (key "0" "Super+Shift" "exec" "${zoom}")
         (key "1" "Ctrl+Alt" "exec" "lifx state --brightness 0.01")
         (key "1" "Super" "workspace" "1")

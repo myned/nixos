@@ -48,6 +48,8 @@ in {
           [
             # Bash files with extension .sh
             (bash "audio" [
+              argc
+              coreutils
               easyeffects
               libnotify
             ])

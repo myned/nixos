@@ -6,6 +6,7 @@
 }:
 with lib; let
   _1password = "${config.programs._1password-gui.package}/bin/1password";
+  audio = config.home-manager.users.${config.custom.username}.home.file.".local/bin/audio".source;
   clipse = "${pkgs.clipse}/bin/clipse";
   firefox-esr = "${
     config.home-manager.users.${config.custom.username}.programs.firefox.finalPackage
@@ -72,6 +73,7 @@ in {
         optionals config.custom.wallpaper ["wallpaper"]
         ++ [
           sway-audio-idle-inhibit # Inhibit idle while audio is playing
+          "${audio} --init" # Enforce audio profile state
           "${clipse} --clear" # Clear clipboard history
           "${clipse} --listen" # Monitor clipboard
           "${_1password} --silent" # Launch password manager in background
