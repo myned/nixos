@@ -12,6 +12,7 @@
 # @option -W --workspace Move next window to workspace
 # @flag -a --active Focus and raise next window (raise requires floating)
 # @flag -c --center Center next window (requires floating)
+# @flag -e --empty Only launch if workspace is empty (requires workspace)
 # @flag -f --float Float next window
 # @flag -g --group Add next window to the active group
 # @flag -l --lock Lock next window's group
@@ -23,6 +24,16 @@
 # @arg commands+ Commands to execute in an exec dispatcher
 
 eval "$(argc --argc-eval "$0" "$@")"
+
+if [[ "${argc_empty:-}" ]]; then
+  # Delay to mitigate on-created-empty window race condition
+  sleep 1
+
+  # Silently exit if window exists on specified workspace
+  if hyprctl -j clients | jq -r .[].workspace.name | grep "${argc_workspace:-}"; then
+    exit
+  fi
+fi
 
 # Get initial count of open windows
 count="$(hyprctl -j clients | jq length)"
@@ -40,7 +51,7 @@ while (("$(hyprctl -j clients | jq length)" <= "$count")); do
   # Time out after 60 seconds
   if (("$c" >= 60 * 10)); then
     notify-send "> launch" "Polling timed out" --urgency critical
-    break
+    exit 1
   fi
 
   sleep 0.1

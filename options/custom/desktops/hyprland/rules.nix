@@ -24,6 +24,8 @@ in {
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
+      # BUG: on-created-empty race condition with delayed windows
+      # https://github.com/hyprwm/Hyprland/issues/5663
       # https://wiki.hyprland.org/Configuring/Workspace-Rules
       #?? workspace = WORKSPACE, RULES
       workspace = [
@@ -32,7 +34,7 @@ in {
         "special:android, on-created-empty:${waydroid} app launch com.YoStarEN.Arknights"
         "special:music, on-created-empty:${youtube-music}"
         "special:office, on-created-empty:[tile] ${onlyoffice}"
-        "special:password, on-created-empty:${launch} --tile ${_1password}"
+        "special:password, on-created-empty:${launch} --empty --tile --workspace special:password ${_1password}"
         "special:steam, on-created-empty:${steam}"
         "special:terminal, on-created-empty:${kitty}"
         "special:vm, on-created-empty:${pgrep} -x vm || ${virt-manager}"
