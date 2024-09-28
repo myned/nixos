@@ -42,8 +42,6 @@ in {
           "/r" = any "/run";
           "/rc" = any "/run/current-system";
 
-          ip = "tailscale ip --4";
-
           reboot = "systemctl reboot";
           restart = "systemctl reboot";
           poweroff = "systemctl poweroff";
@@ -105,7 +103,6 @@ in {
           jcsf = "journalctl --system --follow";
           jcsfu = "journalctl --system --follow --unit";
           jcsi = "journalctl --system --identifier";
-          jcst = "journalctl --system --target";
           jcsu = "journalctl --system --unit";
           jcu = "journalctl --user";
           jcue = "journalctl --user --pager-end";
@@ -113,7 +110,6 @@ in {
           jcuf = "journalctl --user --follow";
           jcufu = "journalctl --user --follow --unit";
           jcui = "journalctl --user --identifier";
-          jcut = "journalctl --user --target";
           jcuu = "journalctl --user --unit";
 
           k = "kitten";
@@ -163,6 +159,12 @@ in {
           td = "tmux detach";
           tk = "tmux kill-session";
           tl = "tmux list-sessions";
+
+          ts = "tailscale";
+          tsip = "tailscale ip --4";
+
+          zt = "sudo zerotier-cli";
+          ztip = "sudo zerotier-cli get $(sudo zerotier-cli -j listnetworks | jq -r .[-1].id) ip";
         };
 
         interactiveShellInit = ''
