@@ -22,7 +22,9 @@
 
       steam = {
         enable = true;
-        extest = true;
+
+        # BUG: Causes SteamOS crash when emulating scroll wheel in-game
+        #// extest = true;
       };
     };
 
