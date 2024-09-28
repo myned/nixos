@@ -47,6 +47,7 @@ with lib; {
       swaync.enable = true;
       swayosd.enable = true;
       #// xembed-sni-proxy.enable = true;
+      zerotierone.enable = true;
     })
   ];
 }
