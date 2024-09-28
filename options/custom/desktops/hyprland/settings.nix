@@ -180,7 +180,7 @@ in {
         float_switch_override_focus = 0; # Disable float to tile hover focus
         focus_on_close = 1; # Focus window under mouse
         follow_mouse = 1; # Hover focus
-        #// mouse_refocus = false;
+        mouse_refocus = false; # Required to focus last window on close
         repeat_delay = 300;
         repeat_rate = 40;
         sensitivity = 0.5;
