@@ -25,6 +25,7 @@ in {
       };
 
       extraConfig = {
+        fetch.prune = true;
         init.defaultBranch = "master";
         push.autoSetupRemote = true;
         pull.ff = "only";
