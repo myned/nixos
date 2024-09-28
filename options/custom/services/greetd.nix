@@ -33,6 +33,9 @@ in {
       };
     };
 
+    # Use password at login to unlock keyring
+    security.pam.services.greetd.fprintAuth = false;
+
     # Attempt to prevent bootlogs from polluting the tty
     # https://github.com/apognu/tuigreet/issues/68
     systemd.services.greetd.serviceConfig = {
@@ -44,8 +47,5 @@ in {
       TTYVHangup = true;
       TTYVTDisallocate = true;
     };
-
-    # FIXME: Does not unlock at login
-    security.pam.services.greetd.enableGnomeKeyring = true; # Allow PAM unlocking
   };
 }
