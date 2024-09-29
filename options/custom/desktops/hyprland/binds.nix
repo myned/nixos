@@ -41,6 +41,7 @@ with lib; let
   vrr = config.home-manager.users.${config.custom.username}.home.file.".local/bin/vrr".source;
   walker = "${config.home-manager.users.${config.custom.username}.programs.walker.package}/bin/walker";
   waydroid = "${pkgs.waydroid}/bin/waydroid";
+  window = config.home-manager.users.${config.custom.username}.home.file.".local/bin/window".source;
   zoom = config.home-manager.users.${config.custom.username}.home.file.".local/bin/zoom".source;
 
   cfg = config.custom.desktops.hyprland.binds;
@@ -173,6 +174,14 @@ in {
           "--workspace special:pip"
         ]))
         (key "Space" "Super" "togglespecialworkspace" "scratchpad")
+        (key "Space" "Super+Ctrl+Shift" "exec" (with config.custom;
+          concatStringsSep " " [
+            "${window} move"
+            "--current"
+            "--property title"
+            "'^Picture.in.[Pp]icture$'"
+            "${toString (gap + border)},${toString (gap + border)}"
+          ]))
         (key "Space" "Super+Shift" "movetoworkspacesilent" "special:scratchpad")
         (key "Tab" "Super" "cyclenext" "tiled")
         (key "Tab" "Super+Shift" "alterzorder" "top")
