@@ -175,6 +175,11 @@ in {
               swww
               tailscale
             ])
+            (bash "window" [
+              argc
+              hyprland
+              jq
+            ])
             (bash "zoom" [
               argc
               bc
