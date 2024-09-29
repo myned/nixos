@@ -177,8 +177,16 @@ in {
             ])
             (bash "window" [
               argc
+              coreutils
               hyprland
               jq
+            ])
+            (bash "workspace" [
+              argc
+              coreutils
+              hyprland
+              jq
+              libnotify
             ])
             (bash "zoom" [
               argc
