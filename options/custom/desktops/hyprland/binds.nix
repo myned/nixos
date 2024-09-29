@@ -42,6 +42,7 @@ with lib; let
   walker = "${config.home-manager.users.${config.custom.username}.programs.walker.package}/bin/walker";
   waydroid = "${pkgs.waydroid}/bin/waydroid";
   window = config.home-manager.users.${config.custom.username}.home.file.".local/bin/window".source;
+  workspace = config.home-manager.users.${config.custom.username}.home.file.".local/bin/workspace".source;
   zoom = config.home-manager.users.${config.custom.username}.home.file.".local/bin/zoom".source;
 
   cfg = config.custom.desktops.hyprland.binds;
@@ -141,6 +142,8 @@ in {
         (key "Escape" "Super" "togglefloating" null)
         (key "Escape" "Super+Alt" "exec" "lifx state --color red")
         (key "Escape" "Super+Shift" "centerwindow" null)
+        (key "Grave" "Super" "togglespecialworkspace" "scratchpad")
+        (key "Grave" "Super+Shift" "movetoworkspacesilent" "special:scratchpad")
         (key "Left" "Super" "movewindow" "l")
         (key "Left" "Super+Alt" "exec" "${left} --scroll kensington-orbit-wireless-tb-mouse")
         (key "Left" "Super+Shift" "movewindoworgroup" "l")
@@ -173,7 +176,7 @@ in {
           "--expression '^Picture.in.[Pp]icture$'"
           "--workspace special:pip"
         ]))
-        (key "Space" "Super" "togglespecialworkspace" "scratchpad")
+        (key "Space" "Super" "exec" workspace)
         (key "Space" "Super+Ctrl+Shift" "exec" (with config.custom;
           concatStringsSep " " [
             "${window} move"
@@ -182,7 +185,6 @@ in {
             "'^Picture.in.[Pp]icture$'"
             "${toString (gap + border)},${toString (gap + border)}"
           ]))
-        (key "Space" "Super+Shift" "movetoworkspacesilent" "special:scratchpad")
         (key "Tab" "Super" "cyclenext" "tiled")
         (key "Tab" "Super+Shift" "alterzorder" "top")
         (key "Tab" "Super+Shift" "cyclenext" "floating")
