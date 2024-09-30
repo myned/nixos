@@ -91,16 +91,12 @@
       fallback = true; # Build from source if cache timeout reached
       log-lines = 1000; # Build failure log length
       min-free = 1024 * 1024 * 1024; # Trigger garbage collection at 1 GB space remaining
+      trusted-users = ["@wheel"]; # Binary caches
       warn-dirty = false; # Git tree is usually dirty
+
       experimental-features = [
         "nix-command"
         "flakes"
-      ];
-
-      # Binary caches
-      trusted-users = [
-        "root"
-        "@wheel"
       ];
 
       trusted-substituters = [
@@ -131,6 +127,7 @@
     # };
 
     # API access tokens to increase rate limits
+    #!! Requires nix to be run as root for read access to agenix secrets
     # https://nix.dev/manual/nix/latest/command-ref/conf-file#conf-access-tokens
     # https://github.com/NixOS/nix/issues/6536#issuecomment-1254858889
     # https://github.com/settings/tokens
