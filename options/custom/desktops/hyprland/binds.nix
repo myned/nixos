@@ -142,8 +142,7 @@ in {
         (key "Escape" "Super" "togglefloating" null)
         (key "Escape" "Super+Alt" "exec" "lifx state --color red")
         (key "Escape" "Super+Shift" "centerwindow" null)
-        (key "Grave" "Super" "togglespecialworkspace" "scratchpad")
-        (key "Grave" "Super+Shift" "movetoworkspacesilent" "special:scratchpad")
+        (key "Grave" "Super" "exec" workspace)
         (key "Left" "Super" "movewindow" "l")
         (key "Left" "Super+Alt" "exec" "${left} --scroll kensington-orbit-wireless-tb-mouse")
         (key "Left" "Super+Shift" "movewindoworgroup" "l")
@@ -176,7 +175,8 @@ in {
           "--expression '^Picture.in.[Pp]icture$'"
           "--workspace special:pip"
         ]))
-        (key "Space" "Super" "exec" workspace)
+        (key "Space" "Super" "togglespecialworkspace" "scratchpad")
+        (key "Space" "Super+Shift" "movetoworkspacesilent" "special:scratchpad")
         (key "Space" "Super+Ctrl+Shift" "exec" (with config.custom;
           concatStringsSep " " [
             "${window} move"
