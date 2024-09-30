@@ -33,6 +33,9 @@ in {
             "Silkscreen"
           ];
         })
+
+        # Microsoft
+        corefonts
       ];
 
       #?? fc-list --brief | grep family: | sort
