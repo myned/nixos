@@ -108,9 +108,9 @@ in {
       # https://wiki.hyprland.org/Configuring/Animations
       #?? animation = NAME, ONOFF, SPEED, CURVE, [STYLE]
       animation = [
-        "global, 1, 5, default"
-        "specialWorkspace, 1, 5, default, fade"
-        "windows, 1, 5, default, slide"
+        "global, 1, 3, default"
+        "specialWorkspace, 1, 3, default, fade"
+        "windows, 1, 3, default, slide"
         "layers, 0"
       ];
 
