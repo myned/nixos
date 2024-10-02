@@ -61,7 +61,6 @@ in {
           # GUI applications
           amberol
           baobab
-          bitwarden
           blackbox-terminal
           cinny-desktop
           d-spy
