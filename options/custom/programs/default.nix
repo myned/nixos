@@ -51,7 +51,7 @@ with lib; {
       #// gnome-shell.enable = true;
       gpg.enable = true;
       hyprlock.enable = true;
-      #// libreoffice.enable = true;
+      libreoffice.enable = true;
       #// librewolf.enable = true;
       localsend.enable = true;
       logseq.enable = true;
