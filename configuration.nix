@@ -52,11 +52,17 @@
           #?? nixpkgs.BRANCH.PACKAGE
           inherit stable unstable staging-next;
 
+          ### Packages
+          # TODO: Remove when GTK > 4.16 in unstable
+          # BUG: v5.4 is not compatible with GTK < 4.16
+          # https://github.com/lassekongo83/adw-gtk3/releases/tag/v5.4
+          adw-gtk3 = stable.adw-gtk3;
+
           # BUG: Build tests often fail on unstable
           # https://github.com/NixOS/nixpkgs/issues/333946
           fprintd = stable.fprintd;
 
-          # Hypr*
+          ### Hypr*
           hypridle = inputs.hypridle.packages.${prev.system}.default;
           hyprland = inputs.hyprland.packages.${prev.system}.default;
           hyprlock = inputs.hyprlock.packages.${prev.system}.default;
@@ -65,7 +71,7 @@
             hyprbars = inputs.hyprland-plugins.packages.${prev.system}.hyprbars;
           };
 
-          # Development
+          ### Development
           #// ciscoPacketTracer8 = local.ciscoPacketTracer8;
         }
       )
