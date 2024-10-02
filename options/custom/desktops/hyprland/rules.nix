@@ -224,7 +224,7 @@ in {
           (tag.editor ["group invade" "tile"])
           (tag.files ["size 1000 625"])
           (tag.game ["fullscreen" "group barred" "idleinhibit always" "noborder" "noshadow" "renderunfocused" "workspace name:game"])
-          (tag.media ["tile" "workspace special:scratchpad"])
+          #// (tag.media ["tile" "workspace special:scratchpad"])
           (tag.music ["tile" "workspace special:music"])
           (tag.office ["workspace special:office"])
           (tag.password ["center" "workspace special:password"])
