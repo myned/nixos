@@ -42,7 +42,6 @@ in {
         # https://github.com/abenz1267/walker/wiki/Modules
         # https://www.nerdfonts.com/cheat-sheet
         builtins = {
-          calc.switcher_only = true;
           clipboard.switcher_only = true;
           commands.switcher_only = true;
           custom_commands.switcher_only = true;
@@ -55,6 +54,11 @@ in {
             actions = false; # Desktop file actions
 
             switcher_only = false;
+          };
+
+          calc = {
+            min_chars = 0;
+            switcher_only = true;
           };
 
           dmenu = {
