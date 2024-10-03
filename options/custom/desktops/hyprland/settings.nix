@@ -243,7 +243,7 @@ in {
         {
           name = "logitech-m570";
           accel_profile = "custom 1 0 1 3";
-          sensitivity = -0.1;
+          sensitivity = -0.2;
         }
 
         {
