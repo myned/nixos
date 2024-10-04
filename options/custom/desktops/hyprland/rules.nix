@@ -254,6 +254,10 @@ in {
             title = "^Lutris$"; # Main window
           } ["center" "size 1000 500"])
           (fields {
+            class = "^org\\.remmina\\.Remmina$";
+            title = "^Remmina Remote Desktop Client$"; # Main window
+          } ["center" "size 1000 500" "workspace +1"])
+          (fields {
             class = "^steam$";
             title = "^notificationtoasts$"; # Steam notifications
           } ["pin" "suppressevent activatefocus"])
