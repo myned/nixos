@@ -8,11 +8,12 @@ LOGIN_PERSISTENCE = True
 # https://github.com/netbox-community/pynetbox/pull/641
 LOGIN_REQUIRED = True
 
+MEDIA_ROOT = "/opt/netbox/netbox/media"  # Default /opt/netbox/media
 TIME_ZONE = "America/Chicago"
 
 PLUGINS = [
     "netbox_acls",
-    "netbox_attachments",
+    # // "netbox_attachments",
     "netbox_dns",
     "netbox_interface_synchronization",
     "netbox_lists",
@@ -21,7 +22,7 @@ PLUGINS = [
     # // "netbox_routing",
     "netbox_secrets",
     "netbox_topology_views",
-    "slurpit_netbox",
+    # // "slurpit_netbox",
 ]
 
 PLUGINS_CONFIG = {

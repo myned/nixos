@@ -33,19 +33,21 @@ in {
           container_name = "netbox";
           depends_on = ["cache" "db"];
           env_file = [config.age.secrets."${config.custom.profile}/netbox/.env".path];
+          image = "localhost/netbox"; # Built image
           restart = "unless-stopped";
-          volumes = ["${./extra.py}:/etc/netbox/config/extra.py"];
-
-          # https://github.com/netbox-community/netbox-docker/wiki/Using-Netbox-Plugins
-          #!! Context modifications require a rebuild
-          #?? arion-netbox build
-          build.context = "${./.}";
+          user = "unit:root";
+          volumes = ["${config.custom.containers.directory}/netbox/media:/opt/netbox/netbox/media"];
         };
       in {
         netbox.service =
           netbox
           // {
             ports = ["8585:8080"];
+
+            # https://github.com/netbox-community/netbox-docker/wiki/Using-Netbox-Plugins
+            #!! Context modifications require a rebuild
+            #?? arion-netbox build --no-cache
+            build.context = "${./.}";
           };
 
         housekeeping.service =
@@ -77,12 +79,12 @@ in {
           env_file = [config.age.secrets."${config.custom.profile}/netbox/db.env".path];
           image = "docker.io/postgres:16";
           restart = "unless-stopped";
-
-          volumes = [
-            "${config.custom.containers.directory}/netbox/db:/var/lib/postgresql/data"
-          ];
+          volumes = ["${config.custom.containers.directory}/netbox/db:/var/lib/postgresql/data"];
         };
       };
     };
+
+    #!! Required for correct volume permissions
+    systemd.tmpfiles.rules = ["z ${config.custom.containers.directory}/netbox/media 0770 999 root"]; # unit:root
   };
 }
