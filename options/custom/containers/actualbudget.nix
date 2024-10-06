@@ -4,9 +4,9 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.settings.containers.actualbudget;
+  cfg = config.custom.containers.actualbudget;
 in {
-  options.custom.settings.containers.actualbudget.enable = mkOption {default = false;};
+  options.custom.containers.actualbudget.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     #?? arion-actualbudget pull
@@ -21,7 +21,7 @@ in {
           image = "actualbudget/actual-server:24.9.0";
           ports = ["5006:5006"];
           restart = "unless-stopped";
-          volumes = ["${config.custom.settings.containers.directory}/actualbudget/data:/data"];
+          volumes = ["${config.custom.containers.directory}/actualbudget/data:/data"];
           # TODO: Set up trusted proxies
         };
       };

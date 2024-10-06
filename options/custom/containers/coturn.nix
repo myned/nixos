@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.settings.containers.coturn;
+  cfg = config.custom.containers.coturn;
 in {
-  options.custom.settings.containers.coturn.enable = mkOption {default = false;};
+  options.custom.containers.coturn.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     age.secrets = let
@@ -33,7 +33,7 @@ in {
           restart = "unless-stopped";
 
           volumes = [
-            "${config.custom.settings.containers.directory}/coturn/coturn.conf:/etc/coturn/turnserver.conf"
+            "${config.custom.containers.directory}/coturn/coturn.conf:/etc/coturn/turnserver.conf"
           ];
         };
       };
@@ -43,7 +43,7 @@ in {
     # HACK: Copy with global read-only permissions in container directory which is assumed to be locked down
     # https://github.com/moby/moby/issues/2259
     systemd.tmpfiles.rules = [
-      "C ${config.custom.settings.containers.directory}/coturn/coturn.conf 0444 - - - ${
+      "C ${config.custom.containers.directory}/coturn/coturn.conf 0444 - - - ${
         config.age.secrets."${config.custom.profile}/coturn/coturn.conf".path
       }"
     ];

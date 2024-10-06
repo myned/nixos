@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.settings.containers.mastodon;
+  cfg = config.custom.containers.mastodon;
 in {
-  options.custom.settings.containers.mastodon.enable = mkOption {default = false;};
+  options.custom.containers.mastodon.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     age.secrets = let
@@ -34,7 +34,7 @@ in {
           image = "lscr.io/linuxserver/mastodon:4.2.12";
           ports = ["3000:443"];
           restart = "unless-stopped";
-          volumes = ["${config.custom.settings.containers.directory}/mastodon/config:/config"];
+          volumes = ["${config.custom.containers.directory}/mastodon/config:/config"];
 
           depends_on = [
             "cache"
@@ -46,7 +46,7 @@ in {
           container_name = "mastodon-cache";
           image = "redis:latest";
           restart = "unless-stopped";
-          volumes = ["${config.custom.settings.containers.directory}/mastodon/cache:/data"];
+          volumes = ["${config.custom.containers.directory}/mastodon/cache:/data"];
         };
 
         db.service = {
@@ -54,7 +54,7 @@ in {
           env_file = [config.age.secrets."${config.custom.profile}/mastodon/db.env".path];
           image = "postgres:15";
           restart = "unless-stopped";
-          volumes = ["${config.custom.settings.containers.directory}/mastodon/db:/var/lib/postgresql/data"];
+          volumes = ["${config.custom.containers.directory}/mastodon/db:/var/lib/postgresql/data"];
         };
       };
     };

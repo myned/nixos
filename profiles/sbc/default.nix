@@ -3,6 +3,12 @@
     profile = "sbc";
     programs.fastfetch.greet = true;
 
+    containers = {
+      enable = true;
+      boot = true;
+      homeassistant.enable = true;
+    };
+
     services = {
       tailscale.cert = true;
 
@@ -27,12 +33,6 @@
     settings = {
       boot.u-boot = true;
       networking.wifi = true;
-
-      containers = {
-        enable = true;
-        boot = true;
-        homeassistant.enable = true;
-      };
     };
   };
 }

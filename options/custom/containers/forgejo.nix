@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.settings.containers.forgejo;
+  cfg = config.custom.containers.forgejo;
 in {
-  options.custom.settings.containers.forgejo.enable = mkOption {default = false;};
+  options.custom.containers.forgejo.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     age.secrets = let
@@ -38,7 +38,7 @@ in {
           env_file = [config.age.secrets."${config.custom.profile}/forgejo/.env".path];
           image = "codeberg.org/forgejo/forgejo:8";
           restart = "unless-stopped";
-          volumes = ["${config.custom.settings.containers.directory}/forgejo/data:/data"];
+          volumes = ["${config.custom.containers.directory}/forgejo/data:/data"];
 
           ports = [
             "127.0.0.1:3333:3000"
@@ -51,7 +51,7 @@ in {
           env_file = [config.age.secrets."${config.custom.profile}/forgejo/db.env".path];
           image = "postgres:15";
           restart = "unless-stopped";
-          volumes = ["${config.custom.settings.containers.directory}/forgejo/db:/var/lib/postgresql/data"];
+          volumes = ["${config.custom.containers.directory}/forgejo/db:/var/lib/postgresql/data"];
         };
       };
     };

@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.settings.containers.foundryvtt;
+  cfg = config.custom.containers.foundryvtt;
 in {
-  options.custom.settings.containers.foundryvtt.enable = mkOption {default = false;};
+  options.custom.containers.foundryvtt.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     age.secrets = let
@@ -31,7 +31,7 @@ in {
           image = "felddy/foundryvtt:12";
           ports = ["127.0.0.1:30000:30000"];
           restart = "unless-stopped";
-          volumes = ["${config.custom.settings.containers.directory}/foundryvtt/data:/data"];
+          volumes = ["${config.custom.containers.directory}/foundryvtt/data:/data"];
         };
       };
     };

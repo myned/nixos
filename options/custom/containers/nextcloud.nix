@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.settings.containers.nextcloud;
+  cfg = config.custom.containers.nextcloud;
 in {
-  options.custom.settings.containers.nextcloud.enable = mkOption {default = false;};
+  options.custom.containers.nextcloud.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     age.secrets = let
@@ -35,8 +35,8 @@ in {
           restart = "unless-stopped";
 
           volumes = [
-            "${config.custom.settings.containers.directory}/nextcloud/app:/var/www/html"
-            "${config.custom.settings.containers.directory}/nextcloud/data:/var/www/html/data"
+            "${config.custom.containers.directory}/nextcloud/app:/var/www/html"
+            "${config.custom.containers.directory}/nextcloud/data:/var/www/html/data"
           ];
 
           depends_on = [
@@ -63,7 +63,7 @@ in {
           container_name = "nextcloud-cache";
           image = "redis:latest";
           restart = "unless-stopped";
-          volumes = ["${config.custom.settings.containers.directory}/nextcloud/cache:/data"];
+          volumes = ["${config.custom.containers.directory}/nextcloud/cache:/data"];
         };
 
         db.service = {
@@ -73,7 +73,7 @@ in {
           restart = "unless-stopped";
 
           volumes = [
-            "${config.custom.settings.containers.directory}/nextcloud/db:/var/lib/postgresql/data"
+            "${config.custom.containers.directory}/nextcloud/db:/var/lib/postgresql/data"
           ];
         };
       };

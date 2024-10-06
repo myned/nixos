@@ -25,7 +25,6 @@ with lib; {
 
     (mkIf config.custom.full {
       accounts.enable = true;
-      containers.enable = true;
       vm.enable = true;
       waydroid.enable = true;
     })

@@ -62,7 +62,6 @@ in {
             ms-python.black-formatter
             ms-python.debugpy
             ms-python.isort
-            ms-python.python
             natizyskunk.sftp
             pkief.material-icon-theme
             pkief.material-product-icons
@@ -72,10 +71,11 @@ in {
             vincaslt.highlight-matching-tag
           ]
           ++ (with (repo "vscode-marketplace"); [
-            # Some extensions go missing from open-vsx, so use official marketplace as fallback
+            #!! Some extensions go missing from open-vsx, so use official marketplace as fallback
             # https://github.com/nix-community/nix-vscode-extensions?tab=readme-ov-file#note
             bodil.blueprint-gtk
             cormoran.disable-default-keybinding
+            ms-python.python
             sirmspencer.vscode-autohide
           ]);
     };

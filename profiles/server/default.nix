@@ -3,6 +3,21 @@
     profile = "server";
     programs.fastfetch.greet = true;
 
+    containers = {
+      enable = true;
+      boot = true;
+      actualbudget.enable = true;
+      coturn.enable = true;
+      forgejo.enable = true;
+      foundryvtt.enable = true;
+      #// headscale.enable = true;
+      mastodon.enable = true;
+      netbox.enable = true;
+      nextcloud.enable = true;
+      redlib.enable = true;
+      searxng.enable = true;
+    };
+
     services = {
       caddy.enable = true;
       matrix-conduit.enable = true;
@@ -47,20 +62,6 @@
       boot.systemd-boot = true;
       mounts.enable = true;
       users.myned.linger = true;
-
-      containers = {
-        enable = true;
-        boot = true;
-        actualbudget.enable = true;
-        coturn.enable = true;
-        forgejo.enable = true;
-        foundryvtt.enable = true;
-        #// headscale.enable = true;
-        mastodon.enable = true;
-        nextcloud.enable = true;
-        redlib.enable = true;
-        searxng.enable = true;
-      };
     };
   };
 }

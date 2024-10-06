@@ -6,10 +6,10 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.settings.containers;
+  cfg = config.custom.containers;
 in {
-  options.custom.settings.containers = {
-    enable = mkOption {default = false;};
+  options.custom.containers = {
+    enable = mkOption {default = config.custom.full;};
     boot = mkOption {default = false;};
     directory = mkOption {default = "/containers";};
     docker = mkOption {default = true;};

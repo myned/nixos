@@ -4,9 +4,9 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.settings.containers.redlib;
+  cfg = config.custom.containers.redlib;
 in {
-  options.custom.settings.containers.redlib.enable = mkOption {default = false;};
+  options.custom.containers.redlib.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     #?? arion-redlib pull

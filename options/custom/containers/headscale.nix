@@ -6,9 +6,9 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.settings.containers.headscale;
+  cfg = config.custom.containers.headscale;
 in {
-  options.custom.settings.containers.headscale.enable = mkOption {default = false;};
+  options.custom.containers.headscale.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     age.secrets = let
@@ -43,8 +43,8 @@ in {
           ];
 
           volumes = [
-            "${config.custom.settings.containers.directory}/headscale/config:/etc/headscale"
-            "${config.custom.settings.containers.directory}/headscale/data:/var/lib/headscale"
+            "${config.custom.containers.directory}/headscale/config:/etc/headscale"
+            "${config.custom.containers.directory}/headscale/data:/var/lib/headscale"
 
             # Minimum config.yaml
             # https://github.com/juanfont/headscale/blob/main/config-example.yaml

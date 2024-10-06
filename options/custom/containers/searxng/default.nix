@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.settings.containers.searxng;
+  cfg = config.custom.containers.searxng;
 in {
-  options.custom.settings.containers.searxng.enable = mkOption {default = false;};
+  options.custom.containers.searxng.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
     age.secrets = let
