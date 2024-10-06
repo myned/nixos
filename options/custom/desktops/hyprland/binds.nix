@@ -69,9 +69,9 @@ in {
 
       # Lockscreen binds
       bindl = [
-        (key "Apostrophe" "Super" "exec" inhibit)
         (key "Delete" "Ctrl" "exec" "${hyprctl} reload")
         (key "Delete" "Ctrl+Alt" "exec" "${loginctl} terminate-session ''")
+        (key "Delete" "Super+Shift" "exec" inhibit)
 
         (key "L" "Super" "exec" "${hyprlock} --immediate & ${sleep} 1 && ${hyprctl} dispatch dpms off")
 
@@ -107,8 +107,7 @@ in {
       bindr = [
         (key "Alt_L" "Super+Alt" "togglespecialworkspace" "wallpaper")
         (key "Alt_L" "Super+Alt+Shift" "movetoworkspacesilent" "special:wallpaper")
-        (key "Control_L" "Super+Ctrl" "layoutmsg" "swapnext")
-        (key "Control_L" "Super+Ctrl+Shift" "layoutmsg" "swapprev")
+        (key "Control_L" "Super+Ctrl" "exec" workspace)
         (key "Shift_L" "Super+Shift" "workspace" "previous")
         (key "Super_L" "Super" "exec" "${menu}")
         (key "Super_L" "Super+Alt" "exec" "${menu} --passwords")
@@ -123,6 +122,8 @@ in {
         (key "mouse:274" "Super+Shift" "layoutmsg" "addmaster")
         (key "mouse:274" "Super+Ctrl+Shift" "layoutmsg" "removemaster")
 
+        (key "Apostrophe" "Super" "layoutmsg" "swapnext")
+        (key "Apostrophe" "Super+Shift" "layoutmsg" "swapprev")
         (key "Backslash" "Super" "layoutmsg" "orientationcycle center left")
         (key "Backslash" "Super+Shift" "splitratio" "exact 0.5") # Reset layout ratio
         (key "Backspace" "Super" "changegroupactive" "f")
@@ -141,7 +142,6 @@ in {
         (key "Escape" "Super" "togglefloating" null)
         (key "Escape" "Super+Alt" "exec" "lifx state --color red")
         (key "Escape" "Super+Shift" "centerwindow" null)
-        (key "Grave" "Super" "exec" workspace)
         (key "Left" "Super" "movewindow" "l")
         (key "Left" "Super+Alt" "exec" "${left} --scroll kensington-orbit-wireless-tb-mouse")
         (key "Left" "Super+Shift" "movewindoworgroup" "l")
