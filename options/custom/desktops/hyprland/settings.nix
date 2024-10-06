@@ -81,7 +81,15 @@ in {
         force_zero_scaling = true;
       };
 
-      # https://wiki.hyprland.org/Configuring/Master-Layout
+      # https://wiki.hyprland.org/Configuring/Dwindle-Layout/
+      dwindle = {
+        default_split_ratio = 1.25;
+        force_split = 2; # Right
+        split_bias = 1; # Larger active window
+        split_width_multiplier = 1.5;
+      };
+
+      # https://wiki.hyprland.org/Configuring/Master-Layout/
       # Optimized for ultrawide use by default
       master = {
         allow_small_split = true;
@@ -131,6 +139,7 @@ in {
         "col.border_inactive" = "rgba(6c71c440)";
         "col.border_locked_active" = "rgb(d33682)";
         "col.border_locked_inactive" = "rgba(d3368240)";
+        auto_group = false;
         insert_after_current = false;
 
         # https://wiki.hyprland.org/Configuring/Variables/#groupbar
@@ -178,14 +187,14 @@ in {
       input = {
         accel_profile = "flat";
         float_switch_override_focus = 0; # Disable float to tile hover focus
-        focus_on_close = 1; # Focus window under mouse
+        #// focus_on_close = 1; # Focus window under mouse
         follow_mouse = 1; # Hover focus
         mouse_refocus = false; # Required to focus last window on close
         repeat_delay = 300;
         repeat_rate = 40;
         sensitivity = 0.5;
         #// scroll_factor = 0.75;
-        special_fallthrough = true; # Alternative to toggle script
+        special_fallthrough = true; # Focus windows under special workspace
 
         touchpad = {
           clickfinger_behavior = true; # Multi-finger clicks
@@ -197,7 +206,7 @@ in {
       # https://wiki.hyprland.org/Configuring/Variables/#cursor
       cursor = {
         hide_on_key_press = true;
-        hotspot_padding = config.custom.gap;
+        #// hotspot_padding = config.custom.gap;
         #// min_refresh_rate = 60; # !! Hardware dependent
         #// no_break_fs_vrr = true;
         #// no_hardware_cursors = true;

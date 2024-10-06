@@ -107,9 +107,8 @@ in {
       bindr = [
         (key "Alt_L" "Super+Alt" "togglespecialworkspace" "wallpaper")
         (key "Alt_L" "Super+Alt+Shift" "movetoworkspacesilent" "special:wallpaper")
-        (key "Control_L" "Super+Ctrl" "layoutmsg" "swapwithmaster master")
-        (key "Control_L" "Super+Ctrl+Alt+Shift" "layoutmsg" "removemaster")
-        (key "Control_L" "Super+Ctrl+Shift" "layoutmsg" "addmaster")
+        (key "Control_L" "Super+Ctrl" "layoutmsg" "swapnext")
+        (key "Control_L" "Super+Ctrl+Shift" "layoutmsg" "swapprev")
         (key "Shift_L" "Super+Shift" "workspace" "previous")
         (key "Super_L" "Super" "exec" "${menu}")
         (key "Super_L" "Super+Alt" "exec" "${menu} --passwords")
@@ -120,19 +119,19 @@ in {
 
       # Regular binds
       bind = [
-        (key "mouse:274" "Super" "layoutmsg" "swapwithmaster master")
+        (key "mouse:274" "Super" "layoutmsg" "swapwithmaster auto")
         (key "mouse:274" "Super+Shift" "layoutmsg" "addmaster")
         (key "mouse:274" "Super+Ctrl+Shift" "layoutmsg" "removemaster")
 
-        (key "Backslash" "Super" "layoutmsg" "orientationcenter")
+        (key "Backslash" "Super" "layoutmsg" "orientationcycle center left")
         (key "Backslash" "Super+Shift" "splitratio" "exact 0.5") # Reset layout ratio
         (key "Backspace" "Super" "changegroupactive" "f")
         (key "Backspace" "Super+Ctrl" "togglegroup" null)
         (key "Backspace" "Super+Ctrl+Shift" "lockactivegroup" "toggle")
         (key "Backspace" "Super+Shift" "movegroupwindow" null)
-        (key "Bracketleft" "Super" "layoutmsg" "orientationprev")
+        (key "Bracketleft" "Super" "layoutmsg" "rollnext")
         (key "Bracketleft" "Super+Shift" "splitratio" "-0.1")
-        (key "Bracketright" "Super" "layoutmsg" "orientationnext")
+        (key "Bracketright" "Super" "layoutmsg" "rollprev")
         (key "Bracketright" "Super+Shift" "splitratio" "+0.1")
         (key "Delete" "Super" "exec" "${swayosd-client} --output-volume mute-toggle")
         (key "Down" "Super" "movewindow" "d")
@@ -185,7 +184,7 @@ in {
             "'^Picture.in.[Pp]icture$'"
             "${toString (gap + border)},${toString (gap + border)}"
           ]))
-        (key "Tab" "Super" "cyclenext" "tiled")
+        (key "Tab" "Super" "layoutmsg" "cyclenext")
         (key "Tab" "Super+Shift" "alterzorder" "top")
         (key "Tab" "Super+Shift" "cyclenext" "floating")
         (key "Up" "Super" "movewindow" "u")

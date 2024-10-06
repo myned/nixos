@@ -36,7 +36,7 @@ in {
 
       master = {
         mfact = mkForce 0.5;
-        orientation = mkForce "top";
+        orientation = mkForce "left";
         always_center_master = mkForce false;
       };
 
