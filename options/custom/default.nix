@@ -29,8 +29,7 @@ in {
     # TODO: Use option for border size
     border = mkOption {default = 2;};
 
-    gap = mkOption {default = 10;};
-    padding = mkOption {default = 56;}; # ?? journalctl --user -u waybar.service | grep height:
+    rounding = mkOption {default = 10;};
 
     ### Misc
     wallpaper = mkOption {default = false;};

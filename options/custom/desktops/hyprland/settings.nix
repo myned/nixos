@@ -120,7 +120,7 @@ in {
         "col.shadow" = "rgba(00000040)";
         blur.enabled = false;
         dim_special = 0;
-        rounding = 12;
+        rounding = config.custom.rounding;
         shadow_range = 50;
         shadow_render_power = 4; # Distance falloff
       };
