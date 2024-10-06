@@ -43,8 +43,16 @@ in {
     # https://www.nerdfonts.com/cheat-sheet
     programs.waybar = {
       enable = true;
-      style = ./style.css; # ?? waybar --log-level debug
       systemd.enable = true; # Start on login
+
+      # ?? waybar --log-level debug
+      style = ''
+        ${readFile ./style.css}
+
+        .horizontal > box {
+          margin: 0 ${toString config.custom.gap}px ${toString config.custom.gap}px;
+        }
+      '';
 
       ### SETTINGS ###
       # https://github.com/Alexays/Waybar/wiki/Configuration
