@@ -1,4 +1,4 @@
-# !! Generate flake.nix
+#!! Generate flake.nix
 # https://github.com/jorsn/flakegen
 #?? rm flake.nix
 #?? nix flake init -t github:jorsn/flakegen
@@ -60,15 +60,9 @@
     hypridle = flake "github:hyprwm/hypridle" // unstable "nixpkgs";
     hyprland = flake "git+https://github.com/hyprwm/Hyprland?ref=refs/tags/v0.44.0&submodules=1" // unstable "nixpkgs";
     #// hyprland = flake "git+https://github.com/hyprwm/Hyprland?submodules=1" // unstable "nixpkgs";
-    hyprland =
-      flake "git+https://github.com/hyprwm/Hyprland?ref=refs/tags/v0.43.0&submodules=1"
-      // unstable "nixpkgs";
-    #// hyprland =
-    #//   flake "git+https://github.com/UjinT34/Hyprland?ref=vrr-cursor-fix&submodules=1"
-    #//   // unstable "nixpkgs";
+    #// hyprland = flake "git+https://github.com/UjinT34/Hyprland?ref=vrr-cursor-fix&submodules=1" // unstable "nixpkgs";
     hyprland-contrib = flake "github:hyprwm/contrib" // unstable "nixpkgs";
-    hyprland-plugins =
-      flake "github:hyprwm/hyprland-plugins" // unstable "nixpkgs" // follows "hyprland";
+    hyprland-plugins = flake "github:hyprwm/hyprland-plugins" // unstable "nixpkgs" // follows "hyprland";
     hyprlock = flake "github:hyprwm/hyprlock" // unstable "nixpkgs";
     hyprpaper = flake "github:hyprwm/hyprpaper" // unstable "nixpkgs";
     hyprpicker = flake "github:hyprwm/hyprpicker" // unstable "nixpkgs";
@@ -111,10 +105,7 @@
       common = branch: arch: modules:
         inputs."nixpkgs-${branch}".lib.nixosSystem {
           system = arch;
-
-          specialArgs = {
-            inherit inputs;
-          };
+          specialArgs = {inherit inputs;};
 
           # TODO: Clean up optional attributes with each new release
           #!! Options will diverge between branches over time
@@ -156,36 +147,14 @@
       unstable = arch: modules: common "unstable" "${arch}-linux" modules;
     in {
       ### Stable
-      myarm = stable "aarch64" [
-        ./profiles/server
-        ./machines/myarm
-      ];
-
-      myne = stable "x86_64" [
-        ./profiles/server
-        ./machines/myne
-      ];
-
-      mypi3 = stable "aarch64" [
-        ./profiles/sbc
-        ./machines/mypi3
-      ];
+      myarm = stable "aarch64" [./profiles/server ./machines/myarm];
+      myne = stable "x86_64" [./profiles/server ./machines/myne];
+      mypi3 = stable "aarch64" [./profiles/sbc ./machines/mypi3];
 
       ### Unstable
-      myeck = unstable "x86_64" [
-        ./profiles/console
-        ./machines/myeck
-      ];
-
-      mynix = unstable "x86_64" [
-        ./profiles/desktop
-        ./machines/mynix
-      ];
-
-      myork = unstable "x86_64" [
-        ./profiles/laptop
-        ./machines/myork
-      ];
+      myeck = unstable "x86_64" [./profiles/console ./machines/myeck];
+      mynix = unstable "x86_64" [./profiles/desktop ./machines/mynix];
+      myork = unstable "x86_64" [./profiles/laptop ./machines/myork];
     };
   };
 }
