@@ -58,6 +58,7 @@
     bitwarden-menu = flake "github:firecat53/bitwarden-menu" // unstable "nixpkgs";
     fw-fanctrl = flake "github:TamtamHero/fw-fanctrl/packaging/nix" // unstable "nixpkgs";
     hypridle = flake "github:hyprwm/hypridle" // unstable "nixpkgs";
+    hyprland = flake "git+https://github.com/hyprwm/Hyprland?ref=refs/tags/v0.44.0&submodules=1" // unstable "nixpkgs";
     #// hyprland = flake "git+https://github.com/hyprwm/Hyprland?submodules=1" // unstable "nixpkgs";
     hyprland =
       flake "git+https://github.com/hyprwm/Hyprland?ref=refs/tags/v0.43.0&submodules=1"
