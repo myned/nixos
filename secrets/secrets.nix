@@ -75,6 +75,9 @@ in {
   "server/mastodon/.env".publicKeys = server;
   "server/mastodon/db.env".publicKeys = server;
   "server/matrix-conduit/conduwuit.toml".publicKeys = server;
+  "server/netbox/.env".publicKeys = server;
+  "server/netbox/cache.env".publicKeys = server;
+  "server/netbox/db.env".publicKeys = server;
   "server/netdata/parent.conf".publicKeys = server;
   "server/nextcloud/.env".publicKeys = server;
   "server/nextcloud/db.env".publicKeys = server;
