@@ -21,21 +21,17 @@ in {
     #?? arion-coturn pull
     environment.shellAliases.arion-coturn = "sudo arion --prebuilt-file ${config.virtualisation.arion.projects.coturn.settings.out.dockerComposeYaml}";
 
-    virtualisation.arion.projects.coturn = {
-      serviceName = "coturn";
+    virtualisation.arion.projects.coturn.settings.services = {
+      # https://conduwuit.puppyirl.gay/turn.html
+      coturn.service = {
+        container_name = "coturn";
+        image = "coturn/coturn:4.6";
+        network_mode = "host";
+        restart = "unless-stopped";
 
-      settings.services = {
-        # https://conduwuit.puppyirl.gay/turn.html
-        coturn.service = {
-          container_name = "coturn";
-          image = "coturn/coturn:4.6";
-          network_mode = "host";
-          restart = "unless-stopped";
-
-          volumes = [
-            "${config.custom.containers.directory}/coturn/coturn.conf:/etc/coturn/turnserver.conf"
-          ];
-        };
+        volumes = [
+          "${config.custom.containers.directory}/coturn/coturn.conf:/etc/coturn/turnserver.conf"
+        ];
       };
     };
 

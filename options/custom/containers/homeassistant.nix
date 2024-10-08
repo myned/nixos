@@ -12,17 +12,13 @@ in {
     #?? arion-homeassistant pull
     environment.shellAliases.arion-homeassistant = "sudo arion --prebuilt-file ${config.virtualisation.arion.projects.homeassistant.settings.out.dockerComposeYaml}";
 
-    virtualisation.arion.projects.homeassistant = {
-      serviceName = "homeassistant";
-
-      settings.services = {
-        homeassistant.service = {
-          container_name = "homeassistant";
-          image = "homeassistant/home-assistant:2024.9.1";
-          ports = ["8123:8123"];
-          restart = "unless-stopped";
-          volumes = ["${config.custom.containers.directory}/homeassistant/config:/config"];
-        };
+    virtualisation.arion.projects.homeassistant.settings.services = {
+      homeassistant.service = {
+        container_name = "homeassistant";
+        image = "homeassistant/home-assistant:2024.9.1";
+        ports = ["8123:8123"];
+        restart = "unless-stopped";
+        volumes = ["${config.custom.containers.directory}/homeassistant/config:/config"];
       };
     };
   };
