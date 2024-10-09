@@ -8,9 +8,9 @@
 
 1. Clone this repository
 
-   ```sh
-   git clone https://github.com/Myned/nixos
-   ```
+```sh
+git clone https://github.com/myned/nixos
+```
 
 2. Enable [Flakes](https://wiki.nixos.org/wiki/Flakes)
 
@@ -18,59 +18,75 @@
 
 4. Create machine-specific modules in `machines/MACHINE/`
 
-   b. Machine configuration and hostname in `default.nix`
+a. Machine configuration and hostname in `default.nix`
 
-   ```nix
-   { custom.hostname = "MACHINE"; }
-   ```
+```nix
+{ custom.hostname = "MACHINE"; }
+```
 
-   c. [Disko](https://github.com/nix-community/disko) layout in `disko.nix`
+b. [Disko](https://github.com/nix-community/disko) layout in `disko.nix`
 
-   ```sh
-   # Verify /dev identifier on machine
-   lsblk
+```sh
+# Verify /dev identifier on machine
+lsblk
 
-   # Verify EFI/BIOS firmware on machine
-   [ -d /sys/firmware/efi/efivars ] && echo "UEFI" || echo "BIOS"
-   ```
+# Verify EFI/BIOS firmware on machine
+[ -d /sys/firmware/efi/efivars ] && echo "UEFI" || echo "BIOS"
+```
 
-   d. Generated hardware configuration in `hardware-configuration.nix`
+c. Generated hardware configuration in `hardware-configuration.nix`
 
-   ```sh
-   nixos-generate-config --show-hardware-config --no-filesystems --root /mnt
-   ```
+```sh
+nixos-generate-config --show-hardware-config --no-filesystems --root /mnt
+```
 
 5. Choose profile and add machine-specific modules to `flake.in.nix`
 
-   ```nix
-   MACHINE = BRANCH [ ./profiles/PROFILE ./machines/MACHINE ];
-   ```
+```nix
+MACHINE = BRANCH "ARCHITECTURE" [ ./profiles/PROFILE ./machines/MACHINE ];
+```
 
-6. Generate `flake.nix` with [flakegen](https://github.com/jorsn/flakegen)
+6. Generate and lock `flake.nix` with [flakegen](https://github.com/jorsn/flakegen)
 
-   ```sh
-   git add .
-   nix run .#genflake flake.nix
-   nix flake lock
-   ```
+```sh
+cd nixos
+git add .
+nix run .#genflake flake.nix
+nix flake lock
+```
 
-7. Copy host public SSH key to root on machine
+7. Generate machine SSH key and rekey agenix secrets with added public key
 
-   ```sh
-   # On machine
-   sudo passwd root
-   ```
+```sh
+mkdir -p tmp/etc/ssh/
+ssh-keygen -f tmp/etc/ssh/id_ed25519 -N '' -C root@MACHINE
+cd secrets
+agenix -r
+```
 
-   ```sh
-   # On host
-   ssh-copy-id root@MACHINE
-   ```
+8. Add user SSH key to root authorized_keys on machine
 
-8. Test and execute [NixOS Anywhere](https://github.com/nix-community/nixos-anywhere)
+```sh
+# On host
+cat ~/.ssh/id_ed25519.pub | wl-copy
+```
 
-   ```sh
-   nixos-anywhere --vm-test -f .#MACHINE root@IP
-   nixos-anywhere -f .#MACHINE root@IP
-   ```
+```sh
+# On machine
+sudo mkdir /root/.ssh/
+sudo nano /root/.ssh/authorized_keys
+```
 
-9. Shutdown, detach ISO, and reboot
+9. Execute [NixOS Anywhere](https://github.com/nix-community/nixos-anywhere)
+
+```sh
+nixos-anywhere --extra-files tmp --flake .#MACHINE root@IP
+```
+
+10. Shutdown, detach ISO, and reboot
+
+11. Remove temporary files
+
+```sh
+rm -r tmp
+```
