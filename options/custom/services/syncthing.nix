@@ -15,7 +15,7 @@ in {
     dataDir = mkOption {default = "/home/${cfg.user}";};
     devices = mkOption {
       default = [
-        "myarm"
+        "myne"
         "mynix"
         "myork"
       ];
@@ -124,9 +124,9 @@ in {
         # Devices can be declared globally without issue
         # Syncthing seems to ignore entries that match the machine's id
         devices = {
-          myarm = {
+          myne = {
             introducer = true;
-            id = "XM3ZAIB-337KY6I-T2IFUF6-U6NE7M2-OHKKX4F-CGQDTYE-DBKSIUD-E6RUBQJ";
+            id = "3YFGJ2J-X2653BB-WHKO54B-7FSL4LH-4CP4AUX-ZSUNIXW-NOBWBAN-324UOQR";
           };
 
           mynix.id = "UFLECA5-QQUKD5J-FQB55TE-YKKHD37-VT5ASXU-4EGUZNV-KW7Z434-FBI7CQ2";
@@ -155,12 +155,17 @@ in {
       };
     };
 
-    #!! Syncthing needs to start after mounting or there is a risk of file deletion
-    # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/networking/syncthing.nix#L646
-    #?? systemctl status
-    systemd.services.syncthing = mkIf (isString cfg.mount) {
-      after = [cfg.mount];
-      bindsTo = [cfg.mount]; # Start/stop service on mount/unmount
+    systemd = {
+      # Ensure creation of config directory
+      tmpfiles.rules = ["d ${cfg.configDir} - ${cfg.user} ${cfg.group}"];
+
+      #!! Syncthing needs to start after mounting or there is a risk of file deletion
+      # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/networking/syncthing.nix#L646
+      #?? systemctl status
+      services.syncthing = mkIf (isString cfg.mount) {
+        after = [cfg.mount];
+        bindsTo = [cfg.mount]; # Start/stop service on mount/unmount
+      };
     };
   };
 }
