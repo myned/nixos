@@ -3,7 +3,7 @@
     disk = {
       master = {
         type = "disk";
-        device = "/dev/sda";
+        device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_53186364";
         content = {
           type = "gpt";
           partitions = {
@@ -54,7 +54,33 @@
 
                   "/swap" = {
                     mountpoint = "/swap";
-                    swap.swapfile.size = "8G";
+                    swap.swapfile.size = "4G";
+                  };
+                };
+              };
+            };
+          };
+        };
+      };
+
+      myvol = {
+        type = "disk";
+        device = "/dev/disk/by-id/scsi-0HC_Volume_101412796";
+        content = {
+          type = "gpt";
+          partitions = {
+            local = {
+              size = "100%";
+              content = {
+                type = "btrfs";
+                extraArgs = ["-f"];
+                subvolumes = {
+                  "/local" = {
+                    mountpoint = "/mnt/local";
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
                   };
                 };
               };

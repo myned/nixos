@@ -29,7 +29,7 @@ let
   ];
 
   servers = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDPlG7FWZ5Us4Ix5fGMHn2DJU1/ma/7kQu39cPKKQMXJ root@myarm"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAgrWvzp14Vj+aMd3b9w6e3/xbkHfNZoswsAg9QtUcDc root@myne"
   ];
 
   common = users ++ consoles ++ desktops ++ sbcs ++ servers;
@@ -65,7 +65,7 @@ in {
   "sbc/users/root.pass".publicKeys = sbc;
 
   ### Server
-  "server/borgmatic/borgbase.myarm".publicKeys = server;
+  "server/borgmatic/borgbase".publicKeys = server;
   "server/caddy/Caddyfile".publicKeys = server;
   "server/coturn/coturn.conf".publicKeys = server;
   "server/forgejo/.env".publicKeys = server;
