@@ -45,6 +45,9 @@ in {
 
         # https://redis.io/docs/latest/develop/get-started/faq/#background-saving-fails-with-a-fork-error-on-linux
         "vm.overcommit_memory" = 1;
+
+        # https://docs.syncthing.net/users/faq.html#inotify-limits
+        "fs.inotify.max_user_watches" = 204800;
       };
 
       loader = {
