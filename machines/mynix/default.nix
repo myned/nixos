@@ -96,7 +96,7 @@
 
   #     #!! Hostname dependent
   #     script = ''
-  #       rsync --chown caddy:caddy "$(variety --current)" root@myarm:/srv/static/wallpaper.png
+  #       rsync --chown caddy:caddy "$(variety --current)" root@myne:/srv/static/wallpaper.png
   #     '';
   #   };
 

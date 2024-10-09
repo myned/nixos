@@ -27,7 +27,7 @@ while true; do
 
   # Send unaltered image to server in background
   #!! Hostname dependent
-  rsync --chown caddy:caddy "$WALLPAPER" root@myarm:"$STATIC" || notify-send --urgency critical '> wallpaper' 'Upload failed' &
+  rsync --chown caddy:caddy "$WALLPAPER" root@myne:"$STATIC" || notify-send --urgency critical '> wallpaper' 'Upload failed' &
 
   sleep "$INTERVAL"m
 done
