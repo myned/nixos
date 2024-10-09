@@ -32,7 +32,7 @@ in {
     # Bind conduwuit service to media mount
     # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/matrix/conduit.nix#L113
     systemd.services.conduit = let
-      mount = "mnt-remote-conduwuit.mount";
+      mount = "mnt-local.mount";
     in {
       after = [mount];
       bindsTo = [mount];
@@ -47,10 +47,10 @@ in {
       };
     };
 
-    # Create bind mount to remote media in lieu of conduwuit.toml setting
+    # Create bind mount to local media in lieu of conduwuit.toml setting
     # https://nixos.wiki/wiki/Filesystems#Bind_mounts
     fileSystems."/var/lib/matrix-conduit/media" = {
-      device = "/mnt/remote/conduwuit/media";
+      device = "/mnt/local/conduwuit/media";
       fsType = "none";
       options = ["bind"];
     };
