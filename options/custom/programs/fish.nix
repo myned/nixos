@@ -47,18 +47,24 @@ in {
           poweroff = "systemctl poweroff";
           shutdown = "systemctl poweroff";
 
-          backup = "borgmatic -v 1 create --progress --stats";
-          extract = "borgmatic -v 1 extract --progress";
-          init = "borgmatic init -e repokey-blake2";
-          key = "borgmatic key export";
-          list = "borgmatic -v 1 list";
-          restore = "borgmatic -v 1 restore";
-
           rsync = "rsync --info progress2";
 
           a = "adb";
           as = "adb shell";
           asa = "adb shell sh /sdcard/Android/data/com.llamalab.automate/cache/start.sh"; # Automate
+
+          b = "sudo borgmatic";
+          bb = "sudo borgmatic borg";
+          bc = "sudo borgmatic create --progress --stats";
+          be = "sudo borgmatic extract --progress";
+          bi = "sudo borgmatic init -e repokey-blake2";
+          bk = "sudo borgmatic key export";
+          bl = "sudo borgmatic list";
+          bm = "sudo borgmatic mount";
+          brl = "sudo borgmatic rlist";
+          br = "sudo borgmatic restore";
+          bt = "sudo borgmatic export-tar";
+          bu = "sudo borgmatic unmount";
 
           c = "clear";
           e = "exit";
