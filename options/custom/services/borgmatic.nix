@@ -28,6 +28,7 @@ in {
 
       # https://torsion.org/borgmatic/docs/reference/configuration/
       settings = {
+        archive_name_format = "{now:%Y-%m-%d %H:%M:%S}"; # Remove hostname
         keep_daily = 7;
         keep_weekly = 4;
         keep_monthly = 1;
@@ -36,9 +37,7 @@ in {
         retry_wait = 60; # Additive seconds per retry
         compression = "auto,zstd"; # Use heuristics to decide whether to compress with zstd
         ssh_command = "ssh -i /etc/ssh/id_ed25519"; # !! Imperative key generation
-        encryption_passcommand = "${cat} ${
-          config.age.secrets."${config.custom.profile}/borgmatic/borgbase.${config.custom.hostname}".path
-        }";
+        encryption_passcommand = "${cat} ${config.age.secrets."${config.custom.profile}/borgmatic/borgbase".path}";
         repositories = cfg.repositories;
         source_directories = cfg.sources;
 
@@ -67,7 +66,7 @@ in {
     age.secrets = let
       secret = filename: {file = "${inputs.self}/secrets/${filename}";};
     in {
-      "${config.custom.profile}/borgmatic/borgbase.${config.custom.hostname}" = secret "${config.custom.profile}/borgmatic/borgbase.${config.custom.hostname}";
+      "${config.custom.profile}/borgmatic/borgbase" = secret "${config.custom.profile}/borgmatic/borgbase";
     };
   };
 }
