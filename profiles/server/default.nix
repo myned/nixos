@@ -1,4 +1,4 @@
-{
+{config, ...}: {
   custom = {
     profile = "server";
     programs.fastfetch.greet = true;
@@ -6,7 +6,7 @@
     containers = {
       enable = true;
       boot = true;
-      actualbudget.enable = true;
+      #// actualbudget.enable = true;
       coturn.enable = true;
       forgejo.enable = true;
       foundryvtt.enable = true;
@@ -22,21 +22,23 @@
       caddy.enable = true;
       matrix-conduit.enable = true;
       #// modufur.enable = true;
-      tailscale.cert = true;
+      #// tailscale.cert = true;
 
       borgmatic = {
         enable = true;
+
         sources = [
-          "/containers"
+          config.custom.containers.directory
           "/home"
-          "/mnt/remote"
+          "/mnt/local"
           "/srv"
+          "/var/lib/matrix-conduit"
         ];
 
         repositories = [
           {
-            path = "ssh://n882bnik@n882bnik.repo.borgbase.com/./repo";
-            label = "myarm";
+            path = "ssh://ysrll00y@ysrll00y.repo.borgbase.com/./repo";
+            label = "server";
           }
         ];
       };
@@ -49,19 +51,17 @@
       syncthing = {
         enable = true;
         configDir = "/var/lib/syncthing";
-        dataDir = "/mnt/remote/syncthing";
-        ignorePerms = true; # Mount permissions are forced
-        mount = "mnt-remote-syncthing.mount";
+        dataDir = "/mnt/local/syncthing";
+        mount = "mnt-local.mount";
         type = "receiveonly";
         user = "syncthing";
         group = "syncthing";
       };
     };
 
-    settings = {
-      boot.systemd-boot = true;
-      mounts.enable = true;
-      users.myned.linger = true;
-    };
+    # settings = {
+    #   mounts.enable = true;
+    #   #// users.myned.linger = true;
+    # };
   };
 }

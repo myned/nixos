@@ -1,4 +1,4 @@
-{
+{config, ...}: {
   custom = {
     profile = "sbc";
     programs.fastfetch.greet = true;
@@ -10,11 +10,11 @@
     };
 
     services = {
-      tailscale.cert = true;
+      #// tailscale.cert = true;
 
       borgmatic = {
         enable = true;
-        sources = ["/containers"];
+        sources = [config.custom.containers.directory];
 
         repositories = [
           {
