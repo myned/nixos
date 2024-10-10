@@ -1,4 +1,3 @@
-# TODO: Upgrade to v4.1 when supported by netbox-acls
 FROM docker.io/netboxcommunity/netbox:v4.0.11
 
 # Install extra configuration
