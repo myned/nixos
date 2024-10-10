@@ -45,7 +45,7 @@ in {
           clipboard.switcher_only = true;
           commands.switcher_only = true;
           custom_commands.switcher_only = true;
-          runner.switcher_only = false;
+          runner.switcher_only = true;
           ssh.switcher_only = true;
           windows.switcher_only = true;
 
