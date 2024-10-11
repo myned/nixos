@@ -71,7 +71,7 @@ in {
       bindl = [
         (key "Delete" "Ctrl" "exec" "${hyprctl} reload")
         (key "Delete" "Ctrl+Alt" "exec" "${loginctl} terminate-session ''")
-        (key "Delete" "Super+Shift" "exec" inhibit)
+        (key "Delete" "Super" "exec" inhibit)
 
         (key "L" "Super" "exec" "${hyprlock} --immediate & ${sleep} 1 && ${hyprctl} dispatch dpms off")
 
@@ -134,7 +134,6 @@ in {
         (key "Bracketleft" "Super+Shift" "splitratio" "-0.1")
         (key "Bracketright" "Super" "layoutmsg" "rollprev")
         (key "Bracketright" "Super+Shift" "splitratio" "+0.1")
-        (key "Delete" "Super" "exec" "${swayosd-client} --output-volume mute-toggle")
         (key "Down" "Super" "movewindow" "d")
         (key "Down" "Super+Shift" "movewindoworgroup" "d")
         (key "Equal" "Super" "exec" "${swayosd-client} --output-volume raise")
@@ -190,7 +189,7 @@ in {
         (key "Up" "Super" "movewindow" "u")
         (key "Up" "Super+Shift" "movewindoworgroup" "u")
 
-        (key "0" "Super" "exec" "${audio}")
+        (key "0" "Super" "exec" "${swayosd-client} --output-volume mute-toggle")
         (key "0" "Super+Shift" "exec" "${zoom}")
         (key "1" "Ctrl+Alt" "exec" "lifx state --brightness 0.01")
         (key "1" "Super" "workspace" "1")
@@ -218,8 +217,7 @@ in {
         (key "7" "Super+Shift" "movetoworkspacesilent" "7")
         (key "8" "Super" "workspace" "8")
         (key "8" "Super+Shift" "movetoworkspacesilent" "8")
-        (key "9" "Super" "workspace" "9")
-        (key "9" "Super+Shift" "movetoworkspacesilent" "9")
+        (key "9" "Super" "exec" "${audio}")
         (key "A" "Ctrl+Alt" "exec" "${waydroid} session stop")
         (key "A" "Super" "togglespecialworkspace" "android")
         (key "A" "Super+Shift" "movetoworkspacesilent" "special:android")
