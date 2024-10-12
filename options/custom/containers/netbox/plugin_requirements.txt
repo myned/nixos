@@ -1,6 +1,6 @@
 netbox-acls == 1.6.* # https://github.com/netbox-community/netbox-acls
 #// netbox-attachments == 5.1.* # https://github.com/Kani999/netbox-attachments
-#// netbox-interface-synchronization == 4.0.* # https://github.com/NetTech2001/netbox-interface-synchronization
+netbox-interface-synchronization == 4.0.* # https://github.com/NetTech2001/netbox-interface-synchronization
 #// netbox-lists == 4.0.* # https://github.com/devon-mar/netbox-lists
 netbox-otp-plugin == 1.3.* # https://github.com/k1nky/netbox-otp-plugin
 netbox-plugin-dns == 1.1.* # https://github.com/peteeckel/netbox-plugin-dns

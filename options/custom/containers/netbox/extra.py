@@ -15,7 +15,7 @@ PLUGINS = [
     "netbox_acls",
     # // "netbox_attachments",
     "netbox_dns",
-    # // "netbox_interface_synchronization",
+    "netbox_interface_synchronization",
     # // "netbox_lists",
     "netbox_otp_plugin",
     "netbox_reorder_rack",
