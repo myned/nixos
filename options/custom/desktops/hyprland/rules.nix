@@ -236,6 +236,7 @@ in {
           (tag.wine ["noborder" "noshadow"])
 
           ### Overrides
+          (class "signal" ["group new"])
           (class "steam_app_1473350" ["workspace 0"]) # (the) Gnorp Apologue
           (class "Tap Wizard 2.x86_64" ["workspace 0"])
           (class "Xdg-desktop-portal-gtk" ["noborder" "noshadow"])
