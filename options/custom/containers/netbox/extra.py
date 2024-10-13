@@ -13,7 +13,7 @@ TIME_ZONE = "America/Chicago"
 
 PLUGINS = [
     "netbox_acls",
-    # // "netbox_attachments",
+    "netbox_attachments",
     "netbox_dns",
     "netbox_interface_synchronization",
     # // "netbox_lists",
@@ -21,6 +21,7 @@ PLUGINS = [
     "netbox_reorder_rack",
     # // "netbox_routing",
     "netbox_secrets",
+    "netbox_storage",
     "netbox_topology_views",
     # // "slurpit_netbox",
 ]
