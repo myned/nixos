@@ -24,6 +24,13 @@ move() {
   # Get current position
   position="$(hyprctl -j clients | jq -r ".[] | select(.${argc_property:-} | test(\"${argc_window:-}\")).at")" # [X,Y]
 
+  # Clear saved position if window does not exist
+  if ! [[ "$position" ]]; then
+    rm --force "${argc_file:-}"
+    notify-send "> window" "Cleared saved position" --urgency low
+    exit
+  fi
+
   if [[ "${argc_current:-}" ]]; then
     if [[ -f "${argc_file:-}" ]]; then
       # Pop saved position
