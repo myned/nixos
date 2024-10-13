@@ -214,7 +214,7 @@ in {
           ### Defaults
           (class ".*" ["float" "suppressevent maximize" "syncfullscreen"])
           (floating false ["noshadow"])
-          (floating true ["bordercolor rgb(073642)"])
+          (floating true ["noborder"])
           (fullscreen true ["idleinhibit focus"])
           (pinned true ["bordercolor rgb(073642) rgb(073642)"])
 
@@ -222,14 +222,14 @@ in {
           (tag.clipboard ["move ${clipboard.x} ${clipboard.y}" "pin" "size ${clipboard.w} ${clipboard.h}" "stayfocused"])
           (tag.dropdown ["move ${dropdown.x} ${dropdown.y}" "pin" "size ${dropdown.w} ${dropdown.h}"])
           (tag.editor ["group invade" "tile"])
-          (tag.files ["size 1000 625"])
+          (tag.files ["center" "size 1000 625"])
           (tag.game ["fullscreen" "group barred" "idleinhibit always" "noborder" "noshadow" "renderunfocused" "workspace name:game"])
           #// (tag.media ["tile" "workspace special:scratchpad"])
           (tag.music ["tile" "workspace special:music"])
           (tag.office ["workspace special:office"])
           (tag.password ["center" "workspace special:password"])
           (tag.pip ["keepaspectratio" "move ${pip.x} ${pip.y}" "pin" "size ${pip.w} ${pip.h}"])
-          (tag.social ["group" "tile"])
+          (tag.social ["group invade lock" "tile"])
           (tag.steam ["workspace special:steam"])
           (tag.terminal ["tile"])
           (tag.vm ["workspace special:vm"])
@@ -242,6 +242,10 @@ in {
 
           #!! Expressions are not wrapped in ^$
           (fields {
+            class = "^1Password$";
+            title = "^1Password$";
+          } ["stayfocused"])
+          (fields {
             class = "^com\\.github\\.wwmm\\.easyeffects$";
             title = "^Easy Effects$"; # Main window
           } ["size 50% 50%"])
@@ -253,6 +257,10 @@ in {
             class = "^lutris$";
             title = "^Lutris$"; # Main window
           } ["center" "size 1000 500"])
+          (fields {
+            class = "^org\\.gnome\\.Nautilus$";
+            title = "^New Folder$";
+          } ["stayfocused"])
           (fields {
             class = "^org\\.remmina\\.Remmina$";
             title = "^Remmina Remote Desktop Client$"; # Main window
