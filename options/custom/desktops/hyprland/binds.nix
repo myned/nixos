@@ -122,8 +122,6 @@ in {
         (key "mouse:274" "Super+Shift" "layoutmsg" "addmaster")
         (key "mouse:274" "Super+Ctrl+Shift" "layoutmsg" "removemaster")
 
-        (key "Apostrophe" "Super" "layoutmsg" "swapnext")
-        (key "Apostrophe" "Super+Shift" "layoutmsg" "swapprev")
         (key "Backslash" "Super" "layoutmsg" "orientationcycle center left")
         (key "Backslash" "Super+Shift" "splitratio" "exact 0.5") # Reset layout ratio
         (key "Backspace" "Super" "changegroupactive" "f")
@@ -134,6 +132,7 @@ in {
         (key "Bracketleft" "Super+Shift" "splitratio" "-0.1")
         (key "Bracketright" "Super" "layoutmsg" "rollprev")
         (key "Bracketright" "Super+Shift" "splitratio" "+0.1")
+        (key "Comma" "Super" "layoutmsg" "swapprev")
         (key "Down" "Super" "movewindow" "d")
         (key "Down" "Super+Shift" "movewindoworgroup" "d")
         (key "Equal" "Super" "exec" "${swayosd-client} --output-volume raise")
@@ -146,10 +145,11 @@ in {
         (key "Left" "Super+Shift" "movewindoworgroup" "l")
         (key "Minus" "Super" "exec" "${swayosd-client} --output-volume lower")
         (key "Minus" "Super+Shift" "exec" "${zoom} -0.1")
-        (key "Print" "Shift" "exec" "${screenshot} display")
-        (key "Print" "Super" "exec" "${screenshot} selection --edit")
-        (key "Print" "Super+Shift" "exec" "${screenshot} display --edit")
-        (key "Print" null "exec" "${screenshot} selection")
+        (key "Period" "Super" "layoutmsg" "swapnext")
+        (key "Apostrophe" "Super" "exec" "${screenshot} selection")
+        (key "Apostrophe" "Super+Shift" "exec" "${screenshot} display")
+        (key "Apostrophe" "Super+Alt" "exec" "${screenshot} selection --edit")
+        (key "Apostrophe" "Super+Alt+Shift" "exec" "${screenshot} display --edit")
         (key "Return" "Super" "fullscreen" "1") # Maximize
         (key "Return" "Super+Shift" "fullscreen" "0") # Fullscreen
         (key "Right" "Super" "movewindow" "r")
