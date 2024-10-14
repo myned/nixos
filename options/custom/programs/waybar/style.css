@@ -64,6 +64,10 @@ tooltip {
   color: #dc322f;
 }
 
+#custom-equalizer.normalizer {
+  color: #2aa198;
+}
+
 #custom-inhibitor.enabled {
   color: #cb4b16;
 }

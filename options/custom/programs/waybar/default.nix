@@ -5,11 +5,14 @@
   ...
 }:
 with lib; let
+  audio = config.home-manager.users.${config.custom.username}.home.file.".local/bin/audio".source;
   bash = "${pkgs.bash}/bin/bash";
   blueberry = "${pkgs.blueberry}/bin/blueberry";
   bluetoothctl = "${pkgs.bluez}/bin/bluetoothctl";
+  cat = "${pkgs.coreutils}/bin/cat";
   easyeffects = "${pkgs.easyeffects}/bin/easyeffects";
   echo = "${pkgs.coreutils}/bin/echo";
+  grep = "${pkgs.gnugrep}/bin/grep";
   hyprctl = "${config.programs.hyprland.package}/bin/hyprctl";
   inhibit = config.home-manager.users.${config.custom.username}.home.file.".local/bin/inhibit".source;
   jq = "${pkgs.jq}/bin/jq";
@@ -23,13 +26,12 @@ with lib; let
   power = config.home-manager.users.${config.custom.username}.home.file.".local/bin/power".source;
   rfkill = "${pkgs.util-linux}/bin/rfkill";
   sleep = "${pkgs.coreutils}/bin/sleep";
-  swaync-client = "${
-    config.home-manager.users.${config.custom.username}.services.swaync.package
-  }/bin/swaync-client";
+  swaync-client = "${config.home-manager.users.${config.custom.username}.services.swaync.package}/bin/swaync-client";
   swayosd-client = "${pkgs.swayosd}/bin/swayosd-client";
   systemctl = "${pkgs.systemd}/bin/systemctl";
   systemd-inhibit = "${pkgs.systemd}/bin/systemd-inhibit";
   tailscale = "${pkgs.tailscale}/bin/tailscale";
+  tr = "${pkgs.coreutils}/bin/tr";
   vm = config.home-manager.users.${config.custom.username}.home.file.".local/bin/vm".source;
   vpn = config.home-manager.users.${config.custom.username}.home.file.".local/bin/vpn".source;
   wttrbar = "${pkgs.wttrbar}/bin/wttrbar";
@@ -119,6 +121,7 @@ in {
           modules-right = [
             "mpris"
             "tray"
+            "custom/equalizer"
             "wireplumber"
             "bluetooth"
             "network"
@@ -231,6 +234,16 @@ in {
             // {
               reverse = true;
             };
+
+          "custom/equalizer" = {
+            interval = 5;
+            on-click = audio;
+            exec = pkgs.writeShellScript "equalizer.sh" ''
+              ${echo} 󰺢
+              ${echo} "$(${cat} ~/.audio)"
+              ${echo} "$(${cat} ~/.audio | ${tr} '[:upper:]' '[:lower:]')"
+            '';
+          };
 
           # https://github.com/Alexays/Waybar/wiki/Module:-MPRIS
           mpris = {
