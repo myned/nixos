@@ -69,7 +69,7 @@ in {
 
           emojis = {
             placeholder = "Unicode";
-            switcher_only = false;
+            switcher_only = true;
           };
 
           finder = {
@@ -98,23 +98,16 @@ in {
         '';
 
         # https://github.com/abenz1267/walker/blob/master/internal/config/layout.default.json
-        layout.ui.window.box = rec {
-          height = 300 / config.custom.scale;
-          width = 1000 / config.custom.scale;
+        layout.ui.window.box.scroll.list = {
+          max_height = 500 / config.custom.scale;
+          min_width = 750 / config.custom.scale;
 
-          scroll.list = {
-            max_height = height;
-            max_width = width;
-            min_width = width;
+          item = {
+            text.sub.hide = true; # Subtext
 
-            # Icon resolution
-            item = {
-              text.sub.hide = true; # Subtext
-
-              icon = {
-                icon_size = "largest"; # 128px
-                pixel_size = 32; # Downscale
-              };
+            icon = {
+              icon_size = "largest"; # 128px
+              pixel_size = 32; # Downscale
             };
           };
         };
