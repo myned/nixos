@@ -32,6 +32,7 @@ with lib; let
   rm = "${pkgs.coreutils}/bin/rm";
   screenshot = "~/.local/bin/screenshot";
   sleep = "${pkgs.coreutils}/bin/sleep";
+  smile = "${pkgs.smile}/bin/smile";
   steam = "${config.programs.steam.package}/bin/steam";
   swayosd-client = "${pkgs.swayosd}/bin/swayosd-client";
   systemctl = "${pkgs.systemd}/bin/systemctl";
@@ -140,6 +141,7 @@ in {
         (key "Escape" "Super" "togglefloating" null)
         (key "Escape" "Super+Alt" "exec" "lifx state --color red")
         (key "Escape" "Super+Shift" "centerwindow" null)
+        (key "Grave" "Super" "exec" smile)
         (key "Left" "Super" "movewindow" "l")
         (key "Left" "Super+Alt" "exec" "${left} --scroll kensington-orbit-wireless-tb-mouse")
         (key "Left" "Super+Shift" "movewindoworgroup" "l")
