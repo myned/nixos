@@ -30,8 +30,8 @@ in {
         notify-process-completion = mkBoolean false;
         opacity = mkUint32 100;
         pretty = mkBoolean false;
-        remember-window-size = mkBoolean false;
-        scrollback-mode = mkInt32 1;
+        remember-window-size = mkBoolean true;
+        scrollback-mode = mkUint32 1;
         scrollbar-mode = mkUint32 1;
         show-headerbar = mkBoolean false;
         show-menu-button = mkBoolean false;
