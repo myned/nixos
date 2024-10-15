@@ -80,7 +80,6 @@ in {
           gnome-calculator
           gnome-calendar
           gnome-connections
-          gnome-console
           gnome-disk-utility
           gnome-resources
           gnome-software
