@@ -96,8 +96,20 @@ tooltip {
   color: #b58900;
 }
 
-#tray .active {
+#tray {
+  background: #073642;
+}
+
+#tray > widget {
   background: none;
+}
+
+#tray > widget:hover {
+  background: rgba(88, 110, 117, 0.25);
+}
+
+#tray > widget > image {
+  padding: 4px 8px;
 }
 
 #wireplumber.muted {
