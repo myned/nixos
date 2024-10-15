@@ -230,7 +230,7 @@ in {
           (tag.password ["center" "workspace special:password"])
           (tag.pip ["keepaspectratio" "move ${pip.x} ${pip.y}" "pin" "size ${pip.w} ${pip.h}"])
           (tag.social ["group invade lock" "tile"])
-          (tag.steam ["workspace special:steam"])
+          (tag.steam ["suppressevent activate activatefocus" "workspace special:steam"])
           (tag.terminal ["tile"])
           (tag.vm ["workspace special:vm"])
           (tag.wine ["noborder" "noshadow"])
@@ -269,7 +269,7 @@ in {
           (fields {
             class = "^steam$";
             title = "^notificationtoasts$"; # Steam notifications
-          } ["pin" "suppressevent activatefocus"])
+          } ["pin"])
           (fields {
             class = "^steam$";
             title = "^Steam$"; # Main window
