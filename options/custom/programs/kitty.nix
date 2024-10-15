@@ -13,6 +13,7 @@ in {
     # https://github.com/kovidgoyal/kitty
     programs.kitty = {
       enable = true;
+      shellIntegration.mode = "no-cursor"; # Disable forced beam cursor
 
       font = {
         name = config.custom.font.monospace;
@@ -26,8 +27,8 @@ in {
         inactive_tab_font_style = "normal";
         confirm_os_window_close = 0;
         cursor_blink_interval = 0;
-        cursor_shape = "beam";
-        cursor_shape_unfocused = "underline";
+        cursor_shape = "block";
+        cursor_shape_unfocused = "hollow";
         placement_strategy = "top-left"; # Partially fix padding
         scrollback_lines = -1;
         strip_trailing_spaces = "smart";
@@ -40,15 +41,15 @@ in {
         # Solarized Dark colors
         # https://ethanschoonover.com/solarized/
         #?? kitten themes
-        cursor = "none"; # Invert colors
+        cursor = "none"; # Inherit text tcolor
         background = "#002b36";
         foreground = "#839496";
         active_tab_background = "#93a1a1";
         active_tab_foreground = "#002b36";
         inactive_tab_background = "#586e75";
         inactive_tab_foreground = "#002b36";
-        selection_background = "#073642"; # Affects scrollbar color
-        selection_foreground = "none";
+        selection_background = "#586e75"; # Affects scrollbar color
+        selection_foreground = "#002b36";
         url_color = "#586e75";
 
         color0 = "#073642";
