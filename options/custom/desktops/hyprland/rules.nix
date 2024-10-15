@@ -107,7 +107,7 @@ in {
           x = tr (width / scale - (toInt w) - gap - border);
           y = tr (gap + border);
           w = tr (width / scale * 0.25 - gap - gap / 2 - border * 2); # 25%
-          h = tr ((toInt w) * 9 / 16); # 16:9 aspect ratio
+          h = tr ((toInt w) * 9 / 16 + 1); # 16:9 aspect ratio
         };
 
         ### Rules
