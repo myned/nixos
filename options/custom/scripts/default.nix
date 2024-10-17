@@ -70,14 +70,15 @@ in {
               wofi
               xclip
             ])
-            (bash "clipboard" [
-              cliphist
-              libnotify
-              procps
-              wl-clipboard
-              wofi
-              xclip
-            ])
+            # TODO: Convert to options and disable clipboard.sh
+            # (bash "clipboard" [
+            #   cliphist
+            #   libnotify
+            #   procps
+            #   wl-clipboard
+            #   wofi
+            #   xclip
+            # ])
             (bash "close" [
               coreutils
               hyprland
