@@ -2,6 +2,7 @@
   config,
   inputs,
   lib,
+  pkgs,
   ...
 }: {
   age.secrets = let
@@ -82,9 +83,8 @@
 
   nix = {
     #!! Override upstream nix
-    # TODO: Try lix v2.92.0
     # https://git.lix.systems/lix-project/lix
-    #// package = pkgs.lix;
+    package = pkgs.lix;
 
     # BUG: Absolute paths are forbidden in pure mode
     # https://github.com/NixOS/nix/issues/11030
