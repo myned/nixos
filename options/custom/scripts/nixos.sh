@@ -20,7 +20,6 @@ cd /etc/nixos || exit 1
 # @flag -p --poweroff Gracefully poweroff system after a successful build
 # @flag -r --reboot Gracefully reboot system after a successful build
 # @flag -u --update Update flake.lock before building
-# @arg extra~ Pass extra arguments to builder
 build() { :; }
 
 # Internal wrapper for subcommands
@@ -42,7 +41,7 @@ _build() {
   else
     # Build current system
     if [[ "${argc_builder:-}" == nh ]]; then
-      nh os "$1" ${argc_extra:+"${argc_extra[@]}"}
+      nh os "$1" -- ${argc_extra:+"${argc_extra[@]}"}
     elif [[ "${argc_builder:-}" == nixos ]]; then
       sudo nixos-rebuild "$1" ${argc_extra:+"${argc_extra[@]}"}
     fi
@@ -59,14 +58,17 @@ _build() {
 
 # @cmd Build and boot NixOS configuration
 # @alias b,bo,boo
+# @arg extra~ Pass extra arguments to builder
 build::boot() { _build boot; }
 
 # @cmd Build and switch NixOS configuration
 # @alias s,sw,swi,swit,switc
+# @arg extra~ Pass extra arguments to builder
 build::switch() { _build switch; }
 
 # @cmd Build and test NixOS configuration
 # @alias t,te,tes
+# @arg extra~ Pass extra arguments to builder
 build::test() { _build test; }
 
 # @cmd Compare NixOS system generations
