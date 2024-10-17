@@ -7,6 +7,8 @@
   age.secrets = let
     secret = filename: {
       file = "${inputs.self}/secrets/${filename}";
+      owner = config.custom.username;
+      group = config.custom.username;
     };
   in {
     "common/nix/access-tokens.conf" = secret "common/nix/access-tokens.conf";
