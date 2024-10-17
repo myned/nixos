@@ -7,6 +7,7 @@
       enable = true;
       boot = true;
       #// actualbudget.enable = true;
+      conduwuit.enable = true;
       coturn.enable = true;
       forgejo.enable = true;
       foundryvtt.enable = true;
@@ -20,7 +21,7 @@
 
     services = {
       caddy.enable = true;
-      matrix-conduit.enable = true;
+      #// matrix-conduit.enable = true;
       #// modufur.enable = true;
       #// tailscale.cert = true;
 

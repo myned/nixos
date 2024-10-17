@@ -67,6 +67,7 @@ in {
   ### Server
   "server/borgmatic/borgbase".publicKeys = server;
   "server/caddy/Caddyfile".publicKeys = server;
+  "server/conduwuit/conduwuit.toml".publicKeys = server;
   "server/coturn/coturn.conf".publicKeys = server;
   "server/forgejo/.env".publicKeys = server;
   "server/forgejo/db.env".publicKeys = server;
