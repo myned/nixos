@@ -11,7 +11,7 @@ with lib; let
   kitty = "${config.home-manager.users.${config.custom.username}.programs.kitty.package}/bin/kitty";
   launch = config.home-manager.users.${config.custom.username}.home.file.".local/bin/launch".source;
   loupe = "${pkgs.loupe}/bin/loupe";
-  onlyoffice = "${pkgs.onlyoffice-bin}/bin/onlyoffice-desktopeditors";
+  onlyoffice = "${pkgs.onlyoffice-bin}/bin/onlyoffice-desktopeditors --xdg-desktop-portal";
   pgrep = "${pkgs.procps}/bin/pgrep";
   steam = "${config.programs.steam.package}/bin/steam";
   virt-manager = "${pkgs.virt-manager}/bin/virt-manager";
@@ -33,7 +33,7 @@ in {
 
         "special:android, on-created-empty:${waydroid} app launch com.YoStarEN.Arknights"
         "special:music, on-created-empty:${youtube-music}"
-        "special:office, on-created-empty:[tile] ${onlyoffice}"
+        "special:office, on-created-empty:[tile] ${onlyoffice} --xdg-desktop-portal"
         "special:password, on-created-empty:${launch} --empty --tile --workspace special:password ${_1password}"
         "special:steam, on-created-empty:${steam}"
         "special:terminal, on-created-empty:${kitty}"
