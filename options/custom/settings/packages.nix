@@ -120,9 +120,9 @@ in {
           youtube-music
 
           #!! Must be downloaded manually due to licensing
-          (ciscoPacketTracer8.overrideAttrs {
-            src = /home/myned/SYNC/linux/config/cisco/CiscoPacketTracer822_amd64_signed.deb;
-          })
+          # (ciscoPacketTracer8.overrideAttrs {
+          #   src = /home/myned/SYNC/linux/config/cisco/CiscoPacketTracer822_amd64_signed.deb;
+          # })
 
           # CLI applications
           inputs.agenix.packages.${system}.default
