@@ -9,7 +9,7 @@
     secret = filename: {
       file = "${inputs.self}/secrets/${filename}";
       owner = config.custom.username;
-      group = config.custom.username;
+      group = "users";
     };
   in {
     "common/nix/access-tokens.conf" = secret "common/nix/access-tokens.conf";
