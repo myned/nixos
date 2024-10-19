@@ -203,6 +203,12 @@ in {
         };
       };
 
+      # https://wiki.hyprland.org/Configuring/Variables/#render
+      render = {
+        explicit_sync = 1;
+        explicit_sync_kms = 1;
+      };
+
       # https://wiki.hyprland.org/Configuring/Variables/#cursor
       cursor = {
         hide_on_key_press = true;
