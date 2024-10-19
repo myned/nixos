@@ -63,6 +63,8 @@
     "z /mnt/gaymer 0755 myned users"
   ];
 
+  # TODO: Remove when Linux 6.12 is released
+  # https://gitlab.freedesktop.org/agd5f/linux/-/commit/ec1aab7816b06c32f42935e34ce3a3040c778afb
   # Work around performance issues with AMD power scaling
   # https://wiki.archlinux.org/title/AMDGPU#Screen_artifacts_and_frequency_problem
   # https://wiki.archlinux.org/title/AMDGPU#Power_profiles
@@ -71,7 +73,7 @@
   #?? ls -l /dev/dri/by-path/*-card
   #?? grep '*' /sys/class/drm/card*/device/pp_power_profile_mode
   services.udev.extraRules = ''
-    KERNEL=="renderD128", SUBSYSTEM=="drm", DRIVERS=="amdgpu", ATTR{device/power_dpm_force_performance_level}="manual", ATTR{device/pp_power_profile_mode}="1"
+    SUBSYSTEM=="drm", KERNEL=="renderD128", DRIVERS=="amdgpu", ATTR{device/power_dpm_force_performance_level}="manual", ATTR{device/pp_power_profile_mode}="1"
   '';
 
   # https://github.com/Zygo/bees
