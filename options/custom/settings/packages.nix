@@ -81,6 +81,7 @@ in {
           gnome-calendar
           gnome-connections
           gnome-disk-utility
+          gnome-font-viewer
           gnome-resources
           gnome-software
           gnome-system-monitor
@@ -107,6 +108,7 @@ in {
           pwvucontrol
           remmina
           signal-desktop
+          smile
           snapshot
           spotify
           syncthingtray
