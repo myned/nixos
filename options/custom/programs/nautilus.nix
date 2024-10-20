@@ -10,16 +10,21 @@ in {
   options.custom.programs.nautilus.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
-    services.gvfs.enable = true; # Trash dependency
-
-    # Fix nautilus extension environment
-    # https://github.com/NixOS/nixpkgs/pull/240780
-    #?? echo $NAUTILUS_4_EXTENSION_DIR
-    services.gnome = {
-      core-utilities.enable = true; # Required to set environment variables
-      sushi.enable = true; # Quick preview with spacebar
+    services = {
+      gnome.sushi.enable = true; # Quick preview with spacebar
+      gvfs.enable = true; # Trash dependency
     };
 
+    # Alternative fix to services.gnome.core-utilities.enable
+    # https://github.com/NixOS/nixpkgs/pull/240780
+    #?? echo $NAUTILUS_4_EXTENSION_DIR
+    programs.nautilus-open-any-terminal = {
+      enable = true;
+      terminal = "kitty";
+    };
+
+    # TODO: Use module when completed
+    # https://github.com/NixOS/nixpkgs/pull/319535
     environment.systemPackages = with pkgs; [
       nautilus
       nautilus-open-in-blackbox
