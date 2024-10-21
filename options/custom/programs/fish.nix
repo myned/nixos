@@ -69,7 +69,6 @@ in {
           c = "clear";
           e = "exit";
           m = "mosh";
-          s = "ssh";
 
           d = "docker";
           dc = "docker compose";
@@ -96,11 +95,31 @@ in {
           dspav = "docker system prune --all --volumes";
 
           g = "git";
-          gb = "git bisect";
-          gbb = "git bisect bad";
-          gbg = "git bisect good";
+          ga = "git add";
+          gb = "git branch";
+          gbi = "git bisect";
+          gbib = "git bisect bad";
+          gbig = "git bisect good";
           gc = "git clone";
+          gd = "git diff";
+          gf = "git fetch";
+          gi = "git init";
+          gk = "git checkout";
+          gl = "git log";
+          gm = "git merge";
+          gp = "git pull";
+          gps = "git push";
+          gr = "git reset";
+          grh = "git reset --hard";
+          grb = "git rebase";
+          grm = "git rm";
+          grt = "git remote";
+          grv = "git revert";
           gs = "git status";
+          gsh = "git show";
+          gst = "git stash";
+          gsw = "git switch";
+          gy = "git cherrypick";
 
           jc = "journalctl";
           jcs = "journalctl --system";
@@ -160,6 +179,9 @@ in {
           scus = "systemctl --user status";
           scut = "systemctl --user stop";
           scuu = "systemctl --user unmask";
+
+          s = "ssh";
+          si = "ssh -o KexAlgorithms=+diffie-hellman-group1-sha1 -o HostkeyAlgorithms=+ssh-rsa -o Ciphers=aes256-cbc";
 
           ta = "tmux attach";
           td = "tmux detach";
