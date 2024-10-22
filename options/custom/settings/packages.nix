@@ -66,6 +66,7 @@ in {
           d-spy
           dconf-editor
           discord
+          drawio
           easyeffects
           element-desktop
           evince
