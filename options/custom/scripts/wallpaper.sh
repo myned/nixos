@@ -23,7 +23,7 @@ while true; do
   magick "$WALLPAPER" -brightness-contrast -50x-50 "$ALTERED"
 
   # Display altered wallpaper
-  swww img "$ALTERED" --transition-type random --transition-fps 100
+  swww img "$ALTERED" --transition-type grow --transition-pos bottom --transition-fps 100
 
   # Send unaltered image to server in background
   #!! Hostname dependent
