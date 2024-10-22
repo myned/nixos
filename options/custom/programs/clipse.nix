@@ -22,11 +22,17 @@ in {
       home.file.".config/clipse/config.json".text = ''
         {
           "historyFile": "clipboard_history.json",
-          "maxHistory": 100,
+          "maxHistory": 50,
           "allowDuplicates": false,
           "themeFile": "custom_theme.json",
           "tempDir": "tmp_files",
-          "logFile": "clipse.log"
+          "logFile": "clipse.log",
+          "imageDisplay": {
+            "type": "kitty",
+            "scaleX": 9,
+            "scaleY": 9,
+            "heightCut": 2
+          }
         }
       '';
     };
