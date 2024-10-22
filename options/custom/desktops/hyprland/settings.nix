@@ -60,8 +60,8 @@ in {
       # https://wiki.hyprland.org/Configuring/Keywords/#executing
       exec = [
         "${left} --init --scroll kensington-orbit-wireless-tb-mouse" # Enforce left-pawed state
-        "${sleep} 5 && ${systemctl} --user restart walker"
-        "${sleep} 5 && ${systemctl} --user restart waybar"
+        "${sleep} 1 && ${systemctl} --user restart walker"
+        "${sleep} 1 && ${systemctl} --user restart waybar"
       ];
 
       # https://wiki.hyprland.org/Configuring/Keywords/#executing
@@ -70,8 +70,8 @@ in {
         ++ [
           sway-audio-idle-inhibit # Inhibit idle while audio is playing
           "${audio} --init" # Enforce audio profile state
-          "${clipse} --clear" # Clear clipboard history
           "${clipse} --listen" # Monitor clipboard
+          "${sleep} 1 && ${clipse} --clear" # Clear clipboard history
           "${_1password} --silent" # Launch password manager in background
           "[group new lock; tile] ${firefox-esr}"
         ];
