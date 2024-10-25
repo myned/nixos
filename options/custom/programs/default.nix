@@ -29,7 +29,7 @@ with lib; {
       firefox.enable = true;
       #// foot.enable = true;
       #// gnome-terminal.enable = true;
-      kdeconnect.enable = true;
+      #// kdeconnect.enable = true;
       kitty.enable = true;
       nautilus.enable = true;
       nvtop.enable = true;

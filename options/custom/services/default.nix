@@ -16,7 +16,7 @@ with lib; {
       flatpak.enable = true;
       fwupd.enable = true;
       geoclue2.enable = true;
-      kdeconnect.enable = true;
+      #// kdeconnect.enable = true;
       libinput.enable = true;
       logind.enable = true;
       pipewire.enable = true;
@@ -47,7 +47,7 @@ with lib; {
       swaync.enable = true;
       swayosd.enable = true;
       #// xembed-sni-proxy.enable = true;
-      zerotierone.enable = true;
+      #// zerotierone.enable = true;
     })
   ];
 }
