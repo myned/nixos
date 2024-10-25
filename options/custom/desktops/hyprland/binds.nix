@@ -226,7 +226,7 @@ in {
         (key "B" "Super" "exec" "[group new lock; tile] ${firefox-esr}")
         (key "C" "Super" "exec" codium)
         (key "E" "Super" "exec" gnome-text-editor)
-        (key "F" "Super" "exec" nautilus)
+        (key "F" "Super" "exec" "${nautilus} --new-window")
         (key "G" "Super" "workspace" "name:game")
         (key "G" "Super+Alt" "workspace" "name:gamescope")
         (key "G" "Super+Ctrl+Alt" "exec" "${pkill} gamescope")
