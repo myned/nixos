@@ -8,10 +8,17 @@ with lib; let
 in {
   options.custom.settings.qt.enable = mkOption {default = false;};
 
-  config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
+  config = mkIf cfg.enable {
     qt = {
       enable = true;
-      platformTheme.name = "gtk3";
+      style = "gtk2";
+    };
+
+    home-manager.users.${config.custom.username} = {
+      qt = {
+        enable = true;
+        style.name = "gtk";
+      };
     };
   };
 }
