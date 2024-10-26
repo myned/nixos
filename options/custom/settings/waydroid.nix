@@ -12,13 +12,13 @@ in {
     # https://wiki.nixos.org/wiki/WayDroid
     # https://wiki.archlinux.org/title/Waydroid
     #!! Configuration is imperative
-    #* Optionally update image
+    # Optionally update image
     #?? sudo waydroid upgrade
 
     # Install image
-    #?? sudo waydroid init
+    #?? sudo waydroid init --system_type <FOSS|GAPPS>
 
-    # Helper script
+    # Optional helper script
     # https://github.com/casualsnek/waydroid_script
     #?? git clone https://github.com/casualsnek/waydroid_script.git
     #?? cd waydroid_script
@@ -32,6 +32,11 @@ in {
     # Start session
     #?? waydroid session start &
 
+    # Optionally certify with Google for the Play Store
+    #?? sudo waydroid shell
+    #?? ANDROID_RUNTIME_ROOT=/apex/com.android.runtime ANDROID_DATA=/data ANDROID_TZDATA_ROOT=/apex/com.android.tzdata ANDROID_I18N_ROOT=/apex/com.android.i18n sqlite3 /data/data/com.google.android.gsf/databases/gservices.db "select * from main where name = \"android_id\";"
+    #?? https://www.google.com/android/uncertified
+
     # Enable windowed applications
     #?? waydroid prop set persist.waydroid.multi_windows true
 
@@ -41,7 +46,7 @@ in {
     #?? sudo waydroid shell
     #?? wm size reset
 
-    # Waydroid must run on the same GPU as the compositor
+    # Optionally, run waydroid on the same GPU as the compositor
     # https://wiki.archlinux.org/title/Waydroid#Graphical_Corruption_on_multi-gpu_systems
     # https://github.com/Quackdoc/waydroid-scripts/blob/main/waydroid-choose-gpu.sh
     #!! Rerun after each waydroid_script invocation
@@ -58,7 +63,7 @@ in {
     #?? chmod 777 -R /mnt/*/*/*/*/Android/data
     #?? chmod 777 -R /mnt/*/*/*/*/Android/obb
 
-    # Disable unnecessary desktop files
+    # Optionally, disable unnecessary desktop files
     #?? sed -i 's|(\[Desktop Entry\])|$1\nNoDisplay=true|' ~/.local/share/applications/waydroid.*.desktop
 
     virtualisation.waydroid.enable = true;
