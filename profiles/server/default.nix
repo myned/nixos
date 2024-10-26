@@ -33,7 +33,7 @@
           "/home"
           "/mnt/local"
           "/srv"
-          "/var/lib/matrix-conduit"
+          #// "/var/lib/matrix-conduit"
         ];
 
         repositories = [
