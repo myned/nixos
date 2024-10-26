@@ -11,7 +11,7 @@ with lib; let
   kitty = "${config.home-manager.users.${config.custom.username}.programs.kitty.package}/bin/kitty";
   launch = config.home-manager.users.${config.custom.username}.home.file.".local/bin/launch".source;
   loupe = "${pkgs.loupe}/bin/loupe";
-  onlyoffice = "${pkgs.onlyoffice-bin}/bin/onlyoffice-desktopeditors --xdg-desktop-portal";
+  onlyoffice = "${pkgs.onlyoffice-bin}/bin/onlyoffice-desktopeditors --system-title-bar --xdg-desktop-portal";
   pgrep = "${pkgs.procps}/bin/pgrep";
   steam = "${config.programs.steam.package}/bin/steam";
   virt-manager = "${pkgs.virt-manager}/bin/virt-manager";

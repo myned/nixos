@@ -25,7 +25,7 @@ with lib; let
   networkmanager_dmenu = "${pkgs.networkmanager_dmenu}/bin/networkmanager_dmenu";
   notify-send = "${pkgs.libnotify}/bin/notify-send";
   obsidian = "${pkgs.obsidian}/bin/obsidian";
-  onlyoffice = "${pkgs.onlyoffice-bin}/bin/onlyoffice-desktopeditors --xdg-desktop-portal";
+  onlyoffice = "${pkgs.onlyoffice-bin}/bin/onlyoffice-desktopeditors --system-title-bar --xdg-desktop-portal";
   pkill = "${pkgs.procps}/bin/pkill";
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   rofi-rbw = "${pkgs.rofi-rbw}/bin/rofi-rbw";
