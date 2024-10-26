@@ -155,7 +155,7 @@ in {
           ];
           editor = rules: [
             (class "codium-url-handler" rules) # VSCode
-            (class "obsidian" (rules ++ ["group override barred"]))
+            (class "obsidian" (rules ++ ["group barred"]))
           ];
           files = rules: [
             (class "org\\.gnome\\.Nautilus" rules)
@@ -190,7 +190,6 @@ in {
             (class "discord" rules)
             (class "Element" rules)
             (class "org\\.telegram\\.desktop" rules)
-            (class "signal" rules)
           ];
           steam = rules: [
             (class "SDL Application" rules) # Steam
@@ -221,7 +220,7 @@ in {
           (tag.android ["tile" "workspace special:android"])
           (tag.clipboard ["move ${clipboard.x} ${clipboard.y}" "pin" "size ${clipboard.w} ${clipboard.h}" "stayfocused"])
           (tag.dropdown ["move ${dropdown.x} ${dropdown.y}" "pin" "size ${dropdown.w} ${dropdown.h}"])
-          (tag.editor ["group override set invade" "tile"])
+          (tag.editor ["group override set" "tile"])
           (tag.files ["center" "size 1000 625"])
           (tag.game ["fullscreen" "idleinhibit always" "noborder" "noshadow" "renderunfocused" "workspace name:game"])
           (tag.media ["center" "keepaspectratio"])
@@ -229,14 +228,14 @@ in {
           (tag.office ["group override set" "workspace special:office"])
           (tag.password ["center" "workspace special:password"])
           (tag.pip ["keepaspectratio" "move ${pip.x} ${pip.y}" "noinitialfocus" "pin" "size ${pip.w} ${pip.h}"])
-          (tag.social ["group override set invade" "tile"])
+          (tag.social ["group override set" "tile"])
           (tag.steam ["suppressevent activate activatefocus" "workspace special:steam"])
           (tag.terminal ["tile"])
           (tag.vm ["workspace special:vm"])
           (tag.wine ["noborder" "noshadow"])
 
           ### Overrides
-          (class "signal" ["group override new lock"])
+          (class "signal" ["group override new" "tile"]) # Initial window in social group
           (class "steam_app_1473350" ["workspace 0"]) # (the) Gnorp Apologue
           (class "Tap Wizard 2\\.x86_64" ["workspace 0"])
           (class "Xdg-desktop-portal-gtk" ["noborder" "noshadow"])
