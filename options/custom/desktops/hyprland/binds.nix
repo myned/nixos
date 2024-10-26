@@ -223,7 +223,7 @@ in {
         (key "A" "Ctrl+Alt" "exec" "${waydroid} session stop")
         (key "A" "Super" "togglespecialworkspace" "android")
         (key "A" "Super+Shift" "movetoworkspacesilent" "special:android")
-        (key "B" "Super" "exec" "[group new lock; tile] ${firefox-esr}")
+        (key "B" "Super" "exec" "[group new; tile] ${firefox-esr}")
         (key "C" "Super" "exec" codium)
         (key "E" "Super" "exec" gnome-text-editor)
         (key "F" "Super" "exec" "${nautilus} --new-window")
