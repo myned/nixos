@@ -155,7 +155,7 @@ in {
           ];
           editor = rules: [
             (class "codium-url-handler" rules) # VSCode
-            (class "obsidian" (rules ++ ["group barred"]))
+            (class "obsidian" (rules ++ ["group override barred"]))
           ];
           files = rules: [
             (class "org\\.gnome\\.Nautilus" rules)
@@ -212,7 +212,7 @@ in {
       in
         flatten [
           ### Defaults
-          (class ".*" ["float" "suppressevent maximize" "syncfullscreen"])
+          (class ".*" ["float" "group barred" "suppressevent maximize"])
           (floating false ["noshadow"])
           (floating true ["noborder"])
           (fullscreen true ["idleinhibit focus"])
@@ -221,31 +221,31 @@ in {
           (tag.android ["tile" "workspace special:android"])
           (tag.clipboard ["move ${clipboard.x} ${clipboard.y}" "pin" "size ${clipboard.w} ${clipboard.h}" "stayfocused"])
           (tag.dropdown ["move ${dropdown.x} ${dropdown.y}" "pin" "size ${dropdown.w} ${dropdown.h}"])
-          (tag.editor ["group invade" "tile"])
+          (tag.editor ["group override set invade" "tile"])
           (tag.files ["center" "size 1000 625"])
-          (tag.game ["fullscreen" "group barred" "idleinhibit always" "noborder" "noshadow" "renderunfocused" "workspace name:game"])
-          #// (tag.media ["tile" "workspace special:scratchpad"])
+          (tag.game ["fullscreen" "idleinhibit always" "noborder" "noshadow" "renderunfocused" "workspace name:game"])
+          (tag.media ["center" "keepaspectratio"])
           (tag.music ["tile" "workspace special:music"])
-          (tag.office ["workspace special:office"])
+          (tag.office ["group override set" "workspace special:office"])
           (tag.password ["center" "workspace special:password"])
-          (tag.pip ["keepaspectratio" "move ${pip.x} ${pip.y}" "pin" "size ${pip.w} ${pip.h}"])
-          (tag.social ["group invade lock" "tile"])
+          (tag.pip ["keepaspectratio" "move ${pip.x} ${pip.y}" "noinitialfocus" "pin" "size ${pip.w} ${pip.h}"])
+          (tag.social ["group override set invade" "tile"])
           (tag.steam ["suppressevent activate activatefocus" "workspace special:steam"])
           (tag.terminal ["tile"])
           (tag.vm ["workspace special:vm"])
           (tag.wine ["noborder" "noshadow"])
 
           ### Overrides
-          (class "signal" ["group new"])
+          (class "signal" ["group override new lock"])
           (class "steam_app_1473350" ["workspace 0"]) # (the) Gnorp Apologue
-          (class "Tap Wizard 2.x86_64" ["workspace 0"])
+          (class "Tap Wizard 2\\.x86_64" ["workspace 0"])
           (class "Xdg-desktop-portal-gtk" ["noborder" "noshadow"])
 
           #!! Expressions are not wrapped in ^$
           (fields {
             class = "^com\\.github\\.wwmm\\.easyeffects$";
             title = "^Easy Effects$"; # Main window
-          } ["size 50% 50%"])
+          } ["center" "size 50% 50%"])
           (fields {
             class = "^discord$";
             title = "^Discord Updater$"; # Update dialog
@@ -257,15 +257,15 @@ in {
           (fields {
             class = "^org\\.gnome\\.Nautilus$";
             title = "^New Folder$";
-          } ["stayfocused"])
+          } ["center" "stayfocused"])
           (fields {
             class = "^org\\.remmina\\.Remmina$";
             title = "^Remmina Remote Desktop Client$"; # Main window
-          } ["center" "size 1000 500" "workspace +1"])
+          } ["center" "size 1000 500"])
           (fields {
             class = "^steam$";
             title = "^notificationtoasts$"; # Steam notifications
-          } ["pin"])
+          } ["nofocus" "pin"])
           (fields {
             class = "^steam$";
             title = "^Steam$"; # Main window
@@ -273,7 +273,7 @@ in {
           (fields {
             class = "^virt-manager$";
             title = "^.+on QEMU/KVM$"; # VM window
-          } ["tile"])
+          } ["group override set" "tile"])
         ];
     };
   };
