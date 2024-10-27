@@ -52,4 +52,9 @@ while (("$#" > 0)); do
   shift
 done
 
-$command
+# HACK: Restart service to close existing menu
+if hyprctl -j layers | jq -e '.[][][][] | select(.namespace == "walker")'; then
+  systemctl --user restart walker.service
+else
+  $command
+fi

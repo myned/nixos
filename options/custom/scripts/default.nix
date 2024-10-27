@@ -107,6 +107,9 @@ in {
               libnotify
             ])
             (bash "menu" [
+              coreutils
+              hyprland
+              jq
               networkmanager_dmenu
               rofi-rbw
               walker
