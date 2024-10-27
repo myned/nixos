@@ -37,13 +37,15 @@ in {
         #?? flatpak search NAME
         packages =
           optionals config.custom.default [
-            "com.github.tchx84.Flatseal"
+            "com.github.tchx84.Flatseal" # Flatpak permissions editor
           ]
           ++ optionals config.custom.minimal [
-            "net.retrodeck.retrodeck"
+            "net.retrodeck.retrodeck" # Game emulator
           ]
           ++ optionals config.custom.full [
-            "app.drey.Biblioteca"
+            "app.drey.Biblioteca" # Documentation viewer
+            "io.github.ronniedroid.concessio" # Permissions converter
+            "re.sonny.Workbench" # GTK prototyper
           ];
 
         # https://github.com/gmodena/nix-flatpak?tab=readme-ov-file#overrides
