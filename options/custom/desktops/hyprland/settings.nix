@@ -111,6 +111,7 @@ in {
         layout = "master";
         #// no_border_on_floating = true;
         resize_on_border = true;
+        snap.enabled = true;
       };
 
       # https://wiki.hyprland.org/Configuring/Animations
