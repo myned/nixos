@@ -195,6 +195,19 @@ in {
           ts = "tailscale";
           tsip = "tailscale ip --4";
 
+          w = "waydroid";
+          wa = "waydroid app";
+          waa = "waydroid app launch com.YoStarEN.Arknights"; # Arknights
+          wap = "waydroid app launch com.android.vending"; # Play Store
+          was = "waydroid app launch com.android.settings"; # Settings
+          wf = "waydroid show-full-ui";
+          wi = "sudo waydroid init --force --system_type GAPPS";
+          ws = "waydroid session";
+          wsh = "sudo waydroid shell";
+          wss = "waydroid session start &> /dev/null & disown";
+          wst = "waydroid session stop";
+          wu = "sudo waydroid upgrade";
+
           zt = "sudo zerotier-cli";
           ztip = "sudo zerotier-cli get $(sudo zerotier-cli -j listnetworks | jq -r .[-1].id) ip";
         };
