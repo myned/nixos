@@ -59,7 +59,7 @@
     fw-fanctrl = flake "github:TamtamHero/fw-fanctrl/packaging/nix" // unstable "nixpkgs";
     hypridle = flake "github:hyprwm/hypridle" // unstable "nixpkgs";
     #// hyprland = flake "git+https://github.com/hyprwm/Hyprland?ref=refs/tags/v0.44.1&submodules=1" // unstable "nixpkgs";
-    hyprland = flake "git+https://github.com/hyprwm/Hyprland?ref=main&rev=5d4b54b01286c10d4b6bf402a772b5938b054ce6&submodules=1" // unstable "nixpkgs";
+    hyprland = flake "git+https://github.com/hyprwm/Hyprland?ref=main&rev=6e0aadc585c6d9fdaaebfa5853adbf9610897c82&submodules=1" // unstable "nixpkgs";
     hyprland-contrib = flake "github:hyprwm/contrib" // unstable "nixpkgs";
     hyprland-plugins = flake "github:hyprwm/hyprland-plugins" // unstable "nixpkgs" // follows "hyprland";
     hyprlock = flake "github:hyprwm/hyprlock" // unstable "nixpkgs";
