@@ -30,6 +30,7 @@ in {
           "plugin:hyprbars:nobar, class:^dropdown$"
           "plugin:hyprbars:nobar, class:^org\\.gnome\\.Nautilus$, title:^New Folder$"
           "plugin:hyprbars:nobar, class:^steam_app_.+$"
+          "plugin:hyprbars:nobar, class:^waydroid.*$"
           "plugin:hyprbars:nobar, class:^Xdg-desktop-portal-gtk$"
           "plugin:hyprbars:nobar, title:^Picture.in.[Pp]icture$"
         ];

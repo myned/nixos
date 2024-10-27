@@ -31,7 +31,7 @@ in {
       workspace = [
         "name:gamescope, on-created-empty:MANGOHUD=0 ${gamescope} --fullscreen --steam ${steam}"
 
-        "special:android, on-created-empty:${waydroid} app launch com.YoStarEN.Arknights"
+        "special:android, on-created-empty:${launch} --empty ${waydroid} app launch com.YoStarEN.Arknights"
         "special:music, on-created-empty:${youtube-music}"
         "special:office, on-created-empty:[tile] ${onlyoffice} --xdg-desktop-portal"
         "special:password, on-created-empty:${launch} --empty --tile --workspace special:password ${_1password}"
@@ -217,7 +217,7 @@ in {
           (fullscreen true ["idleinhibit focus"])
           (pinned true ["bordercolor rgb(073642) rgb(073642)"])
 
-          (tag.android ["tile" "workspace special:android"])
+          (tag.android ["maximize" "idleinhibit always" "noborder" "noshadow" "workspace special:android"])
           (tag.clipboard ["move ${clipboard.x} ${clipboard.y}" "pin" "size ${clipboard.w} ${clipboard.h}" "stayfocused"])
           (tag.dropdown ["move ${dropdown.x} ${dropdown.y}" "pin" "size ${dropdown.w} ${dropdown.h}"])
           (tag.editor ["group override set" "tile"])
