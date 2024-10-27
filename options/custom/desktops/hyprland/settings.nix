@@ -185,7 +185,7 @@ in {
 
       # https://wiki.hyprland.org/Configuring/Variables/#input
       input = {
-        accel_profile = "flat";
+        accel_profile = "adaptive";
         float_switch_override_focus = 0; # Disable float to tile hover focus
         focus_on_close = 1; # Focus window under mouse
         follow_mouse = 1; # Hover focus
@@ -263,17 +263,17 @@ in {
 
         {
           name = "nordic-2.4g-wireless-receiver-mouse";
-          sensitivity = -0.6;
+          sensitivity = -1;
         }
 
         {
           name = "protoarc-em11-nl-mouse";
-          sensitivity = -0.6;
+          sensitivity = -1;
         }
 
         {
           name = "razer-razer-viper-ultimate-dongle";
-          sensitivity = 0;
+          sensitivity = -0.7;
         }
 
         {
