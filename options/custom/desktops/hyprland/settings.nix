@@ -264,12 +264,12 @@ in {
 
         {
           name = "nordic-2.4g-wireless-receiver-mouse";
-          sensitivity = -1;
+          sensitivity = -0.7;
         }
 
         {
           name = "protoarc-em11-nl-mouse";
-          sensitivity = -1;
+          sensitivity = -0.7;
         }
 
         {
