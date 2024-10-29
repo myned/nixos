@@ -49,6 +49,37 @@ in {
         tr = num: toString (builtins.floor num); # Convert truncated float to string
 
         # Bottom center
+        android = rec {
+          x = tr (width / scale / 2 - (toInt w) / 2);
+          y = tr (height
+            / scale
+            - (toInt h)
+            - gap
+            - padding
+            + (
+              if ultrawide
+              then - border # Cause unknown
+              else 0
+            ));
+          w = tr (
+            width
+            / scale
+            * (
+              if ultrawide
+              then 0.5 # 50%
+              else 1
+            )
+            + (
+              if ultrawide
+              then - gap / 2 * 2 # Center layout padding between windows
+              else - gap * 2
+            )
+            - border * 2
+          );
+          h = tr (height / scale * 0.5); # 50%
+        };
+
+        # Bottom center
         clipboard = rec {
           x = tr (width / scale / 2 - (toInt w) / 2);
           y = tr (height
@@ -217,7 +248,7 @@ in {
           (fullscreen true ["idleinhibit focus"])
           (pinned true ["bordercolor rgb(073642) rgb(073642)"])
 
-          (tag.android ["idleinhibit always" "tile" "workspace special:android"])
+          (tag.android ["idleinhibit always" "move ${android.x} ${android.y}" "size ${android.w} ${android.h}" "workspace special:android"])
           (tag.clipboard ["move ${clipboard.x} ${clipboard.y}" "pin" "size ${clipboard.w} ${clipboard.h}" "stayfocused"])
           (tag.dropdown ["move ${dropdown.x} ${dropdown.y}" "pin" "size ${dropdown.w} ${dropdown.h}"])
           (tag.editor ["group override set" "tile"])
