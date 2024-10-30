@@ -21,8 +21,8 @@ in {
 
       gnome = {
         sushi.enable = true; # Quick preview with spacebar
-        tracker.enable = true; # File indexing
-        tracker-miners.enable = true;
+        #// tracker.enable = true; # File indexing
+        #// tracker-miners.enable = true;
       };
     };
 
