@@ -206,6 +206,7 @@ in {
             (title "Spotify Premium" rules)
           ];
           office = rules: [
+            (class "draw\\.io" (rules ++ ["tile"]))
             (class "libreoffice.+" rules)
             (class "ONLYOFFICE Desktop Editors" rules)
           ];
