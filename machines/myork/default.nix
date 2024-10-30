@@ -24,7 +24,7 @@ in {
       fw-fanctrl.enable = true;
 
       auto-cpufreq.max = {
-        battery = 2.5; # GHz
+        battery = 3; # GHz
         #// charger = 3.5; # GHz
       };
     };
