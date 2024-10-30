@@ -30,7 +30,7 @@ in {
             energy_performance_preference = "balance_power";
             governor = "powersave";
             platform_profile = "low-power";
-            scaling_max_freq = mkIf (isFloat cfg.max.battery) (builtins.floor (cfg.max.battery * 1000 * 1000)); # KHz
+            scaling_max_freq = mkIf (isFloat cfg.max.battery || isInt cfg.max.battery) (builtins.floor (cfg.max.battery * 1000 * 1000)); # KHz
             #// turbo = "never"; # Only works with acpi-cpufreq
           };
 
@@ -38,7 +38,7 @@ in {
             energy_performance_preference = "balance_performance";
             governor = "powersave";
             platform_profile = "balanced";
-            scaling_max_freq = mkIf (isFloat cfg.max.charger) (builtins.floor (cfg.max.charger * 1000 * 1000)); # KHz
+            scaling_max_freq = mkIf (isFloat cfg.max.charger || isInt cfg.max.charger) (builtins.floor (cfg.max.charger * 1000 * 1000)); # KHz
           };
         };
       };
