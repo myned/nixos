@@ -21,8 +21,8 @@ in {
 
       gnome = {
         sushi.enable = true; # Quick preview with spacebar
-        #// tracker.enable = true; # File indexing
-        #// tracker-miners.enable = true;
+        tracker.enable = true; # File indexing
+        tracker-miners.enable = true;
       };
     };
 
@@ -45,7 +45,7 @@ in {
             BusName = "org.gnome.Nautilus";
             ExecStart = "${nautilus} --gapplication-service";
             ExecStop = "${nautilus} --quit";
-            Restart = "on-failure";
+            Restart = "no";
             Type = "dbus";
           };
         };
