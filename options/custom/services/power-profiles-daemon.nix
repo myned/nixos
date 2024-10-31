@@ -12,6 +12,9 @@ in {
     # https://gitlab.freedesktop.org/upower/power-profiles-daemon
     #!! Usage is imperative
     #?? powerprofilesctl set <performance|balanced|power-saver>
-    services.power-profiles-daemon.enable = true;
+    services = {
+      power-profiles-daemon.enable = true;
+      tlp.enable = false; # Conflicts with PPD
+    };
   };
 }
