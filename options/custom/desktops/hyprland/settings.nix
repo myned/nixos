@@ -198,7 +198,7 @@ in {
         touchpad = {
           clickfinger_behavior = true; # Multi-finger clicks
           natural_scroll = true;
-          scroll_factor = 0.4;
+          scroll_factor = 0.5;
         };
       };
 
