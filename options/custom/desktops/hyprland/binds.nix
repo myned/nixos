@@ -71,7 +71,7 @@ in {
       # Lockscreen binds
       bindl = [
         (key "Delete" "Ctrl" "exec" "${hyprctl} reload")
-        (key "Delete" "Ctrl+Alt" "exec" "${loginctl} terminate-session ''")
+        (key "Delete" "Ctrl+Alt" "exec" "${loginctl} terminate-user ''") # Current user sessions
         (key "Delete" "Super" "exec" inhibit)
 
         (key "L" "Super" "exec" "${hyprlock} --immediate & ${sleep} 1 && ${hyprctl} dispatch dpms off")
