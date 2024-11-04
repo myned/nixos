@@ -5,8 +5,6 @@
   ...
 }:
 with lib; let
-  nautilus = "${pkgs.nautilus}/bin/nautilus";
-
   cfg = config.custom.programs.nautilus;
 in {
   options.custom.programs.nautilus.enable = mkOption {default = false;};
@@ -14,7 +12,7 @@ in {
   config = mkIf cfg.enable {
     # TODO: Use module when completed
     # https://github.com/NixOS/nixpkgs/pull/319535
-    environment.systemPackages = [pkgs.nautilus];
+    environment.systemPackages = with pkgs; [nautilus];
 
     services = {
       gvfs.enable = true; # Trash dependency
@@ -36,7 +34,10 @@ in {
 
     home-manager.users.${config.custom.username} = {
       # HACK: Partially fix startup delay with background service until module is available
-      systemd.user.services = {
+      systemd.user.services = let
+        nautilus = "${pkgs.nautilus}/bin/nautilus";
+        turtle_service = "${pkgs.turtle}/bin/turtle_service";
+      in {
         nautilus = {
           Unit.Description = "GNOME Files Background Service";
           Install.WantedBy = ["graphical-session.target"];
@@ -45,6 +46,19 @@ in {
             BusName = "org.gnome.Nautilus";
             ExecStart = "${nautilus} --gapplication-service";
             ExecStop = "${nautilus} --quit";
+            Restart = "no";
+            Type = "dbus";
+          };
+        };
+
+        # Git integration dependency
+        turtle = {
+          Unit.Description = "Turtle Background Service";
+          Install.WantedBy = ["graphical-session.target"];
+
+          Service = {
+            BusName = "de.philippun1.turtle";
+            ExecStart = turtle_service;
             Restart = "no";
             Type = "dbus";
           };
