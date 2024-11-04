@@ -46,11 +46,13 @@ in {
             BusName = "org.gnome.Nautilus";
             ExecStart = "${nautilus} --gapplication-service";
             ExecStop = "${nautilus} --quit";
-            Restart = "no";
+            Restart = "always"; #!! Benign exceptions cause nautilus to exit
             Type = "dbus";
           };
         };
 
+        # TODO: Check for official service
+        # BUG: Benign AttributeError when scanning on nautilus launch
         # Git integration dependency
         turtle = {
           Unit.Description = "Turtle Background Service";
@@ -59,7 +61,7 @@ in {
           Service = {
             BusName = "de.philippun1.turtle";
             ExecStart = turtle_service;
-            Restart = "no";
+            Restart = "always";
             Type = "dbus";
           };
         };
