@@ -23,10 +23,10 @@ in {
     services = {
       fw-fanctrl.enable = true;
 
-      # auto-cpufreq.max = {
-      #   battery = 3; # GHz
-      #   #// charger = 3.5; # GHz
-      # };
+      auto-cpufreq.max = {
+        battery = 3; # GHz
+        #// charger = 3.5; # GHz
+      };
     };
   };
 
