@@ -8,6 +8,7 @@
     hostname = "mynix";
     width = 3440;
     height = 1440;
+    refresh = 100;
   };
 
   boot = {

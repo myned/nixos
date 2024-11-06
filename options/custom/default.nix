@@ -22,6 +22,7 @@ in {
     ### Hardware
     width = mkOption {default = 1920;};
     height = mkOption {default = 1080;};
+    refresh = mkOption {default = 60;};
     ultrawide = mkOption {default = cfg.width * 9 / 16 > cfg.height;}; # Wider than 16:9
     hidpi = mkOption {default = cfg.scale > 1;};
     scale = mkOption {default = 1;};
