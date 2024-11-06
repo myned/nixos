@@ -71,7 +71,7 @@ in {
           "${clipse} --listen" # Monitor clipboard
           "${sleep} 1 && ${clipse} --clear" # Clear clipboard history
           "${_1password} --silent" # Launch password manager in background
-          "[group new; tile] ${firefox-esr}"
+          #// "[group new; tile] ${firefox-esr}"
         ];
 
       # https://wiki.hyprland.org/Configuring/Variables/#xwayland
