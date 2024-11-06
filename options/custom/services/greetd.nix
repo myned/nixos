@@ -22,8 +22,7 @@ in {
       settings.default_session = {
         command = lib.concatStringsSep " " [
           "${tuigreet}"
-          "--session-wrapper '${systemd-cat} --identifier hyprland'" # ?? journalctl --identifier hyprland
-          "--cmd ${Hyprland}"
+          "--session-wrapper '${systemd-cat} --identifier wm'" # ?? journalctl --identifier wm
           "--remember"
           "--time"
           "--asterisks"
