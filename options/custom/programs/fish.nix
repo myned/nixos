@@ -122,14 +122,15 @@ in {
           gy = "git cherrypick";
 
           jc = "journalctl";
+          jcei = "journalctl --pager-end --identifier";
+          jcfi = "journalctl --follow --identifier";
+          jci = "journalctl --identifier";
           jcs = "journalctl --system";
           jcse = "journalctl --system --pager-end";
           jcsei = "journalctl --user --pager-end --identifier";
           jcseu = "journalctl --system --pager-end --unit";
           jcsf = "journalctl --system --follow";
-          jcsfi = "journalctl --user --follow --identifier";
           jcsfu = "journalctl --system --follow --unit";
-          jcsi = "journalctl --system --identifier";
           jcsu = "journalctl --system --unit";
           jcu = "journalctl --user";
           jcue = "journalctl --user --pager-end";
