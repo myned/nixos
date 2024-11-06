@@ -131,7 +131,6 @@ in {
           syncthingtray # Syncthing client
           tagger # Audio file tagger
           telegram-desktop # Telegram client
-          turtle # Git client
           variety # Wallpaper changer
           ventoy # Image writer
           virt-viewer # Virtual machine viewer

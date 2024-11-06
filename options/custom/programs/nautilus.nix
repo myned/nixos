@@ -7,7 +7,13 @@
 with lib; let
   cfg = config.custom.programs.nautilus;
 in {
-  options.custom.programs.nautilus.enable = mkOption {default = false;};
+  options.custom.programs.nautilus = {
+    enable = mkOption {default = false;};
+    git = mkOption {default = false;};
+    index = mkOption {default = true;};
+    service = mkOption {default = false;};
+    terminal = mkOption {default = "kitty";};
+  };
 
   config = mkIf cfg.enable {
     # TODO: Use module when completed
@@ -19,8 +25,8 @@ in {
 
       gnome = {
         sushi.enable = true; # Quick preview with spacebar
-        tracker.enable = true; # File indexing
-        tracker-miners.enable = true;
+        tracker.enable = cfg.index; # File indexing
+        tracker-miners.enable = cfg.index;
       };
     };
 
@@ -29,7 +35,7 @@ in {
     #?? echo $NAUTILUS_4_EXTENSION_DIR
     programs.nautilus-open-any-terminal = {
       enable = true;
-      terminal = "kitty";
+      terminal = cfg.terminal;
     };
 
     home-manager.users.${config.custom.username} = {
@@ -38,7 +44,7 @@ in {
         nautilus = "${pkgs.nautilus}/bin/nautilus";
         turtle_service = "${pkgs.turtle}/bin/turtle_service";
       in {
-        nautilus = {
+        nautilus = mkIf cfg.service {
           Unit.Description = "GNOME Files Background Service";
           Install.WantedBy = ["graphical-session.target"];
 
@@ -51,10 +57,10 @@ in {
           };
         };
 
-        # TODO: Check for official service
+        # TODO: Check for module
         # BUG: Benign AttributeError when scanning on nautilus launch
         # Git integration dependency
-        turtle = {
+        turtle = mkIf cfg.git {
           Unit.Description = "Turtle Background Service";
           Install.WantedBy = ["graphical-session.target"];
 

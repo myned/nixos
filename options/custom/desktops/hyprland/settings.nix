@@ -10,6 +10,7 @@ with lib; let
   clipse = "${pkgs.clipse}/bin/clipse";
   firefox-esr = "${config.home-manager.users.${config.custom.username}.programs.firefox.finalPackage}/bin/firefox-esr";
   left = config.home-manager.users.${config.custom.username}.home.file.".local/bin/left".source;
+  nautilus = "${pkgs.nautilus}/bin/nautilus";
   pkill = "${pkgs.procps}/bin/pkill";
   rm = "${pkgs.coreutils}/bin/rm";
   sleep = "${pkgs.coreutils}/bin/sleep";
@@ -72,6 +73,9 @@ in {
           "${sleep} 1 && ${clipse} --clear" # Clear clipboard history
           "${_1password} --silent" # Launch password manager in background
           #// "[group new; tile] ${firefox-esr}"
+
+          # HACK: Launch hidden nautilus window in lieu of background service
+          "[workspace special:files silent] ${nautilus}"
         ];
 
       # https://wiki.hyprland.org/Configuring/Variables/#xwayland
