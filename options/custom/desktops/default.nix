@@ -4,5 +4,8 @@
   ...
 }:
 with lib; {
-  config.custom.desktops.hyprland.enable = config.custom.full;
+  config.custom.desktops = mkIf config.custom.full {
+    hyprland.enable = true;
+    sway.enable = true;
+  };
 }

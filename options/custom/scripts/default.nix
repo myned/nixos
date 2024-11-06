@@ -106,6 +106,12 @@ in {
               jq
               libnotify
             ])
+            (bash "mark" [
+              coreutils
+              gnugrep
+              libnotify
+              sway
+            ])
             (bash "menu" [
               coreutils
               hyprland
@@ -137,6 +143,11 @@ in {
               libnotify
               power-profiles-daemon
             ])
+            (bash "scratchpad" [
+              coreutils
+              libnotify
+              sway
+            ])
             (bash "screenshot" [
               argc
               coreutils
@@ -144,6 +155,10 @@ in {
               imagemagick
               libnotify
               swappy
+            ])
+            (bash "socket" [
+              coreutils
+              procps
             ])
             (bash "toggle" [
               gnugrep
@@ -165,6 +180,11 @@ in {
               libnotify
               tailscale
             ])
+            (bash "vrr-fs" [
+              jq
+              libnotify
+              sway
+            ])
             (bash "vrr" [
               hyprland
               jq
@@ -184,6 +204,11 @@ in {
               coreutils
               hyprland
               jq
+            ])
+            (bash "workspace-sway" [
+              jq
+              libnotify
+              sway
             ])
             (bash "workspace" [
               argc

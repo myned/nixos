@@ -74,6 +74,9 @@
             hyprbars = inputs.hyprland-plugins.packages.${prev.system}.hyprbars;
           };
 
+          ### Sway
+          #// sway = unstable.swayfx;
+
           ### Development
           #// ciscoPacketTracer8 = local.ciscoPacketTracer8;
         }
