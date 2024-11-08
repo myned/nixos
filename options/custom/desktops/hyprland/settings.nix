@@ -114,6 +114,7 @@ in {
         gaps_out = config.custom.gap;
         layout = "master";
         #// no_border_on_floating = true;
+        resize_corner = 3; # Bottom-right
         resize_on_border = true;
         snap.enabled = true;
       };
