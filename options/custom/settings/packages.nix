@@ -75,6 +75,7 @@ in {
           drawio # Diagram maker
           easyeffects # Audio filters
           element-desktop # Matrix client
+          file-roller # Archive utility
           flare-signal # Signal client
           fluffychat # Matrix client
           footage # Video editor
