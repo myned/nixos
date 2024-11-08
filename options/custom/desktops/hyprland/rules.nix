@@ -29,15 +29,14 @@ in {
       # https://wiki.hyprland.org/Configuring/Workspace-Rules
       #?? workspace = WORKSPACE, RULES
       workspace = [
-        "name:gamescope, on-created-empty:MANGOHUD=0 ${gamescope} --fullscreen --steam ${steam}"
-
-        "special:android, on-created-empty:${launch} --empty --workspace special:android ${waydroid} app launch com.YoStarEN.Arknights"
+        "special:android, on-created-empty:${waydroid} app launch com.YoStarEN.Arknights"
+        "special:gamescope, on-created-empty:MANGOHUD=0 ${gamescope} --fullscreen --steam ${steam}"
         "special:music, on-created-empty:${youtube-music}"
-        "special:office, on-created-empty:[tile] ${onlyoffice} --xdg-desktop-portal"
-        "special:password, on-created-empty:${launch} --empty --tile --workspace special:password ${_1password}"
+        #// "special:office, on-created-empty:[tile] ${onlyoffice} --xdg-desktop-portal"
+        "special:password, on-created-empty:${_1password}"
         "special:steam, on-created-empty:${steam}"
         "special:terminal, on-created-empty:${kitty}"
-        "special:vm, on-created-empty:${pgrep} -x vm || ${virt-manager}"
+        #// "special:vm, on-created-empty:${pgrep} -x vm || ${virt-manager}"
         "special:wallpaper, on-created-empty:[tile] ${loupe} /tmp/wallpaper.png"
       ];
 
@@ -178,6 +177,18 @@ in {
           android = rules: [
             (class "[Ww]aydroid.*" rules)
           ];
+          browser = rules: [
+            (fields {
+                class = "^chromium-browser$";
+                title = "^(?!Picture.in.[Pp]icture).*$";
+              }
+              rules)
+            (fields {
+                class = "^firefox$";
+                title = "^(?!Picture.in.[Pp]icture).*$";
+              }
+              rules)
+          ];
           clipboard = rules: [
             (class "clipboard" rules)
           ];
@@ -206,13 +217,17 @@ in {
             (title "Spotify Premium" rules)
           ];
           office = rules: [
-            (class "draw\\.io" (rules ++ ["tile"]))
+            (class "draw\\.io" (rules ++ ["group override set" "tile"]))
             (class "libreoffice.+" rules)
             (class "ONLYOFFICE Desktop Editors" rules)
           ];
           password = rules: [
-            (class "1Password" rules)
             (class "Bitwarden" rules)
+            (fields {
+                class = "^1Password$";
+                title = "^.+1Password$"; # Main window
+              }
+              rules)
           ];
           pip = rules: [
             (title "Picture.in.[Pp]icture" rules)
@@ -249,16 +264,17 @@ in {
           (fullscreen true ["idleinhibit focus"])
           (pinned true ["bordercolor rgb(073642) rgb(073642)"])
 
-          (tag.android ["idleinhibit always" "move ${android.x} ${android.y}" "size ${android.w} ${android.h}" "workspace special:android"])
+          (tag.android ["idleinhibit always" "move ${android.x} ${android.y}" "size ${android.w} ${android.h}"])
+          (tag.browser ["group override set" "tile" "workspace 1"])
           (tag.clipboard ["move ${clipboard.x} ${clipboard.y}" "pin" "size ${clipboard.w} ${clipboard.h}" "stayfocused"])
           (tag.dropdown ["move ${dropdown.x} ${dropdown.y}" "pin" "size ${dropdown.w} ${dropdown.h}"])
           (tag.editor ["group override set" "tile"])
           (tag.files ["center" "size 1000 625"])
           (tag.game ["fullscreen" "idleinhibit always" "noborder" "noshadow" "renderunfocused" "workspace name:game"])
-          (tag.media ["center" "keepaspectratio"])
+          (tag.media ["center" "keepaspectratio" "size <90% <90%"])
           (tag.music ["tile" "workspace special:music"])
-          (tag.office ["group override set" "workspace special:office"])
-          (tag.password ["center" "workspace special:password"])
+          (tag.office ["workspace special:office"])
+          (tag.password ["center" "tile" "workspace special:password"])
           (tag.pip ["keepaspectratio" "move ${pip.x} ${pip.y}" "noinitialfocus" "pin" "size ${pip.w} ${pip.h}"])
           (tag.social ["group override set" "tile"])
           (tag.steam ["suppressevent activate activatefocus" "workspace special:steam"])
@@ -267,6 +283,7 @@ in {
           (tag.wine ["noborder" "noshadow"])
 
           ### Overrides
+          (class "org\\.gnome\\.NautilusPreviewer" ["stayfocused"]) # Sushi
           (class "signal" ["group override new" "tile"]) # Initial window in social group
           (class "steam_app_1473350" ["workspace 0"]) # (the) Gnorp Apologue
           (class "Tap Wizard 2\\.x86_64" ["workspace 0"])
@@ -285,10 +302,6 @@ in {
             class = "^lutris$";
             title = "^Lutris$"; # Main window
           } ["center" "size 1000 500"])
-          (fields {
-            class = "^org\\.gnome\\.Nautilus$";
-            title = "^New Folder$";
-          } ["center" "stayfocused"])
           (fields {
             class = "^org\\.remmina\\.Remmina$";
             title = "^Remmina Remote Desktop Client$"; # Main window
