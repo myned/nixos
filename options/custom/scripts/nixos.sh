@@ -47,6 +47,7 @@ _build() {
     fi
   fi
 
+  # TODO: Send to remote target if specified
   # Invoke systemd to shutdown system
   # Assumes errexit shell option is set
   if [[ "${argc_poweroff:-}" ]]; then
