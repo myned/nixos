@@ -180,8 +180,8 @@ in {
             format-icons = {
               android = "";
               dropdown = "󰞷";
-              files = "󰉋";
               game = "󰊴";
+              hidden = "";
               music = "󰝚";
               office = "󰈙";
               password = "󰌾";
