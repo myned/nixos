@@ -66,6 +66,7 @@ in {
           blackbox-terminal # Terminal
           cartridges # Game library
           cinny-desktop # Matrix client
+          clapper # Video player
           d-spy # D-Bus introspection
           dconf-editor # GSettings editor
           decibels # Audio player
