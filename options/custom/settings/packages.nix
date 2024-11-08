@@ -113,7 +113,6 @@ in {
           newsflash # RSS feed
           nheko # Matrix client
           obsidian # Knowledge base
-          onlyoffice-bin # Document editor
           papers # Document viewer
           path-of-building # Path of Exile planner
           pika-backup # Borg backup manager
