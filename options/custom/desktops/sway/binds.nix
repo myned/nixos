@@ -73,9 +73,9 @@ in {
         keybindings = let
           # Keyboard modifiers
           super = cfg.modifier;
-          ctrl = "Control";
-          shift = "Shift";
-          alt = "Mod1";
+          ctrl = "control";
+          shift = "shift";
+          alt = "mod1";
 
           # Mouse bindings
           left = "button1";
@@ -97,9 +97,8 @@ in {
             })
             keys;
         in
-          # Repeat keybindings
+          # Repeat binds
           {
-            ### Media
             # https://github.com/xkbcommon/libxkbcommon/blob/master/include/xkbcommon/xkbcommon-keysyms.h
             XF86AudioMute = "exec ${swayosd-client} --output-volume mute-toggle";
             XF86AudioLowerVolume = "exec ${swayosd-client} --output-volume lower";
@@ -113,165 +112,126 @@ in {
             # TODO: Unused media key
             #// XF86AudioMedia = "exec null";
           }
-          # Press keybindings
+          # Press binds
           // flags "--no-repeat"
           {
-            # TODO: Toggle left handed trackball
-            ### Scripts
-            "${super}+delete" = "exec inhibit";
-            "${super}+${shift}+delete" = "exec vrr";
-            "${super}+minus" = "exec audio Flat";
-            "${super}+equal" = "exec audio Normalizer";
-            "${super}+${shift}+${ctrl}+q" = "exec close";
-
-            ### Messages
-            "${ctrl}+delete" = "reload";
-            "${ctrl}+${alt}+delete" = "exec ${loginctl} terminate-user ''";
-
-            # Windows
-            "${super}+q" = "kill";
-            "${super}+${shift}+q" = "exec ${kill} -9 $(${swaymsg} -t get_tree | ${jq} '.. | select(.focused?==true).pid')";
-            "${super}+grave" = "sticky toggle";
-            "${super}+return" = "fullscreen toggle";
-            "${super}+tab" = "focus next";
-            "${super}+${shift}+tab" = "focus prev";
-
-            # Containers
-            "${super}+up" = "move up";
-            "${super}+down" = "move down";
-            "${super}+left" = "move left";
-            "${super}+right" = "move right";
-            "${super}+backslash" = "split toggle";
-            "${super}+${shift}+backslash" = "split none";
-            "${super}+backspace" = "focus mode_toggle";
-            "${super}+${shift}+backspace" = "floating toggle";
-            "${super}+bracketleft" = "layout toggle tabbed stacking";
-            "${super}+bracketright" = "layout toggle split";
-            "${super}+escape" = "focus parent";
-            "${super}+${shift}+escape" = "focus child";
-
-            # Workspaces
-            "${super}+1" = "workspace 1";
-            "${super}+${shift}+1" = "move to workspace 1";
-            "${super}+2" = "workspace 2";
-            "${super}+${shift}+2" = "move to workspace 2";
-            "${super}+3" = "workspace 3";
-            "${super}+${shift}+3" = "move to workspace 3";
-            "${super}+4" = "workspace 4";
-            "${super}+${shift}+4" = "move to workspace 4";
-            "${super}+5" = "workspace 5";
-            "${super}+${shift}+5" = "move to workspace 5";
-            "${super}+6" = "workspace 6";
-            "${super}+${shift}+6" = "move to workspace 6";
-            "${super}+7" = "workspace 7";
-            "${super}+${shift}+7" = "move to workspace 7";
-            "${super}+8" = "workspace 8";
-            "${super}+${shift}+8" = "move to workspace 8";
-            "${super}+9" = "workspace 9";
-            "${super}+${shift}+9" = "move to workspace 9";
-            "${super}+0" = "workspace 10";
-            "${super}+${shift}+0" = "move to workspace 0";
-            "${super}+g" = "workspace game";
-            "${super}+${shift}+g" = "move to workspace game";
-            "${super}+${ctrl}+g" = "workspace gamescope";
-            "${super}+z" = "exec workspace prev";
-            "${super}+${shift}+z" = "move to workspace prev";
-            "${super}+x" = "exec workspace next";
-            "${super}+${shift}+x" = "move to workspace next";
-
-            # Scratchpads
-            "${super}+a" = "[con_mark=android] scratchpad show";
-            "${super}+s" = "[con_mark=steam] scratchpad show";
-            "${super}+w" = "[con_mark=vm] scratchpad show";
-            "${super}+space" = "scratchpad show";
-            "${super}+${shift}+space" = "move to scratchpad";
-            "${super}+${middle}" = "move window to scratchpad";
-            "${super}+${shift}+${middle}" = "move container to scratchpad";
-            "${ctrl}+space" = "exec scratchpad dropdown ${foot} --app-id dropdown";
-
-            ### Commands
-            # Clipboard
-            "${super}+v" = "exec clipboard";
-            "${super}+${shift}+v" = "exec ${cliphist} wipe && ${notify-send} cliphist 'Clipboard cleared' --urgency low";
-
-            # Color picker
-            "${super}+p" = "exec {hyprpicker} --autocopy";
-            "${super}+${shift}+p" = "exec {hyprpicker} --autocopy --format rgb";
-
-            # Screenshot
-            print = "exec {grimblast} --freeze copysave area \"$XDG_SCREENSHOTS_DIR/$(date +'%F %H.%M.%S')\"";
-            "${super}+print" = "exec {grimblast} --freeze save area - | ${satty} --filename -";
-            "${shift}+print" = "exec {grimblast} --freeze copysave output \"$XDG_SCREENSHOTS_DIR/$(date +'%F %H.%M.%S')\"";
-            "${super}+${shift}+print" = "exec {grimblast} --freeze save output - | ${satty} --filename -";
-
-            # Smart home
-            "${super}+${alt}+escape" = "exec lifx state --color red";
-            "${super}+${alt}+1" = "exec lifx state --kelvin 1500";
-            "${super}+${alt}+2" = "exec lifx state --kelvin 2500";
-            "${super}+${alt}+3" = "exec lifx state --kelvin 3000";
-            "${super}+${alt}+4" = "exec lifx state --kelvin 4000";
-            "${super}+${alt}+5" = "exec lifx state --kelvin 5000";
-            "${ctrl}+${alt}+space" = "exec lifx toggle";
-            "${ctrl}+${alt}+1" = "exec lifx state --brightness 0.01";
-            "${ctrl}+${alt}+2" = "exec lifx state --brightness 0.25";
-            "${ctrl}+${alt}+3" = "exec lifx state --brightness 0.50";
-            "${ctrl}+${alt}+4" = "exec lifx state --brightness 0.75";
-            "${ctrl}+${alt}+5" = "exec lifx state --brightness 1.00";
-
-            ### Applications
-            "${super}+b" = "exec ${firefox-esr}";
-            "${super}+c" = "exec ${codium}";
-            "${super}+e" = "exec ${gnome-text-editor}";
-            "${super}+f" = "exec ${nautilus}";
-            "${super}+k" = "exec ${obsidian}";
-            # "${super}+t" = "workspace terminal; exec launch terminal ${foot} --app-id terminal";
-            "${super}+t" = "workspace terminal; exec ${kitty}";
-            "${super}+${shift}+t" = "exec ${foot}";
-
-            # Kill applications
-            "${super}+${shift}+a" = "exec ${waydroid} session stop";
-            "${super}+${shift}+s" = "exec ${pkill} steam";
-            "${super}+${ctrl}+${shift}+g" = "exec ${pkill} gamescope";
-
-            # Remote desktop
-            # https://forum.level1techs.com/t/how-to-seamlessly-run-windows-10-apps-in-a-vm-in-linux/170417
-            "${super}+${shift}+w" = "exec vm ${wlfreerdp} /cert:ignore /u:Myned /p:password /v:myndows /dynamic-resolution +gfx-progressive -grab-keyboard";
-            "${super}+${ctrl}+${shift}+w" = "exec vm ${xfreerdp} /cert:ignore /u:Myned /p:password /app:explorer.exe /v:myndows +gfx-progressive -grab-keyboard";
+            "${middle}+${super}" = "move window to scratchpad";
+            "${middle}+${super}+${shift}" = "move container to scratchpad";
+            "1+${ctrl}+${alt}" = "exec lifx state --brightness 0.01";
+            "1+${super}" = "workspace 1";
+            "1+${super}+${alt}" = "exec lifx state --kelvin 1500";
+            "1+${super}+${shift}" = "move to workspace 1";
+            "2+${ctrl}+${alt}" = "exec lifx state --brightness 0.25";
+            "2+${super}" = "workspace 2";
+            "2+${super}+${alt}" = "exec lifx state --kelvin 2500";
+            "2+${super}+${shift}" = "move to workspace 2";
+            "3+${ctrl}+${alt}" = "exec lifx state --brightness 0.50";
+            "3+${super}" = "workspace 3";
+            "3+${super}+${alt}" = "exec lifx state --kelvin 3000";
+            "3+${super}+${shift}" = "move to workspace 3";
+            "4+${ctrl}+${alt}" = "exec lifx state --brightness 0.75";
+            "4+${super}" = "workspace 4";
+            "4+${super}+${alt}" = "exec lifx state --kelvin 4000";
+            "4+${super}+${shift}" = "move to workspace 4";
+            "5+${ctrl}+${alt}" = "exec lifx state --brightness 1.00";
+            "5+${super}" = "workspace 5";
+            "5+${super}+${alt}" = "exec lifx state --kelvin 5000";
+            "5+${super}+${shift}" = "move to workspace 5";
+            "6+${super}" = "workspace 6";
+            "6+${super}+${shift}" = "move to workspace 6";
+            "7+${super}" = "workspace 7";
+            "7+${super}+${shift}" = "move to workspace 7";
+            "8+${super}" = "workspace 8";
+            "8+${super}+${shift}" = "move to workspace 8";
+            "9+${super}" = "workspace 9";
+            "9+${super}+${shift}" = "move to workspace 9";
+            "a+${super}" = "[con_mark=android] scratchpad show";
+            "a+${super}+${shift}" = "exec ${waydroid} session stop";
+            "b+${super}" = "exec ${firefox-esr}";
+            "backslash+${super}" = "split toggle";
+            "backslash+${super}+${shift}" = "split none";
+            "backspace+${super}" = "focus mode_toggle";
+            "backspace+${super}+${shift}" = "floating toggle";
+            "bracketleft+${super}" = "layout toggle tabbed stacking";
+            "bracketright+${super}" = "layout toggle split";
+            "c+${super}" = "exec ${codium}";
+            "delete+${super}" = "exec inhibit";
+            "delete+${super}+${shift}" = "exec vrr";
+            "down+${super}" = "move down";
+            "e+${super}" = "exec ${gnome-text-editor}";
+            "equal+${super}" = "exec audio Normalizer";
+            "escape+${super}" = "focus parent";
+            "escape+${super}+${alt}" = "exec lifx state --color red";
+            "escape+${super}+${shift}" = "focus child";
+            "f+${super}" = "exec ${nautilus}";
+            "g+${super}" = "workspace game";
+            "g+${super}+${ctrl}" = "workspace gamescope";
+            "g+${super}+${ctrl}+${shift}" = "exec ${pkill} gamescope";
+            "g+${super}+${shift}" = "move to workspace game";
+            "grave+${super}" = "sticky toggle";
+            "k+${super}" = "exec ${obsidian}";
+            "left+${super}" = "move left";
+            "minus+${super}" = "exec audio Flat";
+            "p+${super}" = "exec ${hyprpicker} --autocopy";
+            "p+${super}+${shift}" = "exec ${hyprpicker} --autocopy --format rgb";
+            "print+${shift}" = "exec {grimblast} --freeze copysave output \"$XDG_SCREENSHOTS_DIR/$(date +'%F %H.%M.%S')\"";
+            "q+${super}" = "kill";
+            "q+${super}+${shift}" = "exec ${kill} -9 $(${swaymsg} -t get_tree | ${jq} '.. | select(.focused?==true).pid')";
+            "q+${super}+${shift}+${ctrl}" = "exec close";
+            "return+${super}" = "fullscreen toggle";
+            "right+${super}" = "move right";
+            "s+${super}" = "[con_mark=steam] scratchpad show";
+            "s+${super}+${shift}" = "exec ${pkill} steam";
+            "space+${ctrl}" = "exec scratchpad dropdown ${kitty} --app-id dropdown";
+            "space+${ctrl}+${alt}" = "exec lifx toggle";
+            "space+${super}" = "scratchpad show";
+            "space+${super}+${shift}" = "move to scratchpad";
+            "t+${super}" = "workspace terminal; exec ${kitty} --app-id terminal";
+            "t+${super}+${shift}" = "exec ${kitty}";
+            "tab+${super}" = "focus next";
+            "tab+${super}+${shift}" = "focus prev";
+            "up+${super}" = "move up";
+            "v+${super}" = "exec clipboard";
+            "v+${super}+${shift}" = "exec ${cliphist} wipe && ${notify-send} cliphist 'Clipboard cleared' --urgency low";
+            "w+${super}" = "[con_mark=vm] scratchpad show";
+            "w+${super}+${ctrl}+${shift}" = "exec vm ${xfreerdp} /cert:ignore /u:Myned /p:password /app:explorer.exe /v:myndows +gfx-progressive -grab-keyboard";
+            "w+${super}+${shift}" = "exec vm ${wlfreerdp} /cert:ignore /u:Myned /p:password /v:myndows /dynamic-resolution +gfx-progressive -grab-keyboard";
+            "x+${super}" = "exec workspace next";
+            "x+${super}+${shift}" = "move to workspace next";
+            "z+${super}" = "exec workspace prev";
+            "z+${super}+${shift}" = "move to workspace prev";
           }
-          # Release keybindings
+          # Release binds
           // flags "--no-repeat --release"
           {
-            # Menus
-            super_l = "exec ${pkill} wofi || ${wofi} --show drun";
-            "${ctrl}+super_l" = "exec ${pkill} wofi || calc";
-            "${shift}+super_l" = "exec ${pkill} wofi || ${wofi} --show run";
-            "${alt}+super_l" = "exec ${pkill} wofi || ${rofi-rbw}";
-            "${ctrl}+${shift}+super_l" = "exec ${pkill} || ${networkmanager_dmenu}";
-
-            # Workspaces
-            "${super}+control_l" = "workspace music";
-            "${super}+shift_l" = "workspace back_and_forth";
-            "${super}+alt_l" = "workspace wallpaper";
-
-            # Scratchpad
-            "${super}+${shift}+control_l" = "exec hide Picture-in-Picture special:pip";
+            "alt_l+${super}" = "workspace wallpaper";
+            "control_l+${super}" = "workspace music";
+            "control_l+${super}+${shift}" = "exec hide Picture-in-Picture special:pip";
+            "shift_l+${super}" = "workspace back_and_forth";
+            "super_l" = "exec ${pkill} wofi || ${wofi} --show drun";
+            "super_l+${alt}" = "exec ${pkill} wofi || ${rofi-rbw}";
+            "super_l+${ctrl}" = "exec ${pkill} wofi || calc";
+            "super_l+${ctrl}+${shift}" = "exec ${pkill} || ${networkmanager_dmenu}";
+            "super_l+${shift}" = "exec ${pkill} wofi || ${wofi} --show run";
           }
-          # Lockscreen keybindings
+          # Lockscreen binds
           // flags "--no-repeat --release --locked"
           {
-            "${super}+l" = "exec ${loginctl} lock-session";
+            "delete+${ctrl}" = "reload";
+            "delete+${ctrl}+${alt}" = "exec ${loginctl} terminate-user ''";
+            "l+${super}" = "exec ${loginctl} lock-session";
           };
       };
 
       #// modes = { };
 
-      # Keybindings that are not supported by options
+      # Binds not supported by options
       extraConfig = ''
-        # Gesture keybindings
+        # Gesture binds
         bindgesture swipe:left workspace prev
         bindgesture swipe:right workspace next
 
-        # Switch keybindings
+        # Switch binds
         bindswitch lid:on exec ${loginctl} lock-session
         #// bindswitch lid:on output '*' power off
         #// bindswitch lid:off output '*' power on

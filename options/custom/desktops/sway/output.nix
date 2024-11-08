@@ -16,7 +16,7 @@ in {
     wayland.windowManager.sway.config.output = {
       # Default
       "*" = {
-        adaptive_sync = "off"; # Explicitly use script/keybindings to toggle vrr
+        adaptive_sync = "off"; # Explicitly use script/binds to toggle vrr
         background = "#073642 solid_color"; # Fallback color
         resolution = "${toString config.custom.width}x${toString config.custom.height}@${toString config.custom.refresh}Hz";
         scale = toString config.custom.scale;

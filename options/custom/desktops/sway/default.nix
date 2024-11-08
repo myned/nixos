@@ -13,9 +13,9 @@ in {
       binds.enable = true;
       input.enable = true;
       output.enable = true;
-      # TODO: rules.enable = true;
+      rules.enable = true;
       settings.enable = true;
-      #// swayfx.enable = true;
+      swayfx.enable = true;
     };
 
     # https://wiki.nixos.org/wiki/Sway

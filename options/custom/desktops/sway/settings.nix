@@ -1,52 +1,9 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib; let
-  audio = "~/.local/bin/audio";
-  clipse = "${pkgs.clipse}/bin/clipse";
-  codium = "${config.home-manager.users.${config.custom.username}.programs.vscode.package}/bin/codium";
-  firefox-esr = "${config.home-manager.users.${config.custom.username}.programs.firefox.finalPackage}/bin/firefox-esr";
-  gnome-text-editor = "${pkgs.gnome-text-editor}/bin/gnome-text-editor";
-  hyprctl = "${config.programs.hyprland.package}/bin/hyprctl";
-  hyprlock = "${config.home-manager.users.${config.custom.username}.programs.hyprlock.package}/bin/hyprlock";
-  hyprpicker = "${pkgs.hyprpicker}/bin/hyprpicker";
-  inhibit = config.home-manager.users.${config.custom.username}.home.file.".local/bin/inhibit".source;
-  jq = "${pkgs.jq}/bin/jq";
-  kill = "${pkgs.procps}/bin/kill";
-  kitty = "${config.home-manager.users.${config.custom.username}.programs.kitty.package}/bin/kitty";
-  left = config.home-manager.users.${config.custom.username}.home.file.".local/bin/left".source;
-  loginctl = "${pkgs.systemd}/bin/loginctl";
-  menu = config.home-manager.users.${config.custom.username}.home.file.".local/bin/menu".source;
-  nautilus = "${pkgs.nautilus}/bin/nautilus";
-  networkmanager_dmenu = "${pkgs.networkmanager_dmenu}/bin/networkmanager_dmenu";
-  notify-send = "${pkgs.libnotify}/bin/notify-send";
-  obsidian = "${pkgs.obsidian}/bin/obsidian";
-  onlyoffice = "${pkgs.onlyoffice-bin}/bin/onlyoffice-desktopeditors --system-title-bar --xdg-desktop-portal";
-  pkill = "${pkgs.procps}/bin/pkill";
-  playerctl = "${pkgs.playerctl}/bin/playerctl";
-  rofi-rbw = "${pkgs.rofi-rbw}/bin/rofi-rbw";
-  rm = "${pkgs.coreutils}/bin/rm";
-  screenshot = "~/.local/bin/screenshot";
-  sleep = "${pkgs.coreutils}/bin/sleep";
-  smile = "${pkgs.smile}/bin/smile";
-  steam = "${config.programs.steam.package}/bin/steam";
-  swayosd-client = "${pkgs.swayosd}/bin/swayosd-client";
-  systemctl = "${pkgs.systemd}/bin/systemctl";
-  toggle = "~/.local/bin/toggle";
-  virt-manager = "${config.programs.virt-manager.package}/bin/virt-manager";
-  vm = config.home-manager.users.${config.custom.username}.home.file.".local/bin/vm".source;
-  vrr = config.home-manager.users.${config.custom.username}.home.file.".local/bin/vrr".source;
-  walker = "${config.home-manager.users.${config.custom.username}.programs.walker.package}/bin/walker";
-  waydroid = "${pkgs.waydroid}/bin/waydroid";
-  window = config.home-manager.users.${config.custom.username}.home.file.".local/bin/window".source;
-  workspace = config.home-manager.users.${config.custom.username}.home.file.".local/bin/workspace".source;
-  zoom = config.home-manager.users.${config.custom.username}.home.file.".local/bin/zoom".source;
-  sway-audio-idle-inhibit = "${pkgs.sway-audio-idle-inhibit}/bin/sway-audio-idle-inhibit";
-  waybar = "${config.home-manager.users.${config.custom.username}.programs.waybar.package}/bin/waybar";
-
   cfg = config.custom.desktops.sway.settings;
 in {
   options.custom.desktops.sway.settings.enable = mkOption {default = false;};
@@ -143,59 +100,6 @@ in {
           # (once "${rm} ~/.config/qalculate/qalc.dmenu.history") # Clear calc history
           # (once "${rm} ~/.cache/cliphist/db") # Clear clipboard database
           # (once firefox-esr)
-        ];
-
-        window.commands = let
-          command = command: {inherit command;};
-
-          # Boilerplate criteria
-          #?? criteria = <"ATTR"|{ATTRS = "EXPR"}> <"EXPR"|null>
-          criteria = attr: expr: {
-            criteria = with builtins;
-              if isAttrs attr
-              then (mapAttrs (a: e: "^${e}$") attr)
-              else {
-                ${attr} =
-                  if isNull expr
-                  then true
-                  else "^${expr}$";
-              };
-          };
-
-          app = expr: criteria "app_id" expr;
-          floating = criteria "floating" null;
-          mark = expr: criteria "con_mark" expr;
-          title = expr: criteria "title" expr;
-
-          attrs = attrs: criteria attrs null;
-        in [
-          ### Defaults
-          # HACK: Prefer default_floating_border when fixed upstream
-          # https://github.com/swaywm/sway/issues/7360
-          (floating // command "border normal 0")
-
-          ### Workspaces
-          # 1
-          (attrs {
-              app_id = "firefox";
-              title = ".*Firefox.*";
-            }
-            // command "layout tabbed")
-          (attrs {
-              app_id = "firefox";
-              title = "Extension.*";
-            }
-            // command "floating enable")
-          (mark "browser" // command "move to workspace 1")
-
-          # terminal
-          (mark "terminal" // command "move to workspace terminal")
-
-          ### Scratchpads
-          (mark "dropdown" // command "move to scratchpad")
-
-          ### Sticky
-          (mark "pip" // command "border none, floating enable, sticky enable")
         ];
       };
 

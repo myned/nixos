@@ -18,7 +18,7 @@ in {
 
       # Polyfill home-manager wrappers
       # https://github.com/nix-community/home-manager/blob/master/modules/services/window-managers/i3-sway/sway.nix#L334
-      package = with config.wayland.windowManager.sway;
+      package = with config.home-manager.users.${config.custom.username}.wayland.windowManager.sway;
         pkgs.sway.override {
           extraSessionCommands = extraSessionCommands;
           extraOptions = extraOptions;

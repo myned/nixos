@@ -75,7 +75,7 @@
           };
 
           ### Sway
-          #// sway = unstable.swayfx;
+          sway = unstable.swayfx;
 
           ### Development
           #// ciscoPacketTracer8 = local.ciscoPacketTracer8;

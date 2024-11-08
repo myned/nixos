@@ -5,7 +5,9 @@
 }:
 with lib; {
   config.custom.desktops = mkIf config.custom.full {
+    #// gnome.enable = true;
     hyprland.enable = true;
-    sway.enable = true;
+    #// kde.enable = true;
+    #// sway.enable = true;
   };
 }
