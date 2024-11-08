@@ -32,12 +32,12 @@ in {
         "special:android, on-created-empty:${waydroid} app launch com.YoStarEN.Arknights"
         "special:gamescope, on-created-empty:MANGOHUD=0 ${gamescope} --fullscreen --steam ${steam}"
         "special:music, on-created-empty:${youtube-music}"
-        #// "special:office, on-created-empty:[tile] ${onlyoffice} --xdg-desktop-portal"
+        #// "special:office, on-created-empty:${onlyoffice} --xdg-desktop-portal"
         "special:password, on-created-empty:${_1password}"
         "special:steam, on-created-empty:${steam}"
         "special:terminal, on-created-empty:${kitty}"
         #// "special:vm, on-created-empty:${pgrep} -x vm || ${virt-manager}"
-        "special:wallpaper, on-created-empty:[tile] ${loupe} /tmp/wallpaper.png"
+        "special:wallpaper, on-created-empty:${loupe} /tmp/wallpaper.png"
       ];
 
       # https://wiki.hyprland.org/Configuring/Window-Rules
@@ -302,6 +302,10 @@ in {
             class = "^lutris$";
             title = "^Lutris$"; # Main window
           } ["center" "size 1000 500"])
+          (fields {
+            class = "^org\\.gnome\\.Loupe$";
+            title = "^wallpaper.png$";
+          } ["tile" "workspace special:wallpaper"])
           (fields {
             class = "^org\\.remmina\\.Remmina$";
             title = "^Remmina Remote Desktop Client$"; # Main window
