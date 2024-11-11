@@ -65,6 +65,10 @@
           # https://github.com/NixOS/nixpkgs/issues/333946
           fprintd = stable.fprintd;
 
+          # BUG: Empty password regression, remove > v3.9.0 on unstable
+          # https://github.com/FreeRDP/FreeRDP/issues/10784
+          freerdp3 = stable.freerdp3;
+
           ### Hypr*
           hypridle = inputs.hypridle.packages.${prev.system}.default;
           hyprland = inputs.hyprland.packages.${prev.system}.default;
