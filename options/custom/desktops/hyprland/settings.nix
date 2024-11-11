@@ -130,13 +130,16 @@ in {
 
       # https://wiki.hyprland.org/Configuring/Variables/#decoration
       decoration = {
-        "col.shadow_inactive" = "rgba(0000001a)";
-        "col.shadow" = "rgba(00000040)";
         blur.enabled = false;
         dim_special = 0.25;
         rounding = config.custom.rounding;
-        shadow_range = 50;
-        shadow_render_power = 4; # Distance falloff
+
+        shadow = {
+          color = "rgba(00000040)";
+          color_inactive = "rgba(0000001a)";
+          range = 50;
+          render_power = 4; # Distance falloff
+        };
       };
 
       # https://wiki.hyprland.org/Configuring/Variables/#group
