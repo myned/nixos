@@ -11,55 +11,88 @@ in {
   config = mkIf cfg.enable {
     programs.hyprlock.enable = true; # Grant PAM access
 
-    # https://wiki.hyprland.org/Hypr-Ecosystem/hyprlock
     # https://github.com/hyprwm/hyprlock
     home-manager.users.${config.custom.username}.programs.hyprlock = {
       enable = true;
 
+      # https://wiki.hyprland.org/Hypr-Ecosystem/hyprlock
+      # https://wiki.hyprland.org/Hypr-Ecosystem/hyprlang/#comments
       settings = {
         general = {
+          disable_loading_bar = true;
+          enable_fingerprint = true; # Enter not required
+          fingerprint_present_message = "<span foreground='##d33682'>󰈷</span>";
+          fingerprint_ready_message = "󰈷";
           grace = 5 * 60; # Seconds
           hide_cursor = true;
-          #// immediate_render = true;
+          ignore_empty_input = true;
           no_fade_in = true; # Fix suspend interrupting animation
         };
 
         background = {
           blur_passes = 5;
-          color = "rgb(073642)";
+          color = "rgb(073642)"; # Fallback
           path = "/tmp/wallpaper.png";
         };
 
         input-field = {
           capslock_color = "rgb(cb4b16)";
           check_color = "rgb(859900)";
+          fade_on_empty = false;
           fade_timeout = 0;
           fail_color = "rgb(dc322f)";
           fail_text = "";
-          font_color = "rgb(fdf6e3)";
+          font_color = "rgb(93a1a1)";
           inner_color = "rgb(002b36)";
-          outer_color = "rgb(fdf6e3)";
-          outline_thickness = 0;
+          outer_color = "rgb(d33682)";
+          outline_thickness = 3;
           placeholder_text = "";
           position = "0, 0";
-          shadow_passes = 1;
-          shadow_size = 2;
-          size = "300, 50";
+          size = "500, 50";
         };
 
-        label = {
-          color = "rgb(fdf6e3)";
-          font_family = config.custom.font.monospace;
-          font_size = 48;
-          halign = "center";
-          position = "0, 200";
-          text_align = "center";
-          valign = "center";
+        label = [
+          # Time
+          {
+            color = "rgb(93a1a1)";
+            font_family = config.custom.font.sans-serif;
+            font_size = 64;
+            halign = "center";
+            position = "0, 200";
 
-          #     12:00 AM
-          # Sunday, January 01
-          text = "cmd[update:1000] echo \"<span allow_breaks='true'>$(date +'%I:%M %p<br/><small>%A, %B %d</small>')</span>\"";
-        };
+            # BUG: Noon displayed as 00:00, fixed > v0.5.0
+            # https://github.com/hyprwm/hyprlock/issues/552
+            #// text = "$TIME12";
+            text = ''cmd[update:1000] echo "$(date +'%I:%M %p')"''; # 12:00 AM
+
+            text_align = "center";
+            valign = "center";
+          }
+
+          # Date
+          {
+            color = "rgb(93a1a1)";
+            font_family = config.custom.font.sans-serif;
+            font_size = 32;
+            halign = "center";
+            position = "0, 100";
+            text = ''cmd[update:60000] echo "$(date +'%a %b %d')"''; # Sun Jan 01
+            text_align = "center";
+            valign = "center";
+          }
+
+          # Fingerprint
+          {
+            color = "rgb(93a1a1)";
+            font_family = config.custom.font.monospace;
+            font_size = 32;
+            halign = "center";
+            position = "0, -100";
+            text = "$FPRINTMESSAGE";
+            text_align = "center";
+            valign = "center";
+          }
+        ];
       };
     };
   };
