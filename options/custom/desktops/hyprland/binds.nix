@@ -111,7 +111,7 @@ in {
         (key "Control_L" "Super+Ctrl" "exec" workspace)
         (key "Shift_L" "Super+Shift" "workspace" "previous")
         (key "Super_L" "Super" "exec" "${menu}")
-        (key "Super_L" "Super+Alt" "exec" "${menu} --passwords")
+        #// (key "Super_L" "Super+Alt" "exec" "${menu} --passwords")
         (key "Super_L" "Super+Ctrl" "exec" "${menu} --calculator")
         (key "Super_L" "Super+Ctrl+Shift" "exec" "${menu} --networks")
         (key "Super_L" "Super+Shift" "exec" "${menu} --search")
