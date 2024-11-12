@@ -29,14 +29,14 @@ in {
       # https://wiki.hyprland.org/Configuring/Workspace-Rules
       #?? workspace = WORKSPACE, RULES
       workspace = [
-        "special:android, on-created-empty:${waydroid} app launch com.YoStarEN.Arknights"
+        "special:android, on-created-empty:${launch} --workspace special:android --empty ${waydroid} app launch com.YoStarEN.Arknights"
         "special:gamescope, on-created-empty:MANGOHUD=0 ${gamescope} --fullscreen --steam ${steam}"
         "special:music, on-created-empty:${youtube-music}"
-        #// "special:office, on-created-empty:${onlyoffice} --xdg-desktop-portal"
-        "special:password, on-created-empty:${_1password}"
+        "special:office, on-created-empty:${launch} --workspace special:office --empty --tile -- ${onlyoffice-desktopeditors}"
+        "special:password, on-created-empty:${launch} --workspace special:password --empty ${_1password}"
         "special:steam, on-created-empty:${steam}"
         "special:terminal, on-created-empty:${kitty}"
-        #// "special:vm, on-created-empty:${pgrep} -x vm || ${virt-manager}"
+        "special:vm, on-created-empty:${launch} --workspace special:vm --empty ${virt-manager}"
         "special:wallpaper, on-created-empty:${loupe} /tmp/wallpaper.png"
       ];
 
@@ -222,12 +222,8 @@ in {
             (class "ONLYOFFICE Desktop Editors" rules)
           ];
           password = rules: [
+            (class "1Password" rules)
             (class "Bitwarden" rules)
-            (fields {
-                class = "^1Password$";
-                title = "^.+1Password$"; # Main window
-              }
-              rules)
           ];
           pip = rules: [
             (title "Picture.in.[Pp]icture" rules)
@@ -264,7 +260,7 @@ in {
           (fullscreen true ["idleinhibit focus"])
           (pinned true ["bordercolor rgb(073642) rgb(073642)"])
 
-          (tag.android ["idleinhibit always" "move ${android.x} ${android.y}" "size ${android.w} ${android.h}"])
+          (tag.android ["idleinhibit always" "move ${android.x} ${android.y}" "size ${android.w} ${android.h}" "workspace special:android"])
           (tag.browser ["group override set" "tile" "workspace 1"])
           (tag.clipboard ["move ${clipboard.x} ${clipboard.y}" "pin" "size ${clipboard.w} ${clipboard.h}" "stayfocused"])
           (tag.dropdown ["move ${dropdown.x} ${dropdown.y}" "pin" "size ${dropdown.w} ${dropdown.h}"])
