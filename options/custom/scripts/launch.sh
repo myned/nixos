@@ -27,7 +27,7 @@ eval "$(argc --argc-eval "$0" "$@")"
 
 if [[ "${argc_empty:-}" ]]; then
   # Delay to mitigate on-created-empty window race condition
-  sleep 1
+  sleep 0.5
 
   # Silently exit if window exists on specified workspace
   if hyprctl -j clients | jq -r .[].workspace.name | grep "${argc_workspace:-}"; then
@@ -39,7 +39,7 @@ fi
 count="$(hyprctl -j clients | jq length)"
 
 # Launch application
-hyprctl dispatch exec "${argc_commands[@]:-}"
+hyprctl dispatch exec -- "${argc_commands[@]:-}"
 
 # Poll for next window
 c=0
