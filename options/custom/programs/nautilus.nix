@@ -25,8 +25,10 @@ in {
 
       gnome = {
         sushi.enable = true; # Quick preview with spacebar
-        tracker.enable = cfg.index; # File indexing
-        tracker-miners.enable = cfg.index;
+
+        # File indexing
+        localsearch.enable = cfg.index;
+        tinysparql.enable = cfg.index;
       };
     };
 
