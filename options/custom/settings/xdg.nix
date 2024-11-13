@@ -137,7 +137,6 @@ in {
       userDirs = {
         enable = true;
         createDirectories = true;
-        desktop = null;
         templates = "/home/${config.custom.username}/SYNC/linux/config/templates";
 
         extraConfig = {
