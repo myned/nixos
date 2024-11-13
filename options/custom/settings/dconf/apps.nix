@@ -88,6 +88,9 @@ in {
         show-delete-permanently = mkBoolean true;
         click-policy = mkString "single";
         default-folder-viewer = mkString "list-view";
+
+        #?? rm -r ~/.local/share/gvfs-metadata
+        default-sort-order = mkString "type";
       };
 
       "org/gnome/nautilus/list-view" = {
