@@ -50,6 +50,7 @@ in {
             bradlc.vscode-tailwindcss
             csstools.postcss
             dbaeumer.vscode-eslint
+            detachhead.basedpyright
             #// eamodio.gitlens
             esbenp.prettier-vscode
             foxundermoon.shell-format
