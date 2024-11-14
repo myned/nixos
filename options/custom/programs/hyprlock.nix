@@ -85,7 +85,7 @@ in {
           {
             color = "rgb(93a1a1)";
             font_family = config.custom.font.monospace;
-            font_size = 32;
+            font_size = 42;
             halign = "center";
             position = "0, -100";
             text = "$FPRINTMESSAGE";
