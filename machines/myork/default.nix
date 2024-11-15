@@ -30,15 +30,9 @@ in {
     };
   };
 
-  home-manager.users.${config.custom.username} = with lib; {
+  home-manager.users.${config.custom.username} = {
     wayland.windowManager.hyprland.settings = {
       exec-once = ["${brightnessctl} set 0%"];
-
-      master = {
-        mfact = mkForce 0.5;
-        orientation = mkForce "left";
-        always_center_master = mkForce false;
-      };
 
       device = [
         {

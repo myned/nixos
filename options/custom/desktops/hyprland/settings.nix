@@ -99,7 +99,10 @@ in {
         allow_small_split = true;
         always_center_master = true;
         mfact = 0.5;
-        orientation = "center";
+        orientation =
+          if config.custom.ultrawide
+          then "center"
+          else "top";
       };
 
       # https://wiki.hyprland.org/Configuring/Variables/#general
