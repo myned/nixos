@@ -70,7 +70,7 @@ in {
         settings = {
           # https://github.com/rafaelmardojai/firefox-gnome-theme?tab=readme-ov-file#features
           "gnomeTheme.bookmarksToolbarUnderTabs" = true;
-          "gnomeTheme.systemIcons" = true;
+          #// "gnomeTheme.systemIcons" = true;
 
           "font.default.x-unicode" = config.custom.font.sans-serif;
           "font.default.x-western" = config.custom.font.sans-serif;
