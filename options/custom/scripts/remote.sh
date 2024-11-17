@@ -68,6 +68,11 @@ fi
 
 # Suspend VM after connection ends
 if [[ "${argc_vm:-}" ]]; then
-  virsh suspend "${argc_host:-}"
-  notify-send "> remote" "${argc_host:-} paused" --urgency low
+  # Delay to avoid suspending shutdown
+  sleep 5
+
+  if [[ "$(virsh domstate "${argc_host:-}")" != "shut off" ]]; then
+    virsh suspend "${argc_host:-}"
+    notify-send "> remote" "${argc_host:-} paused" --urgency low
+  fi
 fi
