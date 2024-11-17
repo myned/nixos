@@ -55,6 +55,7 @@ in {
   "desktop/bitwarden/client_secret".publicKeys = desktop;
   "desktop/users/myned.pass".publicKeys = desktop;
   "desktop/users/root.pass".publicKeys = desktop;
+  "desktop/vm/myndows.pass".publicKeys = desktop;
 
   ### SBC
   "sbc/borgmatic/borgbase.mypi3".publicKeys = sbc;

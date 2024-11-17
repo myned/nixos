@@ -143,6 +143,15 @@ in {
               libnotify
               power-profiles-daemon
             ])
+            (bash "remote" [
+              argc
+              coreutils
+              freerdp3
+              iputils
+              libnotify
+              libvirt
+              remmina
+            ])
             (bash "scratchpad" [
               coreutils
               libnotify
@@ -165,14 +174,6 @@ in {
               hyprland
               jq
               libnotify
-            ])
-            (bash "vm" [
-              coreutils
-              freerdp3
-              iputils
-              libnotify
-              libvirt
-              remmina
             ])
             (bash "vpn" [
               gnused
