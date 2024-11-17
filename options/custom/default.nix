@@ -18,6 +18,7 @@ in {
     hostname = mkOption {};
     realname = mkOption {default = "Myned";};
     username = mkOption {default = "myned";};
+    sync = mkOption {default = "/home/myned/SYNC";};
 
     ### Hardware
     width = mkOption {default = 1920;};

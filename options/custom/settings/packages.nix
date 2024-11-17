@@ -143,7 +143,7 @@ in {
 
           #!! Must be downloaded manually due to licensing
           # (ciscoPacketTracer8.overrideAttrs {
-          #   src = /home/myned/SYNC/linux/config/cisco/CiscoPacketTracer822_amd64_signed.deb;
+          #   src = ${config.custom.sync}/linux/config/cisco/CiscoPacketTracer822_amd64_signed.deb;
           # })
 
           ### CLI applications

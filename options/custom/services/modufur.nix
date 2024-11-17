@@ -21,7 +21,7 @@ in {
       wantedBy = ["default.target"];
 
       serviceConfig = {
-        WorkingDirectory = ["/home/myned/.git/modufur"];
+        WorkingDirectory = ["/home/${config.custom.username}/.git/modufur"];
         ExecStart = ["${poetry}/bin/poetry run python -OO run.py >&2"];
       };
     };

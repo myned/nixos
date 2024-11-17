@@ -546,9 +546,7 @@ in {
 
       # Imperative symlinks intended to be synced
       "Downloads/stg" = mkIf config.custom.full {
-        source =
-          config.home-manager.users.${config.custom.username}.lib.file.mkOutOfStoreSymlink
-          "/home/myned/SYNC/common/config/extensions/Simple Tab Groups";
+        source = config.home-manager.users.${config.custom.username}.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/common/config/extensions/Simple Tab Groups";
       };
 
       # Work around icon dissociation due to missing --name flag in actions
