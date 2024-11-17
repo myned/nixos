@@ -15,7 +15,7 @@ in {
     # https://github.com/firecat53/networkmanager-dmenu/blob/main/config.ini.example
     #!! Option not available, files written directly
     # FIXME: active_chars does not take effect
-    home.file.".config/networkmanager-dmenu/config.ini".text = ''
+    xdg.configFile."networkmanager-dmenu/config.ini".text = ''
       [dmenu]
       dmenu_command = ${menu} --input
       active_chars = >

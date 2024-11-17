@@ -137,7 +137,7 @@ in {
       userDirs = {
         enable = true;
         createDirectories = true;
-        templates = "/home/${config.custom.username}/SYNC/linux/config/templates";
+        templates = "${config.custom.sync}/linux/config/templates";
 
         extraConfig = {
           XDG_SCREENSHOTS_DIR = "${config.home-manager.users.${config.custom.username}.xdg.userDirs.pictures}/Screenshots";

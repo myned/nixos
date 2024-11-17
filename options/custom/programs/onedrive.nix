@@ -15,14 +15,14 @@ in {
     #?? systemctl --user enable --now onedrive@onedrive.service
 
     #!! Option not available, files written directly
-    home.file = {
+    xdg.configFile = {
       # https://github.com/abraunegg/onedrive/blob/master/docs/USAGE.md#configuration
-      ".config/onedrive/config".text = ''
+      "onedrive/config".text = ''
         sync_dir = "~/SYNC/edu/hawkeye"
       '';
 
       # https://github.com/abraunegg/onedrive/blob/master/docs/USAGE.md#performing-a-selective-sync-via-sync_list-file
-      ".config/onedrive/sync_list".text = ''
+      "onedrive/sync_list".text = ''
         !/Apps/
         !/Attachments/
         /*

@@ -14,7 +14,7 @@ in {
     # https://github.com/fdw/rofi-rbw?tab=readme-ov-file#configuration
     # TODO: Enable input emulation when merged (uinput.enable?)
     # https://github.com/NixOS/nixpkgs/pull/303745
-    home.file.".config/rofi-rbw.rc".text = ''
+    xdg.configFile."rofi-rbw.rc".text = ''
       action=copy
     '';
   };

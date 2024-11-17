@@ -77,7 +77,6 @@ in {
     accounts.email.accounts.${config.custom.username}.thunderbird.enable = true;
 
     # https://github.com/rafaelmardojai/thunderbird-gnome-theme
-    home.file.".thunderbird/default/chrome/thunderbird-gnome-theme".source =
-      inputs.thunderbird-gnome-theme;
+    home.file.".thunderbird/default/chrome/thunderbird-gnome-theme".source = inputs.thunderbird-gnome-theme;
   };
 }

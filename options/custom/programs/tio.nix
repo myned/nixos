@@ -15,7 +15,7 @@ in {
 
     # https://github.com/tio/tio
     #!! Options not available, files written directly
-    home-manager.users.${config.custom.username}.home.file.".config/tio/config".text = ''
+    home-manager.users.${config.custom.username}.xdg.configFile."tio/config".text = ''
       baudrate = 9600
     '';
   };

@@ -15,9 +15,16 @@ in {
 
     ### PRESETS ###
     # https://github.com/Digitalone1/EasyEffects-Presets
-    home.file = with config.home-manager.users.${config.custom.username}.lib.file; {
-      ".config/easyeffects/input".source = mkOutOfStoreSymlink "/home/${config.custom.username}/SYNC/linux/config/easyeffects/input";
-      ".config/easyeffects/output".source = mkOutOfStoreSymlink "/home/${config.custom.username}/SYNC/linux/config/easyeffects/output";
+    xdg.configFile = with config.home-manager.users.${config.custom.username}.lib.file; {
+      "easyeffects/input" = {
+        force = true;
+        source = mkOutOfStoreSymlink "${config.custom.sync}/linux/config/easyeffects/input";
+      };
+
+      "easyeffects/output" = {
+        force = true;
+        source = mkOutOfStoreSymlink "${config.custom.sync}/linux/config/easyeffects/output";
+      };
     };
   };
 }

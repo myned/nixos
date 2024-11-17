@@ -11,7 +11,10 @@ in {
   config = mkIf cfg.enable {
     home-manager.users.${config.custom.username} = {
       #!! Imperative configuration
-      home.file.".config/remmina/remmina.pref".source = config.home-manager.users.${config.custom.username}.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/linux/config/remmina/remmina.pref";
+      xdg.configFile."remmina/remmina.pref" = {
+        force = true;
+        source = config.home-manager.users.${config.custom.username}.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/linux/config/remmina/remmina.pref";
+      };
     };
   };
 }

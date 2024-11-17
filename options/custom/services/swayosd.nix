@@ -15,6 +15,6 @@ in {
     ### THEME ###
     # https://github.com/ErikReider/SwayOSD/blob/main/data/style/style.scss
     #!! Options not yet available, files written directly
-    home.file.".config/swayosd/style.css".text = '''';
+    xdg.configFile."swayosd/style.css".text = '''';
   };
 }

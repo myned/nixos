@@ -19,7 +19,7 @@ in {
 
     home-manager.users.${config.custom.username} = mkIf cfg.enable {
       # https://github.com/savedra1/clipse?tab=readme-ov-file#configuration
-      home.file.".config/clipse/config.json".text = ''
+      xdg.configFile."clipse/config.json".text = ''
         {
           "historyFile": "clipboard_history.json",
           "maxHistory": 50,

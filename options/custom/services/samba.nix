@@ -24,7 +24,7 @@ in {
         # https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html
         settings = {
           Public.path = "/home/${config.custom.username}/Public";
-          SYNC.path = "/home/${config.custom.username}/SYNC";
+          SYNC.path = config.custom.sync;
 
           global = {
             "allow insecure wide links" = "yes";

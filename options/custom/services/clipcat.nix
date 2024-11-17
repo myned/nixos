@@ -17,8 +17,8 @@ in {
     services.clipcat.enable = true;
 
     # https://github.com/xrelkd/clipcat?tab=readme-ov-file#configuration
-    home-manager.users.${config.custom.username}.home.file = {
-      ".config/clipcat/clipcatd.toml".text = ''
+    home-manager.users.${config.custom.username}.xdg.configFile = {
+      "clipcat/clipcatd.toml".text = ''
         daemonize = false
         max_history = 100
 
@@ -30,7 +30,7 @@ in {
         enable_http = false
       '';
 
-      ".config/clipcat/clipcat-menu.toml".text = ''
+      "clipcat/clipcat-menu.toml".text = ''
         finder = "custom_finder"
 
         [custom_finder]

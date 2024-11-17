@@ -11,7 +11,7 @@ in {
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     # Element Desktop custom themes
     # https://github.com/aaronraimist/element-themes
-    home.file.".config/Element/config.json".text = ''
+    xdg.configFile."Element/config.json".text = ''
       {
         "show_labs_settings": true,
         "setting_defaults": {

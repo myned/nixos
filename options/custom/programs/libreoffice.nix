@@ -17,8 +17,11 @@ in {
     environment.systemPackages = [cfg.package];
 
     #!! Options not available, files synced
-    home-manager.users.${config.custom.username}.home.file.".config/libreoffice/4/user".source =
-      config.home-manager.users.${config.custom.username}.lib.file.mkOutOfStoreSymlink
-      "/home/${config.custom.username}/SYNC/linux/config/libreoffice/user";
+    home-manager.users.${config.custom.username} = {
+      xdg.configFile.".config/libreoffice/4/user" = {
+        force = true;
+        source = config.home-manager.users.${config.custom.username}.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/linux/config/libreoffice/user";
+      };
+    };
   };
 }

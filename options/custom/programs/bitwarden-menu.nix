@@ -14,7 +14,7 @@ in {
     # https://github.com/firecat53/bitwarden-menu
     #!! Options not available, files written directly
     # https://github.com/firecat53/bitwarden-menu/blob/main/docs/configure.md
-    home.file.".config/bwm/config.ini".text = ''
+    xdg.configFile."bwm/config.ini".text = ''
       [dmenu]
       dmenu_command = ${wofi} --dmenu
 

@@ -357,9 +357,9 @@ in {
       #?? text
       #?? tooltip
       #?? class
-      home.file = {
+      xdg.configFile = {
         # Return inhibit idle status
-        ".config/waybar/scripts/inhibitor.sh" = {
+        "waybar/scripts/inhibitor.sh" = {
           executable = true;
           text = ''
             #! /usr/bin/env ${bash}
@@ -377,7 +377,7 @@ in {
         };
 
         # Return tailscale status
-        ".config/waybar/scripts/vm.sh" = {
+        "waybar/scripts/vm.sh" = {
           executable = true;
           text = ''
             #! /usr/bin/env ${bash}
@@ -404,7 +404,7 @@ in {
         };
 
         # Return tailscale status
-        ".config/waybar/scripts/vpn.sh" = {
+        "waybar/scripts/vpn.sh" = {
           executable = true;
           text = ''
             #! /usr/bin/env ${bash}

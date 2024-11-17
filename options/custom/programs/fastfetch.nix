@@ -30,7 +30,7 @@ in {
 
     # https://github.com/fastfetch-cli/fastfetch
     #!! Option not available, files written directly
-    home-manager.users.${config.custom.username}.home.file.".config/fastfetch/config.jsonc".text = ''
+    home-manager.users.${config.custom.username}.xdg.configFile."fastfetch/config.jsonc".text = ''
       {
         "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
         "logo": {

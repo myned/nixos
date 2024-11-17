@@ -81,44 +81,59 @@ in {
           ]);
     };
 
+    xdg.configFile = with config.home-manager.users.${config.custom.username}.lib.file; {
+      # Imperative symlinks intended to be synced
+      "VSCodium/User/settings.json" = {
+        force = true;
+        source = mkOutOfStoreSymlink "${config.custom.sync}/dev/config/vscode/settings.json";
+      };
+
+      "VSCodium/User/keybindings.json" = {
+        force = true;
+        source = mkOutOfStoreSymlink "${config.custom.sync}/dev/config/vscode/keybindings.json";
+      };
+
+      "VSCodium/User/snippets/" = {
+        force = true;
+        source = mkOutOfStoreSymlink "${config.custom.sync}/dev/config/vscode/snippets/";
+      };
+
+      "VSCodium/User/profiles/" = {
+        force = true;
+        source = mkOutOfStoreSymlink "${config.custom.sync}/dev/config/vscode/profiles/";
+      };
+    };
+
     home = {
       # https://github.com/nix-community/nixd/blob/main/nixd/docs/features.md
       sessionVariables.NIXD_FLAGS = "--inlay-hints=false"; # Disable package versions in the editor
 
-      file = with config.home-manager.users.${config.custom.username}.lib.file; {
-        # Imperative symlinks intended to be synced
-        ".config/VSCodium/User/settings.json".source = mkOutOfStoreSymlink "/home/${config.custom.username}/SYNC/dev/config/vscode/settings.json";
-        ".config/VSCodium/User/keybindings.json".source = mkOutOfStoreSymlink "/home/${config.custom.username}/SYNC/dev/config/vscode/keybindings.json";
-        ".config/VSCodium/User/snippets/".source = mkOutOfStoreSymlink "/home/${config.custom.username}/SYNC/dev/config/vscode/snippets/";
-        ".config/VSCodium/User/profiles/".source = mkOutOfStoreSymlink "/home/${config.custom.username}/SYNC/dev/config/vscode/profiles/";
+      # Work around wrong wmclass
+      # https://github.com/microsoft/vscode/issues/129953
+      # https://github.com/VSCodium/vscodium/issues/1414
+      #!! Keep updated with upstream desktop file
+      #?? cat /etc/profiles/per-user/USER/share/applications/codium.desktop
+      # file.".local/share/applications/codium.desktop".text = ''
+      #   [Desktop Entry]
+      #   Actions=new-empty-window
+      #   Categories=Utility;TextEditor;Development;IDE
+      #   Comment=Code Editing. Redefined.
+      #   Exec=codium %F
+      #   GenericName=Text Editor
+      #   Icon=vscodium
+      #   Keywords=vscode
+      #   MimeType=text/plain;inode/directory
+      #   Name=VSCodium
+      #   StartupNotify=true
+      #   StartupWMClass=codium-url-handler
+      #   Type=Application
+      #   Version=1.4
 
-        # Work around wrong wmclass
-        # https://github.com/microsoft/vscode/issues/129953
-        # https://github.com/VSCodium/vscodium/issues/1414
-        #!! Keep updated with upstream desktop file
-        #?? cat /etc/profiles/per-user/USER/share/applications/codium.desktop
-        # ".local/share/applications/codium.desktop".text = ''
-        #   [Desktop Entry]
-        #   Actions=new-empty-window
-        #   Categories=Utility;TextEditor;Development;IDE
-        #   Comment=Code Editing. Redefined.
-        #   Exec=codium %F
-        #   GenericName=Text Editor
-        #   Icon=vscodium
-        #   Keywords=vscode
-        #   MimeType=text/plain;inode/directory
-        #   Name=VSCodium
-        #   StartupNotify=true
-        #   StartupWMClass=codium-url-handler
-        #   Type=Application
-        #   Version=1.4
-
-        #   [Desktop Action new-empty-window]
-        #   Exec=codium --new-window %F
-        #   Icon=vscodium
-        #   Name=New Empty Window
-        # '';
-      };
+      #   [Desktop Action new-empty-window]
+      #   Exec=codium --new-window %F
+      #   Icon=vscodium
+      #   Name=New Empty Window
+      # '';
     };
   };
 }

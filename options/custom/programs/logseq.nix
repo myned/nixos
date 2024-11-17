@@ -10,8 +10,9 @@ in {
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     #!! Synced imperative configuration
-    home.file.".logseq/".source =
-      config.home-manager.users.${config.custom.username}.lib.file.mkOutOfStoreSymlink
-      "/home/${config.custom.username}/SYNC/common/config/logseq/";
+    home.file.".logseq/" = {
+      force = true;
+      source = config.home-manager.users.${config.custom.username}.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/common/config/logseq/";
+    };
   };
 }
