@@ -266,7 +266,7 @@ in {
           (tag.dropdown ["move ${dropdown.x} ${dropdown.y}" "pin" "size ${dropdown.w} ${dropdown.h}"])
           (tag.editor ["group override set" "tile"])
           (tag.files ["center" "size 1000 625"])
-          (tag.game ["fullscreen" "idleinhibit always" "noborder" "noshadow" "renderunfocused" "workspace name:game"])
+          (tag.game ["idleinhibit always" "noborder" "noshadow" "renderunfocused" "workspace name:game"])
           (tag.media ["center" "keepaspectratio" "size <90% <90%"])
           (tag.music ["tile" "workspace special:music"])
           (tag.office ["workspace special:office"])
