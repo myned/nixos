@@ -245,6 +245,7 @@ in {
           ];
           vm = rules: [
             (class "(sdl-|wl|x)freerdp" (rules ++ ["nomaxsize" "tile"]))
+            (class "org\\.remmina\\.Remmina" (rules ++ ["tile"]))
             (class "virt-manager" rules)
           ];
           wine = rules: [
@@ -289,7 +290,7 @@ in {
           (fields {
             class = "^com\\.github\\.wwmm\\.easyeffects$";
             title = "^Easy Effects$"; # Main window
-          } ["center" "size 50% 50%"])
+          } ["center" "float" "size 50% 50%"])
           (fields {
             class = "^discord$";
             title = "^Discord Updater$"; # Update dialog
@@ -297,19 +298,19 @@ in {
           (fields {
             class = "^lutris$";
             title = "^Lutris$"; # Main window
-          } ["center" "size 1000 500"])
+          } ["center" "float" "size 1000 500"])
           (fields {
             class = "^org\\.gnome\\.Loupe$";
             title = "^wallpaper.png$";
           } ["tile" "workspace special:wallpaper"])
           (fields {
             class = "^org\\.remmina\\.Remmina$";
-            title = "^Remmina Remote Desktop Client$"; # Main window
-          } ["center" "size 1000 500"])
+            title = "^Remmina.*$"; # Main windows
+          } ["center" "float" "size 1000 500"])
           (fields {
             class = "^steam$";
             title = "^notificationtoasts$"; # Steam notifications
-          } ["nofocus" "pin"])
+          } ["float" "nofocus" "pin"])
           (fields {
             class = "^steam$";
             title = "^Steam$"; # Main window
