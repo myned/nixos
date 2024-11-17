@@ -5,7 +5,7 @@
 # https://github.com/sigoden/argc
 
 # @meta combine-shorts
-# @option -C --client=remmina Remote desktop client to connect with (remmina or <x|w|sdl>-freerdp)
+# @option -C --client=remmina Remote desktop client to connect with (remmina or <sdl-|x|w>freerdp)
 # @option -P --password Password to connect with
 # @option -S --scale=100 Set FreeRDP resolution scale
 # @option -U --username! Username to connect with
