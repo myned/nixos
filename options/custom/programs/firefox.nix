@@ -130,8 +130,8 @@ in {
               #// "FirefoxColor@mozilla.com" = extension "firefox-color"; # Firefox Color
               #// "chrome-gnome-shell@gnome.org" = extension "gnome-shell-integration"; # GNOME Shell Integration
               #// "{248e6a49-f636-4c81-9899-a456eb6291a8}" = extension "ground-news-bias-checker"; # Ground News Bias Checker
-              "{3c6bf0cc-3ae2-42fb-9993-0d33104fdcaf}" = extension "youtube-addon"; # ImprovedTube
-              "7esoorv3@alefvanoon.anonaddy.me" = extension "libredirect"; # LibRedirect
+              #// "{3c6bf0cc-3ae2-42fb-9993-0d33104fdcaf}" = extension "youtube-addon"; # ImprovedTube
+              #// "7esoorv3@alefvanoon.anonaddy.me" = extension "libredirect"; # LibRedirect
               #// "firefoxpwa@filips.si" = extension "pwas-for-firefox"; # Progressive Web Apps for Firefox
               "select-after-closing-current@qw.linux-2g64.local" = extension "select-after-closing-current"; # Select After Closing Current
               "simple-tab-groups@drive4ik" = extension "simple-tab-groups"; # Simple Tab Groups
@@ -139,7 +139,8 @@ in {
               "{7a7a4a92-a2a0-41d1-9fd7-1e92480d612d}" = extension "styl-us"; # Stylus
               #// "{a0370179-acc3-452f-9530-246b6adb2768}" = extension "svelte-devtools"; # Svelte Devtools
               "uBlock0@raymondhill.net" = extension "ublock-origin"; # uBlock Origin
-              "{a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7}" = extension "user-agent-string-switcher"; # User-Agent Switcher and Manager
+              "{2662ff67-b302-4363-95f3-b050218bd72c}" = extension "untrap-for-youtube"; # UnTrap for YouTube
+              #// "{a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7}" = extension "user-agent-string-switcher"; # User-Agent Switcher and Manager
               #// "{c49b13b1-5dee-4345-925e-0c793377e3fa}" = extension "youtube-enhancer-vc"; # YouTube Enhancer
             })
           ];
