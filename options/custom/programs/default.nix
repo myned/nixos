@@ -64,6 +64,7 @@ with lib; {
       #// onedrive.enable = true;
       path-of-building.enable = true;
       rbw.enable = true;
+      remmina.enable = true;
       rofi-rbw.enable = true;
       rofi.enable = true;
       seahorse.enable = true;
