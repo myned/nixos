@@ -266,7 +266,7 @@ in {
           (key "V" "Super" "exec" "${kitty} --app-id clipboard --override font_size=12 ${clipse}")
           (key "V" "Super+Shift" "exec" "${clipse} --clear && ${notify-send} clipse 'Clipboard cleared' --urgency low")
           (key "W" "Super" "togglespecialworkspace" "vm")
-          (key "W" "Super+Ctrl" "exec" ''${remote} --vm --username Myned --password "$(${cat} ${config.age.secrets."desktop/vm/myndows.pass".path})" ${
+          (key "W" "Super+Ctrl" "exec" ''${remote} --vm --client xfreerdp --username Myned --password "$(${cat} ${config.age.secrets."desktop/vm/myndows.pass".path})" ${
               if config.custom.hidpi
               then "--scale 140"
               else ""

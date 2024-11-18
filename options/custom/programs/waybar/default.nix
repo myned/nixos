@@ -160,7 +160,7 @@ in {
             "custom/vm" = {
               interval = 5;
               exec = "~/.config/waybar/scripts/vm.sh";
-              on-click = ''${remote} --vm --username Myned --password "$(${cat} ${config.age.secrets."desktop/vm/myndows.pass".path})" ${
+              on-click = ''${remote} --vm --client xfreerdp --username Myned --password "$(${cat} ${config.age.secrets."desktop/vm/myndows.pass".path})" ${
                   if config.custom.hidpi
                   then "--scale 140"
                   else ""
