@@ -237,7 +237,7 @@ in {
         workspace_swipe = true;
         workspace_swipe_cancel_ratio = 0.2;
         workspace_swipe_distance = 1000;
-        workspace_swipe_forever = true;
+        #// workspace_swipe_forever = true;
         workspace_swipe_min_speed_to_force = 10;
       };
 
