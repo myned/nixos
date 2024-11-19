@@ -122,6 +122,7 @@ in {
           pods # Podman manager
           protonup-qt # Proton updater
           protonvpn-gui # Proton VPN client
+          ptyxis # Terminal
           pwvucontrol # Pipewire volume controller
           remmina # Remote desktop client
           signal-desktop # Signal client
