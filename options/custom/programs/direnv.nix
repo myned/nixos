@@ -15,5 +15,12 @@ in {
       loadInNixShell = false; # nix develop
       silent = true;
     };
+
+    home-manager.users.${config.custom.username} = {
+      programs.direnv = {
+        enable = true;
+        silent = true;
+      };
+    };
   };
 }
