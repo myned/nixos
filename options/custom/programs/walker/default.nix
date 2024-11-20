@@ -2,7 +2,6 @@
   config,
   lib,
   inputs,
-  pkgs,
   ...
 }:
 with lib; let
@@ -18,7 +17,6 @@ in {
     # https://github.com/abenz1267/walker/blob/master/nix/hm-module.nix
     programs.walker = {
       enable = true;
-      package = pkgs.walker;
 
       #!! Service must be restarted for changes to take effect
       #?? systemctl --user restart walker.service
