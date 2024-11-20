@@ -69,14 +69,15 @@
           # https://github.com/FreeRDP/FreeRDP/issues/10784
           freerdp3 = stable.freerdp3;
 
+          # TODO: Exclusively use module packages instead of overlays where possible
           ### Hypr*
-          hypridle = inputs.hypridle.packages.${prev.system}.default;
-          hyprland = inputs.hyprland.packages.${prev.system}.default;
-          hyprlock = inputs.hyprlock.packages.${prev.system}.default;
+          # hypridle = inputs.hypridle.packages.${prev.system}.default;
+          # hyprland = inputs.hyprland.packages.${prev.system}.default;
+          # hyprlock = inputs.hyprlock.packages.${prev.system}.default;
 
-          hyprlandPlugins = {
-            hyprbars = inputs.hyprland-plugins.packages.${prev.system}.hyprbars;
-          };
+          # hyprlandPlugins = {
+          #   hyprbars = inputs.hyprland-plugins.packages.${prev.system}.hyprbars;
+          # };
 
           ### Sway
           sway = unstable.swayfx;

@@ -65,7 +65,7 @@
     };
     hyprland = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "git+https://github.com/hyprwm/Hyprland?ref=refs/tags/v0.45.0&submodules=1";
+      url = "github:hyprwm/Hyprland?ref=v0.45.2";
     };
     hyprland-contrib = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
