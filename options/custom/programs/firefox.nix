@@ -134,12 +134,13 @@ in {
               #// "7esoorv3@alefvanoon.anonaddy.me" = extension "libredirect"; # LibRedirect
               #// "firefoxpwa@filips.si" = extension "pwas-for-firefox"; # Progressive Web Apps for Firefox
               "select-after-closing-current@qw.linux-2g64.local" = extension "select-after-closing-current"; # Select After Closing Current
+              "myallychou@gmail.com" = extension "youtube-recommended-videos"; # Unhook: Remove YouTube Recommended Videos Comments
               "simple-tab-groups@drive4ik" = extension "simple-tab-groups"; # Simple Tab Groups
               "sponsorBlocker@ajay.app" = extension "sponsorblock"; # SponsorBlock
               "{7a7a4a92-a2a0-41d1-9fd7-1e92480d612d}" = extension "styl-us"; # Stylus
               #// "{a0370179-acc3-452f-9530-246b6adb2768}" = extension "svelte-devtools"; # Svelte Devtools
               "uBlock0@raymondhill.net" = extension "ublock-origin"; # uBlock Origin
-              "{2662ff67-b302-4363-95f3-b050218bd72c}" = extension "untrap-for-youtube"; # UnTrap for YouTube
+              #// "{2662ff67-b302-4363-95f3-b050218bd72c}" = extension "untrap-for-youtube"; # UnTrap for YouTube
               #// "{a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7}" = extension "user-agent-string-switcher"; # User-Agent Switcher and Manager
               #// "{c49b13b1-5dee-4345-925e-0c793377e3fa}" = extension "youtube-enhancer-vc"; # YouTube Enhancer
             })
