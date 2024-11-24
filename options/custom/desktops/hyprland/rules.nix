@@ -217,7 +217,7 @@ in {
             (title "Spotify Premium" rules)
           ];
           office = rules: [
-            (class "draw\\.io" (rules ++ ["group override set" "tile"]))
+            (class "draw\\.io" rules)
             (class "libreoffice.+" rules)
             (class "ONLYOFFICE Desktop Editors" rules)
           ];
@@ -266,11 +266,11 @@ in {
           (tag.clipboard ["move ${clipboard.x} ${clipboard.y}" "pin" "size ${clipboard.w} ${clipboard.h}" "stayfocused"])
           (tag.dropdown ["move ${dropdown.x} ${dropdown.y}" "pin" "size ${dropdown.w} ${dropdown.h}"])
           (tag.editor ["group override set" "tile"])
-          (tag.files ["center" "size 1000 625"])
+          (tag.files ["center"])
           (tag.game ["idleinhibit always" "noborder" "noshadow" "renderunfocused" "workspace name:game"])
           (tag.media ["center" "keepaspectratio" "size <90% <90%"])
           (tag.music ["tile" "workspace special:music"])
-          (tag.office ["workspace special:office"])
+          (tag.office ["group override set" "tile" "workspace special:office"])
           (tag.password ["center" "tile" "workspace special:password"])
           (tag.pip ["keepaspectratio" "move ${pip.x} ${pip.y}" "noinitialfocus" "pin" "size ${pip.w} ${pip.h}"])
           (tag.social ["group override set" "tile"])
@@ -285,6 +285,8 @@ in {
           (class "steam_app_1473350" ["workspace 0"]) # (the) Gnorp Apologue
           (class "Tap Wizard 2\\.x86_64" ["workspace 0"])
           (class "Xdg-desktop-portal-gtk" ["noborder" "noshadow"])
+          (title "Open" ["center" "float" "size 1000 625"])
+          (title "Save As" ["center" "float" "size 1000 625"])
 
           #!! Expressions are not wrapped in ^$
           (fields {
@@ -303,6 +305,10 @@ in {
             class = "^org\\.gnome\\.Loupe$";
             title = "^wallpaper.png$";
           } ["tile" "workspace special:wallpaper"])
+          (fields {
+            class = "^org\\.gnome\\.Nautilus$";
+            title = "^Home$"; # Main window
+          } ["size 1000 625"])
           (fields {
             class = "^org\\.remmina\\.Remmina$";
             title = "^Remmina.*$"; # Main windows
