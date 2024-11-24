@@ -36,6 +36,7 @@ in {
 
         # Microsoft
         corefonts
+        vistafonts
       ];
 
       #?? fc-list --brief | grep family: | sort
