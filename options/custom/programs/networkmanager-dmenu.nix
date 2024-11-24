@@ -17,7 +17,7 @@ in {
     xdg.configFile."networkmanager-dmenu/config.ini".text = ''
       [dmenu]
       compact = true
-      dmenu_command = ${menu} --input
+      dmenu_command = ${menu} input
       active_chars = 
       wifi_icons = 󰤯󰤟󰤢󰤥󰤨
       format = {icon}    {name}
