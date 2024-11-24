@@ -18,7 +18,7 @@ in {
 
     #!! Options not available, files synced
     home-manager.users.${config.custom.username} = {
-      xdg.configFile.".config/libreoffice/4/user" = {
+      xdg.configFile."libreoffice/4/user" = {
         force = true;
         source = config.home-manager.users.${config.custom.username}.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/linux/config/libreoffice/user";
       };
