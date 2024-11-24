@@ -113,6 +113,7 @@ in {
               sway
             ])
             (bash "menu" [
+              argc
               coreutils
               hyprland
               jq
