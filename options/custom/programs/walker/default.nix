@@ -156,8 +156,8 @@ in {
         #!! Inherit from default layout
         # https://github.com/abenz1267/walker/blob/master/internal/config/layout.default.json
         layout.ui.window = let
-          w = 1000 / config.custom.scale;
-          h = 500 / config.custom.scale;
+          w = 750;
+          h = 250;
         in {
           width = w;
           height = h;
@@ -188,7 +188,7 @@ in {
 
                 item = {
                   icon = {
-                    icon_size = "largest"; # 128px
+                    icon_size = "larger"; # 64px
                     pixel_size = 32; # Downscale
                   };
 
