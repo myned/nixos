@@ -12,7 +12,7 @@ case "$1" in
     label="ArchWiki"
     icon="distributor-logo-archlinux"
     url="https://wiki.archlinux.org/index.php?search="
-    query="${1:2}"
+    query="${1:3}"
     ;;
   'b '*)
     label="Brave"
@@ -30,7 +30,7 @@ case "$1" in
     label="Docker Hub"
     icon="docker-desktop"
     url="https://hub.docker.com/search?q="
-    query="${1:2}"
+    query="${1:3}"
     ;;
   'e '*)
     label="e621"
@@ -42,13 +42,13 @@ case "$1" in
     label="Element Issues"
     icon="com.github.zren.bugzilla"
     url="https://github.com/element-hq/element-web/issues?q=is%3Aissue+is%3Aopen+"
-    query="${1:2}"
+    query="${1:3}"
     ;;
   'fh '*)
     label="Flathub"
     icon="application-vnd.flatpak"
     url="https://flathub.org/apps/search?q="
-    query="${1:2}"
+    query="${1:3}"
     ;;
   'g '*)
     label="Google"
@@ -60,13 +60,13 @@ case "$1" in
     label="GitHub"
     icon="github"
     url="https://github.com/search?q="
-    query="${1:2}"
+    query="${1:3}"
     ;;
   'hi '*)
     label="Home Manager Issues"
     icon="com.github.zren.bugzilla"
     url="https://github.com/nix-community/home-manager/issues?q=is%3Aissue+is%3Aopen+"
-    query="${1:2}"
+    query="${1:3}"
     ;;
   'ho '*)
     label="Home Manager Options"
@@ -78,13 +78,13 @@ case "$1" in
     label="Hyprland Issues"
     icon="com.github.zren.bugzilla"
     url="https://github.com/hyprwm/Hyprland/issues?q=is%3Aissue+is%3Aopen+"
-    query="${1:2}"
+    query="${1:4}"
     ;;
   'ii '*)
     label="i3 Issues"
     icon="com.github.zren.bugzilla"
     url="https://github.com/i3/i3/issues?q=is%3Aissue+is%3Aopen+"
-    query="${1:2}"
+    query="${1:3}"
     ;;
   'l '*)
     label="Lutris"
@@ -96,73 +96,73 @@ case "$1" in
     label="Lix Issues"
     icon="com.github.zren.bugzilla"
     url="https://git.lix.systems/lix-project/lix/issues?state=open&q="
-    query="${1:2}"
+    query="${1:3}"
     ;;
   'mdn '*)
     label="Mozilla Web Docs"
     icon="emblem-web"
     url="https://developer.mozilla.org/en-US/search?q="
-    query="${1:2}"
+    query="${1:4}"
     ;;
   'mno '*)
     label="MyNixOS Options"
     icon="nix-snowflake"
     url="https://mynixos.com/search?q=option+"
-    query="${1:2}"
+    query="${1:4}"
     ;;
   'nd '*)
     label="Nix Dev"
     icon="nix-snowflake"
     url="https://nix.dev/manual/nix/latest?search="
-    query="${1:2}"
+    query="${1:3}"
     ;;
   'nf '*)
     label="NixOS Flakes"
     icon="nix-snowflake"
     url="https://search.nixos.org/flakes?channel=unstable&query="
-    query="${1:2}"
+    query="${1:3}"
     ;;
   'nh '*)
     label="Nix Hub"
     icon="nix-snowflake"
     url="https://www.nixhub.io/search?q="
-    query="${1:2}"
+    query="${1:3}"
     ;;
   'ni '*)
     label="NixOS Nixpkgs Issues"
     icon="com.github.zren.bugzilla"
     url="https://github.com/NixOS/nixpkgs/issues?q=is%3Aissue+is%3Aopen+"
-    query="${1:2}"
+    query="${1:3}"
     ;;
   'no '*)
     label="NixOS Options"
     icon="nix-snowflake"
     url="https://search.nixos.org/options?channel=unstable&query="
-    query="${1:2}"
+    query="${1:3}"
     ;;
   'nod '*)
     label="Noogle Dev"
     icon="nix-snowflake"
     url="https://noogle.dev/q?term="
-    query="${1:2}"
+    query="${1:4}"
     ;;
   'np '*)
     label="NixOS Packages"
     icon="nix-snowflake"
     url="https://search.nixos.org/packages?channel=unstable&query="
-    query="${1:2}"
+    query="${1:3}"
     ;;
   'npr '*)
     label="Nix PR"
     icon="nix-snowflake"
     url="https://nixpk.gs/pr-tracker.html?pr="
-    query="${1:2}"
+    query="${1:4}"
     ;;
   'nw '*)
     label="NixOS Wiki"
     icon="nix-snowflake"
     url="https://wiki.nixos.org/w/index.php?search="
-    query="${1:2}"
+    query="${1:3}"
     ;;
   'p '*)
     label="Piped"
@@ -174,19 +174,19 @@ case "$1" in
     label="PCGamingWiki"
     icon="computer"
     url="https://www.pcgamingwiki.com/w/index.php?search="
-    query="${1:2}"
+    query="${1:3}"
     ;;
   'pdb '*)
     label="ProtonDB"
     icon="portproton"
     url="https://www.protondb.com/search?q="
-    query="${1:2}"
+    query="${1:4}"
     ;;
   'pip '*)
     label="PyPI"
     icon="python"
     url="https://pypi.org/search/?q="
-    query="${1:2}"
+    query="${1:4}"
     ;;
   'r '*)
     label="Reddit"
@@ -204,7 +204,7 @@ case "$1" in
     label="Sway Issues"
     icon="com.github.zren.bugzilla"
     url="https://github.com/swaywm/sway/issues?q=is%3Aissue+is%3Aopen+"
-    query="${1:2}"
+    query="${1:3}"
     ;;
   'w '*)
     label="Wikipedia"
@@ -216,7 +216,7 @@ case "$1" in
     label="Wolfram Alpha"
     icon="wolfram-mathematica"
     url="https://www.wolframalpha.com/input?i="
-    query="${1:2}"
+    query="${1:3}"
     ;;
   'y '*)
     label="YouTube"
