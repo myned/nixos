@@ -179,6 +179,7 @@ in {
         focus_on_activate = true;
         font_family = config.custom.font.monospace;
         force_default_wallpaper = 0;
+        initial_workspace_tracking = 2; # All children
         key_press_enables_dpms = true;
         middle_click_paste = false;
 
