@@ -122,11 +122,11 @@ in {
           (key "Alt_L" "Super+Alt+Shift" "movetoworkspacesilent" "special:wallpaper")
           (key "Control_L" "Super+Ctrl" "exec" workspace)
           (key "Shift_L" "Super+Shift" "workspace" "previous")
-          (key "Super_L" "Super" "exec" "${menu}")
-          #// (key "Super_L" "Super+Alt" "exec" "${menu} --passwords")
-          (key "Super_L" "Super+Ctrl" "exec" "${menu} --calculator")
-          (key "Super_L" "Super+Ctrl+Shift" "exec" "${menu} --networks")
-          (key "Super_L" "Super+Shift" "exec" "${menu} --search")
+          (key "Super_L" "Super" "exec" menu)
+          #// (key "Super_L" "Super+Alt" "exec" "${menu} search")
+          #// (key "Super_L" "Super+Ctrl" "exec" "${menu} calculator")
+          (key "Super_L" "Super+Ctrl+Shift" "exec" "${menu} network")
+          (key "Super_L" "Super+Shift" "exec" "${menu} search")
         ];
 
         # Regular binds
@@ -263,8 +263,8 @@ in {
           (key "T" "Super" "togglespecialworkspace" "terminal")
           (key "T" "Super+Ctrl" "exec" kitty)
           (key "T" "Super+Shift" "movetoworkspacesilent" "special:terminal")
-          (key "V" "Super" "exec" "${kitty} --app-id clipboard --override font_size=12 ${clipse}")
-          (key "V" "Super+Shift" "exec" "${clipse} --clear && ${notify-send} clipse 'Clipboard cleared' --urgency low")
+          (key "V" "Super" "exec" "${menu} clipboard")
+          (key "V" "Super+Shift" "exec" "${rm} ~/.cache/walker/clipboard.gob && ${notify-send} menu 'Clipboard cleared' --urgency low")
           (key "W" "Super" "togglespecialworkspace" "vm")
           (key "W" "Super+Ctrl" "exec" ''${remote} --vm --client xfreerdp --username Myned --password "$(${cat} ${config.age.secrets."desktop/vm/myndows.pass".path})" ${
               if config.custom.hidpi

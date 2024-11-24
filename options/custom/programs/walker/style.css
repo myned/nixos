@@ -13,20 +13,19 @@ https://docs.gtk.org/gtk4/css-properties.html
 #box {
   background: #002b36;
   border: 2px #073642 solid;
-  border-radius: 25px;
-  padding: 4px;
+  border-radius: 30px;
 }
 
 /* Input box */
 #search entry {
-  border-radius: 25px;
-  margin-bottom: 4px;
-  padding: 4px;
+  border-radius: 30px;
+  margin: 4px;
+  padding: 8px;
 }
 
-/* Input box icons */
-#search entry image {
-  opacity: 0;
+/* Input box typeahead */
+#search #typeahead {
+  opacity: 0.25;
 }
 
 /* List */
@@ -37,7 +36,7 @@ https://docs.gtk.org/gtk4/css-properties.html
 /* List entry */
 #list child {
   border-radius: 25px;
-  margin: 2px 8px;
+  margin: 0px 4px 4px;
   padding: 8px;
 }
 

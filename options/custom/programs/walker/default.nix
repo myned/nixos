@@ -2,6 +2,7 @@
   config,
   lib,
   inputs,
+  pkgs,
   ...
 }:
 with lib; let
@@ -26,63 +27,116 @@ in {
       # https://github.com/abenz1267/walker/blob/master/internal/config/config.default.json
       config = {
         activation_mode.disabled = true; # Key chords
+        force_keyboard_focus = true;
 
-        # BUG: Hover interrupts keyboard selections
-        ignore_mouse = true;
+        list = {
+          placeholder = "";
+          #// show_initial_entries = false;
+          single_click = false;
+        };
 
-        search.placeholder = "";
-
-        disabled = [
-          # BUG: Applications such as GNOME Files require multiple copy operations to register
-          "clipboard"
-        ];
+        search = {
+          placeholder = "";
+        };
 
         # https://github.com/abenz1267/walker/wiki/Modules
-        # https://www.nerdfonts.com/cheat-sheet
-        builtins = {
-          clipboard.switcher_only = true;
-          commands.switcher_only = true;
-          custom_commands.switcher_only = true;
-          runner.switcher_only = true;
-          ssh.switcher_only = true;
-          windows.switcher_only = true;
+        # https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/tree/master/Papirus/64x64
+        disabled = [
+          "commands"
+          "custom_commands"
+          "websearch" # Replaced by custom plugin
+          "windows"
+        ];
 
+        builtins = {
           applications = {
             # BUG: Ghost entries are still visible with single module
-            actions = false; # Desktop file actions
+            actions = false;
+            hide_actions_with_empty_query = true;
 
+            placeholder = "";
             switcher_only = false;
           };
 
           calc = {
-            min_chars = 0;
+            icon = "accessories-calculator";
+            min_chars = 1;
+            placeholder = "";
+            prefix = "=";
+            show_icon_when_single = true;
+            switcher_only = false;
+          };
+
+          clipboard = {
+            max_entries = 50;
+            placeholder = "";
             switcher_only = true;
           };
 
           dmenu = {
-            keep_sort = true; # Disable sorting entries
-            placeholder = "Input";
+            keep_sort = true;
+            placeholder = "";
             switcher_only = true;
           };
 
           emojis = {
-            placeholder = "Unicode";
-            switcher_only = true;
+            placeholder = "";
+            prefix = "`";
+            switcher_only = false;
           };
 
           finder = {
-            placeholder = "Files";
-            switcher_only = true;
+            icon = "filetypes";
+            placeholder = "";
+            prefix = "/";
+            show_icon_when_single = true;
+            switcher_only = false;
           };
 
-          websearch = {
-            # TODO: Implement custom search engine
-            engines = ["duckduckgo"];
+          runner = {
+            icon = "utilities-x-terminal";
+            placeholder = "";
+            prefix = ">";
+            show_icon_when_single = true;
+            switcher_only = false;
+          };
 
-            placeholder = "Search";
-            switcher_only = true;
+          ssh = {
+            icon = "folder-remote-symbolic";
+            placeholder = "";
+            prefix = "ssh";
+            show_icon_when_single = true;
+            switcher_only = false;
+          };
+
+          switcher = {
+            icon = "application-default-icon";
+            prefix = "?";
+            show_icon_when_single = true;
           };
         };
+
+        # https://github.com/abenz1267/walker/wiki/Plugins
+        plugins = [
+          # Search engines by keyword prefix
+          {
+            name = "search";
+            placeholder = "";
+            show_icon_when_single = true;
+            switcher_only = true;
+
+            src = "${pkgs.writeShellApplication {
+              name = "search";
+              text = builtins.readFile ./search.sh;
+
+              runtimeInputs = with pkgs; [
+                coreutils
+                jq
+                xdg-utils
+              ];
+            }}/bin/search '%TERM%'";
+          }
+        ];
       };
 
       # https://github.com/abenz1267/walker/wiki/Theming
@@ -92,20 +146,65 @@ in {
             font: larger ${config.custom.font.sans-serif};
           }
 
+          placeholder {
+            font: larger ${config.custom.font.monospace};
+          }
+
           ${builtins.readFile ./style.css}
         '';
 
+        #!! Inherit from default layout
         # https://github.com/abenz1267/walker/blob/master/internal/config/layout.default.json
-        layout.ui.window.box.scroll.list = {
-          max_height = 500 / config.custom.scale;
-          min_width = 750 / config.custom.scale;
+        layout.ui.window = let
+          w = 1000 / config.custom.scale;
+          h = 500 / config.custom.scale;
+        in {
+          width = w;
+          height = h;
 
-          item = {
-            text.sub.hide = true; # Subtext
+          box = {
+            h_align = "fill";
+            width = -1;
+            height = -1;
 
-            icon = {
-              icon_size = "largest"; # 128px
-              pixel_size = 32; # Downscale
+            ai_scroll = {
+              # BUG: AiScroll H/VScrollbarPolicy applies to Scroll widget
+              h_scrollbar_policy = "external";
+              v_scrollbar_policy = "external";
+            };
+
+            scroll = {
+              h_align = "fill";
+              h_scrollbar_policy = "external";
+              v_scrollbar_policy = "external";
+
+              list = {
+                width = -1;
+                height = -1;
+                min_width = -1;
+                min_height = -1;
+                max_width = w;
+                max_height = h;
+
+                item = {
+                  icon = {
+                    icon_size = "largest"; # 128px
+                    pixel_size = 32; # Downscale
+                  };
+
+                  text = {
+                    sub = {
+                      hide = true; # Subtext
+                    };
+                  };
+                };
+              };
+            };
+
+            search = {
+              input = {
+                icons = false;
+              };
             };
           };
         };

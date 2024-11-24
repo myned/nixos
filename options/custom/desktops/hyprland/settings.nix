@@ -70,8 +70,7 @@ in {
         ++ [
           sway-audio-idle-inhibit # Inhibit idle while audio is playing
           "${audio} --init" # Enforce audio profile state
-          "${clipse} --listen" # Monitor clipboard
-          "${sleep} 1 && ${clipse} --clear" # Clear clipboard history
+          "${rm} ~/.cache/walker/clipboard.gob" # Clear clipboard history
           "${_1password} --silent" # Launch password manager in background
           #// "[group new; tile] ${firefox-esr}"
 

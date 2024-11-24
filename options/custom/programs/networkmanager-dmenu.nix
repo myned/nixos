@@ -14,13 +14,13 @@ in {
     # https://github.com/firecat53/networkmanager-dmenu
     # https://github.com/firecat53/networkmanager-dmenu/blob/main/config.ini.example
     #!! Option not available, files written directly
-    # FIXME: active_chars does not take effect
     xdg.configFile."networkmanager-dmenu/config.ini".text = ''
       [dmenu]
+      compact = true
       dmenu_command = ${menu} --input
-      active_chars = >
+      active_chars = 
       wifi_icons = 󰤯󰤟󰤢󰤥󰤨
-      format = {icon}  {name}
+      format = {icon}    {name}
     '';
   };
 }
