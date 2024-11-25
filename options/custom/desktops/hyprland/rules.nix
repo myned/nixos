@@ -285,6 +285,7 @@ in {
           (class "steam_app_1473350" ["workspace 0"]) # (the) Gnorp Apologue
           (class "Tap Wizard 2\\.x86_64" ["workspace 0"])
           (class "Xdg-desktop-portal-gtk" ["noborder" "noshadow"])
+          (title "File Upload" ["center" "float" "size 1000 625"])
           (title "Open" ["center" "float" "size 1000 625"])
           (title "Save As" ["center" "float" "size 1000 625"])
 
