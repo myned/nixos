@@ -10,6 +10,7 @@ with lib; let
   hyprctl = "${config.programs.hyprland.package}/bin/hyprctl";
   kitty = "${config.home-manager.users.${config.custom.username}.programs.kitty.package}/bin/kitty";
   launch = config.home-manager.users.${config.custom.username}.home.file.".local/bin/launch".source;
+  libreoffice = "${config.custom.programs.libreoffice.package}/bin/libreoffice";
   loupe = "${pkgs.loupe}/bin/loupe";
   onlyoffice-desktopeditors = "${pkgs.onlyoffice-bin}/bin/onlyoffice-desktopeditors --system-title-bar --xdg-desktop-portal";
   pgrep = "${pkgs.procps}/bin/pgrep";
@@ -32,7 +33,7 @@ in {
         "special:android, on-created-empty:${launch} --workspace special:android --empty ${waydroid} app launch com.YoStarEN.Arknights"
         "special:gamescope, on-created-empty:MANGOHUD=0 ${gamescope} --fullscreen --steam ${steam}"
         "special:music, on-created-empty:${youtube-music}"
-        "special:office, on-created-empty:${launch} --workspace special:office --empty --tile -- ${onlyoffice-desktopeditors}"
+        "special:office, on-created-empty:${launch} --workspace special:office --empty --tile -- ${libreoffice}"
         "special:password, on-created-empty:${launch} --workspace special:password --empty ${_1password}"
         "special:steam, on-created-empty:${steam}"
         "special:terminal, on-created-empty:${kitty}"

@@ -20,13 +20,14 @@ with lib; let
   kill = "${pkgs.procps}/bin/kill";
   kitty = "${config.home-manager.users.${config.custom.username}.programs.kitty.package}/bin/kitty";
   left = config.home-manager.users.${config.custom.username}.home.file.".local/bin/left".source;
+  libreoffice = "${config.custom.programs.libreoffice.package}/bin/libreoffice";
   loginctl = "${pkgs.systemd}/bin/loginctl";
   menu = config.home-manager.users.${config.custom.username}.home.file.".local/bin/menu".source;
   nautilus = "${pkgs.nautilus}/bin/nautilus";
   networkmanager_dmenu = "${pkgs.networkmanager_dmenu}/bin/networkmanager_dmenu";
   notify-send = "${pkgs.libnotify}/bin/notify-send";
   obsidian = "${pkgs.obsidian}/bin/obsidian";
-  onlyoffice = "${pkgs.onlyoffice-bin}/bin/onlyoffice-desktopeditors --system-title-bar --xdg-desktop-portal";
+  onlyoffice-desktopeditors = "${pkgs.onlyoffice-bin}/bin/onlyoffice-desktopeditors --system-title-bar --xdg-desktop-portal";
   pkill = "${pkgs.procps}/bin/pkill";
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   remote = config.home-manager.users.${config.custom.username}.home.file.".local/bin/remote".source;
@@ -204,7 +205,7 @@ in {
           (key "Up" "Super+Shift" "movewindow" "u")
 
           (key "0" "Super" "exec" "${swayosd-client} --output-volume mute-toggle")
-          (key "0" "Super+Shift" "exec" "${zoom}")
+          (key "0" "Super+Shift" "exec" zoom)
           (key "1" "Ctrl+Alt" "exec" "lifx state --brightness 0.01")
           (key "1" "Super" "workspace" "1")
           (key "1" "Super+Alt" "exec" "lifx state --kelvin 1500")
@@ -231,7 +232,7 @@ in {
           (key "7" "Super+Shift" "movetoworkspacesilent" "7")
           (key "8" "Super" "workspace" "8")
           (key "8" "Super+Shift" "movetoworkspacesilent" "8")
-          (key "9" "Super" "exec" "${audio}")
+          (key "9" "Super" "exec" audio)
           (key "A" "Ctrl+Alt" "exec" "${waydroid} session stop")
           (key "A" "Super" "togglespecialworkspace" "android")
           (key "A" "Super+Shift" "movetoworkspacesilent" "special:android")
@@ -247,7 +248,7 @@ in {
           (key "M" "Super" "togglespecialworkspace" "music")
           (key "M" "Super+Shift" "movetoworkspacesilent" "special:music")
           (key "O" "Super" "togglespecialworkspace" "office")
-          (key "O" "Super+Ctrl" "exec" "${onlyoffice}")
+          (key "O" "Super+Ctrl" "exec" libreoffice)
           (key "O" "Super+Shift" "movetoworkspacesilent" "special:office")
           (key "P" "Ctrl+Alt" "exec" "${pkill} 1password")
           (key "P" "Super" "togglespecialworkspace" "password")
