@@ -93,6 +93,7 @@ in {
           gnome-calendar # Calendar
           gnome-connections # Remote desktop client
           gnome-disk-utility # Disk formatter
+          gnome-firmware # Firmware updater
           gnome-font-viewer # Font viewer
           gnome-graphs # Data plotter
           gnome-maps # OpenStreetMap client
