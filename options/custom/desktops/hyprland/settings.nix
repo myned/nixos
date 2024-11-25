@@ -112,6 +112,7 @@ in {
         "col.nogroup_border" = "rgba(dc322f40)";
         #// allow_tearing = true;
         border_size = config.custom.border;
+        extend_border_grab_area = 5;
         gaps_in = config.custom.gap / 2;
         gaps_out = config.custom.gap;
         layout = "master";
