@@ -185,7 +185,7 @@ in {
               }
               rules)
             (fields {
-                class = "^firefox$";
+                class = "^firefox.*$";
                 title = "^(?!Picture.in.[Pp]icture).*$";
               }
               rules)
