@@ -54,7 +54,7 @@ in {
             #// eamodio.gitlens
             esbenp.prettier-vscode
             foxundermoon.shell-format
-            ginfuru.ginfuru-better-solarized-dark-theme
+            #// ginfuru.ginfuru-better-solarized-dark-theme
             gruntfuggly.todo-tree
             jnoortheen.nix-ide
             koihik.vscode-lua-format
