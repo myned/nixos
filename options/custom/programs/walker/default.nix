@@ -51,7 +51,7 @@ in {
         builtins = {
           applications = {
             # BUG: Ghost entries are still visible with single module
-            actions = false;
+            actions.enabled = false;
             hide_actions_with_empty_query = true;
 
             placeholder = "";
