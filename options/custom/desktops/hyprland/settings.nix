@@ -247,53 +247,37 @@ in {
       # https://wiki.hyprland.org/Configuring/Variables/#custom-accel-profiles
       # https://wayland.freedesktop.org/libinput/doc/latest/pointer-acceleration.html#the-custom-acceleration-profile
       #?? custom <STEP> <POINTS...>
-      # TODO: Combine same devices
-      # FIXME: Hotplugging may result in different id
-      device = [
-        {
-          name = "kensington-orbit-wireless-tb-mouse";
-          accel_profile = "adaptive";
-          sensitivity = -0.6;
-          left_handed = true;
-          middle_button_emulation = true;
-          natural_scroll = true;
-        }
+      device = let
+        # Combine duplicate devices into one attrset
+        #?? (devices ["NAME"] {ATTRS})
+        devices = names: attrs: map (name: {inherit name;} // attrs) names;
+      in
+        flatten [
+          (devices ["kensington-orbit-wireless-tb-mouse" "orbit-bt5.0-mouse"] {
+            accel_profile = "adaptive";
+            left_handed = true;
+            middle_button_emulation = true;
+            natural_scroll = true;
+            sensitivity = -0.6;
+          })
 
-        {
-          name = "orbit-bt5.0-mouse";
-          accel_profile = "adaptive";
-          sensitivity = -0.6;
-          left_handed = true;
-          middle_button_emulation = true;
-          natural_scroll = true;
-        }
+          (devices ["logitech-m570"] {
+            accel_profile = "custom 1 0 1 3";
+            sensitivity = -0.2;
+          })
 
-        {
-          name = "logitech-m570";
-          accel_profile = "custom 1 0 1 3";
-          sensitivity = -0.2;
-        }
+          (devices ["nordic-2.4g-wireless-receiver-mouse" "protoarc-em11-nl-mouse"] {
+            sensitivity = -0.7;
+          })
 
-        {
-          name = "nordic-2.4g-wireless-receiver-mouse";
-          sensitivity = -0.7;
-        }
+          (devices ["razer-razer-viper-ultimate" "razer-razer-viper-ultimate-dongle"] {
+            sensitivity = -0.7;
+          })
 
-        {
-          name = "protoarc-em11-nl-mouse";
-          sensitivity = -0.7;
-        }
-
-        {
-          name = "razer-razer-viper-ultimate-dongle";
-          sensitivity = -0.7;
-        }
-
-        {
-          name = "wireless-controller-touchpad";
-          enabled = false;
-        }
-      ];
+          (devices ["wireless-controller-touchpad"] {
+            enabled = false;
+          })
+        ];
     };
   };
 }
