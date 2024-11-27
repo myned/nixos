@@ -197,7 +197,7 @@ in {
             (class "dropdown" rules)
           ];
           editor = rules: [
-            (class "codium-url-handler" rules) # VSCode
+            (class "codium" rules) # VSCode
             (class "obsidian" (rules ++ ["group barred"]))
           ];
           files = rules: [
