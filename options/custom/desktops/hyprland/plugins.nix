@@ -28,6 +28,7 @@ in {
           "plugin:hyprbars:nobar, class:^clipboard$"
           "plugin:hyprbars:nobar, class:^discord$, title:^Discord Updater$"
           "plugin:hyprbars:nobar, class:^dropdown$"
+          "plugin:hyprbars:nobar, class:^moe\\.launcher\\..+$"
           "plugin:hyprbars:nobar, class:^org\\.gnome\\.Nautilus$, title:^New Folder$"
           "plugin:hyprbars:nobar, class:^org\\.gnome\\.NautilusPreviewer$"
           "plugin:hyprbars:nobar, class:^steam$"

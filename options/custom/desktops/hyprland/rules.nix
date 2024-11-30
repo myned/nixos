@@ -204,7 +204,7 @@ in {
             (class "org\\.gnome\\.Nautilus" rules)
           ];
           game = rules: [
-            (class "moe\\.launcher\\.the-honkers-railway-launcher" (rules ++ ["size 1280 730"])) # Honkai: Star Rail
+            (class "moe\\.launcher\\..+" (rules ++ ["size 1280 730"])) # An Anime Game Launcher
             (class "net.retrodeck.retrodeck" rules) # Emulators
             (class "steam_app_.+" rules) # Proton
           ];
