@@ -6,9 +6,9 @@
 
 # @meta combine-shorts
 
-# HACK: Restart service to close existing menu
-if hyprctl -j layers | jq -e '.[][][][] | select(.namespace == "walker")'; then
-  systemctl --user restart walker.service
+# HACK: Send Esc to close menu, requires window instead of layer
+if hyprctl -j clients | jq -e '.[] | select(.class == "dev.benz.walker")'; then
+  hyprctl dispatch sendshortcut ', Escape, class:^dev\.benz\.walker$'
   exit
 fi
 

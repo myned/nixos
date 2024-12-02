@@ -281,6 +281,7 @@ in {
           (tag.wine ["noborder" "noshadow"])
 
           ### Overrides
+          (class "dev\\.benz\\.walker" ["noanim" "noshadow" "pin" "stayfocused"]) # Imitate layer
           (class "org\\.gnome\\.NautilusPreviewer" ["stayfocused"]) # Sushi
           (class "signal" ["group override new" "tile"]) # Initial window in social group
           (class "steam_app_1473350" ["workspace 0"]) # (the) Gnorp Apologue

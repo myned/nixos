@@ -26,6 +26,7 @@ in {
           "plugin:hyprbars:nobar, floating:0"
           "plugin:hyprbars:nobar, class:^1Password$, title:^1Password$"
           "plugin:hyprbars:nobar, class:^clipboard$"
+          "plugin:hyprbars:nobar, class:^dev\\.benz\\.walker$"
           "plugin:hyprbars:nobar, class:^discord$, title:^Discord Updater$"
           "plugin:hyprbars:nobar, class:^dropdown$"
           "plugin:hyprbars:nobar, class:^moe\\.launcher\\..+$"

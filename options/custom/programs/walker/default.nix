@@ -29,6 +29,9 @@ in {
         activation_mode.disabled = true; # Key chords
         force_keyboard_focus = true;
 
+        # HACK: Window client required to send Esc key on Hyprland
+        as_window = true; # Disable layer
+
         list = {
           placeholder = "";
           #// show_initial_entries = false;
