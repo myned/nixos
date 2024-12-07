@@ -44,6 +44,7 @@
         ];
       };
 
+      # TODO: Setup netdata
       # netdata = {
       #   enable = true;
       #   parent = true;
@@ -59,10 +60,5 @@
         group = "syncthing";
       };
     };
-
-    # settings = {
-    #   mounts.enable = true;
-    #   #// users.myned.linger = true;
-    # };
   };
 }
