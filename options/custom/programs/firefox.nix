@@ -230,6 +230,7 @@ in {
           "extensions.formautofill.creditCards.enabled" = locked false;
           "general.autoScroll" = locked false;
           "general.smoothScroll" = locked true;
+          "gfx.webrender.software" = locked true;
           "layers.acceleration.force-enabled" = locked true;
           "layout.css.always_underline_links" = locked false;
           "layout.css.backdrop-filter.enabled" = locked true;
