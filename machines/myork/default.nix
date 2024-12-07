@@ -1,7 +1,6 @@
 {
   config,
   inputs,
-  lib,
   pkgs,
   ...
 }: let
@@ -30,20 +29,6 @@ in {
     };
   };
 
-  home-manager.users.${config.custom.username} = {
-    wayland.windowManager.hyprland.settings = {
-      exec-once = ["${brightnessctl} set 0%"];
-
-      device = [
-        {
-          name = "pixa3854:00-093a:0274-touchpad";
-          accel_profile = "adaptive";
-          sensitivity = 0.3;
-        }
-      ];
-    };
-  };
-
   services.keyd.keyboards.default.settings.main.rightcontrol = "layer(altgr)"; # No Ctrl_R
 
   boot = {
@@ -68,5 +53,19 @@ in {
       # https://wiki.archlinux.org/title/CPU_frequency_scaling#amd_pstate
       #// "amd_pstate=disable"
     ];
+  };
+
+  home-manager.users.${config.custom.username} = {
+    wayland.windowManager.hyprland.settings = {
+      exec-once = ["${brightnessctl} set 0%"];
+
+      device = [
+        {
+          name = "pixa3854:00-093a:0274-touchpad";
+          accel_profile = "adaptive";
+          sensitivity = 0.3;
+        }
+      ];
+    };
   };
 }
