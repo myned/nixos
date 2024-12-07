@@ -27,6 +27,7 @@ in {
           SYNC.path = config.custom.sync;
 
           global = {
+            "acl allow execute always" = "yes"; # Required for execution on Windows
             "allow insecure wide links" = "yes";
             "browseable" = "no";
             "follow symlinks" = "yes";
