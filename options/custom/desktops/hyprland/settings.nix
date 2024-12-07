@@ -39,7 +39,7 @@ in {
 
       # https://wiki.hyprland.org/Configuring/Monitors
       #?? monitor = NAME, RESOLUTION, POSITION, SCALE
-      monitor = [
+      monitor = mkBefore [
         ", highrr, auto, ${toString config.custom.scale}"
 
         # HACK: Ensure the fallback output has a sane resolution
@@ -79,7 +79,7 @@ in {
           # HACK: Launch hidden GTK windows to reduce startup time
           "[workspace special:hidden silent] ${loupe}"
           "[workspace special:hidden silent] ${nautilus}"
-]
+        ]
         ++ optionals config.custom.wallpaper [
           "wallpaper"
         ]
