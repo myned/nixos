@@ -214,6 +214,7 @@ in {
           "browser.search.widget.inNavBar" = locked false;
           "browser.startup.homepage" = locked "about:home";
           "browser.startup.page" = locked 3; # Previous session
+          "browser.tabs.allowTabDetach" = locked false;
           "browser.tabs.closeTabByDblclick" = locked true;
           "browser.tabs.closeWindowWithLastTab" = locked false;
           "browser.tabs.insertAfterCurrent" = locked false;
