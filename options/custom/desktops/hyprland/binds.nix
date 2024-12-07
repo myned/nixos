@@ -272,6 +272,7 @@ in {
               then "--scale 140"
               else ""
             } myndows'')
+          (key "W" "Super+Ctrl+Shift" "exec" virt-manager)
           (key "W" "Super+Shift" "movetoworkspacesilent" "special:vm")
           (key "X" "Super" "workspace" "+1")
           (key "X" "Super+Shift" "movetoworkspacesilent" "+1")
