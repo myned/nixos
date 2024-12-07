@@ -35,10 +35,20 @@ in {
     };
 
     # Serve static files
-    systemd.tmpfiles.rules = [
-      "d /srv/static - caddy caddy"
-      "Z /srv/static - caddy caddy"
-    ];
+    systemd.tmpfiles.settings."10-caddy" = {
+      "/srv/static" = {
+        d = {
+          user = "caddy";
+          group = "caddy";
+        };
+
+        #!! Recursive
+        Z = {
+          user = "caddy";
+          group = "caddy";
+        };
+      };
+    };
 
     # https://wiki.nixos.org/wiki/Firewall
     # https://github.com/coturn/coturn/blob/master/docker/coturn/README.md

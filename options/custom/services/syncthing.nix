@@ -157,7 +157,14 @@ in {
 
     systemd = {
       # Ensure creation of config directory
-      tmpfiles.rules = ["d ${cfg.configDir} - ${cfg.user} ${cfg.group}"];
+      tmpfiles.settings."10-syncthing" = {
+        ${cfg.configDir} = {
+          d = {
+            user = cfg.user;
+            group = cfg.group;
+          };
+        };
+      };
 
       #!! Syncthing needs to start after mounting or there is a risk of file deletion
       # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/networking/syncthing.nix#L646

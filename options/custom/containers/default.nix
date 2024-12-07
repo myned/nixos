@@ -79,7 +79,16 @@ in {
         podman-tui
       ];
 
-    systemd.tmpfiles.rules = ["d /containers 0700 root root"]; # Custom directory for containers
+    systemd.tmpfiles.settings."10-containers" = {
+      "/containers" = {
+        d = {
+          mode = "0700";
+          user = "root";
+          group = "root";
+        };
+      };
+    };
+
     users.users.${config.custom.username}.extraGroups = [
       (
         if cfg.docker

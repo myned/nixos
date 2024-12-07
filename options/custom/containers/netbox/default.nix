@@ -81,6 +81,14 @@ in {
     };
 
     #!! Required for correct volume permissions
-    systemd.tmpfiles.rules = ["z ${config.custom.containers.directory}/netbox/media 0770 999 root"]; # unit:root
+    systemd.tmpfiles.settings."10-netbox" = {
+      "${config.custom.containers.directory}/netbox/media" = {
+        z = {
+          mode = "0770";
+          user = "999"; # unit
+          group = "root";
+        };
+      };
+    };
   };
 }

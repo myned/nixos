@@ -11,9 +11,20 @@ in {
   config = mkIf cfg.enable {
     # https://www.freedesktop.org/software/systemd/man/latest/tmpfiles.d.html
     # Create NixOS configuration directory and set permissions
-    systemd.tmpfiles.rules = [
-      "d /etc/nixos 0755 myned root"
-      "Z /etc/nixos - myned root" # Recursively set owner
-    ];
+    systemd.tmpfiles.settings."10-nixos" = {
+      "/etc/nixos" = {
+        d = {
+          mode = "0755";
+          user = config.custom.username;
+          group = "root";
+        };
+
+        #!! Recursive
+        Z = {
+          user = config.custom.username;
+          group = "root";
+        };
+      };
+    };
   };
 }

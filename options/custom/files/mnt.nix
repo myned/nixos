@@ -10,6 +10,14 @@ in {
 
   config = mkIf cfg.enable {
     # Set /mnt permissions
-    systemd.tmpfiles.rules = ["z /mnt 0755 root root"];
+    systemd.tmpfiles.settings."10-mnt" = {
+      "/mnt" = {
+        z = {
+          mode = "0755";
+          user = "root";
+          group = "root";
+        };
+      };
+    };
   };
 }
