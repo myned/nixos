@@ -6,12 +6,24 @@
   ...
 }:
 with lib; let
+  virsh = "${config.virtualisation.libvirtd.package}/bin/virsh";
+
   cfg = config.custom.settings.vm;
 in {
   options.custom.settings.vm = {
     enable = mkOption {default = false;};
     libvirt = mkOption {default = true;};
     virtualbox = mkOption {default = false;};
+
+    passthrough = {
+      enable = mkOption {default = false;};
+      driver = mkOption {default = null;}; #?? lspci -k
+      guest = mkOption {default = null;}; #?? virsh list --all
+      id = mkOption {default = null;}; #?? lspci -nn
+      init = mkOption {default = false;};
+      intel = mkOption {default = false;};
+      node = mkOption {default = null;}; #?? virsh nodedev-list
+    };
   };
 
   config = mkIf cfg.enable {
@@ -23,12 +35,37 @@ in {
         onBoot = "ignore";
         onShutdown = "shutdown";
 
+        # https://libvirt.org/hooks.html
+        hooks.qemu = {
+          # Attach/detach GPU for passthrough
+          passthrough = mkIf cfg.passthrough.enable (pkgs.writeShellScript "passthrough" ''
+            if [[ "$1" == "${cfg.passthrough.guest}" ]]; then
+              case "$2" in
+                prepare)
+                  ${virsh} nodedev-detach ${cfg.passthrough.node}
+                  ;;
+                release)
+                  ${virsh} nodedev-reattach ${cfg.passthrough.node}
+                  ;;
+                *)
+                  exit
+                  ;;
+              esac
+            fi
+          '');
+        };
+
         qemu = {
           swtpm.enable = true; # TPM emulation
 
+          # BUG: Windows requires global mountpoint for some applications (\\.\*: instead of *:)
+          # https://github.com/virtio-win/kvm-guest-drivers-windows/issues/950
+          # https://virtio-win.github.io/Knowledge-Base/Virtiofs:-Shared-file-system
+          #// vhostUserPackages = with pkgs; [virtiofsd]; # virtiofs support
+
           # Build OVMF with Windows 11 support
-          ovmf.packages = [
-            (pkgs.OVMF.override {
+          ovmf.packages = with pkgs; [
+            (OVMF.override {
               secureBoot = true;
               tpmSupport = true;
             })
@@ -77,24 +114,42 @@ in {
       ++ lib.optionals cfg.virtualbox ["vboxusers"];
 
     systemd = mkIf cfg.libvirt {
-      # Fix resume messages polluting tty
-      services.libvirt-guests.serviceConfig.StandardOutput = "journal";
+      services = {
+        # Fix resume messages polluting tty
+        libvirt-guests.serviceConfig = {
+          StandardOutput = "journal";
+        };
+      };
 
-      tmpfiles.rules = let
-        firmware = pkgs.runCommandLocal "qemu-firmware" {} ''
-          mkdir $out
-          cp ${pkgs.qemu}/share/qemu/firmware/*.json $out
-          substituteInPlace $out/*.json --replace ${pkgs.qemu} /run/current-system/sw
-        '';
-      in [
+      tmpfiles.settings."10-vm" = {
+        # HACK: Manually link image to default directory
+        "/var/lib/libvirt/images/virtio-win.iso" = {
+          "L+" = {
+            argument = "${inputs.virtio-win}";
+          };
+        };
+
         # HACK: Fix libvirt not automatically locating firmware
         # https://github.com/NixOS/nixpkgs/issues/115996#issuecomment-2224296279
         # https://libvirt.org/formatdomain.html#bios-bootloader
-        "L+ /var/lib/qemu/firmware - - - - ${firmware}"
+        "/var/lib/qemu/firmware" = {
+          "L+" = {
+            argument = "${pkgs.runCommandLocal "qemu-firmware" {} ''
+              mkdir $out
+              cp ${pkgs.qemu}/share/qemu/firmware/*.json $out
+              substituteInPlace $out/*.json --replace ${pkgs.qemu} /run/current-system/sw
+            ''}";
+          };
+        };
+      };
+    };
 
-        # HACK: Manually link image to default directory
-        "L+ /var/lib/libvirt/images/virtio-win.iso - - - - ${inputs.virtio-win}"
-      ];
+    boot = mkIf cfg.passthrough.enable {
+      # https://wiki.archlinux.org/title/PCI_passthrough_via_OVMF#Isolating_the_GPU
+      blacklistedKernelModules = mkIf cfg.passthrough.init [cfg.passthrough.driver];
+
+      # https://wiki.archlinux.org/title/PCI_passthrough_via_OVMF#Enabling_IOMMU
+      kernelParams = mkIf cfg.passthrough.intel ["intel_iommu=on"];
     };
   };
 }

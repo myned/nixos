@@ -9,14 +9,17 @@ with lib; let
   audio = config.home-manager.users.${config.custom.username}.home.file.".local/bin/audio".source;
   clipse = "${pkgs.clipse}/bin/clipse";
   firefox-esr = "${config.home-manager.users.${config.custom.username}.programs.firefox.finalPackage}/bin/firefox-esr";
+  grep = "${pkgs.gnugrep}/bin/grep";
   left = config.home-manager.users.${config.custom.username}.home.file.".local/bin/left".source;
   loupe = "${pkgs.loupe}/bin/loupe";
+  modprobe = "${pkgs.kmod}/bin/modprobe";
   nautilus = "${pkgs.nautilus}/bin/nautilus";
   pkill = "${pkgs.procps}/bin/pkill";
   rm = "${pkgs.coreutils}/bin/rm";
   sleep = "${pkgs.coreutils}/bin/sleep";
   sway-audio-idle-inhibit = "${pkgs.sway-audio-idle-inhibit}/bin/sway-audio-idle-inhibit";
   systemctl = "${pkgs.systemd}/bin/systemctl";
+  virsh = "${config.virtualisation.libvirtd.package}/bin/virsh";
   waybar = "${config.home-manager.users.${config.custom.username}.programs.waybar.package}/bin/waybar";
 
   cfg = config.custom.desktops.hyprland.settings;
@@ -66,8 +69,7 @@ in {
 
       # https://wiki.hyprland.org/Configuring/Keywords/#executing
       exec-once =
-        optionals config.custom.wallpaper ["wallpaper"]
-        ++ [
+        [
           sway-audio-idle-inhibit # Inhibit idle while audio is playing
           "${audio} --init" # Enforce audio profile state
           "${rm} ~/.cache/walker/clipboard.gob" # Clear clipboard history
@@ -77,6 +79,13 @@ in {
           # HACK: Launch hidden GTK windows to reduce startup time
           "[workspace special:hidden silent] ${loupe}"
           "[workspace special:hidden silent] ${nautilus}"
+]
+        ++ optionals config.custom.wallpaper [
+          "wallpaper"
+        ]
+        # HACK: Delay driver initialization to work around reset issues
+        ++ optionals config.custom.settings.vm.passthrough.init [
+          "${virsh} list | ${grep} ${config.custom.settings.vm.passthrough.guest} || sudo ${modprobe} ${config.custom.settings.vm.passthrough.driver}"
         ];
 
       # https://wiki.hyprland.org/Configuring/Variables/#xwayland

@@ -9,6 +9,15 @@
     width = 3440;
     height = 1440;
     refresh = 100;
+      vm.passthrough = {
+        enable = true;
+        driver = "amdgpu";
+        guest = "myndows";
+        id = "1002:73df";
+        init = true;
+        intel = true;
+        node = "pci_0000_03_00_0";
+      };
   };
 
   boot = {
