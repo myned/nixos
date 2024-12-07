@@ -94,6 +94,11 @@ in {
               libnotify
               systemd
             ])
+            (bash "iommu" [
+              coreutils
+              findutils
+              pciutils
+            ])
             (bash "launch" [
               argc
               coreutils
