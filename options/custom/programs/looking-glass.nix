@@ -81,6 +81,11 @@ in {
               else "/dev/shm/looking-glass";
           };
 
+          egl = {
+            doubleBuffer = true;
+            vsync = true;
+          };
+
           input = {
             grabKeyboard = false;
             ignoreWindowsKeys = true;
