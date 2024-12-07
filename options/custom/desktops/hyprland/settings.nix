@@ -253,6 +253,10 @@ in {
         devices = names: attrs: map (name: {inherit name;} // attrs) names;
       in
         flatten [
+          (devices ["compx-2.4g-receiver-mouse"] {
+            accel_profile = "custom 1 0 1 10 20";
+          })
+
           (devices ["kensington-orbit-wireless-tb-mouse" "orbit-bt5.0-mouse"] {
             accel_profile = "adaptive";
             left_handed = true;
@@ -270,7 +274,7 @@ in {
             sensitivity = -0.7;
           })
 
-          (devices ["razer-razer-viper-ultimate" "razer-razer-viper-ultimate-dongle"] {
+          (devices ["razer-razer-viper-ultimate" "razer-razer-viper-ultimate-dongle" "razer-razer-viper-ultimate-dongle-1"] {
             sensitivity = -0.7;
           })
 
