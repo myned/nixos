@@ -246,6 +246,7 @@ in {
           ];
           vm = rules: [
             (class "(sdl-|wl|x)freerdp" (rules ++ ["nomaxsize" "tile"]))
+            (class "looking-glass-client" rules)
             (class "org\\.remmina\\.Remmina" (rules ++ ["tile"]))
             (class "virt-manager" rules)
           ];

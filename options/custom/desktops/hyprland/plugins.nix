@@ -29,6 +29,7 @@ in {
           "plugin:hyprbars:nobar, class:^dev\\.benz\\.walker$"
           "plugin:hyprbars:nobar, class:^discord$, title:^Discord Updater$"
           "plugin:hyprbars:nobar, class:^dropdown$"
+          "plugin:hyprbars:nobar, class:^looking-glass-client$"
           "plugin:hyprbars:nobar, class:^moe\\.launcher\\..+$"
           "plugin:hyprbars:nobar, class:^org\\.gnome\\.Nautilus$, title:^New Folder$"
           "plugin:hyprbars:nobar, class:^org\\.gnome\\.NautilusPreviewer$"
