@@ -49,6 +49,9 @@ in {
           kdiskmark # Must be system package for polkit
 
           ### CLI applications
+          mesa-demos # <glx|vk>gears
+          vulkan-tools # vkcube
+
           # https://github.com/sonic2kk/steamtinkerlaunch
           # TODO: Remove when v14 released on nixpkgs
           # https://github.com/sonic2kk/steamtinkerlaunch/issues/992
