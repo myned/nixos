@@ -9,6 +9,10 @@
     width = 3440;
     height = 1440;
     refresh = 100;
+
+    settings = {
+      storage.mnt = ["gayme" "myve"];
+
       vm.passthrough = {
         enable = true;
         driver = "amdgpu";
@@ -17,6 +21,7 @@
         init = true;
         intel = true;
         node = "pci_0000_03_00_0";
+      };
       };
   };
 
