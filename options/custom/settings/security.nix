@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -24,6 +25,22 @@ in {
           });
         '';
       };
+    };
+
+    environment.shellAliases = {
+      # Sudo confirmation prompt
+      sudo = pkgs.writeShellScript "sudo" ''
+        read -p "Execute as root? [Y/n] "
+
+        case "$REPLY" in
+          "" | [Yy])
+            command sudo "$@"
+            ;;
+          *)
+            exit 1
+            ;;
+        esac
+      '';
     };
   };
 }
