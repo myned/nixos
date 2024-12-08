@@ -40,7 +40,7 @@ in {
 
     font = {
       emoji = mkOption {default = "Noto Color Emoji";};
-      monospace = mkOption {default = "Iosevka NFP SemiBold";};
+      monospace = mkOption {default = "IosevkaTermSlab NFP Medium";};
       sans-serif = mkOption {default = "Outfit";};
       serif = mkOption {default = "Liberation Serif";};
     };

@@ -14,30 +14,41 @@ in {
     fonts = {
       enableDefaultPackages = true; # Fallback fonts
 
-      packages = with pkgs; [
-        # Monospace
-        (nerdfonts.override {fonts = ["Iosevka"];})
+      packages = with pkgs.nerd-fonts;
+        [
+          ### Monospace
+          # https://www.nerdfonts.com/#home
+          #?? kitten choose-fonts
+          departure-mono
+          gohufont
+          iosevka-term
+          iosevka-term-slab
+          jetbrains-mono
+          space-mono
+          zed-mono
+        ]
+        ++ (with pkgs; [
+          ### Sans Serif
+          (google-fonts.override {
+            fonts = [
+              # Text
+              "Jost"
+              "Lexend"
+              "Outfit"
 
-        # Sans Serif
-        (google-fonts.override {
-          fonts = [
-            # Text
-            "Jost"
-            "Lexend"
-            "Outfit"
+              # Condensed
+              "Oswald"
 
-            # Condensed
-            "Oswald"
+              # Pixel
+              "Silkscreen"
+            ];
+          })
 
-            # Pixel
-            "Silkscreen"
-          ];
-        })
-
-        # Microsoft
-        corefonts
-        vistafonts
-      ];
+          ### Other
+          # Microsoft
+          corefonts
+          vistafonts
+        ]);
 
       #?? fc-list --brief | grep family: | sort
       fontconfig.defaultFonts = {
@@ -48,7 +59,6 @@ in {
       };
     };
 
-    home-manager.users.${config.custom.username}.fonts.fontconfig.defaultFonts =
-      config.fonts.fontconfig.defaultFonts;
+    home-manager.users.${config.custom.username}.fonts.fontconfig.defaultFonts = config.fonts.fontconfig.defaultFonts;
   };
 }
