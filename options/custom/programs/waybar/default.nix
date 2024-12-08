@@ -63,6 +63,14 @@ in {
         style = ''
           ${readFile ./style.css}
 
+          * {
+            border-radius: 50px;
+            color: #93a1a1;
+            font: 18px '${config.custom.font.monospace}';
+            margin: 0;
+            padding: 0;
+          }
+
           .horizontal > box {
             margin: 0 ${toString config.custom.gap}px ${toString config.custom.gap}px;
           }
