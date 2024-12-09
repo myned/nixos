@@ -262,7 +262,7 @@ in {
         devices = names: attrs: map (name: {inherit name;} // attrs) names;
       in
         flatten [
-          (devices ["compx-2.4g-receiver-mouse"] {
+          (devices ["compx-2.4g-receiver-mouse" "protoarc-em04"] {
             accel_profile = "custom 1 0 1 10 20";
           })
 
