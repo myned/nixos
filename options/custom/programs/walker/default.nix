@@ -28,19 +28,11 @@ in {
       config = {
         activation_mode.disabled = true; # Key chords
         force_keyboard_focus = true;
+        list.placeholder = "";
+        search.placeholder = "";
 
         # HACK: Window client required to send Esc key on Hyprland
         as_window = true; # Disable layer
-
-        list = {
-          placeholder = "";
-          #// show_initial_entries = false;
-          single_click = false;
-        };
-
-        search = {
-          placeholder = "";
-        };
 
         # https://github.com/abenz1267/walker/wiki/Modules
         # https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/tree/master/Papirus/64x64
