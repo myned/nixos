@@ -493,6 +493,13 @@ in {
             }
 
             {
+              Name = "Walker Issues";
+              Alias = "wi";
+              IconURL = "https://github.com/favicon.ico";
+              URLTemplate = "https://github.com/abenz1267/walker/issues?q=is%3Aissue+is%3Aopen+{searchTerms}";
+            }
+
+            {
               Name = "Wikipedia";
               Alias = "w";
               IconURL = "https://en.wikipedia.org/static/favicon/wikipedia.ico";

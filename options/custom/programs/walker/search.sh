@@ -218,6 +218,12 @@ case "$1" in
     url="https://www.wolframalpha.com/input?i="
     query="${1:3}"
     ;;
+  'wi '*)
+    label="Walker Issues"
+    icon="com.github.zren.bugzilla"
+    url="https://github.com/abenz1267/walker/issues?q=is%3Aissue+is%3Aopen+"
+    query="${1:3}"
+    ;;
   'y '*)
     label="YouTube"
     icon="youtube"
