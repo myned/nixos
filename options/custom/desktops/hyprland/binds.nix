@@ -119,8 +119,8 @@ in {
 
         # Release binds
         bindr = [
-          (key "Alt_L" "Super+Alt" "togglespecialworkspace" "wallpaper")
-          (key "Alt_L" "Super+Alt+Shift" "movetoworkspacesilent" "special:wallpaper")
+          (key "Alt_L" "Super+Alt" "togglespecialworkspace" "music")
+          (key "Alt_L" "Super+Alt+Shift" "movetoworkspacesilent" "special:music")
           (key "Control_L" "Super+Ctrl" "togglespecialworkspace" "office")
           (key "Control_L" "Super+Ctrl+Shift" "movetoworkspacesilent" "special:office")
           (key "Shift_L" "Super+Shift" "workspace" "previous")
@@ -244,8 +244,8 @@ in {
           (key "G" "Super+Ctrl+Alt" "exec" "${pkill} gamescope")
           (key "G" "Super+Shift" "movetoworkspacesilent" "name:game")
           (key "K" "Super" "exec" obsidian)
-          (key "M" "Super" "togglespecialworkspace" "music")
-          (key "M" "Super+Shift" "movetoworkspacesilent" "special:music")
+          (key "O" "Super" "togglespecialworkspace" "wallpaper")
+          (key "O" "Super+Shift" "movetoworkspacesilent" "special:wallpaper")
           (key "P" "Ctrl+Alt" "exec" "${pkill} 1password")
           (key "P" "Super" "togglespecialworkspace" "password")
           (key "P" "Super+Shift" "movetoworkspacesilent" "special:password")
