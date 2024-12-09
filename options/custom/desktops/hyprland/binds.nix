@@ -121,11 +121,10 @@ in {
         bindr = [
           (key "Alt_L" "Super+Alt" "togglespecialworkspace" "wallpaper")
           (key "Alt_L" "Super+Alt+Shift" "movetoworkspacesilent" "special:wallpaper")
-          (key "Control_L" "Super+Ctrl" "exec" workspace)
+          (key "Control_L" "Super+Ctrl" "togglespecialworkspace" "office")
+          (key "Control_L" "Super+Ctrl+Shift" "movetoworkspacesilent" "special:office")
           (key "Shift_L" "Super+Shift" "workspace" "previous")
           (key "Super_L" "Super" "exec" menu)
-          #// (key "Super_L" "Super+Alt" "exec" "${menu} search")
-          #// (key "Super_L" "Super+Ctrl" "exec" "${menu} calculator")
           (key "Super_L" "Super+Ctrl+Shift" "exec" "${menu} network")
           (key "Super_L" "Super+Shift" "exec" "${menu} search")
         ];
@@ -247,9 +246,6 @@ in {
           (key "K" "Super" "exec" obsidian)
           (key "M" "Super" "togglespecialworkspace" "music")
           (key "M" "Super+Shift" "movetoworkspacesilent" "special:music")
-          (key "O" "Super" "togglespecialworkspace" "office")
-          (key "O" "Super+Ctrl" "exec" libreoffice)
-          (key "O" "Super+Shift" "movetoworkspacesilent" "special:office")
           (key "P" "Ctrl+Alt" "exec" "${pkill} 1password")
           (key "P" "Super" "togglespecialworkspace" "password")
           (key "P" "Super+Shift" "movetoworkspacesilent" "special:password")
