@@ -23,7 +23,7 @@ in {
         notification-2fa-action = false;
         #// notification-inline-replies = true;
         positionX = "center";
-        positionY = "top";
+        positionY = "bottom";
         timeout-low = 5;
         timeout = 5; # normal
         timeout-critical = 0;
