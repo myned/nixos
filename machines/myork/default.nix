@@ -18,6 +18,7 @@ in {
     width = 2256;
     height = 1504;
     scale = 1.5;
+    settings.storage.mnt = ["myve"];
 
     services = {
       fw-fanctrl.enable = true;
