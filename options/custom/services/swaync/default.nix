@@ -18,12 +18,13 @@ in {
       settings = {
         control-center-width = 750 / config.custom.scale;
         control-center-height = config.custom.height / 2;
+        control-center-positionY = "bottom";
         fit-to-screen = false;
         hide-on-clear = true;
         notification-2fa-action = false;
         #// notification-inline-replies = true;
         positionX = "center";
-        positionY = "bottom";
+        positionY = "top";
         timeout-low = 5;
         timeout = 5; # normal
         timeout-critical = 0;
