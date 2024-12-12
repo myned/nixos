@@ -125,7 +125,7 @@ in {
             reload_style_on_change = true; # Reload CSS when modified
 
             ## GLOBAL ##
-            layer = "top";
+            layer = "bottom";
             position = "bottom";
 
             ## POSITION ##
