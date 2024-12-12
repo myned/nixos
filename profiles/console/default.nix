@@ -70,7 +70,6 @@
       autoStart = true;
       desktopSession = "gnome";
       user = config.custom.username;
-      environment = config.programs.steam.package.steamargs.extraEnv; # Inherit desktop environment
     };
 
     devices.steamdeck = {
