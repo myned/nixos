@@ -4,8 +4,8 @@
     profile = "desktop"; # Inherit desktop
 
     services = {
-      auto-cpufreq.enable = true;
-      #// power-profiles-daemon.enable = true;
+      #// auto-cpufreq.enable = true;
+      power-profiles-daemon.enable = true;
     };
   };
 
