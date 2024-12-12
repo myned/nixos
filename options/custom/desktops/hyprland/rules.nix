@@ -204,6 +204,7 @@ in {
             (class "org\\.gnome\\.Nautilus" rules)
           ];
           game = rules: [
+            (class ".*\\.(exe|x86_64)" rules) # Wine
             (class "moe\\.launcher\\..+" (rules ++ ["size 1280 730"])) # An Anime Game Launcher
             (class "net.retrodeck.retrodeck" rules) # Emulators
             (class "steam_app_.+" rules) # Proton
@@ -249,9 +250,6 @@ in {
             (class "looking-glass-client" rules)
             (class "org\\.remmina\\.Remmina" (rules ++ ["tile"]))
             (class "virt-manager" rules)
-          ];
-          wine = rules: [
-            (class ".*\\.(exe|x86_64)" rules) # Wine
           ];
         };
       in
