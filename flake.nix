@@ -95,7 +95,7 @@
       flake = false;
       url = "github:Rawa/lifx-cli";
     };
-    nix-flatpak.url = "github:gmodena/nix-flatpak?ref=v0.4.1";
+    nix-flatpak.url = "github:gmodena/nix-flatpak?ref=v0.5.1";
     nix-index-database-stable = {
       inputs.nixpkgs.follows = "nixpkgs-stable";
       url = "github:nix-community/nix-index-database";
@@ -130,7 +130,7 @@
     };
     walker = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:abenz1267/walker?ref=v0.10.1";
+      url = "github:abenz1267/walker?ref=v0.10.15";
     };
   };
   outputs = inputs: inputs.flakegen ./flake.in.nix inputs;

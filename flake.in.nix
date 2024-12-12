@@ -28,6 +28,7 @@
     nixos-hardware = flake "github:NixOS/nixos-hardware";
 
     ### Stable
+    # TODO: Upgrade to NixOS 24.11 stable
     nixpkgs-stable = flake "github:NixOS/nixpkgs/nixos-24.05";
 
     # Common flakes
@@ -64,10 +65,10 @@
     hyprlock = flake "github:hyprwm/hyprlock" // unstable "nixpkgs";
     hyprpaper = flake "github:hyprwm/hyprpaper" // unstable "nixpkgs";
     hyprpicker = flake "github:hyprwm/hyprpicker" // unstable "nixpkgs";
-    nix-flatpak = flake "github:gmodena/nix-flatpak?ref=v0.4.1";
+    nix-flatpak = flake "github:gmodena/nix-flatpak?ref=v0.5.1";
     nix-vscode-extensions = flake "github:nix-community/nix-vscode-extensions" // unstable "nixpkgs";
     nixd = flake "github:nix-community/nixd" // unstable "nixpkgs";
-    walker = flake "github:abenz1267/walker?ref=v0.10.1" // unstable "nixpkgs";
+    walker = flake "github:abenz1267/walker?ref=v0.10.15" // unstable "nixpkgs";
 
     # Server flakes
     conduwuit = flake "github:Myned/conduwuit" // unstable "nixpkgs";
