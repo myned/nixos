@@ -261,23 +261,22 @@ in {
           (fullscreen true ["idleinhibit focus"])
           (pinned true ["bordercolor rgb(073642) rgb(073642)"])
 
-          (tag.android ["idleinhibit always" "move ${android.x} ${android.y}" "size ${android.w} ${android.h}" "workspace special:android"])
+          (tag.android ["idleinhibit always" "move ${android.x} ${android.y}" "size ${android.w} ${android.h}" "workspace special:android silent"])
           (tag.browser ["group override set" "tile" "workspace 1"])
           (tag.clipboard ["move ${clipboard.x} ${clipboard.y}" "pin" "size ${clipboard.w} ${clipboard.h}" "stayfocused"])
           (tag.dropdown ["move ${dropdown.x} ${dropdown.y}" "pin" "size ${dropdown.w} ${dropdown.h}"])
           (tag.editor ["group override set" "tile"])
           (tag.files ["center"])
-          (tag.game ["idleinhibit always" "noborder" "noshadow" "renderunfocused" "workspace name:game"])
+          (tag.game ["focusonactivate" "idleinhibit always" "noborder" "noshadow" "renderunfocused" "workspace name:game"])
           (tag.media ["center" "keepaspectratio" "size <90% <90%"])
-          (tag.music ["tile" "workspace special:music"])
-          (tag.office ["group override set" "tile" "workspace special:office"])
-          (tag.password ["center" "tile" "workspace special:password"])
+          (tag.music ["tile" "workspace special:music silent"])
+          (tag.office ["group override set" "tile" "workspace special:office silent"])
+          (tag.password ["center" "tile" "workspace special:password silent"])
           (tag.pip ["keepaspectratio" "move ${pip.x} ${pip.y}" "noinitialfocus" "pin" "size ${pip.w} ${pip.h}"])
           (tag.social ["group override set" "tile"])
-          (tag.steam ["suppressevent activate activatefocus" "workspace special:steam"])
+          (tag.steam ["suppressevent activate activatefocus" "workspace special:steam silent"])
           (tag.terminal ["tile"])
-          (tag.vm ["workspace special:vm"])
-          (tag.wine ["noborder" "noshadow"])
+          (tag.vm ["workspace special:vm silent"])
 
           ### Overrides
           (class "dev\\.benz\\.walker" ["noanim" "noshadow" "pin" "stayfocused"]) # Imitate layer
@@ -306,7 +305,7 @@ in {
           (fields {
             class = "^org\\.gnome\\.Loupe$";
             title = "^wallpaper.png$";
-          } ["tile" "workspace special:wallpaper"])
+          } ["tile" "workspace special:wallpaper silent"])
           (fields {
             class = "^org\\.gnome\\.Nautilus$";
             title = "^Home$"; # Main window
