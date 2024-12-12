@@ -8,6 +8,7 @@ with lib; let
 in {
   options.custom.programs.looking-glass = {
     enable = mkOption {default = false;};
+    igpu = mkOption {default = false;};
     kvmfr = mkOption {default = true;};
   };
 

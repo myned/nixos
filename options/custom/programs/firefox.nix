@@ -231,7 +231,7 @@ in {
           "extensions.formautofill.creditCards.enabled" = locked false;
           "general.autoScroll" = locked false;
           "general.smoothScroll" = locked true;
-          "gfx.webrender.software" = locked true;
+          "gfx.webrender.software" = locked config.custom.programs.looking-glass.igpu; # Reduce load on iGPU
           "layers.acceleration.force-enabled" = locked true;
           "layout.css.always_underline_links" = locked false;
           "layout.css.backdrop-filter.enabled" = locked true;

@@ -10,6 +10,11 @@
     height = 1440;
     refresh = 100;
 
+    programs.looking-glass = {
+      enable = true;
+      igpu = true;
+    };
+
     settings = {
       storage.mnt = ["gayme" "myve"];
 
