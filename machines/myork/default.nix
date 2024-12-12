@@ -58,8 +58,6 @@ in {
 
   home-manager.users.${config.custom.username} = {
     wayland.windowManager.hyprland.settings = {
-      exec-once = ["${brightnessctl} set 0%"];
-
       device = [
         {
           name = "pixa3854:00-093a:0274-touchpad";
