@@ -46,6 +46,7 @@ with lib; {
       #// swayidle.enable = true;
       swaync.enable = true;
       swayosd.enable = true;
+      usbmuxd.enable = true;
       #// xembed-sni-proxy.enable = true;
       #// zerotierone.enable = true;
     })
