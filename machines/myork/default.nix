@@ -18,6 +18,11 @@ in {
     width = 2256;
     height = 1504;
     scale = 1.5;
+
+    # BUG: Phoenix support not currently functional
+    # https://github.com/Cryolitia/ryzen_smu/issues/1
+    #// programs.ryzenadj.enable = true;
+
     settings.storage.mnt = ["myve"];
 
     services = {
