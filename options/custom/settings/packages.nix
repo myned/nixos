@@ -35,6 +35,7 @@ in {
           progress # Coreutils progress viewer
           rclone # File sync
           stress # CPU stress tester
+          testdisk # Data recovery tool
           trashy # CLI trash
           waypipe # Wayland proxy
           wl-clipboard # Wayland clipboard
