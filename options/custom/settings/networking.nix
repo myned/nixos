@@ -88,6 +88,11 @@ in {
       ];
     };
 
+    # https://wiki.archlinux.org/title/IPv6#Prefer_IPv4_over_IPv6
+    environment.etc."gai.conf".text = ''
+      precedence ::ffff:0:0/96 100
+    '';
+
     #!! Override nsswitch.conf resolution order
     #!! nss-resolve blocks some modules after [!UNAVAIL=return]
     # https://wiki.archlinux.org/title/Systemd-resolved#systemd-resolved_not_searching_the_local_domain
