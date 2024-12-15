@@ -23,13 +23,15 @@ in {
     services = {
       gvfs.enable = true; # Trash dependency
 
-      gnome = {
-        sushi.enable = true; # Quick preview with spacebar
-
-        # File indexing
-        localsearch.enable = cfg.index;
-        tinysparql.enable = cfg.index;
-      };
+      gnome =
+        {
+          sushi.enable = true; # Quick preview with spacebar
+        }
+        // optionalAttrs (versionAtLeast version "24.11") {
+          # File indexing
+          localsearch.enable = cfg.index;
+          tinysparql.enable = cfg.index;
+        };
     };
 
     # Alternative fix to services.gnome.core-utilities.enable

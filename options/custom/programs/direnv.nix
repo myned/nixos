@@ -10,17 +10,23 @@ in {
 
   config = mkIf cfg.enable {
     # https://github.com/direnv/direnv
-    programs.direnv = {
-      enable = true;
-      loadInNixShell = false; # nix develop
-      silent = true;
-    };
-
-    home-manager.users.${config.custom.username} = {
-      programs.direnv = {
+    programs.direnv =
+      {
         enable = true;
+        loadInNixShell = false; # nix develop
+      }
+      // optionalAttrs (versionAtLeast version "24.11") {
         silent = true;
       };
+
+    home-manager.users.${config.custom.username} = {
+      programs.direnv =
+        {
+          enable = true;
+        }
+        // optionalAttrs (versionAtLeast version "24.11") {
+          silent = true;
+        };
     };
   };
 }
