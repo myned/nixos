@@ -15,6 +15,7 @@
       mastodon.enable = true;
       netbox.enable = true;
       nextcloud.enable = true;
+      owncast.enable = true;
       redlib.enable = true;
       searxng.enable = true;
     };
