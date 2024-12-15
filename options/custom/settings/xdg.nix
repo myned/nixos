@@ -80,6 +80,7 @@ in {
           "application/x-shellscript" = gnome-text-editor;
           "application/x-trash" = gnome-text-editor;
           "application/x-xpinstall" = gnome-text-editor;
+          "application/x-wine-extension-ini" = gnome-text-editor;
           "application/xhtml_xml" = gnome-text-editor;
           "application/xhtml+xml" = gnome-text-editor;
           "application/xml" = gnome-text-editor;
