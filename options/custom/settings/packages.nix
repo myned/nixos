@@ -95,6 +95,7 @@ in {
           gnome-boxes # Virtual machine manager
           gnome-calculator # Calculator
           gnome-calendar # Calendar
+          gnome-clocks # Clock
           gnome-connections # Remote desktop client
           gnome-disk-utility # Disk formatter
           gnome-firmware # Firmware updater
