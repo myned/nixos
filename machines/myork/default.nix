@@ -23,16 +23,8 @@ in {
     # https://github.com/Cryolitia/ryzen_smu/issues/1
     #// programs.ryzenadj.enable = true;
 
+    services.fw-fanctrl.enable = true;
     settings.storage.mnt = ["myve"];
-
-    services = {
-      fw-fanctrl.enable = true;
-
-      auto-cpufreq.max = {
-        battery = 3; # GHz
-        #// charger = 3.5; # GHz
-      };
-    };
   };
 
   services.keyd.keyboards.default.settings.main.rightcontrol = "layer(altgr)"; # No Ctrl_R
@@ -49,11 +41,11 @@ in {
 
       # Fix battery drain with suspend-then-hibernate
       # https://wiki.archlinux.org/title/Framework_Laptop_13#Suspend-then-hibernate_on_AMD_version
-      #// "rtc_cmos.use_acpi_alarm=1"
+      "rtc_cmos.use_acpi_alarm=1"
 
-      # Force disable display power savings
+      # Force display power savings
       # https://wiki.archlinux.org/title/Framework_Laptop_13#(AMD)_Washed-out_colors_when_using_power-profiles-daemon_in_power-saver_or_balanced_mode
-      #// "amdgpu.abmlevel=0"
+      "amdgpu.abmlevel=0"
 
       # Disable AMD scaling driver
       # https://wiki.archlinux.org/title/CPU_frequency_scaling#amd_pstate

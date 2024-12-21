@@ -27,7 +27,7 @@ in {
         # https://github.com/AdnanHodzic/auto-cpufreq/blob/master/auto-cpufreq.conf-example
         settings = {
           battery = {
-            energy_performance_preference = "balance_power";
+            energy_performance_preference = "power";
             governor = "powersave";
             platform_profile = "low-power";
             scaling_max_freq = mkIf (isFloat cfg.max.battery || isInt cfg.max.battery) (builtins.floor (cfg.max.battery * 1000 * 1000)); # KHz

@@ -42,6 +42,7 @@ with lib; {
       keyd.enable = true;
       #// mako.enable = true;
       #// network-manager-applet.enable = true;
+      power-profiles-daemon.enable = true;
       samba.enable = true;
       #// swayidle.enable = true;
       swaync.enable = true;
