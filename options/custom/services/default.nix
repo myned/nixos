@@ -8,6 +8,7 @@ with lib; {
     (mkIf config.custom.default {
       #// automatic-timezoned.enable = true;
       #// agenix.enable = true;
+      geoclue2.enable = true;
       #// netbird.enable = true;
       tailscale.enable = true;
       tzupdate.enable = true;
@@ -17,7 +18,6 @@ with lib; {
       dbus.enable = true;
       flatpak.enable = true;
       fwupd.enable = true;
-      geoclue2.enable = true;
       #// kdeconnect.enable = true;
       libinput.enable = true;
       logind.enable = true;
