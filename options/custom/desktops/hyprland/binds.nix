@@ -93,8 +93,8 @@ in {
           # Laptop lid switches
           # https://wiki.hyprland.org/Configuring/Binds/#switches
           #?? hyprctl devices
-          (key "switch:off:Lid Switch" null "dpms" "on") # Open
-          (key "switch:on:Lid Switch" null "dpms" "off") # Close
+          #// (key "switch:off:Lid Switch" null "dpms" "on") # Open
+          #// (key "switch:on:Lid Switch" null "dpms" "off") # Close
         ];
 
         # Mouse binds
