@@ -161,7 +161,7 @@ in {
         "col.border_locked_active" = "rgb(d33682)";
         "col.border_locked_inactive" = "rgba(d3368240)";
         #// auto_group = false;
-        insert_after_current = false;
+        #// insert_after_current = false;
 
         # https://wiki.hyprland.org/Configuring/Variables/#groupbar
         groupbar = {
