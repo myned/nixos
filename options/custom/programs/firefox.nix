@@ -276,18 +276,18 @@ in {
             }
 
             {
-              Name = "Docker Hub";
-              Alias = "dh";
-              IconURL = "https://hub.docker.com/favicon.ico";
-              URLTemplate = "https://hub.docker.com/search?q={searchTerms}";
-            }
-
-            {
               Name = "Duck";
               Alias = "d";
               IconURL = "https://duckduckgo.com/favicon.ico";
               URLTemplate = "https://duckduckgo.com/?q={searchTerms}";
               SuggestURLTemplate = "https://duckduckgo.com/ac/?type=list&q={searchTerms}";
+            }
+
+            {
+              Name = "Docker Hub";
+              Alias = "dh";
+              IconURL = "https://hub.docker.com/favicon.ico";
+              URLTemplate = "https://hub.docker.com/search?q={searchTerms}";
             }
 
             {
@@ -312,13 +312,6 @@ in {
             }
 
             {
-              Name = "GitHub";
-              Alias = "gh";
-              IconURL = "https://github.com/favicon.ico";
-              URLTemplate = "https://github.com/search?q={searchTerms}";
-            }
-
-            {
               Name = "Google";
               Alias = "g";
               IconURL = "https://www.google.com/favicon.ico";
@@ -326,10 +319,10 @@ in {
             }
 
             {
-              Name = "Home Manager Options";
-              Alias = "ho";
-              IconURL = "https://home-manager-options.extranix.com/images/favicon.png";
-              URLTemplate = "https://home-manager-options.extranix.com/?query={searchTerms}&release=master";
+              Name = "GitHub";
+              Alias = "gh";
+              IconURL = "https://github.com/favicon.ico";
+              URLTemplate = "https://github.com/search?q={searchTerms}";
             }
 
             {
@@ -340,17 +333,17 @@ in {
             }
 
             {
+              Name = "Home Manager Options";
+              Alias = "ho";
+              IconURL = "https://home-manager-options.extranix.com/images/favicon.png";
+              URLTemplate = "https://home-manager-options.extranix.com/?query={searchTerms}&release=master";
+            }
+
+            {
               Name = "Hyprland Issues";
               Alias = "hyi";
               IconURL = "https://github.com/favicon.ico";
               URLTemplate = "https://github.com/hyprwm/Hyprland/issues?q=is%3Aissue+is%3Aopen+{searchTerms}";
-            }
-
-            {
-              Name = "Lix Issues";
-              Alias = "li";
-              IconURL = "https://git.lix.systems/assets/img/favicon.png";
-              URLTemplate = "https://git.lix.systems/lix-project/lix/issues?state=open&q={searchTerms}";
             }
 
             {
@@ -365,6 +358,13 @@ in {
               Alias = "l";
               IconURL = "https://lutris.net/favicon.ico";
               URLTemplate = "https://lutris.net/games?q={searchTerms}";
+            }
+
+            {
+              Name = "Lix Issues";
+              Alias = "li";
+              IconURL = "https://git.lix.systems/assets/img/favicon.png";
+              URLTemplate = "https://git.lix.systems/lix-project/lix/issues?state=open&q={searchTerms}";
             }
 
             {
@@ -389,23 +389,17 @@ in {
             }
 
             {
-              Name = "Nix Hub";
-              Alias = "nh";
-              IconURL = "https://www.nixhub.io/favicon.ico";
-              URLTemplate = "https://www.nixhub.io/search?q={searchTerms}";
-            }
-
-            {
-              Name = "Nix PR";
-              Alias = "npr";
-              URLTemplate = "https://nixpk.gs/pr-tracker.html?pr={searchTerms}";
-            }
-
-            {
               Name = "NixOS Flakes";
               Alias = "nf";
               IconURL = "https://nixos.org/favicon.png";
               URLTemplate = "https://search.nixos.org/flakes?channel=unstable&query={searchTerms}";
+            }
+
+            {
+              Name = "Nix Hub";
+              Alias = "nh";
+              IconURL = "https://www.nixhub.io/favicon.ico";
+              URLTemplate = "https://www.nixhub.io/search?q={searchTerms}";
             }
 
             {
@@ -416,10 +410,23 @@ in {
             }
 
             {
+              Name = "Nix PR";
+              Alias = "npr";
+              URLTemplate = "https://nixpk.gs/pr-tracker.html?pr={searchTerms}";
+            }
+
+            {
               Name = "NixOS Options";
               Alias = "no";
               IconURL = "https://nixos.org/favicon.png";
               URLTemplate = "https://search.nixos.org/options?channel=unstable&query={searchTerms}";
+            }
+
+            {
+              Name = "Noogle Dev";
+              Alias = "nod";
+              IconURL = "https://noogle.dev/favicon.png";
+              URLTemplate = "https://noogle.dev/q?term={searchTerms}";
             }
 
             {
@@ -437,10 +444,10 @@ in {
             }
 
             {
-              Name = "Noogle Dev";
-              Alias = "nod";
-              IconURL = "https://noogle.dev/favicon.png";
-              URLTemplate = "https://noogle.dev/q?term={searchTerms}";
+              Name = "Piped";
+              Alias = "p";
+              IconURL = "https://piped.bjork.tech/favicon.ico";
+              URLTemplate = "https://piped.bjork.tech/results?search_query={searchTerms}";
             }
 
             {
@@ -448,13 +455,6 @@ in {
               Alias = "pc";
               IconURL = "https://static.pcgamingwiki.com/favicons/pcgamingwiki.png";
               URLTemplate = "https://www.pcgamingwiki.com/w/index.php?search={searchTerms}";
-            }
-
-            {
-              Name = "Piped";
-              Alias = "p";
-              IconURL = "https://piped.bjork.tech/favicon.ico";
-              URLTemplate = "https://piped.bjork.tech/results?search_query={searchTerms}";
             }
 
             {
@@ -475,7 +475,7 @@ in {
               Name = "Reddit";
               Alias = "r";
               IconURL = "https://www.redditstatic.com/desktop2x/img/favicon/favicon-96x96.png";
-              URLTemplate = "https://search.brave.com/search?q=site%3Areddit.com+{searchTerms}";
+              URLTemplate = "https://www.google.com/search?q=site%3Areddit.com+{searchTerms}";
             }
 
             {
@@ -493,13 +493,6 @@ in {
             }
 
             {
-              Name = "Walker Issues";
-              Alias = "wi";
-              IconURL = "https://github.com/favicon.ico";
-              URLTemplate = "https://github.com/abenz1267/walker/issues?q=is%3Aissue+is%3Aopen+{searchTerms}";
-            }
-
-            {
               Name = "Wikipedia";
               Alias = "w";
               IconURL = "https://en.wikipedia.org/static/favicon/wikipedia.ico";
@@ -511,6 +504,13 @@ in {
               Alias = "wa";
               IconURL = "https://www.wolframalpha.com/_next/static/images/favicon_1zbE9hjk.ico";
               URLTemplate = "https://www.wolframalpha.com/input?i={searchTerms}";
+            }
+
+            {
+              Name = "Walker Issues";
+              Alias = "wi";
+              IconURL = "https://github.com/favicon.ico";
+              URLTemplate = "https://github.com/abenz1267/walker/issues?q=is%3Aissue+is%3Aopen+{searchTerms}";
             }
 
             {
