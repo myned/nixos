@@ -16,14 +16,7 @@ in {
     '';
 
     home-manager.users.${config.custom.username} = {
-      programs.ssh = {
-        enable = true;
-
-        extraConfig = ''
-          Host *
-            IdentityAgent ~/.1password/agent.sock
-        '';
-      };
+      programs.ssh.enable = true;
 
       # Work around FHS permissions
       # https://github.com/nix-community/home-manager/issues/322#issuecomment-1856128020
