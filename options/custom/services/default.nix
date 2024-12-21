@@ -10,6 +10,7 @@ with lib; {
       #// agenix.enable = true;
       #// netbird.enable = true;
       tailscale.enable = true;
+      tzupdate.enable = true;
     })
 
     (mkIf config.custom.minimal {
