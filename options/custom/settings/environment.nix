@@ -29,6 +29,7 @@ in {
 
         # https://wiki.nixos.org/wiki/Wayland#Electron_and_Chromium
         NIXOS_OZONE_WL = mkIf cfg.wayland "1";
+        ELECTRON_OZONE_PLATFORM_HINT = mkIf cfg.wayland "auto";
       };
 
       shellAliases = {
