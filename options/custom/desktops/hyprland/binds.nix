@@ -30,6 +30,7 @@ with lib; let
   onlyoffice-desktopeditors = "${pkgs.onlyoffice-bin}/bin/onlyoffice-desktopeditors --system-title-bar --xdg-desktop-portal";
   pkill = "${pkgs.procps}/bin/pkill";
   playerctl = "${pkgs.playerctl}/bin/playerctl";
+  power = config.home-manager.users.${config.custom.username}.home.file.".local/bin/power".source;
   remote = config.home-manager.users.${config.custom.username}.home.file.".local/bin/remote".source;
   rofi-rbw = "${pkgs.rofi-rbw}/bin/rofi-rbw";
   rm = "${pkgs.coreutils}/bin/rm";
@@ -146,7 +147,7 @@ in {
           (key "Bracketright" "Super" "splitratio" "+0.1")
           (key "Bracketright" "Super+Shift" "layoutmsg" "rollprev")
           (key "Comma" "Super" "layoutmsg" "swapprev")
-          (key "Down" "Super" "exec" "${swayosd-client} --brightness lower")
+          (key "Delete" "Super+Shift" "exec" power)
           (key "Down" "Super+Shift" "movewindoworgroup" "d")
           (key "Equal" "Super" "exec" "${swayosd-client} --output-volume raise")
           (key "Equal" "Super+Shift" "exec" "${zoom} +0.1")
