@@ -23,7 +23,7 @@ in {
       # TODO: Add keybinds
       settings.general = {
         brightness-day = 1;
-        brightness-night = 0.4;
+        brightness-night = 0.6;
       };
     };
   };
