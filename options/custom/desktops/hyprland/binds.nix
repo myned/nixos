@@ -116,6 +116,15 @@ in {
           (key "XF86MonBrightnessDown" null "exec" "${swayosd-client} --brightness lower") # F7
           (key "XF86MonBrightnessUp" null "exec" "${swayosd-client} --brightness raise") # F8
           (key "XF86AudioMedia" null "exec" "${notify-send} test") # F12
+
+          (key "0" "Super" "exec" "${swayosd-client} --output-volume mute-toggle")
+          (key "Minus" "Super" "exec" "${swayosd-client} --output-volume lower")
+          (key "Equal" "Super" "exec" "${swayosd-client} --output-volume raise")
+          (key "Left" "Super" "exec" "${playerctl} previous")
+          (key "Space" "Super" "exec" "${playerctl} play-pause")
+          (key "Right" "Super" "exec" "${playerctl} next")
+          (key "Down" "Super" "exec" "${swayosd-client} --brightness lower")
+          (key "Up" "Super" "exec" "${swayosd-client} --brightness raise")
         ];
 
         # Release binds
@@ -149,17 +158,14 @@ in {
           (key "Comma" "Super" "layoutmsg" "swapprev")
           (key "Delete" "Super+Shift" "exec" power)
           (key "Down" "Super+Shift" "movewindoworgroup" "d")
-          (key "Equal" "Super" "exec" "${swayosd-client} --output-volume raise")
           (key "Equal" "Super+Shift" "exec" "${zoom} +0.1")
           (key "Escape" "Super" "togglefloating" null)
           (key "Escape" "Super+Alt" "exec" "lifx state --color red")
           (key "Escape" "Super+Shift" "centerwindow" null)
           (key "Grave" "Super" "togglespecialworkspace" "scratchpad")
           (key "Grave" "Super+Shift" "movetoworkspacesilent" "special:scratchpad")
-          (key "Left" "Super" "exec" "${playerctl} previous")
           (key "Left" "Super+Alt" "exec" "${left} --scroll kensington-orbit-wireless-tb-mouse")
           (key "Left" "Super+Shift" "movewindoworgroup" "l")
-          (key "Minus" "Super" "exec" "${swayosd-client} --output-volume lower")
           (key "Minus" "Super+Shift" "exec" "${zoom} -0.1")
           (key "Period" "Super" "layoutmsg" "swapnext")
           (key "Apostrophe" "Super" "exec" "${screenshot} selection")
@@ -168,7 +174,6 @@ in {
           (key "Apostrophe" "Super+Alt+Shift" "exec" "${screenshot} display --edit")
           (key "Return" "Super" "fullscreen" "1") # Maximize
           (key "Return" "Super+Shift" "fullscreen" "0") # Fullscreen
-          (key "Right" "Super" "exec" "${playerctl} next")
           (key "Right" "Super+Shift" "movewindoworgroup" "r")
           (key "Semicolon" "Super" "exec" "${hyprpicker} --autocopy")
           (key "Semicolon" "Super+Shift" "exec" "${hyprpicker} --autocopy --format rgb")
@@ -189,7 +194,6 @@ in {
             "--expression '^Picture.in.[Pp]icture$'"
             "--workspace special:pip"
           ]))
-          (key "Space" "Super" "exec" "${playerctl} play-pause")
           (key "Space" "Super+Ctrl+Shift" "exec" (with config.custom;
             concatStringsSep " " [
               "${window} move"
@@ -201,10 +205,8 @@ in {
           (key "Tab" "Super" "layoutmsg" "cyclenext")
           (key "Tab" "Super+Shift" "alterzorder" "top")
           (key "Tab" "Super+Shift" "cyclenext" "floating")
-          (key "Up" "Super" "exec" "${swayosd-client} --brightness raise")
           (key "Up" "Super+Shift" "movewindoworgroup" "u")
 
-          (key "0" "Super" "exec" "${swayosd-client} --output-volume mute-toggle")
           (key "0" "Super+Shift" "exec" zoom)
           (key "1" "Ctrl+Alt" "exec" "lifx state --brightness 0.01")
           (key "1" "Super" "workspace" "1")
