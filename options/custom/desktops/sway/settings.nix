@@ -99,7 +99,6 @@ in {
 
           # (once "${rm} ~/.config/qalculate/qalc.dmenu.history") # Clear calc history
           # (once "${rm} ~/.cache/cliphist/db") # Clear clipboard database
-          # (once firefox-esr)
         ];
       };
 

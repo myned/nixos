@@ -8,7 +8,6 @@ with lib; let
   clapper = "com.github.rafostar.Clapper.desktop";
   decibels = "org.gnome.Decibels.desktop";
   file-roller = "org.gnome.File Roller.desktop";
-  firefox-esr = "firefox-esr.desktop";
   font-viewer = "org.gnome.font-viewer.desktop";
   gnome-text-editor = "org.gnome.TextEditor.desktop";
   libreoffice = "base.desktop";
@@ -131,8 +130,8 @@ in {
           "text/x-scss" = gnome-text-editor;
           "video/mp4" = clapper;
           "video/x-matroska" = clapper;
-          "x-scheme-handler/http" = firefox-esr;
-          "x-scheme-handler/https" = firefox-esr;
+          "x-scheme-handler/http" = config.custom.browser.desktop;
+          "x-scheme-handler/https" = config.custom.browser.desktop;
         };
       };
 

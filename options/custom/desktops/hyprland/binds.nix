@@ -10,7 +10,6 @@ with lib; let
   cat = "${pkgs.coreutils}/bin/cat";
   clipse = "${pkgs.clipse}/bin/clipse";
   codium = "${config.home-manager.users.${config.custom.username}.programs.vscode.package}/bin/codium";
-  firefox-esr = "${config.home-manager.users.${config.custom.username}.programs.firefox.finalPackage}/bin/firefox-esr";
   gnome-text-editor = "${pkgs.gnome-text-editor}/bin/gnome-text-editor";
   hyprctl = "${config.programs.hyprland.package}/bin/hyprctl";
   hyprlock = "${config.home-manager.users.${config.custom.username}.programs.hyprlock.package}/bin/hyprlock";
@@ -238,7 +237,7 @@ in {
           (key "A" "Ctrl+Alt" "exec" "${waydroid} session stop")
           (key "A" "Super" "togglespecialworkspace" "android")
           (key "A" "Super+Shift" "movetoworkspacesilent" "special:android")
-          (key "B" "Super" "exec" firefox-esr)
+          (key "B" "Super" "exec" config.custom.browser.command)
           (key "C" "Super" "exec" codium)
           (key "E" "Super" "exec" gnome-text-editor)
           (key "F" "Super" "exec" "${nautilus} --new-window")

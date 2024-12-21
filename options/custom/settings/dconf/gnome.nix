@@ -152,7 +152,7 @@ in {
       "org/gnome/shell" = {
         favorite-apps = mkArray type.string [
           "org.gnome.Nautilus.desktop"
-          "firefox-esr.desktop"
+          config.custom.browser.desktop
           "signal-desktop.desktop"
           "org.telegram.desktop.desktop"
           "discord.desktop"

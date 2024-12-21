@@ -8,7 +8,6 @@ with lib; let
   audio = "~/.local/bin/audio";
   clipse = "${pkgs.clipse}/bin/clipse";
   codium = "${config.home-manager.users.${config.custom.username}.programs.vscode.package}/bin/codium";
-  firefox-esr = "${config.home-manager.users.${config.custom.username}.programs.firefox.finalPackage}/bin/firefox-esr";
   gnome-text-editor = "${pkgs.gnome-text-editor}/bin/gnome-text-editor";
   hyprctl = "${config.programs.hyprland.package}/bin/hyprctl";
   hyprlock = "${config.home-manager.users.${config.custom.username}.programs.hyprlock.package}/bin/hyprlock";
@@ -147,7 +146,7 @@ in {
             "9+${super}+${shift}" = "move to workspace 9";
             "a+${super}" = "[con_mark=android] scratchpad show";
             "a+${super}+${shift}" = "exec ${waydroid} session stop";
-            "b+${super}" = "exec ${firefox-esr}";
+            "b+${super}" = "exec ${config.custom.browser.command}";
             "backslash+${super}" = "split toggle";
             "backslash+${super}+${shift}" = "split none";
             "backspace+${super}" = "focus mode_toggle";

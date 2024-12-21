@@ -38,6 +38,11 @@ in {
     ### Misc
     wallpaper = mkOption {default = false;};
 
+    browser = {
+      command = mkOption {default = "${config.custom.programs.chromium.package}/bin/google-chrome-stable";};
+      desktop = mkOption {default = "google-chrome.desktop";};
+    };
+
     font = {
       emoji = mkOption {default = "Noto Color Emoji";};
       monospace = mkOption {default = "IosevkaTermSlab NFP Medium";};

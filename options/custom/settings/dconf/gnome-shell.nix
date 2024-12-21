@@ -22,9 +22,9 @@ in {
       # Auto Move Windows
       "org/gnome/shell/extensions/auto-move-windows" = {
         application-list = mkArray type.string [
+          "${config.custom.browser.desktop}:1"
           "codium.desktop:1"
           "discord.desktop:1"
-          "firefox-esr.desktop:1"
           "obsidian.desktop:1"
           "org.telegram.desktop.desktop:1"
           "signal-desktop.desktop:1"

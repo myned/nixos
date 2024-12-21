@@ -8,7 +8,6 @@ with lib; let
   _1password = "${config.programs._1password-gui.package}/bin/1password";
   audio = config.home-manager.users.${config.custom.username}.home.file.".local/bin/audio".source;
   clipse = "${pkgs.clipse}/bin/clipse";
-  firefox-esr = "${config.home-manager.users.${config.custom.username}.programs.firefox.finalPackage}/bin/firefox-esr";
   grep = "${pkgs.gnugrep}/bin/grep";
   left = config.home-manager.users.${config.custom.username}.home.file.".local/bin/left".source;
   loupe = "${pkgs.loupe}/bin/loupe";
@@ -74,7 +73,6 @@ in {
           "${audio} --init" # Enforce audio profile state
           "${rm} ~/.cache/walker/clipboard.gob" # Clear clipboard history
           "${_1password} --silent" # Launch password manager in background
-          #// "[group new; tile] ${firefox-esr}"
 
           # HACK: Launch hidden GTK windows to reduce startup time
           "[workspace special:hidden silent] ${loupe}"
