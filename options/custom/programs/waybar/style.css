@@ -13,9 +13,27 @@ label:hover {
   background: #073642;
 }
 
+menu {
+  border-radius: 20px;
+  padding: 4px;
+}
+
+menuitem {
+  padding: 4px;
+}
+
+menuitem label {
+  font-size: 16px;
+}
+
 tooltip {
-  opacity: 0;
-  /* background: #002b36; */
+  background: #002b36;
+  border-radius: 20px;
+}
+
+tooltip label {
+  font-size: 16px;
+  padding: 4px;
 }
 
 .active {

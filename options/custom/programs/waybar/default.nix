@@ -61,8 +61,6 @@ in {
 
         # ?? waybar --log-level debug
         style = ''
-          ${readFile ./style.css}
-
           * {
             border-radius: 50px;
             color: #93a1a1;
@@ -74,6 +72,8 @@ in {
           .horizontal > box {
             margin: 0 ${toString config.custom.gap}px ${toString config.custom.gap}px;
           }
+
+          ${readFile ./style.css}
         '';
 
         ### SETTINGS ###
