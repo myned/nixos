@@ -71,8 +71,8 @@ case "$1" in
   'ho '*)
     label="Home Manager Options"
     icon="home"
-    url="https://home-manager-options.extranix.com/?query="
-    query="${1:2}"
+    url="https://home-manager-options.extranix.com/?release=master&query="
+    query="${1:3}"
     ;;
   'hyi '*)
     label="Hyprland Issues"
@@ -191,7 +191,7 @@ case "$1" in
   'r '*)
     label="Reddit"
     icon="reddit"
-    url="https://search.brave.com/search?q=site%3Areddit.com+"
+    url="https://www.google.com/search?q=site%3Areddit.com+"
     query="${1:2}"
     ;;
   's '*)
