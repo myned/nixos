@@ -179,16 +179,11 @@ in {
             (class "[Ww]aydroid.*" rules)
           ];
           browser = rules: [
-            (fields {
-                class = "^chromium-browser$";
-                title = "^(?!Picture.in.[Pp]icture).*$";
-              }
-              rules)
-            (fields {
-                class = "^firefox.*$";
-                title = "^(?!Picture.in.[Pp]icture).*$";
-              }
-              rules)
+            (class "^brave-browser$" rules)
+            (class "^chromium-browser$" rules)
+            (class "^firefox.*$" rules)
+            (class "^google-chrome$" rules)
+            (class "^vivaldi.*$" rules)
           ];
           clipboard = rules: [
             (class "clipboard" rules)
