@@ -7,11 +7,9 @@
 with lib; let
   grep = "${pkgs.gnugrep}/bin/grep";
   hyprctl = "${config.programs.hyprland.package}/bin/hyprctl";
-  hyprlock = "${
-    config.home-manager.users.${config.custom.username}.programs.hyprlock.package
-  }/bin/hyprlock";
+  hyprlock = "${config.home-manager.users.${config.custom.username}.programs.hyprlock.package}/bin/hyprlock";
   loginctl = "${pkgs.systemd}/bin/loginctl";
-  pgrep = "${pkgs.coreutils}/bin/pgrep";
+  pgrep = "${pkgs.procps}/bin/pgrep";
   pw-cli = "${pkgs.pipewire}/bin/pw-cli";
   systemctl = "${pkgs.systemd}/bin/systemctl";
 
@@ -43,7 +41,6 @@ in {
           }
 
           {
-            # FIXME: Add resume offset to mynix
             timeout = 60 * 60; # Seconds
             on-timeout = "${pw-cli} info all | ${grep} running || ${systemctl} suspend-then-hibernate"; # Suspend if no audio
           }
