@@ -41,6 +41,7 @@ in {
               #// "enamippconapkdmgfgjchkhakpfinmaj" # DeArrow
               #// "fnaicdffflnofjppbagibeoednhnbjhg" # floccus
               #// "bnomihfieiccainjcjblhegjgglakjdd" # Improve YouTube
+              "pnjaodmkngahhkoihejjehlcdlnohgmp" # RSS Feed Reader
               "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock
               "clngdbkpkpeebahjckkjfobafhncgmne" # Stylus
               #// "kfidecgcdjjfpeckbblhmfkhmlgecoff" # Svelte DevTools
