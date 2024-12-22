@@ -261,7 +261,7 @@ in {
       in
         flatten [
           (devices ["compx-2.4g-receiver-mouse" "protoarc-em04"] {
-            accel_profile = "custom 1 0 1 10 20";
+            accel_profile = "custom 1 0 1 5 10";
           })
 
           (devices ["kensington-orbit-wireless-tb-mouse" "orbit-bt5.0-mouse"] {
