@@ -292,7 +292,7 @@ in {
         #?? https://source.chromium.org/chromium/chromium/src/+/main:chrome/browser/about_flags.cc
         commandLineArgs = let
           features = concatStringsSep "," [
-            "OverlayScrollbar"
+            "FluentOverlayScrollbar"
 
             # https://wiki.archlinux.org/title/Chromium#Touchpad_Gestures_for_Navigation
             "TouchpadOverscrollHistoryNavigation"
