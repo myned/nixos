@@ -24,7 +24,7 @@ in {
           fingerprint_present_message = "<span foreground='##d33682'>󰈷</span>";
           fingerprint_ready_message = "󰈷";
           grace = 5 * 60; # Seconds
-          hide_cursor = true;
+          #// hide_cursor = true;
           ignore_empty_input = true;
           no_fade_in = true; # Fix suspend interrupting animation
         };
