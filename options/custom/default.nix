@@ -39,7 +39,16 @@ in {
     wallpaper = mkOption {default = false;};
 
     browser = {
-      command = mkOption {default = "${config.custom.programs.chromium.package}/bin/google-chrome-stable";};
+      # HACK: Find first matching package in final home-manager list
+      command = mkOption {
+        default = "${lib.findFirst (pkg:
+            if (lib.hasAttr "pname" pkg)
+            then pkg.pname == "google-chrome"
+            else false)
+          null
+          config.home-manager.users.${config.custom.username}.home.packages}/bin/google-chrome-stable";
+      };
+
       desktop = mkOption {default = "google-chrome.desktop";};
     };
 
