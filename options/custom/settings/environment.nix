@@ -25,7 +25,7 @@ in {
       #// i18n.defaultLocale = "C.UTF-8";
 
       sessionVariables = {
-        GDK_SCALE = toString config.custom.scale; # Steam HiDPI
+        GDK_SCALE = mkIf (!config.custom.services.xwayland-satellite.enable) (toString config.custom.scale); # Steam HiDPI
 
         # https://wiki.nixos.org/wiki/Wayland#Electron_and_Chromium
         NIXOS_OZONE_WL = mkIf cfg.wayland "1";

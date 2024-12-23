@@ -8,6 +8,7 @@ with lib; {
     #// gnome.enable = true;
     hyprland.enable = true;
     #// kde.enable = true;
+    niri.enable = true;
     #// sway.enable = true;
   };
 }

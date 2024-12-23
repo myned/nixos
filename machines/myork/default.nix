@@ -54,6 +54,19 @@ in {
   };
 
   home-manager.users.${config.custom.username} = {
+    programs.niri.settings.outputs = {
+      "eDP-1" = {
+        background-color = "#073642";
+
+        mode = with config.custom; {
+          inherit width height;
+          refresh = refresh + 0.0;
+        };
+
+        scale = config.custom.scale;
+      };
+    };
+
     wayland.windowManager.hyprland.settings = {
       device = [
         {

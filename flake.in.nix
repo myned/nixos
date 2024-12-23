@@ -65,6 +65,7 @@
     hyprlock = flake "github:hyprwm/hyprlock" // unstable "nixpkgs";
     hyprpaper = flake "github:hyprwm/hyprpaper" // unstable "nixpkgs";
     hyprpicker = flake "github:hyprwm/hyprpicker" // unstable "nixpkgs";
+    niri = flake "github:sodiboo/niri-flake" // unstable "nixpkgs";
     nix-flatpak = flake "github:gmodena/nix-flatpak?ref=v0.5.1";
     nix-vscode-extensions = flake "github:nix-community/nix-vscode-extensions" // unstable "nixpkgs";
     nixd = flake "github:nix-community/nixd" // unstable "nixpkgs";
@@ -131,6 +132,7 @@
                     inputs.arion.nixosModules.arion
                     inputs.disko.nixosModules.disko
                     inputs.fw-fanctrl.nixosModules.default
+                    inputs.niri.nixosModules.niri
                   ];
 
                   home-manager.users.${config.custom.username}.imports = [

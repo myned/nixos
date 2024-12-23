@@ -95,6 +95,10 @@
       flake = false;
       url = "github:Rawa/lifx-cli";
     };
+    niri = {
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "github:sodiboo/niri-flake";
+    };
     nix-flatpak.url = "github:gmodena/nix-flatpak?ref=v0.5.1";
     nix-index-database-stable = {
       inputs.nixpkgs.follows = "nixpkgs-stable";
