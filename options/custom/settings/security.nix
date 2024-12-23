@@ -12,13 +12,15 @@ in {
   config = mkIf cfg.enable {
     # Bypass password prompts
     security = {
-      sudo.wheelNeedsPassword = false;
+      sudo = {
+        enable = true;
+        wheelNeedsPassword = false;
+      };
 
       # https://wiki.nixos.org/wiki/Sway#Using_Home_Manager
+      # https://wiki.archlinux.org/title/Polkit#Bypass_password_prompt
       polkit = {
         enable = true;
-
-        # https://wiki.archlinux.org/title/Polkit#Bypass_password_prompt
         extraConfig = ''
           polkit.addRule(function(action, subject) {
             if (subject.isInGroup("wheel")) { return polkit.Result.YES; }
