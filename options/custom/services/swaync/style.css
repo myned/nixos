@@ -43,7 +43,7 @@ https://github.com/ErikReider/SwayNotificationCenter/blob/main/data/style/style.
 }
 
 .control-center {
-  border: 2px solid #073642;
+  /* border: 2px solid #073642; */
   margin: 10px; /* Gap size */
   padding: 16px;
 }
