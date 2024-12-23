@@ -60,7 +60,9 @@ in {
         systemd.enable = true; # Start on login
 
         # ?? waybar --log-level debug
-        style = ''
+        style = let
+          gap = toString config.custom.gap;
+        in ''
           * {
             border-radius: 50px;
             color: #93a1a1;
@@ -70,7 +72,7 @@ in {
           }
 
           .horizontal > box {
-            margin: 0 ${toString config.custom.gap}px ${toString config.custom.gap}px;
+            margin: 0 ${gap}px ${gap}px;
           }
 
           ${readFile ./style.css}
@@ -125,7 +127,7 @@ in {
             reload_style_on_change = true; # Reload CSS when modified
 
             ## GLOBAL ##
-            layer = "bottom";
+            layer = "top";
             position = "bottom";
 
             ## POSITION ##
@@ -134,7 +136,8 @@ in {
               "custom/inhibitor"
               "custom/vpn"
               "custom/vm"
-              "hyprland/workspaces"
+              (mkIf config.custom.desktops.hyprland.enable "hyprland/workspaces")
+              (mkIf config.custom.desktops.niri.enable "niri/workspaces")
             ];
             modules-center = [
               "clock"
@@ -196,6 +199,27 @@ in {
             # https://www.nerdfonts.com/cheat-sheet
             "hyprland/workspaces" = {
               show-special = true;
+              format = "{icon}";
+              format-icons = {
+                android = "";
+                dropdown = "󰞷";
+                game = "󰊴";
+                hidden = "";
+                music = "󰝚";
+                office = "󰈙";
+                password = "󰌾";
+                pip = "󰹙";
+                scratchpad = "";
+                steam = "󰓓";
+                terminal = "";
+                vm = "󰢹";
+                wallpaper = "󰏩";
+              };
+            };
+
+            # https://github.com/Alexays/Waybar/wiki/Module:-Niri
+            # https://www.nerdfonts.com/cheat-sheet
+            "niri/workspaces" = {
               format = "{icon}";
               format-icons = {
                 android = "";
