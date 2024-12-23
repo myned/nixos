@@ -33,7 +33,7 @@ in {
 
     gap = mkOption {default = 15;};
     padding = mkOption {default = 51;}; # ?? journalctl --user -u waybar.service | grep height:
-    rounding = mkOption {default = 10;};
+    rounding = mkOption {default = 15;};
 
     ### Misc
     wallpaper = mkOption {default = false;};
