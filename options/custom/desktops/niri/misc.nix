@@ -28,7 +28,7 @@ in {
         };
 
         hotkey-overlay.skip-at-startup = true;
-        prefer-no-csd = true; # Electron windows have odd borders otherwise
+        prefer-no-csd = true;
 
         # https://github.com/YaLTeR/niri/wiki/Configuration:-Switch-Events
         switch-events = {

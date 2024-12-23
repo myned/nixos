@@ -27,7 +27,6 @@ in {
         preset-column-widths = [
           {proportion = 0.5;}
           {proportion = 0.3;}
-          {proportion = 1.0;}
           {proportion = 0.7;} # Default
         ];
 
@@ -44,7 +43,7 @@ in {
           enable = true;
           width = config.custom.border;
           active.color = "#d33682";
-          inactive.color = "#586e75";
+          inactive.color = "#00000000";
         };
 
         focus-ring.enable = false;
