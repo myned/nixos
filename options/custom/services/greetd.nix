@@ -5,7 +5,6 @@
   ...
 }:
 with lib; let
-  Hyprland = "${config.programs.hyprland.package}/bin/Hyprland";
   systemd-cat = "${pkgs.systemd}/bin/systemd-cat";
   tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
 
@@ -21,9 +20,10 @@ in {
 
       settings.default_session = {
         command = lib.concatStringsSep " " [
-          "${tuigreet}"
+          tuigreet
           "--session-wrapper '${systemd-cat} --identifier wm'" # ?? journalctl --identifier wm
           "--remember"
+          "--remember-user-session"
           "--time"
           "--asterisks"
           "--window-padding 1"
