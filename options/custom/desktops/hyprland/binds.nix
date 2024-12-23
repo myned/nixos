@@ -53,16 +53,6 @@ in {
   options.custom.desktops.hyprland.binds.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
-    age.secrets = let
-      secret = filename: {
-        file = "${inputs.self}/secrets/${filename}";
-        owner = config.custom.username;
-        group = "users";
-      };
-    in {
-      "desktop/vm/myndows.pass" = secret "desktop/vm/myndows.pass";
-    };
-
     home-manager.users.${config.custom.username} = {
       wayland.windowManager.hyprland.settings = let
         # Reverse mods and key for alphabetical sorting

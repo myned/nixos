@@ -27,6 +27,16 @@ in {
   };
 
   config = mkIf cfg.enable {
+    age.secrets = let
+      secret = filename: {
+        file = "${inputs.self}/secrets/${filename}";
+        owner = config.custom.username;
+        group = "users";
+      };
+    in {
+      "desktop/vm/myndows.pass" = secret "desktop/vm/myndows.pass";
+    };
+
     virtualisation = {
       # https://wiki.nixos.org/wiki/Libvirt
       # https://libvirt.org
