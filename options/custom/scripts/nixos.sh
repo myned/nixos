@@ -41,9 +41,9 @@ _build() {
   else
     # Build current system
     if [[ "${argc_builder:-}" == nh ]]; then
-      nh os "$1" -- ${argc_extra:+"${argc_extra[@]}"}
+      nh os "$1" -- --show-trace ${argc_extra:+"${argc_extra[@]}"}
     elif [[ "${argc_builder:-}" == nixos ]]; then
-      sudo nixos-rebuild "$1" ${argc_extra:+"${argc_extra[@]}"}
+      sudo nixos-rebuild "$1" --show-trace ${argc_extra:+"${argc_extra[@]}"}
     fi
   fi
 
