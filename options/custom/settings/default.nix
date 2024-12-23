@@ -11,7 +11,6 @@ with lib; {
       hardware.enable = true;
       networking.enable = true;
       packages.enable = true;
-      security.enable = true;
       storage.enable = true;
       users.enable = true;
     })

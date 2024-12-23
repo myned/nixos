@@ -17,7 +17,9 @@ with lib; {
       nh.enable = true;
       nix-index.enable = true;
       nushell.enable = true;
+      polkit.enable = true;
       ssh.enable = true;
+      sudo.enable = true;
       tmux.enable = true;
     })
 

@@ -10,6 +10,7 @@ with lib; let
 in {
   options.custom.desktops.niri = {
     enable = mkOption {default = false;};
+    polkit = mkOption {default = false;};
     xwayland = mkOption {default = true;};
   };
 
@@ -34,7 +35,7 @@ in {
 
     #!! Disabled bundled KDE polkit agent
     # https://github.com/sodiboo/niri-flake?tab=readme-ov-file#additional-notes
-    systemd.user.services.niri-flake-polkit.enable = false;
+    systemd.user.services.niri-flake-polkit.enable = cfg.polkit;
 
     # Enable rootless Xwayland
     custom.services.xwayland-satellite.enable = cfg.xwayland;
