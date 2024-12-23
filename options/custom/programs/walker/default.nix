@@ -32,7 +32,7 @@ in {
         search.placeholder = "";
 
         # HACK: Window client required to send Esc key on Hyprland
-        as_window = true; # Disable layer
+        #// as_window = true; # Disable layer
 
         # https://github.com/abenz1267/walker/wiki/Modules
         # https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/tree/master/Papirus/64x64
