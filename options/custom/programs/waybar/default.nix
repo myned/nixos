@@ -221,20 +221,9 @@ in {
             # https://www.nerdfonts.com/cheat-sheet
             "niri/workspaces" = {
               format = "{icon}";
+
               format-icons = {
-                android = "";
-                dropdown = "󰞷";
-                game = "󰊴";
-                hidden = "";
-                music = "󰝚";
-                office = "󰈙";
-                password = "󰌾";
-                pip = "󰹙";
                 scratchpad = "";
-                steam = "󰓓";
-                terminal = "";
-                vm = "󰢹";
-                wallpaper = "󰏩";
               };
             };
 
