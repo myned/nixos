@@ -193,6 +193,7 @@ in {
           adw-gtk3
 
           ### Python packages
+          # TODO: Separate into standalone package for absolute path reference
           # https://wiki.nixos.org/wiki/Python#Package_unavailable_in_Nixpkgs
           # https://wiki.nixos.org/wiki/Packaging/Python
           (python311.withPackages (
