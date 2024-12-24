@@ -26,7 +26,9 @@ in {
         # HACK: Inherit home-manager environment variables in lieu of upstream fix
         # https://github.com/nix-community/home-manager/issues/2659
         # https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#environment
-        environment = mapAttrs (name: value: builtins.toString value) config.home-manager.users.${config.custom.username}.home.sessionVariables;
+        environment =
+          mapAttrs (name: value: toString value)
+          config.home-manager.users.${config.custom.username}.home.sessionVariables;
 
         cursor = {
           hide-after-inactive-ms = 1000 * 15; # Milliseconds
