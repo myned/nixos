@@ -9,7 +9,10 @@ with lib; let
 
   cfg = config.custom.services.xwayland-satellite;
 in {
-  options.custom.services.xwayland-satellite.enable = mkOption {default = false;};
+  options.custom.services.xwayland-satellite = {
+    enable = mkOption {default = false;};
+    display = mkOption {default = ":${toString config.services.xserver.display}";};
+  };
 
   config = mkIf cfg.enable {
     # HACK: Use official module if added
@@ -41,7 +44,13 @@ in {
     };
 
     environment.sessionVariables = {
-      DISPLAY = ":0"; # Assume first display
+      DISPLAY = cfg.display;
+    };
+
+    home-manager.users.${config.custom.username} = {
+      home.sessionVariables = {
+        DISPLAY = cfg.display;
+      };
     };
   };
 }
