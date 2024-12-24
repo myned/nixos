@@ -247,7 +247,7 @@ in {
           (key "S" "Ctrl+Alt" "exec" "${pkill} steam")
           (key "S" "Super" "togglespecialworkspace" "steam")
           (key "S" "Super+Shift" "movetoworkspacesilent" "special:steam")
-          (key "S" "Super+Shift" "exec" steam)
+          (key "S" "Super+Ctrl" "exec" steam)
           (key "T" "Ctrl+Alt" "exec" "${pkill} kitty")
           (key "T" "Super" "togglespecialworkspace" "terminal")
           (key "T" "Super+Ctrl" "exec" kitty)
