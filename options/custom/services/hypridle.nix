@@ -47,5 +47,13 @@ in {
         ];
       };
     };
+
+    # BUG: graphical-session-pre.target may not have WAYLAND_DISPLAY set, so service is skipped
+    # https://github.com/nix-community/home-manager/issues/5899
+    systemd.user.services.hypridle = {
+      Unit = {
+        After = mkForce ["graphical-session.target"]; # graphical-session-pre.target
+      };
+    };
   };
 }
