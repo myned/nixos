@@ -6,45 +6,32 @@
 }:
 with lib; let
   audio = "~/.local/bin/audio";
+  bash = "${pkgs.bash}/bin/bash";
   cat = "${pkgs.coreutils}/bin/cat";
-  clipse = "${pkgs.clipse}/bin/clipse";
   codium = "${config.home-manager.users.${config.custom.username}.programs.vscode.package}/bin/codium";
-  gnome-text-editor = "${pkgs.gnome-text-editor}/bin/gnome-text-editor";
   hyprlock = "${config.home-manager.users.${config.custom.username}.programs.hyprlock.package}/bin/hyprlock";
   hyprpicker = "${pkgs.hyprpicker}/bin/hyprpicker";
   inhibit = config.home-manager.users.${config.custom.username}.home.file.".local/bin/inhibit".source;
-  jq = "${pkgs.jq}/bin/jq";
-  kill = "${pkgs.procps}/bin/kill";
   kitty = "${config.home-manager.users.${config.custom.username}.programs.kitty.package}/bin/kitty";
-  left = config.home-manager.users.${config.custom.username}.home.file.".local/bin/left".source;
-  libreoffice = "${config.custom.programs.libreoffice.package}/bin/libreoffice";
   loginctl = "${pkgs.systemd}/bin/loginctl";
-  menu = config.home-manager.users.${config.custom.username}.home.file.".local/bin/menu".source;
+  loupe = "${pkgs.loupe}/bin/loupe";
   nautilus = "${pkgs.nautilus}/bin/nautilus";
   networkmanager_dmenu = "${pkgs.networkmanager_dmenu}/bin/networkmanager_dmenu";
   notify-send = "${pkgs.libnotify}/bin/notify-send";
   niri = "${config.programs.niri.package}/bin/niri";
   obsidian = "${pkgs.obsidian}/bin/obsidian";
-  onlyoffice-desktopeditors = "${pkgs.onlyoffice-bin}/bin/onlyoffice-desktopeditors --system-title-bar --xdg-desktop-portal";
   pkill = "${pkgs.procps}/bin/pkill";
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   power = config.home-manager.users.${config.custom.username}.home.file.".local/bin/power".source;
   remote = config.home-manager.users.${config.custom.username}.home.file.".local/bin/remote".source;
-  rofi-rbw = "${pkgs.rofi-rbw}/bin/rofi-rbw";
   rm = "${pkgs.coreutils}/bin/rm";
-  sleep = "${pkgs.coreutils}/bin/sleep";
-  smile = "${pkgs.smile}/bin/smile";
   steam = "${config.programs.steam.package}/bin/steam";
   swayosd-client = "${pkgs.swayosd}/bin/swayosd-client";
-  systemctl = "${pkgs.systemd}/bin/systemctl";
-  toggle = "~/.local/bin/toggle";
   virt-manager = "${config.programs.virt-manager.package}/bin/virt-manager";
-  vrr = config.home-manager.users.${config.custom.username}.home.file.".local/bin/vrr".source;
   walker = "${config.home-manager.users.${config.custom.username}.programs.walker.package}/bin/walker";
   waydroid = "${pkgs.waydroid}/bin/waydroid";
-  window = config.home-manager.users.${config.custom.username}.home.file.".local/bin/window".source;
-  workspace = config.home-manager.users.${config.custom.username}.home.file.".local/bin/workspace".source;
-  zoom = config.home-manager.users.${config.custom.username}.home.file.".local/bin/zoom".source;
+  _1password = "${config.programs._1password-gui.package}/bin/1password";
+  youtube-music = "${pkgs.youtube-music}/bin/youtube-music";
 
   cfg = config.custom.desktops.niri.binds;
 in {
@@ -68,36 +55,99 @@ in {
           }${key}";
           value = {inherit action;};
         };
+
+        # Launch VM
+        vm = ''${remote} --vm --client xfreerdp --username Myned --password "$(${cat} ${config.age.secrets."desktop/vm/myndows.pass".path})" ${
+            if config.custom.hidpi
+            then "--scale 140"
+            else ""
+          } myndows'';
       in
         listToAttrs (with config.home-manager.users.${config.custom.username}.lib.niri.actions; [
           (key "0" "Mod" (spawn [swayosd-client "--output-volume" "mute-toggle"]))
+          (key "1" "Ctrl+Alt" (spawn ["lifx" "state" "--brightness" "0.01"]))
+          (key "1" "Mod" (focus-workspace "1"))
+          (key "1" "Mod+Alt" (spawn ["lifx" "state" "--kelvin" "1500"]))
+          (key "1" "Mod+Shift" (move-column-to-workspace "1"))
+          (key "2" "Ctrl+Alt" (spawn ["lifx" "state" "--brightness" "0.25"]))
+          (key "2" "Mod" (focus-workspace "2"))
+          (key "2" "Mod+Alt" (spawn ["lifx" "state" "--kelvin" "2500"]))
+          (key "2" "Mod+Shift" (move-column-to-workspace "2"))
+          (key "3" "Ctrl+Alt" (spawn ["lifx" "state" "--brightness" "0.50"]))
+          (key "3" "Mod" (focus-workspace "3"))
+          (key "3" "Mod+Alt" (spawn ["lifx" "state" "--kelvin" "3000"]))
+          (key "3" "Mod+Shift" (move-column-to-workspace "3"))
+          (key "4" "Ctrl+Alt" (spawn ["lifx" "state" "--brightness" "0.75"]))
+          (key "4" "Mod" (focus-workspace "4"))
+          (key "4" "Mod+Alt" (spawn ["lifx" "state" "--kelvin" "4000"]))
+          (key "4" "Mod+Shift" (move-column-to-workspace "4"))
+          (key "5" "Ctrl+Alt" (spawn ["lifx" "state" "--brightness" "1.00"]))
+          (key "5" "Mod" (focus-workspace "5"))
+          (key "5" "Mod+Alt" (spawn ["lifx" "state" "--kelvin" "5000"]))
+          (key "5" "Mod+Shift" (move-column-to-workspace "5"))
+          (key "6" "Mod" (focus-workspace "6"))
+          (key "6" "Mod+Shift" (move-column-to-workspace "6"))
+          (key "7" "Mod" (focus-workspace "7"))
+          (key "7" "Mod+Shift" (move-column-to-workspace "7"))
+          (key "8" "Mod" (focus-workspace "8"))
+          (key "8" "Mod+Shift" (move-column-to-workspace "8"))
+          (key "9" "Mod" (spawn audio))
+          (key "A" "Ctrl+Alt" (spawn [waydroid "session" "stop"]))
           (key "A" "Mod" focus-column-or-monitor-left)
+          (key "A" "Mod+Ctrl" consume-or-expel-window-left)
           (key "A" "Mod+Shift" move-column-left-or-to-monitor-left)
           (key "Apostrophe" "Mod" screenshot)
           (key "Apostrophe" "Mod+Ctrl+Shift" screenshot-screen)
           (key "Apostrophe" "Mod+Shift" screenshot-window)
+          (key "B" "Ctrl+Alt" (spawn [pkill config.custom.browser.command]))
+          (key "B" "Mod" (spawn config.custom.browser.command))
           (key "Backslash" "Mod" (spawn inhibit))
+          (key "Backslash" "Mod+Shift" (spawn power))
           (key "Bracketleft" "Mod" (switch-layout "prev"))
           (key "Bracketright" "Mod" (switch-layout "next"))
-          (key "Delete" "Ctrl+Alt" quit)
+          (key "C" "Mod" (spawn [walker "--modules" "clipboard"]))
+          (key "C" "Mod+Ctrl" (spawn [bash "-c" "${rm} ~/.cache/walker/clipboard.gob && ${notify-send} menu 'Clipboard cleared' --urgency low"]))
+          (key "Delete" "Ctrl+Alt" (spawn [loginctl "terminate-user" config.custom.username]))
           (key "Delete" "Mod" (spawn [playerctl] "play-pause"))
           (key "Down" "Mod" (spawn [swayosd-client "--brightness" "lower"]))
+          (key "E" "Ctrl+Alt" (spawn [pkill "codium"]))
+          (key "E" "Mod" (spawn codium))
           (key "Equal" "Mod" (spawn [swayosd-client "--output-volume" "raise"]))
+          (key "Escape" "Mod+Alt" (spawn ["lifx" "state" "--color" "red"]))
+          (key "F" "Mod" (spawn [nautilus "--new-window"]))
+          (key "G" "Ctrl+Alt" (spawn [pkill "steam"]))
+          (key "G" "Mod" (spawn steam))
+          (key "K" "Ctrl+Alt" (spawn [pkill "obsidian"]))
+          (key "K" "Mod" (spawn obsidian))
+          (key "L" "Mod" (spawn [bash "-c" "${hyprlock} --immediate & ${niri} msg action power-off-monitors"]))
           (key "L" "Mod+Shift" suspend)
-          (key "L" "Mod" (spawn [hyprlock "--immediate" "&" niri "msg" "power-off-monitors"]))
           (key "Left" "Mod" (spawn [playerctl "previous"]))
+          (key "M" "Ctrl+Alt" (spawn [pkill "youtube-music"]))
+          (key "M" "Mod" (spawn youtube-music))
           (key "Minus" "Mod" (spawn [swayosd-client "--output-volume" "lower"]))
+          (key "O" "Mod" (spawn [loupe "/tmp/wallpaper.png"]))
+          (key "P" "Ctrl+Alt" (spawn [pkill "1password"]))
+          (key "P" "Mod" (spawn _1password))
           (key "Q" "Mod" close-window)
           (key "R" "Mod" focus-window-or-workspace-down)
           (key "R" "Mod+Shift" move-window-down-or-to-workspace-down)
           (key "Return" "Mod" maximize-column)
+          (key "Return" "Mod+Ctrl" center-column)
           (key "Return" "Mod+Shift" fullscreen-window)
           (key "Right" "Mod" (spawn [playerctl "next"]))
           (key "S" "Mod" focus-column-or-monitor-right)
+          (key "S" "Mod+Ctrl" consume-or-expel-window-right)
           (key "S" "Mod+Shift" move-column-right-or-to-monitor-right)
+          (key "Semicolon" "Mod" (spawn [hyprpicker "--autocopy"]))
+          (key "Semicolon" "Mod+Shift" (spawn [hyprpicker "--autocopy --format rgb"]))
           (key "Slash" "Mod+Shift" show-hotkey-overlay)
+          (key "Space" "Ctrl+Alt" (spawn ["lifx" "toggle"]))
+          (key "Space" "Ctrl+Alt" (spawn ["lifx" "toggle"]))
+          (key "T" "Ctrl+Alt" (spawn [pkill "kitty"]))
           (key "T" "Mod" (spawn kitty))
           (key "Up" "Mod" (spawn [swayosd-client "--brightness" "raise"]))
+          (key "V" "Mod" (spawn virt-manager))
+          (key "V" "Mod+Ctrl" (spawn vm))
           (key "W" "Mod" focus-window-or-workspace-up)
           (key "W" "Mod+Shift" move-window-up-or-to-workspace-up)
           (key "X" "Mod" switch-preset-column-width)
@@ -105,8 +155,12 @@ in {
 
           # BUG: Release binds execute with all binds involving that modifier
           # https://github.com/YaLTeR/niri/issues/605
-          #// (key "Super_L" "Mod" spawn menu)
-          (key "Space" "Mod" (spawn menu))
+          # TODO: Uncomment when fixed
+          #// (key "Shift_L" "Mod" focus-workspace-previous)
+          # TODO: Use "Super_L" when fixed
+          (key "Space" "Mod" (spawn walker))
+          (key "Space" "Mod+Ctrl+Shift" (spawn networkmanager_dmenu))
+          (key "Space" "Mod+Shift" (spawn [walker "--modules" "search"]))
 
           # Media keys
           # https://github.com/xkbcommon/libxkbcommon/blob/master/include/xkbcommon/xkbcommon-keysyms.h
