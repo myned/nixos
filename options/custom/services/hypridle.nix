@@ -9,6 +9,7 @@ with lib; let
   hyprctl = "${config.programs.hyprland.package}/bin/hyprctl";
   hyprlock = "${config.home-manager.users.${config.custom.username}.programs.hyprlock.package}/bin/hyprlock";
   loginctl = "${pkgs.systemd}/bin/loginctl";
+  niri = "${config.programs.niri.package}/bin/niri";
   pgrep = "${pkgs.procps}/bin/pgrep";
   pw-cli = "${pkgs.pipewire}/bin/pw-cli";
   systemctl = "${pkgs.systemd}/bin/systemctl";
@@ -37,7 +38,12 @@ in {
 
           {
             timeout = 20 * 60; # Seconds
-            on-timeout = "${hyprctl} dispatch dpms off";
+            on-timeout =
+              if config.custom.desktops.desktop == "hyprland"
+              then "${hyprctl} dispatch dpms off"
+              else if config.custom.desktops.desktop == "niri"
+              then "${niri} msg action power-off-monitors"
+              else "";
           }
 
           {

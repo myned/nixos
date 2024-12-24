@@ -12,9 +12,9 @@
     minimal = true;
     profile = "console";
 
-    desktops.gnome = {
-      enable = true;
-      gdm = false;
+    desktops = {
+      desktop = "gnome";
+      gnome.gdm = false;
     };
 
     programs = {

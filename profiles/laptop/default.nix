@@ -1,7 +1,7 @@
 {
   custom = {
     full = true;
-    profile = "desktop"; # Inherit desktop
+    profile = "desktop"; # Inherit desktop profile
   };
 
   #!! Rebuild offline - drastically increases initial download and resulting closure size
