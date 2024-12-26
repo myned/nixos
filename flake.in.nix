@@ -31,33 +31,24 @@
     # TODO: Upgrade to NixOS 24.11 stable
     nixpkgs-stable = flake "github:NixOS/nixpkgs/nixos-24.05";
 
-    # Common flakes
+    aagl-gtk-on-nix-stable = flake "github:ezKEa/aagl-gtk-on-nix/release-24.05" // stable "nixpkgs";
     home-manager-stable = flake "github:nix-community/home-manager/release-24.05" // stable "nixpkgs";
     nix-index-database-stable = flake "github:nix-community/nix-index-database" // stable "nixpkgs";
-
-    # Desktop flakes
-    aagl-gtk-on-nix-stable = flake "github:ezKEa/aagl-gtk-on-nix/release-24.05" // stable "nixpkgs";
 
     ### Unstable
     nixpkgs-unstable = flake "github:NixOS/nixpkgs/nixos-unstable";
 
-    # Common flakes
-    agenix = flake "github:ryantm/agenix" // unstable "nixpkgs";
-    arion = flake "github:hercules-ci/arion" // unstable "nixpkgs";
-    compose2nix = flake "github:aksiksi/compose2nix" // unstable "nixpkgs";
-    disko = flake "github:nix-community/disko" // unstable "nixpkgs";
-    home-manager-unstable = flake "github:nix-community/home-manager" // unstable "nixpkgs";
-    nix-index-database-unstable = flake "github:nix-community/nix-index-database" // unstable "nixpkgs";
-
-    # Console flakes
-    jovian-nixos = flake "github:Jovian-Experiments/Jovian-NixOS" // unstable "nixpkgs";
-
-    # Desktop flakes
     aagl-gtk-on-nix-unstable = flake "github:ezKEa/aagl-gtk-on-nix" // unstable "nixpkgs";
+    agenix = flake "github:ryantm/agenix" // unstable "nixpkgs";
     ags = flake "github:Aylur/ags" // unstable "nixpkgs";
     anyrun = flake "github:Kirottu/anyrun" // unstable "nixpkgs";
+    arion = flake "github:hercules-ci/arion" // unstable "nixpkgs";
     bitwarden-menu = flake "github:firecat53/bitwarden-menu" // unstable "nixpkgs";
+    compose2nix = flake "github:aksiksi/compose2nix" // unstable "nixpkgs";
+    conduwuit = flake "github:Myned/conduwuit" // unstable "nixpkgs";
+    disko = flake "github:nix-community/disko" // unstable "nixpkgs";
     fw-fanctrl = flake "github:TamtamHero/fw-fanctrl/packaging/nix" // unstable "nixpkgs";
+    home-manager-unstable = flake "github:nix-community/home-manager" // unstable "nixpkgs";
     hypridle = flake "github:hyprwm/hypridle" // unstable "nixpkgs";
     hyprland = flake "github:hyprwm/Hyprland?ref=v0.45.2" // unstable "nixpkgs";
     hyprland-contrib = flake "github:hyprwm/contrib" // unstable "nixpkgs";
@@ -65,14 +56,14 @@
     hyprlock = flake "github:hyprwm/hyprlock" // unstable "nixpkgs";
     hyprpaper = flake "github:hyprwm/hyprpaper" // unstable "nixpkgs";
     hyprpicker = flake "github:hyprwm/hyprpicker" // unstable "nixpkgs";
+    jovian-nixos = flake "github:Jovian-Experiments/Jovian-NixOS" // unstable "nixpkgs";
     niri = flake "github:sodiboo/niri-flake" // unstable "nixpkgs";
     nix-flatpak = flake "github:gmodena/nix-flatpak?ref=v0.5.1";
+    nix-index-database-unstable = flake "github:nix-community/nix-index-database" // unstable "nixpkgs";
     nix-vscode-extensions = flake "github:nix-community/nix-vscode-extensions" // unstable "nixpkgs";
     nixd = flake "github:nix-community/nixd" // unstable "nixpkgs";
+    stylix = flake "github:danth/stylix" // unstable "nixpkgs";
     walker = flake "github:abenz1267/walker?ref=v0.10.15" // unstable "nixpkgs";
-
-    # Server flakes
-    conduwuit = flake "github:Myned/conduwuit" // unstable "nixpkgs";
 
     ### Staging
     nixpkgs-staging-next = flake "github:NixOS/nixpkgs/staging-next";
@@ -119,11 +110,7 @@
               #!! Avoid globally importing modules that are not guarded by .enable
               # https://github.com/NixOS/nixpkgs/issues/137168
               (
-                {
-                  config,
-                  inputs,
-                  ...
-                }: {
+                {inputs, ...}: {
                   imports = [
                     inputs."aagl-gtk-on-nix-${branch}".nixosModules.default
                     inputs."home-manager-${branch}".nixosModules.home-manager
@@ -133,9 +120,11 @@
                     inputs.disko.nixosModules.disko
                     inputs.fw-fanctrl.nixosModules.default
                     inputs.niri.nixosModules.niri
+                    inputs.stylix.nixosModules.stylix
                   ];
 
-                  home-manager.users.${config.custom.username}.imports = [
+                  # TODO: Use home-manager.sharedModules for all options
+                  home-manager.sharedModules = [
                     inputs."nix-index-database-${branch}".hmModules.nix-index
                   ];
                 }

@@ -124,6 +124,10 @@
       flake = false;
       url = "github:sonic2kk/steamtinkerlaunch";
     };
+    stylix = {
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "github:danth/stylix";
+    };
     thunderbird-gnome-theme = {
       flake = false;
       url = "github:rafaelmardojai/thunderbird-gnome-theme";
