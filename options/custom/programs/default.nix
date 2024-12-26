@@ -6,6 +6,7 @@
 with lib; {
   config.custom.programs = mkMerge [
     (mkIf config.custom.default {
+      bash.enable = true;
       direnv.enable = true;
       fastfetch.enable = true;
       fish.enable = true;
