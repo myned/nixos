@@ -20,6 +20,7 @@ with lib; {
       fonts.enable = true;
       gtk.enable = true;
       qt.enable = true;
+      #// stylix.enable = true;
       xdg.enable = true;
     })
 
