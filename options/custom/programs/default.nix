@@ -53,6 +53,7 @@ with lib; {
       gamescope.enable = true;
       #// gnome-shell.enable = true;
       gpg.enable = true;
+      #// gtklock.enable = true;
       hyprlock.enable = true;
       libreoffice.enable = true;
       #// librewolf.enable = true;
