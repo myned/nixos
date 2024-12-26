@@ -28,12 +28,12 @@ in {
           scroll-factor = 0.5;
         };
 
+        # BUG: Applies to trackball device, switch to "flat" when per-device configuration is supported
+        # https://github.com/YaLTeR/niri/issues/371
         mouse = {
-          # BUG: Applies to trackball device, switch to "flat" when per-device configuration is supported
-          # https://github.com/YaLTeR/niri/issues/371
           accel-profile = "adaptive";
 
-          accel-speed = 0.0;
+          accel-speed = -0.1;
         };
 
         trackball = {
