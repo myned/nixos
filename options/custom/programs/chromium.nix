@@ -39,6 +39,7 @@ in {
               #// "ajopnjidmegmdimjlfnijceegpefgped" # BetterTTV
               #// "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
               #// "enamippconapkdmgfgjchkhakpfinmaj" # DeArrow
+              "ponfpcnoihfmfllpaingbgckeeldkhle" # Enhancer for YouTube
               #// "fnaicdffflnofjppbagibeoednhnbjhg" # floccus
               #// "bnomihfieiccainjcjblhegjgglakjdd" # Improve YouTube
               "pnjaodmkngahhkoihejjehlcdlnohgmp" # RSS Feed Reader
@@ -46,7 +47,7 @@ in {
               "clngdbkpkpeebahjckkjfobafhncgmne" # Stylus
               #// "kfidecgcdjjfpeckbblhmfkhmlgecoff" # Svelte DevTools
               #// "nplimhmoanghlebhdiboeellhgmgommi" # Tab Groups Extension
-              "enboaomnljigfhfjfoalacienlhjlfil" # UnTrap for YouTube
+              #// "enboaomnljigfhfjfoalacienlhjlfil" # UnTrap for YouTube
             ]));
 
         # https://chromeenterprise.google/policies/#DefaultSearchProvider
