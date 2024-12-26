@@ -80,6 +80,7 @@ in {
 
         ### SETTINGS ###
         # https://github.com/Alexays/Waybar/wiki/Configuration
+        # https://docs.gtk.org/Pango/pango_markup.html#pango-markup
         #?? pkill -SIGUSR2 -x waybar
         settings = let
           ## INHERIT ##
@@ -140,7 +141,8 @@ in {
               (mkIf config.custom.desktops.niri.enable "niri/workspaces")
             ];
             modules-center = [
-              "clock"
+              "clock#date"
+              "clock#time"
               "custom/weather"
             ];
             modules-right = [
@@ -231,10 +233,10 @@ in {
             cava = cava-config;
 
             # https://github.com/Alexays/Waybar/wiki/Module:-Clock
-            clock = {
-              # https://fmt.dev/latest/syntax.html#chrono-specs
-              format = "{:%a %b %d   %I:%M %p}"; # Mon Jan 01  12:00 AM
+            "clock#date" = {
+              format = "{:%a %b %d}";
               tooltip-format = "{calendar}";
+
               calendar.format = {
                 months = "<span color='#eee8d5'>{}</span>";
                 weeks = "<span color='#eee8d5'>{}</span>";
@@ -242,11 +244,12 @@ in {
                 days = "<span color='#586e75'>{}</span>";
                 today = "<span color='#eee8d5'>{}</span>";
               };
+            };
 
-              # FIXME: Click release event sends to incorrect layer without sleeping
-              # https://github.com/hyprwm/Hyprland/issues/1348
+            "clock#time" = {
+              # https://fmt.dev/latest/syntax/#chrono-format-specifications
+              format = "<span text_transform='lowercase'>{:%I:%M%p}</span>";
               on-click = "${swaync-client} --toggle-panel";
-              # on-click-right = easyeffects;
               on-scroll-up = "${swayosd-client} --output-volume raise";
               on-scroll-down = "${swayosd-client} --output-volume lower";
             };
@@ -286,7 +289,7 @@ in {
             mpris = {
               format = "{player_icon} {dynamic}";
               format-paused = "{status_icon} {dynamic}";
-              dynamic-len = 50;
+              dynamic-len = 25;
               dynamic-order = [
                 "title"
                 "artist"
@@ -363,6 +366,8 @@ in {
             # https://github.com/Alexays/Waybar/wiki/Module:-Battery
             "battery" = {
               format = "{icon} {power:.0f}W";
+              interval = 5;
+
               format-icons = [
                 "󰂃"
                 "󰁺"
@@ -376,13 +381,13 @@ in {
                 "󰂂"
                 "󰁹"
               ];
-              interval = 5;
+
               states = {
                 critical = 15;
                 warning = 30;
               };
 
-              on-click = power; # Toggle power-saver mode
+              on-click = power;
             };
           };
         };
