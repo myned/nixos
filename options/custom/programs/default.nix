@@ -20,6 +20,7 @@ with lib; {
       nushell.enable = true;
       polkit.enable = true;
       ssh.enable = true;
+      starship.enable = true;
       sudo.enable = true;
       tmux.enable = true;
     })
