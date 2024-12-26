@@ -107,6 +107,18 @@ tooltip label {
   color: #b58900;
 }
 
+#power-profiles-daemon.default {
+  color: #dc322f;
+}
+
+#power-profiles-daemon.performance {
+  color: #cb4b16;
+}
+
+#power-profiles-daemon.power-saver {
+  color: #859900;
+}
+
 #tray {
   background: #073642;
 }

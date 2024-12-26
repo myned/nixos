@@ -150,6 +150,7 @@ in {
               "wireplumber"
               "bluetooth"
               "network"
+              "power-profiles-daemon"
               "battery"
             ];
 
@@ -343,6 +344,20 @@ in {
 
               on-click = nm-connection-editor;
               on-click-right = network; # Toggle networking on/off
+            };
+
+            # https://github.com/Alexays/Waybar/wiki/Module:-PowerProfilesDaemon
+            power-profiles-daemon = {
+              format = "{icon}";
+
+              format-icons = {
+                default = "";
+                performance = "";
+                balanced = "";
+                power-saver = "";
+              };
+
+              tooltip = false;
             };
 
             # https://github.com/Alexays/Waybar/wiki/Module:-Battery
