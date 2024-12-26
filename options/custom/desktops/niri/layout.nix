@@ -17,7 +17,7 @@ in {
         gap = config.custom.gap / 2;
       in {
         gaps = gap;
-        #// center-focused-column = "always";
+        center-focused-column = mkIf config.custom.ultrawide "always";
         always-center-single-column = true;
 
         # TODO: Uncomment after next release > v1.10.1
