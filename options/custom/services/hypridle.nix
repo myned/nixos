@@ -24,10 +24,20 @@ in {
     services.hypridle = {
       enable = true;
 
-      settings = {
-        general = {
-          before_sleep_cmd = "${pgrep} hyprlock || ${hyprlock} --immediate";
-          lock_cmd = "${pgrep} hyprlock || ${hyprlock}";
+      settings = let
+        # Workaround for red background immediately showing while lockscreen starts
+        # https://github.com/YaLTeR/niri/issues/808
+        do-screen-transition = "${niri} msg action do-screen-transition --delay-ms 1000 &&";
+      in {
+        general = let
+          lock = "${pgrep} hyprlock || ${
+            if config.custom.desktops.desktop == "niri"
+            then do-screen-transition
+            else ""
+          } ${hyprlock}";
+        in {
+          before_sleep_cmd = "${lock} --immediate";
+          lock_cmd = lock;
         };
 
         listener = [
