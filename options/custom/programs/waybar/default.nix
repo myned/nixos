@@ -7,39 +7,41 @@
 }:
 with lib; let
   audio = config.home-manager.users.${config.custom.username}.home.file.".local/bin/audio".source;
-  bash = "${pkgs.bash}/bin/bash";
   blueberry = "${pkgs.blueberry}/bin/blueberry";
   bluetoothctl = "${pkgs.bluez}/bin/bluetoothctl";
   cat = "${pkgs.coreutils}/bin/cat";
+  date = "${pkgs.coreutils}/bin/date";
   easyeffects = "${pkgs.easyeffects}/bin/easyeffects";
   echo = "${pkgs.coreutils}/bin/echo";
-  grep = "${pkgs.gnugrep}/bin/grep";
-  hyprctl = "${config.programs.hyprland.package}/bin/hyprctl";
+  gnome-calendar = "${pkgs.gnome-calendar}/bin/gnome-calendar";
+  gnome-clocks = "${pkgs.gnome-clocks}/bin/gnome-clocks";
+  gnome-weather = "${pkgs.gnome-weather}/bin/gnome-weather";
   inhibit = config.home-manager.users.${config.custom.username}.home.file.".local/bin/inhibit".source;
   jq = "${pkgs.jq}/bin/jq";
   loginctl = "${pkgs.systemd}/bin/loginctl";
   network = config.home-manager.users.${config.custom.username}.home.file.".local/bin/network".source;
+  niri = "${config.programs.niri.package}/bin/niri";
   nm-connection-editor = "${pkgs.networkmanagerapplet}/bin/nm-connection-editor";
   pgrep = "${pkgs.procps}/bin/pgrep";
-  ping = "${pkgs.iputils}/bin/ping";
-  pkill = "${pkgs.procps}/bin/pkill";
-  playerctl = "${pkgs.playerctl}/bin/playerctl";
-  power = config.home-manager.users.${config.custom.username}.home.file.".local/bin/power".source;
+  pwvucontrol = "${pkgs.pwvucontrol}/bin/pwvucontrol";
   remote = config.home-manager.users.${config.custom.username}.home.file.".local/bin/remote".source;
   rfkill = "${pkgs.util-linux}/bin/rfkill";
-  sleep = "${pkgs.coreutils}/bin/sleep";
   swaync-client = "${config.home-manager.users.${config.custom.username}.services.swaync.package}/bin/swaync-client";
   swayosd-client = "${pkgs.swayosd}/bin/swayosd-client";
   systemctl = "${pkgs.systemd}/bin/systemctl";
-  systemd-inhibit = "${pkgs.systemd}/bin/systemd-inhibit";
   tailscale = "${pkgs.tailscale}/bin/tailscale";
   tr = "${pkgs.coreutils}/bin/tr";
+  virsh = "${pkgs.libvirt}/bin/virsh";
+  virt-manager = "${pkgs.virt-manager}/bin/virt-manager";
   vpn = config.home-manager.users.${config.custom.username}.home.file.".local/bin/vpn".source;
   wttrbar = "${pkgs.wttrbar}/bin/wttrbar";
 
   cfg = config.custom.programs.waybar;
 in {
-  options.custom.programs.waybar.enable = mkOption {default = false;};
+  options.custom.programs.waybar = {
+    enable = mkOption {default = false;};
+    desktop = mkOption {default = config.custom.desktops.desktop;};
+  };
 
   config = mkIf cfg.enable {
     age.secrets = let
@@ -52,416 +54,437 @@ in {
       "desktop/vm/myndows.pass" = secret "desktop/vm/myndows.pass";
     };
 
-    home-manager.users.${config.custom.username} = {
-      # https://github.com/Alexays/Waybar
-      # https://www.nerdfonts.com/cheat-sheet
-      programs.waybar = {
-        enable = true;
-        systemd.enable = true; # Start on login
-
-        # ?? waybar --log-level debug
-        style = let
-          gap = toString config.custom.gap;
-        in ''
-          * {
-            border-radius: 50px;
-            color: #93a1a1;
-            font: 18px '${config.custom.font.monospace}';
-            margin: 0;
-            padding: 0;
-          }
-
-          .horizontal > box {
-            margin: 0 ${gap}px ${gap}px;
-          }
-
-          ${readFile ./style.css}
-        '';
-
-        ### SETTINGS ###
-        # https://github.com/Alexays/Waybar/wiki/Configuration
-        # https://docs.gtk.org/Pango/pango_markup.html#pango-markup
+    home-manager.sharedModules = [
+      {
+        # https://github.com/Alexays/Waybar
+        #!! Some settings need a restart to take effect
+        #?? systemctl --user restart waybar
         #?? pkill -SIGUSR2 -x waybar
-        settings = let
-          ## INHERIT ##
-          #!! Module defaults are not accurate to documentation
-          # TODO: Submit pull request to fix in addition to inconsistent hyphen vs underscore
-          # https://github.com/Alexays/Waybar/wiki/Module:-Cava
-          cava-config = {
-            cava_config = null; # Default: null?
-            framerate = 30; # Default: 30?
-            autosens = 1; # Default: 1
-            # sensitivity = 0; # Default: 100?
-            bars = 16; # Default: 2
-            lower_cutoff_freq = 50; # Default: 50?
-            higher_cutoff_freq = 10000; # Default: 10000?
-            sleep_timer = 5; # Default: 0
-            hide_on_silence = true; # Default: false
-            method = "pipewire"; # Default: pulse
-            source = "auto"; # Default: auto?
-            sample_rate = 44100; # Default: 44100?
-            sample_bits = 16; # Default: 16?
-            stereo = false; # Default: true
-            reverse = false; # Default: false
-            bar_delimiter = 32; # ASCII code for space, default: 59 or ;
-            monstercat = true; # Default: false?
-            waves = true; # Default: false?
-            noise_reduction = 0.2; # Default: 0.77?
-            input_delay = 1; # Default: 4
-            format-icons = [
-              "▁"
-              "▂"
-              "▃"
-              "▄"
-              "▅"
-              "▆"
-              "▇"
-              "█"
-            ]; # !! Required
-            on-click = easyeffects;
-            on-scroll-up = "${swayosd-client} --output-volume raise";
-            on-scroll-down = "${swayosd-client} --output-volume lower";
-            rotate = 180;
-          };
-        in {
-          status = {
-            reload_style_on_change = true; # Reload CSS when modified
+        programs.waybar = {
+          enable = true;
+          systemd.enable = true;
 
-            ## GLOBAL ##
-            layer = "top";
-            position = "bottom";
+          # https://github.com/Alexays/Waybar/wiki/Styling
+          #?? GTK_DEBUG=interactive waybar
+          style = let
+            border = toString config.custom.border;
+            font = config.custom.font.monospace;
+            gap = toString config.custom.gap;
+          in ''
+            * {
+              border-radius: 50px;
+              color: #93a1a1;
+              font: 18px '${font}';
+              margin: 0;
+              padding: 0;
+            }
 
-            ## POSITION ##
-            modules-left = [
-              "custom/power"
-              "custom/inhibitor"
-              "custom/vpn"
-              "custom/vm"
-              (mkIf config.custom.desktops.hyprland.enable "hyprland/workspaces")
-              (mkIf config.custom.desktops.niri.enable "niri/workspaces")
-            ];
-            modules-center = [
-              "clock#date"
-              "clock#time"
-              "custom/weather"
-            ];
-            modules-right = [
-              "mpris"
-              "tray"
-              "custom/equalizer"
-              "wireplumber"
-              "bluetooth"
-              "network"
-              "power-profiles-daemon"
-              "battery"
-            ];
+            .horizontal > box {
+              border: ${border} solid #073642;
+              margin: 0 ${gap}px ${gap}px;
+            }
 
-            ## MODULES ##
-            # https://github.com/Alexays/Waybar/wiki/Module:-Custom
-            "custom/power" = {
-              format = "";
-              on-click = "${systemctl} poweroff";
-              on-click-right = "${systemctl} reboot";
-              on-click-middle = "${loginctl} terminate-session ''";
+            ${readFile ./style.css}
+          '';
+
+          # https://github.com/Alexays/Waybar/wiki/Configuration
+          # https://docs.gtk.org/Pango/pango_markup.html#pango-markup
+          # https://www.nerdfonts.com/cheat-sheet
+          settings = let
+            # Common module settings
+            #!! Some settings are commonly available for use but not documented per module
+            common = {
+              # https://github.com/Alexays/Waybar/issues/1800
+              smooth-scrolling-threshold = 2;
+
+              on-scroll-down =
+                if cfg.desktop == "niri"
+                then "${niri} msg action focus-workspace-down"
+                else "";
+
+              on-scroll-up =
+                if cfg.desktop == "niri"
+                then "${niri} msg action focus-workspace-up"
+                else "";
             };
 
-            "custom/inhibitor" = {
-              interval = 5;
-              exec = "~/.config/waybar/scripts/inhibitor.sh";
-              on-click = inhibit;
-            };
-
-            "custom/vm" = {
-              interval = 5;
-              exec = "~/.config/waybar/scripts/vm.sh";
-              on-click = ''${remote} --vm --client xfreerdp --username Myned --password "$(${cat} ${config.age.secrets."desktop/vm/myndows.pass".path})" ${
-                  if config.custom.hidpi
-                  then "--scale 140"
-                  else ""
-                } myndows'';
-            };
-
-            "custom/vpn" = {
-              interval = 5;
-              exec = "~/.config/waybar/scripts/vpn.sh";
-              on-click = "${vpn} mypi3";
-            };
-
-            # https://github.com/Alexays/Waybar/wiki/Module:-Idle-Inhibitor
-            # FIXME: Not currently usable
-            # https://github.com/Alexays/Waybar/issues/690
-            idle_inhibitor = {
-              format = "{icon}";
-              format-icons = {
-                activated = "󰅶";
-                deactivated = "󰾪";
-              };
-            };
-
-            # https://github.com/Alexays/Waybar/wiki/Module:-Hyprland
-            # https://www.nerdfonts.com/cheat-sheet
-            "hyprland/workspaces" = {
-              show-special = true;
-              format = "{icon}";
-              format-icons = {
-                android = "";
-                dropdown = "󰞷";
-                game = "󰊴";
-                hidden = "";
-                music = "󰝚";
-                office = "󰈙";
-                password = "󰌾";
-                pip = "󰹙";
-                scratchpad = "";
-                steam = "󰓓";
-                terminal = "";
-                vm = "󰢹";
-                wallpaper = "󰏩";
-              };
-            };
-
-            # https://github.com/Alexays/Waybar/wiki/Module:-Niri
-            # https://www.nerdfonts.com/cheat-sheet
-            "niri/workspaces" = {
-              format = "{icon}";
-
-              format-icons = {
-                scratchpad = "";
-              };
-            };
-
-            cava = cava-config;
-
-            # https://github.com/Alexays/Waybar/wiki/Module:-Clock
-            "clock#date" = {
-              format = "{:%a %b %d}";
-              tooltip-format = "{calendar}";
-
-              calendar.format = {
-                months = "<span color='#eee8d5'>{}</span>";
-                weeks = "<span color='#eee8d5'>{}</span>";
-                weekdays = "<span color='#93a1a1'>{}</span>";
-                days = "<span color='#586e75'>{}</span>";
-                today = "<span color='#eee8d5'>{}</span>";
-              };
-            };
-
-            "clock#time" = {
-              # https://fmt.dev/latest/syntax/#chrono-format-specifications
-              format = "<span text_transform='lowercase'>{:%I:%M%p}</span>";
-              on-click = "${swaync-client} --toggle-panel";
-              on-scroll-up = "${swayosd-client} --output-volume raise";
-              on-scroll-down = "${swayosd-client} --output-volume lower";
-            };
-
-            # https://github.com/bjesus/wttrbar
-            "custom/weather" = {
-              format = "{}°";
-              interval = 60 * 60;
-              return-type = "json";
-
-              exec = lib.strings.concatStringsSep " " [
-                "${wttrbar}"
-                "--ampm"
-                "--fahrenheit"
-                "--hide-conditions"
-                "--main-indicator temp_F"
-              ];
-            };
-
-            "cava#reverse" =
-              cava-config
+            #!! Module defaults are not accurate to documentation
+            cava =
+              common
               // {
-                reverse = true;
+                autosens = 1; # Default: 1
+                bar_delimiter = 32; # ASCII code for space, default: 59 or ;
+                bars = 16; # Default: 2
+                cava_config = null; # Default: null?
+                format-icons = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"]; #!! Required
+                framerate = 30; # Default 30?
+                hide_on_silence = true; # Default false
+                higher_cutoff_freq = 10000; # Default 10000?
+                input_delay = 1; # Default 4
+                lower_cutoff_freq = 50; # Default 50?
+                method = "pipewire"; # Default pulse
+                monstercat = true; # Default false?
+                noise_reduction = 0.2; # Default 0.77?
+                on-click = easyeffects;
+                on-scroll-down = "${swayosd-client} --output-volume lower";
+                on-scroll-up = "${swayosd-client} --output-volume raise";
+                reverse = false; # Default false
+                rotate = 180;
+                sample_bits = 16; # Default 16?
+                sample_rate = 44100; # Default 44100?
+                #// sensitivity = 0; # Default 100?
+                sleep_timer = 5; # Default 0
+                source = "auto"; # Default auto?
+                stereo = false; # Default true
+                waves = true; # Default false?
               };
+          in {
+            default = {
+              layer = "top";
+              position = "bottom";
+              reload_style_on_change = true;
 
-            "custom/equalizer" = {
-              interval = 5;
-              on-click = audio;
-              exec = pkgs.writeShellScript "equalizer.sh" ''
-                ${echo} 󰺢
-                ${echo} "$(${cat} ~/.audio)"
-                ${echo} "$(${cat} ~/.audio | ${tr} '[:upper:]' '[:lower:]')"
-              '';
-            };
-
-            # https://github.com/Alexays/Waybar/wiki/Module:-MPRIS
-            mpris = {
-              format = "{player_icon} {dynamic}";
-              format-paused = "{status_icon} {dynamic}";
-              dynamic-len = 25;
-              dynamic-order = [
-                "title"
-                "artist"
-              ];
-              dynamic-separator = " 󰧟 ";
-              player-icons.default = "󰎈";
-              status-icons.paused = "";
-              on-click-middle = ""; # TODO: Close music player
-              on-scroll-up = "${swayosd-client} --output-volume raise";
-              on-scroll-down = "${swayosd-client} --output-volume lower";
-            };
-
-            # https://github.com/Alexays/Waybar/wiki/Module:-WirePlumber
-            wireplumber = {
-              format = "{icon} {volume}%";
-              format-muted = "󰸈";
-              format-icons = [
-                "󰕿"
-                "󰖀"
-                "󰕾"
-              ];
-              on-click = easyeffects;
-              on-click-right = "${swayosd-client} --output-volume mute-toggle";
-              on-scroll-up = "${swayosd-client} --output-volume raise";
-              on-scroll-down = "${swayosd-client} --output-volume lower";
-            };
-
-            # https://github.com/Alexays/Waybar/wiki/Module:-Bluetooth
-            bluetooth = {
-              format-disabled = "󰂲";
-              format-off = "󰂲";
-              format-on = "󰂯";
-              format-connected = "󰂱";
-              on-click = blueberry;
-              on-click-right = "${bluetoothctl} disconnect";
-              on-click-middle = "${rfkill} toggle bluetooth"; # Toggle bluetooth on/off
-            };
-
-            # https://github.com/Alexays/Waybar/wiki/Module:-Network
-            network = {
-              format = "{icon}";
-              format-icons = {
-                disabled = "";
-                disconnected = "";
-                ethernet = "󰈀";
-                linked = "";
-                wifi = [
-                  "󰤯"
-                  "󰤟"
-                  "󰤢"
-                  "󰤥"
-                  "󰤨"
-                ];
-              };
-
-              on-click = nm-connection-editor;
-              on-click-right = network; # Toggle networking on/off
-            };
-
-            # https://github.com/Alexays/Waybar/wiki/Module:-PowerProfilesDaemon
-            power-profiles-daemon = {
-              format = "{icon}";
-
-              format-icons = {
-                default = "";
-                performance = "";
-                balanced = "";
-                power-saver = "";
-              };
-
-              tooltip = false;
-            };
-
-            # https://github.com/Alexays/Waybar/wiki/Module:-Battery
-            "battery" = {
-              format = "{icon} {power:.0f}W";
-              interval = 5;
-
-              format-icons = [
-                "󰂃"
-                "󰁺"
-                "󰁻"
-                "󰁼"
-                "󰁽"
-                "󰁾"
-                "󰁿"
-                "󰂀"
-                "󰂁"
-                "󰂂"
-                "󰁹"
+              modules-left = [
+                "custom/power"
+                "custom/inhibitor"
+                "custom/vpn"
+                "custom/vm"
+                (mkIf config.custom.desktops.hyprland.enable "hyprland/workspaces")
+                (mkIf config.custom.desktops.niri.enable "niri/workspaces")
               ];
 
-              states = {
-                critical = 15;
-                warning = 30;
-              };
+              modules-center = [
+                #// "cava#forward"
+                "clock#date"
 
-              on-click = power;
+                # BUG: Padding modifiers not currently supported, so use custom module
+                # https://github.com/Alexays/Waybar/issues/1469 et al.
+                #// "clock#time"
+                "custom/time"
+
+                "custom/weather"
+                #// "cava#reverse"
+              ];
+
+              modules-right = [
+                "mpris"
+                "tray"
+                "custom/equalizer"
+                "wireplumber"
+                "bluetooth"
+                "network"
+                "power-profiles-daemon"
+                "battery"
+              ];
+
+              # https://github.com/Alexays/Waybar/wiki/Module:-Battery
+              battery =
+                common
+                // {
+                  format = "{icon} {power:.0f}W";
+                  format-icons = ["󰂃" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
+                  interval = 5; # Seconds
+
+                  states = {
+                    critical = 15; # Percent
+                    warning = 30; # Percent
+                  };
+                };
+
+              # https://github.com/Alexays/Waybar/wiki/Module:-Bluetooth
+              bluetooth =
+                common
+                // {
+                  format-connected = "󰂱";
+                  format-disabled = "󰂲";
+                  format-off = "󰂲";
+                  format-on = "󰂯";
+                  on-click = "${rfkill} toggle bluetooth";
+                  on-click-middle = "${bluetoothctl} disconnect";
+                  on-click-right = blueberry;
+                };
+
+              # https://github.com/Alexays/Waybar/wiki/Module:-Cava
+              "cava#forward" = cava;
+              "cava#reverse" = cava // {reverse = true;};
+
+              # https://github.com/Alexays/Waybar/wiki/Module:-Clock
+              # https://fmt.dev/latest/syntax/#chrono-format-specifications
+              "clock#date" =
+                common
+                // {
+                  format = "{:%a %b %d}";
+                  tooltip-format = "{calendar}";
+                  on-click-right = gnome-calendar;
+
+                  calendar = {
+                    format = {
+                      months = "<span color='#eee8d5'>{}</span>";
+                      weeks = "<span color='#eee8d5'>{}</span>";
+                      weekdays = "<span color='#93a1a1'>{}</span>";
+                      days = "<span color='#586e75'>{}</span>";
+                      today = "<span color='#eee8d5'>{}</span>";
+                    };
+                  };
+                };
+
+              "clock#time" =
+                common
+                // {
+                  format = "<span text_transform='lowercase'>{:%-I:%M%p}</span>";
+                  on-click = "${swaync-client} --toggle-panel";
+                  on-click-right = gnome-clocks;
+                };
+
+              # https://github.com/Alexays/Waybar/wiki/Module:-Hyprland
+              "hyprland/workspaces" =
+                common
+                // {
+                  format = "{icon}";
+
+                  format-icons = {
+                    android = "";
+                    dropdown = "󰞷";
+                    game = "󰊴";
+                    hidden = "";
+                    music = "󰝚";
+                    office = "󰈙";
+                    password = "󰌾";
+                    pip = "󰹙";
+                    scratchpad = "";
+                    steam = "󰓓";
+                    terminal = "";
+                    vm = "󰢹";
+                    wallpaper = "󰏩";
+                  };
+
+                  show-special = true;
+                };
+
+              # https://github.com/Alexays/Waybar/wiki/Module:-Idle-Inhibitor
+              # BUG: Not currently compatible with other inhibit activations
+              # https://github.com/Alexays/Waybar/issues/690
+              idle_inhibitor =
+                common
+                // {
+                  format = "{icon}";
+
+                  format-icons = {
+                    activated = "󰅶";
+                    deactivated = "󰾪";
+                  };
+                };
+
+              # https://github.com/Alexays/Waybar/wiki/Module:-Niri
+              "niri/workspaces" =
+                common
+                // {
+                  format = "{icon}";
+
+                  format-icons = {
+                    scratchpad = "";
+                  };
+                };
+
+              # https://github.com/Alexays/Waybar/wiki/Module:-MPRIS
+              mpris =
+                common
+                // {
+                  format = "{player_icon} {dynamic}";
+                  format-paused = "{status_icon} {dynamic}";
+                  dynamic-len = 25; # Characters
+                  dynamic-order = ["title" "artist"];
+                  dynamic-separator = " 󰧟 ";
+                  player-icons.default = "󰎈";
+                  status-icons.paused = "";
+
+                  # TODO: on-click focus currently playing window
+                  #// on-click = "";
+
+                  on-click-middle =
+                    if cfg.desktop == "niri"
+                    then ''${niri} msg action close-window --id "$(${niri} msg -j windows | ${jq} '.[] | select(.app_id == "YouTube Music").id')"''
+                    else "";
+
+                  on-scroll-down = "${swayosd-client} --output-volume lower";
+                  on-scroll-up = "${swayosd-client} --output-volume raise";
+                };
+
+              # https://github.com/Alexays/Waybar/wiki/Module:-Network
+              network =
+                common
+                // {
+                  format = "{icon}";
+
+                  format-icons = {
+                    disabled = "";
+                    disconnected = "";
+                    ethernet = "󰈀";
+                    linked = "";
+                    wifi = ["󰤯" "󰤟" "󰤢" "󰤥" "󰤨"];
+                  };
+
+                  on-click = network;
+                  on-click-right = nm-connection-editor;
+                };
+
+              # https://github.com/Alexays/Waybar/wiki/Module:-PowerProfilesDaemon
+              power-profiles-daemon =
+                common
+                // {
+                  format = "{icon}";
+
+                  format-icons = {
+                    default = "";
+                    performance = "";
+                    balanced = "";
+                    power-saver = "";
+                  };
+
+                  tooltip = false;
+                };
+
+              # https://github.com/Alexays/Waybar/wiki/Module:-WirePlumber
+              wireplumber =
+                common
+                // {
+                  format = "{icon} {volume}%";
+                  format-icons = ["󰕿" "󰖀" "󰕾"];
+                  format-muted = "󰸈";
+                  on-click = "${swayosd-client} --output-volume mute-toggle";
+                  on-click-right = pwvucontrol;
+                  on-scroll-down = "${swayosd-client} --output-volume lower";
+                  on-scroll-up = "${swayosd-client} --output-volume raise";
+                };
+
+              # https://github.com/Alexays/Waybar/wiki/Module:-Custom
+              "custom/equalizer" =
+                common
+                // {
+                  exec = pkgs.writeShellScript "equalizer.sh" ''
+                    ${echo} 󰺢
+                    ${echo} "$(${cat} ~/.audio)"
+                    ${echo} "$(${cat} ~/.audio | ${tr} '[:upper:]' '[:lower:]')"
+                  '';
+
+                  interval = 5; # Seconds
+                  on-click = audio;
+                  on-click-right = easyeffects;
+                };
+
+              "custom/inhibitor" =
+                common
+                // {
+                  exec = pkgs.writeShellScript "inhibitor.sh" ''
+                    if ${pgrep} systemd-inhibit &> /dev/null; then
+                      ${echo} 󰅶
+                      ${echo} Enabled
+                      ${echo} enabled
+                    else
+                      ${echo} 󰾪
+                      ${echo} Disabled
+                      ${echo} disabled
+                    fi
+                  '';
+
+                  interval = 5; # Seconds
+                  on-click = inhibit;
+                };
+
+              "custom/power" =
+                common
+                // {
+                  format = "";
+                  on-click = "${systemctl} poweroff";
+                  on-click-middle = "${loginctl} terminate-session ${config.custom.username}";
+                  on-click-right = "${systemctl} reboot";
+                };
+
+              "custom/time" =
+                common
+                // {
+                  exec = "${date} '+%-I:%M%P'";
+                  interval = 60; # Seconds
+                  on-click = "${swaync-client} --toggle-panel";
+                  on-click-right = gnome-clocks;
+                };
+
+              "custom/vm" =
+                common
+                // {
+                  exec = pkgs.writeShellScript "vm.sh" ''
+                    case "$(${virsh} domstate myndows)" in
+                      'running')
+                        ${echo} 
+                        ${echo} Online
+                        ${echo} online;;
+                      'paused')
+                        ${echo} 
+                        ${echo} Paused
+                        ${echo} paused;;
+                      'shut off')
+                        ${echo} 
+                        ${echo} Offline
+                        ${echo} offline;;
+                      *)
+                        ${echo} 
+                        ${echo} Unknown
+                        ${echo} unknown;;
+                    esac
+                  '';
+
+                  interval = 5;
+
+                  on-click = ''${remote} --vm --client xfreerdp --username Myned --password "$(${cat} ${config.age.secrets."desktop/vm/myndows.pass".path})" ${
+                      if config.custom.hidpi
+                      then "--scale 140"
+                      else ""
+                    } myndows'';
+
+                  on-click-middle = "${virsh} shutdown myndows";
+                  on-click-right = virt-manager;
+                };
+
+              "custom/vpn" =
+                common
+                // {
+                  exec = pkgs.writeShellScript "vpn.sh" ''
+                    if [[ $(${tailscale} status --json | ${jq} .ExitNodeStatus.Online) == 'true' ]]; then
+                      ${echo} 󰖂
+                      ${echo} Connected
+                      ${echo} connected
+                    else
+                      ${echo} 󰖂
+                      ${echo} Disconnected
+                      ${echo} disconnected
+                    fi
+                  '';
+
+                  interval = 5; # Seconds
+                  on-click = "${vpn} mypi3";
+                };
+
+              # https://github.com/bjesus/wttrbar
+              "custom/weather" =
+                common
+                // {
+                  exec = lib.strings.concatStringsSep " " [
+                    wttrbar
+                    "--ampm"
+                    "--fahrenheit"
+                    "--hide-conditions"
+                    "--main-indicator temp_F"
+                  ];
+
+                  format = "{}°";
+                  interval = 60 * 60; # Seconds
+                  return-type = "json";
+                  on-click-right = gnome-weather;
+                };
             };
           };
         };
-      };
-
-      # TODO: Convert to writeShellApplication
-      ### SCRIPTS ###
-      #?? text
-      #?? tooltip
-      #?? class
-      xdg.configFile = {
-        # Return inhibit idle status
-        "waybar/scripts/inhibitor.sh" = {
-          executable = true;
-          text = ''
-            #! /usr/bin/env ${bash}
-
-            if ${pgrep} systemd-inhibit &> /dev/null; then
-              ${echo} 󰅶
-              ${echo} Enabled
-              ${echo} enabled
-            else
-              ${echo} 󰾪
-              ${echo} Disabled
-              ${echo} disabled
-            fi
-          '';
-        };
-
-        # Return tailscale status
-        "waybar/scripts/vm.sh" = {
-          executable = true;
-          text = ''
-            #! /usr/bin/env ${bash}
-
-            case "$(virsh domstate myndows)" in
-              'running')
-                ${echo} 
-                ${echo} Online
-                ${echo} online;;
-              'paused')
-                ${echo} 
-                ${echo} Paused
-                ${echo} paused;;
-              'shut off')
-                ${echo} 
-                ${echo} Offline
-                ${echo} offline;;
-              *)
-                ${echo} 
-                ${echo} Unknown
-                ${echo} unknown;;
-            esac
-          '';
-        };
-
-        # Return tailscale status
-        "waybar/scripts/vpn.sh" = {
-          executable = true;
-          text = ''
-            #! /usr/bin/env ${bash}
-
-            if [[ $(${tailscale} status --json | ${jq} .ExitNodeStatus.Online) == 'true' ]]; then
-              ${echo} 󰖂
-              ${echo} Connected
-              ${echo} connected
-            else
-              ${echo} 󰖂
-              ${echo} Disconnected
-              ${echo} disconnected
-            fi
-          '';
-        };
-      };
-    };
+      }
+    ];
   };
 }
