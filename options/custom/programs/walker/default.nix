@@ -122,7 +122,7 @@ in {
 
             src = "${pkgs.writeShellApplication {
               name = "search";
-              text = builtins.readFile ./search.sh;
+              text = readFile ./search.sh;
 
               runtimeInputs = with pkgs; [
                 coreutils
@@ -145,7 +145,7 @@ in {
             font: larger ${config.custom.font.monospace};
           }
 
-          ${builtins.readFile ./style.css}
+          ${readFile ./style.css}
         '';
 
         #!! Inherit from default layout

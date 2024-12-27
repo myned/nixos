@@ -158,7 +158,7 @@ in {
         merge = field: expr: rules:
           map (
             rule:
-              if builtins.isAttrs field
+              if isAttrs field
               then "${rule}, ${lib.concatStringsSep ", " (lib.mapAttrsToList (f: e: format f e) field)}"
               else "${rule}, ${format field expr}"
           )

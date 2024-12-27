@@ -25,7 +25,7 @@ in {
           #// excludeShellChecks = ["SC2154"]; # argc evaluates variables at runtime
 
           runtimeInputs = dependencies;
-          text = builtins.readFile ./${name}.sh;
+          text = readFile ./${name}.sh;
         }
         + "/bin/${name}";
     };
@@ -38,7 +38,7 @@ in {
         pkgs.writers.writePython3Bin name {libraries = dependencies;}
         # Disable linting
         # https://flake8.pycqa.org/en/3.1.1/user/ignoring-errors.html#ignoring-entire-files
-        ("# flake8: noqa\n" + builtins.readFile ./${name}.py)
+        ("# flake8: noqa\n" + readFile ./${name}.py)
         + "/bin/${name}";
     };
   in

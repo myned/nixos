@@ -26,7 +26,7 @@ in {
         -- # TODO: Remove when using Wayland
         config.font_size = ${toString (14 * config.custom.scale)}
 
-        ${builtins.readFile ./config.lua}
+        ${readFile ./config.lua}
 
         return config
       '';

@@ -17,13 +17,15 @@ in {
       package = pkgs.google-cursor;
     };
 
-    gtk = {
+    gtk = let
+      css = readFile ./style.css;
+    in {
       enable = true;
-      gtk3.extraCss = builtins.readFile ./style.css;
+      gtk3.extraCss = css;
 
       gtk4 = {
         extraConfig.gtk-hint-font-metrics = 1; # Fix blurry fonts
-        extraCss = builtins.readFile ./style.css;
+        extraCss = css;
       };
 
       font = {
