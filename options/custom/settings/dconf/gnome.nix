@@ -119,7 +119,10 @@ in {
         workspaces-only-on-primary = mkBoolean true;
 
         #?? [as]
-        experimental-features = mkArray type.string ["variable-refresh-rate"];
+        experimental-features = mkArray type.string [
+          "scale-monitor-framebuffer" # https://wiki.archlinux.org/title/HiDPI#Fractional_scaling
+          "variable-refresh-rate" # https://wiki.archlinux.org/title/Variable_refresh_rate#GNOME
+        ];
       };
 
       "org/gnome/mutter/wayland/keybindings" = {
