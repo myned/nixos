@@ -43,10 +43,10 @@ with lib; {
     (mkIf config.custom.full {
       _1password.enable = true;
       adb.enable = true;
-      ags.enable = true;
+      #// ags.enable = true;
       #// anyrun.enable = true;
       #// bitwarden-menu.enable = true;
-      clipse.enable = true;
+      #// clipse.enable = true;
       discord.enable = true;
       element-desktop.enable = true;
       #// fuzzel.enable = true;
@@ -67,13 +67,13 @@ with lib; {
       obs-studio.enable = true;
       onlyoffice.enable = true;
       #// onedrive.enable = true;
-      path-of-building.enable = true;
-      rbw.enable = true;
+      #// path-of-building.enable = true;
+      #// rbw.enable = true;
       remmina.enable = true;
-      rofi-rbw.enable = true;
-      rofi.enable = true;
+      #// rofi-rbw.enable = true;
+      #// rofi.enable = true;
       seahorse.enable = true;
-      slurp.enable = true;
+      #// slurp.enable = true;
       steam.enable = true;
       #// swaylock.enable = true;
       #// thunderbird.enable = true;
@@ -82,7 +82,7 @@ with lib; {
       walker.enable = true;
       waybar.enable = true;
       wireshark.enable = true;
-      wofi.enable = true;
+      #// wofi.enable = true;
       #// wpaperd.enable = true;
     })
   ];
