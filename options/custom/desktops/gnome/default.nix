@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib; let
@@ -10,22 +9,23 @@ in {
   options.custom.desktops.gnome = {
     enable = mkOption {default = false;};
     gdm = mkOption {default = true;};
+    minimal = mkOption {default = false;};
   };
 
   config = mkIf cfg.enable {
+    # https://wiki.nixos.org/wiki/GNOME
     # FIXME: xdg-desktop-portal-[gnome|gtk] not working through steam
     services = {
-      xserver = {
+      xserver = mkIf (!cfg.minimal) {
         enable = true;
         desktopManager.gnome.enable = true;
         displayManager.gdm.enable = cfg.gdm;
       };
 
-      gnome.gnome-browser-connector.enable = true; # Install extensions from browser
+      gnome = {
+        core-os-services.enable = mkIf cfg.minimal true;
+        gnome-browser-connector.enable = !cfg.minimal;
+      };
     };
-
-    # Remove default packages
-    # https://wiki.nixos.org/wiki/GNOME#Excluding_GNOME_Applications
-    environment.gnome.excludePackages = [pkgs.gnome-shell-extensions];
   };
 }

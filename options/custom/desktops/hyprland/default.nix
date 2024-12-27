@@ -10,11 +10,18 @@ in {
   options.custom.desktops.hyprland.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
-    custom.desktops.hyprland = mkIf config.custom.full {
-      binds.enable = true;
-      plugins.enable = true;
-      rules.enable = true;
-      settings.enable = true;
+    custom.desktops = mkIf config.custom.full {
+      hyprland = {
+        binds.enable = true;
+        plugins.enable = true;
+        rules.enable = true;
+        settings.enable = true;
+      };
+
+      gnome = {
+        enable = true;
+        minimal = true;
+      };
     };
 
     # https://github.com/hyprwm/Hyprland

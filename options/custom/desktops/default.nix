@@ -8,7 +8,13 @@ with lib; let
 in {
   options.custom.desktops = {
     enable = mkOption {default = config.custom.minimal;};
-    desktop = mkOption {default = "niri";};
+
+    desktop = mkOption {
+      default =
+        if config.custom.full
+        then "niri"
+        else "gnome";
+    };
   };
 
   config = mkIf cfg.enable {

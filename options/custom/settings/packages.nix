@@ -97,12 +97,14 @@ in {
           gnome-calendar # Calendar
           gnome-clocks # Clock
           gnome-connections # Remote desktop client
+          gnome-contacts # Contact editor
           gnome-disk-utility # Disk formatter
           gnome-firmware # Firmware updater
           gnome-font-viewer # Font viewer
           gnome-graphs # Data plotter
           gnome-maps # OpenStreetMap client
           gnome-obfuscate # Image redacter
+          gnome-online-accounts-gtk # GNOME accounts
           gnome-podcasts # Podcast feed
           gnome-resources # System monitor
           gnome-software # Flatpak manager

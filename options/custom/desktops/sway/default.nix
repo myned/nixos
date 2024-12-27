@@ -9,13 +9,20 @@ in {
   options.custom.desktops.sway.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
-    custom.desktops.sway = mkIf config.custom.full {
-      binds.enable = true;
-      input.enable = true;
-      output.enable = true;
-      rules.enable = true;
-      settings.enable = true;
-      swayfx.enable = true;
+    custom.desktops = mkIf config.custom.full {
+      sway = {
+        binds.enable = true;
+        input.enable = true;
+        output.enable = true;
+        rules.enable = true;
+        settings.enable = true;
+        swayfx.enable = true;
+      };
+
+      gnome = {
+        enable = true;
+        minimal = true;
+      };
     };
 
     # https://wiki.nixos.org/wiki/Sway

@@ -15,12 +15,19 @@ in {
   };
 
   config = mkIf cfg.enable {
-    custom.desktops.niri = mkIf config.custom.full {
-      binds.enable = true;
-      input.enable = true;
-      layout.enable = true;
-      misc.enable = true;
-      rules.enable = true;
+    custom.desktops = mkIf config.custom.full {
+      niri = {
+        binds.enable = true;
+        input.enable = true;
+        layout.enable = true;
+        misc.enable = true;
+        rules.enable = true;
+      };
+
+      gnome = {
+        enable = true;
+        minimal = true;
+      };
     };
 
     # https://github.com/YaLTeR/niri
