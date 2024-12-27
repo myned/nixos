@@ -5,7 +5,6 @@ https://github.com/ErikReider/SwayNotificationCenter/blob/main/data/style/style.
 ***/
 
 @define-color cc-bg #002b36;
-
 @define-color noti-border-color #073642;
 @define-color noti-bg #002b36;
 @define-color noti-bg-opaque #002b36;
@@ -13,24 +12,29 @@ https://github.com/ErikReider/SwayNotificationCenter/blob/main/data/style/style.
 @define-color noti-bg-hover #073642;
 @define-color noti-bg-hover-opaque #073642;
 @define-color noti-bg-focus #002b36;
-
 @define-color text-color #93a1a1;
 @define-color text-color-disabled #586e75;
 
-.notification.low {
-  border: 2px solid #6c71c4;
+.control-center {
+  padding: 16px;
 }
 
-.notification.normal {
-  border: 2px solid #d33682;
-}
-
-.notification.critical {
-  border: 2px solid #dc322f;
+.control-center .notification {
+  box-shadow: none;
 }
 
 .notification-content {
-  padding: 16px;
+  padding: 12px;
+}
+
+.notification-content .app-icon,
+.notification-content .image {
+  margin: 0 8px 0 0;
+}
+
+.notification-group-buttons,
+.notification-group-headers {
+  margin: 0;
 }
 
 .text-box .summary,
@@ -40,14 +44,4 @@ https://github.com/ErikReider/SwayNotificationCenter/blob/main/data/style/style.
 
 .text-box .body {
   font-size: 16px;
-}
-
-.control-center {
-  /* border: 2px solid #073642; */
-  margin: 10px; /* Gap size */
-  padding: 16px;
-}
-
-.control-center .notification {
-  box-shadow: none;
 }

@@ -12,26 +12,51 @@ in {
     # https://github.com/ErikReider/SwayNotificationCenter
     services.swaync = {
       enable = true;
-      style = ./style.css;
+
+      # https://github.com/ErikReider/SwayNotificationCenter/blob/main/data/style/style.scss
+      style = let
+        border = toString config.custom.border;
+        gap = toString config.custom.gap;
+      in ''
+        .control-center {
+          border: ${border} solid #073642;
+          margin: ${gap}px;
+        }
+
+        .notification.low {
+          border: ${border} solid #6c71c4;
+        }
+
+        .notification.normal {
+          border: ${border} solid #d33682;
+        }
+
+        .notification.critical {
+          border: ${border} solid #dc322f;
+        }
+
+        ${readFile ./style.css}
+      '';
 
       # https://github.com/ErikReider/SwayNotificationCenter/blob/main/src/configSchema.json
       settings = {
-        control-center-width = 750 / config.custom.scale;
-        control-center-height = config.custom.height / 2;
+        control-center-height = builtins.floor (config.custom.height / 2);
         control-center-positionY = "bottom";
+        control-center-width = builtins.floor (1000 / config.custom.scale);
         fit-to-screen = false;
         hide-on-clear = true;
         notification-2fa-action = false;
+        notification-icon-size = 32;
         #// notification-inline-replies = true;
+        notification-window-width = builtins.floor (750 / config.custom.scale);
         positionX = "center";
         positionY = "top";
-        timeout-low = 5;
         timeout = 5; # normal
         timeout-critical = 0;
+        timeout-low = 5;
 
         widgets = [
           "notifications"
-          "backlight"
           "inhibitors"
           "dnd"
           "title"
