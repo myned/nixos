@@ -17,7 +17,7 @@ in {
 
       font = {
         name = config.custom.font.monospace;
-        size = 14;
+        size = 13;
       };
 
       # https://sw.kovidgoyal.net/kitty/conf/
@@ -33,7 +33,7 @@ in {
         scrollback_lines = -1;
         strip_trailing_spaces = "smart";
         tab_bar_style = "powerline";
-        touch_scroll_multiplier = 3;
+        touch_scroll_multiplier = 5;
         url_style = "straight";
         wayland_enable_ime = "no";
         window_padding_width = "2.5 5"; # top/bottom left/right
