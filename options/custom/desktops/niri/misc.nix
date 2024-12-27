@@ -32,11 +32,11 @@ in {
             {command = [_1password "--silent"];} # Launch password manager in background
             {command = [audio "--init"];} # Enforce audio profile state
             {command = [rm "${home}/.cache/walker/clipboard.gob"];} # Clear clipboard history
-          {command = [sway-audio-idle-inhibit];} # Inhibit while audio is playing
+            {command = [sway-audio-idle-inhibit];} # Inhibit while audio is playing
           ]
           ++ optionals config.custom.wallpaper [
             {command = [wallpaper];}
-        ];
+          ];
 
         # HACK: Inherit home-manager environment variables in lieu of upstream fix
         # https://github.com/nix-community/home-manager/issues/2659
@@ -45,12 +45,18 @@ in {
           mapAttrs (name: value: toString value)
           config.home-manager.users.${config.custom.username}.home.sessionVariables;
 
-        cursor = {
+        # https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#cursor
+        cursor = with config.home-manager.users.${config.custom.username}.home.pointerCursor; {
+          inherit size;
           hide-after-inactive-ms = 1000 * 15; # Milliseconds
           hide-when-typing = true;
+          theme = name;
         };
 
+        # https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#hotkey-overlay
         hotkey-overlay.skip-at-startup = true;
+
+        # https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#prefer-no-csd
         prefer-no-csd = true;
 
         # https://github.com/YaLTeR/niri/wiki/Configuration:-Switch-Events
