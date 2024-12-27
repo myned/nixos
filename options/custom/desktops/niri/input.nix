@@ -25,7 +25,7 @@ in {
           click-method = "clickfinger"; # Multi-finger click
           dwt = true; # Disable while typing
           dwtp = true; # Disable while trackpointing
-          scroll-factor = 0.5;
+          scroll-factor = 0.4;
         };
 
         # BUG: Applies to trackball device, switch to "flat" when per-device configuration is supported
@@ -33,7 +33,7 @@ in {
         mouse = {
           accel-profile = "adaptive";
 
-          accel-speed = -0.1;
+          accel-speed = -0.2;
         };
 
         trackball = {
