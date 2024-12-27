@@ -41,7 +41,7 @@ in {
                 # https://starship.rs/config/#prompt
                 add_newline = false;
 
-                format = concatStringsSep "" [
+                format = concatStrings [
                   # Top left
                   "$shell"
                   "$all"
@@ -59,9 +59,19 @@ in {
                   "$character"
                 ];
 
+                # https://starship.rs/advanced-config/#enable-right-prompt
+                right_format = concatStrings [
+                  # Bottom right
+                ];
+
                 # https://starship.rs/config/#battery
                 battery = {
                   format = " [$symbol]($style)";
+                  charging_symbol = "󰂄";
+                  discharging_symbol = "󰂃";
+                  empty_symbol = "󰂎";
+                  full_symbol = "󰁹";
+                  unknown_symbol = "󰂑";
 
                   display = [
                     {
@@ -204,7 +214,7 @@ in {
                   style = "bold #657b83";
 
                   # https://docs.rs/chrono/latest/chrono/format/strftime/index.html
-                  time_format = "%a %b %-d %I:%M%P";
+                  time_format = "%a %b %-d %-I:%M%P";
                 };
 
                 # https://starship.rs/config/#username
