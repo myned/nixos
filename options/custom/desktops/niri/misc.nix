@@ -5,8 +5,12 @@
   ...
 }:
 with lib; let
+  _1password = "${config.programs._1password-gui.package}/bin/1password";
+  audio = config.home-manager.users.${config.custom.username}.home.file.".local/bin/audio".source;
   niri = "${config.programs.niri.package}/bin/niri";
+  rm = "${pkgs.coreutils}/bin/rm";
   sway-audio-idle-inhibit = "${pkgs.sway-audio-idle-inhibit}/bin/sway-audio-idle-inhibit";
+  wallpaper = "${config.home-manager.users.${config.custom.username}.home.file.".local/bin/wallpaper".source}";
 
   cfg = config.custom.desktops.niri.misc;
 in {
@@ -19,8 +23,19 @@ in {
       programs.niri.settings = {
         # https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous
 
-        spawn-at-startup = [
+        # https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#spawn-at-startup
+        # https://github.com/YaLTeR/niri/wiki/Configuration:-Key-Bindings#actions
+        spawn-at-startup = let
+          home = config.home-manager.users.${config.custom.username}.home.homeDirectory;
+        in
+          [
+            {command = [_1password "--silent"];} # Launch password manager in background
+            {command = [audio "--init"];} # Enforce audio profile state
+            {command = [rm "${home}/.cache/walker/clipboard.gob"];} # Clear clipboard history
           {command = [sway-audio-idle-inhibit];} # Inhibit while audio is playing
+          ]
+          ++ optionals config.custom.wallpaper [
+            {command = [wallpaper];}
         ];
 
         # HACK: Inherit home-manager environment variables in lieu of upstream fix
