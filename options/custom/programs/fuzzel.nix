@@ -15,7 +15,7 @@ in {
 
       settings = {
         main = {
-          font = "${config.gtk.font.name}:size=12";
+          font = "${config.custom.sans-serif}:size=12";
           icon-theme = config.gtk.iconTheme.name;
           horizontal-pad = 20;
           inner-pad = 12;
