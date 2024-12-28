@@ -39,7 +39,7 @@ in {
     wallpaper = mkOption {default = false;};
 
     browser = {
-      # TODO: Use lib.getExe' instead of /bin/ everywhere
+      # TODO: Use lib.getExe' instead of /bin/ where possible
       # HACK: Find first matching package in final home-manager list
       command = mkOption {
         default = "${lib.findFirst (pkg:
