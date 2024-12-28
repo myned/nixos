@@ -10,13 +10,6 @@ in {
   options.custom.settings.gtk.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
-    home.pointerCursor = {
-      gtk.enable = true; # Propagate attributes to gtk.cursorTheme
-      size = 24;
-      name = "GoogleDot-Black";
-      package = pkgs.google-cursor;
-    };
-
     gtk = let
       css = readFile ./style.css;
     in {
@@ -36,6 +29,13 @@ in {
       iconTheme = {
         name = "Papirus-Dark";
         package = pkgs.papirus-icon-theme;
+      };
+
+      # BUG: home.pointerCursor breaks XCURSOR_PATH for some child windows, so avoid that workaround
+      cursorTheme = {
+        size = 24;
+        name = "GoogleDot-Black";
+        package = pkgs.google-cursor;
       };
 
       theme = {

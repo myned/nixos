@@ -46,11 +46,13 @@ in {
           config.home-manager.users.${config.custom.username}.home.sessionVariables;
 
         # https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#cursor
-        cursor = with config.home-manager.users.${config.custom.username}.home.pointerCursor; {
+        cursor = with config.home-manager.users.${config.custom.username}.gtk.cursorTheme; {
+          # Inherit home-manager GTK settings
           inherit size;
+          theme = name;
+
           hide-after-inactive-ms = 1000 * 15; # Milliseconds
           hide-when-typing = true;
-          theme = name;
         };
 
         # https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#hotkey-overlay
