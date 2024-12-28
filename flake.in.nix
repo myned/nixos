@@ -57,7 +57,8 @@
     hyprpaper = flake "github:hyprwm/hyprpaper" // unstable "nixpkgs";
     hyprpicker = flake "github:hyprwm/hyprpicker" // unstable "nixpkgs";
     jovian-nixos = flake "github:Jovian-Experiments/Jovian-NixOS" // unstable "nixpkgs";
-    niri = flake "github:sodiboo/niri-flake" // unstable "nixpkgs";
+    niri = flake "github:YaLTeR/niri/floating" // unstable "nixpkgs";
+    niri-flake = flake "github:sodiboo/niri-flake" // unstable "nixpkgs";
     nix-flatpak = flake "github:gmodena/nix-flatpak?ref=v0.5.1";
     nix-index-database-unstable = flake "github:nix-community/nix-index-database" // unstable "nixpkgs";
     nix-vscode-extensions = flake "github:nix-community/nix-vscode-extensions" // unstable "nixpkgs";
@@ -119,7 +120,7 @@
                     inputs.arion.nixosModules.arion
                     inputs.disko.nixosModules.disko
                     inputs.fw-fanctrl.nixosModules.default
-                    inputs.niri.nixosModules.niri
+                    inputs.niri-flake.nixosModules.niri
                     inputs.stylix.nixosModules.stylix
                   ];
 
