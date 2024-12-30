@@ -410,6 +410,13 @@ in {
             }
 
             {
+              Name = "Niri Issues";
+              Alias = "niri";
+              IconURL = "https://github.com/favicon.ico";
+              URLTemplate = "https://github.com/YaLTeR/niri/issues?q=is%3Aissue+is%3Aopen+{searchTerms}";
+            }
+
+            {
               Name = "Nix PR";
               Alias = "npr";
               URLTemplate = "https://nixpk.gs/pr-tracker.html?pr={searchTerms}";
