@@ -21,6 +21,7 @@ with lib; {
       #// kdeconnect.enable = true;
       libinput.enable = true;
       logind.enable = true;
+      openrazer.enable = true;
       pipewire.enable = true;
       playerctld.enable = true;
       ratbagd.enable = true;
