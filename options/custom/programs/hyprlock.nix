@@ -23,16 +23,17 @@ in {
           enable_fingerprint = true; # Enter not required
           fingerprint_present_message = "<span foreground='##d33682'>󰈷</span>";
           fingerprint_ready_message = "󰈷";
-          grace = 5 * 60; # Seconds
+          #// grace = 60; # Seconds
           #// hide_cursor = true;
           ignore_empty_input = true;
+          immediate_render = true;
           no_fade_in = true; # Fix suspend interrupting animation
         };
 
         background = {
           blur_passes = 5;
           color = "rgb(073642)"; # Fallback
-          path = "/tmp/wallpaper.png";
+          path = mkIf config.custom.wallpaper "/tmp/wallpaper.png";
         };
 
         input-field = {
