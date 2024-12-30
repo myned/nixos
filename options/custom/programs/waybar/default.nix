@@ -76,6 +76,7 @@ in {
               font: 18px '${font}';
               margin: 0;
               padding: 0;
+              text-shadow: none;
             }
 
             .horizontal > box {
