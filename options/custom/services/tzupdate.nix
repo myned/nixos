@@ -11,5 +11,10 @@ in {
   config = mkIf cfg.enable {
     # https://github.com/cdown/tzupdate
     services.tzupdate.enable = true;
+
+    # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/misc/tzupdate.nix
+    systemd.services.tzupdate = {
+      wantedBy = ["network-online.target"]; # Run at boot without checking for Internet access
+    };
   };
 }
