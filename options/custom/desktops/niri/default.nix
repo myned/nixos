@@ -70,6 +70,12 @@ in {
               (leaf "open-floating" true)
             ])
           ]);
+
+        # https://github.com/YaLTeR/niri/wiki/Configuration:-Debug-Options
+        # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsdebug
+        settings.debug = {
+          #// disable-direct-scanout = [];
+        };
       };
     };
   };
