@@ -17,7 +17,7 @@ in {
         gap = config.custom.gap / 2;
       in {
         gaps = gap;
-        center-focused-column = mkIf config.custom.ultrawide "always";
+        #// center-focused-column = mkIf config.custom.ultrawide "always";
         always-center-single-column = true;
 
         # TODO: Uncomment after next release > v1.10.1
@@ -25,12 +25,12 @@ in {
         #// empty-workspace-above-first = true;
 
         preset-column-widths = [
+          {proportion = 0.75;}
           {proportion = 0.5;}
-          {proportion = 0.3;}
-          {proportion = 0.7;} # Default
+          {proportion = 0.25;}
         ];
 
-        default-column-width = {proportion = 0.7;};
+        default-column-width = {}; # Window-defined
 
         preset-window-heights = [
           {proportion = 0.7;}
