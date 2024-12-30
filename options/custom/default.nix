@@ -36,6 +36,13 @@ in {
     rounding = mkOption {default = 15;};
 
     ### Misc
+    desktop = mkOption {
+      default =
+        if config.custom.full
+        then "niri"
+        else "gnome";
+    };
+
     lockscreen = mkOption {default = "hyprlock";};
     wallpaper = mkOption {default = false;};
 

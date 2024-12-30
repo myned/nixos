@@ -8,22 +8,15 @@ with lib; let
 in {
   options.custom.desktops = {
     enable = mkOption {default = config.custom.minimal;};
-
-    desktop = mkOption {
-      default =
-        if config.custom.full
-        then "niri"
-        else "gnome";
-    };
   };
 
   config = mkIf cfg.enable {
     custom.desktops = {
-      gnome.enable = cfg.desktop == "gnome";
-      hyprland.enable = cfg.desktop == "hyprland";
-      kde.enable = cfg.desktop == "kde";
-      niri.enable = cfg.desktop == "niri";
-      sway.enable = cfg.desktop == "sway";
+      gnome.enable = config.custom.desktop == "gnome";
+      hyprland.enable = config.custom.desktop == "hyprland";
+      kde.enable = config.custom.desktop == "kde";
+      niri.enable = config.custom.desktop == "niri";
+      sway.enable = config.custom.desktop == "sway";
     };
   };
 }

@@ -40,7 +40,6 @@ with lib; let
 in {
   options.custom.programs.waybar = {
     enable = mkOption {default = false;};
-    desktop = mkOption {default = config.custom.desktops.desktop;};
   };
 
   config = mkIf cfg.enable {
@@ -98,12 +97,12 @@ in {
               smooth-scrolling-threshold = 2;
 
               on-scroll-down =
-                if cfg.desktop == "niri"
+                if config.custom.desktop == "niri"
                 then "${niri} msg action focus-workspace-down"
                 else "";
 
               on-scroll-up =
-                if cfg.desktop == "niri"
+                if config.custom.desktop == "niri"
                 then "${niri} msg action focus-workspace-up"
                 else "";
             };
@@ -302,7 +301,7 @@ in {
                   #// on-click = "";
 
                   on-click-middle =
-                    if cfg.desktop == "niri"
+                    if config.custom.desktop == "niri"
                     then ''${niri} msg action close-window --id "$(${niri} msg -j windows | ${jq} '.[] | select(.app_id == "YouTube Music").id')"''
                     else "";
 
