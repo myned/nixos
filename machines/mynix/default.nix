@@ -13,6 +13,7 @@
     width = 3440;
     height = 1440;
     refresh = 100;
+    desktops.niri.output.connectors = ["DP-1"];
 
     programs.looking-glass = {
       enable = true;

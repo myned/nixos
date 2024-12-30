@@ -24,6 +24,7 @@ in {
         input.enable = true;
         layout.enable = true;
         misc.enable = true;
+        output.enable = true;
         rules.enable = true;
       };
 

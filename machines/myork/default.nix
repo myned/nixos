@@ -1,11 +1,8 @@
 {
   config,
   inputs,
-  pkgs,
   ...
-}: let
-  brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
-in {
+}: {
   imports = [
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
 
@@ -18,6 +15,7 @@ in {
     width = 2256;
     height = 1504;
     scale = 1.5;
+    desktops.niri.output.connectors = ["eDP-1"];
 
     # BUG: Phoenix support not currently functional
     # https://github.com/Cryolitia/ryzen_smu/issues/1
@@ -54,19 +52,6 @@ in {
   };
 
   home-manager.users.${config.custom.username} = {
-    programs.niri.settings.outputs = {
-      "eDP-1" = {
-        background-color = "#073642";
-
-        mode = with config.custom; {
-          inherit width height;
-          refresh = refresh + 0.0;
-        };
-
-        scale = config.custom.scale;
-      };
-    };
-
     wayland.windowManager.hyprland.settings = {
       device = [
         {
