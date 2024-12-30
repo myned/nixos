@@ -36,6 +36,7 @@ in {
     rounding = mkOption {default = 15;};
 
     ### Misc
+    lockscreen = mkOption {default = "hyprlock";};
     wallpaper = mkOption {default = false;};
 
     browser = {
