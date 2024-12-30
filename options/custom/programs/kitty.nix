@@ -17,7 +17,7 @@ in {
 
       font = {
         name = config.custom.font.monospace;
-        size = 13;
+        size = 14;
       };
 
       # https://sw.kovidgoyal.net/kitty/conf/
