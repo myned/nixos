@@ -88,8 +88,8 @@ in {
 
                 # https://starship.rs/config/#character
                 character = {
-                  error_symbol = "[](bold red) ";
-                  success_symbol = "[](bold) ";
+                  error_symbol = "[](bold red)";
+                  success_symbol = "[](bold)";
                 };
 
                 # https://starship.rs/config/#command-duration
