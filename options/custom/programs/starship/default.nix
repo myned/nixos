@@ -43,7 +43,6 @@ in {
 
                 format = concatStrings [
                   # Top left
-                  "$shell"
                   "$all"
                   "$fill"
 
@@ -56,6 +55,7 @@ in {
 
                   # Bottom left
                   "$jobs"
+                  "$shell"
                   "$character"
                 ];
 
