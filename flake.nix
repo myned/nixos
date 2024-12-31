@@ -97,7 +97,7 @@
     };
     niri = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:YaLTeR/niri/floating";
+      url = "github:YaLTeR/niri";
     };
     niri-flake = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
