@@ -13,7 +13,8 @@
     width = 3440;
     height = 1440;
     refresh = 100;
-    desktops.niri.output.connectors = ["DP-1" "HDMI-A-1"];
+    vrr = true;
+    desktops.niri.output.connectors = ["DP-1" "DP-2" "DP-3" "HDMI-A-1" "HDMI-A-2" "HDMI-A-3"];
 
     programs.looking-glass = {
       enable = true;

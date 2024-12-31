@@ -15,6 +15,7 @@ in {
     home-manager.sharedModules = [
       {
         # https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
+        #?? niri msg outputs
         programs.niri.settings.outputs = listToAttrs (forEach cfg.connectors (connector: {
           name = connector;
 
@@ -27,6 +28,7 @@ in {
             };
 
             scale = config.custom.scale;
+            variable-refresh-rate = mkIf config.custom.vrr "on-demand"; #!! Requires window-rule
           };
         }));
       }

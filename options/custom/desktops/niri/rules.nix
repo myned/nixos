@@ -96,7 +96,8 @@ in {
             # Games
             matches = [
               {app-id = "^.*\.(exe|x86_64)$";}
-              {app-id = "^moe\.launcher\..+$";}
+                {app-id = "^love$";} # vrrtest
+                {app-id = "^moe\.launcher\..+$";} # Anime Game Launcher
               {app-id = "^net\.retrodeck\.retrodeck$";}
               {app-id = "^steam_app_.+$";}
             ];
