@@ -1910,16 +1910,15 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1735378372,
-        "narHash": "sha256-9zu4bScVN5ej7ljxZpdm3BCt7eiPr0jZNFLDUFRr8Z8=",
+        "lastModified": 1735586144,
+        "narHash": "sha256-YenL+60BJHF2cc4htz/iKEMgYd9dNfegzgH9tMBMhEY=",
         "owner": "YaLTeR",
         "repo": "niri",
-        "rev": "28f4e5e1abc41c953ae6f93035a0b1006bd52bcb",
+        "rev": "4741ab2e0465275d58c36db426b169c742d964cf",
         "type": "github"
       },
       "original": {
         "owner": "YaLTeR",
-        "ref": "floating",
         "repo": "niri",
         "type": "github"
       }
