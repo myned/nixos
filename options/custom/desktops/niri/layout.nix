@@ -32,7 +32,7 @@ in {
           #// center-focused-column = mkIf config.custom.ultrawide "always";
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutdefault-column-width
-          default-column-width.proportion = 1.0 / 3.0; # 33%
+          default-column-width.proportion = 3.0 / 10.0; # 30%
 
           # TODO: Uncomment after next release > v1.10.1
           #// empty-workspace-above-first = true;
@@ -56,17 +56,21 @@ in {
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutpreset-column-widths
           preset-column-widths = [
-            {proportion = 1.0 / 3.0;} # 33%, default
-            {proportion = 1.5 / 3.0;} # 50%
-            {proportion = 2.0 / 3.0;} # 66%
+            {proportion = 3.0 / 10.0;} # 30%, default
+            {proportion = 4.0 / 10.0;} # 40%
+            {proportion = 5.0 / 10.0;} # 50%
+            {proportion = 6.0 / 10.0;} # 60%
+            {proportion = 7.0 / 10.0;} # 70%
           ];
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutpreset-window-heights
           preset-window-heights = [
-            {proportion = 2.0 / 3.0;} # 66%
-            {proportion = 1.5 / 3.0;} # 50%
-            {proportion = 1.0 / 3.0;} # 33%
-            {proportion = 3.0 / 3.0;} # 100%, default
+            {proportion = 7.0 / 10.0;} # 70%
+            {proportion = 6.0 / 10.0;} # 60%
+            {proportion = 5.0 / 10.0;} # 50%
+            {proportion = 4.0 / 10.0;} # 40%
+            {proportion = 3.0 / 10.0;} # 30%
+            {proportion = 10.0 / 10.0;} # 100%, default
           ];
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutstruts
