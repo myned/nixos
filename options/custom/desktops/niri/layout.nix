@@ -22,7 +22,7 @@ in {
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutborder
           border = {
-            enable = true;
+            enable = false;
             width = config.custom.border;
             active.color = "#d33682";
             inactive.color = "#00000000";
@@ -37,7 +37,15 @@ in {
           # TODO: Uncomment after next release > v1.10.1
           #// empty-workspace-above-first = true;
 
-          focus-ring.enable = false;
+          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutfocus-ring
+          focus-ring = {
+            enable = true;
+            width = config.custom.border;
+            active.color = "#d33682";
+            inactive.color = "#00000000";
+          };
+
+          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutgaps
           gaps = gap;
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutinsert-hint
@@ -49,13 +57,14 @@ in {
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutpreset-column-widths
           preset-column-widths = [
             {proportion = 1.0 / 3.0;} # 33%, default
+            {proportion = 1.5 / 3.0;} # 50%
             {proportion = 2.0 / 3.0;} # 66%
-            {proportion = 3.0 / 3.0;} # 100%
           ];
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutpreset-window-heights
           preset-window-heights = [
             {proportion = 2.0 / 3.0;} # 66%
+            {proportion = 1.5 / 3.0;} # 50%
             {proportion = 1.0 / 3.0;} # 33%
             {proportion = 3.0 / 3.0;} # 100%, default
           ];
