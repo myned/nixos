@@ -16,12 +16,20 @@ in {
       enable = true;
 
       #!! Binds use qwerty without layouts
+      # https://github.com/rvaiya/keyd/blob/master/docs/keyd.scdoc
       #?? keyd monitor
       keyboards.default.settings = {
         #// global.disable_modifier_guard = 1; # Disable extraneous Control injection
 
         control.esc = "toggle(qwerty)"; # Control+Esc toggles qwerty
         shift.shift = "capslock"; # Both Shifts toggle Capslock
+
+        meta = {
+          # Mouse repeat macro
+          "," = "macro2(300, 100, leftmouse)";
+          "." = "macro2(300, 100, rightmouse)";
+          "/" = "macro2(300, 100, middlemouse)";
+        };
 
         # Emulate function keys
         function = {
