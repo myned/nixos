@@ -16,6 +16,7 @@ in {
         # https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
         programs.niri.settings = {
           # HACK: Name workspaces after index to use open-on-workspace rule
+          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsworkspaces
           #?? niri msg workspaces
           # workspaces = {
           #   "1" = {};
@@ -23,10 +24,10 @@ in {
           #   "3" = {};
           # };
 
+          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingswindow-rules
           #?? niri msg windows
           window-rules = [
             ### Defaults
-
             {
               # Global
               geometry-corner-radius = let

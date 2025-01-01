@@ -22,8 +22,9 @@ in {
   config = mkIf cfg.enable {
     home-manager.sharedModules = [
       {
+        # https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous
         programs.niri.settings = {
-          # https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous
+          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingscursorhide-after-inactive-ms
           cursor = with hm.gtk.cursorTheme; {
             # Inherit home-manager GTK settings
             inherit size;
@@ -35,13 +36,18 @@ in {
 
           # HACK: Inherit home-manager environment variables in lieu of upstream fix
           # https://github.com/nix-community/home-manager/issues/2659
+          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsenvironment
           environment = mapAttrs (name: value: toString value) hm.home.sessionVariables;
 
+          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingshotkey-overlayskip-at-startup
           hotkey-overlay.skip-at-startup = true;
+
+          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsprefer-no-csd
           prefer-no-csd = true;
 
           #!! Not executed in a shell
           # https://github.com/YaLTeR/niri/wiki/Configuration:-Key-Bindings#spawn
+          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsspawn-at-startup
           spawn-at-startup = let
             home = hm.home.homeDirectory;
           in
@@ -55,6 +61,7 @@ in {
               {command = [wallpaper];}
             ];
 
+          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsswitch-eventslid-close
           switch-events = {
             # Turn display off while inhibiting suspend
             lid-close.action.spawn = [niri "msg" "action" "power-off-monitors"];

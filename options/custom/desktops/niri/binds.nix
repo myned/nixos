@@ -44,6 +44,7 @@ in {
     home-manager.sharedModules = [
       {
         # https://github.com/YaLTeR/niri/wiki/Configuration:-Key-Bindings
+        # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsbinds
         #?? Mod = Super/Win, Alt when nested; Mod5 = AltGr
         #?? wev
         programs.niri.settings.binds = let

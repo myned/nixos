@@ -15,6 +15,7 @@ in {
     home-manager.sharedModules = [
       {
         # https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
+        # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsoutputs
         #?? niri msg outputs
         programs.niri.settings.outputs = listToAttrs (forEach cfg.connectors (connector: {
           name = connector;

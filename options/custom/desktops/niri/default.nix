@@ -41,7 +41,6 @@ in {
 
     # https://github.com/YaLTeR/niri
     # https://github.com/sodiboo/niri-flake
-    # https://github.com/sodiboo/niri-flake/blob/main/docs.md
     programs.niri = {
       enable = true;
       #// package = pkgs.niri; # nixpkgs
@@ -50,7 +49,7 @@ in {
 
     nixpkgs.overlays = [inputs.niri-flake.overlays.niri];
 
-    #!! Disable bundled KDE polkit agent by default
+    # Disable bundled KDE polkit agent by default
     # https://github.com/sodiboo/niri-flake?tab=readme-ov-file#additional-notes
     systemd.user.services.niri-flake-polkit.enable = cfg.polkit;
 
