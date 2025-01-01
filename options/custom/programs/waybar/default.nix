@@ -67,7 +67,7 @@ in {
           #?? GTK_DEBUG=interactive waybar
           style = let
             border = toString config.custom.border;
-            font = config.custom.font.monospace;
+            font = config.custom.settings.fonts.monospace;
             gap = toString config.custom.gap;
           in ''
             * {

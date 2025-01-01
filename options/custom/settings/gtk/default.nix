@@ -21,8 +21,8 @@ in {
         extraCss = css;
       };
 
-      font = {
-        name = config.custom.font.sans-serif;
+      font = with config.custom.settings.fonts; {
+        name = sans-serif;
         size = 12;
       };
 

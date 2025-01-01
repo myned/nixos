@@ -31,7 +31,7 @@ in {
         indicator-idle-visible = true;
         indicator-radius = 150;
         font-size = 48 * config.custom.scale;
-        font = config.custom.font.monospace;
+        font = config.custom.settings.fonts.monospace;
         image = mkIf config.custom.wallpaper "/tmp/altered.png";
         bs-hl-color = "93a1a1";
         color = "073642";

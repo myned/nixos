@@ -61,12 +61,5 @@ in {
 
       desktop = mkOption {default = "google-chrome.desktop";};
     };
-
-    font = {
-      emoji = mkOption {default = "Noto Color Emoji";};
-      monospace = mkOption {default = "IosevkaTerm NFP SemiBold";};
-      sans-serif = mkOption {default = "Outfit";};
-      serif = mkOption {default = "Liberation Serif";};
-    };
   };
 }

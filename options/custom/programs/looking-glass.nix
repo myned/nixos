@@ -103,7 +103,7 @@ in {
             fullScreen = true;
             quickSplash = true;
             size = "${toString (config.custom.width / 2)}x${toString (config.custom.height / 2)}";
-            uiFont = config.custom.font.monospace;
+            uiFont = config.custom.settings.fonts.monospace;
             uiSize = 24;
           };
         };

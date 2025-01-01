@@ -7,7 +7,13 @@
 with lib; let
   cfg = config.custom.settings.fonts;
 in {
-  options.custom.settings.fonts.enable = mkOption {default = false;};
+  options.custom.settings.fonts = {
+    enable = mkOption {default = false;};
+    emoji = mkOption {default = "Noto Color Emoji";};
+    monospace = mkOption {default = "IosevkaTerm NFP SemiBold";};
+    sans-serif = mkOption {default = "Outfit";};
+    serif = mkOption {default = "Liberation Serif";};
+  };
 
   config = mkIf cfg.enable {
     # https://wiki.nixos.org/wiki/Fonts
@@ -52,10 +58,10 @@ in {
 
       #?? fc-list --brief | grep family: | sort
       fontconfig.defaultFonts = {
-        emoji = [config.custom.font.emoji];
-        monospace = [config.custom.font.monospace];
-        sansSerif = [config.custom.font.sans-serif];
-        serif = [config.custom.font.serif];
+        emoji = [cfg.emoji];
+        monospace = [cfg.monospace];
+        sansSerif = [cfg.sans-serif];
+        serif = [cfg.serif];
       };
     };
 

@@ -185,7 +185,7 @@ in {
         disable_hyprland_logo = true;
         disable_splash_rendering = true;
         focus_on_activate = true;
-        font_family = config.custom.font.monospace;
+        font_family = config.custom.settings.fonts.monospace;
         force_default_wallpaper = 0;
         initial_workspace_tracking = 2; # All children
         key_press_enables_dpms = true;

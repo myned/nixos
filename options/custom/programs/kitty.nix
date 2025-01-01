@@ -16,7 +16,7 @@ in {
       shellIntegration.mode = "no-cursor"; # Disable forced beam cursor
 
       font = {
-        name = config.custom.font.monospace;
+        name = config.custom.settings.fonts.monospace;
         size = 14;
       };
 

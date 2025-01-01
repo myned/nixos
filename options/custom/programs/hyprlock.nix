@@ -56,7 +56,7 @@ in {
           # Time
           {
             color = "rgb(93a1a1)";
-            font_family = config.custom.font.sans-serif;
+            font_family = config.custom.settings.fonts.sans-serif;
             font_size = 64;
             halign = "center";
             position = "0, 200";
@@ -73,7 +73,7 @@ in {
           # Date
           {
             color = "rgb(93a1a1)";
-            font_family = config.custom.font.sans-serif;
+            font_family = config.custom.settings.fonts.sans-serif;
             font_size = 32;
             halign = "center";
             position = "0, 100";
@@ -85,7 +85,7 @@ in {
           # Fingerprint
           {
             color = "rgb(93a1a1)";
-            font_family = config.custom.font.monospace;
+            font_family = config.custom.settings.fonts.monospace;
             font_size = 42;
             halign = "center";
             position = "0, -100";

@@ -138,11 +138,11 @@ in {
       theme = {
         style = ''
           #box {
-            font: larger ${config.custom.font.sans-serif};
+            font: larger ${config.custom.settings.fonts.sans-serif};
           }
 
           placeholder {
-            font: larger ${config.custom.font.monospace};
+            font: larger ${config.custom.settings.fonts.monospace};
           }
 
           ${readFile ./style.css}

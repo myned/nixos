@@ -49,7 +49,7 @@ in {
             bar_padding = 10;
             bar_precedence_over_border = true; # Render borders around hyprbars
             bar_text_align = "left";
-            bar_text_font = config.custom.font.monospace;
+            bar_text_font = config.custom.settings.fonts.monospace;
             bar_text_size = 11;
             #// bar_title_enabled = false;
             "col.text" = "rgb(93a1a1)";

@@ -32,7 +32,7 @@ in {
 
       #?? rofi-theme-selector
       theme = "custom";
-      font = "${config.custom.font.monospace} 16";
+      font = "${config.custom.settings.fonts.monospace} 16";
 
       # https://github.com/davatorium/rofi/blob/next/CONFIG.md
       extraConfig = {
