@@ -61,17 +61,42 @@ in {
           # https://github.com/YaLTeR/niri/wiki/Configuration:-Overview
           # HACK: Prepend validated kdl config not currently implemented in settings module for e.g. custom build
           # https://github.com/sodiboo/niri-flake/blob/main/settings.nix
-          config = with inputs.niri-flake.lib;
-            (internal.settings-module {config = hm;}).options.programs.niri.config.default
-            # https://github.com/sodiboo/niri-flake/blob/main/default-config.kdl.nix
-            ++ (with kdl; [
-              # TODO: Migrate to window-rules when released
-              # https://github.com/YaLTeR/niri/pull/871
-              (plain "window-rule" [
-                (leaf "match" {title = "^Picture.in.[Pp]icture$";})
-                (leaf "open-floating" true)
-              ])
-            ]);
+          config = let
+            # BUG: Fixed width may not take borders into account
+            # https://github.com/YaLTeR/niri/issues/269
+            pip = with config.custom; rec {
+              x = gap;
+              y = gap;
+              w = builtins.floor (h * 16 / 9); # 16:9
+              h = builtins.floor (height / 3.0 - gap * 2 - border); # 33%
+            };
+          in
+            with inputs.niri-flake.lib;
+              (internal.settings-module {config = hm;}).options.programs.niri.config.default
+              # https://github.com/sodiboo/niri-flake/blob/main/default-config.kdl.nix
+              ++ (with kdl; [
+                # TODO: Migrate to window-rules when released
+                # https://github.com/YaLTeR/niri/pull/871
+                (plain "window-rule" [
+                  (leaf "match" {is-floating = true;})
+                  (plain "border" [(flag "off")])
+                ])
+
+                (plain "window-rule" [
+                  (leaf "match" {title = "^Picture.in.[Pp]icture$";})
+
+                  (leaf "default-floating-position" {
+                    x = pip.x;
+                    y = pip.y;
+                    relative-to = "top-right";
+                  })
+
+                  (plain "default-column-width" [(leaf "fixed" (pip.w))])
+                  (plain "default-window-height" [(leaf "fixed" (pip.h))])
+                  (leaf "open-floating" true)
+                  (leaf "open-focused" false)
+                ])
+              ]);
 
           # https://github.com/YaLTeR/niri/wiki/Configuration:-Debug-Options
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsdebug
