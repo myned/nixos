@@ -14,28 +14,18 @@ in {
       css = readFile ./style.css;
     in {
       enable = true;
-      gtk3.extraCss = css;
-
-      gtk4 = {
-        extraConfig.gtk-hint-font-metrics = 1; # Fix blurry fonts
-        extraCss = css;
-      };
 
       font = with config.custom.settings.fonts; {
         name = sans-serif;
         size = 12;
       };
 
-      iconTheme = {
-        name = "Papirus-Dark";
-        package = pkgs.papirus-icon-theme;
+      cursorTheme = with config.custom.settings.icons.cursor; {
+        inherit name package size;
       };
 
-      # BUG: home.pointerCursor breaks XCURSOR_PATH for some child windows, so avoid that workaround
-      cursorTheme = {
-        size = 24;
-        name = "GoogleDot-Black";
-        package = pkgs.google-cursor;
+      iconTheme = with config.custom.settings.icons.icon; {
+        inherit name package;
       };
 
       theme = {
@@ -44,6 +34,15 @@ in {
         # BUG: Forces theme on GTK 4
         # https://github.com/nix-community/home-manager/issues/5133
         #// package = pkgs.adw-gtk3;
+      };
+
+      gtk3 = {
+        extraCss = css;
+      };
+
+      gtk4 = {
+        extraConfig.gtk-hint-font-metrics = 1; # Fix blurry fonts
+        extraCss = css;
       };
     };
   };
