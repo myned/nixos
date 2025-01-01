@@ -95,7 +95,7 @@ in {
             #!! Some settings are commonly available for use but not documented per module
             common = {
               # https://github.com/Alexays/Waybar/issues/1800
-              smooth-scrolling-threshold = 2;
+              smooth-scrolling-threshold = 1; #!! Affects discrete scroll events
 
               on-scroll-down =
                 if config.custom.desktop == "niri"
