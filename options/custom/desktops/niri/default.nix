@@ -67,8 +67,8 @@ in {
             pip = with config.custom; rec {
               x = gap;
               y = gap;
-              w = builtins.floor (h * 16 / 9); # 16:9
-              h = builtins.floor (height / 3.0 - gap * 2 - border); # 33%
+              w = builtins.floor (width * 0.3 - gap); # 30%
+              h = builtins.floor (w * 9 / 16); # 16:9
             };
           in
             with inputs.niri-flake.lib;
@@ -80,6 +80,7 @@ in {
                 (plain "window-rule" [
                   (leaf "match" {is-floating = true;})
                   (plain "border" [(flag "off")])
+                  (plain "focus-ring" [(flag "off")])
                 ])
 
                 (plain "window-rule" [
