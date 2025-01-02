@@ -102,6 +102,10 @@ in {
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsdebug
           settings.debug = {
             #// disable-direct-scanout = [];
+
+            # BUG: Crash when multiple outputs from the same monitor are enabled
+            # https://github.com/YaLTeR/niri/issues/734
+            disable-monitor-names = [];
           };
         };
       }

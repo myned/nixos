@@ -15,6 +15,11 @@
     refresh = 100;
     #// vrr = true;
 
+    desktops.niri.output = {
+      connectors = ["DP-1" "DP-2" "DP-3"];
+      disabled = ["HDMI-A-1" "HDMI-A-2" "HDMI-A-3"];
+    };
+
     programs.looking-glass = {
       enable = true;
       igpu = true;
