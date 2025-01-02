@@ -163,8 +163,12 @@ in {
             (key "WheelScrollRight" "Mod+Shift" move-column-right-or-to-monitor-right)
             (key "WheelScrollUp" "Mod" focus-window-or-workspace-up)
             (key "WheelScrollUp" "Mod+Shift" move-window-up-or-to-workspace-up)
-            (key "X" "Mod" switch-preset-column-width)
-            (key "Z" "Mod" switch-preset-window-height)
+            #// (key "X" "Mod" switch-preset-column-width)
+            (key "X" "Mod" (set-column-width "+10%"))
+            (key "X" "Mod+Shift" (set-window-height "+10%"))
+            #// (key "Z" "Mod" switch-preset-window-height)
+            (key "Z" "Mod" (set-column-width "-10%"))
+            (key "Z" "Mod+Shift" (set-window-height "-10%"))
 
             # BUG: Release binds execute with all binds involving that modifier
             # https://github.com/YaLTeR/niri/issues/605
