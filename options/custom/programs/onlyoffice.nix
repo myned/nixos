@@ -5,7 +5,7 @@
   ...
 }:
 with lib; let
-  hyprctl = "${pkgs.hyprland}/bin/hyprctl";
+  hyprctl = "${config.programs.hyprland.package}/bin/hyprctl";
   onlyoffice-desktopeditors = "${pkgs.onlyoffice-bin}/bin/onlyoffice-desktopeditors --system-title-bar --xdg-desktop-portal";
 
   cfg = config.custom.programs.onlyoffice;

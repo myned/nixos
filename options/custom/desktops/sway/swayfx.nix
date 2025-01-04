@@ -11,6 +11,8 @@ in {
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     # https://github.com/WillPower3309/swayfx
+    programs.sway.package = pkgs.swayfx;
+
     wayland.windowManager.sway = {
       # BUG: DRM build failure
       # https://github.com/nix-community/home-manager/issues/5379
@@ -19,7 +21,7 @@ in {
       # Polyfill home-manager wrappers
       # https://github.com/nix-community/home-manager/blob/master/modules/services/window-managers/i3-sway/sway.nix#L334
       package = with config.home-manager.users.${config.custom.username}.wayland.windowManager.sway;
-        pkgs.sway.override {
+        config.programs.sway.package.override {
           extraSessionCommands = extraSessionCommands;
           extraOptions = extraOptions;
           withBaseWrapper = wrapperFeatures.base;
