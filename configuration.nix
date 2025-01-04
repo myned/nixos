@@ -56,11 +56,6 @@
           inherit stable unstable staging-next;
 
           ### Packages
-          # TODO: Remove when GTK > 4.16 in unstable
-          # BUG: v5.4 is not compatible with GTK < 4.16
-          # https://github.com/lassekongo83/adw-gtk3/releases/tag/v5.4
-          adw-gtk3 = stable.adw-gtk3;
-
           # BUG: Build tests often fail on unstable
           # https://github.com/NixOS/nixpkgs/issues/333946
           fprintd = stable.fprintd;
@@ -68,19 +63,6 @@
           # BUG: Empty password regression, remove > v3.9.0 on unstable
           # https://github.com/FreeRDP/FreeRDP/issues/10784
           freerdp3 = stable.freerdp3;
-
-          # TODO: Exclusively use module packages instead of overlays where possible
-          ### Hypr*
-          # hypridle = inputs.hypridle.packages.${prev.system}.default;
-          # hyprland = inputs.hyprland.packages.${prev.system}.default;
-          # hyprlock = inputs.hyprlock.packages.${prev.system}.default;
-
-          # hyprlandPlugins = {
-          #   hyprbars = inputs.hyprland-plugins.packages.${prev.system}.hyprbars;
-          # };
-
-          ### Sway
-          sway = unstable.swayfx;
 
           ### Development
           #// ciscoPacketTracer8 = local.ciscoPacketTracer8;
