@@ -30,10 +30,10 @@
 
       vm.passthrough = {
         enable = true;
+        blacklist = true;
         driver = "amdgpu";
         guest = "myndows";
         id = "1002:73df";
-        init = true;
         intel = true;
         node = "pci_0000_03_00_0";
       };

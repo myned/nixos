@@ -17,10 +17,10 @@ in {
 
     passthrough = {
       enable = mkOption {default = false;};
+      blacklist = mkOption {default = false;};
       driver = mkOption {default = null;}; #?? lspci -k
       guest = mkOption {default = null;}; #?? virsh list --all
       id = mkOption {default = null;}; #?? lspci -nn
-      init = mkOption {default = false;};
       intel = mkOption {default = false;};
       node = mkOption {default = null;}; #?? virsh nodedev-list
     };
@@ -156,7 +156,7 @@ in {
 
     boot = mkIf cfg.passthrough.enable {
       # https://wiki.archlinux.org/title/PCI_passthrough_via_OVMF#Isolating_the_GPU
-      blacklistedKernelModules = mkIf cfg.passthrough.init [cfg.passthrough.driver];
+      blacklistedKernelModules = mkIf cfg.passthrough.blacklist [cfg.passthrough.driver];
 
       # https://wiki.archlinux.org/title/PCI_passthrough_via_OVMF#Enabling_IOMMU
       kernelParams = mkIf cfg.passthrough.intel ["intel_iommu=on"];
