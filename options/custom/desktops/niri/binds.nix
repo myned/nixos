@@ -163,11 +163,13 @@ in {
             (key "WheelScrollRight" "Mod+Shift" move-column-right-or-to-monitor-right)
             (key "WheelScrollUp" "Mod" focus-window-or-workspace-up)
             (key "WheelScrollUp" "Mod+Shift" move-window-up-or-to-workspace-up)
-            #// (key "X" "Mod" switch-preset-column-width)
             (key "X" "Mod" (set-column-width "+10%"))
+            (key "X" "Mod+Ctrl" (set-column-width "100%"))
+            (key "X" "Mod+Ctrl+Shift" (set-window-height "100%"))
             (key "X" "Mod+Shift" (set-window-height "+10%"))
-            #// (key "Z" "Mod" switch-preset-window-height)
             (key "Z" "Mod" (set-column-width "-10%"))
+            (key "Z" "Mod+Ctrl" (set-column-width "30%"))
+            (key "Z" "Mod+Ctrl+Shift" (set-window-height "30%"))
             (key "Z" "Mod+Shift" (set-window-height "-10%"))
 
             # BUG: Release binds execute with all binds involving that modifier
