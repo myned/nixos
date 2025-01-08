@@ -130,6 +130,7 @@ in {
                 # https://starship.rs/config/#local-ip
                 localip = {
                   disabled = false;
+                  format = "[$localipv4]($style)";
                 };
 
                 # https://starship.rs/config/#os
