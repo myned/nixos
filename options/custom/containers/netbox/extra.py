@@ -6,24 +6,28 @@ LOGIN_PERSISTENCE = True
 # BUG: pynetbox does not send token with version requests
 # https://github.com/netbox-community/Device-Type-Library-Import/issues/134
 # https://github.com/netbox-community/pynetbox/pull/641
+# ?? LOGIN_REQUIRED = False
 LOGIN_REQUIRED = True
 
 MEDIA_ROOT = "/opt/netbox/netbox/media"  # Default /opt/netbox/media
 TIME_ZONE = "America/Chicago"
 
+# https://netboxlabs.com/docs/netbox/en/stable/plugins/installation/
+# TODO: Upgrade to v4.2 when supported by plugins
+#!! "ImproperlyConfigured: Application labels aren't unique, duplicates: <plugin>" means incompatible version
 PLUGINS = [
     "netbox_acls",
     "netbox_attachments",
     "netbox_dns",
     "netbox_interface_synchronization",
-    # // "netbox_lists",
+    # "netbox_lists",
     "netbox_otp_plugin",
     "netbox_reorder_rack",
-    # // "netbox_routing",
-    "netbox_secrets",
+    # "netbox_routing",
+    # "netbox_secrets",
     "netbox_storage",
     "netbox_topology_views",
-    # // "slurpit_netbox",
+    # "slurpit_netbox",
 ]
 
 PLUGINS_CONFIG = {
