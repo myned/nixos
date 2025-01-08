@@ -37,7 +37,7 @@ _build() {
 
   # Build and send closures to remote machine
   if [[ "${argc_target:-}" ]]; then
-    nixos-rebuild --flake ".#${argc_target}" --target-host "root@${argc_target}" "$1" ${argc_extra:+"${argc_extra[@]}"}
+    nixos-rebuild --flake ".#${argc_target}" --target-host "root@${argc_target}" "$1" -- --show-trace ${argc_extra:+"${argc_extra[@]}"}
   else
     # Build current system
     if [[ "${argc_builder:-}" == nh ]]; then
