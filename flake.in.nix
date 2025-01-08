@@ -36,7 +36,7 @@
     stylix-stable = flake "github:danth/stylix/release-24.11" // stable "nixpkgs";
 
     ### Unstable
-    nixpkgs-unstable = flake "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-unstable = flake "github:NixOS/nixpkgs/nixos-unstable-small";
 
     aagl-gtk-on-nix-unstable = flake "github:ezKEa/aagl-gtk-on-nix" // unstable "nixpkgs";
     agenix = flake "github:ryantm/agenix" // unstable "nixpkgs";

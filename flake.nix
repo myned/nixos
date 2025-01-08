@@ -123,7 +123,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-staging-next.url = "github:NixOS/nixpkgs/staging-next";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     steamtinkerlaunch = {
       flake = false;
       url = "github:sonic2kk/steamtinkerlaunch";
