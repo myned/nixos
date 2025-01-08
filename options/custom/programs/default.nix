@@ -38,7 +38,7 @@ with lib; {
       kitty.enable = true;
       nautilus.enable = true;
       nvtop.enable = true;
-      #// wezterm.enable = true;
+      wezterm.enable = true;
     })
 
     (mkIf config.custom.full {

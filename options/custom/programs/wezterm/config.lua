@@ -5,7 +5,7 @@ config.enable_scroll_bar = true
 
 -- # BUG: Wayland is currently a WIP
 -- https://github.com/wez/wezterm/issues/5793
-config.enable_wayland = false
+-- // config.enable_wayland = false
 
 -- # BUG: Font weight does not render properly with WebGpu
 -- https://github.com/wez/wezterm/issues/3032
@@ -14,7 +14,7 @@ config.force_reverse_video_cursor = true -- Invert colors
 
 -- # BUG: OpenGL/Software rendering is broken
 -- https://github.com/wez/wezterm/issues/5990
-config.front_end = 'WebGpu' -- Vulkan support
+-- // config.front_end = 'WebGpu' -- Vulkan support
 
 config.hide_tab_bar_if_only_one_tab = true
 config.scrollback_lines = 10000
