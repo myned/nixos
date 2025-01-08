@@ -4,7 +4,7 @@
   inputs = {
     aagl-gtk-on-nix-stable = {
       inputs.nixpkgs.follows = "nixpkgs-stable";
-      url = "github:ezKEa/aagl-gtk-on-nix/release-24.05";
+      url = "github:ezKEa/aagl-gtk-on-nix/release-24.11";
     };
     aagl-gtk-on-nix-unstable = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -53,7 +53,7 @@
     };
     home-manager-stable = {
       inputs.nixpkgs.follows = "nixpkgs-stable";
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-24.11";
     };
     home-manager-unstable = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -121,14 +121,18 @@
       url = "github:nix-community/nixd";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-staging-next.url = "github:NixOS/nixpkgs/staging-next";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     steamtinkerlaunch = {
       flake = false;
       url = "github:sonic2kk/steamtinkerlaunch";
     };
-    stylix = {
+    stylix-stable = {
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+      url = "github:danth/stylix/release-24.11";
+    };
+    stylix-unstable = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:danth/stylix";
     };

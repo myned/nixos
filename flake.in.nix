@@ -28,12 +28,12 @@
     nixos-hardware = flake "github:NixOS/nixos-hardware";
 
     ### Stable
-    # TODO: Upgrade to NixOS 24.11 stable
-    nixpkgs-stable = flake "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs-stable = flake "github:NixOS/nixpkgs/nixos-24.11";
 
-    aagl-gtk-on-nix-stable = flake "github:ezKEa/aagl-gtk-on-nix/release-24.05" // stable "nixpkgs";
-    home-manager-stable = flake "github:nix-community/home-manager/release-24.05" // stable "nixpkgs";
+    aagl-gtk-on-nix-stable = flake "github:ezKEa/aagl-gtk-on-nix/release-24.11" // stable "nixpkgs";
+    home-manager-stable = flake "github:nix-community/home-manager/release-24.11" // stable "nixpkgs";
     nix-index-database-stable = flake "github:nix-community/nix-index-database" // stable "nixpkgs";
+    stylix-stable = flake "github:danth/stylix/release-24.11" // stable "nixpkgs";
 
     ### Unstable
     nixpkgs-unstable = flake "github:NixOS/nixpkgs/nixos-unstable";
@@ -63,7 +63,7 @@
     nix-index-database-unstable = flake "github:nix-community/nix-index-database" // unstable "nixpkgs";
     nix-vscode-extensions = flake "github:nix-community/nix-vscode-extensions" // unstable "nixpkgs";
     nixd = flake "github:nix-community/nixd" // unstable "nixpkgs";
-    stylix = flake "github:danth/stylix" // unstable "nixpkgs";
+    stylix-unstable = flake "github:danth/stylix" // unstable "nixpkgs";
     walker = flake "github:abenz1267/walker?ref=v0.10.15" // unstable "nixpkgs";
 
     ### Staging
@@ -116,12 +116,12 @@
                     inputs."aagl-gtk-on-nix-${branch}".nixosModules.default
                     inputs."home-manager-${branch}".nixosModules.home-manager
                     inputs."nix-index-database-${branch}".nixosModules.nix-index
+                    inputs."stylix-${branch}".nixosModules.stylix
                     inputs.agenix.nixosModules.default
                     inputs.arion.nixosModules.arion
                     inputs.disko.nixosModules.disko
                     inputs.fw-fanctrl.nixosModules.default
                     inputs.niri-flake.nixosModules.niri
-                    inputs.stylix.nixosModules.stylix
                   ];
 
                   # TODO: Use home-manager.sharedModules for all options
