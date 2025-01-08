@@ -32,6 +32,7 @@ with lib; {
       dconf.enable = true;
       firefox.enable = true;
       #// foot.enable = true;
+      ghostty.enable = true;
       #// gnome-terminal.enable = true;
       #// kdeconnect.enable = true;
       kitty.enable = true;
