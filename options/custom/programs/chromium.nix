@@ -42,7 +42,8 @@ in {
               "ponfpcnoihfmfllpaingbgckeeldkhle" # Enhancer for YouTube
               #// "fnaicdffflnofjppbagibeoednhnbjhg" # floccus
               #// "bnomihfieiccainjcjblhegjgglakjdd" # Improve YouTube
-              "pnjaodmkngahhkoihejjehlcdlnohgmp" # RSS Feed Reader
+              #// "pnjaodmkngahhkoihejjehlcdlnohgmp" # RSS Feed Reader
+              "kfimphpokifbjgmjflanmfeppcjimgah" # RSS Reader Extension (by Inoreader)
               "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock
               "clngdbkpkpeebahjckkjfobafhncgmne" # Stylus
               #// "kfidecgcdjjfpeckbblhmfkhmlgecoff" # Svelte DevTools
