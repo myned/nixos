@@ -147,7 +147,7 @@ in {
           {
             name = "Kagi";
             shortcut = "k";
-            url = "https://kagi.com?q={searchTerms}";
+            url = "https://kagi.com/search?q={searchTerms}";
           }
 
           {

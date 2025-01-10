@@ -89,7 +89,7 @@ case "$1" in
   'k '*)
     label="Kagi"
     icon="kagi"
-    url="https://kagi.com?q="
+    url="https://kagi.com/search?q="
     query="${1:2}"
     ;;
   'l '*)

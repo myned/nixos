@@ -357,7 +357,7 @@ in {
               Name = "Kagi";
               Alias = "k";
               IconURL = "https://kagi.com/asset/v2/favicon-32x32.png";
-              URLTemplate = "https://kagi.com?q={searchTerms}";
+              URLTemplate = "https://kagi.com/search?q={searchTerms}";
             }
 
             {
