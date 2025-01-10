@@ -86,6 +86,12 @@ case "$1" in
     url="https://github.com/i3/i3/issues?q=is%3Aissue+is%3Aopen+"
     query="${1:3}"
     ;;
+  'k '*)
+    label="Kagi"
+    icon="kagi"
+    url="https://kagi.com?q="
+    query="${1:2}"
+    ;;
   'l '*)
     label="Lutris"
     icon="lutris"
