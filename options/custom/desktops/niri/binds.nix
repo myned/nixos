@@ -12,6 +12,7 @@ with lib; let
   bash = "${pkgs.bash}/bin/bash";
   cat = "${pkgs.coreutils}/bin/cat";
   codium = "${config.home-manager.users.${config.custom.username}.programs.vscode.package}/bin/codium";
+  ghostty = "${hm.programs.ghostty.package}/bin/ghostty";
   hyprlock = "${config.home-manager.users.${config.custom.username}.programs.hyprlock.package}/bin/hyprlock";
   hyprpicker = "${pkgs.hyprpicker}/bin/hyprpicker";
   inhibit = config.home-manager.users.${config.custom.username}.home.file.".local/bin/inhibit".source;
@@ -60,11 +61,11 @@ in {
           };
 
           # Launch VM
-          vm = ''${remote} --vm --client xfreerdp --username Myned --password "$(${cat} ${config.age.secrets."desktop/vm/myndows.pass".path})" ${
-              if config.custom.hidpi
-              then "--scale 140"
-              else ""
-            } myndows'';
+          vm = [
+            bash
+            "-c"
+            ''${remote} --vm --client sdl-freerdp --username Myned --password "$(${cat} ${config.age.secrets."desktop/vm/myndows.pass".path})" myndows''
+          ];
         in
           listToAttrs (with hm.lib.niri.actions; [
             (key "0" "Mod" (spawn [swayosd-client "--output-volume" "mute-toggle"]))
@@ -147,8 +148,8 @@ in {
             (key "Slash" "Mod+Shift" show-hotkey-overlay)
             (key "Space" "Ctrl+Alt" (spawn ["lifx" "toggle"]))
             (key "Space" "Ctrl+Alt" (spawn ["lifx" "toggle"]))
-            (key "T" "Ctrl+Alt" (spawn [pkill "kitty"]))
-            (key "T" "Mod" (spawn kitty))
+            (key "T" "Ctrl+Alt" (spawn [pkill "ghostty"]))
+            (key "T" "Mod" (spawn ghostty))
             (key "Tab" "Mod" switch-focus-between-floating-and-tiling)
             (key "Up" "Mod" (spawn [swayosd-client "--brightness" "raise"]))
             (key "V" "Mod" (spawn virt-manager))

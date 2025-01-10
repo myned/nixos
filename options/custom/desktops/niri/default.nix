@@ -97,6 +97,11 @@ in {
                   (leaf "open-floating" true)
                   (leaf "open-focused" false)
                 ])
+
+                (plain "window-rule" [
+                  (leaf "match" {app-id = "^(sdl-|wl|x)freerdp$";})
+                  (leaf "open-floating" false)
+                ])
               ]);
 
           # https://github.com/YaLTeR/niri/wiki/Configuration:-Debug-Options

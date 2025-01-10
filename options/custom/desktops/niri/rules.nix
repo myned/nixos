@@ -63,6 +63,11 @@ in {
                 {app-id = "^vivaldi.*$";}
               ];
 
+              default-column-width.proportion =
+                if config.custom.ultrawide
+                then 0.4
+                else 0.7;
+
               #// open-on-workspace = "2";
             }
 
