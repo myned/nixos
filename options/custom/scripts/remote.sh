@@ -52,7 +52,11 @@ elif [[ "${argc_client:-}" =~ ^.+freerdp$ ]]; then
     "/v:${argc_host:-}"
     "/u:${argc_username:-}"
     "/p:${argc_password:-}"
-    "/kbd:remap:015b=0154" # VK_LWIN=<00> #?? xfreerdp /list:kbd-scancode
+
+    # BUG: Invalid argument regression?
+    # https://github.com/FreeRDP/FreeRDP/issues/10810
+    #// "/kbd:remap:015b=0154" # VK_LWIN=<00> #?? sdl-freerdp /list:kbd-scancode
+
     "/scale:${argc_scale:-}"
     "/dynamic-resolution"
     "/sound"
