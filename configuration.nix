@@ -48,21 +48,22 @@
 
           stable = nixpkgs "stable";
           unstable = nixpkgs "unstable";
-          staging-next = nixpkgs "staging-next";
+          master = nixpkgs "master";
+          dcsunset = nixpkgs "dcsunset";
           #// local = nixpkgs "local";
         in {
           # Overlay nixpkgs branches
           #?? nixpkgs.BRANCH.PACKAGE
-          inherit stable unstable staging-next;
+          inherit stable unstable master;
 
           ### Packages
           # BUG: Build tests often fail on unstable
           # https://github.com/NixOS/nixpkgs/issues/333946
           fprintd = stable.fprintd;
 
-          # BUG: Empty password regression, remove > v3.9.0 on unstable
-          # https://github.com/FreeRDP/FreeRDP/issues/10784
-          freerdp3 = stable.freerdp3;
+          # TODO: Remove when on unstable
+          # https://github.com/NixOS/nixpkgs/pull/369808
+          freerdp3 = dcsunset.freerdp3;
 
           ### Development
           #// ciscoPacketTracer8 = local.ciscoPacketTracer8;

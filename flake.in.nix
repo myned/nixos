@@ -36,7 +36,7 @@
     stylix-stable = flake "github:danth/stylix/release-24.11" // stable "nixpkgs";
 
     ### Unstable
-    nixpkgs-unstable = flake "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs-unstable = flake "github:NixOS/nixpkgs/nixos-unstable";
 
     aagl-gtk-on-nix-unstable = flake "github:ezKEa/aagl-gtk-on-nix" // unstable "nixpkgs";
     agenix = flake "github:ryantm/agenix" // unstable "nixpkgs";
@@ -66,8 +66,9 @@
     stylix-unstable = flake "github:danth/stylix" // unstable "nixpkgs";
     walker = flake "github:abenz1267/walker?ref=v0.10.15" // unstable "nixpkgs";
 
-    ### Staging
-    nixpkgs-staging-next = flake "github:NixOS/nixpkgs/staging-next";
+    ### Branches
+    nixpkgs-dcsunset = flake "github:DCsunset/nixpkgs/update-freerdp3";
+    nixpkgs-master = flake "github:NixOS/nixpkgs/master";
 
     ### Development
     #// nixpkgs-local = flake "git+file:///home/myned/SYNC/dev/repo/nixpkgs";
