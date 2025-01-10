@@ -1,7 +1,11 @@
 {config, ...}: {
   custom = {
     profile = "server";
-    programs.fastfetch.greet = true;
+
+    programs = {
+      fastfetch.greet = true;
+      ghostty.minimal = true;
+    };
 
     containers = {
       enable = true;
@@ -14,10 +18,10 @@
       #// headscale.enable = true;
       mastodon.enable = true;
       netbox.enable = true;
-      nextcloud.enable = true;
+      #// nextcloud.enable = true;
       owncast.enable = true;
-      redlib.enable = true;
-      searxng.enable = true;
+      #// redlib.enable = true;
+      #// searxng.enable = true;
     };
 
     services = {

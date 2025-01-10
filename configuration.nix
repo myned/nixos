@@ -65,6 +65,9 @@
           # https://github.com/NixOS/nixpkgs/pull/369808
           freerdp3 = dcsunset.freerdp3;
 
+          # TODO: Remove when on stable
+          ghostty = unstable.ghostty;
+
           ### Development
           #// ciscoPacketTracer8 = local.ciscoPacketTracer8;
         }

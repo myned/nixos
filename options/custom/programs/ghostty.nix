@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -8,10 +9,13 @@ with lib; let
 in {
   options.custom.programs.ghostty = {
     enable = mkOption {default = false;};
+    minimal = mkOption {default = false;};
   };
 
   config = mkIf cfg.enable {
-    home-manager.sharedModules = [
+    environment.systemPackages = mkIf cfg.minimal [pkgs.ghostty]; # Terminfo
+
+    home-manager.sharedModules = mkIf (!cfg.minimal) [
       {
         # https://ghostty.org/
         programs.ghostty = {

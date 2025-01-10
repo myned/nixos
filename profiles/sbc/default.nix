@@ -1,7 +1,11 @@
 {config, ...}: {
   custom = {
     profile = "sbc";
-    programs.fastfetch.greet = true;
+
+    programs = {
+      fastfetch.greet = true;
+      ghostty.minimal = true;
+    };
 
     containers = {
       enable = true;

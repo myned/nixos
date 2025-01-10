@@ -10,6 +10,7 @@ with lib; {
       direnv.enable = true;
       fastfetch.enable = true;
       fish.enable = true;
+      ghostty.enable = true;
       git.enable = true;
       htop.enable = true;
       man.enable = true;
@@ -32,7 +33,6 @@ with lib; {
       dconf.enable = true;
       firefox.enable = true;
       #// foot.enable = true;
-      ghostty.enable = true;
       #// gnome-terminal.enable = true;
       #// kdeconnect.enable = true;
       kitty.enable = true;
