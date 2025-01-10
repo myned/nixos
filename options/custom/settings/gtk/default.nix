@@ -41,7 +41,7 @@ in {
       };
 
       gtk4 = {
-        extraConfig.gtk-hint-font-metrics = 1; # Fix blurry fonts
+        #// extraConfig.gtk-hint-font-metrics = 1; # Fix blurry fonts
         extraCss = css;
       };
     };

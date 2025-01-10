@@ -10,6 +10,7 @@ in {
   options.custom.settings.fonts = {
     enable = mkOption {default = false;};
     emoji = mkOption {default = "Noto Color Emoji";};
+    fallback = mkOption {default = "Unifont";};
     monospace = mkOption {default = "IosevkaTerm NFP SemiBold";};
     sans-serif = mkOption {default = "Outfit";};
     serif = mkOption {default = "Liberation Serif";};
@@ -54,6 +55,9 @@ in {
           # Microsoft
           corefonts
           vistafonts
+
+          # Fallback
+          unifont
         ]);
 
       #?? fc-list --brief | grep family: | sort
