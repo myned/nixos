@@ -435,11 +435,7 @@ in {
 
                   interval = 5;
 
-                  on-click = ''${remote} --vm --client xfreerdp --username Myned --password "$(${cat} ${config.age.secrets."desktop/vm/myndows.pass".path})" ${
-                      if config.custom.hidpi
-                      then "--scale 140"
-                      else ""
-                    } myndows'';
+                  on-click = ''${remote} --vm --client sdl-freerdp --username Myned --password "$(${cat} ${config.age.secrets."desktop/vm/myndows.pass".path})" myndows'';
 
                   on-click-middle = "${virsh} shutdown myndows";
                   on-click-right = virt-manager;
