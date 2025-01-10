@@ -103,6 +103,12 @@ in {
           }
 
           {
+            name = "Extensions";
+            shortcut = "ex";
+            url = "https://chromewebstore.google.com/search/{searchTerms}";
+          }
+
+          {
             name = "Flathub";
             shortcut = "fh";
             url = "https://flathub.org/apps/search?q={searchTerms}";
