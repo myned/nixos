@@ -40,15 +40,15 @@ in {
 
       # https://github.com/ErikReider/SwayNotificationCenter/blob/main/src/configSchema.json
       settings = {
-        control-center-height = builtins.floor (config.custom.height / 2);
+        control-center-height = builtins.floor (config.custom.height * 0.75); # 75%
         control-center-positionY = "bottom";
-        control-center-width = builtins.floor (750 * config.custom.scale);
+        control-center-width = 750;
         fit-to-screen = false;
         hide-on-clear = true;
         notification-2fa-action = false;
         notification-icon-size = 32;
         #// notification-inline-replies = true;
-        notification-window-width = builtins.floor (500 * config.custom.scale);
+        notification-window-width = 500;
         positionX = "center";
         positionY = "top";
         timeout = 5; # normal
