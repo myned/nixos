@@ -22,10 +22,10 @@ in {
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutborder
           border = {
-            enable = false;
-            width = config.custom.border;
-            active.color = "#d33682";
-            inactive.color = "#00000000";
+            enable = true;
+            width = 1;
+            active.color = "#073642";
+            inactive.color = "#073642";
           };
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutcenter-focused-column
