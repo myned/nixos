@@ -11,13 +11,19 @@ in {
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     gtk = let
-      css = readFile ./style.css;
+      css = ''
+        * {
+          font-weight: ${config.custom.settings.fonts.weight};
+        }
+
+        ${readFile ./style.css}
+      '';
     in {
       enable = true;
 
       font = with config.custom.settings.fonts; {
         name = sans-serif;
-        size = 12;
+        size = 14;
       };
 
       cursorTheme = with config.custom.settings.icons.cursor; {
