@@ -22,7 +22,7 @@ in {
           enable = true;
 
           # https://ghostty.org/docs/config/reference
-          settings = rec {
+          settings = {
             adjust-cell-width = -1;
 
             # https://ghostty.org/docs/config/reference#adw-toolbar-style
@@ -34,11 +34,14 @@ in {
             # https://ghostty.org/docs/config/reference#font-family
             #?? ghostty +list-fonts
             #?? ghostty +show-face
-            font-family = with config.custom.settings.fonts; [monospace fallback];
-            font-family-bold = font-family;
+            font-family = with config.custom.settings.fonts; ["monospace" fallback];
 
             # https://ghostty.org/docs/config/reference#font-size
             font-size = 14;
+
+            # https://github.com/ghostty-org/ghostty/discussions/3515
+            # https://ghostty.org/docs/config/reference#freetype-load-flags
+            freetype-load-flags = "no-force-autohint";
 
             # https://ghostty.org/docs/config/reference#gtk-titlebar
             gtk-titlebar = false;
