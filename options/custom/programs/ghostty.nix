@@ -39,9 +39,9 @@ in {
             # https://ghostty.org/docs/config/reference#font-size
             font-size = 14;
 
-            # https://github.com/ghostty-org/ghostty/discussions/3515
             # https://ghostty.org/docs/config/reference#freetype-load-flags
-            freetype-load-flags = "no-force-autohint";
+            # https://github.com/ghostty-org/ghostty/discussions/3515
+            #// freetype-load-flags = "no-force-autohint";
 
             # https://ghostty.org/docs/config/reference#gtk-titlebar
             gtk-titlebar = false;
