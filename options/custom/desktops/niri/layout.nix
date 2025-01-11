@@ -24,8 +24,8 @@ in {
           border = {
             enable = true;
             width = 1;
-            active.color = "#073642";
-            inactive.color = "#073642";
+            active.color = "#002b36";
+            inactive.color = "#002b36";
           };
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutcenter-focused-column
