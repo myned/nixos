@@ -12,7 +12,7 @@ in {
     git = mkOption {default = false;};
     index = mkOption {default = true;};
     service = mkOption {default = false;};
-    terminal = mkOption {default = "kitty";};
+    terminal = mkOption {default = "ghostty";};
   };
 
   config = mkIf cfg.enable {
