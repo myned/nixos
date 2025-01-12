@@ -275,17 +275,6 @@ in {
                   };
                 };
 
-              # https://github.com/Alexays/Waybar/wiki/Module:-Niri
-              "niri/workspaces" =
-                common
-                // {
-                  format = "{icon}";
-
-                  format-icons = {
-                    scratchpad = "";
-                  };
-                };
-
               # https://github.com/Alexays/Waybar/wiki/Module:-MPRIS
               mpris =
                 common
@@ -329,6 +318,19 @@ in {
 
                   on-click = network;
                   on-click-right = nm-connection-editor;
+                };
+
+              # https://github.com/Alexays/Waybar/wiki/Module:-Niri
+              "niri/workspaces" =
+                common
+                // {
+                  format = "{icon}";
+
+                  format-icons = {
+                    "1" = "";
+                    "2" = "";
+                    "3" = "";
+                  };
                 };
 
               # https://github.com/Alexays/Waybar/wiki/Module:-PowerProfilesDaemon
