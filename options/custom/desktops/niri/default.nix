@@ -61,48 +61,10 @@ in {
           # https://github.com/YaLTeR/niri/wiki/Configuration:-Overview
           # HACK: Prepend validated kdl config not currently implemented in settings module for e.g. custom build
           # https://github.com/sodiboo/niri-flake/blob/main/settings.nix
-          config = let
-            # BUG: Fixed width may not take borders into account
-            # https://github.com/YaLTeR/niri/issues/269
-            pip = with config.custom; rec {
-              x = gap;
-              y = gap;
-              w = builtins.floor (width * 0.3 - gap); # 30%
-              h = builtins.floor (w * 9 / 16); # 16:9
-            };
-          in
-            with inputs.niri-flake.lib;
-              (internal.settings-module {config = hm;}).options.programs.niri.config.default
-              # https://github.com/sodiboo/niri-flake/blob/main/default-config.kdl.nix
-              ++ (with kdl; [
-                # TODO: Migrate to window-rules when released
-                # https://github.com/YaLTeR/niri/pull/871
-                (plain "window-rule" [
-                  (leaf "match" {is-floating = true;})
-                  (plain "border" [(flag "off")])
-                  (plain "focus-ring" [(flag "off")])
-                ])
-
-                (plain "window-rule" [
-                  (leaf "match" {title = "^Picture.in.[Pp]icture$";})
-
-                  (leaf "default-floating-position" {
-                    x = pip.x;
-                    y = pip.y;
-                    relative-to = "top-right";
-                  })
-
-                  (plain "default-column-width" [(leaf "fixed" (pip.w))])
-                  (plain "default-window-height" [(leaf "fixed" (pip.h))])
-                  (leaf "open-floating" true)
-                  (leaf "open-focused" false)
-                ])
-
-                (plain "window-rule" [
-                  (leaf "match" {app-id = "^(sdl-|wl|x)freerdp$";})
-                  (leaf "open-floating" false)
-                ])
-              ]);
+          config = with inputs.niri-flake.lib;
+            (internal.settings-module {config = hm;}).options.programs.niri.config.default
+            # https://github.com/sodiboo/niri-flake/blob/main/default-config.kdl.nix
+            ++ (with kdl; []);
 
           # https://github.com/YaLTeR/niri/wiki/Configuration:-Debug-Options
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsdebug

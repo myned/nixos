@@ -43,6 +43,14 @@ in {
             }
 
             {
+              # Floating
+              matches = [{is-floating = true;}];
+
+              border.enable = false;
+              focus-ring.enable = false;
+            }
+
+            {
               # Startup
               #?? <= 60 secs after niri launches
               matches = [{at-startup = true;}];
@@ -139,10 +147,30 @@ in {
               #// open-on-workspace = "2";
             }
 
-            {
+            (let
+              # BUG: Fixed width may not take borders into account
+              # https://github.com/YaLTeR/niri/issues/269
+              pip = with config.custom; rec {
+                x = gap;
+                y = gap;
+                w = builtins.floor (width * 0.3 - gap); # 30%
+                h = builtins.floor (w * 9 / 16); # 16:9
+              };
+            in {
               # PiP
               matches = [{title = "^Picture.in.[Pp]icture$";}];
-            }
+
+              default-floating-position = {
+                x = pip.x;
+                y = pip.y;
+                relative-to = "top-right";
+              };
+
+              default-column-width.fixed = pip.w;
+              default-window-height.fixed = pip.h;
+              open-floating = true;
+              open-focused = false;
+            })
 
             {
               # Terminals
@@ -170,6 +198,7 @@ in {
                 {app-id = "^virt-manager$";}
               ];
 
+              open-floating = false;
               #// open-on-workspace = "1";
             }
 
