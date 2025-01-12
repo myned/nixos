@@ -23,7 +23,7 @@ in {
 
       font = with config.custom.settings.fonts; {
         name = sans-serif;
-        size = 14;
+        size = 12;
       };
 
       cursorTheme = with config.custom.settings.icons.cursor; {
@@ -42,14 +42,8 @@ in {
         #// package = pkgs.adw-gtk3;
       };
 
-      gtk3 = {
-        extraCss = css;
-      };
-
-      gtk4 = {
-        #// extraConfig.gtk-hint-font-metrics = 1; # Fix blurry fonts
-        extraCss = css;
-      };
+      gtk3.extraCss = css;
+      gtk4.extraCss = css;
     };
   };
 }
