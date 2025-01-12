@@ -292,8 +292,11 @@ in {
                 // {
                   format = "{player_icon} {dynamic}";
                   format-paused = "{status_icon} {dynamic}";
-                  dynamic-len = 25; # Characters
-                  dynamic-order = ["title" "artist"];
+                  artist-len = 64; # Characters
+                  title-len = 32; # Characters
+                  dynamic-len = 64; # Characters
+                  dynamic-importance-order = ["artist" "title"];
+                  dynamic-order = ["artist" "title"];
                   dynamic-separator = " 󰧟 ";
                   player-icons.default = "󰎈";
                   status-icons.paused = "";
