@@ -121,6 +121,12 @@ in {
           }
 
           {
+            name = "Google Fonts";
+            shortcut = "gf";
+            url = "https://fonts.google.com/?query={searchTerms}";
+          }
+
+          {
             name = "Home Manager Issues";
             shortcut = "hi";
             url = "https://github.com/nix-community/home-manager/issues?q=is%3Aissue+is%3Aopen+{searchTerms}";

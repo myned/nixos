@@ -56,6 +56,12 @@ case "$1" in
     url="https://www.google.com/search?q="
     query="${1:2}"
     ;;
+  'gf '*)
+    label="Google Fonts"
+    icon="google"
+    url="https://fonts.google.com/?query="
+    query="${1:3}"
+    ;;
   'gh '*)
     label="GitHub"
     icon="github"

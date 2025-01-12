@@ -319,6 +319,13 @@ in {
             }
 
             {
+              Name = "Google Fonts";
+              Alias = "gf";
+              IconURL = "https://www.gstatic.com/images/icons/material/apps/fonts/1x/catalog/v5/favicon.svg";
+              URLTemplate = "https://fonts.google.com/?query={searchTerms}";
+            }
+
+            {
               Name = "GitHub";
               Alias = "gh";
               IconURL = "https://github.com/favicon.ico";
