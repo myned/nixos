@@ -37,8 +37,7 @@ in {
             then 0.3 # 30%
             else 0.6; # 60%
 
-          # TODO: Uncomment after next release > v1.10.1
-          #// empty-workspace-above-first = true;
+          empty-workspace-above-first = true;
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutfocus-ring
           focus-ring = {
