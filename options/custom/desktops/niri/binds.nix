@@ -13,6 +13,7 @@ with lib; let
   cat = "${pkgs.coreutils}/bin/cat";
   codium = "${config.home-manager.users.${config.custom.username}.programs.vscode.package}/bin/codium";
   ghostty = "${hm.programs.ghostty.package}/bin/ghostty";
+  gnome-text-editor = "${pkgs.gnome-text-editor}/bin/gnome-text-editor";
   hyprlock = "${config.home-manager.users.${config.custom.username}.programs.hyprlock.package}/bin/hyprlock";
   hyprpicker = "${pkgs.hyprpicker}/bin/hyprpicker";
   inhibit = config.home-manager.users.${config.custom.username}.home.file.".local/bin/inhibit".source;
@@ -115,14 +116,16 @@ in {
             (key "Delete" "Ctrl+Alt" (spawn [loginctl "terminate-user" config.custom.username]))
             (key "Delete" "Mod" (spawn [playerctl] "play-pause"))
             (key "Down" "Mod" (spawn [swayosd-client "--brightness" "lower"]))
-            (key "E" "Ctrl+Alt" (spawn [pkill "codium"]))
-            (key "E" "Mod" (spawn codium))
+            (key "E" "Ctrl+Alt" (spawn [pkill "gnome-text-editor"]))
+            (key "E" "Mod" (spawn gnome-text-editor))
             (key "Equal" "Mod" (spawn [swayosd-client "--output-volume" "raise"]))
             (key "Escape" "Mod" toggle-window-floating)
             (key "Escape" "Mod+Alt" (spawn ["lifx" "state" "--color" "red"]))
             (key "F" "Mod" (spawn [nautilus "--new-window"]))
             (key "G" "Ctrl+Alt" (spawn [pkill "steam"]))
             (key "G" "Mod" (spawn steam))
+            (key "I" "Ctrl+Alt" (spawn [pkill "codium"]))
+            (key "I" "Mod" (spawn codium))
             (key "K" "Ctrl+Alt" (spawn [pkill "obsidian"]))
             (key "K" "Mod" (spawn obsidian))
             (key "L" "Mod" (spawn [bash "-c" "${hyprlock} --immediate & ${niri} msg action power-off-monitors"]))
