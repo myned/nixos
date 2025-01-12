@@ -11,7 +11,7 @@ in {
     enable = mkOption {default = false;};
     git = mkOption {default = false;};
     index = mkOption {default = true;};
-    service = mkOption {default = false;};
+    service = mkOption {default = true;};
     terminal = mkOption {default = "ghostty";};
   };
 
