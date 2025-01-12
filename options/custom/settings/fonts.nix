@@ -12,9 +12,9 @@ in {
     emoji = mkOption {default = "Blobmoji";};
     fallback = mkOption {default = "Unifont";};
     monospace = mkOption {default = "IosevkaTermSlab NFP Medium";};
-    sans-serif = mkOption {default = "Afacad";};
+    sans-serif = mkOption {default = "Arvo";};
     serif = mkOption {default = "Lora";};
-    weight = mkOption {default = "500";};
+    weight = mkOption {default = "400";};
   };
 
   config = mkIf cfg.enable {
@@ -24,7 +24,7 @@ in {
 
       packages = with pkgs.nerd-fonts;
         [
-          ### Monospace
+          # Monospace
           # https://www.nerdfonts.com/#home
           #?? kitten choose-fonts
           departure-mono
@@ -32,6 +32,7 @@ in {
           iosevka-term
           iosevka-term-slab
           jetbrains-mono
+          roboto-mono
           shure-tech-mono
           space-mono
           zed-mono
@@ -39,28 +40,39 @@ in {
         ++ (with pkgs; [
           (google-fonts.override {
             fonts = [
-              ### Sans Serif
-              # Text
-              "Afacad"
-              "Outfit"
-              "Urbanist"
-
-              # Condensed
-              "Oswald"
-
               # Pixel
               "Geo"
               "Silkscreen"
 
-              ### Serif
+              # Sans-serif
+              "Josefin Sans"
+              "Jost"
+              "Lexend"
+              "Outfit"
+              "Roboto"
+              "Roboto Flex"
+
+              # Sans-serif condensed
+              "Oswald"
+              "Roboto Condensed"
+
+              # Serif
               "Lora"
+              "Roboto Serif"
+
+              # Slab
+              "Aleo"
+              "Arvo"
+              "Josefin Slab"
+              "Roboto Slab"
+              "Solway"
             ];
           })
 
-          ### Emoji
+          # Emoji
+          noto-fonts-color-emoji
           noto-fonts-emoji-blob-bin
 
-          ### Other
           # Microsoft
           corefonts
           vistafonts
