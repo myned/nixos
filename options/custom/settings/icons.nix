@@ -27,8 +27,7 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = [cfg.cursor.package cfg.icon.package];
 
-    # BUG: home.pointerCursor breaks XCURSOR_PATH for some child windows, so avoid that workaround
-    # HACK: Copy home-manager index.theme without setting XCURSOR_* environment variables
+    # HACK: Copy home-manager implementation without setting XCURSOR_* environment variables
     home-manager.sharedModules = let
       # https://github.com/nix-community/home-manager/blob/59a4c43e9ba6db24698c112720a58a334117de83/modules/config/home-cursor.nix#L66C3-L77C8
       defaultIndexThemePackage = pkgs.writeTextFile {
@@ -44,6 +43,13 @@ in {
       };
     in [
       {
+        # BUG: home.pointerCursor breaks XCURSOR_PATH for some child windows, so avoid that workaround
+        # https://github.com/nix-community/home-manager/blob/59a4c43e9ba6db24698c112720a58a334117de83/modules/config/home-cursor.nix#L154
+        home.sessionVariables = {
+          XCURSOR_SIZE = cfg.cursor.size;
+          XCURSOR_THEME = cfg.cursor.name;
+        };
+
         # https://github.com/nix-community/home-manager/blob/59a4c43e9ba6db24698c112720a58a334117de83/modules/config/home-cursor.nix#L161
         home.file.".icons/default/index.theme".source = "${defaultIndexThemePackage}/share/icons/default/index.theme";
         home.file.".icons/${cfg.cursor.name}".source = "${cfg.cursor.package}/share/icons/${cfg.cursor.name}";
