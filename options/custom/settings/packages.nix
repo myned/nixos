@@ -101,6 +101,7 @@ in {
           gnome-disk-utility # Disk formatter
           gnome-firmware # Firmware updater
           gnome-font-viewer # Font viewer
+          gnome-frog # Text extraction
           gnome-graphs # Data plotter
           gnome-maps # OpenStreetMap client
           gnome-obfuscate # Image redacter
