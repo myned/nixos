@@ -275,20 +275,31 @@ in {
                   };
                 };
 
+              # BUG: Widget stays after last player closes
+              # https://github.com/Alexays/Waybar/issues/3107
               # https://github.com/Alexays/Waybar/wiki/Module:-MPRIS
               mpris =
                 common
                 // {
                   format = "{player_icon} {dynamic}";
                   format-paused = "{status_icon} {dynamic}";
-                  artist-len = 64; # Characters
+                  artist-len = 32; # Characters
                   title-len = 32; # Characters
                   dynamic-len = 64; # Characters
                   dynamic-importance-order = ["artist" "title"];
                   dynamic-order = ["artist" "title"];
                   dynamic-separator = " 󰧟 ";
-                  player-icons.default = "󰎈";
-                  status-icons.paused = "";
+
+                  player-icons = {
+                    default = "󰎈";
+                    chromium = "";
+                    firefox = "";
+                  };
+
+                  status-icons = {
+                    paused = "";
+                    stopped = "";
+                  };
 
                   # TODO: on-click focus currently playing window
                   #// on-click = "";
@@ -326,11 +337,11 @@ in {
                 // {
                   format = "{icon}";
 
-                  format-icons = {
-                    "1" = "";
-                    "2" = "";
-                    "3" = "";
-                  };
+                  # format-icons = {
+                  #   "1" = "";
+                  #   "2" = "";
+                  #   "3" = "";
+                  # };
                 };
 
               # https://github.com/Alexays/Waybar/wiki/Module:-PowerProfilesDaemon
