@@ -33,7 +33,7 @@ in {
             "follow symlinks" = "yes";
             "force user" = config.custom.username;
             "hostname lookups" = "yes";
-            "hosts allow" = "192.168.111.";
+            "hosts allow" = "100.64.0.";
             "inherit owner" = "unix only";
             "inherit permissions" = "yes";
             "logging" = "systemd";
