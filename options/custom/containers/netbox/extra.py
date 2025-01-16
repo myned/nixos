@@ -25,7 +25,7 @@ PLUGINS = [
     "netbox_otp_plugin",
     "netbox_reorder_rack",
     # "netbox_routing",
-    # "netbox_secrets",
+    "netbox_secrets",
     "netbox_storage",
     "netbox_topology_views",
     "nextbox_ui_plugin",
