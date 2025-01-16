@@ -20,6 +20,7 @@ PLUGINS = [
     "netbox_attachments",
     "netbox_dns",
     "netbox_interface_synchronization",
+    "netbox_inventory",
     # "netbox_lists",
     "netbox_otp_plugin",
     "netbox_reorder_rack",
@@ -27,6 +28,7 @@ PLUGINS = [
     # "netbox_secrets",
     "netbox_storage",
     "netbox_topology_views",
+    "nextbox_ui_plugin",
     # "slurpit_netbox",
 ]
 
