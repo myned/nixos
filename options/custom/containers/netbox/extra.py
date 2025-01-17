@@ -41,8 +41,8 @@ PLUGINS_CONFIG = {
 
 shortcuts = """
 ## [Racks](/dcim/rack-elevations/)
-## [Topology](/plugins/netbox_topology_views/topology/)
-## [Topology v2](/plugins/nextbox-ui/topology/?filter_id=1)
+## [Topology](/plugins/netbox_topology_views/topology/?filter_id=9)
+## [Topology v2](/plugins/nextbox-ui/topology/?filter_id=3)
 """
 
 # https://netboxlabs.com/docs/netbox/en/stable/configuration/default-values/#default_dashboard
@@ -71,18 +71,18 @@ DEFAULT_DASHBOARD = [
         "color": "orange",
         "config": {
             "model": "extras.journalentry",
-            "page_size": 3,
+            "page_size": 5,
         },
     },
     {
         "widget": "extras.ObjectListWidget",
         "width": 12,
-        "height": 5,
+        "height": 6,
         "title": "Changelog",
         "color": "black",
         "config": {
             "model": "core.objectchange",
-            "page_size": 5,
+            "page_size": 10,
         },
     },
 ]
