@@ -33,7 +33,7 @@ in {
         container_name = "forgejo";
         depends_on = ["db"];
         env_file = [config.age.secrets."${config.custom.profile}/forgejo/.env".path];
-        image = "codeberg.org/forgejo/forgejo:8";
+        image = "codeberg.org/forgejo/forgejo:10";
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/forgejo/data:/data"];
 
