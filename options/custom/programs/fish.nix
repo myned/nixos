@@ -69,6 +69,7 @@ in {
           c = "clear";
           e = "exit";
           m = "mosh";
+          r = "reset";
 
           d = "docker";
           dc = "docker compose";
