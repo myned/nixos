@@ -38,3 +38,51 @@ PLUGINS_CONFIG = {
     "netbox_secrets": {"top_level_menu": True},
     "netbox_topology_views": {"allow_coordinates_saving": True},
 }
+
+shortcuts = """
+## [Racks](/dcim/rack-elevations/)
+## [Topology](/plugins/netbox_topology_views/topology/)
+## [Topology v2](/plugins/nextbox-ui/topology/?filter_id=1)
+"""
+
+# https://netboxlabs.com/docs/netbox/en/stable/configuration/default-values/#default_dashboard
+DEFAULT_DASHBOARD = [
+    {
+        "widget": "extras.NoteWidget",
+        "width": 3,
+        "height": 3,
+        "title": "Shortcuts",
+        "color": "white",
+        "config": {"content": shortcuts},
+    },
+    {
+        "widget": "extras.NoteWidget",
+        "width": 9,
+        "height": 3,
+        "title": "TODO",
+        "color": "red",
+        "config": {"content": "Nothing to do (yet)."},
+    },
+    {
+        "widget": "extras.ObjectListWidget",
+        "width": 12,
+        "height": 4,
+        "title": "Journal",
+        "color": "orange",
+        "config": {
+            "model": "extras.journalentry",
+            "page_size": 3,
+        },
+    },
+    {
+        "widget": "extras.ObjectListWidget",
+        "width": 12,
+        "height": 5,
+        "title": "Changelog",
+        "color": "black",
+        "config": {
+            "model": "core.objectchange",
+            "page_size": 5,
+        },
+    },
+]
