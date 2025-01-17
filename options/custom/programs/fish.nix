@@ -53,14 +53,17 @@ in {
           as = "adb shell";
           asa = "adb shell sh /sdcard/Android/data/com.llamalab.automate/cache/start.sh"; # Automate
 
-          b = "sudo borgmatic";
+          b = "sudo borgmatic --progress --stats";
           bb = "sudo borgmatic borg";
           bc = "sudo borgmatic create --progress --stats";
+          bct = "sudo borgmatic compact";
           be = "sudo borgmatic extract --progress";
-          bi = "sudo borgmatic init -e repokey-blake2";
+          bi = "sudo borgmatic info";
+          bin = "sudo borgmatic init -e repokey-blake2";
           bk = "sudo borgmatic key export";
           bl = "sudo borgmatic list";
           bm = "sudo borgmatic mount";
+          bp = "sudo borgmatic prune";
           brl = "sudo borgmatic rlist";
           br = "sudo borgmatic restore";
           bt = "sudo borgmatic export-tar";
