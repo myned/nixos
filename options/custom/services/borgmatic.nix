@@ -28,7 +28,7 @@ in {
 
       # https://torsion.org/borgmatic/docs/reference/configuration/
       settings = {
-        archive_name_format = "{now:%Y-%m-%d %H:%M:%S}"; # Remove hostname
+        keep_hourly = 24;
         keep_daily = 7;
         keep_weekly = 4;
         keep_monthly = 1;
