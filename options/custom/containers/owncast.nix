@@ -15,7 +15,7 @@ in {
     virtualisation.arion.projects.owncast.settings.services = {
       owncast.service = {
         container_name = "owncast";
-        image = "owncast/owncast:0.1.3";
+        image = "owncast/owncast:0.2.0";
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/owncast/data:/app/data"];
 
