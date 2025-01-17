@@ -32,7 +32,7 @@ in {
         keep_daily = 7;
         keep_weekly = 4;
         keep_monthly = 1;
-        keep_yearly = 1;
+        keep_yearly = 0;
         retries = 10;
         retry_wait = 60; # Additive seconds per retry
         compression = "auto,zstd"; # Use heuristics to decide whether to compress with zstd
