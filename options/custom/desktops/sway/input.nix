@@ -20,8 +20,8 @@ in {
         input = {
           # Keyboard
           "type:keyboard" = {
-            repeat_delay = "400";
-            repeat_rate = "40";
+            repeat_delay = "250";
+            repeat_rate = "30";
           };
 
           # Mouse

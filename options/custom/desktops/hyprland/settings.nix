@@ -214,8 +214,8 @@ in {
         # https://github.com/hyprwm/Hyprland/issues/8057
         mouse_refocus = false; # Required to focus last window on close
 
-        repeat_delay = 300;
-        repeat_rate = 40;
+        repeat_delay = 250;
+        repeat_rate = 30;
         sensitivity = 0.5;
         #// scroll_factor = 0.75;
         special_fallthrough = true; # Focus windows under special workspace
