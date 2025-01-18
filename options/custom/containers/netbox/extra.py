@@ -40,9 +40,13 @@ PLUGINS_CONFIG = {
 }
 
 shortcuts = """
-## [Racks](/dcim/rack-elevations/)
-## [Topology](/plugins/netbox_topology_views/topology/?filter_id=9)
-## [Topology v2](/plugins/nextbox-ui/topology/?filter_id=3)
+|    |    |
+|:---|---:|
+| [Topology](/plugins/netbox_topology_views/topology/?filter_id=9) | [Racks](/dcim/rack-elevations/) |
+| [Topology v2](/plugins/nextbox-ui/topology/?filter_id=3) | [Servers](/dcim/devices/?role_id=3) |
+| [Routers](/dcim/devices/?role_id=1) | [Clients](/dcim/devices/?role_id=4) |
+| [Switches](/dcim/devices/?role_id=2) | [Clusters](/virtualization/clusters/) |
+| [Contacts](/tenancy/contacts/) | [VMs](/virtualization/virtual-machines/) |
 """
 
 # https://netboxlabs.com/docs/netbox/en/stable/configuration/default-values/#default_dashboard
@@ -66,7 +70,7 @@ DEFAULT_DASHBOARD = [
     {
         "widget": "extras.ObjectListWidget",
         "width": 12,
-        "height": 4,
+        "height": 5,
         "title": "Journal",
         "color": "orange",
         "config": {
