@@ -39,7 +39,7 @@ PLUGINS_CONFIG = {
     "netbox_topology_views": {"allow_coordinates_saving": True},
 }
 
-shortcuts = """
+shortcuts = """\
 |    |    |
 |:---|---:|
 | [Topology](/plugins/netbox_topology_views/topology/?filter_id=9) | [Racks](/dcim/rack-elevations/) |
@@ -53,26 +53,26 @@ shortcuts = """
 DEFAULT_DASHBOARD = [
     {
         "widget": "extras.NoteWidget",
-        "width": 3,
+        "width": 4,
         "height": 3,
         "title": "Shortcuts",
-        "color": "white",
+        "color": "black",
         "config": {"content": shortcuts},
     },
     {
-        "widget": "extras.NoteWidget",
-        "width": 9,
+        "widget": "extras.BookmarksWidget",
+        "width": 8,
         "height": 3,
-        "title": "TODO",
-        "color": "red",
-        "config": {"content": "Nothing to do (yet)."},
+        "title": "Bookmarks",
+        "color": "black",
+        "config": {"order_by": "name"},
     },
     {
         "widget": "extras.ObjectListWidget",
         "width": 12,
         "height": 5,
         "title": "Journal",
-        "color": "orange",
+        "color": "black",
         "config": {
             "model": "extras.journalentry",
             "page_size": 5,
