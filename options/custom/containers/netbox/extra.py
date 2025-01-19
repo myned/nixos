@@ -42,11 +42,12 @@ PLUGINS_CONFIG = {
 shortcuts = """\
 |    |    |
 |:---|---:|
-| [Topology](/plugins/netbox_topology_views/topology/?filter_id=9) | [Racks](/dcim/rack-elevations/) |
-| [Topology v2](/plugins/nextbox-ui/topology/?filter_id=3) | [Servers](/dcim/devices/?role_id=3) |
-| [Routers](/dcim/devices/?role_id=1) | [Clients](/dcim/devices/?role_id=4) |
-| [Switches](/dcim/devices/?role_id=2) | [Clusters](/virtualization/clusters/) |
-| [Contacts](/tenancy/contacts/) | [VMs](/virtualization/virtual-machines/) |
+| [Topology](/plugins/netbox_topology_views/topology/?filter_id=9) ([v2](/plugins/nextbox-ui/topology/?filter_id=3)) | [Racks](/dcim/rack-elevations/) |
+| [Networks](/ipam/prefixes/) | [Servers](/dcim/devices/?role_id=3) |
+| [VLANs](/ipam/vlans/) | [Clients](/dcim/devices/?role_id=4) |
+| [Routers](/dcim/devices/?role_id=1) | [Clusters](/virtualization/clusters/) |
+| [Switches](/dcim/devices/?role_id=2) | [VMs](/virtualization/virtual-machines/) |
+| [Contacts](/tenancy/contacts/) | [Services](/ipam/services/) |
 """
 
 # https://netboxlabs.com/docs/netbox/en/stable/configuration/default-values/#default_dashboard
@@ -54,7 +55,7 @@ DEFAULT_DASHBOARD = [
     {
         "widget": "extras.NoteWidget",
         "width": 4,
-        "height": 3,
+        "height": 4,
         "title": "Shortcuts",
         "color": "black",
         "config": {"content": shortcuts},
@@ -62,7 +63,7 @@ DEFAULT_DASHBOARD = [
     {
         "widget": "extras.BookmarksWidget",
         "width": 8,
-        "height": 3,
+        "height": 4,
         "title": "Bookmarks",
         "color": "black",
         "config": {"order_by": "name"},
@@ -81,7 +82,7 @@ DEFAULT_DASHBOARD = [
     {
         "widget": "extras.ObjectListWidget",
         "width": 12,
-        "height": 6,
+        "height": 7,
         "title": "Changelog",
         "color": "black",
         "config": {
