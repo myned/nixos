@@ -65,7 +65,7 @@
     nix-vscode-extensions = flake "github:nix-community/nix-vscode-extensions" // unstable "nixpkgs";
     nixd = flake "github:nix-community/nixd" // unstable "nixpkgs";
     stylix-unstable = flake "github:danth/stylix" // unstable "nixpkgs";
-    walker = flake "github:abenz1267/walker?ref=v0.10.15" // unstable "nixpkgs";
+    walker = flake "github:abenz1267/walker?ref=v0.12.8" // unstable "nixpkgs";
 
     ### Branches
     nixpkgs-dcsunset = flake "github:DCsunset/nixpkgs/update-freerdp3";

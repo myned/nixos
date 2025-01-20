@@ -151,7 +151,7 @@
     };
     walker = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:abenz1267/walker?ref=v0.10.15";
+      url = "github:abenz1267/walker?ref=v0.12.8";
     };
   };
   outputs = inputs: inputs.flakegen ./flake.in.nix inputs;
