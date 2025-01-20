@@ -28,6 +28,9 @@ in {
             # https://ghostty.org/docs/config/reference#adw-toolbar-style
             adw-toolbar-style = "flat";
 
+            # https://ghostty.org/docs/config/reference#confirm-close-surface
+            confirm-close-surface = false;
+
             # https://ghostty.org/docs/config/reference#cursor-style-blink
             cursor-style-blink = false;
 
@@ -48,6 +51,9 @@ in {
 
             # https://ghostty.org/docs/config/reference#mouse-hide-while-typing
             mouse-hide-while-typing = true;
+
+            # https://ghostty.org/docs/config/reference#mouse-scroll-multiplier
+            mouse-scroll-multiplier = 2;
 
             # https://ghostty.org/docs/config/reference#shell-integration-features
             shell-integration-features = "no-cursor";
