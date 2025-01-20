@@ -3,13 +3,13 @@ https://github.com/lassekongo83/adw-colors/blob/main/themes/solarized-dark/gtk.c
 https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1.2/named-colors.html
 ***/
 
-@define-color accent_bg_color #6c71c4;
-@define-color accent_color #6c71c4;
+@define-color accent_bg_color #d33682;
+@define-color accent_color #d33682;
 @define-color accent_fg_color #ffffff;
 @define-color card_bg_color #123a44;
 @define-color card_fg_color #fdf6e3;
-@define-color destructive_bg_color #d33682;
-@define-color destructive_color #d33682;
+@define-color destructive_bg_color #b58900;
+@define-color destructive_color #b58900;
 @define-color destructive_fg_color #eee8d5;
 @define-color dialog_bg_color @popover_bg_color;
 @define-color dialog_fg_color @popover_fg_color;
