@@ -38,7 +38,7 @@ in {
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsinputmouseaccel-profile
           mouse = {
             accel-profile = "adaptive";
-            accel-speed = -0.5;
+            accel-speed = -0.7;
           };
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsinputtouchpadaccel-profile
@@ -54,7 +54,7 @@ in {
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsinputtrackballaccel-profile
           trackball = {
             accel-profile = "adaptive";
-            accel-speed = 0.5;
+            accel-speed = -0.5;
             middle-emulation = true;
           };
         };
