@@ -53,10 +53,14 @@ in {
 
         # https://chromeenterprise.google/policies/#DefaultSearchProvider
         DefaultSearchProviderEnabled = true;
-        DefaultSearchProviderKeyword = "g";
-        DefaultSearchProviderName = "Google";
-        DefaultSearchProviderSearchURL = "{google:baseURL}search?q={searchTerms}&{google:RLZ}{google:originalQueryForSuggestion}{google:assistedQueryStats}{google:searchFieldtrialParameter}{google:searchClient}{google:sourceId}ie={inputEncoding}";
-        DefaultSearchProviderSuggestURL = "{google:baseURL}complete/search?output=chrome&q={searchTerms}";
+        DefaultSearchProviderKeyword = "k";
+        DefaultSearchProviderName = "Kagi";
+        DefaultSearchProviderSearchURL = "https://kagi.com/search?q={searchTerms}";
+        DefaultSearchProviderSuggestURL = "https://kagi.com/api/autosuggest?q={searchTerms}";
+        # DefaultSearchProviderKeyword = "g";
+        # DefaultSearchProviderName = "Google";
+        # DefaultSearchProviderSearchURL = "{google:baseURL}search?q={searchTerms}&{google:RLZ}{google:originalQueryForSuggestion}{google:assistedQueryStats}{google:searchFieldtrialParameter}{google:searchClient}{google:sourceId}ie={inputEncoding}";
+        # DefaultSearchProviderSuggestURL = "{google:baseURL}complete/search?output=chrome&q={searchTerms}";
 
         # https://chromeenterprise.google/policies/#SiteSearchSettings
         SiteSearchSettings = [

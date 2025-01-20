@@ -251,7 +251,7 @@ in {
 
         # https://mozilla.github.io/policy-templates/#searchengines-this-policy-is-only-available-on-the-esr
         SearchEngines = {
-          Default = "Brave";
+          Default = "Kagi";
 
           Add = [
             {
@@ -365,6 +365,7 @@ in {
               Alias = "k";
               IconURL = "https://kagi.com/asset/v2/favicon-32x32.png";
               URLTemplate = "https://kagi.com/search?q={searchTerms}";
+              SuggestURLTemplate = "https://kagi.com/api/autosuggest?q={searchTerms}";
             }
 
             {
