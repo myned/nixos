@@ -94,7 +94,7 @@ case "$1" in
     ;;
   'k '*)
     label="Kagi"
-    icon="kagi"
+    icon="plasma-search"
     url="https://kagi.com/search?q="
     query="${1:2}"
     ;;
@@ -249,10 +249,11 @@ case "$1" in
     query="${1:2}"
     ;;
   *)
-    label="Search"
-    icon="globe-symbolic"
-    url="https://search.brave.com/search?q="
-    query="$1"
+    exit
+    # label="Search"
+    # icon="globe-symbolic"
+    # url="https://search.brave.com/search?q="
+    # query="$1"
     ;;
 esac
 

@@ -7,8 +7,12 @@
 }:
 with lib; let
   cfg = config.custom.programs.walker;
+  hm = config.home-manager.users.${config.custom.username};
 in {
-  options.custom.programs.walker.enable = mkOption {default = false;};
+  options.custom.programs.walker = {
+    enable = mkOption {default = false;};
+    icons = mkOption {default = ["edit-find" "terminal"];};
+  };
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     imports = [inputs.walker.homeManagerModules.default];
@@ -24,32 +28,49 @@ in {
       runAsService = true;
 
       # https://github.com/abenz1267/walker/wiki/Basic-Configuration
-      # https://github.com/abenz1267/walker/blob/master/internal/config/config.default.json
+      # https://github.com/abenz1267/walker/blob/master/internal/config/config.default.toml
       config = {
         activation_mode.disabled = true; # Key chords
+        close_when_open = true;
+        disable_click_to_close = true;
         force_keyboard_focus = true;
-        list.placeholder = "";
-        search.placeholder = "";
+        hotreload_theme = true;
+        ignore_mouse = true;
 
-        # HACK: Window client required to send Esc key on Hyprland
-        #// as_window = true; # Disable layer
+        list = {
+          placeholder = "";
+        };
+
+        search = {
+          placeholder = "";
+          resume_last_query = true;
+        };
 
         # https://github.com/abenz1267/walker/wiki/Modules
         # https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/tree/master/Papirus/64x64
         disabled = [
+          "ai"
           "commands"
           "custom_commands"
+          "finder"
           "websearch" # Replaced by custom plugin
           "windows"
         ];
 
-        builtins = {
+        builtins = let
+        in {
           applications = {
-            # BUG: Ghost entries are still visible with single module
             actions.enabled = false;
-            hide_actions_with_empty_query = true;
-
+            hide_without_query = true;
             placeholder = "";
+            show_generic = false;
+            switcher_only = false;
+          };
+
+          bookmarks = {
+            icon = "user-bookmarks";
+            placeholder = "";
+            prefix = "b";
             switcher_only = false;
           };
 
@@ -70,7 +91,7 @@ in {
 
           dmenu = {
             keep_sort = true;
-            placeholder = "";
+            placeholder = "Input";
             switcher_only = true;
           };
 
@@ -83,7 +104,7 @@ in {
           finder = {
             icon = "filetypes";
             placeholder = "";
-            prefix = "/";
+            prefix = "//";
             show_icon_when_single = true;
             switcher_only = false;
           };
@@ -106,29 +127,46 @@ in {
 
           switcher = {
             icon = "application-default-icon";
-            prefix = "?";
+            prefix = "/";
             show_icon_when_single = true;
+          };
+
+          symbols = {
+            placeholder = "";
+            prefix = "sym";
+            switcher_only = false;
+          };
+
+          translation = {
+            icon = "translator";
+            placeholder = "";
+            prefix = "tr";
+            switcher_only = false;
+          };
+
+          websearch = {
+            placeholder = "system-search";
+            switcher_only = false;
+            entries = [{}];
           };
         };
 
+        # TODO: Keybinds
+        # https://github.com/abenz1267/walker/wiki/Keybinds
+
         # https://github.com/abenz1267/walker/wiki/Plugins
         plugins = [
-          # Search engines by keyword prefix
           {
+            # Search engines by keyword prefix
             name = "search";
             placeholder = "";
             show_icon_when_single = true;
-            switcher_only = true;
+            switcher_only = false;
 
             src = "${pkgs.writeShellApplication {
               name = "search";
               text = readFile ./search.sh;
-
-              runtimeInputs = with pkgs; [
-                coreutils
-                jq
-                xdg-utils
-              ];
+              runtimeInputs = with pkgs; [coreutils jq xdg-utils];
             }}/bin/search '%TERM%'";
           }
         ];
@@ -138,21 +176,17 @@ in {
       theme = {
         style = ''
           #box {
+            border: ${toString config.custom.border}px #073642 solid;
             font: larger ${config.custom.settings.fonts.sans-serif};
-          }
-
-          placeholder {
-            font: larger ${config.custom.settings.fonts.monospace};
           }
 
           ${readFile ./style.css}
         '';
 
-        #!! Inherit from default layout
-        # https://github.com/abenz1267/walker/blob/master/internal/config/layout.default.json
+        # https://github.com/abenz1267/walker/blob/master/internal/config/layout.default.toml
         layout.ui.window = let
           w = 750;
-          h = 250;
+          h = 300;
         in {
           width = w;
           height = h;
@@ -161,12 +195,6 @@ in {
             h_align = "fill";
             width = -1;
             height = -1;
-
-            ai_scroll = {
-              # BUG: AiScroll H/VScrollbarPolicy applies to Scroll widget
-              h_scrollbar_policy = "external";
-              v_scrollbar_policy = "external";
-            };
 
             scroll = {
               h_align = "fill";
@@ -182,11 +210,6 @@ in {
                 max_height = h;
 
                 item = {
-                  icon = {
-                    icon_size = "larger"; # 64px
-                    pixel_size = 32; # Downscale
-                  };
-
                   text = {
                     sub = {
                       hide = true; # Subtext
@@ -195,16 +218,30 @@ in {
                 };
               };
             };
-
-            search = {
-              input = {
-                icons = false;
-              };
-            };
           };
         };
       };
     };
+
+    # # HACK: Create theme files for module prompt icons
+    # #?? MODULE.theme = "icon-ICON"
+    # # https://github.com/abenz1267/walker/blob/bb584eab3b0cc48ebfbac1a5da019864d74781c4/nix/hm-module.nix#L86
+    # xdg.configFile = listToAttrs (flatten (forEach cfg.icons (
+    #   icon: [
+    #     {
+    #       name = "walker/themes/icon-${icon}.css";
+    #       value = {text = hm.programs.walker.theme.style;};
+    #     }
+    #     {
+    #       name = "walker/themes/icon-${icon}.json";
+    #       value = {
+    #         text = builtins.toJSON (recursiveUpdate hm.programs.walker.theme.layout {
+    #           ui.window.box.search.prompt.icon = icon;
+    #         });
+    #       };
+    #     }
+    #   ]
+    # )));
 
     # HACK: Allow child processes to live, otherwise applications launched through service are killed on stop
     # https://www.freedesktop.org/software/systemd/man/latest/systemd.kill.html#KillMode=

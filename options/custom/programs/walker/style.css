@@ -1,6 +1,7 @@
 /***
 /* !! Inherits system GTK theme
-https://github.com/abenz1267/walker/blob/master/internal/config/themes/bare.css
+https://github.com/abenz1267/walker/blob/master/internal/config/themes/colors.css
+https://github.com/abenz1267/walker/blob/master/internal/config/themes/default.css
 https://docs.gtk.org/gtk4/css-properties.html
 ***/
 
@@ -12,7 +13,6 @@ https://docs.gtk.org/gtk4/css-properties.html
 /* Visible window overlay */
 #box {
   background: #002b36;
-  border: 2px #073642 solid;
   border-radius: 30px;
 }
 
