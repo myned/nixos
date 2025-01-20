@@ -114,6 +114,7 @@ in {
           gnome-tweaks # GNOME extras
           gnome-usage # System monitor
           gradience # GTK theme editor
+          gtk4.dev # GTK4 icon browser
           gtkcord4 # Discord client
           gtkterm # Serial terminal
           helvum # Pipewire patchbay
