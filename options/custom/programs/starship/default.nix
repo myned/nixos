@@ -40,6 +40,8 @@ in {
                 ### Overrides
                 # https://starship.rs/config/#prompt
                 add_newline = false;
+                command_timeout = 1000 * 60; # Milliseconds
+                scan_timeout = 100; # Milliseconds
 
                 format = concatStrings [
                   # Top left
