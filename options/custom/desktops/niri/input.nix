@@ -48,7 +48,7 @@ in {
             click-method = "clickfinger"; # Multi-finger click
             dwt = true; # Disable while typing
             dwtp = true; # Disable while trackpointing
-            scroll-factor = 0.4;
+            scroll-factor = 0.3;
           };
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsinputtrackballaccel-profile
