@@ -67,6 +67,7 @@ in {
           amberol # Audio player
           apostrophe # Markdown editor
           baobab # Disk usage analyzer
+          biblioteca # Documentation viewer
           blackbox-terminal # Terminal
           cartridges # Game library
 
@@ -75,6 +76,7 @@ in {
           #// cinny-desktop # Matrix client
 
           clapper # Video player
+          concessio # Permissions converter
           d-spy # D-Bus introspection
           dconf-editor # GSettings editor
           decibels # Audio player

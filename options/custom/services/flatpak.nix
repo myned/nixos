@@ -43,8 +43,7 @@ in {
             "net.retrodeck.retrodeck" # Game emulator
           ]
           ++ optionals config.custom.full [
-            "app.drey.Biblioteca" # Documentation viewer
-            "io.github.ronniedroid.concessio" # Permissions converter
+            # TODO: Check if in nixpkgs
             "re.sonny.Workbench" # GTK prototyper
           ];
 
