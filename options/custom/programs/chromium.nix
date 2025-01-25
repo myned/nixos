@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib; let
@@ -9,7 +8,7 @@ with lib; let
 in {
   options.custom.programs.chromium = {
     enable = mkOption {default = false;};
-    package = mkOption {default = pkgs.google-chrome;};
+    package = mkOption {default = config.custom.browser.package;};
   };
 
   config = mkIf cfg.enable {

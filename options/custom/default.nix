@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -53,13 +54,14 @@ in {
       command = mkOption {
         default = "${lib.findFirst (pkg:
             if (lib.hasAttr "pname" pkg)
-            then pkg.pname == "google-chrome"
+            then pkg.pname == "brave"
             else false)
           null
-          config.home-manager.users.${config.custom.username}.home.packages}/bin/google-chrome-stable";
+          config.home-manager.users.${config.custom.username}.home.packages}/bin/brave";
       };
 
-      desktop = mkOption {default = "google-chrome.desktop";};
+      desktop = mkOption {default = "brave.desktop";};
+      package = mkOption {default = pkgs.brave;};
     };
   };
 }
