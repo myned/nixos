@@ -45,9 +45,10 @@ shortcuts = """\
 | [Topology](/plugins/netbox_topology_views/topology/?filter_id=9) ([v2](/plugins/nextbox-ui/topology/?filter_id=3)) | [Racks](/dcim/rack-elevations/) |
 | [Networks](/ipam/prefixes/) | [Servers](/dcim/devices/?role_id=3) |
 | [VLANs](/ipam/vlans/) | [Clients](/dcim/devices/?role_id=4) |
-| [Routers](/dcim/devices/?role_id=1) | [Clusters](/virtualization/clusters/) |
-| [Switches](/dcim/devices/?role_id=2) | [VMs](/virtualization/virtual-machines/) |
-| [Contacts](/tenancy/contacts/) | [Services](/ipam/services/) |
+| [VPNs](/vpn/tunnels/) | [Clusters](/virtualization/clusters/) |
+| [Routers](/dcim/devices/?role_id=1) | [VMs](/virtualization/virtual-machines/) |
+| [Switches](/dcim/devices/?role_id=2) | [Services](/ipam/services/) |
+| [ACLs](/plugins/access-lists/access-lists/) | [Contacts](/tenancy/contacts/) |
 """
 
 # https://netboxlabs.com/docs/netbox/en/stable/configuration/default-values/#default_dashboard
@@ -71,7 +72,7 @@ DEFAULT_DASHBOARD = [
     {
         "widget": "extras.ObjectListWidget",
         "width": 12,
-        "height": 5,
+        "height": 7,
         "title": "Journal",
         "color": "black",
         "config": {
