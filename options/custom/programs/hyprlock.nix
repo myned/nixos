@@ -25,7 +25,7 @@ in {
           fingerprint_ready_message = "󰈷";
           #// grace = 60; # Seconds
           #// hide_cursor = true;
-          ignore_empty_input = true;
+          #// ignore_empty_input = true;
           immediate_render = true;
           no_fade_in = true; # Fix suspend interrupting animation
         };
