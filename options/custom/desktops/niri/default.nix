@@ -35,8 +35,13 @@ in {
         };
       };
 
-      # Enable rootless Xwayland
-      services.xwayland-satellite.enable = cfg.xwayland;
+      services = {
+        # Enable rootless Xwayland
+        xwayland-satellite.enable = cfg.xwayland;
+
+        # Enable X11/Wayland clipboard sync
+        clipsync.enable = true;
+      };
     };
 
     # https://github.com/YaLTeR/niri
