@@ -135,6 +135,7 @@ in {
             (key "O" "Mod" (spawn [loupe "/tmp/wallpaper.png"]))
             (key "P" "Ctrl+Alt" (spawn [pkill "1password"]))
             (key "P" "Mod" (spawn _1password))
+            (key "P" "Mod+Shift" (spawn [_1password "--quick-access"]))
             (key "Q" "Mod" close-window)
             (key "R" "Mod" focus-window-or-workspace-down)
             (key "R" "Mod+Shift" move-window-down-or-to-workspace-down)
