@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -24,7 +25,7 @@ in {
         control.esc = "toggle(qwerty)"; # Control+Esc toggles qwerty
         shift.shift = "capslock"; # Both Shifts toggle Capslock
 
-        meta = {
+        "meta+control+shift" = {
           # Mouse repeat macro
           "," = "macro2(300, 100, leftmouse)";
           "." = "macro2(300, 100, rightmouse)";
@@ -132,5 +133,7 @@ in {
         };
       };
     };
+
+    environment.systemPackages = [pkgs.keyd];
   };
 }
