@@ -40,7 +40,7 @@ in {
 
       # https://github.com/ErikReider/SwayNotificationCenter/blob/main/src/configSchema.json
       settings = {
-        control-center-height = builtins.floor (config.custom.height * 0.75); # 75%
+        control-center-height = builtins.floor (config.custom.height * 0.5); # 50%
         control-center-positionY = "bottom";
         control-center-width = 750;
         fit-to-screen = false;
