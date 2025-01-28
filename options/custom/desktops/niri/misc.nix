@@ -53,7 +53,6 @@ in {
             home = hm.home.homeDirectory;
           in
             [
-              {command = [_1password "--silent"];} # Launch password manager in background
               {command = [audio "--init"];} # Enforce audio profile state
               {command = [rm "${home}/.cache/walker/clipboard.gob"];} # Clear clipboard history
               {command = [sway-audio-idle-inhibit];} # Inhibit while audio is playing

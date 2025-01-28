@@ -6,11 +6,14 @@
 }:
 with lib; let
   cfg = config.custom.programs._1password;
+
+  _1password = getExe config.programs._1password-gui.package;
 in {
   options.custom.programs._1password = {
     enable = mkOption {default = false;};
     agent = mkOption {default = true;};
     browser = mkOption {default = null;};
+    service = mkOption {default = true;};
   };
 
   config = mkIf cfg.enable {
@@ -35,6 +38,26 @@ in {
         text = ''
           ${cfg.browser}
         '';
+      };
+    };
+
+    systemd.user.services."1password" = mkIf cfg.service {
+      enable = true;
+      wantedBy = ["graphical-session.target"];
+
+      unitConfig = {
+        Description = "Launch 1Password in the background";
+
+        After =
+          ["graphical-session.target"]
+          ++ optionals config.custom.services.xwayland-satellite.enable ["xwayland-satellite.service"];
+      };
+
+      serviceConfig = {
+        Type = "simple";
+
+        # FIXME: 1password clipboard does not work in wayland
+        ExecStart = "${_1password} --silent --ozone-platform=x11";
       };
     };
 
