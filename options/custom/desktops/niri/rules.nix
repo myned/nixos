@@ -203,6 +203,21 @@ in {
             }
 
             ### Overrides
+            # TODO: Remove when switching 1Password to Wayland
+            (let
+              height = builtins.floor (config.custom.height / config.custom.scale * 0.4); # 40%
+            in {
+              matches = [
+                {
+                  app-id = "^1Password";
+                  title = "^Quick Access — 1Password$";
+                }
+              ];
+
+              max-height = height;
+              min-height = height;
+              open-floating = true;
+            })
           ];
         };
       }
