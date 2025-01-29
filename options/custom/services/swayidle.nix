@@ -61,7 +61,7 @@ in {
         # https://github.com/NixOS/nixpkgs/pull/259196
         # Suspend system
         {
-          command = "${systemctl} suspend-then-hibernate";
+          command = "${systemctl} hybrid-sleep";
           timeout = 60 * 60; # Minutes * 60
         }
       ];

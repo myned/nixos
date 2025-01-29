@@ -37,7 +37,7 @@
       #?? sudo btrfs inspect-internal map-swapfile -r /swap/swapfile
       "resume_offset=533760"
 
-      # Fix battery drain with suspend-then-hibernate
+      # Fix battery drain with suspend
       # https://wiki.archlinux.org/title/Framework_Laptop_13#Suspend-then-hibernate_on_AMD_version
       "rtc_cmos.use_acpi_alarm=1"
 

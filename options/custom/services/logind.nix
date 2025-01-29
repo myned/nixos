@@ -10,7 +10,7 @@ in {
 
   config = mkIf cfg.enable {
     services.logind = {
-      lidSwitch = "suspend-then-hibernate"; # Laptop lid switch
+      lidSwitch = "hybrid-sleep"; # Laptop lid switch
     };
   };
 }
