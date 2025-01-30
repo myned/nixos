@@ -85,6 +85,7 @@ with lib; {
       wireshark.enable = true;
       #// wofi.enable = true;
       #// wpaperd.enable = true;
+      zed.enable = true;
     })
   ];
 }
