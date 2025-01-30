@@ -13,7 +13,10 @@ in {
     # https://github.com/flightlessmango/MangoHud
     programs.mangohud = {
       enable = true;
-      enableSessionWide = true;
+
+      # BUG: Some GTK apps use Vulkan, which triggers MangoHUD
+      # https://github.com/flightlessmango/MangoHud/issues/1305
+      #// enableSessionWide = true;
 
       settings = {
         background_alpha = 0;
