@@ -29,9 +29,9 @@ in {
           # https://zed.dev/docs/extensions
           # https://github.com/zed-industries/extensions/tree/main/extensions
           extensions = [
-            "basher"
-            "git-firefly"
-            "nix"
+            "basher" # https://github.com/d1y/bash.zed
+            "git-firefly" # https://github.com/d1y/git_firefly
+            "nix" # https://github.com/zed-extensions/nix
           ];
 
           # https://zed.dev/docs/key-bindings
@@ -140,6 +140,10 @@ in {
               inline_completion_provider = "none";
             };
 
+            git = {
+              inline_blame.enabled = false;
+            };
+
             indent_guides = {
               active_line_width = 2;
             };
@@ -199,6 +203,7 @@ in {
               };
             };
 
+            # TODO: Add missing syntax in highlights.scm
             # Theme overrides
             # https://zed.dev/docs/themes#theme-overrides
             # https://zed.dev/docs/extensions/languages#syntax-highlighting
@@ -219,19 +224,25 @@ in {
               "scrollbar.thumb.border" = "#00000000";
 
               syntax = {
+                _expr.color = "#b58900";
+                _id.color = "#93a1a1";
                 attribute.color = "#93a1a1";
                 boolean.color = "#cb4b16";
                 comment.color = "#586e75";
                 "comment.doc".color = "#586e75";
                 constant.color = "#93a1a1";
+                "constant.builtin".color = "#93a1a1";
                 constructor.color = "#b58900";
                 embedded.color = "#657b83";
                 emphasis.color = "#93a1a1";
                 "emphasis.strong".color = "#93a1a1";
                 enum.color = "#b58900";
                 function.color = "#268bd2";
+                "function.builtin".color = "#268bd2";
+                "function.call".color = "#268bd2";
                 hint.color = "#657b83";
                 keyword.color = "#d33682";
+                "keyword.exception".color = "#d33682";
                 label.color = "#93a1a1";
                 link_text.color = "#93a1a1";
                 link_uri.color = "#93a1a1";
@@ -257,6 +268,8 @@ in {
                 title.color = "#93a1a1";
                 type.color = "#b58900";
                 variable.color = "#93a1a1";
+                "variable.member".color = "#93a1a1";
+                "variable.parameter".color = "#6c71c4";
                 "variable.special".color = "#93a1a1";
                 variant.color = "#93a1a1";
               };
