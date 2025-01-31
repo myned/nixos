@@ -46,6 +46,9 @@ in {
             # https://github.com/ghostty-org/ghostty/discussions/3515
             #// freetype-load-flags = "no-force-autohint";
 
+            # https://ghostty.org/docs/help/gtk-single-instance
+            gtk-single-instance = true;
+
             # https://ghostty.org/docs/config/reference#gtk-titlebar
             gtk-titlebar = false;
 
