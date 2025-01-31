@@ -40,7 +40,6 @@ in {
               #// "enamippconapkdmgfgjchkhakpfinmaj" # DeArrow
               "ponfpcnoihfmfllpaingbgckeeldkhle" # Enhancer for YouTube
               #// "fnaicdffflnofjppbagibeoednhnbjhg" # floccus
-              "aabgbgciohhaogajcnacpgilhmacdahc" # Lazy Tabs
               #// "bnomihfieiccainjcjblhegjgglakjdd" # Improve YouTube
               #// "pnjaodmkngahhkoihejjehlcdlnohgmp" # RSS Feed Reader
               "kfimphpokifbjgmjflanmfeppcjimgah" # RSS Reader Extension (by Inoreader)
