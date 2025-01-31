@@ -146,12 +146,6 @@ case "$1" in
     url="https://github.com/NixOS/nixpkgs/issues?q=is%3Aissue+is%3Aopen+"
     query="${1:3}"
     ;;
-  'niri '*)
-    label="Niri Issues"
-    icon="com.github.zren.bugzilla"
-    url="https://github.com/YaLTeR/niri/issues?q=is%3Aissue+is%3Aopen+"
-    query="${1:3}"
-    ;;
   'no '*)
     label="NixOS Options"
     icon="nix-snowflake"
@@ -174,6 +168,12 @@ case "$1" in
     label="Nix PR"
     icon="nix-snowflake"
     url="https://nixpk.gs/pr-tracker.html?pr="
+    query="${1:4}"
+    ;;
+  'nri '*)
+    label="Niri Issues"
+    icon="com.github.zren.bugzilla"
+    url="https://github.com/YaLTeR/niri/issues?q=is%3Aissue+is%3Aopen+"
     query="${1:4}"
     ;;
   'nw '*)

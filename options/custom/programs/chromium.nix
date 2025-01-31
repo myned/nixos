@@ -208,12 +208,6 @@ in {
           }
 
           {
-            name = "Niri Issues";
-            shortcut = "niri";
-            url = "https://github.com/YaLTeR/niri/issues?q=is%3Aissue+is%3Aopen+{searchTerms}";
-          }
-
-          {
             name = "NixOS Options";
             shortcut = "no";
             url = "https://search.nixos.org/options?channel=unstable&query={searchTerms}";
@@ -235,6 +229,12 @@ in {
             name = "Nix PR";
             shortcut = "npr";
             url = "https://nixpk.gs/pr-tracker.html?pr={searchTerms}";
+          }
+
+          {
+            name = "Niri Issues";
+            shortcut = "nri";
+            url = "https://github.com/YaLTeR/niri/issues?q=is%3Aissue+is%3Aopen+{searchTerms}";
           }
 
           {
