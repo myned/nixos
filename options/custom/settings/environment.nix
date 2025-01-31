@@ -25,6 +25,9 @@ in {
       #// i18n.defaultLocale = "C.UTF-8";
 
       sessionVariables = {
+        # https://wiki.archlinux.org/title/Wayland#Java
+        _JAVA_AWT_WM_NONREPARENTING = "1";
+
         GDK_SCALE = mkIf (!config.custom.services.xwayland-satellite.enable) (toString config.custom.scale); # Steam HiDPI
 
         # https://wiki.nixos.org/wiki/Wayland#Electron_and_Chromium
