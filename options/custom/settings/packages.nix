@@ -96,6 +96,7 @@ in {
           gcolor3 # Color picker
           gitg # Git client
           github-desktop # Git client
+          gitnuro # Git client
           gnome-boxes # Virtual machine manager
           gnome-calculator # Calculator
           gnome-calendar # Calendar
@@ -147,6 +148,7 @@ in {
           smile # Emoji picker
           snapshot # Camera
           snoop # File content finder
+          sourcegit # Git client
           spotify # Spotify client
           syncthingtray # Syncthing client
           tagger # Audio file tagger
