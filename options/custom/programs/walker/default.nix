@@ -43,7 +43,7 @@ in {
 
         search = {
           placeholder = "";
-          resume_last_query = true;
+          #// resume_last_query = true;
         };
 
         # https://github.com/abenz1267/walker/wiki/Modules
