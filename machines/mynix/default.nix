@@ -62,8 +62,6 @@
   #// services.logind.powerKey = "ignore"; # Disable power button
 
   home-manager.users.${config.custom.username} = {
-    services.gammastep.settings.general.brightness-night = lib.mkForce 0.4;
-
     # Prevent secondary GPU reset from crashing window manager
     wayland.windowManager.hyprland.settings = {
       monitor = [
