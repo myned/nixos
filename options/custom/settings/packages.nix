@@ -144,6 +144,7 @@ in {
           ptyxis # Terminal
           pwvucontrol # Pipewire volume controller
           remmina # Remote desktop client
+          rustdesk-flutter # Remote desktop client
           signal-desktop # Signal client
           smile # Emoji picker
           snapshot # Camera
