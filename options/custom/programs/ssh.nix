@@ -10,7 +10,15 @@ in {
 
   config = mkIf cfg.enable {
     home-manager.users.${config.custom.username} = {
-      programs.ssh.enable = true;
+      programs.ssh = {
+        enable = true;
+
+        # https://ghostty.org/docs/help/terminfo#configure-ssh-to-fall-back-to-a-known-terminfo-entry
+        extraConfig = ''
+          Host *
+            SetEnv TERM=xterm-256color
+        '';
+      };
 
       # Work around FHS permissions
       # https://github.com/nix-community/home-manager/issues/322#issuecomment-1856128020
