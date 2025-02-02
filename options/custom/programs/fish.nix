@@ -192,13 +192,22 @@ in {
           s = "ssh";
           si = "ssh -o KexAlgorithms=+diffie-hellman-group1-sha1 -o HostkeyAlgorithms=+ssh-rsa -o Ciphers=aes256-cbc";
 
-          ta = "tmux attach";
-          td = "tmux detach";
-          tk = "tmux kill-session";
-          tl = "tmux list-sessions";
+          t = "tailscale";
+          td = "sudo tailscale down";
+          te = "sudo tailscale exit-node";
+          ti = "tailscale ip --4";
+          tl = "sudo tailscale login";
+          tp = "tailscale ping";
+          ts = "tailscale status";
+          tss = "tailscale ssh";
+          tt = "sudo tailscale set";
+          tu = "sudo tailscale up";
+          tw = "sudo tailscale switch";
 
-          ts = "tailscale";
-          tsip = "tailscale ip --4";
+          txa = "tmux attach";
+          txd = "tmux detach";
+          txk = "tmux kill-session";
+          txl = "tmux list-sessions";
 
           w = "waydroid";
           wa = "waydroid app";
