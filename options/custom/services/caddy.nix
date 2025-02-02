@@ -67,6 +67,8 @@ in {
       allowedUDPPorts = [
         3478 # TURN
         5349 # TURN
+        8000 # WebRTC
+        10080 # SRT
       ];
 
       allowedUDPPortRanges = [
