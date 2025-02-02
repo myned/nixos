@@ -17,10 +17,12 @@ in {
     with pkgs; {
       environment.systemPackages =
         cfg.extra
-        ++ optionals config.custom.default [
+        ++ optionals config.custom.default (with config.boot.kernelPackages; [
           ### CLI applications
-          config.boot.kernelPackages.cpupower # Install for current kernel
-
+          cpupower # Processor utilities
+          perf # Performance analyzer
+        ])
+        ++ optionals config.custom.default [
           alejandra # Nix formatter
           fd # File finder
           fzf # Fuzzy search
