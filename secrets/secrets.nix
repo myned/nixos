@@ -83,6 +83,7 @@ in {
   "server/netdata/parent.conf".publicKeys = server;
   "server/nextcloud/.env".publicKeys = server;
   "server/nextcloud/db.env".publicKeys = server;
+  "server/oryx/.env".publicKeys = server;
   "server/searxng/.env".publicKeys = server;
   "server/users/myned.pass".publicKeys = server;
   "server/users/root.pass".publicKeys = server;
