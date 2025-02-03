@@ -8,14 +8,11 @@ with lib; let
   cfg = config.custom.desktops.niri.misc;
   hm = config.home-manager.users.${config.custom.username};
 
-  _1password = "${config.programs._1password-gui.package}/bin/1password";
   audio = config.home-manager.users.${config.custom.username}.home.file.".local/bin/audio".source;
   niri = "${config.programs.niri.package}/bin/niri";
   rm = "${pkgs.coreutils}/bin/rm";
   sway-audio-idle-inhibit = "${pkgs.sway-audio-idle-inhibit}/bin/sway-audio-idle-inhibit";
   wallpaper = "${config.home-manager.users.${config.custom.username}.home.file.".local/bin/wallpaper".source}";
-  wl-paste = "${pkgs.wl-clipboard}/bin/wl-paste";
-  xclip = "${pkgs.xclip}/bin/xclip";
 in {
   options.custom.desktops.niri.misc = {
     enable = mkOption {default = false;};
@@ -33,6 +30,7 @@ in {
             theme = name;
 
             # BUG: Heavily increases CPU usage with cursor movement
+            # https://github.com/YaLTeR/niri/issues/1037
             #// hide-after-inactive-ms = 1000 * 15; # Milliseconds
             #// hide-when-typing = true;
           };
@@ -61,9 +59,6 @@ in {
             ]
             ++ optionals config.custom.wallpaper [
               {command = [wallpaper];}
-            ]
-            ++ optionals config.custom.desktops.niri.xwayland [
-              {command = [wl-paste "--watch" xclip "-selection" "clipboard"];} # Sync (X)wayland clipboard
             ];
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsswitch-eventslid-close
