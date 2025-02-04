@@ -25,6 +25,7 @@ in {
           alejandra # nix-ide
           blueprint-compiler # blueprint-gtk
           nixd # nix-ide
+          powershell # powershell
           shfmt # shell-format
         ]);
 
@@ -63,6 +64,7 @@ in {
             ms-python.black-formatter
             ms-python.debugpy
             ms-python.isort
+            ms-vscode.powershell
             natizyskunk.sftp
             pkief.material-icon-theme
             pkief.material-product-icons
