@@ -12,7 +12,7 @@ with lib; let
 in {
   options.custom.services.power-profiles-daemon = {
     enable = mkOption {default = false;};
-    auto = mkOption {default = true;};
+    auto = mkOption {default = false;};
   };
 
   config = mkIf cfg.enable {
