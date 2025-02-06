@@ -10,7 +10,7 @@
     containers = {
       enable = true;
       boot = true;
-      #// actualbudget.enable = true;
+      actualbudget.enable = true;
       conduwuit.enable = true;
       coturn.enable = true;
       forgejo.enable = true;

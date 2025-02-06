@@ -15,11 +15,10 @@ in {
     virtualisation.arion.projects.actualbudget.settings.services = {
       actualbudget.service = {
         container_name = "actualbudget";
-        image = "actualbudget/actual-server:24.9.0";
-        ports = ["5006:5006"];
+        image = "actualbudget/actual-server:25.2.0";
+        ports = ["127.0.0.1:5006:5006"];
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/actualbudget/data:/data"];
-        # TODO: Set up trusted proxies
       };
     };
   };
