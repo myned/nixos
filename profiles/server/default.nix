@@ -11,6 +11,7 @@
       enable = true;
       boot = true;
       actualbudget.enable = true;
+      adguardhome.enable = true;
       conduwuit.enable = true;
       coturn.enable = true;
       forgejo.enable = true;
