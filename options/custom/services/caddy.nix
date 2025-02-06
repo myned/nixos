@@ -54,29 +54,9 @@ in {
     # https://github.com/coturn/coturn/blob/master/docker/coturn/README.md
     # https://element-hq.github.io/synapse/latest/turn-howto.html
     networking.firewall = {
-      enable = true;
-
       allowedTCPPorts = [
         80 # HTTP
         443 # HTTPS
-        1935 # RTMP
-        3478 # TURN
-        5349 # TURN
-      ];
-
-      allowedUDPPorts = [
-        3478 # TURN
-        5349 # TURN
-        8000 # WebRTC
-        10080 # SRT
-      ];
-
-      allowedUDPPortRanges = [
-        {
-          # TURN
-          from = 49152;
-          to = 65535;
-        }
       ];
     };
   };

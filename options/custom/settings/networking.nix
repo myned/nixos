@@ -9,6 +9,7 @@ in {
   options.custom.settings.networking = {
     enable = mkOption {default = false;};
     dns = mkOption {default = config.custom.default;};
+    firewall = mkOption {default = config.custom.default;};
     ipv4 = mkOption {default = null;};
     ipv6 = mkOption {default = null;};
     networkd = mkOption {default = !cfg.networkmanager;};
@@ -30,6 +31,7 @@ in {
     # https://wiki.nixos.org/wiki/Networking
     networking = {
       hostName = config.custom.hostname;
+      firewall.enable = cfg.firewall;
       useNetworkd = cfg.networkd;
       wireless.iwd.enable = cfg.wifi;
 

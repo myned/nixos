@@ -25,5 +25,11 @@ in {
         ];
       };
     };
+
+    networking.firewall = {
+      allowedTCPPorts = [
+        1935 # RTMP
+      ];
+    };
   };
 }

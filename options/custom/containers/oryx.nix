@@ -38,5 +38,16 @@ in {
         volumes = ["${config.custom.containers.directory}/oryx/data:/data"];
       };
     };
+
+    networking.firewall = {
+      allowedTCPPorts = [
+        1935 # RTMP
+      ];
+
+      allowedUDPPorts = [
+        8000 # WebRTC
+        10080 # SRT
+      ];
+    };
   };
 }

@@ -46,5 +46,25 @@ in {
         };
       };
     };
+
+    networking.firewall = {
+      allowedTCPPorts = [
+        3478 # TURN
+        5349 # TURN
+      ];
+
+      allowedUDPPorts = [
+        3478 # TURN
+        5349 # TURN
+      ];
+
+      allowedUDPPortRanges = [
+        {
+          # TURN
+          from = 49152;
+          to = 65535;
+        }
+      ];
+    };
   };
 }
