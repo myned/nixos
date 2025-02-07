@@ -270,7 +270,7 @@ in {
           {
             name = "Reddit";
             shortcut = "r";
-            url = "https://www.google.com/search?q=site%3Areddit.com+{searchTerms}";
+            url = "https://kagi.com/search?q=site%3Areddit.com+{searchTerms}";
           }
 
           {

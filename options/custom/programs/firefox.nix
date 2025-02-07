@@ -497,7 +497,7 @@ in {
               Name = "Reddit";
               Alias = "r";
               IconURL = "https://www.redditstatic.com/desktop2x/img/favicon/favicon-96x96.png";
-              URLTemplate = "https://www.google.com/search?q=site%3Areddit.com+{searchTerms}";
+              URLTemplate = "https://kagi.com/search?q=site%3Areddit.com+{searchTerms}";
             }
 
             {

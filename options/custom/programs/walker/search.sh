@@ -209,7 +209,7 @@ case "$1" in
   'r '*)
     label="Reddit"
     icon="reddit"
-    url="https://www.google.com/search?q=site%3Areddit.com+"
+    url="https://kagi.com/search?q=site%3Areddit.com+"
     query="${1:2}"
     ;;
   's '*)
