@@ -38,8 +38,8 @@ in {
         volumes = ["${config.custom.containers.directory}/forgejo/data:/data"];
 
         ports = [
-          "127.0.0.1:3333:3000"
-          "22:2222"
+          "127.0.0.1:3333:3000/tcp"
+          "22:2222/tcp"
         ];
       };
 

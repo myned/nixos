@@ -29,7 +29,7 @@ in {
         depends_on = ["cache"];
         env_file = [config.age.secrets."${config.custom.profile}/searxng/.env".path];
         image = "searxng/searxng:latest";
-        ports = ["127.0.0.1:8000:8080"];
+        ports = ["127.0.0.1:8000:8080/tcp"];
         restart = "unless-stopped";
 
         volumes = [

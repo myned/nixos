@@ -39,7 +39,7 @@ in {
       netbox.service =
         netbox
         // {
-          ports = ["8585:8080"];
+          ports = ["8585:8080/tcp"];
 
           # https://github.com/netbox-community/netbox-docker/wiki/Using-Netbox-Plugins
           #!! Context modifications require a rebuild

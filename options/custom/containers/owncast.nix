@@ -20,8 +20,8 @@ in {
         volumes = ["${config.custom.containers.directory}/owncast/data:/app/data"];
 
         ports = [
-          "1935:1935"
-          "127.0.0.1:8800:8080"
+          "1935:1935/tcp"
+          "127.0.0.1:8800:8080/tcp"
         ];
       };
     };

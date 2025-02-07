@@ -28,8 +28,8 @@ in {
         image = "ossrs/oryx:5";
 
         ports = [
-          "127.0.0.1:2022:2022" # HTTP
-          "1935:1935" # RTMP
+          "127.0.0.1:2022:2022/tcp" # HTTP
+          "1935:1935/tcp" # RTMP
           "8000:8000/udp" # WebRTC
           "10080:10080/udp" # SRT
         ];

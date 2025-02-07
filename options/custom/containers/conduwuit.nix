@@ -25,7 +25,7 @@ in {
       conduwuit.service = {
         container_name = "conduwuit";
         image = "girlbossceo/conduwuit:main";
-        ports = ["127.0.0.1:6167:6167"];
+        ports = ["127.0.0.1:6167:6167/tcp"];
         restart = "unless-stopped";
 
         environment = {

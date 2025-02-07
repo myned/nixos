@@ -26,7 +26,7 @@ in {
         container_name = "foundryvtt";
         env_file = [config.age.secrets."${config.custom.profile}/foundryvtt/.env".path];
         image = "felddy/foundryvtt:12";
-        ports = ["127.0.0.1:30000:30000"];
+        ports = ["127.0.0.1:30000:30000/tcp"];
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/foundryvtt/data:/data"];
       };
