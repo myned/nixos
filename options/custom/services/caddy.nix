@@ -2,6 +2,7 @@
   config,
   inputs,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -25,6 +26,25 @@ in {
     services = {
       caddy = {
         enable = true;
+
+        # BUG: DNS-over-TLS not currently functional, reattempt when fixed or PROXY protocol supported
+        # https://github.com/mholt/caddy-l4/issues/276
+        # https://github.com/AdguardTeam/AdGuardHome/issues/2798
+        # TODO: Use stable package when available with plugins
+        # https://github.com/NixOS/nixpkgs/pull/358586
+        # package = pkgs.unstable.caddy.withPlugins {
+        #   #?? Copy from failed build
+        #   hash = "sha256-rB2exWVfKS82QpAuEM6+PlUNNmd8sqxvqNHRxCVIE/c=";
+
+        #   #?? REPO@TAG
+        #   plugins = [
+        #     # https://github.com/mholt/caddy-l4
+        #     "github.com/mholt/caddy-l4@v0.0.0-20250124234235-87e3e5e2c7f9"
+
+        #     # https://github.com/tailscale/caddy-tailscale
+        #     "github.com/tailscale/caddy-tailscale@v0.0.0-20250207004440-fd3f49d73216"
+        #   ];
+        # };
 
         # TODO: Convert services to Tailscale subdomains when supported or use plugin when supported by nix
         # https://github.com/tailscale/tailscale/issues/7081
@@ -50,9 +70,6 @@ in {
       };
     };
 
-    # https://wiki.nixos.org/wiki/Firewall
-    # https://github.com/coturn/coturn/blob/master/docker/coturn/README.md
-    # https://element-hq.github.io/synapse/latest/turn-howto.html
     networking.firewall = {
       allowedTCPPorts = [
         80 # HTTP
