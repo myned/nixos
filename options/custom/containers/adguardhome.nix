@@ -17,15 +17,18 @@ in {
     virtualisation.arion.projects.adguardhome.settings.services = {
       # https://github.com/AdguardTeam/AdGuardHome
       # https://adguard-dns.io/kb/adguard-home/overview/
+      #?? ls /var/lib/caddy/.local/share/caddy/certificates/*
       adguardhome.service = {
         container_name = "adguardhome";
         image = "adguard/adguardhome:v0.107.56";
 
         ports = [
-          "53:53" # DNS
-          "853:853" # DNS-over-TLS
-          "3003:80" # Admin panel
-          "8443:443" # DNS-over-HTTPS
+          "53:53/tcp" # DNS
+          "53:53/udp" # DNS
+          "853:853/tcp" # DNS-over-TLS
+          "853:853/udp" # DNS-over-QUIC
+          "3003:80/tcp" # Admin panel
+          "8443:443/tcp" # DNS-over-HTTPS
         ];
 
         restart = "unless-stopped";
@@ -40,11 +43,13 @@ in {
     # https://github.com/AdguardTeam/AdGuardHome/wiki/Encryption
     networking.firewall = {
       allowedTCPPorts = [
+        53 # DNS
         853 # DNS-over-TLS
       ];
 
       allowedUDPPorts = [
         53 # DNS
+        853 # DNS-over-QUIC
       ];
     };
 
