@@ -48,6 +48,10 @@ in {
 
         # https://docs.syncthing.net/users/faq.html#inotify-limits
         "fs.inotify.max_user_watches" = 204800;
+
+        # https://github.com/quic-go/quic-go/wiki/UDP-Buffer-Sizes
+        "net.core.rmem_max" = 7500000;
+        "net.core.wmem_max" = 7500000;
       };
 
       loader = {
