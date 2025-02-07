@@ -35,6 +35,7 @@ in {
           nmap # Network scanner
           nvd # Nix diff viewer
           progress # Coreutils progress viewer
+          q # DNS tester
           rclone # File sync
           stress # CPU stress tester
           testdisk # Data recovery tool
