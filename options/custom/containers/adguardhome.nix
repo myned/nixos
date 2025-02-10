@@ -6,8 +6,8 @@
 with lib; let
   cfg = config.custom.containers.adguardhome;
 in {
-  options = {
-    custom.containers.adguardhome.enable = mkOption {default = false;};
+  options.custom.containers.adguardhome = {
+    enable = mkOption {default = false;};
   };
 
   config = mkIf cfg.enable {

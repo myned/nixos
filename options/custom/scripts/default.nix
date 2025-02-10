@@ -5,10 +5,8 @@
   ...
 }:
 with lib; let
-  # Use packages from local derivation
   git = config.home-manager.users.${config.custom.username}.programs.git.package;
-  hyprland =
-    config.home-manager.users.${config.custom.username}.wayland.windowManager.hyprland.finalPackage;
+  hyprland = config.home-manager.users.${config.custom.username}.wayland.windowManager.hyprland.finalPackage;
   walker = config.home-manager.users.${config.custom.username}.programs.walker.package;
   wofi = config.home-manager.users.${config.custom.username}.programs.wofi.package;
 in {

@@ -29,10 +29,7 @@ in {
     ultrawide = mkOption {default = cfg.width * 9 / 16 > cfg.height;}; # Wider than 16:9
     hidpi = mkOption {default = cfg.scale > 1;};
     scale = mkOption {default = 1;};
-
-    # TODO: Use option for border size
     border = mkOption {default = 2;};
-
     gap = mkOption {default = 20;};
     padding = mkOption {default = 51;}; # ?? journalctl --user -u waybar.service | grep height:
     rounding = mkOption {default = 15;};
