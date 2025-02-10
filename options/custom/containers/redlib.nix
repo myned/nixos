@@ -13,6 +13,7 @@ in {
     environment.shellAliases.arion-redlib = "sudo arion --prebuilt-file ${config.virtualisation.arion.projects.redlib.settings.out.dockerComposeYaml}";
 
     virtualisation.arion.projects.redlib.settings.services = {
+      # https://github.com/redlib-org/redlib
       redlib.service = {
         container_name = "redlib";
         image = "quay.io/redlib/redlib:latest";
