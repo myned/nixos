@@ -87,4 +87,5 @@ in {
   "server/searxng/.env".publicKeys = server;
   "server/users/myned.pass".publicKeys = server;
   "server/users/root.pass".publicKeys = server;
+  "server/vaultwarden/.env".publicKeys = server;
 }

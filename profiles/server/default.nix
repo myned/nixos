@@ -24,6 +24,7 @@
       #// owncast.enable = true;
       #// redlib.enable = true;
       #// searxng.enable = true;
+      vaultwarden.enable = true;
     };
 
     services = {
