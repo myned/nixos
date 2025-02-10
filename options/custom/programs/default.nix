@@ -45,12 +45,10 @@ with lib; {
       _1password.enable = true;
       adb.enable = true;
       #// ags.enable = true;
-      #// anyrun.enable = true;
-      #// bitwarden-menu.enable = true;
+      bitwarden-menu.enable = true;
       #// clipse.enable = true;
       discord.enable = true;
       element-desktop.enable = true;
-      #// fuzzel.enable = true;
       gamemode.enable = true;
       gamescope.enable = true;
       #// gnome-shell.enable = true;
@@ -70,10 +68,8 @@ with lib; {
       onlyoffice.enable = true;
       #// onedrive.enable = true;
       #// path-of-building.enable = true;
-      #// rbw.enable = true;
+      rbw.enable = true;
       remmina.enable = true;
-      #// rofi-rbw.enable = true;
-      #// rofi.enable = true;
       seahorse.enable = true;
       #// slurp.enable = true;
       steam.enable = true;
@@ -81,10 +77,8 @@ with lib; {
       #// thunderbird.enable = true;
       tio.enable = true;
       vscode.enable = true;
-      walker.enable = true;
       waybar.enable = true;
       wireshark.enable = true;
-      #// wofi.enable = true;
       #// wpaperd.enable = true;
       zed.enable = true;
     })
