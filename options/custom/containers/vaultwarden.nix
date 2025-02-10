@@ -30,7 +30,7 @@ in {
       vaultwarden.service = {
         container_name = "vaultwarden";
         env_file = [config.age.secrets."${config.custom.profile}/vaultwarden/.env".path];
-        image = "vaultwarden/server:1.33.1";
+        image = "vaultwarden/server:1.33.2";
         ports = ["8008:80"];
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/vaultwarden/data:/data"];
