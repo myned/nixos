@@ -47,9 +47,10 @@ in {
           ${powerprofilesctl} set power-saver
         fi
       '');
-    in {
-      powerUpCommands = set_profile;
-      resumeCommands = set_profile;
-    };
+    in
+      mkIf cfg.auto {
+        powerUpCommands = set_profile;
+        resumeCommands = set_profile;
+      };
   };
 }
