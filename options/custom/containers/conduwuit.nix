@@ -22,9 +22,10 @@ in {
     environment.shellAliases.arion-conduwuit = "sudo arion --prebuilt-file ${config.virtualisation.arion.projects.conduwuit.settings.out.dockerComposeYaml}";
 
     virtualisation.arion.projects.conduwuit.settings.services = {
+      # https://github.com/girlbossceo/conduwuit
       conduwuit.service = {
         container_name = "conduwuit";
-        image = "girlbossceo/conduwuit:main";
+        image = "girlbossceo/conduwuit:v0.5.0-rc";
         ports = ["127.0.0.1:6167:6167/tcp"];
         restart = "unless-stopped";
 
