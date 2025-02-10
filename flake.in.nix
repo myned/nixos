@@ -109,29 +109,37 @@
               #!! Avoid globally importing modules that are not guarded by .enable
               # https://github.com/NixOS/nixpkgs/issues/137168
               (
-                {inputs, ...}: {
-                  imports = [
-                    inputs."aagl-gtk-on-nix-${branch}".nixosModules.default
-                    inputs."home-manager-${branch}".nixosModules.home-manager
-                    inputs."nix-index-database-${branch}".nixosModules.nix-index
-                    inputs."stylix-${branch}".nixosModules.stylix
-                    inputs.agenix.nixosModules.default
-                    inputs.arion.nixosModules.arion
-                    inputs.disko.nixosModules.disko
-                    inputs.fw-fanctrl.nixosModules.default
-                    inputs.jovian-nixos.nixosModules.default
-                    inputs.niri-flake.nixosModules.niri
-                  ];
+                {
+                  inputs,
+                  lib,
+                  ...
+                }:
+                  with lib; {
+                    imports =
+                      [
+                        inputs."aagl-gtk-on-nix-${branch}".nixosModules.default
+                        inputs."home-manager-${branch}".nixosModules.home-manager
+                        inputs."nix-index-database-${branch}".nixosModules.nix-index
+                        inputs."stylix-${branch}".nixosModules.stylix
+                        inputs.agenix.nixosModules.default
+                        inputs.arion.nixosModules.arion
+                        inputs.disko.nixosModules.disko
+                        inputs.fw-fanctrl.nixosModules.default
+                        inputs.niri-flake.nixosModules.niri
+                      ]
+                      ++ optionals (versionAtLeast version "25.05") [
+                        inputs.jovian-nixos.nixosModules.default
+                      ];
 
-                  # TODO: Use home-manager.sharedModules for all options
-                  home-manager.sharedModules = [
-                    inputs."nix-index-database-${branch}".hmModules.nix-index
-                    inputs.ags.homeManagerModules.default
-                    inputs.anyrun.homeManagerModules.default
-                    inputs.nix-flatpak.homeManagerModules.nix-flatpak
-                    inputs.walker.homeManagerModules.default
-                  ];
-                }
+                    # TODO: Use home-manager.sharedModules for all options
+                    home-manager.sharedModules = [
+                      inputs."nix-index-database-${branch}".hmModules.nix-index
+                      inputs.ags.homeManagerModules.default
+                      inputs.anyrun.homeManagerModules.default
+                      inputs.nix-flatpak.homeManagerModules.nix-flatpak
+                      inputs.walker.homeManagerModules.default
+                    ];
+                  }
               )
             ];
         };
