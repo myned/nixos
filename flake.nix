@@ -30,6 +30,10 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:firecat53/bitwarden-menu";
     };
+    cisco-packettracer8 = {
+      flake = false;
+      url = "file:///home/myned/SYNC/linux/config/cisco/CiscoPacketTracer822_amd64_signed.deb";
+    };
     compose2nix = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:aksiksi/compose2nix";

@@ -167,9 +167,14 @@ in {
           zrythm # Digital audio workstation
 
           #!! Must be downloaded manually due to licensing
-          # (ciscoPacketTracer8.overrideAttrs {
-          #   src = ${config.custom.sync}/linux/config/cisco/CiscoPacketTracer822_amd64_signed.deb;
-          # })
+          # BUG: Dangling symlinks, remove workaround when merged into unstable
+          # https://github.com/NixOS/nixpkgs/pull/380309
+          ((ciscoPacketTracer8.overrideAttrs {
+              dontCheckForBrokenSymlinks = true;
+            })
+            .override {
+              packetTracerSource = inputs.cisco-packettracer8;
+            })
 
           ### CLI applications
           inputs.agenix.packages.${system}.default
