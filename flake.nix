@@ -125,7 +125,6 @@
       url = "github:nix-community/nixd";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    nixpkgs-dcsunset.url = "github:DCsunset/nixpkgs/update-freerdp3";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";

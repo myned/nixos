@@ -68,12 +68,7 @@
     walker = flake "github:abenz1267/walker?ref=v0.12.8" // unstable "nixpkgs";
 
     ### Branches
-    nixpkgs-dcsunset = flake "github:DCsunset/nixpkgs/update-freerdp3";
     nixpkgs-master = flake "github:NixOS/nixpkgs/master";
-
-    ### Development
-    #// nixpkgs-local = flake "git+file:///home/myned/SYNC/dev/repo/nixpkgs";
-    #// hyprland = flake "git+file:///home/myned/SYNC/dev/repo/Hyprland?submodules=1";
 
     ### Source code
     firefox-gnome-theme = source "github:rafaelmardojai/firefox-gnome-theme/v128";

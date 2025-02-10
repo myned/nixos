@@ -49,8 +49,6 @@
           stable = nixpkgs "stable";
           unstable = nixpkgs "unstable";
           master = nixpkgs "master";
-          dcsunset = nixpkgs "dcsunset";
-          #// local = nixpkgs "local";
         in {
           # Overlay nixpkgs branches
           #?? nixpkgs.BRANCH.PACKAGE
