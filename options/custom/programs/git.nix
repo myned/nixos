@@ -14,7 +14,7 @@ in {
     programs.git = {
       enable = true;
       userName = "Myned";
-      userEmail = "dev@bjork.tech";
+      userEmail = "dev@${config.custom.domain}";
 
       # BUG: GitHub Desktop tries to enable if this is not in gitconfig
       lfs.enable = true; # Enable Large File Storage

@@ -246,7 +246,7 @@ in {
           {
             name = "Piped";
             shortcut = "p";
-            url = "https://piped.bjork.tech/results?search_query={searchTerms}";
+            url = "https://piped.${config.custom.domain}/results?search_query={searchTerms}";
           }
 
           {
@@ -276,7 +276,7 @@ in {
           {
             name = "SearXNG";
             shortcut = "s";
-            url = "https://search.bjork.tech/search?q={searchTerms}";
+            url = "https://search.${config.custom.domain}/search?q={searchTerms}";
           }
 
           {

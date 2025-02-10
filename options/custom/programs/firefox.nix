@@ -468,8 +468,8 @@ in {
             {
               Name = "Piped";
               Alias = "p";
-              IconURL = "https://piped.bjork.tech/favicon.ico";
-              URLTemplate = "https://piped.bjork.tech/results?search_query={searchTerms}";
+              IconURL = "https://piped.${config.custom.domain}/favicon.ico";
+              URLTemplate = "https://piped.${config.custom.domain}/results?search_query={searchTerms}";
             }
 
             {
@@ -503,8 +503,8 @@ in {
             {
               Name = "SearXNG";
               Alias = "s";
-              IconURL = "https://search.bjork.tech/static/themes/simple/img/favicon.png";
-              URLTemplate = "https://search.bjork.tech/search?q={searchTerms}";
+              IconURL = "https://search.${config.custom.domain}/static/themes/simple/img/favicon.png";
+              URLTemplate = "https://search.${config.custom.domain}/search?q={searchTerms}";
             }
 
             {
