@@ -130,6 +130,7 @@ in {
             (key "M" "Ctrl+Alt" (spawn [pkill "youtube-music"]))
             (key "M" "Mod" (spawn youtube-music))
             (key "Minus" "Mod" (spawn [swayosd-client "--output-volume" "lower"]))
+            (key "N" "Mod" (spawn networkmanager_dmenu))
             (key "O" "Mod" (spawn [loupe "/tmp/wallpaper.png"]))
             (key "P" "Ctrl+Alt" (spawn [pkill "bitwarden"]))
             (key "P" "Mod" (spawn [bash "-c" config.custom.menus.vault.show]))
@@ -180,7 +181,7 @@ in {
             #// (key "Shift_L" "Mod" focus-workspace-previous)
             # TODO: Use "Super_L" when fixed
             (key "Space" "Mod" (spawn [bash "-c" config.custom.menus.show]))
-            (key "Space" "Mod+Ctrl+Shift" (spawn networkmanager_dmenu))
+            (key "Space" "Mod+Ctrl" (spawn [bash "-c" config.custom.menus.calculator.show]))
             (key "Space" "Mod+Shift" (spawn [bash "-c" config.custom.menus.search.show]))
 
             # Media keys
