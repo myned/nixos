@@ -57,19 +57,36 @@
           inherit stable unstable master;
 
           ### Packages
-          # BUG: Build tests often fail on unstable
-          # https://github.com/NixOS/nixpkgs/issues/333946
-          fprintd = stable.fprintd;
-
-          # TODO: Remove when on unstable
-          # https://github.com/NixOS/nixpkgs/pull/369808
-          freerdp3 = dcsunset.freerdp3;
+          # BUG: Build failure, remove when in unstable
+          # https://github.com/NixOS/nixpkgs/issues/380227
+          # https://github.com/NixOS/nixpkgs/pull/378937
+          bitwarden-cli = stable.bitwarden-cli;
 
           # TODO: Remove when on stable
           ghostty = unstable.ghostty;
 
-          ### Development
-          #// ciscoPacketTracer8 = local.ciscoPacketTracer8;
+          ### Python
+          # https://nixos.org/manual/nixpkgs/unstable/#how-to-override-a-python-package-for-all-python-versions-using-extensions
+          #?? PKG = pyprev.PKG.overridePythonAttrs {};
+          pythonPackagesExtensions =
+            prev.pythonPackagesExtensions
+            ++ [
+              (pyfinal: pyprev: {
+                # BUG: Build failure, remove when fixed
+                # https://github.com/NixOS/nixpkgs/issues/380413
+                asttokens = pyprev.asttokens.overridePythonAttrs rec {
+                  version = "2.4.1";
+
+                  src = pyprev.fetchPypi {
+                    inherit version;
+                    pname = "asttokens";
+                    hash = "sha256-sDhpcYuppusCfhNL/fafOKI21oHIPBYNUQdorxElS6A=";
+                  };
+
+                  propagatedBuildInputs = [pyprev.six];
+                };
+              })
+            ];
         }
       )
     ];
