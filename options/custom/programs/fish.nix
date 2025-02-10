@@ -20,27 +20,35 @@ in {
       };
 
       ${config.custom.username}.programs.fish = let
-        any = expansion: {
-          inherit expansion;
+        # Expand abbreviations anywhere in the shell
+        #?? sudo ABBREVIATION
+        anywhere = expansion: {
+          expansion = "${expansion}%";
           position = "anywhere";
+          setCursor = true;
+        };
+
+        # Set cursor position to %
+        #?? % | EXPANSION
+        cursor = expansion: {
+          inherit expansion;
+          setCursor = true;
         };
       in {
         enable = true;
 
         shellAbbrs = {
-          # Expand abbreviations anywhere in the shell
-          #?? sudo ABBREVIATION
-          "/e" = any "/etc";
-          "/en" = any "/etc/nixos";
-          "/h" = any "~";
-          "/hd" = any "~/.dev";
-          "/n" = any "/nix";
-          "/nv" = any "/nix/var";
-          "/nvn" = any "/nix/var/nix";
-          "/nvnp" = any "/nix/var/nix/profiles";
-          "/nvnps" = any "/nix/var/nix/profiles/system";
-          "/r" = any "/run";
-          "/rc" = any "/run/current-system";
+          "/e" = anywhere "/etc/%";
+          "/en" = anywhere "/etc/nixos/%";
+          "/h" = anywhere "~/%";
+          "/hd" = anywhere "~/.dev/%";
+          "/n" = anywhere "/nix/%";
+          "/nv" = anywhere "/nix/var/%";
+          "/nvn" = anywhere "/nix/var/nix/%";
+          "/nvnp" = anywhere "/nix/var/nix/profiles/%";
+          "/nvnps" = anywhere "/nix/var/nix/profiles/system/%";
+          "/r" = anywhere "/run/%";
+          "/rc" = anywhere "/run/current-system/%";
 
           reboot = "sudo systemctl reboot";
           restart = "sudo systemctl reboot";
@@ -149,15 +157,26 @@ in {
           k = "kitten";
           ks = "kitten ssh";
 
-          n = "nixos";
-          nb = "nixos build";
-          nbb = "nixos build boot";
-          nbs = "nixos build switch";
-          nbt = "nixos build test";
-          nd = "nixos diff";
-          ng = "nixos generate";
-          nl = "nixos list";
-          nr = "nixos repl";
+          n = "nix";
+          nb = "nix build";
+          nf = "nix flake";
+          nfi = "nix flake info";
+          nfl = "nix flake lock";
+          nfu = "nix flake update";
+          ngl = cursor "nix run github:nix-community/nixGL --impure -- %";
+          nr = "nix run nixpkgs#";
+          ns = "nix shell nixpkgs#";
+          nt = "nix store";
+
+          no = "nixos";
+          nob = "nixos build";
+          nobb = "nixos build boot";
+          nobs = "nixos build switch";
+          nobt = "nixos build test";
+          nod = "nixos diff";
+          nog = "nixos generate";
+          nol = "nixos list";
+          nor = "nixos repl";
 
           sc = "systemctl";
           scp = "sudo systemctl poweroff";
