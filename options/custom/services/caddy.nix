@@ -34,7 +34,7 @@ in {
         # https://github.com/NixOS/nixpkgs/pull/358586
         package = pkgs.unstable.caddy.withPlugins {
           #?? Copy from failed build
-          hash = "sha256-jCcSzenewQiW897GFHF9WAcVkGaS/oUu63crJu7AyyQ=";
+          hash = "sha256-JVkUkDKdat4aALJHQCq1zorJivVCdyBT+7UhqTvaFLw=";
 
           #?? REPO@TAG
           plugins = [
