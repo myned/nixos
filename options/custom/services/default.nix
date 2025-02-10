@@ -34,6 +34,7 @@ with lib; {
       #// blueman-applet.enable = true;
       #// clipcat.enable = true;
       #// cliphist.enable = true;
+      #// clipmenu.enable = true;
       easyeffects.enable = true;
       gammastep.enable = true;
       gnome-keyring.enable = true;
