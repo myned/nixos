@@ -10,6 +10,7 @@ with lib; let
 
   audio = config.home-manager.users.${config.custom.username}.home.file.".local/bin/audio".source;
   bash = "${pkgs.bash}/bin/bash";
+  bitwarden = "${pkgs.bitwarden-desktop}/bin/bitwarden";
   cat = "${pkgs.coreutils}/bin/cat";
   codium = "${config.home-manager.users.${config.custom.username}.programs.vscode.package}/bin/codium";
   ghostty = "${hm.programs.ghostty.package}/bin/ghostty";
@@ -29,13 +30,10 @@ with lib; let
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   power = config.home-manager.users.${config.custom.username}.home.file.".local/bin/power".source;
   remote = config.home-manager.users.${config.custom.username}.home.file.".local/bin/remote".source;
-  rm = "${pkgs.coreutils}/bin/rm";
   steam = "${config.programs.steam.package}/bin/steam";
   swayosd-client = "${pkgs.swayosd}/bin/swayosd-client";
   virt-manager = "${config.programs.virt-manager.package}/bin/virt-manager";
-  walker = "${config.home-manager.users.${config.custom.username}.programs.walker.package}/bin/walker";
   waydroid = "${pkgs.waydroid}/bin/waydroid";
-  _1password = "${config.programs._1password-gui.package}/bin/1password";
   youtube-music = "${pkgs.youtube-music}/bin/youtube-music";
 in {
   options.custom.desktops.niri.binds = {
@@ -133,9 +131,9 @@ in {
             (key "M" "Mod" (spawn youtube-music))
             (key "Minus" "Mod" (spawn [swayosd-client "--output-volume" "lower"]))
             (key "O" "Mod" (spawn [loupe "/tmp/wallpaper.png"]))
-            (key "P" "Ctrl+Alt" (spawn [pkill "1password"]))
-            (key "P" "Mod" (spawn _1password))
-            (key "P" "Mod+Shift" (spawn [_1password "--quick-access"]))
+            (key "P" "Ctrl+Alt" (spawn [pkill "bitwarden"]))
+            (key "P" "Mod" (spawn [bash "-c" config.custom.menus.vault.show]))
+            (key "P" "Mod+Shift" (spawn bitwarden))
             (key "Q" "Mod" close-window)
             (key "R" "Mod" focus-window-or-workspace-down)
             (key "R" "Mod+Shift" move-window-down-or-to-workspace-down)
@@ -154,9 +152,9 @@ in {
             (key "T" "Mod" (spawn ghostty))
             (key "Tab" "Mod" switch-focus-between-floating-and-tiling)
             (key "Up" "Mod" (spawn [swayosd-client "--brightness" "raise"]))
-            (key "V" "Mod" (spawn [walker "--modules" "clipboard"]))
+            (key "V" "Mod" (spawn [bash "-c" config.custom.menus.clipboard.show]))
             (key "V" "Mod+Ctrl" (spawn vm))
-            (key "V" "Mod+Shift" (spawn [bash "-c" "${rm} ~/.cache/walker/clipboard.gob && ${notify-send} menu 'Clipboard cleared' --urgency low"]))
+            (key "V" "Mod+Shift" (spawn [bash "-c" config.custom.menus.clipboard.clear]))
             (key "W" "Mod" focus-window-or-workspace-up)
             (key "W" "Mod+Shift" move-window-up-or-to-workspace-up)
             (key "WheelScrollDown" "Mod" focus-window-or-workspace-down)
@@ -181,9 +179,9 @@ in {
             # TODO: Uncomment when fixed
             #// (key "Shift_L" "Mod" focus-workspace-previous)
             # TODO: Use "Super_L" when fixed
-            (key "Space" "Mod" (spawn walker))
+            (key "Space" "Mod" (spawn [bash "-c" config.custom.menus.show]))
             (key "Space" "Mod+Ctrl+Shift" (spawn networkmanager_dmenu))
-            (key "Space" "Mod+Shift" (spawn [walker "--modules" "search"]))
+            (key "Space" "Mod+Shift" (spawn [bash "-c" config.custom.menus.search.show]))
 
             # Media keys
             # https://github.com/xkbcommon/libxkbcommon/blob/master/include/xkbcommon/xkbcommon-keysyms.h

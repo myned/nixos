@@ -43,6 +43,7 @@ in {
     };
 
     lockscreen = mkOption {default = "hyprlock";};
+    menu = mkOption {default = "rofi";};
     wallpaper = mkOption {default = false;};
 
     browser = {

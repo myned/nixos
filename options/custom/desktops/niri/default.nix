@@ -38,9 +38,6 @@ in {
       services = {
         # Enable rootless Xwayland
         xwayland-satellite.enable = cfg.xwayland;
-
-        # Enable X11/Wayland clipboard sync
-        clipsync.enable = true;
       };
     };
 

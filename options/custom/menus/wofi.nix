@@ -4,9 +4,9 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.programs.wofi;
+  cfg = config.custom.menus.wofi;
 in {
-  options.custom.programs.wofi.enable = mkOption {default = false;};
+  options.custom.menus.wofi.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     # https://hg.sr.ht/~scoopta/wofi

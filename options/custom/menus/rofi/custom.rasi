@@ -1,0 +1,85 @@
+/***
+https://github.com/lbonn/rofi/blob/wayland/doc/rofi-theme.5.markdown
+https://github.com/newmanls/rofi-themes-collection/blob/master/themes/rounded-common.rasi
+https://github.com/newmanls/rofi-themes-collection/blob/master/themes/rounded-pink-dark.rasi
+***/
+
+* {
+  background-color: transparent;
+  font: 'sans-serif 14';
+  margin: 0;
+  padding: 0;
+  spacing: 0;
+  text-color: #93a1a1;
+}
+
+window {
+  background-color: #002b36;
+  border-color: #073642;
+  border-radius: 30px;
+  location: north;
+  width: 750;
+  y-offset: calc(50% - 25% / 2);
+}
+
+mainbox {
+  padding: 4px;
+}
+
+inputbar {
+  background-color: #073642;
+  border-color: #d33682;
+  border-radius: 30px;
+  padding: 8px 8px 8px 4px;
+  spacing: 4px;
+}
+
+prompt {
+  font: 'monospace 16';
+  padding: 4px 4px 4px 8px;
+  text-color: #93a1a1;
+  vertical-align: 0.5;
+}
+
+entry {
+  font: 'monospace 18';
+  placeholder-color: #586e7580;
+  vertical-align: 0.5;
+}
+
+message {
+  padding: 8px 8px 4px 8px;
+}
+
+textbox {
+  font: 'sans-serif 10';
+}
+
+listview {
+  background-color: transparent;
+  columns: 1;
+  fixed-height: false;
+  lines: 5;
+  margin: 4px 0 0;
+}
+
+element {
+  border-radius: 30px;
+  padding: 12px;
+  spacing: 8px;
+}
+
+element selected normal,
+element selected active {
+  background-color: #586e7540;
+}
+
+element-icon {
+  size: 32px;
+  vertical-align: 0.5;
+}
+
+element-text {
+  text-color: inherit;
+  vertical-align: 0.5;
+}

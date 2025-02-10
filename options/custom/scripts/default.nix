@@ -51,15 +51,6 @@ in {
               easyeffects
               libnotify
             ])
-            (bash "bwm" [
-              bitwarden-cli
-              coreutils
-              jq
-              libnotify
-              wl-clipboard
-              wofi
-              xclip
-            ])
             (bash "calc" [
               coreutils
               libnotify
@@ -178,6 +169,15 @@ in {
               hyprland
               jq
               libnotify
+            ])
+            (bash "vault" [
+              argc
+              bitwarden-cli
+              coreutils
+              jq
+              libnotify
+              walker
+              wl-clipboard
             ])
             (bash "vpn" [
               gnused

@@ -6,13 +6,11 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.programs.anyrun;
+  cfg = config.custom.menus.anyrun;
 in {
-  options.custom.programs.anyrun.enable = mkOption {default = false;};
+  options.custom.menus.anyrun.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
-    imports = [inputs.anyrun.homeManagerModules.default];
-
     # https://github.com/Kirottu/anyrun
     programs.anyrun = {
       enable = true;

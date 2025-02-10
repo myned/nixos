@@ -4,9 +4,9 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.programs.fuzzel;
+  cfg = config.custom.menus.fuzzel;
 in {
-  options.custom.programs.fuzzel.enable = mkOption {default = false;};
+  options.custom.menus.fuzzel.enable = mkOption {default = false;};
 
   config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
     # https://codeberg.org/dnkl/fuzzel

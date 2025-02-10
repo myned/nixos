@@ -9,8 +9,8 @@ with lib; let
   hm = config.home-manager.users.${config.custom.username};
 
   audio = config.home-manager.users.${config.custom.username}.home.file.".local/bin/audio".source;
+  bash = "${pkgs.bash}/bin/bash";
   niri = "${config.programs.niri.package}/bin/niri";
-  rm = "${pkgs.coreutils}/bin/rm";
   sway-audio-idle-inhibit = "${pkgs.sway-audio-idle-inhibit}/bin/sway-audio-idle-inhibit";
   wallpaper = "${config.home-manager.users.${config.custom.username}.home.file.".local/bin/wallpaper".source}";
 in {
@@ -49,12 +49,10 @@ in {
           #!! Not executed in a shell
           # https://github.com/YaLTeR/niri/wiki/Configuration:-Key-Bindings#spawn
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsspawn-at-startup
-          spawn-at-startup = let
-            home = hm.home.homeDirectory;
-          in
+          spawn-at-startup =
             [
               {command = [audio "--init"];} # Enforce audio profile state
-              {command = [rm "${home}/.cache/walker/clipboard.gob"];} # Clear clipboard history
+              {command = [bash "-c" config.custom.menus.clipboard.clear];} # Clear clipboard history
               {command = [sway-audio-idle-inhibit];} # Inhibit while audio is playing
             ]
             ++ optionals config.custom.wallpaper [
