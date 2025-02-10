@@ -34,9 +34,9 @@ in {
               "ddkjiahejlhfcafbddmgiahcphecmpfh" # uBlock Origin Lite
             ]
             ++ optionals config.custom.full [
-              "khgocmkkpikpnmmkgmdnfckapcdkgfaf" # 1Password Beta
+              #// "khgocmkkpikpnmmkgmdnfckapcdkgfaf" # 1Password Beta
               #// "ajopnjidmegmdimjlfnijceegpefgped" # BetterTTV
-              #// "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
+              "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
               #// "enamippconapkdmgfgjchkhakpfinmaj" # DeArrow
               "ponfpcnoihfmfllpaingbgckeeldkhle" # Enhancer for YouTube
               #// "fnaicdffflnofjppbagibeoednhnbjhg" # floccus
