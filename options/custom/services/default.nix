@@ -7,7 +7,6 @@ with lib; {
   config.custom.services = mkMerge [
     (mkIf config.custom.default {
       #// automatic-timezoned.enable = true;
-      #// agenix.enable = true;
       geoclue2.enable = true;
       #// netbird.enable = true;
       tailscale.enable = true;
