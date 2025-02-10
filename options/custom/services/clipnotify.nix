@@ -5,20 +5,20 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.services.clipsync;
+  cfg = config.custom.services.clipnotify;
 
   clipnotify = getExe pkgs.clipnotify;
   wl-copy = getExe' pkgs.wl-clipboard "wl-copy";
   wl-paste = getExe' pkgs.wl-clipboard "wl-paste";
   xclip = getExe pkgs.xclip;
 in {
-  options.custom.services.clipsync = {
+  options.custom.services.clipnotify = {
     enable = mkOption {default = false;};
   };
 
   config = mkIf cfg.enable {
     # https://github.com/cdown/clipnotify
-    systemd.user.services.clipsync = {
+    systemd.user.services.clipnotify = {
       enable = true;
       wantedBy = ["graphical-session.target"];
 
