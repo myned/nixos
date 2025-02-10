@@ -9,6 +9,7 @@ in {
   options.custom.menus = {
     enable = mkOption {default = config.custom.full;};
     show = mkOption {default = "";};
+    calculator.show = mkOption {default = "";};
 
     clipboard = {
       clear = mkOption {default = "";};
