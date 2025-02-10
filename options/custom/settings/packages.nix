@@ -132,6 +132,7 @@ in {
           icon-library # Icon viewer
           identity # Compare media
           impression # Image writer
+          keyguard # Bitwarden client
           kooha # Screen recorder
           logseq # Knowledge base
           loupe # Image viewer
