@@ -22,8 +22,8 @@
       #// nextcloud.enable = true;
       oryx.enable = true;
       #// owncast.enable = true;
-      #// redlib.enable = true;
-      #// searxng.enable = true;
+      redlib.enable = true;
+      searxng.enable = true;
       vaultwarden.enable = true;
     };
 
