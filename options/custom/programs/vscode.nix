@@ -15,6 +15,7 @@ in {
     environment.systemPackages = with pkgs; [
       alejandra # nix-ide
       blueprint-compiler # blueprint-gtk
+      caddy # caddyfile-support
       nixd # nix-ide
       powershell # powershell
       shfmt # shell-format
@@ -59,6 +60,7 @@ in {
               gruntfuggly.todo-tree
               jnoortheen.nix-ide
               koihik.vscode-lua-format
+              matthewpi.caddyfile-support
               mhutchie.git-graph
               mkhl.direnv
               ms-python.black-formatter
