@@ -73,6 +73,7 @@ in {
           apostrophe # Markdown editor
           baobab # Disk usage analyzer
           biblioteca # Documentation viewer
+          bitwarden-desktop # Password manager
           blackbox-terminal # Terminal
           cartridges # Game library
 
