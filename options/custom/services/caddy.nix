@@ -32,19 +32,22 @@ in {
         # https://github.com/AdguardTeam/AdGuardHome/issues/2798
         # TODO: Use stable package when available with plugins
         # https://github.com/NixOS/nixpkgs/pull/358586
-        # package = pkgs.unstable.caddy.withPlugins {
-        #   #?? Copy from failed build
-        #   hash = "sha256-rB2exWVfKS82QpAuEM6+PlUNNmd8sqxvqNHRxCVIE/c=";
+        package = pkgs.unstable.caddy.withPlugins {
+          #?? Copy from failed build
+          hash = "sha256-jCcSzenewQiW897GFHF9WAcVkGaS/oUu63crJu7AyyQ=";
 
-        #   #?? REPO@TAG
-        #   plugins = [
-        #     # https://github.com/mholt/caddy-l4
-        #     "github.com/mholt/caddy-l4@v0.0.0-20250124234235-87e3e5e2c7f9"
+          #?? REPO@TAG
+          plugins = [
+            # https://github.com/caddy-dns/cloudflare
+            "github.com/caddy-dns/cloudflare@v0.0.0-20240703190432-89f16b99c18e"
 
-        #     # https://github.com/tailscale/caddy-tailscale
-        #     "github.com/tailscale/caddy-tailscale@v0.0.0-20250207004440-fd3f49d73216"
-        #   ];
-        # };
+            # https://github.com/mholt/caddy-l4
+            #// "github.com/mholt/caddy-l4@v0.0.0-20250124234235-87e3e5e2c7f9"
+
+            # https://github.com/tailscale/caddy-tailscale
+            #// "github.com/tailscale/caddy-tailscale@v0.0.0-20250207004440-fd3f49d73216"
+          ];
+        };
 
         # TODO: Convert services to Tailscale subdomains when supported or use plugin when supported by nix
         # https://github.com/tailscale/tailscale/issues/7081
