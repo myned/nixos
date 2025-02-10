@@ -1,13 +1,10 @@
 {
   config,
-  inputs,
   lib,
   options,
   pkgs,
   ...
 }: {
-  imports = [inputs.jovian-nixos.nixosModules.default];
-
   custom = {
     minimal = true;
     profile = "console";

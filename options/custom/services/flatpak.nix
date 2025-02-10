@@ -24,8 +24,6 @@ in {
       ];
 
     home-manager.users.${config.custom.username} = {
-      imports = [inputs.nix-flatpak.homeManagerModules.nix-flatpak];
-
       # https://wiki.nixos.org/wiki/Flatpak
       # https://github.com/gmodena/nix-flatpak
       services.flatpak = {

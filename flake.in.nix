@@ -119,12 +119,17 @@
                     inputs.arion.nixosModules.arion
                     inputs.disko.nixosModules.disko
                     inputs.fw-fanctrl.nixosModules.default
+                    inputs.jovian-nixos.nixosModules.default
                     inputs.niri-flake.nixosModules.niri
                   ];
 
                   # TODO: Use home-manager.sharedModules for all options
                   home-manager.sharedModules = [
                     inputs."nix-index-database-${branch}".hmModules.nix-index
+                    inputs.ags.homeManagerModules.default
+                    inputs.anyrun.homeManagerModules.default
+                    inputs.nix-flatpak.homeManagerModules.nix-flatpak
+                    inputs.walker.homeManagerModules.default
                   ];
                 }
               )
