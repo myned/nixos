@@ -38,6 +38,7 @@ in {
         xdg.configFile = {
           "rofi-rbw.rc".text = ''
             action=copy
+            no-help=true
             selector=${config.custom.menu}
           '';
         };
