@@ -34,10 +34,10 @@ in {
         };
 
         dmenu.show = "${quit} || ${rofi} -dmenu";
-        emoji.show = "${quit} || ${rofimoji} --prompt 󰞅";
-        network.show = "${quit} || ${rofi} -dmenu -p ";
+        emoji.show = "${quit} || ${rofimoji} --prompt 󰱰";
+        network.show = "${quit} || ${rofi} -dmenu -p 󰛳";
         search.show = "";
-        vault.show = "${quit} || ${rofi-rbw} --prompt ";
+        vault.show = "${quit} || ${rofi-rbw} --prompt 󰌾";
       };
 
       services = {
@@ -58,36 +58,35 @@ in {
           enable = true;
 
           # https://github.com/lbonn/rofi
-          # https://github.com/lbonn/rofi/tree/wayland/doc
           package = pkgs.rofi-wayland; # Wayland fork
 
           plugins = with pkgs; [
             rofi-calc # https://github.com/svenstaro/rofi-calc
           ];
 
+          # https://davatorium.github.io/rofi/themes/themes/
           #?? rofi-theme-selector
           theme = "custom";
 
-          # https://github.com/lbonn/rofi/blob/wayland/CONFIG.md
-          # https://github.com/lbonn/rofi/blob/wayland/doc/rofi.1.markdown
+          # https://davatorium.github.io/rofi/current/rofi.1/
           # https://www.nerdfonts.com/cheat-sheet
           extraConfig = {
             combi-hide-mode-prefix = true;
-            combi-modes = ["drun" "run" "calc"];
+            combi-modes = ["drun" "run"];
             cycle = false;
-            display-calc = "󱖦";
-            display-clipboard = "󰅌";
-            display-combi = "";
+            display-calc = "";
+            display-clipboard = "";
+            display-combi = "";
             display-dmenu = "󰗧";
-            display-drun = "";
-            display-keys = "";
+            display-drun = "󱗼";
+            display-keys = "󰌌";
             display-run = "";
             display-ssh = "";
             drun-display-format = "{name}"; # Display only names
             drun-match-fields = "name"; # Disable matching of invisible desktop attributes
             matching = "prefix"; # Match beginning of words
 
-            # https://github.com/lbonn/rofi/blob/wayland/doc/rofi.1.markdown#available-modes
+            # https://davatorium.github.io/rofi/current/rofi.1/#available-modes
             modes = [
               "calc"
               "clipboard"
@@ -101,7 +100,7 @@ in {
         };
 
         xdg.configFile = {
-          # https://github.com/lbonn/rofi/blob/wayland/doc/rofi-theme.5.markdown
+          # https://davatorium.github.io/rofi/current/rofi-theme.5/
           "rofi/custom.rasi".text = ''
             ${readFile ./custom.rasi}
 
@@ -110,7 +109,7 @@ in {
             }
           '';
 
-          # https://github.com/lbonn/rofi/blob/wayland/doc/rofi-script.5.markdown
+          # https://davatorium.github.io/rofi/current/rofi-script.5/
           # https://github.com/sentriz/cliphist?tab=readme-ov-file#picker-examples
           "rofi/scripts/clipboard" = {
             #// source = getExe' hm.services.cliphist.package "cliphist-rofi-img";
