@@ -80,6 +80,7 @@ with lib; {
       waybar.enable = true;
       wireshark.enable = true;
       #// wpaperd.enable = true;
+      ydotool.enable = true;
       zed.enable = true;
     })
   ];
