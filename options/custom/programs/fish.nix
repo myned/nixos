@@ -23,7 +23,7 @@ in {
         # Expand abbreviations anywhere in the shell
         #?? sudo ABBREVIATION
         anywhere = expansion: {
-          expansion = "${expansion}%";
+          inherit expansion;
           position = "anywhere";
           setCursor = true;
         };
