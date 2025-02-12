@@ -26,6 +26,7 @@ in {
         clipboard = {
           show = "${walker} --modules clipboard";
           clear = "${rm} ~/.cache/walker/clipboard.gob && ${notify-send} '> walker' 'Clipboard cleared' --urgency low";
+          clear-silent = "${rm} ~/.cache/walker/clipboard.gob";
         };
 
         dmenu.show = "${walker} --modules dmenu";

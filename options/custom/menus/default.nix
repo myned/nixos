@@ -12,8 +12,9 @@ in {
     calculator.show = mkOption {default = "";};
 
     clipboard = {
-      clear = mkOption {default = "";};
       show = mkOption {default = "";};
+      clear = mkOption {default = "";};
+      clear-silent = mkOption {default = "";};
     };
 
     dmenu.show = mkOption {default = "";};

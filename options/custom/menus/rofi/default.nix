@@ -31,6 +31,7 @@ in {
         clipboard = {
           show = "${quit} || ${rofi} -show clipboard -show-icons";
           clear = "${cliphist} wipe && ${notify-send} '> cliphist' 'Clipboard cleared' --urgency low";
+          clear-silent = "${cliphist} wipe";
         };
 
         dmenu.show = "${quit} || ${rofi} -dmenu";
