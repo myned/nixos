@@ -132,7 +132,12 @@ in {
           icon-library # Icon viewer
           identity # Compare media
           impression # Image writer
-          keyguard # Bitwarden client
+
+          # BUG: nixGL required to launch, imperative flatpak used as alternative
+          # https://github.com/AChep/keyguard-app/releases
+          # https://github.com/gmodena/nix-flatpak/issues/135
+          #// keyguard # Bitwarden client
+
           kooha # Screen recorder
           logseq # Knowledge base
           loupe # Image viewer
