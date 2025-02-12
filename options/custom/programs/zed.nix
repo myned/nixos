@@ -38,69 +38,16 @@ in {
           userKeymaps = [
             {
               bindings = {
-                "escape" = "menu::Cancel";
-                "ctrl-," = "zed::OpenSettings";
-                "ctrl-o" = "workspace::Open";
+                "alt-space" = "command_palette::Toggle";
               };
             }
             {
               context = "Editor";
+
               bindings = {
                 "alt-enter" = "editor::DuplicateLineDown";
-                "backspace" = "editor::Backspace";
-                "shift-backspace" = "editor::Backspace";
-                "delete" = "editor::Delete";
-                "tab" = "editor::Tab";
-                "shift-tab" = "editor::TabPrev";
-                "ctrl-k" = "editor::CutToEndOfLine";
-                "ctrl-k ctrl-q" = "editor::Rewrap";
-                "ctrl-k q" = "editor::Rewrap";
-                "ctrl-backspace" = "editor::DeleteToPreviousWordStart";
-                "ctrl-delete" = "editor::DeleteToNextWordEnd";
-                "shift-delete" = "editor::Cut";
-                "ctrl-insert" = "editor::Copy";
-                "shift-insert" = "editor::Paste";
-                "ctrl-y" = "editor::Redo";
-                "ctrl-z" = "editor::Undo";
-                "ctrl-shift-z" = "editor::Redo";
-                "up" = "editor::MoveUp";
-                "ctrl-up" = "editor::LineUp";
-                "ctrl-down" = "editor::LineDown";
-                "pageup" = "editor::MovePageUp";
-                "alt-pageup" = "editor::PageUp";
-                "shift-pageup" = "editor::SelectPageUp";
-                "home" = "editor::MoveToBeginningOfLine";
-                "down" = "editor::MoveDown";
-                "pagedown" = "editor::MovePageDown";
-                "alt-pagedown" = "editor::PageDown";
-                "shift-pagedown" = "editor::SelectPageDown";
-                "end" = "editor::MoveToEndOfLine";
-                "left" = "editor::MoveLeft";
-                "right" = "editor::MoveRight";
-                "ctrl-left" = "editor::MoveToPreviousWordStart";
-                "ctrl-right" = "editor::MoveToNextWordEnd";
-                "ctrl-home" = "editor::MoveToBeginning";
-                "ctrl-end" = "editor::MoveToEnd";
-                "shift-up" = "editor::SelectUp";
-                "shift-down" = "editor::SelectDown";
-                "shift-left" = "editor::SelectLeft";
-                "shift-right" = "editor::SelectRight";
-                "ctrl-shift-left" = "editor::SelectToPreviousWordStart";
-                "ctrl-shift-right" = "editor::SelectToNextWordEnd";
-                "ctrl-shift-home" = "editor::SelectToBeginning";
-                "ctrl-shift-end" = "editor::SelectToEnd";
-                "ctrl-a" = "editor::SelectAll";
-                "ctrl-l" = "editor::SelectLine";
-                "ctrl-shift-i" = "editor::Format";
-                "ctrl-alt-space" = "editor::ShowCharacterPalette";
-                "ctrl-;" = "editor::ToggleLineNumbers";
-                "ctrl-k ctrl-r" = "editor::RevertSelectedHunks";
-                "ctrl-'" = "editor::ToggleHunkDiff";
-                "ctrl-\"" = "editor::ExpandAllHunkDiffs";
-                "ctrl-i" = "editor::ShowSignatureHelp";
-                "alt-g b" = "editor::ToggleGitBlame";
-                "menu" = "editor::OpenContextMenu";
-                "shift-f10" = "editor::OpenContextMenu";
+                "alt-left" = "editor::MoveToBeginningOfLine";
+                "alt-right" = "editor::MoveToEndOfLine";
               };
             }
           ];
@@ -192,7 +139,7 @@ in {
             };
 
             ui_font_family = config.custom.settings.fonts.sans-serif;
-            ui_font_size = 18;
+            ui_font_size = 20;
 
             # Language-specific
             # https://zed.dev/docs/configuring-languages
@@ -216,7 +163,7 @@ in {
                 {
                   cursor = "#93a1a1";
                   background = "#93a1a1";
-                  selection = "#93a1a11A"; # 10%
+                  selection = "#93a1a11a"; # 10%
                 }
               ];
 
@@ -224,54 +171,54 @@ in {
               "scrollbar.thumb.border" = "#00000000";
 
               syntax = {
-                _expr.color = "#b58900";
-                _id.color = "#93a1a1";
-                attribute.color = "#93a1a1";
-                boolean.color = "#cb4b16";
-                comment.color = "#586e75";
+                "_expr".color = "#b58900";
+                "_id".color = "#93a1a1";
+                "attribute".color = "#93a1a1";
+                "boolean".color = "#cb4b16";
+                "comment".color = "#586e75";
                 "comment.doc".color = "#586e75";
-                constant.color = "#93a1a1";
+                "constant".color = "#93a1a1";
                 "constant.builtin".color = "#93a1a1";
-                constructor.color = "#b58900";
-                embedded.color = "#657b83";
-                emphasis.color = "#93a1a1";
+                "constructor".color = "#b58900";
+                "embedded".color = "#657b83";
+                "emphasis".color = "#93a1a1";
                 "emphasis.strong".color = "#93a1a1";
-                enum.color = "#b58900";
-                function.color = "#268bd2";
+                "enum".color = "#b58900";
+                "function".color = "#268bd2";
                 "function.builtin".color = "#268bd2";
                 "function.call".color = "#268bd2";
-                hint.color = "#657b83";
-                keyword.color = "#d33682";
+                "hint".color = "#657b83";
+                "keyword".color = "#d33682";
                 "keyword.exception".color = "#d33682";
-                label.color = "#93a1a1";
-                link_text.color = "#93a1a1";
-                link_uri.color = "#93a1a1";
-                number.color = "#2aa198";
-                operator.color = "#657b83";
-                predictive.color = "#657b83";
-                preproc.color = "#93a1a1";
-                primary.color = "#93a1a1";
-                property.color = "#93a1a1";
-                punctuation.color = "#657b83";
+                "label".color = "#93a1a1";
+                "link_text".color = "#93a1a1";
+                "link_uri".color = "#93a1a1";
+                "number".color = "#2aa198";
+                "operator".color = "#657b83";
+                "predictive".color = "#657b83";
+                "preproc".color = "#93a1a1";
+                "primary".color = "#93a1a1";
+                "property".color = "#93a1a1";
+                "punctuation".color = "#657b83";
                 "punctuation.bracket".color = "#657b83";
                 "punctuation.delimiter".color = "#657b83";
                 "punctuation.list_marker".color = "#657b83";
                 "punctuation.special".color = "#657b83";
-                string.color = "#859900";
+                "string".color = "#859900";
                 "string.escape".color = "#cb4b16";
                 "string.regex".color = "#cb4b16";
                 "string.special".color = "#cb4b16";
                 "string.special.symbol".color = "#cb4b16";
-                tag.color = "#93a1a1";
+                "tag".color = "#93a1a1";
                 "tag.doctype".color = "#93a1a1";
                 "text.literal".color = "#93a1a1";
-                title.color = "#93a1a1";
-                type.color = "#b58900";
-                variable.color = "#93a1a1";
+                "title".color = "#93a1a1";
+                "type".color = "#b58900";
+                "variable".color = "#93a1a1";
                 "variable.member".color = "#93a1a1";
                 "variable.parameter".color = "#6c71c4";
                 "variable.special".color = "#93a1a1";
-                variant.color = "#93a1a1";
+                "variant".color = "#93a1a1";
               };
             };
           };
