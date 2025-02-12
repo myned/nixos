@@ -9,12 +9,14 @@ with lib; let
   hm = config.home-manager.users.${config.custom.username};
 
   cliphist = getExe hm.services.cliphist.package;
+  echo = getExe' pkgs.coreutils "echo";
   networkmanager_dmenu = getExe pkgs.networkmanager_dmenu;
   notify-send = getExe pkgs.libnotify;
   pkill = getExe' pkgs.procps "pkill";
   rofi = getExe hm.programs.rofi.finalPackage;
   rofi-rbw = getExe pkgs.rofi-rbw;
   rofimoji = getExe pkgs.rofimoji;
+  wl-copy = getExe' pkgs.wl-clipboard "wl-copy";
 in {
   options.custom.menus.rofi = {
     enable = mkOption {default = false;};
@@ -26,7 +28,14 @@ in {
         quit = "${pkill} --exact rofi";
       in {
         show = "${quit} || ${rofi} -show drun -show-icons";
-        calculator.show = "${quit} || ${rofi} -show calc";
+
+        calculator.show = concatStringsSep " " [
+          "${quit} || ${rofi}"
+          "-show calc"
+          "-no-history"
+          "-calc-error-color '#dc322f'"
+          ''-calc-command "${echo} -n '{result}' | ${wl-copy}"''
+        ];
 
         clipboard = {
           show = "${quit} || ${rofi} -show clipboard -show-icons";
