@@ -25,7 +25,7 @@ in {
       menus = let
         quit = "${pkill} --exact rofi";
       in {
-        show = "${quit} || ${rofi} -show combi -show-icons -theme-str 'prompt { enabled: false; }'";
+        show = "${quit} || ${rofi} -show drun -show-icons";
         calculator.show = "${quit} || ${rofi} -show calc";
 
         clipboard = {
