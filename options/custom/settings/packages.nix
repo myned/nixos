@@ -28,7 +28,6 @@ in {
           fzf # Fuzzy search
           jq # JSON parser
           killport # Kill processes on port
-          libqalculate # Calculator
           lf # Terminal file manager
           lm_sensors # System sensors
           nix-output-monitor # Nix build parser

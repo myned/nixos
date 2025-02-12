@@ -21,6 +21,7 @@ with lib; {
       nixgl.enable = true;
       nushell.enable = true;
       polkit.enable = true;
+      qalculate.enable = true;
       ssh.enable = true;
       starship.enable = true;
       sudo.enable = true;
