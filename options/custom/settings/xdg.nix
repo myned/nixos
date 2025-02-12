@@ -27,7 +27,8 @@ in {
 
       # Use portal for xdg-open
       # https://github.com/NixOS/nixpkgs/issues/160923
-      xdgOpenUsePortal = true;
+      # BUG: Window activation fails on niri
+      #// xdgOpenUsePortal = true;
     };
 
     home-manager.users.${config.custom.username}.xdg = {
