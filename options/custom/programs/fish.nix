@@ -158,6 +158,7 @@ in {
 
             n = "nix";
             nb = "nix build";
+            nd = "nix develop";
             nf = "nix flake";
             nfi = "nix flake info";
             nfl = "nix flake lock";
