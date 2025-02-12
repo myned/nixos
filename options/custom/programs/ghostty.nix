@@ -6,10 +6,14 @@
 }:
 with lib; let
   cfg = config.custom.programs.ghostty;
+  hm = config.home-manager.users.${config.custom.username};
+
+  ghostty = getExe hm.programs.ghostty.package;
 in {
   options.custom.programs.ghostty = {
     enable = mkOption {default = false;};
     minimal = mkOption {default = false;};
+    service = mkOption {default = true;};
   };
 
   config = mkIf cfg.enable {
@@ -80,6 +84,27 @@ in {
             # https://ghostty.org/docs/config/reference#window-padding-x
             window-padding-x = 8;
             window-padding-y = 4;
+          };
+        };
+
+        # HACK: Launch in background to decrease GTK startup delay
+        # https://github.com/ghostty-org/ghostty/discussions/2978
+        systemd.user.services = mkIf cfg.service {
+          ghostty = {
+            Unit = {
+              Description = "Ghostty Background Service";
+              After = ["xdg-desktop-autostart.target"];
+            };
+
+            Service = {
+              BusName = "com.mitchellh.ghostty";
+              ExecStart = "${ghostty} --initial-window=false --quit-after-last-window-closed=false";
+              Type = "dbus";
+            };
+
+            Install = {
+              WantedBy = ["xdg-desktop-autostart.target"];
+            };
           };
         };
       }
