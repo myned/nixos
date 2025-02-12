@@ -67,6 +67,9 @@ in {
           ];
         in
           listToAttrs (with hm.lib.niri.actions; [
+            # TODO: Focus window if already launched
+            # https://github.com/YaLTeR/niri/discussions/267
+            #?? niri msg action focus-window --id (niri msg -j windows | jq '.[] | select(.app_id == "").id')
             (key "0" "Mod" (spawn [swayosd-client "--output-volume" "mute-toggle"]))
             (key "1" "Ctrl+Alt" (spawn ["lifx" "state" "--brightness" "0.01"]))
             (key "1" "Mod" (focus-workspace "1"))
