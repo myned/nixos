@@ -128,6 +128,14 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:nix-community/nixd";
     };
+    nixgl-stable = {
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+      url = "github:nix-community/nixGL";
+    };
+    nixgl-unstable = {
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "github:nix-community/nixGL";
+    };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";

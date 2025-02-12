@@ -33,6 +33,7 @@
     aagl-gtk-on-nix-stable = flake "github:ezKEa/aagl-gtk-on-nix/release-24.11" // stable "nixpkgs";
     home-manager-stable = flake "github:nix-community/home-manager/release-24.11" // stable "nixpkgs";
     nix-index-database-stable = flake "github:nix-community/nix-index-database" // stable "nixpkgs";
+    nixgl-stable = flake "github:nix-community/nixGL" // stable "nixpkgs";
     stylix-stable = flake "github:danth/stylix/release-24.11" // stable "nixpkgs";
 
     ### Unstable
@@ -64,6 +65,7 @@
     nix-index-database-unstable = flake "github:nix-community/nix-index-database" // unstable "nixpkgs";
     nix-vscode-extensions = flake "github:nix-community/nix-vscode-extensions" // unstable "nixpkgs";
     nixd = flake "github:nix-community/nixd" // unstable "nixpkgs";
+    nixgl-unstable = flake "github:nix-community/nixGL" // unstable "nixpkgs";
     stylix-unstable = flake "github:danth/stylix" // unstable "nixpkgs";
     walker = flake "github:abenz1267/walker?ref=v0.12.8" // unstable "nixpkgs";
 
@@ -138,6 +140,11 @@
                       inputs.anyrun.homeManagerModules.default
                       inputs.nix-flatpak.homeManagerModules.nix-flatpak
                       inputs.walker.homeManagerModules.default
+                    ];
+
+                    # Branch-specific overlays
+                    nixpkgs.overlays = [
+                      inputs."nixgl-${branch}".overlays.default
                     ];
                   }
               )
