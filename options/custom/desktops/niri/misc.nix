@@ -10,6 +10,9 @@ with lib; let
 
   audio = config.home-manager.users.${config.custom.username}.home.file.".local/bin/audio".source;
   bash = "${pkgs.bash}/bin/bash";
+  chromium = getExe hm.programs.chromium.package;
+  loupe = "${pkgs.loupe}/bin/loupe";
+  nautilus = "${pkgs.nautilus}/bin/nautilus";
   niri = "${config.programs.niri.package}/bin/niri";
   sway-audio-idle-inhibit = "${pkgs.sway-audio-idle-inhibit}/bin/sway-audio-idle-inhibit";
   wallpaper = "${config.home-manager.users.${config.custom.username}.home.file.".local/bin/wallpaper".source}";
@@ -52,8 +55,11 @@ in {
           spawn-at-startup =
             [
               {command = [audio "--init"];} # Enforce audio profile state
-              {command = [bash "-c" config.custom.menus.clipboard.clear];} # Clear clipboard history
+              {command = [bash "-c" config.custom.menus.clipboard.clear-silent];} # Clear clipboard history
               {command = [sway-audio-idle-inhibit];} # Inhibit while audio is playing
+              {command = [chromium];}
+              {command = [loupe];}
+              {command = [nautilus];}
             ]
             ++ optionals config.custom.wallpaper [
               {command = [wallpaper];}
