@@ -60,7 +60,7 @@ in {
               ];
 
               open-focused = false;
-              open-on-workspace = "1";
+              #// open-on-workspace = "1";
             }
 
             {
@@ -83,7 +83,7 @@ in {
                 then 0.4
                 else 0.7;
 
-              open-on-workspace = "2";
+              #// open-on-workspace = "2";
             }
 
             {
@@ -108,7 +108,7 @@ in {
                 {app-id = "^obsidian$";}
               ];
 
-              open-on-workspace = "2";
+              #// open-on-workspace = "2";
             }
 
             {
@@ -127,7 +127,7 @@ in {
               ];
 
               default-column-width = {}; # Window-defined
-              open-on-workspace = "1";
+              #// open-on-workspace = "1";
               variable-refresh-rate = true;
             }
 
@@ -144,7 +144,7 @@ in {
                 {app-id = "^YouTube Music$";}
               ];
 
-              open-on-workspace = "3";
+              #// open-on-workspace = "3";
             }
 
             {
@@ -155,7 +155,7 @@ in {
                 {app-id = "^ONLYOFFICE Desktop Editors$";}
               ];
 
-              open-on-workspace = "2";
+              #// open-on-workspace = "2";
             }
 
             (let
@@ -210,7 +210,7 @@ in {
               ];
 
               open-floating = false;
-              open-on-workspace = "1";
+              #// open-on-workspace = "1";
             }
 
             ### Overrides
