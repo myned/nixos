@@ -57,9 +57,6 @@ in {
               {command = [audio "--init"];} # Enforce audio profile state
               {command = [bash "-c" config.custom.menus.clipboard.clear-silent];} # Clear clipboard history
               {command = [sway-audio-idle-inhibit];} # Inhibit while audio is playing
-              {command = [chromium];}
-              {command = [loupe];}
-              {command = [nautilus];}
             ]
             ++ optionals config.custom.wallpaper [
               {command = [wallpaper];}
