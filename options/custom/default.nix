@@ -30,7 +30,7 @@ in {
     hidpi = mkOption {default = cfg.scale > 1;};
     scale = mkOption {default = 1;};
     border = mkOption {default = 2;};
-    gap = mkOption {default = 20;};
+    gap = mkOption {default = 10;};
     padding = mkOption {default = 51;}; # ?? journalctl --user -u waybar.service | grep height:
     rounding = mkOption {default = 15;};
 
@@ -38,7 +38,7 @@ in {
     desktop = mkOption {
       default =
         if config.custom.full
-        then "niri"
+        then "hyprland"
         else "gnome";
     };
 

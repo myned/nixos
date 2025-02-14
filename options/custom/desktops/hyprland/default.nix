@@ -6,16 +6,21 @@
 }:
 with lib; let
   cfg = config.custom.desktops.hyprland;
+  hm = config.home-manager.users.${config.custom.username};
 in {
-  options.custom.desktops.hyprland.enable = mkOption {default = false;};
+  options.custom.desktops.hyprland = {
+    enable = mkOption {default = false;};
+  };
 
   config = mkIf cfg.enable {
     custom.desktops = mkIf config.custom.full {
       hyprland = {
         binds.enable = true;
+        keywords.enable = true;
+        monitors.enable = true;
         plugins.enable = true;
         rules.enable = true;
-        settings.enable = true;
+        variables.enable = true;
       };
 
       gnome = {
@@ -24,24 +29,25 @@ in {
       };
     };
 
+    # https://wiki.hyprland.org
     # https://github.com/hyprwm/Hyprland
-    programs.hyprland.enable = true;
+    programs.hyprland = {
+      enable = true;
+      package = hm.wayland.windowManager.hyprland.finalPackage;
+      withUWSM = true;
+    };
 
     xdg.portal = {
       enable = true;
       extraPortals = [pkgs.xdg-desktop-portal-gtk];
-
-      # Prefer hyprland over gtk portal
-      config.common.default = [
-        "hyprland"
-        "gtk"
-      ];
     };
 
-    # https://wiki.hyprland.org
-    home-manager.users.${config.custom.username}.wayland.windowManager.hyprland = {
-      enable = true;
-      systemd.variables = ["--all"]; # Import some environment variables into session
-    };
+    home-manager.sharedModules = [
+      {
+        wayland.windowManager.hyprland = {
+          enable = true;
+        };
+      }
+    ];
   };
 }
