@@ -6,8 +6,9 @@
 }:
 with lib; let
   cfg = config.custom.programs.networkmanager-dmenu;
+  hm = config.home-manager.users.${config.custom.username};
 
-  bash = getExe pkgs.bash;
+  rofi = getExe hm.programs.rofi.package;
 in {
   options.custom.programs.networkmanager-dmenu.enable = mkOption {default = false;};
 
@@ -18,10 +19,15 @@ in {
     home-manager.users.${config.custom.username} = {
       # https://github.com/firecat53/networkmanager-dmenu/blob/main/config.ini.example
       #!! Option not available, files written directly
-      xdg.configFile."networkmanager-dmenu/config.ini".text = ''
+      xdg.configFile."networkmanager-dmenu/config.ini".text = let
+        menu =
+          if config.custom.menu == "rofi"
+          then "${rofi} -dmenu -p 󰛳"
+          else "";
+      in ''
         [dmenu]
         compact = true
-        dmenu_command = ${bash} -c '${config.custom.menus.network.show}'
+        dmenu_command = ${menu}
         list_saved = true
         active_chars = 
         highlight = true

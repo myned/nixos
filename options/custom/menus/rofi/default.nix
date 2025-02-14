@@ -45,7 +45,7 @@ in {
 
         dmenu.show = "${quit} || ${rofi} -dmenu";
         emoji.show = "${quit} || ${rofimoji} --prompt 󰱰";
-        network.show = "${quit} || ${rofi} -dmenu -p 󰛳";
+        network.show = "${quit} || ${networkmanager_dmenu}";
         search.show = "";
         vault.show = "${quit} || ${rofi-rbw} --prompt 󰌾";
       };
