@@ -48,7 +48,7 @@ with lib; {
       _1password.enable = true;
       adb.enable = true;
       #// ags.enable = true;
-      bitwarden-menu.enable = true;
+      #// bitwarden-menu.enable = true;
       #// clipse.enable = true;
       discord.enable = true;
       element-desktop.enable = true;
