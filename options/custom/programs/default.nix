@@ -35,6 +35,7 @@ with lib; {
       dconf.enable = true;
       firefox.enable = true;
       #// foot.enable = true;
+      gamescope.enable = true;
       #// gnome-terminal.enable = true;
       #// kdeconnect.enable = true;
       kitty.enable = true;
@@ -52,7 +53,6 @@ with lib; {
       discord.enable = true;
       element-desktop.enable = true;
       gamemode.enable = true;
-      gamescope.enable = true;
       #// gnome-shell.enable = true;
       goldwarden.enable = true;
       gpg.enable = true;
