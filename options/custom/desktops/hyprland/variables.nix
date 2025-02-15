@@ -68,9 +68,9 @@ in {
           # https://wiki.hyprland.org/Configuring/Variables/#general
           general = {
             "col.active_border" = "rgb(d33682)";
-            "col.inactive_border" = "rgba(00000000)";
+            "col.inactive_border" = "rgba(d3368200)";
             "col.nogroup_border_active" = "rgb(dc322f)";
-            "col.nogroup_border" = "rgba(00000000)";
+            "col.nogroup_border" = "rgba(dc322f00)";
             #// allow_tearing = true;
             border_size = config.custom.border;
             extend_border_grab_area = 5;
@@ -95,18 +95,18 @@ in {
           # https://wiki.hyprland.org/Configuring/Variables/#group
           group = {
             "col.border_active" = "rgb(6c71c4)";
-            "col.border_inactive" = "rgba(00000000)";
+            "col.border_inactive" = "rgba(6c71c400)";
             "col.border_locked_active" = "rgb(cb4b16)";
-            "col.border_locked_inactive" = "rgba(00000000)";
+            "col.border_locked_inactive" = "rgba(cb4b1600)";
             #// auto_group = false;
             #// insert_after_current = false;
 
             # https://wiki.hyprland.org/Configuring/Variables/#groupbar
             groupbar = {
               "col.active" = "rgb(6c71c4)";
-              "col.inactive" = "rgba(00000000)";
+              "col.inactive" = "rgba(6c71c400)";
               "col.locked_active" = "rgb(cb4b16)";
-              "col.locked_inactive" = "rgba(00000000)";
+              "col.locked_inactive" = "rgba(cb4b1600)";
 
               font_size =
                 if config.custom.hidpi

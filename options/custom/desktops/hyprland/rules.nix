@@ -43,6 +43,8 @@ in {
       # https://wiki.hyprland.org/Configuring/Window-Rules
       #?? windowrulev2 = RULE, WINDOW
       windowrulev2 = with config.custom; let
+        gaps_in = gap / 4;
+
         # HACK: Attempts to account for hypr-specific scale, gaps, borders, and bar padding
         ### Static geometry rules
         tr = num: toString (builtins.floor num); # Convert truncated float to string
@@ -50,6 +52,7 @@ in {
         # Bottom center
         android = rec {
           x = tr (width / scale / 2 - (toInt w) / 2);
+
           y = tr (height
             / scale
             - (toInt h)
@@ -60,27 +63,30 @@ in {
               then - border # Cause unknown
               else 0
             ));
+
           w = tr (
             width
             / scale
             * (
               if ultrawide
-              then 0.5 # 50%
-              else 1
+              then 3.0 / 8.0 # threeeighths
+              else 1.0 # one
             )
             + (
               if ultrawide
-              then - gap / 2 * 2 # Center layout padding between windows
+              then - gaps_in * 2
               else - gap * 2
             )
             - border * 2
           );
-          h = tr (height / scale * 0.5); # 50%
+
+          h = tr (height / scale * 0.5);
         };
 
         # Bottom center
         clipboard = rec {
           x = tr (width / scale / 2 - (toInt w) / 2);
+
           y = tr (height
             / scale
             - (toInt h)
@@ -91,13 +97,15 @@ in {
               then - border # Cause unknown
               else 0
             ));
+
           w = "600";
-          h = tr (height / scale * 0.75); # 75%
+          h = tr (height / scale * 0.75);
         };
 
         # Bottom center
         dropdown = rec {
           x = tr (width / scale / 2 - (toInt w) / 2);
+
           y = tr (height
             / scale
             - (toInt h)
@@ -108,27 +116,29 @@ in {
               then - border # Cause unknown
               else 0
             ));
+
           w = tr (
             width
             / scale
             * (
               if ultrawide
-              then 0.5 # 50%
-              else 1
+              then 3.0 / 8.0 # threeeighths
+              else 1.0 # one
             )
             + (
               if ultrawide
-              then - gap / 2 * 2 # Center layout padding between windows
+              then - gaps_in * 2
               else - gap * 2
             )
             - border * 2
           );
+
           h = tr (height
             / scale
             * (
               if ultrawide
-              then 0.2 # 20%
-              else 0.3 # 30%
+              then 0.2
+              else 0.3
             ));
         };
 
@@ -136,7 +146,20 @@ in {
         pip = rec {
           x = tr (width / scale - (toInt w) - gap - border);
           y = tr (gap + border);
-          w = tr (width / scale * 0.25 - gap - gap / 2 - border * 2); # 25%
+
+          w = tr (
+            width
+            / scale
+            * (
+              if ultrawide
+              then (1 - 3.0 / 8.0) / 2 # threeeighths / 2
+              else 1.0 / 3.0 # onethird
+            )
+            - gap
+            - gaps_in
+            - border * 2
+          );
+
           h = tr ((toInt w) * 9 / 16 + 1); # 16:9 aspect ratio
         };
 
@@ -169,11 +192,12 @@ in {
         focus = expr: rules: merge "focus" expr rules;
         fullscreen = expr: rules: merge "fullscreen" expr rules;
         pinned = expr: rules: merge "pinned" expr rules;
+        tag = expr: rules: merge "tag" expr rules;
         title = expr: rules: merge "title" "^${expr}$" rules;
 
         ### Pseudo-tags
         # Wrap generated rules in Nix categories
-        tag = {
+        t = {
           android = rules: [
             (class "[Ww]aydroid.*" rules)
           ];
@@ -265,83 +289,47 @@ in {
       in
         flatten [
           ### Defaults
-          (class ".*" ["float" "suppressevent maximize"])
           (floating false ["noshadow" "plugin:hyprbars:nobar"])
           (floating true ["noborder"])
           (focus false ["plugin:hyprbars:bar_color rgb(073642)" "plugin:hyprbars:title_color rgb(586e75)"])
           (fullscreen true ["idleinhibit focus"])
-          (pinned true ["bordercolor rgb(073642) rgb(073642)"])
+          (pinned true ["bordercolor rgb(fdf6e3) rgb(fdf6e300)" "noborder 0" "noshadow"])
 
-          (tag.android ["idleinhibit always" "move ${android.x} ${android.y}" "size ${android.w} ${android.h}" "workspace special:android silent" "plugin:hyprbars:nobar"])
-          (tag.browser ["tile" "workspace 1"])
-          (tag.clipboard ["move ${clipboard.x} ${clipboard.y}" "pin" "size ${clipboard.w} ${clipboard.h}" "stayfocused" "plugin:hyprbars:nobar"])
-          (tag.dropdown ["move ${dropdown.x} ${dropdown.y}" "pin" "size ${dropdown.w} ${dropdown.h}" "plugin:hyprbars:nobar"])
-          (tag.editor ["tile"])
-          (tag.files ["center"])
-          (tag.game ["focusonactivate" "idleinhibit always" "noborder" "noshadow" "renderunfocused" "workspace name:game" "plugin:hyprbars:nobar"])
-          (tag.media ["center" "keepaspectratio" "size <90% <90%"])
-          (tag.music ["tile" "workspace special:music silent"])
-          (tag.office ["tile" "workspace special:office silent"])
-          (tag.password ["center" "tile" "workspace special:password silent" "plugin:hyprbars:nobar"])
-          (tag.pip ["keepaspectratio" "move ${pip.x} ${pip.y}" "noinitialfocus" "pin" "size ${pip.w} ${pip.h}" "plugin:hyprbars:nobar"])
-          (tag.social ["tile"])
-          (tag.steam ["suppressevent activate activatefocus" "workspace special:steam silent" "plugin:hyprbars:nobar"])
-          (tag.terminal ["tile"])
-          (tag.vm ["workspace special:vm silent"])
+          (tag "scroller:pinned" ["bordercolor rgb(fdf6e3) rgb(fdf6e300)"])
+
+          (t.android ["float" "idleinhibit always" "move ${android.x} ${android.y}" "size ${android.w} ${android.h}" "workspace special:android silent" "plugin:hyprbars:nobar"])
+          (t.browser ["workspace 1"])
+          (t.clipboard ["float" "move ${clipboard.x} ${clipboard.y}" "pin" "size ${clipboard.w} ${clipboard.h}" "stayfocused" "plugin:hyprbars:nobar"])
+          (t.dropdown ["float" "move ${dropdown.x} ${dropdown.y}" "pin" "size ${dropdown.w} ${dropdown.h}" "plugin:hyprbars:nobar"])
+          (t.game ["focusonactivate" "idleinhibit always" "noborder" "noshadow" "renderunfocused" "workspace name:game" "plugin:hyprbars:nobar"])
+          (t.media ["center" "float" "keepaspectratio" "size <90% <90%"])
+          (t.music ["workspace special:music silent"])
+          (t.office ["workspace special:office silent" "plugin:scroller:group office"])
+          (t.password ["workspace special:password silent" "plugin:hyprbars:nobar"])
+          (t.pip ["float" "keepaspectratio" "move ${pip.x} ${pip.y}" "noinitialfocus" "pin" "size ${pip.w} ${pip.h}" "plugin:hyprbars:nobar"])
+          (t.social ["plugin:scroller:group social" "plugin:scroller:columnwidth onequarter" "plugin:scroller:windowheight onehalf"])
+          (t.steam ["suppressevent activate activatefocus" "workspace special:steam silent" "plugin:hyprbars:nobar"])
+          (t.terminal ["plugin:scroller:group terminal"])
+          (t.vm ["workspace special:vm silent" "plugin:scroller:group vm"])
 
           ### Overrides
-          (class "dev\\.benz\\.walker" ["noanim" "noshadow" "pin" "stayfocused" "plugin:hyprbars:nobar"]) # Imitate layer
-          (class "org\\.gnome\\.NautilusPreviewer" ["stayfocused" "plugin:hyprbars:nobar"]) # Sushi
-          (class "signal" ["tile"]) # Initial window in social group
+          (class "org\\.gnome\\.NautilusPreviewer" ["float" "stayfocused" "plugin:hyprbars:nobar"]) # Sushi
           (class "steam_app_1473350" ["workspace 0"]) # (the) Gnorp Apologue
           (class "Tap Wizard 2\\.x86_64" ["workspace 0"])
-          (class "Xdg-desktop-portal-gtk" ["noborder" "noshadow" "plugin:hyprbars:nobar"])
-
-          (title "File Upload" ["center" "float" "size 1000 625"])
-          (title "Open" ["center" "float" "size 1000 625"])
-          (title "Save As" ["center" "float" "size 1000 625"])
 
           #!! Expressions are not wrapped in ^$
-          (fields {
-            class = "^com\\.github\\.wwmm\\.easyeffects$";
-            title = "^Easy Effects$"; # Main window
-          } ["center" "float" "size 50% 50%"])
           (fields {
             class = "^discord$";
             title = "^Discord Updater$"; # Update dialog
           } ["float" "nofocus" "plugin:hyprbars:nobar"])
           (fields {
-            class = "^lutris$";
-            title = "^Lutris$"; # Main window
-          } ["center" "float" "size 1000 500"])
-          (fields {
             class = "^org\\.gnome\\.Loupe$";
             title = "^wallpaper.png$";
-          } ["tile" "workspace special:wallpaper silent"])
-          (fields {
-            class = "^org\\.gnome\\.Nautilus$";
-            title = "^Home$"; # Main window
-          } ["size 1000 625"])
-          (fields {
-            class = "^org\\.gnome\\.Nautilus$";
-            title = "^New Folder$";
-          } ["plugin:hyprbars:nobar"])
-          (fields {
-            class = "^org\\.remmina\\.Remmina$";
-            title = "^Remmina.*$"; # Main windows
-          } ["center" "float" "size 1000 500"])
+          } ["workspace special:wallpaper silent"])
           (fields {
             class = "^steam$";
             title = "^notificationtoasts$"; # Steam notifications
           } ["float" "nofocus" "pin"])
-          (fields {
-            class = "^steam$";
-            title = "^Steam$"; # Main window
-          } ["tile"])
-          (fields {
-            class = "^virt-manager$";
-            title = "^.+on QEMU/KVM$"; # VM window
-          } ["tile"])
         ];
     };
   };

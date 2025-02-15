@@ -56,10 +56,18 @@ in {
             # https://github.com/dawsers/hyprscroller?tab=readme-ov-file#options
             scroller = mkIf cfg.hyprscroller {
               "col.selection_border" = "rgb(d33682)";
-              #// center_row_if_space_available = true;
-              column_default_width = "onethird";
-              #// column_widths = "onethird onehalf twothirds one";
-              #// window_heights = "onethird onehalf twothirds one";
+              center_row_if_space_available = true;
+
+              column_default_width =
+                if config.custom.ultrawide
+                then "threeeighths"
+                else "onethird";
+
+              column_widths =
+                if config.custom.ultrawide
+                then "onefourth threeeighths onehalf fiveeighths threequarters one"
+                else "onethird onehalf twothirds one";
+
               cyclesize_wrap = false;
               focus_wrap = false;
             };
