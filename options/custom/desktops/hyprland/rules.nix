@@ -242,6 +242,7 @@ in {
           ];
 
           music = rules: [
+            (class "com\\.github\\.th_ch\\.youtube_music" rules)
             (class "Spotify" rules)
             (class "YouTube Music" rules)
             (title "Spotify Premium" rules)
@@ -267,6 +268,7 @@ in {
             (class "discord" rules)
             (class "Element" rules)
             (class "org\\.telegram\\.desktop" rules)
+            (class "signal" rules)
           ];
 
           steam = rules: [
