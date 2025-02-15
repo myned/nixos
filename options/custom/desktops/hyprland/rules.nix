@@ -15,8 +15,11 @@ with lib; let
   libreoffice = getExe config.custom.programs.libreoffice.package;
   loupe = getExe pkgs.loupe;
   steam = getExe config.programs.steam.package;
+  uwsm = getExe pkgs.uwsm;
   virt-manager = getExe pkgs.virt-manager;
   waydroid = getExe pkgs.waydroid;
+
+  command = command: "${uwsm} app -- ${command}";
   youtube-music = getExe pkgs.youtube-music;
 in {
   options.custom.desktops.hyprland.rules = {
@@ -30,14 +33,14 @@ in {
       # https://wiki.hyprland.org/Configuring/Workspace-Rules
       #?? workspace = WORKSPACE, RULES
       workspace = [
-        "special:android, on-created-empty:${launch} --workspace special:android --empty ${waydroid} app launch com.YoStarEN.Arknights"
-        "special:game, on-created-empty:${steam}"
-        "special:music, on-created-empty:${youtube-music}"
-        "special:office, on-created-empty:${launch} --workspace special:office --empty --tile -- ${libreoffice}"
-        "special:password, on-created-empty:${launch} --workspace special:password --empty ${_1password}"
-        "special:terminal, on-created-empty:${ghostty}"
-        "special:vm, on-created-empty:${launch} --workspace special:vm --empty ${virt-manager}"
-        "special:wallpaper, on-created-empty:${loupe} /tmp/wallpaper.png"
+        "special:android, on-created-empty:${command "${launch} --workspace special:android --empty ${waydroid} app launch com.YoStarEN.Arknights"}"
+        "special:game, on-created-empty:${command steam}"
+        "special:music, on-created-empty:${command youtube-music}"
+        "special:office, on-created-empty:${command "${launch} --workspace special:office --empty --tile -- ${libreoffice}"}"
+        "special:password, on-created-empty:${command "${launch} --workspace special:password --empty ${_1password}"}"
+        "special:terminal, on-created-empty:${command ghostty}"
+        "special:vm, on-created-empty:${command "${launch} --workspace special:vm --empty ${virt-manager}"}"
+        "special:wallpaper, on-created-empty:${command "${loupe} /tmp/wallpaper.png"}"
       ];
 
       # https://wiki.hyprland.org/Configuring/Window-Rules

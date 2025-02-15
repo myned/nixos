@@ -15,7 +15,10 @@ with lib; let
   modprobe = getExe' pkgs.kmod "modprobe";
   nautilus = getExe pkgs.nautilus;
   sway-audio-idle-inhibit = getExe pkgs.sway-audio-idle-inhibit;
+  uwsm = getExe pkgs.uwsm;
   virsh = getExe' config.virtualisation.libvirtd.package "virsh";
+
+  command = command: "${uwsm} app -- ${command}";
 in {
   options.custom.desktops.hyprland.keywords = {
     enable = mkOption {default = false;};
@@ -87,26 +90,25 @@ in {
 
           # https://wiki.hyprland.org/Configuring/Keywords/#executing
           exec = [
-            "${left} --init --scroll kensington-orbit-wireless-tb-mouse" # Enforce left-pawed state
+            (command "${left} --init --scroll kensington-orbit-wireless-tb-mouse") # Enforce left-pawed state
           ];
 
-          # https://wiki.hyprland.org/Configuring/Keywords/#executing
           exec-once =
             [
-              sway-audio-idle-inhibit # Inhibit idle while audio is playing
-              "${audio} --init" # Enforce audio profile state
-              config.custom.menus.clipboard.clear-silent # Clear clipboard history
+              (command sway-audio-idle-inhibit) # Inhibit idle while audio is playing
+              (command "${audio} --init") # Enforce audio profile state
+              (command config.custom.menus.clipboard.clear-silent) # Clear clipboard history
 
               # HACK: Launch hidden GTK windows to reduce startup time
-              "[workspace special:hidden silent] ${loupe}"
-              "[workspace special:hidden silent] ${nautilus}"
+              "[workspace special:hidden silent] ${command loupe}"
+              "[workspace special:hidden silent] ${command nautilus}"
             ]
             ++ optionals config.custom.wallpaper [
-              "wallpaper"
+              (command wallpaper)
             ]
-            # HACK: Delay driver initialization to work around reset issues
             ++ optionals config.custom.settings.vm.passthrough.blacklist [
-              "${virsh} list | ${grep} ${config.custom.settings.vm.passthrough.guest} || sudo ${modprobe} ${config.custom.settings.vm.passthrough.driver}"
+              # HACK: Delay driver initialization to work around reset issues
+              (command "${virsh} list | ${grep} ${config.custom.settings.vm.passthrough.guest} || sudo ${modprobe} ${config.custom.settings.vm.passthrough.driver}")
             ];
         };
       }

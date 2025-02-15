@@ -13,7 +13,8 @@ in {
   };
 
   config = mkIf cfg.enable {
-    custom.desktops = mkIf config.custom.full {
+    custom = {
+      desktops = mkIf config.custom.full {
       hyprland = {
         binds.enable = true;
         keywords.enable = true;
@@ -29,11 +30,20 @@ in {
       };
     };
 
+      programs = {
+        uwsm.enable = true;
+      };
+    };
+
     # https://wiki.hyprland.org
     # https://github.com/hyprwm/Hyprland
     programs.hyprland = {
       enable = true;
       package = hm.wayland.windowManager.hyprland.finalPackage;
+
+      # BUG: Some apps launched via exec cause session to end, wrap in uwsm to isolate scope
+      # https://github.com/Vladimir-csp/uwsm/issues/45
+      #?? uwsm app -- COMMAND
       withUWSM = true;
     };
 

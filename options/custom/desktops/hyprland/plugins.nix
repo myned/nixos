@@ -8,6 +8,9 @@ with lib; let
   cfg = config.custom.desktops.hyprland.plugins;
 
   hyprctl = getExe' config.programs.hyprland.package "hyprctl";
+  uwsm = getExe pkgs.uwsm;
+
+  command = command: "${uwsm} app -- ${command}";
 in {
   options.custom.desktops.hyprland.plugins = {
     enable = mkOption {default = false;};
@@ -47,9 +50,9 @@ in {
               # https://github.com/hyprwm/hyprland-plugins/tree/main/hyprbars#buttons-config
               #?? hyprbars-button = COLOR, SIZE, ICON, EXEC
               hyprbars-button = [
-                "rgb(dc322f), 16,, ${hyprctl} dispatch killactive" # Close
-                "rgb(d33682), 16,, ${hyprctl} dispatch fullscreen 1" # Maximize
-                "rgb(6c71c4), 16,, minimize" # Minimize
+                "rgb(dc322f), 16,, ${command "${hyprctl} dispatch killactive"}" # Close
+                "rgb(d33682), 16,, ${command "${hyprctl} dispatch fullscreen 1"}" # Maximize
+                "rgb(6c71c4), 16,, ${command minimize}" # Minimize
               ];
             };
 
