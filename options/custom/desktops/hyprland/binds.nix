@@ -186,7 +186,7 @@ in {
           (key "C" "Super+Shift" "exec" config.custom.menus.clipboard.clear)
           (key "D" "Super" "togglespecialworkspace" "android")
           (key "D" "Super+Shift" "movetoworkspacesilent" "special:android")
-          (key "E" "Super" "exec" gnome-text-editor)
+            (key "E" "Super" "exec" "${gnome-text-editor} --new-window")
           (key "F" "Super" "exec" "${nautilus} --new-window")
           (key "G" "Super" "togglespecialworkspace" "game")
           (key "G" "Super+Ctrl" "exec" steam)
