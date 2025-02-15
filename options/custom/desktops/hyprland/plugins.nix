@@ -6,8 +6,10 @@
 }:
 with lib; let
   cfg = config.custom.desktops.hyprland.plugins;
+  hm = config.home-manager.users.${config.custom.username};
 
   hyprctl = getExe' config.programs.hyprland.package "hyprctl";
+  minimize = hm.home.file.".local/bin/minimize".source;
   uwsm = getExe pkgs.uwsm;
 
   command = command: "${uwsm} app -- ${command}";

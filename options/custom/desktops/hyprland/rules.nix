@@ -9,7 +9,6 @@ with lib; let
   hm = config.home-manager.users.${config.custom.username};
 
   _1password = getExe config.programs._1password-gui.package;
-  gamescope = getExe config.programs.gamescope.package;
   ghostty = getExe hm.programs.ghostty.package;
   launch = hm.home.file.".local/bin/launch".source;
   libreoffice = getExe config.custom.programs.libreoffice.package;
@@ -18,9 +17,9 @@ with lib; let
   uwsm = getExe pkgs.uwsm;
   virt-manager = getExe pkgs.virt-manager;
   waydroid = getExe pkgs.waydroid;
+  youtube-music = getExe pkgs.youtube-music;
 
   command = command: "${uwsm} app -- ${command}";
-  youtube-music = getExe pkgs.youtube-music;
 in {
   options.custom.desktops.hyprland.rules = {
     enable = mkOption {default = false;};

@@ -9,6 +9,7 @@ with lib; let
   hm = config.home-manager.users.${config.custom.username};
 
   audio = hm.home.file.".local/bin/audio".source;
+  gnome-text-editor = getExe pkgs.gnome-text-editor;
   grep = getExe pkgs.gnugrep;
   left = hm.home.file.".local/bin/left".source;
   loupe = getExe pkgs.loupe;
@@ -17,6 +18,7 @@ with lib; let
   sway-audio-idle-inhibit = getExe pkgs.sway-audio-idle-inhibit;
   uwsm = getExe pkgs.uwsm;
   virsh = getExe' config.virtualisation.libvirtd.package "virsh";
+  wallpaper = hm.home.file.".local/bin/wallpaper".source;
 
   command = command: "${uwsm} app -- ${command}";
 in {
@@ -48,7 +50,7 @@ in {
                 left_handed = true;
                 middle_button_emulation = true;
                 natural_scroll = true;
-                sensitivity = -0.6;
+                sensitivity = -0.7;
               })
 
               (devices ["logitech-m570"] {
@@ -85,7 +87,7 @@ in {
               hm.home.sessionVariables
             )
             ++ [
-              "EDITOR, gnome-text-editor"
+              "EDITOR, ${gnome-text-editor}"
             ];
 
           # https://wiki.hyprland.org/Configuring/Keywords/#executing
