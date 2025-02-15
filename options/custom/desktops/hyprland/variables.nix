@@ -15,13 +15,21 @@ in {
       {
         wayland.windowManager.hyprland.settings = {
           # https://wiki.hyprland.org/Configuring/Animations/
-          #?? animation = NAME, ONOFF, SPEED, CURVE, [STYLE]
+          #?? animation = NAME, ONOFF, SPEED, CURVE, STYLE
           animation = [
-            "global, 1, 4, default"
-            "specialWorkspace, 1, 4, default, fade"
-            "windows, 1, 4, default, slide"
-            "workspaces, 1, 4, default, slidevert"
-            "layers, 0"
+            "global, 1, 3, easeOutCubic"
+            "specialWorkspace, 1, 3, easeOutCubic, fade"
+            "windows, 1, 3, easeOutCubic, slide"
+            "workspaces, 1, 3, easeOutCubic, slidevert"
+          ];
+
+          # https://wiki.hyprland.org/Configuring/Animations/#curves
+          # https://easings.net/
+          #?? bezier = NAME, X0, Y0, X1, Y1
+          bezier = [
+            "easeInOutCubic, 0.65, 0, 0.35, 1"
+            "easeOutCubic, 0.33, 1, 0.68, 1"
+            "easeOutSine, 0.61, 1, 0.88, 1"
           ];
 
           # https://wiki.hyprland.org/Configuring/Variables/#binds
@@ -131,7 +139,7 @@ in {
             mouse_refocus = false; # Required to focus last window on close
 
             repeat_delay = 250;
-            repeat_rate = 30;
+            repeat_rate = 40;
             sensitivity = 0.5;
             scroll_factor = 1.25;
             #// special_fallthrough = true; # Focus windows under special workspace
