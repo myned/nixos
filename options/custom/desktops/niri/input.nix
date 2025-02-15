@@ -30,7 +30,7 @@ in {
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsinputkeyboardrepeat-delay
           keyboard = {
             repeat-delay = 250;
-            repeat-rate = 30;
+            repeat-rate = 40;
           };
 
           # BUG: Applies to trackball device, switch to "flat" when per-device configuration is supported
