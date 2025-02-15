@@ -191,7 +191,7 @@ in {
           ];
 
           dropdown = rules: [
-            (class "dropdown" rules)
+            (class ".*dropdown" rules)
           ];
 
           editor = rules: [

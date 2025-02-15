@@ -61,10 +61,13 @@ in {
           "${toggle}"
           "--focus"
           "--type class"
-          "--expression '^dropdown$'"
+            "--expression '^.*dropdown$'"
           "--workspace special:dropdown"
           "--"
-          "${ghostty} --class=dropdown"
+
+            #!! Must be valid GTK class
+            # https://github.com/ghostty-org/ghostty/issues/3336
+            "${ghostty} --class=gtk.dropdown"
         ];
 
         pip-switch = with config.custom;
