@@ -132,6 +132,29 @@ in {
             gsw = "git switch";
             gy = "git cherrypick";
 
+            hy = "hyprctl";
+            hyc = "hyprctl clients";
+            hycj = "hyprctl -j clients";
+            hyd = "hyprctl dispatch";
+            hydj = "hyprctl -j dispatch";
+            hydv = "hyprctl devices";
+            hydvj = "hyprctl -j devices";
+            hyj = "hyprctl -j";
+            hyk = "hyprctl keyword";
+            hykj = "hyprctl -j keyword";
+            hyl = "hyprctl rollinglog";
+            hylj = "hyprctl -j rollinglog";
+            hym = "hyprctl monitors";
+            hymj = "hyprctl -j monitors";
+            hyo = "hyprctl output";
+            hyoj = "hyprctl -j output";
+            hyr = "hyprctl reload";
+            hyrj = "hyprctl -j reload";
+            hys = "hyprctl setprop";
+            hysj = "hyprctl -j setprop";
+            hyv = "hyprctl version";
+            hyvj = "hyprctl -j version";
+
             jc = "journalctl";
             jcei = "journalctl --pager-end --identifier";
             jcfi = "journalctl --follow --identifier";
@@ -171,15 +194,37 @@ in {
             nsn = "nix shell nixpkgs#%";
             nt = "nix store";
 
-            no = "nixos";
-            nob = "nixos build";
-            nobb = "nixos build boot";
-            nobs = "nixos build switch";
-            nobt = "nixos build test";
-            nod = "nixos diff";
-            nog = "nixos generate";
-            nol = "nixos list";
-            nor = "nixos repl";
+            ni = "niri";
+            nim = "niri msg";
+            nima = "niri msg action";
+            nimaj = "niri msg --json action";
+            nimfo = "niri msg focused-output";
+            nimfoj = "niri msg --json focused-output";
+            nimfw = "niri msg focused-window";
+            nimfwj = "niri msg --json focused-window";
+            nimj = "niri msg --json";
+            niml = "niri msg layers";
+            nimlj = "niri msg --json layers";
+            nimo = "niri msg output";
+            nimoj = "niri msg --json output";
+            nimos = "niri msg outputs";
+            nimosj = "niri msg --json outputs";
+            nimv = "niri msg version";
+            nimvj = "niri msg --json version";
+            nimw = "niri msg windows";
+            nimwj = "niri msg --json windows";
+            nimwk = "niri msg workspaces";
+            nimwkj = "niri msg --json workspaces";
+
+            os = "nixos";
+            osb = "nixos build";
+            osbb = "nixos build boot";
+            osbs = "nixos build switch";
+            osbt = "nixos build test";
+            osd = "nixos diff";
+            osg = "nixos generate";
+            osl = "nixos list";
+            osr = "nixos repl";
 
             sc = "systemctl";
             scp = "sudo systemctl poweroff";
@@ -244,8 +289,8 @@ in {
             wst = "waydroid session stop";
             wu = "sudo waydroid upgrade";
 
-            zt = "sudo zerotier-cli";
-            ztip = "sudo zerotier-cli get $(sudo zerotier-cli -j listnetworks | jq -r .[-1].id) ip";
+            z = "sudo zerotier-cli";
+            zi = "sudo zerotier-cli get $(sudo zerotier-cli -j listnetworks | jq -r .[-1].id) ip";
           };
 
         interactiveShellInit = ''
