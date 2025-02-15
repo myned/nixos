@@ -8,7 +8,7 @@ with lib; let
 in {
   options.custom.menus = {
     enable = mkOption {default = config.custom.full;};
-    show = mkOption {default = "";};
+    default.show = mkOption {default = "";};
     calculator.show = mkOption {default = "";};
 
     clipboard = {

@@ -265,6 +265,7 @@ in {
 
             (key "Super_L" "Super" "exec" config.custom.menus.default.show)
             (key "Super_L" "Super+Alt" "exec" config.custom.menus.vault.show)
+            (key "Super_L" "Super+Ctrl" "exec" config.custom.menus.calculator.show)
             (key "Super_L" "Super+Ctrl+Shift" "exec" config.custom.menus.network.show)
             (key "Super_L" "Super+Shift" "exec" config.custom.menus.search.show)
           ];

@@ -19,9 +19,9 @@ in {
   };
 
   config = mkIf cfg.enable {
-    custom = {
-      menus = mkIf (config.custom.menu == "walker") {
-        show = walker;
+    custom = mkIf (config.custom.menu == "walker") {
+      menus = mapAttrsRecursive (path: value: pkgs.writeShellScript (concatStringsSep "-" (["menus"] ++ path)) value) {
+        default.show = walker;
 
         clipboard = {
           show = "${walker} --modules clipboard";

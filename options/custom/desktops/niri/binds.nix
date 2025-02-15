@@ -136,7 +136,7 @@ in {
             (key "N" "Mod" (spawn networkmanager_dmenu))
             (key "O" "Mod" (spawn [loupe "/tmp/wallpaper.png"]))
             (key "P" "Ctrl+Alt" (spawn [pkill "bitwarden"]))
-            (key "P" "Mod" (spawn [bash "-c" config.custom.menus.vault.show]))
+            (key "P" "Mod" (spawn config.custom.menus.vault.show))
             (key "P" "Mod+Shift" (spawn bitwarden))
             (key "Q" "Mod" close-window)
             (key "R" "Mod" focus-window-or-workspace-down)
@@ -156,9 +156,9 @@ in {
             (key "T" "Mod" (spawn ghostty))
             (key "Tab" "Mod" switch-focus-between-floating-and-tiling)
             (key "Up" "Mod" (spawn [swayosd-client "--brightness" "raise"]))
-            (key "V" "Mod" (spawn [bash "-c" config.custom.menus.clipboard.show]))
+            (key "V" "Mod" (spawn config.custom.menus.clipboard.show))
             (key "V" "Mod+Ctrl" (spawn vm))
-            (key "V" "Mod+Shift" (spawn [bash "-c" config.custom.menus.clipboard.clear]))
+            (key "V" "Mod+Shift" (spawn config.custom.menus.clipboard.clear))
             (key "W" "Mod" focus-window-or-workspace-up)
             (key "W" "Mod+Shift" move-window-up-or-to-workspace-up)
             (key "WheelScrollDown" "Mod" focus-window-or-workspace-down)
@@ -183,9 +183,9 @@ in {
             # TODO: Uncomment when fixed
             #// (key "Shift_L" "Mod" focus-workspace-previous)
             # TODO: Use "Super_L" when fixed
-            (key "Space" "Mod" (spawn [bash "-c" config.custom.menus.show]))
-            (key "Space" "Mod+Ctrl" (spawn [bash "-c" config.custom.menus.calculator.show]))
-            (key "Space" "Mod+Shift" (spawn [bash "-c" config.custom.menus.search.show]))
+            (key "Space" "Mod" (spawn config.custom.menus.default.show))
+            (key "Space" "Mod+Ctrl" (spawn config.custom.menus.calculator.show))
+            (key "Space" "Mod+Shift" (spawn config.custom.menus.search.show))
 
             # Media keys
             # https://github.com/xkbcommon/libxkbcommon/blob/master/include/xkbcommon/xkbcommon-keysyms.h

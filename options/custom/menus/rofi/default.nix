@@ -8,6 +8,7 @@ with lib; let
   cfg = config.custom.menus.rofi;
   hm = config.home-manager.users.${config.custom.username};
 
+  bash = getExe pkgs.bash;
   cliphist = getExe hm.services.cliphist.package;
   echo = getExe' pkgs.coreutils "echo";
   networkmanager_dmenu = getExe pkgs.networkmanager_dmenu;
@@ -24,30 +25,21 @@ in {
 
   config = mkIf cfg.enable {
     custom = mkIf (config.custom.menu == "rofi") {
-      menus = let
-        quit = "${pkill} --exact rofi";
-      in {
-        show = "${quit} || ${rofi} -show drun -show-icons";
-
-        calculator.show = concatStringsSep " " [
-          "${quit} || ${rofi}"
-          "-show calc"
-          "-no-history"
-          "-calc-error-color '#dc322f'"
-          ''-calc-command "${echo} -n '{result}' | ${wl-copy}"''
-        ];
+      menus = mapAttrsRecursive (path: value: pkgs.writeShellScript (concatStringsSep "-" (["menus"] ++ path)) value) {
+        default.show = "${pkill} --exact rofi || ${rofi} -show drun -show-icons";
+        calculator.show = ''${pkill} --exact rofi || ${rofi} -show calc -no-history -calc-error-color '#dc322f' -calc-command "${echo} -n '{result}' | ${wl-copy}"'';
 
         clipboard = {
-          show = "${quit} || ${rofi} -show clipboard -show-icons";
+          show = "${pkill} --exact rofi || ${rofi} -show clipboard -show-icons";
           clear = "${cliphist} wipe && ${notify-send} '> cliphist' 'Clipboard cleared' --urgency low";
           clear-silent = "${cliphist} wipe";
         };
 
-        dmenu.show = "${quit} || ${rofi} -dmenu";
-        emoji.show = "${quit} || ${rofimoji} --prompt 󰱰";
-        network.show = "${quit} || ${networkmanager_dmenu}";
+        dmenu.show = "${pkill} --exact rofi || ${rofi} -dmenu";
+        emoji.show = "${pkill} --exact rofi || ${rofimoji} --prompt 󰱰";
+        network.show = "${pkill} --exact rofi || ${networkmanager_dmenu}";
         search.show = "";
-        vault.show = "${quit} || ${rofi-rbw} --prompt 󰌾";
+        vault.show = "${pkill} --exact rofi || ${rofi-rbw} --prompt 󰌾";
       };
 
       services = {
