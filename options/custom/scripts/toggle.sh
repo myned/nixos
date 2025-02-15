@@ -47,7 +47,7 @@ if [[ "$current_workspace" == "$workspace" ]]; then
   # HACK: Move to current workspace before pinning, otherwise some windows freeze
   # https://github.com/hyprwm/Hyprland/issues/7609
   # https://github.com/hyprwm/Hyprland/issues/7191
-  hyprctl dispatch movetoworkspacesilent "0,$type:$expression"
+  #// hyprctl dispatch movetoworkspacesilent "0,$type:$expression"
 
   hyprctl dispatch pin "$type:$expression" # Pin
 
