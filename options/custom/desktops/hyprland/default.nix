@@ -15,20 +15,20 @@ in {
   config = mkIf cfg.enable {
     custom = {
       desktops = mkIf config.custom.full {
-      hyprland = {
-        binds.enable = true;
-        keywords.enable = true;
-        monitors.enable = true;
-        plugins.enable = true;
-        rules.enable = true;
-        variables.enable = true;
-      };
+        hyprland = {
+          binds.enable = true;
+          keywords.enable = true;
+          monitors.enable = true;
+          plugins.enable = true;
+          rules.enable = true;
+          variables.enable = true;
+        };
 
-      gnome = {
-        enable = true;
-        minimal = true;
+        gnome = {
+          enable = true;
+          minimal = true;
+        };
       };
-    };
 
       programs = {
         uwsm.enable = true;
@@ -49,7 +49,11 @@ in {
 
     xdg.portal = {
       enable = true;
-      extraPortals = [pkgs.xdg-desktop-portal-gtk];
+
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gnome
+        xdg-desktop-portal-gtk
+      ];
     };
 
     home-manager.sharedModules = [
