@@ -32,10 +32,8 @@ in {
             inherit size;
             theme = name;
 
-            # BUG: Heavily increases CPU usage with cursor movement
-            # https://github.com/YaLTeR/niri/issues/1037
-            #// hide-after-inactive-ms = 1000 * 15; # Milliseconds
-            #// hide-when-typing = true;
+            hide-after-inactive-ms = 1000 * 15; # Milliseconds
+            hide-when-typing = true;
           };
 
           # HACK: Inherit home-manager environment variables in lieu of upstream fix
