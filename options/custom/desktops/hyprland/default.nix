@@ -49,11 +49,7 @@ in {
 
     xdg.portal = {
       enable = true;
-
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-gnome
-        xdg-desktop-portal-gtk
-      ];
+      extraPortals = [pkgs.xdg-desktop-portal-gtk];
     };
 
     home-manager.sharedModules = [
