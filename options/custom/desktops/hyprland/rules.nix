@@ -8,7 +8,7 @@ with lib; let
   cfg = config.custom.desktops.hyprland.rules;
   hm = config.home-manager.users.${config.custom.username};
 
-  _1password = getExe config.programs._1password-gui.package;
+  bitwarden-desktop = getExe pkgs.bitwarden-desktop;
   ghostty = getExe hm.programs.ghostty.package;
   launch = hm.home.file.".local/bin/launch".source;
   libreoffice = getExe config.custom.programs.libreoffice.package;
@@ -36,8 +36,8 @@ in {
         "special:game, on-created-empty:${command steam}"
         "special:music, on-created-empty:${command youtube-music}"
         "special:office, on-created-empty:${command "${launch} --workspace special:office --empty --tile -- ${libreoffice}"}"
-        "special:password, on-created-empty:${command "${launch} --workspace special:password --empty ${_1password}"}"
         "special:terminal, on-created-empty:${command ghostty}"
+        "special:vault, on-created-empty:${command "${launch} --workspace special:vault --empty ${bitwarden-desktop}"}"
         "special:vm, on-created-empty:${command "${launch} --workspace special:vm --empty ${virt-manager}"}"
         "special:wallpaper, on-created-empty:${command "${loupe} /tmp/wallpaper.png"}"
       ];
@@ -256,11 +256,6 @@ in {
             (class "ONLYOFFICE Desktop Editors" rules)
           ];
 
-          password = rules: [
-            (class "1Password" rules)
-            (class "Bitwarden" rules)
-          ];
-
           pip = rules: [
             (title "Picture.in.[Pp]icture" rules)
           ];
@@ -283,6 +278,11 @@ in {
             (class "com\\.mitchellh\\.ghostty" rules)
             (class "kitty" rules)
             (class "org\\.wezfurlong\\.wezterm" rules)
+          ];
+
+          vault = rules: [
+            (class "1Password" rules)
+            (class "Bitwarden" rules)
           ];
 
           vm = rules: [
@@ -311,11 +311,11 @@ in {
           (t.media ["center" "float" "keepaspectratio" "size <90% <90%"])
           (t.music ["workspace special:music silent"])
           (t.office ["workspace special:office silent" "plugin:scroller:group office"])
-          (t.password ["workspace special:password silent" "plugin:hyprbars:nobar"])
           (t.pip ["float" "keepaspectratio" "move ${pip.x} ${pip.y}" "noinitialfocus" "pin" "size ${pip.w} ${pip.h}" "plugin:hyprbars:nobar"])
           (t.social ["plugin:scroller:group social" "plugin:scroller:columnwidth onequarter" "plugin:scroller:windowheight onehalf"])
           (t.steam ["suppressevent activate activatefocus" "workspace special:steam silent" "plugin:hyprbars:nobar"])
           (t.terminal ["plugin:scroller:group terminal"])
+          (t.vault ["workspace special:vault silent" "plugin:hyprbars:nobar" "plugin:scroller:group vault"])
           (t.vm ["workspace special:vm silent" "plugin:scroller:group vm"])
 
           ### Overrides

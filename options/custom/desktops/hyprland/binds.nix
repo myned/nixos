@@ -204,7 +204,7 @@ in {
             (key "M" "Super+Shift" "movetoworkspacesilent" "special:music")
             (key "O" "Super" "exec" "${hyprpicker} --autocopy")
             (key "O" "Super+Shift" "exec" "${hyprpicker} --autocopy --format rgb")
-            (key "P" "Ctrl+Alt" "exec" "${pkill} --exact 1password")
+            (key "P" "Ctrl+Alt" "exec" "${pkill} --exact bitwarden-desktop")
             (key "P" "Super" "togglespecialworkspace" "password")
             (key "P" "Super+Shift" "movetoworkspacesilent" "special:password")
             (key "Q" "Ctrl+Alt" "exec" "${hyprctl} kill")
