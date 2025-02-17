@@ -3,7 +3,7 @@
   inputs,
   lib,
   pkgs,
-  theme ? true,
+  theme ? false,
   ...
 }:
 with lib; {
