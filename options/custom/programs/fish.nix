@@ -112,6 +112,7 @@ in {
             gbib = "git bisect bad";
             gbig = "git bisect good";
             gc = "git clone";
+            gco = "git commit";
             gd = "git diff";
             gf = "git fetch";
             gi = "git init";
