@@ -18,7 +18,7 @@ in {
         # https://librewolf.net/
         # https://codeberg.org/librewolf
         programs.librewolf = mkMerge [
-          (import "${inputs.self}/modules/firefox.nix" {inherit config inputs lib pkgs;})
+          (import "${inputs.self}/modules/firefox/default.nix" {inherit config inputs lib pkgs;})
 
           {
             enable = true;

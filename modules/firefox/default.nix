@@ -52,6 +52,8 @@ with lib; {
     # TODO: Consider other themes
     # https://github.com/soulhotel/FF-ULTIMA
 
+    # BUG: Tab groups not yet supported
+    # https://github.com/rafaelmardojai/firefox-gnome-theme/issues/901
     # Import CSS theme with solarized overrides
     # https://github.com/rafaelmardojai/firefox-gnome-theme
     # https://github.com/rafaelmardojai/firefox-gnome-theme/blob/master/theme/colors/dark.css
@@ -61,37 +63,7 @@ with lib; {
 
     userChrome = mkIf theme ''
       @import "${inputs.firefox-gnome-theme}/userChrome.css";
-
-      :root {
-        --gnome-accent: #d33682;
-        --gnome-window-background: #002b36;
-        --gnome-window-color: #93a1a1;
-        --gnome-view-background: #073642;
-        --gnome-sidebar-background: #002b36;
-        --gnome-secondary-sidebar-background: #002b36;
-        --gnome-menu-background: #073642;
-        --gnome-headerbar-background: #002b36;
-        --gnome-toolbar-icon-fill: #93a1a1;
-        --gnome-tabbar-tab-hover-background: #073642;
-        --gnome-tabbar-tab-active-background: #073642;
-        --gnome-tabbar-tab-active-hover-background: #073642;
-      }
-
-      :root:-moz-window-inactive {
-        --gnome-inactive-entry-color: #586e75;
-        --gnome-tabbar-tab-hover-background: #073642;
-        --gnome-tabbar-tab-active-background: #073642;
-      }
-
-      /* Center bookmarks */
-      #PlacesToolbarItems {
-        justify-content: center;
-      }
-
-      /* Disable bookmark folder icons */
-      .bookmark-item[container] > .toolbarbutton-icon {
-        display: none;
-      }
+      ${builtins.readFile ./userChrome.css}
     '';
 
     containersForce = true;

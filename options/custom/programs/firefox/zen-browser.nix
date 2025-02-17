@@ -18,7 +18,7 @@ in {
         # https://zen-browser.app/
         # https://github.com/youwen5/zen-browser-flake
         programs.zen-browser = mkMerge [
-          (import "${inputs.self}/modules/firefox.nix" {
+          (import "${inputs.self}/modules/firefox/default.nix" {
             inherit config inputs lib pkgs;
 
             # TODO: Revisit Zen themes
