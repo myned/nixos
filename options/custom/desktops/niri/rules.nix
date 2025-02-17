@@ -53,19 +53,14 @@ in {
             {
               # Startup
               #?? <= 60 secs after niri launches
-              matches = [
-                {at-startup = true;}
-                {app-id = "^org\.gnome\.Loupe$";}
-                {app-id = "^org\.gnome\.Nautilus$";}
-              ];
-
-              open-focused = false;
-              #// open-on-workspace = "1";
+              matches = [{at-startup = true;}];
             }
 
             {
               # Android
               matches = [{app-id = "^[Ww]aydroid.*$";}];
+
+              open-on-workspace = "2";
             }
 
             {
@@ -81,9 +76,9 @@ in {
               default-column-width.proportion =
                 if config.custom.ultrawide
                 then 0.4
-                else 0.7;
+                else 0.8;
 
-              #// open-on-workspace = "2";
+              open-on-workspace = "2";
             }
 
             {
@@ -94,6 +89,8 @@ in {
                 {app-id = "^Element$";}
                 {app-id = "^org\.telegram\.desktop$";}
               ];
+
+              open-on-workspace = "3";
             }
 
             {
@@ -108,7 +105,7 @@ in {
                 {app-id = "^obsidian$";}
               ];
 
-              #// open-on-workspace = "2";
+              open-on-workspace = "2";
             }
 
             {
@@ -127,7 +124,7 @@ in {
               ];
 
               default-column-width = {}; # Window-defined
-              #// open-on-workspace = "1";
+              open-on-workspace = "1";
               variable-refresh-rate = true;
             }
 
@@ -144,7 +141,7 @@ in {
                 {app-id = "^YouTube Music$";}
               ];
 
-              #// open-on-workspace = "3";
+              open-on-workspace = "3";
             }
 
             {
@@ -155,7 +152,7 @@ in {
                 {app-id = "^ONLYOFFICE Desktop Editors$";}
               ];
 
-              #// open-on-workspace = "2";
+              open-on-workspace = "2";
             }
 
             (let
@@ -190,6 +187,8 @@ in {
                 {app-id = "^kitty$";}
                 {app-id = "^org\.wezfurlong\.wezterm$";}
               ];
+
+              #// default-column-display = "tabbed";
             }
 
             {
@@ -210,7 +209,7 @@ in {
               ];
 
               open-floating = false;
-              #// open-on-workspace = "1";
+              open-on-workspace = "1";
             }
 
             ### Overrides
