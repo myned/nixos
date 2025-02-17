@@ -33,12 +33,13 @@ with lib; {
       appimage.enable = true;
       chromium.enable = true;
       dconf.enable = true;
-      firefox.enable = true;
+      #// firefox.enable = true;
       #// foot.enable = true;
       gamescope.enable = true;
       #// gnome-terminal.enable = true;
       #// kdeconnect.enable = true;
       kitty.enable = true;
+      librewolf.enable = true;
       nautilus.enable = true;
       nvtop.enable = true;
       wezterm.enable = true;
@@ -60,7 +61,6 @@ with lib; {
       #// gtklock.enable = true;
       hyprlock.enable = true;
       libreoffice.enable = true;
-      #// librewolf.enable = true;
       localsend.enable = true;
       logseq.enable = true;
       mangohud.enable = true;

@@ -209,6 +209,7 @@ in {
             (class "^chromium-browser$" rules)
             (class "^firefox.*$" rules)
             (class "^google-chrome$" rules)
+            (class "^librewolf$" rules)
             (class "^vivaldi.*$" rules)
             (class "^zen$" rules)
           ];

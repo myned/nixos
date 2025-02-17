@@ -6,6 +6,7 @@
 }:
 with lib; let
   cfg = config.custom;
+  hm = config.home-manager.users.${config.custom.username};
 in {
   options.custom = {
     ### Profiles
@@ -30,7 +31,7 @@ in {
     hidpi = mkOption {default = cfg.scale > 1;};
     scale = mkOption {default = 1;};
     border = mkOption {default = 3;};
-    gap = mkOption {default = 10;};
+    gap = mkOption {default = 15;};
     padding = mkOption {default = 51;}; # ?? journalctl --user -u waybar.service | grep height:
     rounding = mkOption {default = 15;};
 
@@ -48,18 +49,8 @@ in {
 
     browser = {
       # TODO: Use lib.getExe' instead of /bin/ where possible
-      # HACK: Find first matching package in final home-manager list
-      command = mkOption {
-        default = "${lib.findFirst (pkg:
-            if (lib.hasAttr "pname" pkg)
-            then pkg.pname == "brave"
-            else false)
-          null
-          config.home-manager.users.${config.custom.username}.home.packages}/bin/brave";
-      };
-
-      desktop = mkOption {default = "brave.desktop";};
-      package = mkOption {default = pkgs.brave;};
+      command = mkOption {default = getExe hm.programs.librewolf.finalPackage;};
+      desktop = mkOption {default = "librewolf.desktop";};
     };
   };
 }
