@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib; let
@@ -49,8 +48,8 @@ in {
 
     browser = {
       # TODO: Use lib.getExe' instead of /bin/ where possible
-      command = mkOption {default = getExe hm.programs.librewolf.finalPackage;};
-      desktop = mkOption {default = "librewolf.desktop";};
+      command = mkOption {default = getExe hm.programs.zen-browser.finalPackage;};
+      desktop = mkOption {default = "zen.desktop";};
     };
   };
 }

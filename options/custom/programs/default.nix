@@ -39,7 +39,7 @@ with lib; {
       #// gnome-terminal.enable = true;
       #// kdeconnect.enable = true;
       kitty.enable = true;
-      librewolf.enable = true;
+      #// librewolf.enable = true;
       nautilus.enable = true;
       nvtop.enable = true;
       wezterm.enable = true;
@@ -47,7 +47,7 @@ with lib; {
     })
 
     (mkIf config.custom.full {
-      _1password.enable = true;
+      #// _1password.enable = true;
       adb.enable = true;
       #// ags.enable = true;
       #// bitwarden-menu.enable = true;
