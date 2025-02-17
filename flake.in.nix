@@ -98,28 +98,31 @@
       #!! There is no default nixpkgs, inputs.<nixpkgs|home-manager>-BRANCH must exist
       #?? branch = common "BRANCH" "ARCHITECTURE" [ MODULES ]
       common = branch: arch: modules:
-        inputs."nixpkgs-${branch}".lib.nixosSystem {
-          system = arch;
-          specialArgs = {inherit inputs;};
+        with inputs."nixpkgs-${branch}".lib;
+          nixosSystem {
+            system = arch;
 
-          # TODO: Clean up optional attributes with each new release
-          #!! Options will diverge between branches over time
-          #?? with lib; optionalAttrs (versionAtLeast version "VERSION") { ... };
-          modules =
-            modules
-            ++ [
-              ./options
-              ./configuration.nix
+            specialArgs = {
+              inherit inputs;
 
-              #!! Avoid globally importing modules that are not guarded by .enable
-              # https://github.com/NixOS/nixpkgs/issues/137168
-              (
-                {
-                  inputs,
-                  lib,
-                  ...
-                }:
-                  with lib; {
+              # Pass home-manager lib through nixpkgs lib
+              #?? lib.home-manager.*
+              lib = recursiveUpdate inputs."nixpkgs-${branch}".lib {home-manager = inputs."home-manager-${branch}".lib;};
+            };
+
+            # TODO: Clean up optional attributes with each new release
+            #!! Options will diverge between branches over time
+            #?? with lib; optionalAttrs (versionAtLeast version "VERSION") { ... };
+            modules =
+              modules
+              ++ [
+                ./options
+                ./configuration.nix
+
+                #!! Avoid globally importing modules that are not guarded by .enable
+                # https://github.com/NixOS/nixpkgs/issues/137168
+                (
+                  {inputs, ...}: {
                     imports =
                       [
                         inputs."aagl-gtk-on-nix-${branch}".nixosModules.default
@@ -175,9 +178,9 @@
                       inputs."nixgl-${branch}".overlays.default
                     ];
                   }
-              )
-            ];
-        };
+                )
+              ];
+          };
 
       #?? system = branch "ARCHITECTURE" [ MODULES ]
       stable = arch: modules: common "stable" "${arch}-linux" modules;
