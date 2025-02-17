@@ -47,6 +47,7 @@ in {
           xorg.xev # X11 keysym tester
 
           ### Dependencies
+          lz4 # Compression algorithm
           man-pages
           man-pages-posix
         ]
