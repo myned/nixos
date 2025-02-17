@@ -20,7 +20,7 @@ in {
 
   config = mkIf cfg.enable {
     custom = mkIf (config.custom.menu == "walker") {
-      menus = mapAttrsRecursive (path: value: pkgs.writeShellScript (concatStringsSep "-" (["menus"] ++ path)) value) {
+      menus = mapAttrsRecursive (path: value: toString (pkgs.writeShellScript (concatStringsSep "-" (["menus"] ++ path)) value)) {
         default.show = walker;
 
         clipboard = {

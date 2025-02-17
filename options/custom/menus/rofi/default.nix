@@ -25,7 +25,7 @@ in {
 
   config = mkIf cfg.enable {
     custom = mkIf (config.custom.menu == "rofi") {
-      menus = mapAttrsRecursive (path: value: pkgs.writeShellScript (concatStringsSep "-" (["menus"] ++ path)) value) {
+      menus = mapAttrsRecursive (path: value: toString (pkgs.writeShellScript (concatStringsSep "-" (["menus"] ++ path)) value)) {
         default.show = "${pkill} --exact rofi || ${rofi} -modes drun -show drun -show-icons";
         calculator.show = ''${pkill} --exact rofi || ${rofi} -modes calc -show calc -no-history -calc-error-color '#dc322f' -calc-command "${echo} -n '{result}' | ${wl-copy}"'';
 
