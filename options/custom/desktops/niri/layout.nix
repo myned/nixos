@@ -23,9 +23,9 @@ in {
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutborder
           border = {
             enable = true;
-            width = 1;
-            active.color = "#002b36";
-            inactive.color = "#002b36";
+            width = config.custom.border;
+            active.color = "#d33682";
+            inactive.color = "#d3368200";
           };
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutcenter-focused-column
@@ -41,10 +41,10 @@ in {
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutfocus-ring
           focus-ring = {
-            enable = true;
+            enable = false;
             width = config.custom.border;
             active.color = "#d33682";
-            inactive.color = "#00000000";
+            inactive.color = "#d3368200";
           };
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutgaps
