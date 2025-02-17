@@ -53,7 +53,7 @@ in {
           spawn-at-startup =
             [
               {command = [audio "--init"];} # Enforce audio profile state
-              {command = [bash "-c" config.custom.menus.clipboard.clear-silent];} # Clear clipboard history
+              {command = [config.custom.menus.clipboard.clear-silent];} # Clear clipboard history
               {command = [sway-audio-idle-inhibit];} # Inhibit while audio is playing
             ]
             ++ optionals config.custom.wallpaper [
