@@ -60,20 +60,52 @@ in {
         programs.niri = {
           package = config.programs.niri.package;
 
-          # https://github.com/YaLTeR/niri/wiki/Configuration:-Overview
-          # HACK: Prepend validated kdl config not currently implemented in settings module for e.g. custom build
-          # https://github.com/sodiboo/niri-flake/blob/main/settings.nix
-          config = with inputs.niri-flake.lib;
-            (internal.settings-module {config = hm;}).options.programs.niri.config.default
-            # https://github.com/sodiboo/niri-flake/blob/main/default-config.kdl.nix
-            ++ (with kdl; []);
-
           # https://github.com/YaLTeR/niri/wiki/Configuration:-Debug-Options
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsdebug
           settings.debug = {
             #// disable-cursor-plane = []; # Software cursor
             #// disable-direct-scanout = [];
           };
+        };
+
+        # HACK: Replace read-only finalConfig until extraConfig is supported
+        # https://github.com/sodiboo/niri-flake/issues/825
+        xdg.configFile = {
+          # https://github.com/sodiboo/niri-flake/blob/59ed19d431324af3fcebbf623c081eae2e67ab97/flake.nix#L395
+          niri-config.enable = mkForce false;
+
+          # TODO: Move to niri-flake when supported
+          # HACK: Merge kdl nodes into module config
+          # https://github.com/sodiboo/niri-flake/blob/main/settings.nix
+          # https://github.com/sodiboo/niri-flake/blob/main/default-config.kdl.nix
+          "niri/config.kdl".text = with inputs.niri-flake.lib;
+            kdl.serialize.nodes (forEach hm.programs.niri.config (node:
+              if isAttrs node && node.name == "layout"
+              then
+                recursiveUpdate node {
+                  children = with kdl;
+                    node.children
+                    ++ [
+                      # https://github.com/YaLTeR/niri/wiki/Configuration:-Layout#shadow
+                      (plain "shadow" [
+                        (flag "on")
+                        (leaf "inactive-color" "#00000000")
+                      ])
+
+                      # https://github.com/YaLTeR/niri/wiki/Configuration:-Layout#tab-indicator
+                      (plain "tab-indicator" [
+                        (flag "place-within-column")
+                        (leaf "active-color" "#d33682")
+                        (leaf "inactive-color" "#d3368240")
+                        (leaf "corner-radius" config.custom.rounding)
+                        (leaf "gap" 2)
+                        (leaf "gaps-between-tabs" 2)
+                        (leaf "length" {total-proportion = 0.98;})
+                        (leaf "width" (config.custom.border + 3))
+                      ])
+                    ];
+                }
+              else node));
         };
       }
     ];
