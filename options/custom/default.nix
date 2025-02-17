@@ -39,7 +39,7 @@ in {
     desktop = mkOption {
       default =
         if config.custom.full
-        then "hyprland"
+        then "niri"
         else "gnome";
     };
 
