@@ -127,6 +127,7 @@ in {
 
       # GNOME Text Editor
       "org/gnome/TextEditor" = {
+        custom-font = mkString "monospace 14";
         highlight-current-line = mkBoolean true;
         restore-session = mkBoolean false;
         show-line-numbers = mkBoolean true;
