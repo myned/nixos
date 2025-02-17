@@ -34,6 +34,7 @@
     home-manager-stable = flake "github:nix-community/home-manager/release-24.11" // stable "nixpkgs";
     nix-index-database-stable = flake "github:nix-community/nix-index-database" // stable "nixpkgs";
     nixgl-stable = flake "github:nix-community/nixGL" // stable "nixpkgs";
+    nur-stable = flake "github:nix-community/NUR" // stable "nixpkgs";
     stylix-stable = flake "github:danth/stylix/release-24.11" // stable "nixpkgs";
 
     ### Unstable
@@ -66,6 +67,7 @@
     nix-vscode-extensions = flake "github:nix-community/nix-vscode-extensions" // unstable "nixpkgs";
     nixd = flake "github:nix-community/nixd" // unstable "nixpkgs";
     nixgl-unstable = flake "github:nix-community/nixGL" // unstable "nixpkgs";
+    nur-unstable = flake "github:nix-community/NUR" // unstable "nixpkgs";
     stylix-unstable = flake "github:danth/stylix" // unstable "nixpkgs";
     walker = flake "github:abenz1267/walker?ref=v0.12.8" // unstable "nixpkgs";
     zen-browser = flake "github:youwen5/zen-browser-flake" // unstable "nixpkgs";
@@ -123,6 +125,7 @@
                         inputs."aagl-gtk-on-nix-${branch}".nixosModules.default
                         inputs."home-manager-${branch}".nixosModules.home-manager
                         inputs."nix-index-database-${branch}".nixosModules.nix-index
+                        inputs."nur-${branch}".modules.nixos.default
                         inputs."stylix-${branch}".nixosModules.stylix
                         inputs.agenix.nixosModules.default
                         inputs.arion.nixosModules.arion

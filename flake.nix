@@ -140,6 +140,14 @@
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nur-stable = {
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+      url = "github:nix-community/NUR";
+    };
+    nur-unstable = {
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "github:nix-community/NUR";
+    };
     steamtinkerlaunch = {
       flake = false;
       url = "github:sonic2kk/steamtinkerlaunch";
