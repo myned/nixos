@@ -26,11 +26,11 @@ in {
   config = mkIf cfg.enable {
     custom = mkIf (config.custom.menu == "rofi") {
       menus = mapAttrsRecursive (path: value: pkgs.writeShellScript (concatStringsSep "-" (["menus"] ++ path)) value) {
-        default.show = "${pkill} --exact rofi || ${rofi} -show drun -show-icons";
-        calculator.show = ''${pkill} --exact rofi || ${rofi} -show calc -no-history -calc-error-color '#dc322f' -calc-command "${echo} -n '{result}' | ${wl-copy}"'';
+        default.show = "${pkill} --exact rofi || ${rofi} -modes drun -show drun -show-icons";
+        calculator.show = ''${pkill} --exact rofi || ${rofi} -modes calc -show calc -no-history -calc-error-color '#dc322f' -calc-command "${echo} -n '{result}' | ${wl-copy}"'';
 
         clipboard = {
-          show = "${pkill} --exact rofi || ${rofi} -show clipboard -show-icons";
+          show = "${pkill} --exact rofi || ${rofi} -modes clipboard -show clipboard -show-icons";
           clear = "${cliphist} wipe && ${notify-send} '> cliphist' 'Clipboard cleared' --urgency low";
           clear-silent = "${cliphist} wipe";
         };
@@ -39,7 +39,7 @@ in {
         emoji.show = "${pkill} --exact rofi || ${rofimoji} --prompt 󰱰";
         network.show = "${pkill} --exact rofi || ${networkmanager_dmenu}";
         search.show = "";
-        vault.show = "${pkill} --exact rofi || ${rofi-rbw} --prompt 󰌾";
+        vault.show = "${pkill} --exact rofi || ${rofi-rbw}";
       };
 
       services = {
@@ -87,17 +87,6 @@ in {
             drun-display-format = "{name}"; # Display only names
             drun-match-fields = "name"; # Disable matching of invisible desktop attributes
             matching = "prefix"; # Match beginning of words
-
-            # https://davatorium.github.io/rofi/current/rofi.1/#available-modes
-            modes = [
-              "calc"
-              "clipboard"
-              "combi"
-              "drun"
-              "keys"
-              "run"
-              "ssh"
-            ];
           };
         };
 
