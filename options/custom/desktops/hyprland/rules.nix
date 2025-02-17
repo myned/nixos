@@ -42,6 +42,12 @@ in {
         "special:wallpaper, on-created-empty:${command "${loupe} /tmp/wallpaper.png"}"
       ];
 
+      # https://wiki.hyprland.org/Configuring/Window-Rules/#layer-rules
+      #?? layerrule = RULE, <NAMESPACE|ADDRESS>
+      layerrule = [
+        "noanim, rofi"
+      ];
+
       # https://wiki.hyprland.org/Configuring/Window-Rules
       #?? windowrulev2 = RULE, WINDOW
       windowrulev2 = with config.custom; let
