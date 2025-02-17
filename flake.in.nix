@@ -68,6 +68,7 @@
     nixgl-unstable = flake "github:nix-community/nixGL" // unstable "nixpkgs";
     stylix-unstable = flake "github:danth/stylix" // unstable "nixpkgs";
     walker = flake "github:abenz1267/walker?ref=v0.12.8" // unstable "nixpkgs";
+    zen-browser = flake "github:youwen5/zen-browser-flake" // unstable "nixpkgs";
 
     ### Branches
     nixpkgs-master = flake "github:NixOS/nixpkgs/master";
@@ -140,6 +141,30 @@
                       inputs.anyrun.homeManagerModules.default
                       inputs.nix-flatpak.homeManagerModules.nix-flatpak
                       inputs.walker.homeManagerModules.default
+
+                      # TODO: Use official module when supported
+                      # https://github.com/nix-community/home-manager/blob/master/modules/programs/floorp.nix
+                      (let
+                        modulePath = ["programs" "zen-browser"];
+                        mkFirefoxModule = import "${inputs."home-manager-${branch}"}/modules/programs/firefox/mkFirefoxModule.nix";
+                      in
+                        mkFirefoxModule {
+                          inherit modulePath;
+                          name = "Zen";
+                          wrappedPackageName = "zen-browser";
+                          unwrappedPackageName = "zen-browser-unwrapped";
+                          visible = true;
+
+                          platforms.linux = {
+                            configPath = ".zen";
+                            vendorPath = ".mozilla";
+                          };
+
+                          platforms.darwin = {
+                            configPath = "Library/Application Support/Zen";
+                            vendorPath = "Library/Application Support/Mozilla";
+                          };
+                        })
                     ];
 
                     # Branch-specific overlays

@@ -210,6 +210,7 @@ in {
             (class "^firefox.*$" rules)
             (class "^google-chrome$" rules)
             (class "^vivaldi.*$" rules)
+            (class "^zen$" rules)
           ];
 
           clipboard = rules: [

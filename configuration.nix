@@ -63,6 +63,11 @@
           # TODO: Remove when on stable
           ghostty = unstable.ghostty;
 
+          # TODO: Use official package when available
+          # https://github.com/NixOS/nixpkgs/issues/327982
+          zen-browser = inputs.zen-browser.packages.${pkgs.system}.zen-browser;
+          zen-browser-unwrapped = inputs.zen-browser.packages.${pkgs.system}.zen-browser-unwrapped;
+
           ### Python
           # https://nixos.org/manual/nixpkgs/unstable/#how-to-override-a-python-package-for-all-python-versions-using-extensions
           #?? PKG = pyprev.PKG.overridePythonAttrs {};
@@ -171,6 +176,7 @@
     };
 
     users = {
+      # FIXME: Separate root from sharedModules
       root = {
         # Inherit from user
         programs.home-manager.enable = config.home-manager.users.${config.custom.username}.programs.home-manager.enable;

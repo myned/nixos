@@ -164,6 +164,10 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:abenz1267/walker?ref=v0.12.8";
     };
+    zen-browser = {
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "github:youwen5/zen-browser-flake";
+    };
   };
   outputs = inputs: inputs.flakegen ./flake.in.nix inputs;
 }
