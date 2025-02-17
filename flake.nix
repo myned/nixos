@@ -48,7 +48,7 @@
     };
     firefox-gnome-theme = {
       flake = false;
-      url = "github:rafaelmardojai/firefox-gnome-theme/v128";
+      url = "github:rafaelmardojai/firefox-gnome-theme";
     };
     flakegen.url = "github:jorsn/flakegen";
     fw-fanctrl = {
