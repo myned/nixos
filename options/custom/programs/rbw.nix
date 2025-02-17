@@ -36,10 +36,26 @@ in {
         # https://github.com/NixOS/nixpkgs/pull/303745
         # https://github.com/fdw/rofi-rbw?tab=readme-ov-file#configuration
         xdg.configFile = {
-          "rofi-rbw.rc".text = ''
+          "rofi-rbw.rc".text = let
+            keybindings = concatStringsSep "," [
+              "Ctrl+1:print:username"
+              "Ctrl+2:print:password"
+              "Ctrl+3:print:totp"
+              "Alt+1:type:delay:username"
+              "Alt+2:type:delay:password"
+              "Alt+3:type:delay:totp"
+              "Alt+u:copy:username"
+              "Alt+p:copy:password"
+              "Alt+t:copy:totp"
+              "Alt+s:sync"
+            ];
+          in ''
             action=copy
+            keybindings=${keybindings}
             no-help=true
+            prompt=󰌾
             selector=${config.custom.menu}
+            target=menu
           '';
         };
       }
