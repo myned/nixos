@@ -33,6 +33,7 @@ in {
                 "zen.pinned-tab-manager.close-shortcut-behavior" = "reset-unload-switch";
                 "zen.pinned-tab-manager.restore-pinned-tabs-to-pinned-url" = true;
                 "zen.splitView.change-on-hover" = true;
+                "zen.tab-unloader.enabled" = false;
                 "zen.tab-unloader.timeout-minutes" = 60;
                 "zen.theme.accent-color" = "#d33682";
                 "zen.theme.color-prefs.colorful" = false;
@@ -45,10 +46,10 @@ in {
                 "zen.view.use-single-toolbar" = false;
                 "zen.welcome-screen.enabled" = false;
                 "zen.welcome-screen.seen" = true;
-                "zen.workspaces.container-specific-essentials-enabled" = true;
+                "zen.workspaces.container-specific-essentials-enabled" = false;
                 "zen.workspaces.force-container-workspace" = true;
                 "zen.workspaces.hide-deactivated-workspaces" = true;
-                "zen.workspaces.individual-pinned-tabs" = false;
+                "zen.workspaces.individual-pinned-tabs" = true;
                 "zen.workspaces.show-icon-strip" = true;
                 "zen.workspaces.show-workspace-indicator" = false;
               };
