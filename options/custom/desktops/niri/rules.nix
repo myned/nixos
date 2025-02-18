@@ -70,7 +70,13 @@ in {
                 {app-id = "^chromium-browser$";}
                 {app-id = "^firefox.*$";}
                 {app-id = "^google-chrome$";}
+                {app-id = "^librewolf$";}
                 {app-id = "^vivaldi.*$";}
+                {app-id = "^zen$";}
+              ];
+
+              excludes = [
+                {title = "^Picture.in.[Pp]icture$";}
               ];
 
               default-column-width.proportion =
@@ -78,6 +84,7 @@ in {
                 then 0.4
                 else 0.8;
 
+              min-width = builtins.floor (config.custom.width * 0.3);
               open-on-workspace = "2";
             }
 
@@ -183,6 +190,7 @@ in {
             {
               # Terminals
               matches = [
+                {app-id = "^com\.mitchellh\.ghostty$";}
                 {app-id = "^foot$";}
                 {app-id = "^kitty$";}
                 {app-id = "^org\.wezfurlong\.wezterm$";}
@@ -215,7 +223,7 @@ in {
             ### Overrides
             # TODO: Remove when switching 1Password to Wayland
             (let
-              height = builtins.floor (config.custom.height / config.custom.scale * 0.4); # 40%
+              height = builtins.floor (config.custom.height * 0.4); # 40%
             in {
               matches = [
                 {
