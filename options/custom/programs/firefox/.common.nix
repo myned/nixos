@@ -79,7 +79,7 @@ with lib; {
     containersForce = true;
 
     containers = {
-      Edu = {
+      edu = {
         color = "orange";
         icon = "fruit";
         id = 1;
