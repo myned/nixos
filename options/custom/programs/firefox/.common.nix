@@ -223,7 +223,7 @@ with lib; {
         "media.videocontrols.picture-in-picture.enable-when-switching-tabs.enabled" = true;
         "media.videocontrols.picture-in-picture.enabled" = true;
         "media.videocontrols.picture-in-picture.respect-disablePictureInPicture" = false;
-        "media.videocontrols.picture-in-picture.urlbar-button.enabled" = true;
+        "media.videocontrols.picture-in-picture.urlbar-button.enabled" = false;
         "media.videocontrols.picture-in-picture.video-toggle.enabled" = true;
         "media.videocontrols.picture-in-picture.video-toggle.has-used" = true;
         "media.videocontrols.picture-in-picture.video-toggle.min-video-secs" = 0; # No minimum duration
