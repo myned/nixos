@@ -87,10 +87,10 @@ in {
                     node.children
                     ++ [
                       # https://github.com/YaLTeR/niri/wiki/Configuration:-Layout#shadow
-                      (plain "shadow" [
-                        (flag "on")
-                        (leaf "inactive-color" "#00000000")
-                      ])
+                      # (plain "shadow" [
+                      #   (flag "on")
+                      #   (leaf "inactive-color" "#00000000")
+                      # ])
 
                       # https://github.com/YaLTeR/niri/wiki/Configuration:-Layout#tab-indicator
                       (plain "tab-indicator" [
