@@ -54,27 +54,31 @@ with lib; {
 
     # BUG: Tab groups not yet supported
     # https://github.com/rafaelmardojai/firefox-gnome-theme/issues/901
-    # Import CSS theme with solarized overrides
     # https://github.com/rafaelmardojai/firefox-gnome-theme
     # https://github.com/rafaelmardojai/firefox-gnome-theme/blob/master/theme/colors/dark.css
-    userContent = mkIf theme ''
-      @import "${inputs.firefox-gnome-theme}/userContent.css";
+    userChrome = ''
+      ${
+        if theme
+        then "@import ${inputs.firefox-gnome-theme}/userChrome.css"
+        else ""
+      }
+
+      ${builtins.readFile ./userChrome.css}
     '';
 
-    userChrome = mkIf theme ''
-      @import "${inputs.firefox-gnome-theme}/userChrome.css";
-      ${builtins.readFile ./userChrome.css}
+    userContent = ''
+      ${
+        if theme
+        then "@import ${inputs.firefox-gnome-theme}/userContent.css"
+        else ""
+      }
+
+      ${builtins.readFile ./userContent.css}
     '';
 
     containersForce = true;
 
     containers = {
-      Master = {
-        color = "pink";
-        icon = "circle";
-        id = 0;
-      };
-
       Edu = {
         color = "orange";
         icon = "fruit";
@@ -198,7 +202,8 @@ with lib; {
         "full-screen-api.warning.timeout" = 0;
         "general.autoScroll" = false;
         "general.smoothScroll" = true;
-        "gfx.webrender.software" = config.custom.programs.looking-glass.igpu; # Reduce load on iGPU
+        "general.smoothScroll.msdPhysics.enabled" = true;
+        "gfx.webrender.software" = false;
         "identity.fxaccounts.enabled" = true;
         "layers.acceleration.force-enabled" = true;
         "layout.css.always_underline_links" = false;
@@ -221,7 +226,7 @@ with lib; {
         "media.videocontrols.picture-in-picture.video-toggle.enabled" = true;
         "media.videocontrols.picture-in-picture.video-toggle.has-used" = true;
         "media.videocontrols.picture-in-picture.video-toggle.min-video-secs" = 0; # No minimum duration
-        "media.videocontrols.picture-in-picture.video-toggle.position" = "top";
+        "media.videocontrols.picture-in-picture.video-toggle.position" = "right";
         "messaging-system.askForFeedback" = false;
         "messaging-system.rsexperimentloader.enabled" = false;
         "middlemouse.paste" = false;
@@ -230,7 +235,7 @@ with lib; {
         "network.dns.disablePrefetchFromHTTPS" = true;
         "network.http.referer.XOriginPolicy" = 0; # Relaxed
         "network.predictor.enabled" = false;
-        "pref.privacy.disable_button.view_passwords" = true;
+        "pref.privacy.disable_button.view_passwords" = false;
         "privacy.fingerprintingProtection" = false;
         "privacy.globalprivacycontrol.enabled" = true;
         "privacy.resistFingerprinting.autoDeclineNoUserInputCanvasPrompts" = false;
@@ -264,20 +269,6 @@ with lib; {
         "gnomeTheme.allTabsButtonOnOverflow" = true;
         "gnomeTheme.bookmarksToolbarUnderTabs" = true;
       };
-
-    bookmarks = [
-      {
-        name = "Nix User Repository";
-        keyword = "nur";
-        url = "https://nur.nix-community.org/";
-      }
-
-      {
-        name = "Nix Ryantm";
-        keyword = "nry";
-        url = "https://ryantm.github.io/nixpkgs/";
-      }
-    ];
 
     # https://searchfox.org/mozilla-central/rev/669329e284f8e8e2bb28090617192ca9b4ef3380/toolkit/components/search/SearchEngine.jsm#1138-1177
     search = {
@@ -468,7 +459,7 @@ with lib; {
         };
 
         "Niri Issues" = {
-          definedAliases = ["nri"];
+          definedAliases = ["nii"];
           iconUpdateURL = "https://github.com/favicon.ico";
           urls = [{template = "https://github.com/YaLTeR/niri/issues?q=is%3Aissue+is%3Aopen+{searchTerms}";}];
         };

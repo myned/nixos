@@ -17,7 +17,7 @@ in {
       {
         # https://www.mozilla.org/en-US/firefox/developer
         programs.firefox = mkMerge [
-          (import "${inputs.self}/modules/firefox/default.nix" {inherit config inputs lib pkgs;})
+          (import ./.common.nix {inherit config inputs lib pkgs;})
 
           {
             enable = true;
