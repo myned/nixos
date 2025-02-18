@@ -25,7 +25,7 @@ in {
             enable = true;
             width = config.custom.border;
             active.color = "#d33682";
-            inactive.color = "#d3368200";
+            inactive.color = "#073642";
           };
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutcenter-focused-column
@@ -44,7 +44,7 @@ in {
             enable = false;
             width = config.custom.border;
             active.color = "#d33682";
-            inactive.color = "#d3368200";
+            inactive.color = "#073642";
           };
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutgaps
