@@ -151,12 +151,10 @@ in {
             }
 
             (let
-              # BUG: Fixed width may not take borders into account
-              # https://github.com/YaLTeR/niri/issues/269
               pip = with config.custom; rec {
-                x = gap;
+                x = gap - border * 2;
                 y = gap;
-                w = builtins.floor (width * 0.3 - gap); # 30%
+                w = builtins.floor (width * 0.3 - gap * 2 + border * 2 + border + 1); # 30%
                 h = builtins.floor (w * 9 / 16); # 16:9
               };
             in {
@@ -164,9 +162,9 @@ in {
               matches = [{title = "^Picture.in.[Pp]icture$";}];
 
               default-floating-position = {
+                relative-to = "top-right";
                 x = pip.x;
                 y = pip.y;
-                relative-to = "top-right";
               };
 
               default-column-width.fixed = pip.w;
