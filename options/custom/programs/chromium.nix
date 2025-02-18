@@ -234,7 +234,7 @@ in {
 
           {
             name = "Niri Issues";
-            shortcut = "nri";
+            shortcut = "nii";
             url = "https://github.com/YaLTeR/niri/issues?q=is%3Aissue+is%3Aopen+{searchTerms}";
           }
 

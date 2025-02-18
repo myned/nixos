@@ -170,7 +170,7 @@ case "$1" in
     url="https://nixpk.gs/pr-tracker.html?pr="
     query="${1:4}"
     ;;
-  'nri '*)
+  'nii '*)
     label="Niri Issues"
     icon="com.github.zren.bugzilla"
     url="https://github.com/YaLTeR/niri/issues?q=is%3Aissue+is%3Aopen+"
