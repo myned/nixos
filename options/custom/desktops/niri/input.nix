@@ -39,6 +39,7 @@ in {
           mouse = {
             accel-profile = "adaptive";
             accel-speed = -0.7;
+            scroll-factor = 1.25;
           };
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsinputtouchpadaccel-profile
