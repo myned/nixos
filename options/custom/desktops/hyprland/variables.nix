@@ -50,6 +50,12 @@ in {
             zoom_rigid = true;
           };
 
+          # https://wiki.hyprland.org/Configuring/Variables/#debug
+          debug = {
+            disable_scale_checks = true; #!! Unsupported, may result in pixel misalignment
+            enable_stdout_logs = true; # systemd-cat
+          };
+
           # https://wiki.hyprland.org/Configuring/Variables/#decoration
           decoration = {
             blur.enabled = false;
