@@ -59,8 +59,6 @@ in {
             {
               # Android
               matches = [{app-id = "^[Ww]aydroid.*$";}];
-
-              open-on-workspace = "2";
             }
 
             {
@@ -85,7 +83,6 @@ in {
                 else 0.8;
 
               min-width = builtins.floor (config.custom.width * 0.3);
-              open-on-workspace = "2";
             }
 
             {
@@ -96,8 +93,6 @@ in {
                 {app-id = "^Element$";}
                 {app-id = "^org\.telegram\.desktop$";}
               ];
-
-              open-on-workspace = "3";
             }
 
             {
@@ -111,8 +106,6 @@ in {
                 {app-id = "^codium$";}
                 {app-id = "^obsidian$";}
               ];
-
-              open-on-workspace = "2";
             }
 
             {
@@ -131,7 +124,6 @@ in {
               ];
 
               default-column-width = {}; # Window-defined
-              open-on-workspace = "1";
               variable-refresh-rate = true;
             }
 
@@ -147,8 +139,6 @@ in {
                 {app-id = "^totem$";}
                 {app-id = "^YouTube Music$";}
               ];
-
-              open-on-workspace = "3";
             }
 
             {
@@ -158,8 +148,6 @@ in {
                 {app-id = "^libreoffice$";}
                 {app-id = "^ONLYOFFICE Desktop Editors$";}
               ];
-
-              open-on-workspace = "2";
             }
 
             (let
@@ -217,7 +205,6 @@ in {
               ];
 
               open-floating = false;
-              open-on-workspace = "1";
             }
 
             ### Overrides
