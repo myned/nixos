@@ -25,7 +25,7 @@ with lib; {
         ublock-origin
       ]
       ++ optionals config.custom.full [
-        awesome-rss
+        #// awesome-rss
         #// betterttv
         bitwarden
         enhancer-for-youtube
@@ -33,6 +33,7 @@ with lib; {
         #// gnome-shell-integration
         #// improved-tube
         libredirect
+        multi-account-containers
         #// onepassword-password-manager
         pwas-for-firefox
         #// simple-tab-groups
