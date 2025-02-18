@@ -42,7 +42,7 @@ in {
                 "zen.urlbar.replace-newtab" = false;
                 "zen.view.compact.hide-toolbar" = true;
                 "zen.view.show-newtab-button-top" = false;
-                "zen.view.sidebar-expanded" = false;
+                "zen.view.sidebar-expanded" = true;
                 "zen.view.use-single-toolbar" = false;
                 "zen.welcome-screen.enabled" = false;
                 "zen.welcome-screen.seen" = true;
