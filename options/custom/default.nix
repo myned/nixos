@@ -32,7 +32,7 @@ in {
     border = mkOption {default = 3.0;};
     gap = mkOption {default = 10.0;};
     padding = mkOption {default = 51.0;}; # ?? journalctl --user -u waybar.service | grep height:
-    rounding = mkOption {default = 15.0;};
+    rounding = mkOption {default = 16.0;};
 
     ### Misc
     desktop = mkOption {
