@@ -30,40 +30,48 @@ in {
             ### Defaults
             {
               # Global
-              geometry-corner-radius = let
-                radius = config.custom.rounding + 0.0; # Convert to float
-              in {
-                top-left = radius;
-                top-right = radius;
-                bottom-right = radius;
-                bottom-left = radius;
+              geometry-corner-radius = {
+                top-left = config.custom.rounding;
+                top-right = config.custom.rounding;
+                bottom-right = config.custom.rounding;
+                bottom-left = config.custom.rounding;
               };
 
               clip-to-geometry = true;
+              open-floating = true;
             }
 
             {
               # Floating
-              matches = [{is-floating = true;}];
+              matches = [
+                {is-floating = true;}
+              ];
 
               border.enable = false;
               focus-ring.enable = false;
+              #// shadow.enable = true;
             }
 
             {
               # Startup
               #?? <= 60 secs after niri launches
-              matches = [{at-startup = true;}];
+              matches = [
+                {at-startup = true;}
+              ];
             }
 
             {
               # Android
-              matches = [{app-id = "^[Ww]aydroid.*$";}];
+              matches = [
+                {app-id = "^[Ww]aydroid.*$";}
+              ];
+
+              open-floating = false;
             }
 
             {
               # Browsers
-              matches = [
+              matches = map (match: {at-startup = true;} // match) [
                 {app-id = "^brave-browser$";}
                 {app-id = "^chromium-browser$";}
                 {app-id = "^firefox.*$";}
@@ -82,7 +90,7 @@ in {
                 then 0.4
                 else 0.8;
 
-              min-width = builtins.floor (config.custom.width * 0.3);
+              open-floating = false;
             }
 
             {
@@ -93,11 +101,16 @@ in {
                 {app-id = "^Element$";}
                 {app-id = "^org\.telegram\.desktop$";}
               ];
+
+              #// default-column-display = "tabbed";
+              open-floating = false;
             }
 
             {
               # Dropdown terminal
-              matches = [{app-id = "^dropdown$";}];
+              matches = [
+                {app-id = "^dropdown$";}
+              ];
             }
 
             {
@@ -106,11 +119,17 @@ in {
                 {app-id = "^codium$";}
                 {app-id = "^obsidian$";}
               ];
+
+              open-floating = false;
             }
 
             {
               # Files
-              matches = [{app-id = "^org\.gnome\.Nautilus$";}];
+              matches = [
+                {app-id = "^org\.gnome\.Nautilus$";}
+              ];
+
+              open-floating = false;
             }
 
             {
@@ -124,6 +143,7 @@ in {
               ];
 
               default-column-width = {}; # Window-defined
+              open-floating = false;
               variable-refresh-rate = true;
             }
 
@@ -139,6 +159,8 @@ in {
                 {app-id = "^totem$";}
                 {app-id = "^YouTube Music$";}
               ];
+
+              open-floating = false;
             }
 
             {
@@ -148,6 +170,8 @@ in {
                 {app-id = "^libreoffice$";}
                 {app-id = "^ONLYOFFICE Desktop Editors$";}
               ];
+
+              open-floating = false;
             }
 
             (let
@@ -159,7 +183,9 @@ in {
               };
             in {
               # PiP
-              matches = [{title = "^Picture.in.[Pp]icture$";}];
+              matches = [
+                {title = "^Picture.in.[Pp]icture$";}
+              ];
 
               default-floating-position = {
                 relative-to = "top-right";
@@ -169,7 +195,6 @@ in {
 
               default-column-width.fixed = pip.w;
               default-window-height.fixed = pip.h;
-              open-floating = true;
               open-focused = false;
             })
 
@@ -182,7 +207,7 @@ in {
                 {app-id = "^org\.wezfurlong\.wezterm$";}
               ];
 
-              #// default-column-display = "tabbed";
+              open-floating = false;
             }
 
             {
@@ -191,6 +216,8 @@ in {
                 {app-id = "^1Password$";}
                 {app-id = "^Bitwarden$";}
               ];
+
+              open-floating = false;
             }
 
             {
