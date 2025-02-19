@@ -97,9 +97,15 @@ in {
               # Chats
               matches = [
                 {app-id = "^cinny$";}
+                {app-id = "^de\.schmidhuberj\.Flare$";}
                 {app-id = "^discord$";}
                 {app-id = "^Element$";}
+                {app-id = "^fluffychat$";}
+                {app-id = "^nheko$";}
+                {app-id = "^org\.gnome\.Fractal$";}
                 {app-id = "^org\.telegram\.desktop$";}
+                {app-id = "^signal$";}
+                {app-id = "^so\.libdb\.dissent$";}
               ];
 
               #// default-column-display = "tabbed";
