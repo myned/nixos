@@ -173,8 +173,9 @@ in {
               # Office
               matches = [
                 {app-id = "^draw\.io$";}
-                {app-id = "^libreoffice$";}
+                {app-id = "^libreoffice.*$";}
                 {app-id = "^ONLYOFFICE Desktop Editors$";}
+                {app-id = "^org\.gnome\.Papers$";}
               ];
 
               open-floating = false;
