@@ -77,11 +77,7 @@ in {
           bitwarden-desktop # Password manager
           blackbox-terminal # Terminal
           cartridges # Game library
-
-          # BUG: Build failure
-          # https://github.com/NixOS/nixpkgs/issues/357406
-          #// cinny-desktop # Matrix client
-
+          cinny-desktop # Matrix client
           clapper # Video player
           concessio # Permissions converter
           d-spy # D-Bus introspection
@@ -96,7 +92,7 @@ in {
           flare-signal # Signal client
           fluffychat # Matrix client
           footage # Video editor
-          #// fractal # Matrix client
+          fractal # Matrix client
           fragments # Torrent downloader
           gcolor3 # Color picker
           gitg # Git client
@@ -143,7 +139,6 @@ in {
           loupe # Image viewer
           lutris # Game library
           newsflash # RSS feed
-          nheko # Matrix client
           obsidian # Knowledge base
           papers # Document viewer
           path-of-building # Path of Exile planner
