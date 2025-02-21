@@ -42,7 +42,7 @@ with lib; {
       #// librewolf.enable = true;
       nautilus.enable = true;
       nvtop.enable = true;
-      wezterm.enable = true;
+      #// wezterm.enable = true;
       zen-browser.enable = true;
     })
 
