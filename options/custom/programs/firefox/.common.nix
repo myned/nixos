@@ -139,6 +139,10 @@ with lib; {
         "browser.search.separatePrivateDefault" = false;
         "browser.search.suggest.enabled" = true;
         "browser.search.widget.inNavBar" = false;
+        "browser.sessionstore.restore_hidden_tabs" = false;
+        "browser.sessionstore.restore_on_demand" = true;
+        "browser.sessionstore.restore_pinned_tabs_on_demand" = false;
+        "browser.sessionstore.restore_tabs_lazily" = true;
         "browser.shell.checkDefaultBrowser" = false;
         "browser.startup.homepage" = "about:home";
         "browser.startup.page" = 3; # Previous session
@@ -203,7 +207,7 @@ with lib; {
         "full-screen-api.warning.timeout" = 0;
         "general.autoScroll" = false;
         "general.smoothScroll" = true;
-        "general.smoothScroll.msdPhysics.enabled" = true;
+        "general.smoothScroll.msdPhysics.enabled" = false;
         "gfx.webrender.software" = false;
         "identity.fxaccounts.enabled" = true;
         "layers.acceleration.force-enabled" = true;
