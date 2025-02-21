@@ -181,7 +181,6 @@
         # Inherit from user
         programs.home-manager.enable = config.home-manager.users.${config.custom.username}.programs.home-manager.enable;
         systemd.user.startServices = config.home-manager.users.${config.custom.username}.systemd.user.startServices;
-        nixpkgs.config = config.home-manager.users.${config.custom.username}.nixpkgs.config;
         nix.gc = config.home-manager.users.${config.custom.username}.nix.gc;
 
         home = {
@@ -194,9 +193,6 @@
       ${config.custom.username} = {
         programs.home-manager.enable = true;
         systemd.user.startServices = "sd-switch"; # Start/stop user services immediately
-
-        # Inherit configuration.nix
-        nixpkgs.config = config.nixpkgs.config;
 
         nix.gc = {
           automatic = config.nix.gc.automatic;
