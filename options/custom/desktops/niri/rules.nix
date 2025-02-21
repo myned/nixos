@@ -124,6 +124,7 @@ in {
               matches = [
                 {app-id = "^codium$";}
                 {app-id = "^obsidian$";}
+                {app-id = "^org\.gnome\.TextEditor$";}
               ];
 
               open-floating = false;
@@ -156,11 +157,8 @@ in {
             {
               # Media
               matches = [
-                {
-                  app-id = "^org\.gnome\.Loupe$";
-                  title = "wallpaper.png";
-                }
-
+                {app-id = "^com\.github\.th_ch\.youtube_music$";}
+                {app-id = "^org\.gnome\.Loupe$";}
                 {app-id = "^Spotify$";}
                 {app-id = "^totem$";}
                 {app-id = "^YouTube Music$";}
@@ -206,6 +204,15 @@ in {
             })
 
             {
+              # Steam
+              matches = [
+                {app-id = "^steam$";}
+              ];
+
+              open-floating = false;
+            }
+
+            {
               # Terminals
               matches = [
                 {app-id = "^com\.mitchellh\.ghostty$";}
@@ -233,7 +240,7 @@ in {
                 {app-id = "^(sdl-|wl|x)freerdp$";}
                 {app-id = "^looking-glass-client$";}
                 {app-id = "^org\.remmina\.Remmina$";}
-                {app-id = "^virt-manager$";}
+                {app-id = "^.*virt-manager.*$";}
               ];
 
               open-floating = false;
