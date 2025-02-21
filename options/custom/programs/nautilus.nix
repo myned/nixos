@@ -12,7 +12,7 @@ in {
     git = mkOption {default = false;};
     index = mkOption {default = true;};
     service = mkOption {default = false;};
-    terminal = mkOption {default = "ghostty";};
+    terminal = mkOption {default = null;};
   };
 
   config = mkIf cfg.enable {
@@ -38,8 +38,8 @@ in {
     # https://github.com/NixOS/nixpkgs/pull/240780
     #?? echo $NAUTILUS_4_EXTENSION_DIR
     programs.nautilus-open-any-terminal = {
-      enable = true;
-      terminal = cfg.terminal;
+      enable = isString cfg.terminal;
+      terminal = mkIf (isString cfg.terminal) cfg.terminal;
     };
 
     home-manager.users.${config.custom.username} = {
