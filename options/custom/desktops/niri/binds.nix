@@ -19,7 +19,6 @@ with lib; let
   hyprpicker = "${pkgs.hyprpicker}/bin/hyprpicker";
   inhibit = config.home-manager.users.${config.custom.username}.home.file.".local/bin/inhibit".source;
   loginctl = "${pkgs.systemd}/bin/loginctl";
-  loupe = "${pkgs.loupe}/bin/loupe";
   nautilus = "${pkgs.nautilus}/bin/nautilus";
   networkmanager_dmenu = "${pkgs.networkmanager_dmenu}/bin/networkmanager_dmenu";
   notify-send = "${pkgs.libnotify}/bin/notify-send";
@@ -30,6 +29,7 @@ with lib; let
   power = config.home-manager.users.${config.custom.username}.home.file.".local/bin/power".source;
   remote = config.home-manager.users.${config.custom.username}.home.file.".local/bin/remote".source;
   steam = "${config.programs.steam.package}/bin/steam";
+  sushi = "${pkgs.sushi}/bin/sushi";
   swayosd-client = "${pkgs.swayosd}/bin/swayosd-client";
   virt-manager = "${config.programs.virt-manager.package}/bin/virt-manager";
   waydroid = "${pkgs.waydroid}/bin/waydroid";
@@ -89,7 +89,7 @@ in {
             (key "Return" "Mod" maximize-column)
             (key "Return" "Mod+Shift" fullscreen-window)
             (key "Right" "Mod" (spawn [playerctl "next"]))
-            (key "Slash" "Mod" (spawn [loupe "/tmp/wallpaper.png"]))
+            (key "Slash" "Mod" (spawn [sushi "/tmp/wallpaper.png"]))
             (key "Slash" "Mod+Shift" show-hotkey-overlay)
             (key "Space" "Ctrl+Alt" (spawn ["lifx" "toggle"]))
             (key "Tab" "Mod" toggle-column-tabbed-display)
