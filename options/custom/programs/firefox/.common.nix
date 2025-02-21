@@ -20,7 +20,7 @@ with lib; {
   #?? about:profiles
   profiles.default = {
     # https://nur.nix-community.org/repos/rycee/
-    extensions = with pkgs.nur.repos.rycee.firefox-addons;
+    extensions.packages = with pkgs.nur.repos.rycee.firefox-addons;
       optionals config.custom.minimal [
         ublock-origin
       ]
