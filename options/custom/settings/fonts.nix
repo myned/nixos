@@ -90,6 +90,20 @@ in {
       };
     };
 
-    home-manager.users.${config.custom.username}.fonts.fontconfig.defaultFonts = config.fonts.fontconfig.defaultFonts;
+    home-manager.sharedModules = [
+      {
+        # Inherit from system module
+        fonts.fontconfig.defaultFonts = config.fonts.fontconfig.defaultFonts;
+
+        # HACK: Some applications do not support fontconfig nor symlinks, so copy fonts to user directory
+        # https://github.com/ONLYOFFICE/DocumentServer/issues/1859 et al.
+        home.activation = {
+          copy-fonts = lib.home-manager.hm.dag.entryAfter ["writeBoundary"] ''
+            run cp --recursive --dereference --force \
+              /run/current-system/sw/share/fonts "$XDG_DATA_HOME/"
+          '';
+        };
+      }
+    ];
   };
 }
