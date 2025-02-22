@@ -7,7 +7,7 @@
 with lib; let
   cfg = config.custom.programs.onlyoffice;
 
-  onlyoffice-desktopeditors = "${getExe pkgs.onlyoffice-bin} --system-title-bar --xdg-desktop-portal";
+  onlyoffice-desktopeditors = "${getExe pkgs.onlyoffice-desktopeditors} --system-title-bar --xdg-desktop-portal";
 in {
   options.custom.programs.onlyoffice = {
     enable = mkOption {default = false;};
@@ -15,7 +15,7 @@ in {
 
   config = mkIf cfg.enable {
     # https://github.com/ONLYOFFICE/DesktopEditors
-    environment.systemPackages = [pkgs.onlyoffice-bin];
+    environment.systemPackages = [pkgs.onlyoffice-desktopeditors];
 
     home-manager.sharedModules = [
       {
