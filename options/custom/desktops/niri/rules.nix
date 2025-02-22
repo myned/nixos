@@ -122,7 +122,6 @@ in {
             {
               # Editors
               matches = [
-                {app-id = "^codium$";}
                 {app-id = "^obsidian$";}
                 {app-id = "^org\.gnome\.TextEditor$";}
               ];
@@ -155,6 +154,20 @@ in {
             }
 
             {
+              # IDEs
+              matches = [
+                {app-id = "^codium$";}
+              ];
+
+              default-column-width.proportion =
+                if config.custom.ultrawide
+                then 0.4
+                else 0.8;
+
+              open-floating = false;
+            }
+
+            {
               # Media
               matches = [
                 {app-id = "^com\.github\.th_ch\.youtube_music$";}
@@ -172,7 +185,7 @@ in {
               matches = [
                 {app-id = "^draw\.io$";}
                 {app-id = "^libreoffice.*$";}
-                {app-id = "^ONLYOFFICE Desktop Editors$";}
+                {app-id = "^ONLYOFFICE$";}
                 {app-id = "^org\.gnome\.Papers$";}
               ];
 
