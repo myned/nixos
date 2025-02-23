@@ -18,13 +18,17 @@ in {
   config = mkIf cfg.enable {
     # TODO: Use module when completed
     # https://github.com/NixOS/nixpkgs/pull/319535
-    environment.systemPackages = with pkgs; [nautilus];
+    environment.systemPackages = with pkgs; [
+      nautilus
+      nautilus-python
+    ];
 
     services = {
       gvfs.enable = true; # Trash dependency
 
       gnome =
         {
+          core-utilities.enable = true;
           sushi.enable = true; # Quick preview with spacebar
         }
         // optionalAttrs (versionAtLeast version "24.11") {
