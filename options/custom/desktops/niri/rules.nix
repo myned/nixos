@@ -124,6 +124,7 @@ in {
               matches = [
                 {app-id = "^obsidian$";}
                 {app-id = "^org\.gnome\.TextEditor$";}
+                {app-id = "^org\.wireshark\.Wireshark$";}
               ];
 
               open-floating = false;
