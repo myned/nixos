@@ -6,6 +6,8 @@
 }:
 with lib; let
   cfg = config.custom.settings.fonts;
+
+  rsync = getExe pkgs.rsync;
 in {
   options.custom.settings.fonts = {
     enable = mkOption {default = false;};
@@ -99,7 +101,7 @@ in {
         # https://github.com/ONLYOFFICE/DocumentServer/issues/1859 et al.
         home.activation = {
           copy-fonts = lib.home-manager.hm.dag.entryAfter ["writeBoundary"] ''
-            run cp --recursive --dereference --force \
+            run ${rsync} --recursive --copy-links \
               /run/current-system/sw/share/fonts "$XDG_DATA_HOME/"
           '';
         };
