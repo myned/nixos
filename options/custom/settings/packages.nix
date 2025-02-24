@@ -26,6 +26,7 @@ in {
           alejandra # Nix formatter
           fd # File finder
           fzf # Fuzzy search
+          inetutils # Network utilities
           jq # JSON parser
           killport # Kill processes on port
           lf # Terminal file manager
