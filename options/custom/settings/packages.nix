@@ -38,6 +38,7 @@ in {
           progress # Coreutils progress viewer
           q # DNS tester
           rclone # File sync
+          sshpass # SSH automation
           stress # CPU stress tester
           testdisk # Data recovery tool
           trashy # CLI trash
@@ -139,6 +140,7 @@ in {
           logseq # Knowledge base
           loupe # Image viewer
           lutris # Game library
+          meld # Diff viewer
           newsflash # RSS feed
           obsidian # Knowledge base
           papers # Document viewer
