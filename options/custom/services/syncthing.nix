@@ -27,6 +27,7 @@ in {
     user = mkOption {default = config.custom.username;};
     group = mkOption {default = "users";};
 
+    # TODO: Use staggered versioning
     versioning = mkOption {
       default = {
         params.cleanoutDays = "7";
