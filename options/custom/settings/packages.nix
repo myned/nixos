@@ -31,6 +31,7 @@ in {
           killport # Kill processes on port
           lf # Terminal file manager
           lm_sensors # System sensors
+          lz4 # Compression utility
           nix-output-monitor # Nix build parser
           nix-tree # Nix store explorer
           nmap # Network scanner
@@ -47,9 +48,9 @@ in {
           wl-clipboard # Wayland clipboard
           xclip # X11 clipboard
           xorg.xev # X11 keysym tester
+          zip # Compression utility
 
           ### Dependencies
-          lz4 # Compression algorithm
           man-pages
           man-pages-posix
         ]
