@@ -92,8 +92,5 @@ in {
             ]
         );
     };
-
-    # https://github.com/nix-community/home-manager/issues/4947
-    xdg.configFile."htop/htoprc".force = true; # Force overwrite config file
   };
 }
