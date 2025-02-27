@@ -21,7 +21,7 @@ with lib; {
       gtk.enable = true;
       icons.enable = true;
       qt.enable = true;
-      #// stylix.enable = true;
+      stylix.enable = true;
       xdg.enable = true;
     })
 
