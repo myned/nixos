@@ -30,59 +30,61 @@ in {
         mutableExtensionsDir = false;
         package = pkgs.vscodium;
 
-        # https://github.com/nix-community/nix-vscode-extensions
-        #?? nixos-rebuild repl > inputs.nix-vscode-extensions.extensions.${pkgs.system}.*
-        extensions = let
-          # Use configured version of vscode
-          # https://github.com/nix-community/nix-vscode-extensions?tab=readme-ov-file#extensions
-          #?? extension = with (repo "REPOSITORY"); AUTHOR.EXTENSION
-          repo = repo:
-            with inputs.nix-vscode-extensions.extensions.${pkgs.system};
-              (forVSCodeVersion config.home-manager.users.${config.custom.username}.programs.vscode.package.version).${repo};
-        in
-          with (repo "open-vsx");
-            [
-              aaron-bond.better-comments
-              antfu.iconify
-              antfu.unocss
-              bedsteler20.gnome-magic
-              bilelmoussaoui.flatpak-vscode
-              bmalehorn.vscode-fish
-              bmewburn.vscode-intelephense-client
-              bradlc.vscode-tailwindcss
-              csstools.postcss
-              dbaeumer.vscode-eslint
-              detachhead.basedpyright
-              #// eamodio.gitlens
-              esbenp.prettier-vscode
-              foxundermoon.shell-format
-              #// ginfuru.ginfuru-better-solarized-dark-theme
-              gruntfuggly.todo-tree
-              jnoortheen.nix-ide
-              koihik.vscode-lua-format
-              matthewpi.caddyfile-support
-              mhutchie.git-graph
-              mkhl.direnv
-              ms-python.black-formatter
-              ms-python.debugpy
-              ms-python.isort
-              ms-vscode.powershell
-              natizyskunk.sftp
-              pkief.material-icon-theme
-              pkief.material-product-icons
-              sketchbuch.vsc-workspace-sidebar
-              svelte.svelte-vscode
-              timonwong.shellcheck
-              vincaslt.highlight-matching-tag
-            ]
-            ++ (with (repo "vscode-marketplace"); [
-              #!! Some extensions go missing from open-vsx, so use official marketplace as fallback
-              # https://github.com/nix-community/nix-vscode-extensions?tab=readme-ov-file#note
-              bodil.blueprint-gtk
-              cormoran.disable-default-keybinding
-              ms-python.python
-              sirmspencer.vscode-autohide
-            ]);
+        profiles.default = {
+          # https://github.com/nix-community/nix-vscode-extensions
+          #?? nixos-rebuild repl > inputs.nix-vscode-extensions.extensions.${pkgs.system}.*
+          extensions = let
+            # Use configured version of vscode
+            # https://github.com/nix-community/nix-vscode-extensions?tab=readme-ov-file#extensions
+            #?? extension = with (repo "REPOSITORY"); AUTHOR.EXTENSION
+            repo = repo:
+              with inputs.nix-vscode-extensions.extensions.${pkgs.system};
+                (forVSCodeVersion config.home-manager.users.${config.custom.username}.programs.vscode.package.version).${repo};
+          in
+            with (repo "open-vsx");
+              [
+                aaron-bond.better-comments
+                antfu.iconify
+                antfu.unocss
+                bedsteler20.gnome-magic
+                bilelmoussaoui.flatpak-vscode
+                bmalehorn.vscode-fish
+                bmewburn.vscode-intelephense-client
+                bradlc.vscode-tailwindcss
+                csstools.postcss
+                dbaeumer.vscode-eslint
+                detachhead.basedpyright
+                #// eamodio.gitlens
+                esbenp.prettier-vscode
+                foxundermoon.shell-format
+                #// ginfuru.ginfuru-better-solarized-dark-theme
+                gruntfuggly.todo-tree
+                jnoortheen.nix-ide
+                koihik.vscode-lua-format
+                matthewpi.caddyfile-support
+                mhutchie.git-graph
+                mkhl.direnv
+                ms-python.black-formatter
+                ms-python.debugpy
+                ms-python.isort
+                ms-vscode.powershell
+                natizyskunk.sftp
+                pkief.material-icon-theme
+                pkief.material-product-icons
+                sketchbuch.vsc-workspace-sidebar
+                svelte.svelte-vscode
+                timonwong.shellcheck
+                vincaslt.highlight-matching-tag
+              ]
+              ++ (with (repo "vscode-marketplace"); [
+                #!! Some extensions go missing from open-vsx, so use official marketplace as fallback
+                # https://github.com/nix-community/nix-vscode-extensions?tab=readme-ov-file#note
+                bodil.blueprint-gtk
+                cormoran.disable-default-keybinding
+                ms-python.python
+                sirmspencer.vscode-autohide
+              ]);
+        };
       };
 
       xdg.configFile = with config.home-manager.users.${config.custom.username}.lib.file; {
