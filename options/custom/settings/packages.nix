@@ -36,6 +36,7 @@ in {
           nix-tree # Nix store explorer
           nmap # Network scanner
           nvd # Nix diff viewer
+          openssl # Certificate utility
           progress # Coreutils progress viewer
           q # DNS tester
           rclone # File sync
