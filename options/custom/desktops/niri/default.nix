@@ -86,23 +86,6 @@ in {
                   children = with kdl;
                     node.children
                     ++ [
-                      # https://github.com/YaLTeR/niri/wiki/Configuration:-Layout#shadow
-                      # (plain "shadow" [
-                      #   (flag "on")
-                      #   (leaf "inactive-color" "#00000000")
-                      # ])
-
-                      # https://github.com/YaLTeR/niri/wiki/Configuration:-Layout#tab-indicator
-                      (plain "tab-indicator" [
-                        (flag "place-within-column")
-                        (leaf "active-color" "#d33682")
-                        (leaf "inactive-color" "#d3368240")
-                        (leaf "corner-radius" config.custom.rounding)
-                        (leaf "gap" 2)
-                        (leaf "gaps-between-tabs" 2)
-                        (leaf "length" {total-proportion = 0.98;})
-                        (leaf "width" (config.custom.border + 3))
-                      ])
                     ];
                 }
               else node));

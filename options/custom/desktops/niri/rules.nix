@@ -49,7 +49,7 @@ in {
 
               border.enable = false;
               focus-ring.enable = false;
-              #// shadow.enable = true;
+              shadow.enable = true;
             }
 
             {
@@ -197,7 +197,7 @@ in {
               pip = with config.custom; rec {
                 x = gap - border * 2;
                 y = gap;
-                w = builtins.floor (width * 0.3 - gap * 2 + border * 2 + border + 1); # 30%
+                w = builtins.floor (width * 0.25 - gap * 2 + border * 2 + border + 1); # 25%
                 h = builtins.floor (w * 9 / 16); # 16:9
               };
             in {

@@ -75,12 +75,30 @@ in {
             {proportion = 1.0;} # 100%, default
           ];
 
+          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutshadowcolor
+          shadow = {
+            color = "#00000080";
+            inactive-color = "#00000020";
+          };
+
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutstruts
           struts = {
             left = gap;
             right = gap;
             top = gap;
             bottom = gap;
+          };
+
+          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayouttab-indicator
+          tab-indicator = {
+            corner-radius = config.custom.rounding;
+            gap = 2;
+            gaps-between-tabs = 2;
+            active.color = "#d33682";
+            inactive.color = "#d3368240";
+            length.total-proportion = 0.95;
+            place-within-column = true;
+            width = config.custom.border + 3;
           };
         };
       }
