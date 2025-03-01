@@ -132,6 +132,7 @@ in {
           icon-library # Icon viewer
           identity # Compare media
           impression # Image writer
+          itch # Game library
 
           # BUG: nixGL required to launch, imperative flatpak used as alternative
           # https://github.com/AChep/keyguard-app/releases
