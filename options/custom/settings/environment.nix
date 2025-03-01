@@ -33,6 +33,10 @@ in {
         # https://wiki.nixos.org/wiki/Wayland#Electron_and_Chromium
         NIXOS_OZONE_WL = mkIf cfg.wayland "1";
         ELECTRON_OZONE_PLATFORM_HINT = mkIf cfg.wayland "auto";
+
+        # Allow unfree packages by default
+        #?? nix shell nixpkgs#PACKAGE --impure
+        NIXPKGS_ALLOW_UNFREE = "1";
       };
 
       shellAliases = {
