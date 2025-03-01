@@ -56,7 +56,7 @@ with lib; {
       element-desktop.enable = true;
       gamemode.enable = true;
       #// gnome-shell.enable = true;
-      goldwarden.enable = true;
+      #// goldwarden.enable = true;
       gpg.enable = true;
       #// gtklock.enable = true;
       hyprlock.enable = true;
