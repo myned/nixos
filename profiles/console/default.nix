@@ -1,16 +1,21 @@
 {
   config,
+  inputs,
   lib,
   options,
   pkgs,
   ...
 }: {
+  imports = [
+    inputs.jovian-nixos.nixosModules.default
+  ];
+
   custom = {
     minimal = true;
     profile = "console";
+    desktop = "gnome";
 
     desktops = {
-      desktop = "gnome";
       gnome.gdm = false;
     };
 

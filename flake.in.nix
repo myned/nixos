@@ -123,22 +123,18 @@
                 # https://github.com/NixOS/nixpkgs/issues/137168
                 (
                   {inputs, ...}: {
-                    imports =
-                      [
-                        inputs."aagl-gtk-on-nix-${branch}".nixosModules.default
-                        inputs."home-manager-${branch}".nixosModules.home-manager
-                        inputs."nix-index-database-${branch}".nixosModules.nix-index
-                        inputs."nur-${branch}".modules.nixos.default
-                        inputs."stylix-${branch}".nixosModules.stylix
-                        inputs.agenix.nixosModules.default
-                        inputs.arion.nixosModules.arion
-                        inputs.disko.nixosModules.disko
-                        inputs.fw-fanctrl.nixosModules.default
-                        inputs.niri-flake.nixosModules.niri
-                      ]
-                      ++ optionals (versionAtLeast version "25.05") [
-                        inputs.jovian-nixos.nixosModules.default
-                      ];
+                    imports = [
+                      inputs."aagl-gtk-on-nix-${branch}".nixosModules.default
+                      inputs."home-manager-${branch}".nixosModules.home-manager
+                      inputs."nix-index-database-${branch}".nixosModules.nix-index
+                      inputs."nur-${branch}".modules.nixos.default
+                      inputs."stylix-${branch}".nixosModules.stylix
+                      inputs.agenix.nixosModules.default
+                      inputs.arion.nixosModules.arion
+                      inputs.disko.nixosModules.disko
+                      inputs.fw-fanctrl.nixosModules.default
+                      inputs.niri-flake.nixosModules.niri
+                    ];
 
                     # TODO: Use home-manager.sharedModules for all options
                     home-manager.sharedModules = [
