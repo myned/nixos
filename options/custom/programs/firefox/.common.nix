@@ -9,8 +9,6 @@
 with lib; {
   #!! Creates package derivation
   #?? hm.programs.firefox.finalPackage
-  enableGnomeExtensions = config.services.gnome.gnome-browser-connector.enable;
-
   # https://wiki.nixos.org/wiki/Firefox#Tips
   nativeMessagingHosts = with pkgs; [
     firefoxpwa
