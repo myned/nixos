@@ -35,7 +35,7 @@ with lib; {
       dconf.enable = true;
       #// firefox.enable = true;
       #// foot.enable = true;
-      gamescope.enable = true;
+      #// gamescope.enable = true;
       #// gnome-terminal.enable = true;
       #// kdeconnect.enable = true;
       kitty.enable = true;

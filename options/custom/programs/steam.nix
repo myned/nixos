@@ -20,14 +20,6 @@ in {
         enable = true;
         extest.enable = cfg.extest; # Work around invisible cursor on Wayland
         extraCompatPackages = [pkgs.proton-ge-bin];
-
-        gamescopeSession = {
-          enable = true;
-          # args = [
-          #   "--backend sdl"
-          #   "--fullscreen"
-          # ];
-        };
       }
       // optionalAttrs (versionAtLeast version "24.11") {protontricks.enable = true;};
   };
