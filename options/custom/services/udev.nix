@@ -39,12 +39,10 @@ in {
 
         # Kensington Orbit
         ENV{ID_USB_SERIAL}=="Kensington_ORBIT_WIRELESS_TB", \
-          ENV{ID_INPUT_MOUSE}="", \
           ENV{ID_INPUT_TRACKBALL}="1"
 
         # ProtoArc EM04
         ENV{ID_USB_SERIAL}=="Compx_2.4G_Receiver", \
-          ENV{ID_INPUT_MOUSE}="", \
           ENV{ID_INPUT_TRACKBALL}="1"
       '';
   };
