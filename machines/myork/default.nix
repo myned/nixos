@@ -22,7 +22,7 @@
     #// programs.ryzenadj.enable = true;
 
     services.fw-fanctrl.enable = true;
-    settings.storage.mnt = ["myve"];
+    #// settings.storage.mnt = ["myve"];
   };
 
   services.keyd.keyboards.default.settings.main.rightcontrol = "layer(altgr)"; # No Ctrl_R

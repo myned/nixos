@@ -26,7 +26,11 @@
     };
 
     settings = {
-      storage.mnt = ["gayme" "gaymer" "myve"];
+      storage.mnt = [
+        "gayme"
+        "gaymer"
+        #// "myve"
+      ];
 
       vm.passthrough = {
         enable = true;
