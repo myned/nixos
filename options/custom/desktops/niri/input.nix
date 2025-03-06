@@ -33,11 +33,11 @@ in {
             repeat-rate = 40;
           };
 
-          # BUG: Applies to trackball device, switch to "flat" when per-device configuration is supported
+          # TODO: Update when per-device configuration is supported
           # https://github.com/YaLTeR/niri/issues/371
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsinputmouseaccel-profile
           mouse = {
-            accel-profile = "adaptive";
+            accel-profile = "adaptive"; # flat
             accel-speed = -0.7;
             scroll-factor = 1.25;
           };
@@ -55,8 +55,10 @@ in {
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsinputtrackballaccel-profile
           trackball = {
             accel-profile = "adaptive";
-            accel-speed = -0.5;
+            accel-speed = -0.8;
+            left-handed = true;
             middle-emulation = true;
+            natural-scroll = true;
           };
         };
       }
