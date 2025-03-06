@@ -43,7 +43,7 @@ in {
           ENV{ID_INPUT_TRACKBALL}="1"
 
         # ProtoArc EM04
-        ENV{ID_USB_SERIAL}=="Nordic_2.4G_Wireless_Receiver", \
+        ENV{ID_USB_SERIAL}=="Compx_2.4G_Receiver", \
           ENV{ID_INPUT_MOUSE}="", \
           ENV{ID_INPUT_TRACKBALL}="1"
       '';
