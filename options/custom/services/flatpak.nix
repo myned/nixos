@@ -11,16 +11,6 @@ in {
   config = mkIf cfg.enable {
     services.flatpak.enable = true;
 
-    #!! Only takes effect if /usr/* shares do not exist
-    # Nixpkgs workaround requires packages in the global environment
-    # https://github.com/NixOS/nixpkgs/pull/262462
-    environment.systemPackages =
-      config.fonts.packages
-      ++ [
-        config.home-manager.users.${config.custom.username}.gtk.cursorTheme.package
-        config.home-manager.users.${config.custom.username}.gtk.iconTheme.package
-      ];
-
     home-manager.users.${config.custom.username} = {
       # https://wiki.nixos.org/wiki/Flatpak
       # https://github.com/gmodena/nix-flatpak
