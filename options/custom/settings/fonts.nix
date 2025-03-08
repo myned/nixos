@@ -100,8 +100,10 @@ in {
         # HACK: Some applications do not support fontconfig nor symlinks, so copy fonts to user directory
         # https://github.com/ONLYOFFICE/DocumentServer/issues/1859 et al.
         home.activation = {
+          # BUG: rsync sets directory permissions too early
+          # https://github.com/RsyncProject/rsync/issues/609
           copy-fonts = lib.home-manager.hm.dag.entryAfter ["writeBoundary"] ''
-            run ${rsync} --recursive --copy-links \
+            run ${rsync} --recursive --copy-links --times \
               /run/current-system/sw/share/fonts "$XDG_DATA_HOME/"
           '';
         };
