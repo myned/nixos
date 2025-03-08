@@ -18,9 +18,14 @@ in {
     };
 
     icon = {
+      # BUG: GTK4 apps start slower, use Papirus if fixed
+      # https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/issues/3860
       # https://github.com/PapirusDevelopmentTeam/papirus-icon-theme
-      name = mkOption {default = "Papirus-Dark";};
-      package = mkOption {default = pkgs.papirus-icon-theme;};
+      #// name = mkOption {default = "Papirus-Dark";};
+      #// package = mkOption {default = pkgs.papirus-icon-theme;};
+
+      name = mkOption {default = "Tela-pink";};
+      package = mkOption {default = pkgs.tela-icon-theme;};
     };
   };
 
@@ -45,16 +50,21 @@ in {
       {
         # BUG: home.pointerCursor breaks XCURSOR_PATH for some child windows, so avoid that workaround
         # https://github.com/nix-community/home-manager/blob/59a4c43e9ba6db24698c112720a58a334117de83/modules/config/home-cursor.nix#L154
-        home.sessionVariables = {
-          XCURSOR_SIZE = cfg.cursor.size;
-          XCURSOR_THEME = cfg.cursor.name;
+        home.sessionVariables = with cfg.cursor; {
+          XCURSOR_SIZE = size;
+          XCURSOR_THEME = name;
         };
 
         # https://github.com/nix-community/home-manager/blob/59a4c43e9ba6db24698c112720a58a334117de83/modules/config/home-cursor.nix#L161
-        home.file.".icons/default/index.theme".source = "${defaultIndexThemePackage}/share/icons/default/index.theme";
-        home.file.".icons/${cfg.cursor.name}".source = "${cfg.cursor.package}/share/icons/${cfg.cursor.name}";
-        xdg.dataFile."icons/default/index.theme".source = "${defaultIndexThemePackage}/share/icons/default/index.theme";
-        xdg.dataFile."icons/${cfg.cursor.name}".source = "${cfg.cursor.package}/share/icons/${cfg.cursor.name}";
+        home.file = {
+          ".icons/default/index.theme".source = "${defaultIndexThemePackage}/share/icons/default/index.theme";
+          ".icons/${cfg.cursor.name}".source = "${cfg.cursor.package}/share/icons/${cfg.cursor.name}";
+        };
+
+        xdg.dataFile = {
+          "icons/default/index.theme".source = "${defaultIndexThemePackage}/share/icons/default/index.theme";
+          "icons/${cfg.cursor.name}".source = "${cfg.cursor.package}/share/icons/${cfg.cursor.name}";
+        };
       }
     ];
   };
