@@ -26,6 +26,11 @@
     };
 
     settings = {
+      games = {
+        enable = true;
+        abiotic-factor = true;
+      };
+
       storage.mnt = [
         "gayme"
         "gaymer"
