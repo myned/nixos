@@ -30,15 +30,14 @@ in {
             ### Defaults
             {
               # Global
-              geometry-corner-radius = {
-                top-left = config.custom.rounding;
-                top-right = config.custom.rounding;
-                bottom-right = config.custom.rounding;
-                bottom-left = config.custom.rounding;
+              geometry-corner-radius = with config.custom; {
+                top-left = rounding;
+                top-right = rounding;
+                bottom-right = rounding;
+                bottom-left = rounding;
               };
 
               clip-to-geometry = true;
-              open-floating = true;
             }
 
             {
@@ -65,13 +64,11 @@ in {
               matches = [
                 {app-id = "^[Ww]aydroid.*$";}
               ];
-
-              open-floating = false;
             }
 
             {
               # Browsers
-              matches = map (match: {at-startup = true;} // match) [
+              matches = [
                 {app-id = "^brave-browser$";}
                 {app-id = "^chromium-browser$";}
                 {app-id = "^firefox.*$";}
@@ -89,8 +86,6 @@ in {
                 if config.custom.ultrawide
                 then 0.4
                 else 0.8;
-
-              open-floating = false;
             }
 
             {
@@ -108,8 +103,7 @@ in {
                 {app-id = "^so\.libdb\.dissent$";}
               ];
 
-              #// default-column-display = "tabbed";
-              open-floating = false;
+              default-column-display = "tabbed";
             }
 
             {
@@ -117,6 +111,8 @@ in {
               matches = [
                 {app-id = "^dropdown$";}
               ];
+
+              open-floating = true;
             }
 
             {
@@ -126,8 +122,6 @@ in {
                 {app-id = "^org\.gnome\.TextEditor$";}
                 {app-id = "^org\.wireshark\.Wireshark$";}
               ];
-
-              open-floating = false;
             }
 
             {
@@ -135,8 +129,6 @@ in {
               matches = [
                 {app-id = "^org\.gnome\.Nautilus$";}
               ];
-
-              open-floating = false;
             }
 
             {
@@ -150,7 +142,6 @@ in {
               ];
 
               default-column-width = {}; # Window-defined
-              open-floating = false;
               variable-refresh-rate = true;
             }
 
@@ -164,8 +155,6 @@ in {
                 if config.custom.ultrawide
                 then 0.4
                 else 0.8;
-
-              open-floating = false;
             }
 
             {
@@ -177,8 +166,6 @@ in {
                 {app-id = "^totem$";}
                 {app-id = "^YouTube Music$";}
               ];
-
-              open-floating = false;
             }
 
             {
@@ -189,8 +176,6 @@ in {
                 {app-id = "^ONLYOFFICE$";}
                 {app-id = "^org\.gnome\.Papers$";}
               ];
-
-              open-floating = false;
             }
 
             (let
@@ -214,6 +199,7 @@ in {
 
               default-column-width.fixed = pip.w;
               default-window-height.fixed = pip.h;
+              open-floating = true;
               open-focused = false;
             })
 
@@ -222,8 +208,6 @@ in {
               matches = [
                 {app-id = "^steam$";}
               ];
-
-              open-floating = false;
             }
 
             {
@@ -234,8 +218,6 @@ in {
                 {app-id = "^kitty$";}
                 {app-id = "^org\.wezfurlong\.wezterm$";}
               ];
-
-              open-floating = false;
             }
 
             {
@@ -244,8 +226,6 @@ in {
                 {app-id = "^1Password$";}
                 {app-id = "^Bitwarden$";}
               ];
-
-              open-floating = false;
             }
 
             {
@@ -256,8 +236,6 @@ in {
                 {app-id = "^org\.remmina\.Remmina$";}
                 {app-id = "^.*virt-manager.*$";}
               ];
-
-              open-floating = false;
             }
 
             ### Overrides
@@ -265,6 +243,7 @@ in {
             (let
               height = builtins.floor (config.custom.height * 0.4); # 40%
             in {
+              # 1Password Quick Access
               matches = [
                 {
                   app-id = "^1Password";
@@ -272,10 +251,20 @@ in {
                 }
               ];
 
+              open-floating = true;
               max-height = height;
               min-height = height;
-              open-floating = true;
             })
+
+            {
+              # Sushi
+              matches = [
+                {app-id = "^org\.gnome\.NautilusPreviewer$";}
+              ];
+
+              default-column-width = {};
+              open-floating = true;
+            }
           ];
         };
       }
