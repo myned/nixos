@@ -7,41 +7,46 @@
 }:
 with lib; let
   cfg = config.custom.programs.vscode;
+  hm = config.home-manager.users.${config.custom.username};
 in {
-  options.custom.programs.vscode.enable = mkOption {default = false;};
+  options.custom.programs.vscode = {
+    enable = mkOption {default = false;};
+  };
 
   config = {
-    # Extension dependencies
-    environment.systemPackages = with pkgs; [
-      alejandra # nix-ide
-      blueprint-compiler # blueprint-gtk
-      caddy # caddyfile-support
-      nixd # nix-ide
-      powershell # powershell
-      shfmt # shell-format
-    ];
+    # https://github.com/nix-community/nix-vscode-extensions
+    nixpkgs.overlays = [inputs.nix-vscode-extensions.overlays.default];
 
-    home-manager.users.${config.custom.username} = mkIf cfg.enable {
-      # https://wiki.nixos.org/wiki/VSCodium
-      # https://github.com/VSCodium/vscodium
-      #!! Configuration is imperative
-      programs.vscode = {
-        enable = true;
-        mutableExtensionsDir = false;
-        package = pkgs.vscodium;
+    environment = {
+      sessionVariables = {
+        # https://github.com/nix-community/nixd/blob/main/nixd/docs/features.md
+        NIXD_FLAGS = "--inlay-hints=false"; # Disable package versions in the editor
+      };
 
-        profiles.default = {
-          # https://github.com/nix-community/nix-vscode-extensions
-          #?? nixos-rebuild repl > inputs.nix-vscode-extensions.extensions.${pkgs.system}.*
-          extensions = let
-            # Use configured version of vscode
-            # https://github.com/nix-community/nix-vscode-extensions?tab=readme-ov-file#extensions
-            #?? extension = with (repo "REPOSITORY"); AUTHOR.EXTENSION
-            repo = repo:
-              with inputs.nix-vscode-extensions.extensions.${pkgs.system};
-                (forVSCodeVersion config.home-manager.users.${config.custom.username}.programs.vscode.package.version).${repo};
-          in
-            with (repo "open-vsx");
+      # Extension dependencies
+      systemPackages = with pkgs; [
+        alejandra # nix-ide
+        blueprint-compiler # blueprint-gtk
+        caddy # caddyfile-support
+        nixd # nix-ide
+        powershell # powershell
+        shfmt # shell-format
+      ];
+    };
+
+    home-manager.sharedModules = mkIf cfg.enable [
+      {
+        # https://wiki.nixos.org/wiki/VSCodium
+        # https://github.com/VSCodium/vscodium
+        #!! Configuration is imperative
+        programs.vscode = {
+          enable = true;
+          mutableExtensionsDir = false;
+          package = pkgs.vscodium;
+
+          profiles.default = {
+            #?? nixos-rebuild repl > pkgs.REPO.*
+            extensions = with pkgs.open-vsx;
               [
                 aaron-bond.better-comments
                 antfu.iconify
@@ -76,7 +81,7 @@ in {
                 timonwong.shellcheck
                 vincaslt.highlight-matching-tag
               ]
-              ++ (with (repo "vscode-marketplace"); [
+              ++ (with pkgs.vscode-marketplace; [
                 #!! Some extensions go missing from open-vsx, so use official marketplace as fallback
                 # https://github.com/nix-community/nix-vscode-extensions?tab=readme-ov-file#note
                 bodil.blueprint-gtk
@@ -84,63 +89,32 @@ in {
                 ms-python.python
                 sirmspencer.vscode-autohide
               ]);
-        };
-      };
-
-      xdg.configFile = with config.home-manager.users.${config.custom.username}.lib.file; {
-        # Imperative symlinks intended to be synced
-        "VSCodium/User/settings.json" = {
-          force = true;
-          source = mkOutOfStoreSymlink "${config.custom.sync}/dev/config/vscode/settings.json";
+          };
         };
 
-        "VSCodium/User/keybindings.json" = {
-          force = true;
-          source = mkOutOfStoreSymlink "${config.custom.sync}/dev/config/vscode/keybindings.json";
+        xdg.configFile = with hm.lib.file; {
+          # Imperative symlinks intended to be synced
+          "VSCodium/User/settings.json" = {
+            force = true;
+            source = mkOutOfStoreSymlink "${config.custom.sync}/dev/config/vscode/settings.json";
+          };
+
+          "VSCodium/User/keybindings.json" = {
+            force = true;
+            source = mkOutOfStoreSymlink "${config.custom.sync}/dev/config/vscode/keybindings.json";
+          };
+
+          "VSCodium/User/snippets/" = {
+            force = true;
+            source = mkOutOfStoreSymlink "${config.custom.sync}/dev/config/vscode/snippets/";
+          };
+
+          "VSCodium/User/profiles/" = {
+            force = true;
+            source = mkOutOfStoreSymlink "${config.custom.sync}/dev/config/vscode/profiles/";
+          };
         };
-
-        "VSCodium/User/snippets/" = {
-          force = true;
-          source = mkOutOfStoreSymlink "${config.custom.sync}/dev/config/vscode/snippets/";
-        };
-
-        "VSCodium/User/profiles/" = {
-          force = true;
-          source = mkOutOfStoreSymlink "${config.custom.sync}/dev/config/vscode/profiles/";
-        };
-      };
-
-      home = {
-        # https://github.com/nix-community/nixd/blob/main/nixd/docs/features.md
-        sessionVariables.NIXD_FLAGS = "--inlay-hints=false"; # Disable package versions in the editor
-
-        # Work around wrong wmclass
-        # https://github.com/microsoft/vscode/issues/129953
-        # https://github.com/VSCodium/vscodium/issues/1414
-        #!! Keep updated with upstream desktop file
-        #?? cat /etc/profiles/per-user/USER/share/applications/codium.desktop
-        # file.".local/share/applications/codium.desktop".text = ''
-        #   [Desktop Entry]
-        #   Actions=new-empty-window
-        #   Categories=Utility;TextEditor;Development;IDE
-        #   Comment=Code Editing. Redefined.
-        #   Exec=codium %F
-        #   GenericName=Text Editor
-        #   Icon=vscodium
-        #   Keywords=vscode
-        #   MimeType=text/plain;inode/directory
-        #   Name=VSCodium
-        #   StartupNotify=true
-        #   StartupWMClass=codium-url-handler
-        #   Type=Application
-        #   Version=1.4
-
-        #   [Desktop Action new-empty-window]
-        #   Exec=codium --new-window %F
-        #   Icon=vscodium
-        #   Name=New Empty Window
-        # '';
-      };
-    };
+      }
+    ];
   };
 }
