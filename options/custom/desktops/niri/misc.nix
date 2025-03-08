@@ -27,8 +27,7 @@ in {
         # https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous
         programs.niri.settings = {
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingscursorhide-after-inactive-ms
-          cursor = with hm.gtk.cursorTheme; {
-            # Inherit home-manager GTK settings
+          cursor = with config.custom.settings.icons.cursor; {
             inherit size;
             theme = name;
 
