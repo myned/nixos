@@ -140,7 +140,11 @@ in {
           #// keyguard # Bitwarden client
 
           kooha # Screen recorder
-          logseq # Knowledge base
+
+          # BUG: EOL Electron dependency removed from nixpkgs
+          # https://github.com/logseq/logseq/issues/11644
+          #// logseq # Knowledge base
+
           loupe # Image viewer
           lutris # Game library
           meld # Diff viewer
