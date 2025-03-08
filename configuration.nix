@@ -55,18 +55,13 @@
           inherit stable unstable master;
 
           ### Packages
-          # BUG: Build failure, remove when in unstable
-          # https://github.com/NixOS/nixpkgs/issues/380227
-          # https://github.com/NixOS/nixpkgs/pull/378937
-          bitwarden-cli = stable.bitwarden-cli;
-
           # TODO: Remove when on stable
           ghostty = unstable.ghostty;
 
           # TODO: Use official package when available
           # https://github.com/NixOS/nixpkgs/issues/327982
-          zen-browser = inputs.zen-browser.packages.${pkgs.system}.zen-browser;
-          zen-browser-unwrapped = inputs.zen-browser.packages.${pkgs.system}.zen-browser-unwrapped;
+          zen-browser = inputs.zen-browser.packages.${prev.system}.zen-browser;
+          zen-browser-unwrapped = inputs.zen-browser.packages.${prev.system}.zen-browser-unwrapped;
 
           ### Python
           # https://nixos.org/manual/nixpkgs/unstable/#how-to-override-a-python-package-for-all-python-versions-using-extensions
@@ -75,19 +70,6 @@
             prev.pythonPackagesExtensions
             ++ [
               (pyfinal: pyprev: {
-                # BUG: Build failure, remove when fixed
-                # https://github.com/NixOS/nixpkgs/issues/380413
-                asttokens = pyprev.asttokens.overridePythonAttrs rec {
-                  version = "2.4.1";
-
-                  src = pyprev.fetchPypi {
-                    inherit version;
-                    pname = "asttokens";
-                    hash = "sha256-sDhpcYuppusCfhNL/fafOKI21oHIPBYNUQdorxElS6A=";
-                  };
-
-                  propagatedBuildInputs = [pyprev.six];
-                };
               })
             ];
         }
