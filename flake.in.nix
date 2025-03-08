@@ -142,7 +142,6 @@
                       inputs.ags.homeManagerModules.default
                       inputs.anyrun.homeManagerModules.default
                       inputs.nix-flatpak.homeManagerModules.nix-flatpak
-                      inputs.walker.homeManagerModules.default
 
                       # TODO: Use official module when supported
                       # https://github.com/nix-community/home-manager/blob/master/modules/programs/floorp.nix

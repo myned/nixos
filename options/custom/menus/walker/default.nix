@@ -1,7 +1,7 @@
 {
   config,
-  lib,
   inputs,
+  lib,
   pkgs,
   ...
 }:
@@ -42,11 +42,14 @@ in {
 
     home-manager.sharedModules = [
       {
+        imports = [inputs.walker.homeManagerModules.default];
+
         # https://github.com/abenz1267/walker
         # https://github.com/abenz1267/walker?tab=readme-ov-file#building-from-source
         # https://github.com/abenz1267/walker/blob/master/nix/hm-module.nix
         programs.walker = {
           enable = true;
+          package = pkgs.walker;
 
           #!! Service must be restarted for changes to take effect
           #?? systemctl --user restart walker.service

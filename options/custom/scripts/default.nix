@@ -7,7 +7,7 @@
 with lib; let
   git = config.home-manager.users.${config.custom.username}.programs.git.package;
   hyprland = config.programs.hyprland.package;
-  walker = config.home-manager.users.${config.custom.username}.programs.walker.package;
+  #// walker = config.home-manager.users.${config.custom.username}.programs.walker.package;
   wofi = config.home-manager.users.${config.custom.username}.programs.wofi.package;
 in {
   config.home-manager.users.${config.custom.username}.home.file = let
@@ -106,15 +106,15 @@ in {
               libnotify
               sway
             ])
-            (bash "menu" [
-              argc
-              coreutils
-              hyprland
-              jq
-              networkmanager_dmenu
-              rofi-rbw
-              walker
-            ])
+            # (bash "menu" [
+            #   argc
+            #   coreutils
+            #   hyprland
+            #   jq
+            #   networkmanager_dmenu
+            #   rofi-rbw
+            #   walker
+            # ])
             (bash "minimize" [
               hyprland
               jq
@@ -170,15 +170,15 @@ in {
               jq
               libnotify
             ])
-            (bash "vault" [
-              argc
-              bitwarden-cli
-              coreutils
-              jq
-              libnotify
-              walker
-              wl-clipboard
-            ])
+            # (bash "vault" [
+            #   argc
+            #   bitwarden-cli
+            #   coreutils
+            #   jq
+            #   libnotify
+            #   walker
+            #   wl-clipboard
+            # ])
             (bash "vpn" [
               gnused
               jq
