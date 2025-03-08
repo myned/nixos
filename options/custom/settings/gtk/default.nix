@@ -27,11 +27,11 @@ in {
       };
 
       cursorTheme = with config.custom.settings.icons.cursor; {
-        inherit name package size;
+        inherit name size;
       };
 
       iconTheme = with config.custom.settings.icons.icon; {
-        inherit name package;
+        inherit name;
       };
 
       theme = {
