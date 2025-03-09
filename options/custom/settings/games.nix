@@ -18,6 +18,11 @@ in {
         7777
         27015
       ];
+
+      allowedUDPPorts = optionals cfg.abiotic-factor [
+        7777
+        27015
+      ];
     };
   };
 }
