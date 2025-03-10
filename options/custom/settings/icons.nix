@@ -24,7 +24,7 @@ in {
       #// name = mkOption {default = "Papirus-Dark";};
       #// package = mkOption {default = pkgs.papirus-icon-theme;};
 
-      name = mkOption {default = "Tela-pink";};
+      name = mkOption {default = "Tela-pink-dark";};
       package = mkOption {default = pkgs.tela-icon-theme;};
     };
   };
