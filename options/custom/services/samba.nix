@@ -33,7 +33,7 @@ in {
             "follow symlinks" = "yes";
             "force user" = config.custom.username;
             "hostname lookups" = "yes";
-            "hosts allow" = "10.0.0.";
+            "hosts allow" = "100.64.0.0/255.192.0.0"; # Tailscale
             "inherit owner" = "unix only";
             "inherit permissions" = "yes";
             "logging" = "systemd";
