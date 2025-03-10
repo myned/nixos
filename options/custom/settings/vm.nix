@@ -111,6 +111,9 @@ in {
         enable = true;
         enableExtensionPack = true;
       };
+
+      # Allow unprivileged users to redirect USB devices
+      spiceUSBRedirection.enable = cfg.libvirt;
     };
 
     # https://github.com/virt-manager/virt-manager
