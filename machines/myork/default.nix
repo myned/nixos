@@ -39,7 +39,7 @@
 
       # Fix battery drain with suspend
       # https://wiki.archlinux.org/title/Framework_Laptop_13#Suspend-then-hibernate_on_AMD_version
-      "rtc_cmos.use_acpi_alarm=1"
+      #// "rtc_cmos.use_acpi_alarm=1"
 
       # Force display power savings
       # https://wiki.archlinux.org/title/Framework_Laptop_13#(AMD)_Washed-out_colors_when_using_power-profiles-daemon_in_power-saver_or_balanced_mode
