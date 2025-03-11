@@ -25,6 +25,7 @@ in {
           "--remember"
           "--remember-user-session"
           "--time"
+          "--time-format '%a %b %-m  %-I:%M %p'" # https://strftime.org/
           "--asterisks"
           "--window-padding 1"
           "--greeting owo"
