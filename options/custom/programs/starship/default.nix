@@ -217,7 +217,7 @@ in {
                   style = "bold #657b83";
 
                   # https://docs.rs/chrono/latest/chrono/format/strftime/index.html
-                  time_format = "%a %b %-d %-I:%M%P";
+                  time_format = "%a %b %-d %-I:%M %p";
                 };
 
                 # https://starship.rs/config/#username
