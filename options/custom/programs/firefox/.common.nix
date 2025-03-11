@@ -81,13 +81,13 @@ with lib; {
       master = {
         color = "pink";
         icon = "circle";
-        id = 0;
+        id = 1;
       };
 
       edu = {
         color = "orange";
         icon = "fruit";
-        id = 1;
+        id = 2;
       };
     };
 
