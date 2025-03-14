@@ -15,14 +15,34 @@
     width = 2256;
     height = 1504;
     scale = 1.5;
-    desktops.niri.output.connectors = ["eDP-1"];
+
+    desktops = {
+      niri.output.connectors = ["eDP-1"];
+    };
 
     # BUG: Phoenix support not currently functional
     # https://github.com/Cryolitia/ryzen_smu/issues/1
-    #// programs.ryzenadj.enable = true;
+    programs = {
+      #// ryzenadj.enable = true;
+    };
 
-    services.fw-fanctrl.enable = true;
-    #// settings.storage.mnt = ["myve"];
+    services = {
+      fw-fanctrl.enable = true;
+
+      # https://github.com/ollama/ollama/blob/main/docs/gpu.md#overrides
+      #?? nix run nixpkgs#rocmPackages.rocminfo | grep gfx
+      ollama.rocmOverrideGfx = "10.3.0"; # 10.3.1
+    };
+
+    settings = {
+      hardware = {
+        gpu = "amd";
+      };
+
+      storage = {
+        mnt = ["myve"];
+      };
+    };
   };
 
   services.keyd.keyboards.default.settings.main.rightcontrol = "layer(altgr)"; # No Ctrl_R

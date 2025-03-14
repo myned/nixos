@@ -182,6 +182,12 @@ case "$1" in
     url="https://wiki.nixos.org/w/index.php?search="
     query="${1:3}"
     ;;
+  'o '*)
+    label="Ollama"
+    icon="ollama"
+    url="https://ollama.com/search?q="
+    query="${1:2}"
+    ;;
   'p '*)
     label="Piped"
     icon="youtube"

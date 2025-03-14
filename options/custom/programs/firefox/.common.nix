@@ -479,6 +479,12 @@ with lib; {
           urls = [{template = "https://wiki.nixos.org/w/index.php?search={searchTerms}";}];
         };
 
+        "Ollama" = {
+          definedAliases = ["o"];
+          iconUpdateURL = "https://ollama.com/public/icon-64x64.png";
+          urls = [{template = "https://ollama.com/search?q={searchTerms}";}];
+        };
+
         "Piped" = {
           definedAliases = ["p"];
           iconUpdateURL = "https://piped.${config.custom.domain}/favicon.ico";

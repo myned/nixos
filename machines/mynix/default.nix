@@ -27,6 +27,10 @@
         abiotic-factor = true;
       };
 
+      hardware = {
+        gpu = "amd";
+      };
+
       storage.mnt = [
         "gayme"
         "gaymer"

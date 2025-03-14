@@ -74,6 +74,7 @@ in {
         ]
         ++ optionals config.custom.full [
           ### GUI applications
+          alpaca # AI client
           amberol # Audio player
           apostrophe # Markdown editor
           baobab # Disk usage analyzer

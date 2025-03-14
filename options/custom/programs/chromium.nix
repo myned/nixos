@@ -245,6 +245,12 @@ in {
           }
 
           {
+            name = "Ollama";
+            shortcut = "o";
+            url = "https://ollama.com/search?q={searchTerms}";
+          }
+
+          {
             name = "Piped";
             shortcut = "p";
             url = "https://piped.${config.custom.domain}/results?search_query={searchTerms}";
