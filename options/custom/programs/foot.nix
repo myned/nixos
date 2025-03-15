@@ -15,7 +15,7 @@ in {
 
       # https://codeberg.org/dnkl/foot/src/branch/master/foot.ini
       settings = {
-        main.font = "${config.custom.settings.fonts.monospace}:size=12";
+        main.font = "${config.stylix.fonts.monospace.name}:size=12";
         scrollback.lines = 10000; # Default 1000
 
         # Solarized Dark

@@ -103,7 +103,7 @@ in {
             fullScreen = true;
             quickSplash = true;
             size = "${toString (config.custom.width / 2)}x${toString (config.custom.height / 2)}";
-            uiFont = config.custom.settings.fonts.monospace;
+            uiFont = config.stylix.fonts.monospace.name;
             uiSize = 24;
           };
         };

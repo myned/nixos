@@ -41,10 +41,7 @@ in {
             # https://ghostty.org/docs/config/reference#font-family
             #?? ghostty +list-fonts
             #?? ghostty +show-face
-            font-family = with config.custom.settings.fonts; ["monospace" fallback];
-
-            # https://ghostty.org/docs/config/reference#font-size
-            font-size = 14;
+            font-family = mkForce ["monospace" "Unifont"]; # Force unifont icons
 
             # https://ghostty.org/docs/config/reference#freetype-load-flags
             # https://github.com/ghostty-org/ghostty/discussions/3515
@@ -64,11 +61,6 @@ in {
 
             # https://ghostty.org/docs/config/reference#shell-integration-features
             shell-integration-features = "no-cursor";
-
-            # https://ghostty.org/docs/features/theme
-            # https://ghostty.org/docs/config/reference#theme
-            #?? ghostty +list-themes
-            theme = "Builtin Solarized Dark";
 
             # https://ghostty.org/docs/config/reference#window-decoration
             window-decoration = false;

@@ -205,7 +205,7 @@ in {
             style = ''
               #box {
                 border: ${toString config.custom.border}px #073642 solid;
-                font: larger ${config.custom.settings.fonts.sans-serif};
+                font: larger ${config.stylix.fonts.sansSerif.name};
               }
 
               ${readFile ./style.css}

@@ -27,7 +27,7 @@ in {
         # https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous
         programs.niri.settings = {
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingscursorhide-after-inactive-ms
-          cursor = with config.custom.settings.icons.cursor; {
+          cursor = with config.stylix.cursor; {
             inherit size;
             theme = name;
 

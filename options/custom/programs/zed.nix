@@ -134,11 +134,11 @@ in {
 
             theme = {
               mode = "system";
-              light = "Solarized Light";
-              dark = "Solarized Dark";
+              light = "NeoSolarized Light";
+              dark = "NeoSolarized Dark";
             };
 
-            ui_font_family = config.custom.settings.fonts.sans-serif;
+            ui_font_family = config.stylix.fonts.sansSerif.name;
             ui_font_size = 20;
 
             # Language-specific
@@ -223,6 +223,10 @@ in {
             };
           };
         };
+
+        # TODO: Use stylix
+        # https://stylix.danth.me/options/modules/zed.html
+        stylix.targets.zed.enable = false;
       }
     ];
   };

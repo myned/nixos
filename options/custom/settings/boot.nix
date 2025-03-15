@@ -73,28 +73,5 @@ in {
         grub.enable = cfg.grub;
       };
     };
-
-    console = mkIf config.custom.minimal {
-      # Modified Solarized Dark
-      # https://github.com/coderonline/base16-vtrgb/blob/master/consolecolors/base16-solarized-dark.hex
-      colors = [
-        "073642"
-        "002b36" # Background
-        "859900" # Success
-        "657b83"
-        "839496"
-        "b58900"
-        "eee8d5"
-        "93a1a1" # Primary
-        "dc322f"
-        "cb4b16"
-        "d33682" # Tertiary
-        "586e75"
-        "6c71c4" # Accent
-        "268bd2"
-        "2aa198"
-        "fdf6e3" # Secondary
-      ];
-    };
   };
 }

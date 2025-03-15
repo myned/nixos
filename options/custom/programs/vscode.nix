@@ -92,6 +92,13 @@ in {
           };
         };
 
+        # TODO: Use stylix
+        # https://stylix.danth.me/options/modules/vscode.html
+        stylix.targets.vscode = {
+          enable = false;
+          #// profileNames = ["default"];
+        };
+
         xdg.configFile = with hm.lib.file; {
           # Imperative symlinks intended to be synced
           "VSCodium/User/settings.json" = {

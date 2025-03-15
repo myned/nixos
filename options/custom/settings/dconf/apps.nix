@@ -66,14 +66,6 @@ in {
         show = false;
       };
 
-      # GNOME
-      "org/gnome/desktop/interface" = {
-        cursor-blink = mkBoolean false;
-        gtk-enable-primary-paste = mkBoolean false;
-        color-scheme = mkString "prefer-dark";
-        monospace-font-name = mkString "monospace 14";
-      };
-
       # GNOME Files
       "org/gtk/settings/file-chooser" = {
         show-hidden = mkBoolean true;

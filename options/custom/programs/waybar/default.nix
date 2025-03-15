@@ -67,7 +67,7 @@ in {
           #?? GTK_DEBUG=interactive waybar
           style = let
             border = toString config.custom.border;
-            font = config.custom.settings.fonts.monospace;
+            font = config.stylix.fonts.monospace.name;
             gap = toString config.custom.gap;
           in ''
             * {
@@ -496,6 +496,10 @@ in {
             };
           };
         };
+
+        # TODO: Use stylix
+        # https://stylix.danth.me/options/modules/waybar.html
+        stylix.targets.waybar.enable = false;
       }
     ];
   };

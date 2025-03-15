@@ -46,10 +46,6 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:nix-community/disko";
     };
-    firefox-gnome-theme = {
-      flake = false;
-      url = "github:rafaelmardojai/firefox-gnome-theme";
-    };
     flakegen.url = "github:jorsn/flakegen";
     fw-fanctrl = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";

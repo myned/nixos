@@ -15,11 +15,6 @@ in {
       enable = true;
       shellIntegration.mode = "no-cursor"; # Disable forced beam cursor
 
-      font = {
-        name = config.custom.settings.fonts.monospace;
-        size = 14;
-      };
-
       # https://sw.kovidgoyal.net/kitty/conf/
       #?? man kitty
       settings = {

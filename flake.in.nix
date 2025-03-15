@@ -77,7 +77,6 @@
 
     ### Source code
     cisco-packettracer8 = source "file:///home/myned/SYNC/linux/config/cisco/CiscoPacketTracer822_amd64_signed.deb";
-    firefox-gnome-theme = source "github:rafaelmardojai/firefox-gnome-theme";
     lifx-cli = source "github:Rawa/lifx-cli";
     steamtinkerlaunch = source "github:sonic2kk/steamtinkerlaunch";
     thunderbird-gnome-theme = source "github:rafaelmardojai/thunderbird-gnome-theme";

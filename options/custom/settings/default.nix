@@ -17,10 +17,10 @@ with lib; {
 
     (mkIf config.custom.minimal {
       dconf.enable = true;
-      fonts.enable = true;
-      gtk.enable = true;
-      icons.enable = true;
-      qt.enable = true;
+      #// fonts.enable = true;
+      #// gtk.enable = true;
+      #// icons.enable = true;
+      #// qt.enable = true;
       stylix.enable = true;
       xdg.enable = true;
     })

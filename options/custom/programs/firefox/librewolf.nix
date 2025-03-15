@@ -10,6 +10,7 @@ with lib; let
 in {
   options.custom.programs.librewolf = {
     enable = mkOption {default = false;};
+    profile = mkOption {default = "default";};
   };
 
   config = mkIf cfg.enable {
@@ -18,7 +19,10 @@ in {
         # https://librewolf.net/
         # https://codeberg.org/librewolf
         programs.librewolf = mkMerge [
-          (import ./.common.nix {inherit config inputs lib pkgs;})
+          (import ./.common.nix {
+            inherit config inputs lib pkgs;
+            profile = cfg.profile;
+          })
 
           {
             enable = true;
@@ -29,6 +33,13 @@ in {
           ".librewolf/profiles.ini" = {
             force = true;
           };
+        };
+
+        # https://stylix.danth.me/options/modules/firefox.html
+        stylix.targets.librewolf = {
+          # https://github.com/rafaelmardojai/firefox-gnome-theme
+          firefoxGnomeTheme.enable = true;
+          profileNames = [cfg.profile];
         };
       }
     ];

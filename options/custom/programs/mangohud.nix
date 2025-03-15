@@ -60,5 +60,11 @@ in {
         vram_color = "6c71c4";
       };
     };
+
+        # TODO: Use stylix
+        # https://stylix.danth.me/options/modules/mangohud.html
+        stylix.targets.mangohud.enable = false;
+      }
+    ];
   };
 }

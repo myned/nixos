@@ -3,6 +3,7 @@
   inputs,
   lib,
   pkgs,
+  profile ? "default",
   theme ? false,
   ...
 }:
@@ -16,7 +17,7 @@ with lib; {
 
   #!! Prefer policies over profiles when possible
   #?? about:profiles
-  profiles.default = {
+  profiles.${profile} = {
     # https://nur.nix-community.org/repos/rycee/
     extensions.packages = with pkgs.nur.repos.rycee.firefox-addons;
       optionals config.custom.minimal [
@@ -51,30 +52,9 @@ with lib; {
     # TODO: Consider other themes
     # https://github.com/soulhotel/FF-ULTIMA
 
-    # BUG: Tab groups not yet supported
-    # https://github.com/rafaelmardojai/firefox-gnome-theme/issues/901
-    # https://github.com/rafaelmardojai/firefox-gnome-theme
     # https://github.com/rafaelmardojai/firefox-gnome-theme/blob/master/theme/colors/dark.css
-    userChrome = ''
-      ${
-        if theme
-        then "@import ${inputs.firefox-gnome-theme}/userChrome.css"
-        else ""
-      }
-
-      ${builtins.readFile ./userChrome.css}
-    '';
-
-    userContent = ''
-      ${
-        if theme
-        then "@import ${inputs.firefox-gnome-theme}/userContent.css"
-        else ""
-      }
-
-      ${builtins.readFile ./userContent.css}
-    '';
-
+    userChrome = builtins.readFile ./userChrome.css;
+    userContent = builtins.readFile ./userContent.css;
     containersForce = true;
 
     containers = {
@@ -91,7 +71,7 @@ with lib; {
       };
     };
 
-    settings = with config.custom.settings.fonts;
+    settings =
       {
         "accessibility.browsewithcaret" = false;
         "accessibility.typeaheadfind" = false;
@@ -197,15 +177,6 @@ with lib; {
         "extensions.pocket.enabled" = false;
         "extensions.update.autoUpdateDefault" = true;
         "extensions.update.enabled" = true;
-        "font.default.x-unicode" = sans-serif;
-        "font.default.x-western" = sans-serif;
-        "font.name-list.emoji" = emoji; # System emoji
-        "font.name.monospace.x-unicode" = monospace;
-        "font.name.monospace.x-western" = monospace;
-        "font.name.sans-serif.x-unicode" = sans-serif;
-        "font.name.sans-serif.x-western" = sans-serif;
-        "font.name.serif.x-unicode" = sans-serif;
-        "font.name.serif.x-western" = sans-serif;
         "full-screen-api.ignore-widgets" = false; # Fake fullscreen
         "full-screen-api.warning.delay" = -1;
         "full-screen-api.warning.timeout" = 0;

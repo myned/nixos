@@ -297,38 +297,6 @@ in {
         interactiveShellInit = ''
           # Disable greeting
           set -g fish_greeting
-
-          # Default is brblack (bright0)
-          set -g fish_color_autosuggestion brgreen
-
-          ### Interactive
-          # function exit -d 'Always exit successfully when interactive'
-          #   builtin exit 0
-          # end
-
-          # TODO: Pass flags properly
-          # TODO: Convert to bash
-          # function run -d 'Run packages via nixpkg flakes'
-          #   for i in (seq (count $argv))
-          #     if ! string match -r '^-' -- $argv[$i]
-          #       set argv[$i] (string replace -r ^ nixpkgs# $argv[$i])
-          #     end
-          #   end
-          #   nix run $argv
-          # end
-
-          # function shell -d 'Open packages in new shell via nixpkg flakes'
-          #   for i in (seq (count $argv))
-          #     if ! string match -r '^-' -- $argv[$i]
-          #       set argv[$i] (string replace -r ^ nixpkgs# $argv[$i])
-          #     end
-          #   end
-          #   nix shell $argv
-          # end
-
-          # function activate -d 'Activate Python venv'
-          #   source .venv/bin/activate.fish
-          # end
         '';
       };
     };

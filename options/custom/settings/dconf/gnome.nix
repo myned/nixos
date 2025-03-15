@@ -15,12 +15,15 @@ in {
       };
 
       "org/gnome/desktop/interface" = {
+        clock-format = mkString "12h";
         clock-show-date = mkBoolean true;
         clock-show-seconds = mkBoolean false;
         clock-show-weekday = mkBoolean true;
+        #// color-scheme = mkString "prefer-dark";
+        cursor-blink = mkBoolean false;
         enable-hot-corners = mkBoolean false;
         gtk-enable-primary-paste = mkBoolean false;
-        clock-format = mkString "12h";
+        #// monospace-font-name = mkString "monospace 14";
       };
 
       "org/gnome/desktop/notifications" = {
