@@ -51,10 +51,11 @@ with lib; {
 
     # TODO: Consider other themes
     # https://github.com/soulhotel/FF-ULTIMA
-
+    #!! @import must be above other rules
     # https://github.com/rafaelmardojai/firefox-gnome-theme/blob/master/theme/colors/dark.css
-    userChrome = builtins.readFile ./userChrome.css;
-    userContent = builtins.readFile ./userContent.css;
+    userChrome = mkAfter ''@import "${./customChrome.css}";'';
+    userContent = mkAfter ''@import "${./customContent.css}";'';
+
     containersForce = true;
 
     containers = {

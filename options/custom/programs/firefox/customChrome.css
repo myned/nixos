@@ -1,0 +1,21 @@
+/***
+https://github.com/rafaelmardojai/firefox-gnome-theme
+***/
+
+:root {
+  --gnome-accent: #d33682;
+  --gnome-tabbar-tab-hover-background: color-mix(in srgb, #073642, #586e75 10%);
+  --gnome-tabbar-tab-active-background: color-mix(in srgb, #073642, #586e75 20%);
+  --gnome-tabbar-tab-active-background-contrast: color-mix(in srgb, #073642, #586e75 20%);
+  --gnome-tabbar-tab-active-hover-background: color-mix(in srgb, #073642, #586e75 30%);
+}
+
+/* Center bookmarks */
+#PlacesToolbarItems {
+  justify-content: center;
+}
+
+/* Disable bookmark folder icons */
+.bookmark-item[container] > .toolbarbutton-icon {
+  display: none;
+}
