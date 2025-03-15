@@ -31,7 +31,7 @@ in {
             inherit size;
             theme = name;
 
-            hide-after-inactive-ms = 1000 * 15; # Milliseconds
+            #// hide-after-inactive-ms = 1000 * 15; # Milliseconds
             hide-when-typing = true;
           };
 
