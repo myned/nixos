@@ -173,6 +173,7 @@ in {
           telegram-desktop # Telegram client
           variety # Wallpaper changer
           ventoy # Image writer
+          vesktop # Discord client
           virt-viewer # Virtual machine viewer
           wildcard # Regex tester
           wowup-cf # World of Warcraft addon manager
