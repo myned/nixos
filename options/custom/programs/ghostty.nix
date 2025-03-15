@@ -59,6 +59,10 @@ in {
             # https://ghostty.org/docs/config/reference#mouse-scroll-multiplier
             mouse-scroll-multiplier = 2;
 
+            # https://ghostty.org/docs/config/reference#scrollback-limit
+            #!! Per terminal surface
+            scrollback-limit = 1 * 1024 * 1024 * 1024; # GiB
+
             # https://ghostty.org/docs/config/reference#shell-integration-features
             shell-integration-features = "no-cursor";
 
