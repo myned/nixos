@@ -28,10 +28,6 @@
 
     services = {
       fw-fanctrl.enable = true;
-
-      # https://github.com/ollama/ollama/blob/main/docs/gpu.md#overrides
-      #?? nix run nixpkgs#rocmPackages.rocminfo | grep gfx
-      ollama.rocmOverrideGfx = "10.3.0"; # 10.3.1
     };
 
     settings = {

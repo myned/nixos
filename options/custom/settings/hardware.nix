@@ -9,6 +9,7 @@ in {
   options.custom.settings.hardware = {
     enable = mkOption {default = false;};
     gpu = mkOption {default = null;};
+    rocm = mkOption {default = null;};
   };
 
   config = mkIf cfg.enable {

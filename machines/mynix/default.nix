@@ -29,6 +29,7 @@
 
       hardware = {
         gpu = "amd";
+        rocm = "10.3.0"; # 10.3.1
       };
 
       storage.mnt = [

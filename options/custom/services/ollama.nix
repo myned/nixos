@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib; let
@@ -17,11 +16,11 @@ in {
     services.ollama = {
       enable = true;
       openFirewall = true;
-      package = pkgs.ollama-rocm;
 
-      loadModels = [
-        "deepseek-r1" # https://github.com/deepseek-ai/DeepSeek-R1
-      ];
+      # https://wiki.nixos.org/wiki/Ollama#AMD_GPU_with_open_source_driver
+      # https://github.com/ollama/ollama/blob/main/docs/gpu.md#overrides
+      #?? nix run nixpkgs#rocmPackages.rocminfo | grep gfx
+      rocmOverrideGfx = with config.custom.settings.hardware; mkIf (isString rocm) rocm;
     };
   };
 }
