@@ -98,6 +98,7 @@ in {
           decibels # Audio player
           decoder # QR code scanner
           discord # Discord client
+          drawing # Image editor
           drawio # Diagram maker
           easyeffects # Audio filters
           element-desktop # Matrix client
