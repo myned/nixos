@@ -36,7 +36,7 @@
       };
 
       storage = {
-        mnt = ["myve"];
+        #// mnt = ["myve"];
       };
     };
   };
