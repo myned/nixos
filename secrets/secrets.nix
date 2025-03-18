@@ -77,6 +77,8 @@ in {
   "server/mastodon/.env".publicKeys = server;
   "server/mastodon/db.env".publicKeys = server;
   "server/matrix-conduit/conduwuit.toml".publicKeys = server;
+  "server/miniflux/.env".publicKeys = server;
+  "server/miniflux/db.env".publicKeys = server;
   "server/netbox/.env".publicKeys = server;
   "server/netbox/cache.env".publicKeys = server;
   "server/netbox/db.env".publicKeys = server;
