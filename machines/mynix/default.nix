@@ -40,7 +40,7 @@
 
       vm.passthrough = {
         enable = true;
-        blacklist = true;
+        #// blacklist = true;
         driver = "amdgpu";
         guest = "myndows";
         id = "1002:73df";
