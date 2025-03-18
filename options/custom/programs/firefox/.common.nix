@@ -522,6 +522,12 @@ with lib; {
           iconUpdateURL = "https://www.youtube.com/s/desktop/f8c8418d/img/favicon.ico";
           urls = [{template = "https://www.youtube.com/results?search_query={searchTerms}";}];
         };
+
+        "Zed Issues" = {
+          definedAliases = ["zi"];
+          iconUpdateURL = "https://github.com/favicon.ico";
+          urls = [{template = "https://github.com/zed-industries/zed/issues?q=is%3Aissue+is%3Aopen+{searchTerms}";}];
+        };
       };
     };
   };

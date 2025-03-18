@@ -230,6 +230,7 @@ in {
 
           editor = rules: [
             (class "codium" rules) # VSCode
+            (class "dev\\.zed\\.Zed" rules)
             (class "obsidian" rules)
           ];
 

@@ -34,6 +34,7 @@ with lib; let
   virt-manager = "${config.programs.virt-manager.package}/bin/virt-manager";
   waydroid = "${pkgs.waydroid}/bin/waydroid";
   youtube-music = "${pkgs.youtube-music}/bin/youtube-music";
+  zeditor = getExe hm.programs.zed-editor.package;
 in {
   options.custom.desktops.niri.binds = {
     enable = mkOption {default = false;};
@@ -145,8 +146,8 @@ in {
             (key "F" "Mod" (spawn [nautilus "--new-window"]))
             (key "G" "Ctrl+Alt" (spawn [pkill "steam"]))
             (key "G" "Mod" (spawn steam))
-            (key "I" "Ctrl+Alt" (spawn [pkill "codium"]))
-            (key "I" "Mod" (spawn codium))
+            (key "I" "Ctrl+Alt" (spawn [pkill "zed"]))
+            (key "I" "Mod" (spawn zeditor))
             (key "K" "Ctrl+Alt" (spawn [pkill "obsidian"]))
             (key "K" "Mod" (spawn obsidian))
             (key "L" "Mod" (spawn [bash "-c" "${hyprlock} --immediate & ${niri} msg action power-off-monitors"]))

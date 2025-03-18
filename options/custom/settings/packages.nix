@@ -24,6 +24,8 @@ in {
         ])
         ++ optionals config.custom.default [
           alejandra # Nix formatter
+          blueprint-compiler # GTK markup language
+          caddy # Reverse proxy
           fd # File finder
           fzf # Fuzzy search
           inetutils # Network utilities
@@ -32,14 +34,20 @@ in {
           lf # Terminal file manager
           lm_sensors # System sensors
           lz4 # Compression utility
+          nil # Nix language server
           nix-output-monitor # Nix build parser
           nix-tree # Nix store explorer
+          nixd # Nix language server
           nmap # Network scanner
           nvd # Nix diff viewer
           openssl # Certificate utility
+          powershell # Windows shell
           progress # Coreutils progress viewer
           q # DNS tester
           rclone # File sync
+          shellcheck # Script analysis tool
+          shfmt # Script formatter
+          simple-completion-language-server # Snippet language server
           sshpass # SSH automation
           stress # CPU stress tester
           testdisk # Data recovery tool

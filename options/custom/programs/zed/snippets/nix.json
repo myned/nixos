@@ -1,0 +1,135 @@
+{
+  "Home Manager Option": {
+    "prefix": "ho",
+    "body": [
+      "{",
+      "  config,",
+      "  lib,",
+      "  ...",
+      "}:",
+      "with lib; let",
+      "  cfg = config.custom.$1;",
+      "  hm = config.home-manager.users.\\${config.custom.username};",
+      "in {",
+      "  options.custom.$1 = {",
+      "    enable = mkOption {default = false;};",
+      "  };",
+      "",
+      "  config = mkIf cfg.enable {",
+      "    home-manager.sharedModules = [",
+      "      {",
+      "        $0",
+      "      }",
+      "    ];",
+      "  };",
+      "}"
+    ]
+  },
+
+  "NixOS Agenix": {
+    "prefix": "na",
+    "body": [
+      "age.secrets =",
+      "  let",
+      "    secret = filename: {",
+      "      file = \"\\${inputs.self}/secrets/\\${filename}\";",
+      "    };",
+      "  in",
+      "  {",
+      "    \"$1\" = secret \"$1\";",
+      "  };"
+    ]
+  },
+
+  "NixOS Container Arion": {
+    "prefix": "nca",
+    "body": [
+      "{",
+      "  config,",
+      "  inputs,",
+      "  lib,",
+      "  ...",
+      "}:",
+      "with lib; let",
+      "  cfg = config.custom.containers.$1;",
+      "in {",
+      "  options.custom.containers.$1 = {",
+      "    enable = mkOption {default = false;};",
+      "  };",
+      "",
+      "  config = mkIf cfg.enable {",
+      "    age.secrets = let",
+      "      secret = filename: {",
+      "        file = \"\\${inputs.self}/secrets/\\${filename}\";",
+      "      };",
+      "    in {",
+      "      \"\\${config.custom.profile}/$1/.env\" = secret \"\\${config.custom.profile}/$1/.env\";",
+      "    };",
+      "",
+      "    #?? arion-$1 pull",
+      "    environment.shellAliases.arion-$1 = \"sudo arion --prebuilt-file \\${config.virtualisation.arion.projects.$1.settings.out.dockerComposeYaml}\";",
+      "",
+      "    virtualisation.arion.projects.$1.settings.services = {",
+      "      $1.service = {",
+      "        container_name = \"$1\";",
+      "        depends_on = [\"\"];",
+      "        env_file = [config.age.secrets.\"\\${config.custom.profile}/$1/.env\".path];",
+      "        image = \"$1\";",
+      "        ports = [\"\"];",
+      "        restart = \"unless-stopped\";",
+      "        volumes = [\"\\${config.custom.containers.directory}/$1/data:/data\"];",
+      "      };",
+      "    };",
+      "  };",
+      "}"
+    ]
+  },
+
+  "Nix Develop": {
+    "prefix": "nd",
+    "body": [
+      "{",
+      "  inputs = {",
+      "    nixpkgs.url = \"github:NixOS/nixpkgs/nixos-24.05\";",
+      "  };",
+      "",
+      "  outputs =",
+      "    inputs:",
+      "    let",
+      "      system = \"x86_64-linux\";",
+      "      pkgs = inputs.nixpkgs.legacyPackages.\\${system};",
+      "    in",
+      "    {",
+      "      #?? nix develop",
+      "      devShells.\\${system}.default = pkgs.mkShell {",
+      "        inputsFrom = [ ];",
+      "        packages = [ ];",
+      "        shellHook = '''';",
+      "      };",
+      "    };",
+      "}"
+    ]
+  },
+
+  "NixOS Option": {
+    "prefix": "no",
+    "body": [
+      "{",
+      "  config,",
+      "  lib,",
+      "  ...",
+      "}:",
+      "with lib; let",
+      "  cfg = config.custom.$1;",
+      "in {",
+      "  options.custom.$1 = {",
+      "    enable = mkOption {default = false;};",
+      "  };",
+      "",
+      "  config = mkIf cfg.enable {",
+      "    $0",
+      "  };",
+      "}"
+    ]
+  }
+}

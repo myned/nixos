@@ -315,6 +315,12 @@ in {
             shortcut = "y";
             url = "https://www.youtube.com/results?search_query={searchTerms}";
           }
+
+          {
+            name = "Zed Issues";
+            shortcut = "zi";
+            url = "https://github.com/zed-industries/zed/issues?q=is%3Aissue+is%3Aopen+{searchTerms}";
+          }
         ];
       };
     };

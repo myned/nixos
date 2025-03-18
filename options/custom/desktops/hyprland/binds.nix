@@ -36,6 +36,7 @@ with lib; let
   vrr = hm.home.file.".local/bin/vrr".source;
   waydroid = getExe pkgs.waydroid;
   window = hm.home.file.".local/bin/window".source;
+  zeditor = getExe hm.programs.zed-editor.package;
   zoom = hm.home.file.".local/bin/zoom".source;
 
   command = command: "${uwsm} app -- ${command}";
@@ -198,7 +199,7 @@ in {
             (key "G" "Super" "togglespecialworkspace" "game")
             (key "G" "Super+Ctrl" "exec" steam)
             (key "G" "Super+Shift" "movetoworkspacesilent" "special:game")
-            (key "I" "Super" "exec" codium)
+            (key "I" "Super" "exec" zeditor)
             (key "K" "Super" "exec" obsidian)
             (key "M" "Super" "togglespecialworkspace" "music")
             (key "M" "Super+Shift" "movetoworkspacesilent" "special:music")

@@ -149,6 +149,7 @@ in {
               # IDEs
               matches = [
                 {app-id = "^codium$";}
+                {app-id = "^dev\.zed\.Zed$";}
               ];
 
               default-column-width.proportion =

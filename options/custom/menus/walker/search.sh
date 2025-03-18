@@ -254,6 +254,12 @@ case "$1" in
     url="https://www.youtube.com/results?search_query="
     query="${1:2}"
     ;;
+  'zi '*)
+    label="Zed Issues"
+    icon="com.github.zren.bugzilla"
+    url="https://github.com/zed-industries/zed/issues?q=is%3Aissue+is%3Aopen+"
+    query="${1:3}"
+    ;;
   *)
     exit
     # label="Search"

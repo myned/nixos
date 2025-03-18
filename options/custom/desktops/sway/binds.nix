@@ -54,6 +54,7 @@ with lib; let
   wlfreerdp = "${pkgs.freerdp}/bin/wlfreerdp";
   wofi = "${config.home-manager.users.${config.custom.username}.programs.wofi.package}/bin/wofi";
   xfreerdp = "${pkgs.freerdp}/bin/xfreerdp";
+  zeditor = getExe hm.programs.zed-editor.package;
 
   cfg = config.custom.desktops.sway.binds;
 in {
@@ -153,7 +154,7 @@ in {
             "backspace+${super}+${shift}" = "floating toggle";
             "bracketleft+${super}" = "layout toggle tabbed stacking";
             "bracketright+${super}" = "layout toggle split";
-            "c+${super}" = "exec ${codium}";
+            "c+${super}" = "exec ${zeditor}";
             "delete+${super}" = "exec inhibit";
             "delete+${super}+${shift}" = "exec vrr";
             "down+${super}" = "move down";
