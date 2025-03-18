@@ -17,9 +17,23 @@ in {
     # https://github.com/nix-community/nix-vscode-extensions
     nixpkgs.overlays = [inputs.nix-vscode-extensions.overlays.default];
 
-    environment.sessionVariables = {
-      # https://github.com/nix-community/nixd/blob/main/nixd/docs/features.md
-      NIXD_FLAGS = "--inlay-hints=false"; # Disable package versions in the editor
+    environment = {
+      sessionVariables = {
+        # https://github.com/nix-community/nixd/blob/main/nixd/docs/features.md
+        NIXD_FLAGS = "--inlay-hints=false"; # Disable package versions in the editor
+      };
+
+      # Extension dependencies
+      systemPackages = with pkgs; [
+        alejandra # nix-ide
+        blueprint-compiler # blueprint-gtk
+        caddy # caddyfile-support
+        nil # nix-ide
+        nixd # nix-ide
+        powershell # powershell
+        shellcheck # shellcheck
+        shfmt # shell-format
+      ];
     };
 
     home-manager.sharedModules = mkIf cfg.enable [

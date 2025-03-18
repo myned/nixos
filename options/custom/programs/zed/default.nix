@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -11,22 +12,48 @@ in {
   };
 
   config = mkIf cfg.enable {
+    # Extension dependencies
+    environment.systemPackages = with pkgs; [
+      alejandra # nix
+      basedpyright # basedpyright
+      blueprint-compiler # blueprint
+      caddy # caddyfile
+      docker-compose-language-service # docker-compose
+      dockerfile-language-server-nodejs # dockerfile
+      jdt-language-server # java
+      nginx-language-server # nginx
+      nil # nix
+      nixd # nix
+      nushell # nu
+      phpactor # php
+      powershell # powershell
+      powershell-editor-services # powershell
+      shellcheck # basher
+      shfmt # basher
+      simple-completion-language-server # snippets
+      svelte-language-server # svelte
+      vscode-langservers-extracted # html
+    ];
+
     home-manager.sharedModules = [
       {
         # https://zed.dev/
         # https://github.com/zed-industries/zed
+        # https://wiki.nixos.org/wiki/Zed
         programs.zed-editor = {
           enable = true;
 
           # https://zed.dev/docs/extensions
           # https://github.com/zed-industries/extensions/tree/main/extensions
           extensions = [
-            #// "basedpyright" # https://github.com/m1guer/basedpyright-zed
+            "bearded-icon-theme" # https://github.com/sethstha/bearded-icons-theme
+            "basedpyright" # https://github.com/m1guer/basedpyright-zed
             "basher" # https://github.com/d1y/bash.zed
+            "blueprint" # https://github.com/tfuxu/zed-blueprint
             "caddyfile" # https://github.com/nusnewob/caddyfile-zed
-            "colored-zed-icons-theme" # https://github.com/TheRedXD/zed-icons-colored-theme
+            #// "colored-zed-icons-theme" # https://github.com/TheRedXD/zed-icons-colored-theme
             "csv" # https://github.com/huacnlee/zed-csv
-            "discord-presence" # https://github.com/xhyrom/zed-discord-presence
+            #// "discord-presence" # https://github.com/xhyrom/zed-discord-presence
             "docker-compose" # https://github.com/eth0net/zed-docker-compose
             "dockerfile" # https://github.com/d1y/dockerfile.zed
             "env" # https://github.com/zarifpour/zed-env
@@ -37,25 +64,36 @@ in {
             "java" # https://github.com/zed-extensions/java
             "jinja2" # https://github.com/ArcherHume/jinja2-support
             "make" # https://github.com/caius/zed-make
-            "material-icon-theme" # https://github.com/zed-extensions/material-icon-theme
+            #// "material-icon-theme" # https://github.com/zed-extensions/material-icon-theme
             "nginx" # https://github.com/d1y/nginx-zed
             "nix" # https://github.com/zed-extensions/nix
             "nu" # https://github.com/zed-extensions/nu
             "php" # https://github.com/zed-extensions/php
             "powershell" # https://github.com/wingyplus/zed-powershell
-            "pylsp" # https://github.com/rgbkrk/python-lsp-zed-extension
-            "scss" # https://github.com/bajrangCoder/zed-scss
+
+            # TODO: Add dependencies
+            # https://github.com/NixOS/nixpkgs/issues/229337
+            #// "pylsp" # https://github.com/rgbkrk/python-lsp-zed-extension
+
+            # BUG: scss-lsp/some-sass-lsp not packaged yet
+            # https://github.com/NixOS/nixpkgs/issues/380280
+            #// "scss" # https://github.com/bajrangCoder/zed-scss
+
             "sql" # https://github.com/zed-extensions/sql
             "svelte" # https://github.com/zed-extensions/svelte
             "tmux" # https://github.com/dangh/zed-tmux
+
+            # BUG: unocss-language-server not packaged yet
+            # https://github.com/NixOS/nixpkgs/issues/270993
             "unocss" # https://github.com/bajrangCoder/zed-unocss
+
             "xml" # https://github.com/sweetppro/zed-xml
           ];
 
           # https://zed.dev/docs/key-bindings
           userKeymaps = [
             {
-              # Global keybinds
+              # Global
               bindings = {
                 "alt-\\" = "workspace::ToggleBottomDock";
                 "alt-a" = "assistant::ToggleFocus";
@@ -72,10 +110,10 @@ in {
                 "alt-shift-tab" = "workspace::ToggleRightDock";
               };
             }
-            {
-              # Editor keybinds
-              context = "Editor";
 
+            {
+              # Editor
+              context = "Editor";
               bindings = {
                 "alt-backspace" = "editor::DeleteLine";
                 "alt-enter" = "editor::DuplicateLineDown";
@@ -86,11 +124,19 @@ in {
                 "alt-shift-enter" = "editor::DuplicateLineUp";
               };
             }
+
             {
-              # Terminal keybinds
+              # Editor completions
+              context = "Editor && showing_completions";
+              bindings = {
+                "enter" = "editor::Newline";
+              };
+            }
+
+            {
+              # Terminal
               # https://zed.dev/docs/key-bindings#forward-keys-to-terminal
               context = "Terminal";
-
               bindings = {
                 "ctrl-s" = ["terminal::SendKeystroke" "ctrl-s"];
               };
@@ -146,7 +192,7 @@ in {
               default_width = 300;
             };
 
-            icon_theme = "Colored Zed Icons Theme Dark";
+            icon_theme = "Bearded Icon Theme";
 
             indent_guides = {
               active_line_width = 2;
@@ -200,7 +246,7 @@ in {
               line_height = "standard";
             };
 
-            ui_font_size = mkForce 18;
+            ui_font_size = mkForce 19;
 
             # Language-specific
             # https://zed.dev/docs/configuring-languages

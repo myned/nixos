@@ -1,6 +1,7 @@
 {
   "Home Manager Option": {
     "prefix": "ho",
+    "description": "Home Manager Option",
     "body": [
       "{",
       "  config,",
@@ -28,6 +29,7 @@
 
   "NixOS Agenix": {
     "prefix": "na",
+    "description": "NixOS Agenix",
     "body": [
       "age.secrets =",
       "  let",
@@ -43,6 +45,7 @@
 
   "NixOS Container Arion": {
     "prefix": "nca",
+    "description": "NixOS Container Arion",
     "body": [
       "{",
       "  config,",
@@ -87,6 +90,7 @@
 
   "Nix Develop": {
     "prefix": "nd",
+    "description": "Nix Develop",
     "body": [
       "{",
       "  inputs = {",
@@ -113,6 +117,7 @@
 
   "NixOS Option": {
     "prefix": "no",
+    "description": "NixOS Option",
     "body": [
       "{",
       "  config,",
@@ -130,6 +135,30 @@
       "    $0",
       "  };",
       "}"
+    ]
+  },
+
+  "Script Bash": {
+    "prefix": "sb",
+    "description": "Script Bash",
+    "body": ["#! /usr/bin/env bash", "", "$0"]
+  },
+
+  "Script Bash Argc": {
+    "prefix": "sba",
+    "description": "Script Bash Argc",
+    "body": [
+      "#! /usr/bin/env bash",
+      "",
+      "# @describe $1",
+      "#",
+      "# https://github.com/sigoden/argc",
+      "",
+      "# @meta combine-shorts",
+      "",
+      "$0",
+      "",
+      "eval \"\\$(argc --argc-eval \"\\$0\" \"\\$@\")\""
     ]
   }
 }
