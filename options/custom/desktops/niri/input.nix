@@ -30,7 +30,7 @@ in {
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsinputkeyboardrepeat-delay
           keyboard = {
             repeat-delay = 250;
-            repeat-rate = 40;
+            repeat-rate = 50;
           };
 
           # TODO: Update when per-device configuration is supported
