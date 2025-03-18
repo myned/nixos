@@ -69,8 +69,7 @@ in {
             # TODO: Focus window if already launched
             # https://github.com/YaLTeR/niri/discussions/267
             #?? niri msg action focus-window --id (niri msg -j windows | jq '.[] | select(.app_id == "").id')
-            (key "Apostrophe" "Mod" screenshot)
-            (key "Apostrophe" "Mod+Ctrl+Shift" screenshot-screen)
+            (key "Apostrophe" "Mod" (screenshot {show-pointer = false;}))
             (key "Apostrophe" "Mod+Shift" screenshot-window)
             (key "Backslash" "Mod" (spawn inhibit))
             (key "Backslash" "Mod+Shift" (spawn power))
