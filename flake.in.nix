@@ -77,6 +77,14 @@
 
     ### Source code
     cisco-packettracer8 = source "file:///home/myned/SYNC/linux/config/cisco/CiscoPacketTracer822_amd64_signed.deb";
+    freshrss-autorefresh = source "github:Eisa01/FreshRSS---Auto-Refresh-Extension";
+    freshrss-cntools = source "github:cn-tools/cntools_FreshRssExtensions";
+    freshrss-comicsinfeed = source "github:giventofly/freshrss-comicsinfeed";
+    freshrss-dateformat = source "github:aledeg/xExtension-DateFormat";
+    freshrss-extensions = source "github:FreshRSS/Extensions";
+    freshrss-kagisummarizer = source "git+https://code.sitosis.com/rudism/freshrss-kagi-summarizer";
+    freshrss-kapdap = source "github:kapdap/freshrss-extensions";
+    freshrss-markpreviousasread = source "github:kalvn/freshrss-mark-previous-as-read";
     lifx-cli = source "github:Rawa/lifx-cli";
     steamtinkerlaunch = source "github:sonic2kk/steamtinkerlaunch";
     thunderbird-gnome-theme = source "github:rafaelmardojai/thunderbird-gnome-theme";

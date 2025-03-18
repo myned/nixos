@@ -16,6 +16,7 @@
       coturn.enable = true;
       forgejo.enable = true;
       foundryvtt.enable = true;
+      freshrss.enable = true;
       #// headscale.enable = true;
       mastodon.enable = true;
       netbox.enable = true;

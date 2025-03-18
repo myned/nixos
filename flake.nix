@@ -47,6 +47,38 @@
       url = "github:nix-community/disko";
     };
     flakegen.url = "github:jorsn/flakegen";
+    freshrss-autorefresh = {
+      flake = false;
+      url = "github:Eisa01/FreshRSS---Auto-Refresh-Extension";
+    };
+    freshrss-cntools = {
+      flake = false;
+      url = "github:cn-tools/cntools_FreshRssExtensions";
+    };
+    freshrss-comicsinfeed = {
+      flake = false;
+      url = "github:giventofly/freshrss-comicsinfeed";
+    };
+    freshrss-dateformat = {
+      flake = false;
+      url = "github:aledeg/xExtension-DateFormat";
+    };
+    freshrss-extensions = {
+      flake = false;
+      url = "github:FreshRSS/Extensions";
+    };
+    freshrss-kagisummarizer = {
+      flake = false;
+      url = "git+https://code.sitosis.com/rudism/freshrss-kagi-summarizer";
+    };
+    freshrss-kapdap = {
+      flake = false;
+      url = "github:kapdap/freshrss-extensions";
+    };
+    freshrss-markpreviousasread = {
+      flake = false;
+      url = "github:kalvn/freshrss-mark-previous-as-read";
+    };
     fw-fanctrl = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:TamtamHero/fw-fanctrl/packaging/nix";
