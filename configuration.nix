@@ -55,8 +55,14 @@
           inherit stable unstable master;
 
           ### Packages
-          # TODO: Remove when on stable
-          ghostty = unstable.ghostty;
+          # TODO: Remove when on unstable
+          # https://github.com/NixOS/nixpkgs/pull/389740
+          pwvucontrol = master.pwvucontrol;
+
+          # TODO: Remove when fixed
+          # https://github.com/NixOS/nixpkgs/issues/389638
+          # https://github.com/NixOS/nixpkgs/pull/390171
+          rustdesk-flutter = stable.rustdesk-flutter;
 
           # TODO: Use official package when available
           # https://github.com/NixOS/nixpkgs/issues/327982
