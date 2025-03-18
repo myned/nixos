@@ -110,6 +110,7 @@ in {
           gnome-connections # Remote desktop client
           gnome-contacts # Contact editor
           gnome-disk-utility # Disk formatter
+          gnome-feeds # RSS feed client
           gnome-firmware # Firmware updater
           gnome-font-viewer # Font viewer
           gnome-frog # Text extraction
