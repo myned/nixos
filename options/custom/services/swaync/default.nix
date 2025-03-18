@@ -63,5 +63,8 @@ in {
         ];
       };
     };
+
+    # https://stylix.danth.me/options/modules/swaync.html
+    stylix.targets.swaync.enable = false;
   };
 }
