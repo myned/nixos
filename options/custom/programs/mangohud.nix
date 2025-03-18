@@ -17,7 +17,7 @@ in {
         # https://github.com/flightlessmango/MangoHud
         programs.mangohud = {
           enable = true;
-          enableSessionWide = true;
+          #// enableSessionWide = true;
 
           settings = {
             background_alpha = 0;
