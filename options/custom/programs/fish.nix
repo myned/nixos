@@ -217,11 +217,23 @@ in {
             nimwk = "niri msg workspaces";
             nimwkj = "niri msg --json workspaces";
 
+            ol = "ollama";
+            oll = "ollama list";
+            olp = "ollama pull";
+            olr = "ollama run";
+            olrm = "ollama rm";
+            ols = "ollama show";
+            olsrv = "ollama serve";
+            olv = "ollama --version";
+
             os = "nixos";
             osb = "nixos build";
             osbb = "nixos build boot";
+            osbbo = "nixos build boot -- --offline";
             osbs = "nixos build switch";
+            osbso = "nixos build switch -- --offline";
             osbt = "nixos build test";
+            osbto = "nixos build test -- --offline";
             osd = "nixos diff";
             osg = "nixos generate";
             osl = "nixos list";
