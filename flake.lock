@@ -3079,6 +3079,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-turbo": {
+      "locked": {
+        "lastModified": 1742251962,
+        "narHash": "sha256-JdfDg+R+Sdsf7ehfY5mo9PLIfE3CkOMidQEq8FZ+jtU=",
+        "owner": "getchoo-contrib",
+        "repo": "nixpkgs",
+        "rev": "00ef7da5bfb6ad8fe5caf60f3716e42d3b711399",
+        "type": "github"
+      },
+      "original": {
+        "owner": "getchoo-contrib",
+        "ref": "pkgs/turbo/2.4.5",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-unstable": {
       "locked": {
         "lastModified": 1741851582,
@@ -3331,6 +3347,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs-master": "nixpkgs-master",
         "nixpkgs-stable": "nixpkgs-stable_5",
+        "nixpkgs-turbo": "nixpkgs-turbo",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur-stable": "nur-stable",
         "nur-unstable": "nur-unstable",
