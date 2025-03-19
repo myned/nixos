@@ -1,0 +1,8 @@
+{
+  "name": "Solarized",
+  "author": "Myned",
+  "description": "Solarized theme, colors developed by Ethan Schoonover",
+  "version": 0.1,
+  "files": ["_frss.css", "../Alternative-Dark/adark.css", "solarized.css"],
+  "theme-color": "#d33682"
+}

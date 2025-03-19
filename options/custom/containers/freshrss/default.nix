@@ -34,6 +34,10 @@ in {
         in [
           "${config.custom.containers.directory}/freshrss/data:/var/www/FreshRSS/data"
 
+          # Themes
+          # https://github.com/FreshRSS/FreshRSS/tree/edge/p/themes/base-theme
+          "${./themes/Solarized}:/var/www/FreshRSS/p/themes/Solarized"
+
           # Extensions
           # https://github.com/FreshRSS/Extensions
           #!! Causes docker permission changes to fail on container start due to immutable source

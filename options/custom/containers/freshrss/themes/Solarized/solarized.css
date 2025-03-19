@@ -1,0 +1,142 @@
+:root {
+  /* https://ethanschoonover.com/solarized */
+  --base03: #002b36;
+  --base02: #073642;
+  --base01: #586e75;
+  --base00: #657b83;
+  --base0: #839496;
+  --base1: #93a1a1;
+  --base2: #eee8d5;
+  --base3: #fdf6e3;
+  --red: #dc322f;
+  --orange: #cb4b16;
+  --yellow: #b58900;
+  --green: #859900;
+  --cyan: #2aa198;
+  --blue: #268bd2;
+  --violet: #6c71c4;
+  --magenta: #d33682;
+
+  --accent-color: var(--magenta);
+  --border-radius: 25px;
+
+  --alert-error-border-color: var(--red);
+  --alert-success-border-color: var(--green);
+  --alert-warn-border-color: var(--yellow);
+  --background-color-active: color-mix(in srgb, var(--background-color-light), white 15%);
+  --background-color-dark-transparent: var(--background-color-dark);
+  --background-color-dark: var(--base03);
+  --background-color-hover: #ffffff10;
+  --background-color-light: var(--base02);
+  --background-color-middle: var(--base01);
+  --background-color-slider-shadow: rgba(0, 0, 0, 0.5);
+  --border-color-dark: var(--base03);
+  --border-color-favorite: var(--yellow);
+  --border-color-middle: var(--base02);
+  --border-color-unread: var(--orange);
+  --contrast-attention-background-color-hover: #ffffff10;
+  --contrast-attention-background-color: var(--accent-color);
+  --contrast-attention-font-color: var(--accent-color);
+  --contrast-background-color-active: var(--accent-color);
+  --contrast-background-color-hover: #ffffff10;
+  --contrast-background-color: var(--base03);
+  --contrast-background-font-color: var(--base1);
+  --contrast-border-color-hover: var(--base1);
+  --empty-feed-color: var(--base03);
+  --font-color-contrast: var(--base03);
+  --font-color-dark: var(--base02);
+  --font-color-error: var(--red);
+  --font-color-light: var(--base1);
+  --font-color-middle: var(--base0);
+  --frss-box-shadow-color-transparent: red;
+  --notification-bad-background-color: var(--red);
+  --notification-bad-border-color: var(--base03);
+  --notification-bad-font-color: var(--base03);
+  --notification-border-color: var(--base03);
+  --notification-good-background-color: var(--green);
+  --notification-good-border-color: var(--green);
+}
+
+html,
+body {
+  /* Use system font */
+  font-family: sans-serif;
+}
+
+.btn {
+  /* Set button radius */
+  border-radius: var(--border-radius);
+
+  /* Fix vertical misalignment */
+  font-size: unset;
+  line-height: unset;
+
+  padding: 4px 12px;
+}
+
+.form-group.form-actions {
+  /* Disable blur filter */
+  backdrop-filter: none;
+
+  background: var(--background-color-dark);
+}
+
+.icon {
+  /* Apply #93a1a1 color filter to svg icons */
+  filter: brightness(0%) saturate(100%) invert(69%) sepia(10%) saturate(261%) hue-rotate(132deg) brightness(92%)
+    contrast(85%);
+}
+
+.tree-folder-title:hover button.dropdown-toggle .icon {
+  /* Fix bypassing color filter */
+  filter: brightness(2);
+}
+
+.group input:first-child,
+.stick input:first-child,
+.group .btn:first-child,
+.stick .btn:first-child,
+.group .dropdown:first-child .btn,
+.stick .dropdown:first-child .btn {
+  /* Leftmost element in group */
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+.group input:last-child,
+.stick input:last-child,
+.group .btn:last-child,
+.stick .btn:last-child,
+.group .dropdown:last-child .btn,
+.stick .dropdown:last-child .btn {
+  /* Rightmost element in group */
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+
+.group .btn:only-child,
+.stick .btn:only-child,
+.group .dropdown:only-child .btn,
+.stick .dropdown:only-child .btn {
+  /* Set radius for single-button group */
+  border-radius: var(--border-radius);
+}
+
+.flux .item .title,
+.tree-folder-title .title {
+  /* Fix overlay with transparent background */
+  background: unset !important;
+}
+
+.tree-folder.active .tree-folder-title {
+  /* Set active category background */
+  background: var(--background-color-active);
+}
+
+.tree-folder-items:hover {
+  /* Fix entire section being highlighted */
+  background: unset;
+}
+
+.tree-folder-items .item:hover {
+  /* Set background color on feed hover */
+  background: var(--background-color-hover);
+}
