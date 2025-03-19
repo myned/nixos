@@ -74,6 +74,7 @@
 
     ### Branches
     nixpkgs-master = flake "github:NixOS/nixpkgs/master";
+    nixpkgs-turbo = flake "github:getchoo-contrib/nixpkgs/pkgs/turbo/2.4.5";
 
     ### Source code
     cisco-packettracer8 = source "file:///home/myned/SYNC/linux/config/cisco/CiscoPacketTracer822_amd64_signed.deb";

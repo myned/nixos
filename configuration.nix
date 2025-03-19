@@ -49,6 +49,7 @@
           stable = nixpkgs "stable";
           unstable = nixpkgs "unstable";
           master = nixpkgs "master";
+          turbo = nixpkgs "turbo";
         in {
           # Overlay nixpkgs branches
           #?? nixpkgs.BRANCH.PACKAGE
@@ -63,6 +64,10 @@
           # https://github.com/NixOS/nixpkgs/issues/389638
           # https://github.com/NixOS/nixpkgs/pull/390171
           rustdesk-flutter = stable.rustdesk-flutter;
+
+          # TODO: Remove when on unstable
+          # https://github.com/NixOS/nixpkgs/pull/389948
+          turbo-unwrapped = turbo.turbo-unwrapped;
 
           # TODO: Use official package when available
           # https://github.com/NixOS/nixpkgs/issues/327982

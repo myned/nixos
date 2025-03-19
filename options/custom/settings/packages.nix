@@ -100,6 +100,7 @@ in {
           fractal # Matrix client
           fragments # Torrent downloader
           gcolor3 # Color picker
+          gitbutler # Git client
           gitg # Git client
           github-desktop # Git client
           gitnuro # Git client
