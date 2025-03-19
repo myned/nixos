@@ -251,15 +251,24 @@ in {
             # Language-specific
             # https://zed.dev/docs/configuring-languages
             languages = {
+              # https://zed.dev/docs/languages/markdown
+              Markdown = {
+                format_on_save = "on";
+              };
+
               Nix = {
-                formatter.external.command = "alejandra";
+                # https://github.com/oxalica/nil
+                # https://github.com/nix-community/nixd
                 language_servers = ["nil" "!nixd"];
               };
             };
 
+            # Language servers
             # https://zed.dev/docs/configuring-languages#configuring-language-servers
             lsp = {
+              # https://github.com/oxalica/nil/blob/main/docs/configuration.md
               nil.initialization_options = {
+                formatting.command = ["alejandra"];
                 nix.flake.autoArchive = true;
               };
             };
