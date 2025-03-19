@@ -12,8 +12,8 @@
     #// vrr = true;
 
     desktops.niri.output = {
-      connectors = ["DP-1" "DP-2" "DP-3"];
-      disabled = ["HDMI-A-1" "HDMI-A-2" "HDMI-A-3"];
+      connectors = ["DP-1" "DP-2" "DP-3" "DP-4" "DP-5"];
+      disabled = ["HDMI-A-1" "HDMI-A-2" "HDMI-A-3" "HDMI-A-4" "HDMI-A-5"];
     };
 
     programs.looking-glass = {
