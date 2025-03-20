@@ -266,6 +266,21 @@ in {
               default-column-width = {};
               open-floating = true;
             }
+
+            {
+              # Rofi
+              # FIXME: Figure out why pinentry-rofi opens as a window
+              # HACK: pinentry-rofi opens as a window, so attempt to style as a layer
+              matches = [
+                {app-id = "^Rofi$";}
+              ];
+
+              border.enable = false;
+              clip-to-geometry = false;
+              focus-ring.enable = false;
+              open-floating = true;
+              shadow.enable = false;
+            }
           ];
         };
       }

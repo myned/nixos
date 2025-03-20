@@ -28,7 +28,13 @@ in {
           settings = {
             base_url = "https://vault.${config.custom.domain}";
             email = "${config.custom.username}@${config.custom.domain}";
-            pinentry = pkgs.pinentry-gnome3;
+            lock_timeout = 24 * 60 * 60; # Hours
+            sync_interval = 15 * 60; # Minutes
+
+            pinentry =
+              if config.custom.menu == "rofi"
+              then pkgs.pinentry-rofi # https://github.com/plattfot/pinentry-rofi
+              else pkgs.pinentry-gnome3; # https://github.com/gpg/pinentry
           };
         };
 
