@@ -43,6 +43,15 @@ in {
         enable = true;
         enableOnBoot = cfg.boot; # Socket activation
         storageDriver = "overlay2";
+
+        # https://docs.docker.com/reference/cli/dockerd/#daemon-configuration-file
+        daemon.settings = {
+          # Disable userland-proxy to pass client IP to containers
+          # https://github.com/moby/moby/issues/15086
+          # https://github.com/moby/moby/issues/14856
+          # https://github.com/docker/docs/issues/17312
+          userland-proxy = false;
+        };
       };
 
       # https://github.com/containers/podman
