@@ -21,7 +21,7 @@ in {
       freshrss.service = {
         container_name = "freshrss";
         image = "freshrss/freshrss:1";
-        ports = ["127.0.0.1:8088:80"];
+        ports = ["127.0.0.1:8088:80/tcp"];
         restart = "unless-stopped";
 
         environment = {
