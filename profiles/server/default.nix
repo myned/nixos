@@ -16,9 +16,10 @@
       coturn.enable = true;
       forgejo.enable = true;
       foundryvtt.enable = true;
-      freshrss.enable = true;
+      #// freshrss.enable = true;
       #// headscale.enable = true;
       mastodon.enable = true;
+      miniflux.enable = true;
       netbox.enable = true;
       #// nextcloud.enable = true;
       oryx.enable = true;
