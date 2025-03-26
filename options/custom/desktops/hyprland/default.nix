@@ -31,6 +31,7 @@ in {
       };
 
       programs = {
+        polkit.agent = true;
         uwsm.enable = true;
       };
     };

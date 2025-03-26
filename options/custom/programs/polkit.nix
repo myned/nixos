@@ -11,7 +11,7 @@ with lib; let
 in {
   options.custom.programs.polkit = {
     enable = mkOption {default = false;};
-    agent = mkOption {default = true;};
+    agent = mkOption {default = false;};
     bypass = mkOption {default = false;};
   };
 

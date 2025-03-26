@@ -35,6 +35,11 @@ in {
         };
       };
 
+      programs = {
+        # Enable custom polkit agent
+        polkit.agent = !cfg.polkit;
+      };
+
       services = {
         # Enable rootless Xwayland
         xwayland-satellite.enable = cfg.xwayland;
