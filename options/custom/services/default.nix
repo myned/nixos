@@ -17,7 +17,7 @@ with lib; {
       dbus.enable = true;
       flatpak.enable = true;
       fwupd.enable = true;
-      #// kdeconnect.enable = true;
+      kdeconnect.enable = true;
       libinput.enable = true;
       logind.enable = true;
       openrazer.enable = true;
