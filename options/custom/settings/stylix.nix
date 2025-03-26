@@ -161,6 +161,10 @@ in {
               @define-color borders #073642;
               @define-color unfocused_borders #073642;
             '';
+
+            # BUG: Kvantum currently breaks Plasma 6, remove when fixed
+            # https://github.com/danth/stylix/issues/835
+            qt.enable = false;
           };
         };
 
