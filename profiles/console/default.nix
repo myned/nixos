@@ -13,14 +13,14 @@
   custom = {
     minimal = true;
     profile = "console";
-    desktop = "gnome";
+    desktop = "kde";
 
     desktops = {
-      gnome.gdm = false;
+      #// gnome.gdm = false;
     };
 
     programs = {
-      gnome-shell.enable = true;
+      #// gnome-shell.enable = true;
 
       steam = {
         enable = true;
@@ -30,14 +30,18 @@
       };
     };
 
-    services.syncthing = {
-      enable = true;
-      folders =
-        lib.getAttrs [
-          "SYNC/.ignore"
-          "SYNC/game"
-        ]
-        options.custom.services.syncthing.folders.default;
+    services = {
+      kdeconnect.display = 0;
+
+      syncthing = {
+        enable = true;
+        folders =
+          lib.getAttrs [
+            "SYNC/.ignore"
+            "SYNC/game"
+          ]
+          options.custom.services.syncthing.folders.default;
+      };
     };
 
     settings = {
@@ -70,7 +74,7 @@
     steam = {
       enable = true;
       autoStart = true;
-      desktopSession = "gnome";
+      desktopSession = "plasma";
       user = config.custom.username;
     };
 
