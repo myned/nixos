@@ -167,7 +167,6 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
-    nixpkgs-turbo.url = "github:getchoo-contrib/nixpkgs/pkgs/turbo/2.4.5";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nur-stable = {
       inputs.nixpkgs.follows = "nixpkgs-stable";
