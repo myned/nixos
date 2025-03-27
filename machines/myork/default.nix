@@ -59,7 +59,7 @@
 
       # Force display power savings
       # https://wiki.archlinux.org/title/Framework_Laptop_13#(AMD)_Washed-out_colors_when_using_power-profiles-daemon_in_power-saver_or_balanced_mode
-      "amdgpu.abmlevel=0"
+      #// "amdgpu.abmlevel=0"
 
       # Disable AMD scaling driver
       # https://wiki.archlinux.org/title/CPU_frequency_scaling#amd_pstate
