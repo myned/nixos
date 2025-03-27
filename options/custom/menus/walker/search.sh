@@ -44,6 +44,12 @@ case "$1" in
     url="https://github.com/element-hq/element-web/issues?q=is%3Aissue+is%3Aopen+"
     query="${1:3}"
     ;;
+  'f '*)
+    label="Forums"
+    icon="plasma-search"
+    url="https://kagi.com/search?l=3&q="
+    query="${1:2}"
+    ;;
   'fh '*)
     label="Flathub"
     icon="application-vnd.flatpak"

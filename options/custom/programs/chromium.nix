@@ -113,6 +113,12 @@ in {
           }
 
           {
+            name = "Forums";
+            shortcut = "f";
+            url = "https://kagi.com/search?l=3&q={searchTerms}";
+          }
+
+          {
             name = "Flathub";
             shortcut = "fh";
             url = "https://flathub.org/apps/search?q={searchTerms}";
