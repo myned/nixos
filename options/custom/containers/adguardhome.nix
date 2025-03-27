@@ -43,13 +43,13 @@ in {
     # https://github.com/AdguardTeam/AdGuardHome/wiki/Encryption
     networking.firewall = {
       allowedTCPPorts = [
-        53 # DNS
-        853 # DNS-over-TLS
+        #// 53 # DNS
+        #// 853 # DNS-over-TLS
       ];
 
       allowedUDPPorts = [
-        53 # DNS
-        853 # DNS-over-QUIC
+        #// 53 # DNS
+        #// 853 # DNS-over-QUIC
       ];
     };
 

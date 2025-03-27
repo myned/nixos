@@ -19,7 +19,7 @@ in {
         enable = true;
         nmbd.enable = false;
         nsswins = false;
-        openFirewall = true;
+        #// openFirewall = true;
 
         # https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html
         settings = {

@@ -28,7 +28,7 @@ in {
 
     networking.firewall = {
       allowedTCPPorts = [
-        1935 # RTMP
+        #// 1935 # RTMP
       ];
     };
   };

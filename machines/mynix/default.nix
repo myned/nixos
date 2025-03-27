@@ -24,7 +24,7 @@
     settings = {
       games = {
         enable = true;
-        abiotic-factor = true;
+        #// abiotic-factor = true;
       };
 
       hardware = {
