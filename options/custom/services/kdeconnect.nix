@@ -9,7 +9,6 @@ with lib; let
 in {
   options.custom.services.kdeconnect = {
     enable = mkOption {default = false;};
-    display = mkOption {default = null;};
     package = mkOption {default = mkForce pkgs.kdePackages.kdeconnect-kde;};
   };
 
@@ -25,13 +24,6 @@ in {
         services.kdeconnect = {
           enable = true;
           package = cfg.package;
-        };
-
-        # HACK: Manually set DISPLAY variable if specified
-        systemd.user.services.kdeconnect = mkIf (!isNull cfg.display) {
-          Service = {
-            Environment = ["DISPLAY=:${toString cfg.display}"];
-          };
         };
       }
     ];

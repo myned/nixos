@@ -31,8 +31,6 @@
     };
 
     services = {
-      kdeconnect.display = 0;
-
       syncthing = {
         enable = true;
         folders =
@@ -86,4 +84,15 @@
 
     decky-loader.enable = true;
   };
+
+  home-manager.sharedModules = [
+    {
+      # HACK: Manually set DISPLAY variable for use in gamemode
+      systemd.user.services.kdeconnect = {
+        Service = {
+          Environment = ["DISPLAY=:${toString config.xserver.display}"];
+        };
+      };
+    }
+  ];
 }
