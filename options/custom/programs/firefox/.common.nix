@@ -254,278 +254,288 @@ with lib; {
     # https://searchfox.org/mozilla-central/rev/669329e284f8e8e2bb28090617192ca9b4ef3380/toolkit/components/search/SearchEngine.jsm#1138-1177
     search = {
       force = true;
-      default = "Kagi";
-      privateDefault = "Kagi";
+      default = "kagi";
+      privateDefault = "kagi";
 
       engines = {
         ### Builtins
-        "Amazon.com" = {
-          metaData.hidden = true;
-        };
-
-        "Bing" = {
-          metaData.hidden = true;
-        };
-
-        "DuckDuckGo" = {
-          metaData.alias = "d";
-        };
-
-        "eBay" = {
-          metaData.hidden = true;
-        };
-
-        "Google" = {
-          metaData.alias = "g";
-        };
-
-        "Wikipedia (en)" = {
-          metaData.hidden = true;
-        };
+        amazondotcom-us.metaData.alias = "a";
+        bing.metaData.hidden = true;
+        ddg.metaData.alias = "d";
+        ebay.metaData.hidden = true;
+        google.metaData.alias = "g";
+        wikipedia.metaData.alias = "w";
 
         ### Custom
-        "Amazon" = {
-          definedAliases = ["a"];
-          iconUpdateURL = "https://www.amazon.com/favicon.ico";
-          urls = [{template = "https://www.amazon.com/s?k={searchTerms}";}];
-        };
-
-        "ArchWiki" = {
+        arch-wiki = {
           definedAliases = ["aw"];
-          iconUpdateURL = "https://wiki.archlinux.org/favicon.ico";
+          icon = "https://wiki.archlinux.org/favicon.ico";
+          name = "Arch Wiki";
           urls = [{template = "https://wiki.archlinux.org/index.php?search={searchTerms}";}];
         };
 
-        "Brave" = {
+        brave = {
           definedAliases = ["b"];
-          iconUpdateURL = "https://cdn.search.brave.com/serp/v2/_app/immutable/assets/favicon.c09fe1a1.ico";
+          icon = "https://cdn.search.brave.com/serp/v2/_app/immutable/assets/favicon.c09fe1a1.ico";
+          name = "Brave";
           urls = [{template = "https://search.brave.com/search?q={searchTerms}";}];
         };
 
-        "Docker Hub" = {
+        docker-hub = {
           definedAliases = ["dh"];
-          iconUpdateURL = "https://hub.docker.com/favicon.ico";
+          icon = "https://hub.docker.com/favicon.ico";
+          name = "Docker Hub";
           urls = [{template = "https://hub.docker.com/search?q={searchTerms}";}];
         };
 
-        "e621" = {
+        e621 = {
           definedAliases = ["e"];
-          iconUpdateURL = "https://e621.net/favicon.ico";
+          icon = "https://e621.net/favicon.ico";
+          name = "e621";
           urls = [{template = "https://e621.net/posts?tags={searchTerms}";}];
         };
 
-        "Element Issues" = {
+        element-issues = {
           definedAliases = ["ei"];
-          iconUpdateURL = "https://github.com/favicon.ico";
+          icon = "https://github.com/favicon.ico";
+          name = "Element Issues";
           urls = [{template = "https://github.com/element-hq/element-web/issues?q=is%3Aissue+is%3Aopen+{searchTerms}";}];
         };
 
-        "Flathub" = {
+        forums = {
+          definedAliases = ["f"];
+          icon = "https://kagi.com/asset/c3c3d4b/favicon-32x32.png";
+          name = "Forums";
+          urls = [{template = "https://kagi.com/search?l=3&q={searchTerms}";}];
+        };
+
+        flathub = {
           definedAliases = ["fh"];
-          iconUpdateURL = "https://flathub.org/favicon.png";
+          icon = "https://flathub.org/favicon.png";
+          name = "Flathub";
           urls = [{template = "https://flathub.org/apps/search?q={searchTerms}";}];
         };
 
-        "Google Fonts" = {
+        google-fonts = {
           definedAliases = ["gf"];
-          iconUpdateURL = "https://www.gstatic.com/images/icons/material/apps/fonts/1x/catalog/v5/favicon.svg";
+          icon = "https://www.gstatic.com/images/icons/material/apps/fonts/1x/catalog/v5/favicon.svg";
+          name = "Google Fonts";
           urls = [{template = "https://fonts.google.com/?query={searchTerms}";}];
         };
 
-        "GitHub" = {
+        github = {
           definedAliases = ["gh"];
-          iconUpdateURL = "https://github.com/favicon.ico";
+          icon = "https://github.com/favicon.ico";
+          name = "GitHub";
           urls = [{template = "https://github.com/search?q={searchTerms}";}];
         };
 
-        "Home Manager Issues" = {
+        homemanager-issues = {
           definedAliases = ["hi"];
-          iconUpdateURL = "https://github.com/favicon.ico";
+          icon = "https://github.com/favicon.ico";
+          name = "Home Manager Issues";
           urls = [{template = "https://github.com/nix-community/home-manager/issues?q=is%3Aissue+is%3Aopen+{searchTerms}";}];
         };
 
-        "Home Manager Options" = {
+        homemanager-options = {
           definedAliases = ["ho"];
-          iconUpdateURL = "https://home-manager-options.extranix.com/images/favicon.png";
+          icon = "https://home-manager-options.extranix.com/images/favicon.png";
+          name = "Home Manager Options";
           urls = [{template = "https://home-manager-options.extranix.com/?query={searchTerms}&release=master";}];
         };
 
-        "Hyprland Issues" = {
+        hyprland-issues = {
           definedAliases = ["hyi"];
-          iconUpdateURL = "https://github.com/favicon.ico";
+          icon = "https://github.com/favicon.ico";
+          name = "Hyprland Issues";
           urls = [{template = "https://github.com/hyprwm/Hyprland/issues?q=is%3Aissue+is%3Aopen+{searchTerms}";}];
         };
 
-        "i3 Issues" = {
+        i3-issues = {
           definedAliases = ["ii"];
-          iconUpdateURL = "https://github.com/favicon.ico";
+          icon = "https://github.com/favicon.ico";
+          name = "i3 Issues";
           urls = [{template = "https://github.com/i3/i3/issues?q=is%3Aissue+is%3Aopen+{searchTerms}";}];
         };
 
-        "Kagi" = {
+        kagi = {
           definedAliases = ["k"];
-          iconUpdateURL = "https://kagi.com/asset/v2/favicon-32x32.png";
+          icon = "https://kagi.com/asset/v2/favicon-32x32.png";
+          name = "Kagi";
           urls = [{template = "https://kagi.com/search?q={searchTerms}";}];
         };
 
-        "Lutris" = {
+        lutris = {
           definedAliases = ["l"];
-          iconUpdateURL = "https://lutris.net/favicon.ico";
+          icon = "https://lutris.net/favicon.ico";
+          name = "Lutris";
           urls = [{template = "https://lutris.net/games?q={searchTerms}";}];
         };
 
-        "Lix Issues" = {
+        lix-issues = {
           definedAliases = ["li"];
-          iconUpdateURL = "https://git.lix.systems/assets/img/favicon.png";
+          icon = "https://git.lix.systems/assets/img/favicon.png";
+          name = "Lix Issues";
           urls = [{template = "https://git.lix.systems/lix-project/lix/issues?state=open&q={searchTerms}";}];
         };
 
-        "Mozilla Web Docs" = {
+        mdn-web-docs = {
           definedAliases = ["mdn"];
-          iconUpdateURL = "https://developer.mozilla.org/favicon-48x48.cbbd161b.png";
+          icon = "https://developer.mozilla.org/favicon-48x48.cbbd161b.png";
+          name = "MDN Web Docs";
           urls = [{template = "https://developer.mozilla.org/en-US/search?q={searchTerms}";}];
         };
 
-        "MyNixOS Options" = {
+        mynixos-options = {
           definedAliases = ["mno"];
-          iconUpdateURL = "https://mynixos.com/favicon.ico";
+          icon = "https://mynixos.com/favicon.ico";
+          name = "MyNixOS Options";
           urls = [{template = "https://mynixos.com/search?q=option+{searchTerms}";}];
         };
 
-        "Nix Dev" = {
+        nix-dev = {
           definedAliases = ["nd"];
-          iconUpdateURL = "https://nix.dev/manual/nix/latest/favicon.png";
+          icon = "https://nix.dev/manual/nix/latest/favicon.png";
+          name = "Nix Dev";
           urls = [{template = "https://nix.dev/manual/nix/latest?search={searchTerms}";}];
         };
 
-        "NixOS Flakes" = {
+        nixos-flakes = {
           definedAliases = ["nf"];
-          iconUpdateURL = "https://nixos.org/favicon.png";
+          icon = "https://nixos.org/favicon.png";
+          name = "NixOS Flakes";
           urls = [{template = "https://search.nixos.org/flakes?channel=unstable&query={searchTerms}";}];
         };
 
-        "Nix Hub" = {
+        nix-hub = {
           definedAliases = ["nh"];
-          iconUpdateURL = "https://www.nixhub.io/favicon.ico";
+          icon = "https://www.nixhub.io/favicon.ico";
+          name = "Nix Hub";
           urls = [{template = "https://www.nixhub.io/search?q={searchTerms}";}];
         };
 
-        "NixOS Nixpkgs Issues" = {
+        nixpkgs-issues = {
           definedAliases = ["ni"];
-          iconUpdateURL = "https://github.com/favicon.ico";
+          icon = "https://github.com/favicon.ico";
+          name = "Nixpkgs Issues";
           urls = [{template = "https://github.com/NixOS/nixpkgs/issues?q=is%3Aissue+is%3Aopen+{searchTerms}";}];
         };
 
-        "Nix PR" = {
+        nixpkgs-pr = {
           definedAliases = ["npr"];
+          name = "Nixpkgs PR";
           urls = [{template = "https://nixpk.gs/pr-tracker.html?pr={searchTerms}";}];
         };
 
-        "NixOS Options" = {
+        nixos-options = {
           definedAliases = ["no"];
-          iconUpdateURL = "https://nixos.org/favicon.png";
+          icon = "https://nixos.org/favicon.png";
+          name = "NixOS Options";
           urls = [{template = "https://search.nixos.org/options?channel=unstable&query={searchTerms}";}];
         };
 
-        "Noogle Dev" = {
+        noogle-dev = {
           definedAliases = ["nod"];
-          iconUpdateURL = "https://noogle.dev/favicon.png";
+          icon = "https://noogle.dev/favicon.png";
+          name = "Noogle Dev";
           urls = [{template = "https://noogle.dev/q?term={searchTerms}";}];
         };
 
-        "NixOS Packages" = {
+        nixos-packages = {
           definedAliases = ["np"];
-          iconUpdateURL = "https://nixos.org/favicon.png";
+          icon = "https://nixos.org/favicon.png";
+          name = "NixOS Packages";
           urls = [{template = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}";}];
         };
 
-        "Niri Issues" = {
+        niri-issues = {
           definedAliases = ["nii"];
-          iconUpdateURL = "https://github.com/favicon.ico";
+          icon = "https://github.com/favicon.ico";
+          name = "Niri Issues";
           urls = [{template = "https://github.com/YaLTeR/niri/issues?q=is%3Aissue+is%3Aopen+{searchTerms}";}];
         };
 
-        "NixOS Wiki" = {
+        nixos-wiki = {
           definedAliases = ["nw"];
-          iconUpdateURL = "https://wiki.nixos.org/favicon.ico";
+          icon = "https://wiki.nixos.org/favicon.ico";
+          name = "NixOS Wiki";
           urls = [{template = "https://wiki.nixos.org/w/index.php?search={searchTerms}";}];
         };
 
-        "Ollama" = {
+        ollama = {
           definedAliases = ["o"];
-          iconUpdateURL = "https://ollama.com/public/icon-64x64.png";
+          icon = "https://ollama.com/public/icon-64x64.png";
+          name = "Ollama";
           urls = [{template = "https://ollama.com/search?q={searchTerms}";}];
         };
 
-        "Piped" = {
+        piped = {
           definedAliases = ["p"];
-          iconUpdateURL = "https://piped.${config.custom.domain}/favicon.ico";
+          icon = "https://piped.${config.custom.domain}/favicon.ico";
+          name = "Piped";
           urls = [{template = "https://piped.${config.custom.domain}/results?search_query={searchTerms}";}];
         };
 
-        "PCGamingWiki" = {
+        pcgamingwiki = {
           definedAliases = ["pc"];
-          iconUpdateURL = "https://static.pcgamingwiki.com/favicons/pcgamingwiki.png";
+          icon = "https://static.pcgamingwiki.com/favicons/pcgamingwiki.png";
+          name = "PCGamingWiki";
           urls = [{template = "https://www.pcgamingwiki.com/w/index.php?search={searchTerms}";}];
         };
 
-        "ProtonDB" = {
+        protondb = {
           definedAliases = ["pdb"];
-          iconUpdateURL = "https://www.protondb.com/sites/protondb/images/favicon.ico";
+          icon = "https://www.protondb.com/sites/protondb/images/favicon.ico";
+          name = "ProtonDB";
           urls = [{template = "https://www.protondb.com/search?q={searchTerms}";}];
         };
 
-        "PyPI" = {
+        pypi = {
           definedAliases = ["pip"];
-          iconUpdateURL = "https://pypi.org/static/images/favicon.35549fe8.ico";
+          icon = "https://pypi.org/static/images/favicon.35549fe8.ico";
+          name = "PyPI";
           urls = [{template = "https://pypi.org/search/?q={searchTerms}";}];
         };
 
-        "Reddit" = {
-          definedAliases = ["r"];
-          iconUpdateURL = "https://www.redditstatic.com/desktop2x/img/favicon/favicon-96x96.png";
-          urls = [{template = "https://kagi.com/search?q=site%3Areddit.com+{searchTerms}";}];
-        };
-
-        "SearXNG" = {
+        searxng = {
           definedAliases = ["s"];
-          iconUpdateURL = "https://search.${config.custom.domain}/static/themes/simple/img/favicon.png";
+          icon = "https://search.${config.custom.domain}/static/themes/simple/img/favicon.png";
+          name = "SearXNG";
           urls = [{template = "https://search.${config.custom.domain}/search?q={searchTerms}";}];
         };
 
-        "Sway Issues" = {
+        sway-issues = {
           definedAliases = ["si"];
-          iconUpdateURL = "https://github.com/favicon.ico";
+          icon = "https://github.com/favicon.ico";
+          name = "Sway Issues";
           urls = [{template = "https://github.com/swaywm/sway/issues?q=is%3Aissue+is%3Aopen+{searchTerms}";}];
         };
 
-        "Wikipedia" = {
-          definedAliases = ["w"];
-          iconUpdateURL = "https://en.wikipedia.org/static/favicon/wikipedia.ico";
-          urls = [{template = "https://en.wikipedia.org/w/index.php?search={searchTerms}";}];
-        };
-
-        "Wolfram Alpha" = {
+        wolfram-alpha = {
           definedAliases = ["wa"];
-          iconUpdateURL = "https://www.wolframalpha.com/_next/static/images/favicon_1zbE9hjk.ico";
+          icon = "https://www.wolframalpha.com/_next/static/images/favicon_1zbE9hjk.ico";
+          name = "Wolfram Alpha";
           urls = [{template = "https://www.wolframalpha.com/input?i={searchTerms}";}];
         };
 
-        "Walker Issues" = {
+        walker-issues = {
           definedAliases = ["wi"];
-          iconUpdateURL = "https://github.com/favicon.ico";
+          icon = "https://github.com/favicon.ico";
+          name = "Walker Issues";
           urls = [{template = "https://github.com/abenz1267/walker/issues?q=is%3Aissue+is%3Aopen+{searchTerms}";}];
         };
 
-        "YouTube" = {
+        youtube = {
           definedAliases = ["y"];
-          iconUpdateURL = "https://www.youtube.com/s/desktop/f8c8418d/img/favicon.ico";
+          icon = "https://www.youtube.com/s/desktop/f8c8418d/img/favicon.ico";
+          name = "YouTube";
           urls = [{template = "https://www.youtube.com/results?search_query={searchTerms}";}];
         };
 
-        "Zed Issues" = {
+        zed-issues = {
           definedAliases = ["zi"];
-          iconUpdateURL = "https://github.com/favicon.ico";
+          icon = "https://github.com/favicon.ico";
+          name = "Zed Issues";
           urls = [{template = "https://github.com/zed-industries/zed/issues?q=is%3Aissue+is%3Aopen+{searchTerms}";}];
         };
       };
