@@ -15,7 +15,16 @@ in {
     # https://wiki.nixos.org/wiki/Ollama
     services.ollama = {
       enable = true;
-      openFirewall = true;
+
+      # Bind to all interfaces, but only Tailscale can access the closed port
+      # https://github.com/ollama/ollama/blob/main/docs/faq.md#how-can-i-expose-ollama-on-my-network
+      host = "0.0.0.0";
+      #// openFirewall = true; # 11434/tcp
+
+      environmentVariables = {
+        # https://github.com/ollama/ollama/blob/main/docs/faq.md#how-can-i-specify-the-context-window-size
+        OLLAMA_CONTEXT_LENGTH = "8192";
+      };
 
       # https://wiki.nixos.org/wiki/Ollama#AMD_GPU_with_open_source_driver
       # https://github.com/ollama/ollama/blob/main/docs/gpu.md#overrides
