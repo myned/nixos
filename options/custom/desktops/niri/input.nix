@@ -39,7 +39,7 @@ in {
           mouse = {
             accel-profile = "adaptive"; # flat
             accel-speed = -0.7;
-            scroll-factor = 1.25;
+            scroll-factor = 1.5;
           };
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsinputtouchpadaccel-profile
@@ -49,7 +49,7 @@ in {
             click-method = "clickfinger"; # Multi-finger click
             dwt = true; # Disable while typing
             dwtp = true; # Disable while trackpointing
-            scroll-factor = 0.3;
+            scroll-factor = 0.6;
           };
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsinputtrackballaccel-profile
