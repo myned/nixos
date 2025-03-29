@@ -13,21 +13,12 @@
   custom = {
     minimal = true;
     profile = "console";
-    desktop = "kde";
-
-    desktops = {
-      #// gnome.gdm = false;
-    };
+    desktop = "gnome";
+    desktops.gnome.gdm = false;
 
     programs = {
-      #// gnome-shell.enable = true;
-
-      steam = {
-        enable = true;
-
-        # BUG: Causes SteamOS crash when emulating scroll wheel in-game
-        #// extest = true;
-      };
+      gnome-shell.enable = true;
+      steam.enable = true;
     };
 
     services = {
@@ -72,7 +63,7 @@
     steam = {
       enable = true;
       autoStart = true;
-      desktopSession = "plasma";
+      desktopSession = "gnome"; #?? services.displayManager.sessionData.sessionNames
       user = config.custom.username;
     };
 
