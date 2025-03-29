@@ -47,13 +47,22 @@ _build() {
     fi
   fi
 
-  # TODO: Send to remote target if specified
-  # Invoke systemd to shutdown system
+  # Use systemd to act on system
   # Assumes errexit shell option is set
   if [[ "${argc_poweroff:-}" ]]; then
-    sudo systemctl poweroff
+    action=(systemctl poweroff)
   elif [[ "${argc_reboot:-}" ]]; then
-    sudo systemctl reboot
+    action=(systemctl reboot)
+  fi
+
+  # Invoke action on remote target if specified
+  if [[ -v action ]]; then
+    if [[ "${argc_target:-}" ]]; then
+      # shellcheck disable=SC2029
+      ssh root@"${argc_target}" "${action[@]}"
+    else
+      sudo "${action[@]}"
+    fi
   fi
 }
 

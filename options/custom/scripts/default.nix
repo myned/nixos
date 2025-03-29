@@ -132,6 +132,7 @@ in {
               nix
               nixos-rebuild
               nvd
+              openssh
               systemd
             ])
             (bash "power" [
