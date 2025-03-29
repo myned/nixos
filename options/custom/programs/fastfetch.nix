@@ -20,8 +20,8 @@ in {
 
     # System info greeting
     programs.fish.interactiveShellInit = mkIf cfg.greet ''
-      # If not root, print greeting
-      if test (id -u) -ne 0
+      # If main user, print greeting
+      if test (whoami) = ${config.custom.username}
         function fish_greeting
           ${fastfetch}
         end
