@@ -6,7 +6,11 @@
 with lib; let
   cfg = config.custom.services.pipewire;
 in {
-  options.custom.services.pipewire.enable = mkOption {default = false;};
+  options.custom.services.pipewire = {
+    enable = mkOption {default = false;};
+    pulseaudio = mkOption {default = true;};
+    system = mkOption {default = false;};
+  };
 
   config = mkIf cfg.enable ({
       #!! Realtime priority may cause desync
@@ -17,7 +21,8 @@ in {
         # https://gitlab.freedesktop.org/pipewire/pipewire
         pipewire = {
           enable = true;
-          pulse.enable = true;
+          systemWide = cfg.system;
+          pulse.enable = cfg.pulseaudio;
 
           alsa = {
             enable = true;
