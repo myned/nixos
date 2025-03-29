@@ -1,10 +1,10 @@
 {config, ...}: {
   custom = {
     profile = "sbc";
+    desktop = "kodi";
 
     programs = {
       fastfetch.greet = true;
-      ghostty.minimal = true;
     };
 
     containers = {
@@ -14,18 +14,17 @@
     };
 
     services = {
+      pipewire = {
+        enable = true;
+        pulseaudio = false;
+        system = true;
+      };
+
       #// tailscale.cert = true;
 
       borgmatic = {
         enable = true;
         sources = [config.custom.containers.directory];
-
-        repositories = [
-          {
-            path = "ssh://h1m9k594@h1m9k594.repo.borgbase.com/./repo";
-            label = "mypi3";
-          }
-        ];
       };
 
       # netdata = {
@@ -35,8 +34,10 @@
     };
 
     settings = {
-      boot.u-boot = true;
-      networking.wifi = true;
+      networking = {
+        networkmanager = true;
+        wifi = true;
+      };
     };
   };
 }
