@@ -57,7 +57,7 @@ in {
             mouse-hide-while-typing = true;
 
             # https://ghostty.org/docs/config/reference#mouse-scroll-multiplier
-            mouse-scroll-multiplier = 2;
+            mouse-scroll-multiplier = 1.5;
 
             # https://ghostty.org/docs/config/reference#scrollback-limit
             #!! Per terminal surface
