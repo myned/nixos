@@ -152,6 +152,8 @@ in {
           loupe # Image viewer
           lutris # Game library
           meld # Diff viewer
+          mission-center # System monitor
+          monitorets # System monitor
           newsflash # RSS feed
           obsidian # Knowledge base
           papers # Document viewer
