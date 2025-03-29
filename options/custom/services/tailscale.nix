@@ -19,6 +19,7 @@ in {
   options.custom.services.tailscale = {
     enable = mkOption {default = false;};
     cert = mkOption {default = false;};
+    tray = mkOption {default = false;};
   };
 
   # TODO: Use caddy plugin for provisioning when supported by NixOS
@@ -63,5 +64,12 @@ in {
           };
         };
       };
+
+    home-manager.sharedModules = [
+      {
+        # https://github.com/DeedleFake/trayscale
+        services.trayscale.enable = cfg.tray;
+      }
+    ];
   };
 }
