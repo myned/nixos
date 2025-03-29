@@ -2,9 +2,15 @@
   custom = {
     full = true;
     profile = "desktop"; # Inherit desktop profile
+    desktop = "niri";
 
     services = {
-      power-profiles-daemon.auto = true;
+      #// auto-cpufreq.enable = true;
+
+      power-profiles-daemon = {
+        enable = true;
+        auto = true;
+      };
     };
   };
 

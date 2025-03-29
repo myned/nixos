@@ -46,7 +46,6 @@ with lib; {
       #// mako.enable = true;
       #// network-manager-applet.enable = true;
       ollama.enable = true;
-      power-profiles-daemon.enable = true;
       samba.enable = true;
       #// swayidle.enable = true;
       swaync.enable = true;
