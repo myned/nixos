@@ -28,7 +28,7 @@ in {
       mastodon.service = {
         container_name = "mastodon";
         env_file = [config.age.secrets."${config.custom.profile}/mastodon/.env".path];
-        image = "lscr.io/linuxserver/mastodon:4.3.3";
+        image = "lscr.io/linuxserver/mastodon:4.3.6";
         ports = ["3000:443/tcp"];
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/mastodon/config:/config"];
