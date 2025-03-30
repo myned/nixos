@@ -102,6 +102,7 @@ in {
                 {app-id = "^org\.telegram\.desktop$";}
                 {app-id = "^signal$";}
                 {app-id = "^so\.libdb\.dissent$";}
+                {app-id = "^vesktop$";}
               ];
 
               default-column-display = "tabbed";
