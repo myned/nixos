@@ -93,6 +93,7 @@ in {
           drawio # Diagram maker
           easyeffects # Audio filters
           element-desktop # Matrix client
+          eyedropper # Color picker
           file-roller # Archive utility
           flare-signal # Signal client
           fluffychat # Matrix client
