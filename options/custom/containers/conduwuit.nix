@@ -25,7 +25,7 @@ in {
       # https://github.com/girlbossceo/conduwuit
       conduwuit.service = {
         container_name = "conduwuit";
-        image = "girlbossceo/conduwuit:v0.5.0-rc";
+        image = "girlbossceo/conduwuit:v0.5.0-rc3";
         ports = ["127.0.0.1:6167:6167/tcp"];
         restart = "unless-stopped";
 
