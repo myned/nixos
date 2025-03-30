@@ -20,7 +20,7 @@ in {
       #?? ls /var/lib/caddy/.local/share/caddy/certificates/*
       adguardhome.service = {
         container_name = "adguardhome";
-        image = "adguard/adguardhome:v0.107.56";
+        image = "adguard/adguardhome:v0.107.59";
 
         ports = [
           "53:53/tcp" # DNS
