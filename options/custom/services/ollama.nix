@@ -28,6 +28,20 @@ in {
       host = "0.0.0.0";
       #// openFirewall = true; # 11434/tcp
 
+      # https://ollama.com/search
+      loadModels = [
+        # General
+        "deepseek-r1:14b"
+        "gemma3:12b"
+        "phi4:14b"
+        "qwen2.5:14b"
+
+        # Code
+        "codegemma:7b"
+        "codellama:7b"
+        "qwen2.5-coder:7b"
+      ];
+
       environmentVariables = {
         # https://github.com/ollama/ollama/blob/main/docs/faq.md#how-can-i-specify-the-context-window-size
         OLLAMA_CONTEXT_LENGTH = "8192";
