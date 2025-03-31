@@ -8,6 +8,13 @@ with lib; let
 in {
   options.custom.services.ollama = {
     enable = mkOption {default = false;};
+
+    server = mkOption {
+      default =
+        if config.custom.full
+        then "localhost"
+        else "mynix";
+    };
   };
 
   config = mkIf cfg.enable {

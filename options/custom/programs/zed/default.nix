@@ -146,17 +146,6 @@ in {
           # https://zed.dev/docs/configuring-zed
           userSettings = {
             always_treat_brackets_as_autoclosed = true;
-
-            assistant = {
-              default_model = {
-                model = "gemma3:1b";
-                provider = "ollama";
-              };
-
-              default_width = 500;
-              version = "2";
-            };
-
             auto_install_extensions = false;
             auto_signature_help = true;
             base_keymap = "VSCode";
@@ -271,6 +260,22 @@ in {
                 formatting.command = ["alejandra"];
                 nix.flake.autoArchive = true;
               };
+            };
+
+            # Language models
+            # https://zed.dev/docs/assistant/assistant
+            assistant = {
+              default_model = {
+                model = "codegemma:7b";
+                provider = "ollama";
+              };
+
+              default_width = 500;
+              version = "2";
+            };
+
+            language_models = {
+              api_url = "http://${config.custom.services.ollama.server}:11434";
             };
 
             # TODO: Add missing syntax in highlights.scm

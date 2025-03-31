@@ -1,11 +1,15 @@
 {
   custom = {
     full = true;
+
+    # FIXME: Use "laptop" profile
     profile = "desktop"; # Inherit desktop profile
+
     desktop = "niri";
 
     services = {
       #// auto-cpufreq.enable = true;
+      ollama.server = "mynix";
 
       power-profiles-daemon = {
         enable = true;
