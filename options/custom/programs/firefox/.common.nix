@@ -76,7 +76,8 @@ with lib; {
       {
         "accessibility.browsewithcaret" = false;
         "accessibility.typeaheadfind" = false;
-        "apz.gtk.pangesture.page_delta_mode_multiplier" = 0.25; # Touchpad scroll speed
+        "apz.gtk.pangesture.delta_mode" = 2; # pixel
+        "apz.gtk.pangesture.pixel_delta_mode_multiplier" = 30.0; # Touchpad scroll speed
         "browser.aboutConfig.showWarning" = false;
         "browser.bookmarks.restore_default_bookmarks" = false;
         "browser.contentblocking.category" = "standard";
