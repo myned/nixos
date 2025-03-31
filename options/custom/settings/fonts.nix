@@ -22,62 +22,61 @@ in {
   config = mkIf cfg.enable {
     # https://wiki.nixos.org/wiki/Fonts
     fonts = {
-      enableDefaultPackages = true; # Fallback fonts
-
+      # BUG: Amount of installed fonts impacts pango load times, so only install necessary fonts
+      # https://github.com/davatorium/rofi/issues/673 et al.
       packages = with pkgs.nerd-fonts;
         [
-          # Monospace
           # https://www.nerdfonts.com/#home
-          #?? kitten choose-fonts
-          departure-mono
-          gohufont
-          iosevka-term
+          # Monospace
+          #// departure-mono
+          #// gohufont
+          #// iosevka-term
           iosevka-term-slab
-          jetbrains-mono
-          roboto-mono
-          shure-tech-mono
-          space-mono
-          zed-mono
+          #// jetbrains-mono
+          #// roboto-mono
+          #// shure-tech-mono
+          #// space-mono
+          #// zed-mono
         ]
         ++ (with pkgs; [
+          # https://fonts.google.com/
           (google-fonts.override {
             fonts = [
               # Pixel
-              "Geo"
-              "Silkscreen"
+              #// "Geo"
+              #// "Silkscreen"
 
               # Sans-serif
-              "Josefin Sans"
-              "Jost"
-              "Lexend"
-              "Outfit"
-              "Roboto"
-              "Roboto Flex"
+              #// "Josefin Sans"
+              #// "Jost"
+              #// "Lexend"
+              #// "Outfit"
+              #// "Roboto"
+              #// "Roboto Flex"
 
               # Sans-serif condensed
-              "Oswald"
-              "Roboto Condensed"
+              #// "Oswald"
+              #// "Roboto Condensed"
 
               # Serif
               "Lora"
-              "Roboto Serif"
+              #// "Roboto Serif"
 
               # Slab
-              "Aleo"
+              #// "Aleo"
               "Arvo"
-              "Josefin Slab"
-              "Roboto Slab"
-              "Solway"
+              #// "Josefin Slab"
+              #// "Roboto Slab"
+              #// "Solway"
             ];
           })
 
           # Emoji
-          noto-fonts-color-emoji
+          #// noto-fonts-color-emoji
           noto-fonts-emoji-blob-bin
 
           # Microsoft
-          corefonts
-          vistafonts
+          vista-fonts
 
           # Fallback
           unifont
