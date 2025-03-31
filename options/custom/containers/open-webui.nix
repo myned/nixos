@@ -28,9 +28,10 @@ in {
         environment = {
           PORT = 3033; # 8080/tcp
 
-          # HACK: Offline Ollama endpoints result in an unusable interface, so cap timeout
+          #!! Low timeout causes text streaming to halt, increase if reached
           # https://github.com/open-webui/open-webui/issues/11228
-          AIOHTTP_CLIENT_TIMEOUT = 5; # 300 seconds by default
+          # https://github.com/open-webui/open-webui/issues/11320
+          #// AIOHTTP_CLIENT_TIMEOUT = 300; # Seconds
         };
       };
     };
