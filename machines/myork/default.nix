@@ -33,6 +33,7 @@
     settings = {
       hardware = {
         gpu = "amd";
+        rocm = "11.0.2"; # 11.0.3
       };
 
       storage = {
