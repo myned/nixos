@@ -28,6 +28,7 @@ in {
       host = "0.0.0.0";
       #// openFirewall = true; # 11434/tcp
 
+      #!! Downloads on activation
       # https://ollama.com/search
       loadModels = [
         # General
