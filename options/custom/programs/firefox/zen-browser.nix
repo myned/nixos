@@ -70,10 +70,19 @@ in {
             '';
           };
 
-          file = {
-            ".zen/profiles.ini" = {
+          file = let
+            sync = source: {
+              source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/${source}";
               force = true;
             };
+          in {
+            ".zen/profiles.ini".force = true;
+
+            #!! Imperative synced files
+            ".zen/default/extension-preferences.json" = sync "linux/config/firefox/extension-preferences.json";
+            ".zen/default/extension-settings.json" = sync "linux/config/firefox/extension-settings.json";
+            ".zen/default/zen-keyboard-shortcuts.json" = sync "linux/config/zen/zen-keyboard-shortcuts.json";
+            ".zen/default/zen-themes.json" = sync "linux/config/zen/zen-themes.json";
           };
         };
       }

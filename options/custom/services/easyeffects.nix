@@ -5,6 +5,7 @@
 }:
 with lib; let
   cfg = config.custom.services.easyeffects;
+  hm = config.home-manager.users.${config.custom.username};
 in {
   options.custom.services.easyeffects.enable = mkOption {default = false;};
 
@@ -15,16 +16,15 @@ in {
 
     ### PRESETS ###
     # https://github.com/Digitalone1/EasyEffects-Presets
-    xdg.configFile = with config.home-manager.users.${config.custom.username}.lib.file; {
-      "easyeffects/input" = {
+    xdg.configFile = let
+      sync = source: {
+        source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/${source}";
         force = true;
-        source = mkOutOfStoreSymlink "${config.custom.sync}/linux/config/easyeffects/input";
       };
-
-      "easyeffects/output" = {
-        force = true;
-        source = mkOutOfStoreSymlink "${config.custom.sync}/linux/config/easyeffects/output";
-      };
+    in {
+      #!! Imperative synced files
+      "easyeffects/input" = sync "linux/config/easyeffects/input";
+      "easyeffects/output" = sync "linux/config/easyeffects/output";
     };
   };
 }

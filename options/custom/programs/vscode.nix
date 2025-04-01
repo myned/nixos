@@ -101,27 +101,17 @@ in {
           #// profileNames = ["default"];
         };
 
-        xdg.configFile = with hm.lib.file; {
-          # Imperative symlinks intended to be synced
-          "VSCodium/User/settings.json" = {
+        xdg.configFile = let
+          sync = source: {
+            source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/${source}";
             force = true;
-            source = mkOutOfStoreSymlink "${config.custom.sync}/dev/config/vscode/settings.json";
           };
-
-          "VSCodium/User/keybindings.json" = {
-            force = true;
-            source = mkOutOfStoreSymlink "${config.custom.sync}/dev/config/vscode/keybindings.json";
-          };
-
-          "VSCodium/User/snippets/" = {
-            force = true;
-            source = mkOutOfStoreSymlink "${config.custom.sync}/dev/config/vscode/snippets/";
-          };
-
-          "VSCodium/User/profiles/" = {
-            force = true;
-            source = mkOutOfStoreSymlink "${config.custom.sync}/dev/config/vscode/profiles/";
-          };
+        in {
+          #!! Imperative synced files
+          "VSCodium/User/keybindings.json" = sync "dev/config/vscode/keybindings.json";
+          "VSCodium/User/profiles/" = sync "dev/config/vscode/profiles/";
+          "VSCodium/User/settings.json" = sync "dev/config/vscode/settings.json";
+          "VSCodium/User/snippets/" = sync "dev/config/vscode/snippets/";
         };
       }
     ];
