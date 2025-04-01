@@ -5,6 +5,7 @@
 }:
 with lib; let
   cfg = config.custom.programs.logseq;
+  hm = config.home-manager.users.${config.custom.username};
 in {
   options.custom.programs.logseq.enable = mkOption {default = false;};
 
@@ -12,7 +13,7 @@ in {
     #!! Synced imperative configuration
     home.file.".logseq/" = {
       force = true;
-      source = config.home-manager.users.${config.custom.username}.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/common/config/logseq/";
+      source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/common/config/logseq/";
     };
   };
 }

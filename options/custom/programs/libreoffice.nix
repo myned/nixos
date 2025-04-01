@@ -6,6 +6,7 @@
 }:
 with lib; let
   cfg = config.custom.programs.libreoffice;
+  hm = config.home-manager.users.${config.custom.username};
 in {
   options.custom.programs.libreoffice = {
     enable = mkOption {default = false;};
@@ -20,7 +21,7 @@ in {
     home-manager.users.${config.custom.username} = {
       xdg.configFile."libreoffice/4/user" = {
         force = true;
-        source = config.home-manager.users.${config.custom.username}.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/linux/config/libreoffice/user";
+        source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/linux/config/libreoffice/user";
       };
     };
   };

@@ -108,14 +108,7 @@
         with inputs."nixpkgs-${branch}".lib;
           nixosSystem {
             system = arch;
-
-            specialArgs = {
-              inherit inputs;
-
-              # Pass home-manager lib through nixpkgs lib
-              #?? lib.home-manager.*
-              lib = recursiveUpdate inputs."nixpkgs-${branch}".lib {home-manager = inputs."home-manager-${branch}".lib;};
-            };
+            specialArgs = {inherit inputs;};
 
             # TODO: Clean up optional attributes with each new release
             #!! Options will diverge between branches over time

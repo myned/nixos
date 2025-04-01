@@ -6,6 +6,7 @@
 }:
 with lib; let
   cfg = config.custom.settings.fonts;
+  hm = config.home-manager.users.${config.custom.username};
 
   rsync = getExe pkgs.rsync;
 in {
@@ -101,7 +102,7 @@ in {
         home.activation = {
           # BUG: rsync sets directory permissions too early
           # https://github.com/RsyncProject/rsync/issues/609
-          copy-fonts = lib.home-manager.hm.dag.entryAfter ["writeBoundary"] ''
+          copy-fonts = hm.lib.dag.entryAfter ["writeBoundary"] ''
             run ${rsync} --recursive --copy-links --times \
               /run/current-system/sw/share/fonts "$XDG_DATA_HOME/"
           '';

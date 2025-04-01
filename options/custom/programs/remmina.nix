@@ -5,6 +5,7 @@
 }:
 with lib; let
   cfg = config.custom.programs.remmina;
+  hm = config.home-manager.users.${config.custom.username};
 in {
   options.custom.programs.remmina.enable = mkOption {default = false;};
 
@@ -13,7 +14,7 @@ in {
       #!! Imperative configuration
       xdg.configFile."remmina/remmina.pref" = {
         force = true;
-        source = config.home-manager.users.${config.custom.username}.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/linux/config/remmina/remmina.pref";
+        source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/linux/config/remmina/remmina.pref";
       };
     };
   };

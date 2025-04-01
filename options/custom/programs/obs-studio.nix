@@ -5,6 +5,7 @@
 }:
 with lib; let
   cfg = config.custom.programs.obs-studio;
+  hm = config.home-manager.users.${config.custom.username};
 in {
   options.custom.programs.obs-studio.enable = mkOption {default = false;};
 
@@ -12,6 +13,6 @@ in {
     # https://github.com/obsproject/obs-studio
     programs.obs-studio.enable = true;
 
-    xdg.configFile."obs-studio".source = config.home-manager.users.${config.custom.username}.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/common/config/obs-studio";
+    xdg.configFile."obs-studio".source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/common/config/obs-studio";
   };
 }
