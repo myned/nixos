@@ -8,6 +8,7 @@ with lib; let
 in {
   options.custom.services.ollama = {
     enable = mkOption {default = false;};
+    download = mkOption {default = false;};
 
     server = mkOption {
       default =
@@ -30,7 +31,7 @@ in {
 
       #!! Downloads on activation
       # https://ollama.com/search
-      loadModels = [
+      loadModels = mkIf cfg.download [
         # General
         "deepseek-r1:14b"
         "gemma3:12b"
