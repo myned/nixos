@@ -66,6 +66,9 @@ in {
             # https://git-scm.com/docs/git-config#Documentation/git-config.txt-mergeconflictStyle
             merge.conflictStyle = "zdiff3";
 
+            # https://git-scm.com/docs/git-config#Documentation/git-config.txt-pullrebase
+            pull.rebase = true;
+
             # https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushautoSetupRemote
             push.autoSetupRemote = true;
 
