@@ -13,7 +13,7 @@ in {
     enable = mkOption {default = false;};
   };
 
-  config = {
+  config = mkIf cfg.enable {
     # https://github.com/nix-community/nix-vscode-extensions
     nixpkgs.overlays = [inputs.nix-vscode-extensions.overlays.default];
 
@@ -36,7 +36,7 @@ in {
       ];
     };
 
-    home-manager.sharedModules = mkIf cfg.enable [
+    home-manager.sharedModules = [
       {
         # https://wiki.nixos.org/wiki/VSCodium
         # https://github.com/VSCodium/vscodium
