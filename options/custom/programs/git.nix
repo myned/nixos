@@ -24,12 +24,15 @@ in {
           # BUG: GitHub Desktop tries to enable if this is not in gitconfig
           lfs.enable = true; # Large File Storage
 
-          signing = {
-            # TODO: Use ssh signing
-            format = "openpgp";
-            signByDefault = true;
-            key = "C7224454F7881A34";
-          };
+          signing =
+            {
+              signByDefault = true;
+              key = "C7224454F7881A34";
+            }
+            // optionalAttrs (versionAtLeast version "25.05") {
+              # TODO: Use ssh signing
+              format = "openpgp";
+            };
 
           # https://git-scm.com/docs/git-config
           # https://git-scm.com/book/en/v2/
