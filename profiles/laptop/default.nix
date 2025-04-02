@@ -8,7 +8,7 @@
     desktop = "niri";
 
     services = {
-      #// auto-cpufreq.enable = true;
+      auto-cpufreq.enable = true;
 
       ollama = {
         download = "medium";
@@ -16,7 +16,7 @@
       };
 
       power-profiles-daemon = {
-        enable = true;
+        #// enable = true;
         auto = true;
       };
     };

@@ -35,7 +35,7 @@ in {
           };
 
           charger = {
-            energy_performance_preference = "balance_performance";
+            energy_performance_preference = "balance_power";
             governor = "powersave";
             platform_profile = "balanced";
             scaling_max_freq = mkIf (isFloat cfg.max.charger || isInt cfg.max.charger) (builtins.floor (cfg.max.charger * 1000 * 1000)); # KHz
