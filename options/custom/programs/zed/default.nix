@@ -156,10 +156,7 @@ in {
             buffer_font_family = mkForce "IosevkaTermSlab Nerd Font Propo";
 
             buffer_line_height.custom = 1.5;
-
-            chat_panel = {
-              default_width = 300;
-            };
+            chat_panel.default_width = 300;
 
             collaboration_panel = {
               button = false;
@@ -168,31 +165,13 @@ in {
             };
 
             cursor_blink = false;
-
-            features = {
-              inline_completion_provider = "none";
-            };
-
-            git = {
-              inline_blame.enabled = false;
-            };
-
-            git_panel = {
-              default_width = 300;
-            };
-
+            git.inline_blame.enabled = false;
+            git_panel.default_width = 300;
             icon_theme = "Bearded Icon Theme";
-
-            indent_guides = {
-              active_line_width = 2;
-            };
-
+            indent_guides.active_line_width = 2;
             load_direnv = "shell_hook";
             middle_click_paste = false;
-
-            notification_panel = {
-              default_width = 300;
-            };
+            notification_panel.default_width = 300;
 
             outline_panel = {
               default_width = 300;
@@ -226,15 +205,13 @@ in {
               show_diagnostics = "all";
             };
 
+            #!! Enable telemetry
             telemetry = {
-              metrics = true;
               diagnostics = true;
+              metrics = true;
             };
 
-            terminal = {
-              line_height = "standard";
-            };
-
+            terminal.line_height = "standard";
             ui_font_size = mkForce 19;
 
             # Language-specific
@@ -274,9 +251,11 @@ in {
               version = "2";
             };
 
-            language_models = {
-              api_url = "http://${config.custom.services.ollama.server}:11434";
-            };
+            # https://zed.dev/docs/completions#edit-predictions
+            features.edit_prediction_provider = "zed";
+
+            # https://zed.dev/docs/assistant/configuration
+            language_models.api_url = "http://${config.custom.services.ollama.server}:11434";
 
             # TODO: Add missing syntax in highlights.scm
             # Theme overrides
