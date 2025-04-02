@@ -9,6 +9,11 @@ in {
   options.custom.services.ollama = {
     enable = mkEnableOption "ollama";
 
+    acceleration = mkOption {
+      default = config.custom.full;
+      type = types.bool;
+    };
+
     download = mkOption {
       default = null;
       type = with types; nullOr (enum ["low" "medium" "high"]);
@@ -20,7 +25,7 @@ in {
         then "localhost"
         else "mynix";
 
-      type = with types; str;
+      type = types.str;
     };
   };
 
@@ -29,6 +34,18 @@ in {
     # https://wiki.nixos.org/wiki/Ollama
     services.ollama = {
       enable = true;
+
+      acceleration =
+        if cfg.acceleration
+        then
+          (
+            if config.custom.settings.hardware.gpu == "amd"
+            then "rocm"
+            else if config.custom.settings.hardware.gpu == "nvidia"
+            then "cuda"
+            else null
+          )
+        else false; # CPU
 
       # Bind to all interfaces, but only Tailscale can access the closed port
       # https://github.com/ollama/ollama/blob/main/docs/faq.md#how-can-i-expose-ollama-on-my-network
@@ -71,6 +88,7 @@ in {
       # https://wiki.nixos.org/wiki/Ollama#AMD_GPU_with_open_source_driver
       # https://github.com/ollama/ollama/blob/main/docs/gpu.md#overrides
       #?? nix run nixpkgs#rocmPackages.rocminfo | grep gfx
+      #?? echo $HSA_OVERRIDE_GFX_VERSION
       rocmOverrideGfx = with config.custom.settings.hardware; mkIf (isString rocm) rocm;
     };
   };
