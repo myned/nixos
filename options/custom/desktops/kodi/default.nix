@@ -6,7 +6,6 @@
 }:
 with lib; let
   cfg = config.custom.desktops.kodi;
-  hm = config.home-manager.users.${config.custom.username};
 in {
   options.custom.desktops.kodi = {
     enable = mkOption {default = false;};
@@ -52,12 +51,6 @@ in {
     };
 
     home-manager.users.kodi = {
-      home = {
-        homeDirectory = "/home/kodi";
-        stateVersion = hm.home.stateVersion;
-        username = "kodi";
-      };
-
       programs = {
         home-manager.enable = true;
 

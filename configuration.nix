@@ -4,7 +4,10 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+with lib; let
+  hm = config.home-manager.users.${config.custom.username};
+in {
   age.secrets = let
     secret = filename: {
       file = "${inputs.self}/secrets/${filename}";
@@ -21,7 +24,7 @@
       allowUnfree = true;
 
       allowInsecurePredicate = pkg: let
-        name = lib.getName pkg;
+        name = getName pkg;
       in
         # HACK: Allow all insecure electron versions
         name
@@ -154,45 +157,21 @@
     backupFileExtension = "bak";
     useGlobalPkgs = true;
     useUserPackages = true;
+    extraSpecialArgs = {inherit inputs;};
 
-    extraSpecialArgs = {
-      inherit inputs;
-    };
-
-    users = {
-      # FIXME: Separate root from sharedModules
-      root = {
-        # Inherit from user
-        programs.home-manager.enable = config.home-manager.users.${config.custom.username}.programs.home-manager.enable;
-        systemd.user.startServices = config.home-manager.users.${config.custom.username}.systemd.user.startServices;
-        nix.gc = config.home-manager.users.${config.custom.username}.nix.gc;
-
-        home = {
-          username = "root";
-          homeDirectory = "/root";
-          stateVersion = config.home-manager.users.${config.custom.username}.home.stateVersion;
-        };
-      };
-
-      ${config.custom.username} = {
+    # Common options for every user
+    sharedModules = [
+      {
         programs.home-manager.enable = true;
-        systemd.user.startServices = "sd-switch"; # Start/stop user services immediately
+        systemd.user.startServices = true;
+        home.stateVersion = config.system.stateVersion;
 
         nix.gc = {
           automatic = config.nix.gc.automatic;
           frequency = config.nix.gc.dates;
           options = config.nix.gc.options;
         };
-
-        home = {
-          username = config.custom.username;
-          homeDirectory = "/home/${config.custom.username}";
-
-          #!! DO NOT MODIFY ###
-          stateVersion = "23.11";
-          #!! ############# ###
-        };
-      };
-    };
+      }
+    ];
   };
 }
