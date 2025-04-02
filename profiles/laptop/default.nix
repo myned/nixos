@@ -11,6 +11,7 @@
       auto-cpufreq.enable = true;
 
       ollama = {
+        acceleration = false;
         download = "medium";
         server = "mynix";
       };
