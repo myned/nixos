@@ -1,4 +1,9 @@
-{config, ...}: {
+{
+  config,
+  lib,
+  ...
+}:
+with lib; {
   custom = {
     profile = "sbc";
     desktop = "kodi";
@@ -24,7 +29,14 @@
 
       borgmatic = {
         enable = true;
-        sources = [config.custom.containers.directory];
+
+        sources =
+          [
+            config.custom.containers.directory
+          ]
+          ++ optionals config.home-manager.users.kodi.programs.kodi.enable [
+            config.home-manager.users.kodi.programs.kodi.datadir
+          ];
       };
 
       # netdata = {
