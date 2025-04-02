@@ -6,7 +6,7 @@
     wallpaper = true;
 
     services = {
-      ollama.download = true;
+      ollama.download = "medium";
       power-profiles-daemon.enable = true;
     };
   };

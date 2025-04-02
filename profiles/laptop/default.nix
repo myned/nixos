@@ -9,7 +9,11 @@
 
     services = {
       #// auto-cpufreq.enable = true;
-      ollama.server = "mynix";
+
+      ollama = {
+        download = "medium";
+        server = "mynix";
+      };
 
       power-profiles-daemon = {
         enable = true;

@@ -7,14 +7,20 @@ with lib; let
   cfg = config.custom.services.ollama;
 in {
   options.custom.services.ollama = {
-    enable = mkOption {default = false;};
-    download = mkOption {default = false;};
+    enable = mkEnableOption "ollama";
+
+    download = mkOption {
+      default = null;
+      type = with types; nullOr (enum ["low" "medium" "high"]);
+    };
 
     server = mkOption {
       default =
         if config.custom.full
         then "localhost"
         else "mynix";
+
+      type = with types; str;
     };
   };
 
@@ -31,18 +37,31 @@ in {
 
       #!! Downloads on activation
       # https://ollama.com/search
-      loadModels = mkIf cfg.download [
-        # General
-        "deepseek-r1:14b"
-        "gemma3:12b"
-        "phi4:14b"
-        "qwen2.5:14b"
-
-        # Code
-        "codegemma:7b"
-        "codellama:7b"
-        "qwen2.5-coder:7b"
-      ];
+      loadModels = mkIf (!isNull cfg.download) (
+        [
+          "codegemma:7b"
+          "codellama:7b"
+          "deepseek-coder:6.7b"
+          "qwen2.5-coder:7b"
+        ]
+        ++ optionals (cfg.download == "low") [
+          "deepseek-r1:1.5b"
+          "gemma3:1.5b"
+          "llama3.2:1b"
+        ]
+        ++ optionals (cfg.download == "medium") [
+          "gemma3:4b"
+          "deepseek-r1:7b"
+          "llama3.1:8b"
+          "llama3.2:3b"
+        ]
+        ++ optionals (cfg.download == "high") [
+          "deepseek-r1:14b"
+          "gemma3:12b"
+          "phi4:14b"
+          "qwen2.5:14b"
+        ]
+      );
 
       environmentVariables = {
         # https://github.com/ollama/ollama/blob/main/docs/faq.md#how-can-i-specify-the-context-window-size
