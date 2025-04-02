@@ -173,7 +173,7 @@ in {
                 "wireplumber"
                 "bluetooth"
                 "network"
-                "power-profiles-daemon"
+                (mkIf config.services.power-profiles-daemon.enable "power-profiles-daemon")
                 "battery"
               ];
 
