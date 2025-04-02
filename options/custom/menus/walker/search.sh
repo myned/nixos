@@ -8,6 +8,12 @@ case "$1" in
     url="https://www.amazon.com/s?k="
     query="${1:2}"
     ;;
+  'ai '*)
+    label="Open WebUI"
+    icon="system-search"
+    url="https://ai.bjork.tech/?temporary-chat=true&q="
+    query="${1:3}"
+    ;;
   'aw '*)
     label="ArchWiki"
     icon="distributor-logo-archlinux"

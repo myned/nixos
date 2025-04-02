@@ -261,7 +261,6 @@ with lib; {
 
       engines = {
         ### Builtins
-        amazondotcom-us.metaData.alias = "a";
         bing.metaData.hidden = true;
         ddg.metaData.alias = "d";
         ebay.metaData.hidden = true;
@@ -269,6 +268,20 @@ with lib; {
         wikipedia.metaData.alias = "w";
 
         ### Custom
+        amazon = {
+          definedAliases = ["a"];
+          icon = "https://www.amazon.com/favicon.ico";
+          name = "Amazon";
+          urls = [{template = "https://www.amazon.com/s?k={searchTerms}";}];
+        };
+
+        ai = {
+          definedAliases = ["ai"];
+          icon = "https://ai.${config.custom.domain}/static/favicon.ico";
+          name = "Open WebUI";
+          urls = [{template = "https://ai.${config.custom.domain}/?temporary-chat=true&q={searchTerms}";}];
+        };
+
         arch-wiki = {
           definedAliases = ["aw"];
           icon = "https://wiki.archlinux.org/favicon.ico";

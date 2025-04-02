@@ -71,6 +71,12 @@ in {
           }
 
           {
+            name = "Open WebUI";
+            shortcut = "ai";
+            url = "https://ai.${config.custom.domain}/?temporary-chat=true&q={searchTerms}";
+          }
+
+          {
             name = "ArchWiki";
             shortcut = "aw";
             url = "https://wiki.archlinux.org/index.php?search={searchTerms}";
