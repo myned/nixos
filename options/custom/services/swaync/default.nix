@@ -42,13 +42,13 @@ in {
       settings = {
         control-center-height = builtins.floor (config.custom.height * 0.5); # 50%
         control-center-positionY = "bottom";
-        control-center-width = 750;
+        control-center-width = 1000;
         fit-to-screen = false;
         hide-on-clear = true;
         notification-2fa-action = false;
         notification-icon-size = 32;
         #// notification-inline-replies = true;
-        notification-window-width = 500;
+        notification-window-width = 750;
         positionX = "center";
         positionY = "top";
         timeout = 5; # normal
