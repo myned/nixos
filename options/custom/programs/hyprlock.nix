@@ -41,7 +41,7 @@ in {
             background = {
               blur_passes = 5;
               color = "rgb(073642)"; # Fallback
-              path = mkIf config.custom.wallpaper "/tmp/wallpaper.png";
+              path = mkIf config.custom.services.wallpaper.enable "/tmp/wallpaper.png";
             };
 
             # https://wiki.hyprland.org/Hypr-Ecosystem/hyprlock/#input-field

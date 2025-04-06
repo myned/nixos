@@ -32,7 +32,7 @@ in {
         indicator-radius = 150;
         font-size = 48 * config.custom.scale;
         font = config.stylix.fonts.monospace.name;
-        image = mkIf config.custom.wallpaper "/tmp/altered.png";
+        image = mkIf config.custom.services.wallpaper.enable "/tmp/altered.png";
         bs-hl-color = "93a1a1";
         color = "073642";
         inside-caps-lock-color = "002b36";

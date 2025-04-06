@@ -39,7 +39,6 @@ in {
 
     lockscreen = mkOption {default = "hyprlock";};
     menu = mkOption {default = "rofi";};
-    wallpaper = mkOption {default = false;};
 
     browser = {
       # TODO: Use lib.getExe' instead of /bin/ where possible

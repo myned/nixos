@@ -105,9 +105,6 @@ in {
               "[workspace special:hidden silent] ${command loupe}"
               "[workspace special:hidden silent] ${command nautilus}"
             ]
-            ++ optionals config.custom.wallpaper [
-              (command wallpaper)
-            ]
             ++ optionals config.custom.settings.vm.passthrough.blacklist [
               # HACK: Delay driver initialization to work around reset issues
               (command "${virsh} list | ${grep} ${config.custom.settings.vm.passthrough.guest} || sudo ${modprobe} ${config.custom.settings.vm.passthrough.driver}")
