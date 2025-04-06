@@ -17,7 +17,6 @@ with lib; {
       dbus.enable = true;
       flatpak.enable = true;
       fwupd.enable = true;
-      kdeconnect.enable = true;
       libinput.enable = true;
       logind.enable = true;
       openrazer.enable = true;
@@ -42,6 +41,7 @@ with lib; {
       greetd.enable = true;
       hypridle.enable = true;
       #// hyprpaper.enable = true;
+      kdeconnect.enable = true;
       keyd.enable = true;
       #// mako.enable = true;
       #// network-manager-applet.enable = true;

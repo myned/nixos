@@ -37,7 +37,6 @@ with lib; {
       #// foot.enable = true;
       #// gamescope.enable = true;
       #// gnome-terminal.enable = true;
-      #// kdeconnect.enable = true;
       kitty.enable = true;
       #// librewolf.enable = true;
       nautilus.enable = true;
