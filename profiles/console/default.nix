@@ -13,11 +13,10 @@
   custom = {
     minimal = true;
     profile = "console";
-    desktop = "gnome";
-    desktops.gnome.gdm = false;
+    desktop = "kde";
 
     programs = {
-      gnome-shell.enable = true;
+      kodi.enable = true;
       steam.enable = true;
     };
 
@@ -50,9 +49,6 @@
         # CLI applications
         er-patcher # Elden Ring fixes
         winetricks
-
-        # Dependencies
-        wineWowPackages.stable
       ];
     };
   };
@@ -60,12 +56,7 @@
   # https://github.com/Jovian-Experiments/Jovian-NixOS
   # https://jovian-experiments.github.io/Jovian-NixOS/options.html
   jovian = {
-    steam = {
-      enable = true;
-      autoStart = true;
-      desktopSession = "gnome"; #?? services.displayManager.sessionData.sessionNames
-      user = config.custom.username;
-    };
+    decky-loader.enable = true;
 
     devices.steamdeck = {
       enable = true;
@@ -73,17 +64,11 @@
       autoUpdate = true;
     };
 
-    decky-loader.enable = true;
+    steam = {
+      enable = true;
+      autoStart = true;
+      desktopSession = "plasma"; #?? services.displayManager.sessionData.sessionNames
+      user = config.custom.username;
+    };
   };
-
-  home-manager.sharedModules = [
-    {
-      # HACK: Manually set DISPLAY variable for use in gamemode
-      systemd.user.services.kdeconnect = {
-        Service = {
-          Environment = ["DISPLAY=:${toString config.xserver.display}"];
-        };
-      };
-    }
-  ];
 }
