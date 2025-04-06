@@ -8,6 +8,7 @@ with lib; let
 in {
   options.custom.desktops.gnome = {
     enable = mkOption {default = false;};
+    auto = mkOption {default = false;};
     gdm = mkOption {default = true;};
     minimal = mkOption {default = false;};
   };
@@ -25,6 +26,11 @@ in {
       gnome = {
         core-os-services.enable = mkIf cfg.minimal true;
         gnome-browser-connector.enable = !cfg.minimal;
+      };
+
+      displayManager.autoLogin = {
+        enable = cfg.auto;
+        user = config.custom.username;
       };
     };
   };
