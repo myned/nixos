@@ -13,13 +13,13 @@ in {
     programs.fw-fanctrl = {
       enable = true;
 
-      # https://github.com/TamtamHero/fw-fanctrl/blob/packaging/nix/config.json
-      #?? fw-fanctrl --reload
+      # https://github.com/TamtamHero/fw-fanctrl/blob/packaging/nix/doc/configuration.md
+      #?? fw-fanctrl reload
       config = {
         defaultStrategy = "custom";
 
         strategies.custom = {
-          fanSpeedUpdateFrequency = 5; # Seconds
+          fanSpeedUpdateFrequency = 10; # Seconds
           movingAverageInterval = 30; # Seconds
           speedCurve = let
             curve = temp: speed: {inherit temp speed;};
@@ -27,10 +27,10 @@ in {
             (curve 0 0) # Always active
             (curve 40 20)
             (curve 50 30)
-            (curve 60 40)
-            (curve 70 50)
-            (curve 80 60)
-            #!! Max fan speed of 60%
+            (curve 60 35)
+            (curve 70 40)
+            (curve 80 50)
+            #!! Max fan speed of 50%
           ];
         };
       };
