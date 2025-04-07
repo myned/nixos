@@ -27,6 +27,7 @@
       #// owncast.enable = true;
       redlib.enable = true;
       searxng.enable = true;
+      stremio.enable = true;
       vaultwarden.enable = true;
     };
 
