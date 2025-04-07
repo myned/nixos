@@ -6,10 +6,15 @@
 }:
 with lib; let
   cfg = config.custom.programs.kodi;
+  hm = config.home-manager.users.${config.custom.username};
 in {
   options.custom.programs.kodi = {
     enable = mkEnableOption "kodi";
-    firewall = mkOption {default = false;};
+
+    firewall = mkOption {
+      default = false;
+      type = types.bool;
+    };
 
     package = mkOption {
       default =
@@ -22,6 +27,10 @@ in {
     # https://wiki.nixos.org/wiki/Kodi#Plugins
     plugins = mkOption {
       default = [
+        "joystick" # https://github.com/xbmc/peripheral.joystick
+        "sendtokodi" # https://github.com/firsttris/plugin.video.sendtokodi
+        "sponsorblock" # https://github.com/siku2/script.service.sponsorblock
+        "trakt" # https://github.com/trakt/script.trakt
         "youtube" # https://github.com/anxdpanic/plugin.video.youtube
       ];
 
@@ -33,7 +42,7 @@ in {
     # https://kodi.wiki/view/Smartphone/tablet_remotes#Firewall
     # https://wiki.nixos.org/wiki/Kodi#Access_from_other_machines
     networking.firewall = mkIf cfg.firewall {
-      allowedTCPPorts = [8080];
+      allowedTCPPorts = [8888];
       allowedUDPPorts = [9777];
     };
 
@@ -46,21 +55,19 @@ in {
         programs.kodi = {
           enable = true;
           package = cfg.package;
+        };
 
-          # advancedsettings.xml
-          # https://kodi.wiki/view/Advancedsettings.xml
-          settings = {
-            # guisettings.xml
-            # https://kodi.wiki/view/Advancedsettings.xml#guisettings.xml_Setting_Conversion
-            # https://github.com/xbmc/xbmc/blob/master/system/settings/settings.xml
-
-            # https://kodi.wiki/view/Webserver
-            services = {
-              webserver = "true";
-              webserverauthentication = "false";
-              webserverport = "8888";
-            };
+        #!! Imperative synced files
+        # https://kodi.wiki/view/Advancedsettings.xml
+        # https://kodi.wiki/view/Advancedsettings.xml#guisettings.xml_Setting_Conversion
+        # https://github.com/xbmc/xbmc/blob/master/system/settings/settings.xml
+        home.file = let
+          sync = source: {
+            source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/${source}";
+            force = true;
           };
+        in {
+          ".kodi/userdata" = sync "common/config/kodi/userdata";
         };
       }
     ];

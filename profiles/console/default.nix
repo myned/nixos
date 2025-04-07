@@ -26,6 +26,7 @@
         folders =
           lib.getAttrs [
             "SYNC/.ignore"
+            "SYNC/common"
             "SYNC/game"
           ]
           options.custom.services.syncthing.folders.default;

@@ -11,14 +11,12 @@ in {
   };
 
   config = mkIf cfg.enable {
-    custom = {
-      programs.kodi.enable = true;
-    };
+    custom.programs.kodi.enable = true;
 
     services = {
       displayManager.autoLogin = {
         enable = true;
-        user = "kodi";
+        user = config.custom.username;
       };
 
       xserver = {
@@ -30,10 +28,6 @@ in {
           package = config.custom.programs.kodi.package;
         };
       };
-    };
-
-    users.users.kodi = {
-      isNormalUser = true;
     };
   };
 }
