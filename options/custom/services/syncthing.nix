@@ -42,35 +42,18 @@ in {
         folder = id: devices: {inherit id devices;};
       in {
         "SYNC/.backup" = folder "oxdvq-dfzjk" [];
-        "SYNC/.ignore" = folder "qpvfw-j127s" [
-          "myeck"
-          "myxel"
-        ];
+        "SYNC/.ignore" = folder "qpvfw-j127s" ["myeck" "myxel"];
         "SYNC/android" = folder "y3omj-gpjch" ["myxel"];
-        "SYNC/common" = folder "fcsij-g7cnw" ["myxel"];
+        "SYNC/common" = folder "fcsij-g7cnw" ["myeck" "myxel"];
         "SYNC/dev" = folder "fsmar-4wsd3" ["myxel"];
         "SYNC/edu" = folder "4nyqw-jfkq2" ["myxel"];
-        "SYNC/game" = folder "xvdpp-mxlki" [
-          "myeck"
-          "zendows"
-        ];
+        "SYNC/game" = folder "xvdpp-mxlki" ["myeck" "zendows"];
         "SYNC/linux" = folder "ieikk-bnm7u" ["myxel"];
         "SYNC/mac" = folder "yjmt6-z7u4m" [];
         "SYNC/owo" = folder "ervqc-ebnzz" ["myxel"];
         "SYNC/windows" = folder "2hmna-vfap9" [];
-        "ZEL/android" =
-          folder "gn2l3-2hxtu" [
-            "zendows"
-            "zexel"
-          ]
-          // {
-            type = "receiveonly";
-          };
-        "ZEL/music" =
-          folder "nytcx-uwqs7" ["zendows"]
-          // {
-            type = "receiveonly";
-          };
+        "ZEL/android" = folder "gn2l3-2hxtu" ["zendows" "zexel"] // {type = "receiveonly";};
+        "ZEL/music" = folder "nytcx-uwqs7" ["zendows"] // {type = "receiveonly";};
       };
     };
   };
