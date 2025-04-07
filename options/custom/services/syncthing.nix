@@ -81,7 +81,7 @@ in {
       configDir = cfg.configDir;
       dataDir = cfg.dataDir;
       extraFlags = ["-no-default-folder"]; # Disable automatic creation of Sync folder
-      guiAddress = "0.0.0.0:8384"; # Open to all interfaces
+      #// guiAddress = "0.0.0.0:8384"; # Open to all interfaces
       openDefaultPorts = true; # Open transfer/discovery ports
       user = cfg.user;
       group = cfg.group;
