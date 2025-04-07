@@ -3,7 +3,9 @@
   lib,
   ...
 }:
-with lib; {
+with lib; let
+  hm = config.home-manager.users.${config.custom.username};
+in {
   custom = {
     profile = "sbc";
     desktop = "kodi";
@@ -34,8 +36,8 @@ with lib; {
           [
             config.custom.containers.directory
           ]
-          ++ optionals config.home-manager.users.kodi.programs.kodi.enable [
-            config.home-manager.users.kodi.programs.kodi.datadir
+          ++ optionals hm.programs.kodi.enable [
+            hm.programs.kodi.datadir
           ];
       };
 
