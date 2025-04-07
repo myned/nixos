@@ -246,7 +246,7 @@ in {
                   version = "master";
                   src = inputs.lifx-cli;
                   doCheck = false;
-                  propagatedBuildInputs = with python311Packages; [requests];
+                  propagatedBuildInputs = [requests];
                 })
               ]
           ))
