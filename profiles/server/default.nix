@@ -29,6 +29,7 @@
       searxng.enable = true;
       stremio.enable = true;
       vaultwarden.enable = true;
+      wiki.enable = true;
     };
 
     services = {
