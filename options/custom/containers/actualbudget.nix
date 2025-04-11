@@ -15,7 +15,7 @@ in {
     virtualisation.arion.projects.actualbudget.settings.services = {
       actualbudget.service = {
         container_name = "actualbudget";
-        image = "actualbudget/actual-server:25.3.1";
+        image = "actualbudget/actual-server:25.4.0";
         ports = ["127.0.0.1:5006:5006/tcp"];
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/actualbudget/data:/data"];
