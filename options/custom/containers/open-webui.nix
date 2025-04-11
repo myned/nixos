@@ -20,7 +20,7 @@ in {
       open-webui.service = {
         container_name = "open-webui";
         dns = ["100.100.100.100"]; # Tailscale resolver
-        image = "ghcr.io/open-webui/open-webui:v0.6.0";
+        image = "ghcr.io/open-webui/open-webui:0.6";
         network_mode = "host";
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/open-webui/data:/app/backend/data"];
