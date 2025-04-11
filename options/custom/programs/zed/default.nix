@@ -217,6 +217,17 @@ in {
             # Language-specific
             # https://zed.dev/docs/configuring-languages
             languages = {
+              # https://github.com/nusnewob/caddyfile-zed
+              Caddyfile = {
+                format_on_save = "on";
+                tab_size = 2;
+
+                formatter.external = {
+                  command = "caddy";
+                  arguments = ["fmt" "-"];
+                };
+              };
+
               # https://zed.dev/docs/languages/markdown
               Markdown = {
                 format_on_save = "on";
