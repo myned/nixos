@@ -23,6 +23,7 @@ in {
           perf # Performance analyzer
         ])
         ++ optionals config.custom.default [
+          disko # Declarative disk management
           fd # File finder
           fzf # Fuzzy search
           inetutils # Network utilities
