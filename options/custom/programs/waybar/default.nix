@@ -473,7 +473,7 @@ in {
                   '';
 
                   interval = 5; # Seconds
-                  on-click = "${vpn} mypi3";
+                  on-click = "${vpn} myne";
                 };
 
               # https://github.com/bjesus/wttrbar
