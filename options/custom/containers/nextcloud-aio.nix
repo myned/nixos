@@ -1,0 +1,60 @@
+{
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.containers.nextcloud-aio;
+in {
+  options.custom.containers.nextcloud-aio = {
+    enable = mkEnableOption "nextcloud-aio";
+  };
+
+  config = mkIf cfg.enable {
+    #?? arion-nextcloud-aio pull
+    environment.shellAliases.arion-nextcloud-aio = "sudo arion --prebuilt-file ${config.virtualisation.arion.projects.nextcloud-aio.settings.out.dockerComposeYaml}";
+
+    virtualisation.arion.projects.nextcloud-aio.settings = {
+      services = {
+        # https://github.com/nextcloud/all-in-one
+        # https://github.com/nextcloud/all-in-one/blob/main/reverse-proxy.md
+        # https://github.com/nextcloud/all-in-one/blob/main/compose.yaml
+        nextcloud-aio-mastercontainer.service = {
+          container_name = "nextcloud-aio-mastercontainer";
+          image = "ghcr.io/nextcloud-releases/all-in-one:latest";
+          ports = ["8088:8080"];
+          restart = "unless-stopped";
+
+          volumes = [
+            "nextcloud_aio_mastercontainer:/mnt/docker-aio-config"
+            "/var/run/docker.sock:/var/run/docker.sock:ro"
+          ];
+
+          environment = {
+            APACHE_PORT = 11000;
+            APACHE_IP_BINDING = "0.0.0.0";
+            NEXTCLOUD_DATADIR = "${config.custom.containers.directory}/nextcloud-aio/data";
+            NEXTCLOUD_MOUNT = "/mnt/local/nextcloud";
+            TALK_PORT = 3479; # 3478
+          };
+        };
+      };
+
+      docker-compose.volumes = {
+        nextcloud_aio_mastercontainer.name = "nextcloud_aio_mastercontainer";
+      };
+    };
+
+    systemd.tmpfiles.settings = {
+      "10-nextcloud" = {
+        "/mnt/local/nextcloud" = {
+          d = {
+            mode = "0700";
+            user = "33"; # www-data
+            group = "33"; # www-data
+          };
+        };
+      };
+    };
+  };
+}

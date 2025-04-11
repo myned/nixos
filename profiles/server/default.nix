@@ -22,6 +22,7 @@
       miniflux.enable = true;
       netbox.enable = true;
       #// nextcloud.enable = true;
+      nextcloud-aio.enable = true;
       open-webui.enable = true;
       oryx.enable = true;
       #// owncast.enable = true;
