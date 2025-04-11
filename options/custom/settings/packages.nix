@@ -175,6 +175,7 @@ in {
           snoop # File content finder
           sourcegit # Git client
           spotify # Spotify client
+          stremio # Streaming client
           syncthingtray # Syncthing client
           tagger # Audio file tagger
           telegram-desktop # Telegram client
