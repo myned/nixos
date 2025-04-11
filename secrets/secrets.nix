@@ -90,6 +90,6 @@ in {
   "server/users/myned.pass".publicKeys = server;
   "server/users/root.pass".publicKeys = server;
   "server/vaultwarden/.env".publicKeys = server;
-  "server/wiki/.env".publicKeys = server;
-  "server/wiki/db.env".publicKeys = server;
+  "server/wikijs/.env".publicKeys = server;
+  "server/wikijs/db.env".publicKeys = server;
 }
