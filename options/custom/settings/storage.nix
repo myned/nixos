@@ -14,7 +14,7 @@ in {
 
   config = mkIf cfg.enable {
     # Enforce permissions for mountpoint directory
-    systemd.tmpfiles.settings."10-storage" = {
+    systemd.tmpfiles.settings.storage = {
       "/mnt/remote" = {
         d = {
           mode = "0755";

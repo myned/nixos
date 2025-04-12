@@ -58,7 +58,7 @@ in {
     };
 
     # Serve static files
-    systemd.tmpfiles.settings."10-caddy" = {
+    systemd.tmpfiles.settings.caddy = {
       "/srv/static" = {
         d = {
           user = "caddy";

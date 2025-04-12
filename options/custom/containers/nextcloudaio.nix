@@ -45,14 +45,12 @@ in {
       };
     };
 
-    systemd.tmpfiles.settings = {
-      "10-nextcloud" = {
-        "/mnt/local/nextcloud" = {
-          d = {
-            mode = "0700";
-            user = "33"; # www-data
-            group = "33"; # www-data
-          };
+    systemd.tmpfiles.settings.nextcloud = {
+      "/mnt/local/nextcloud" = {
+        z = {
+          mode = "0700";
+          user = "33"; # www-data
+          group = "33"; # www-data
         };
       };
     };

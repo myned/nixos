@@ -89,7 +89,7 @@ in {
         podman-tui
       ];
 
-    systemd.tmpfiles.settings."10-containers" = {
+    systemd.tmpfiles.settings.containers = {
       "/containers" = {
         d = {
           mode = "0700";

@@ -134,7 +134,7 @@ in {
         };
       };
 
-      tmpfiles.settings."10-vm" = {
+      tmpfiles.settings.vm = {
         # HACK: Manually link image to default directory
         "/var/lib/libvirt/images/virtio-win.iso" = {
           "L+" = {

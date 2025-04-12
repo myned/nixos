@@ -141,7 +141,7 @@ in {
 
     systemd = {
       # Ensure creation of config directory
-      tmpfiles.settings."10-syncthing" = {
+      tmpfiles.settings.syncthing = {
         ${cfg.configDir} = {
           d = {
             user = cfg.user;

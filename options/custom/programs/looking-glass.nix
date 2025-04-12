@@ -28,7 +28,7 @@ in {
     };
 
     systemd = {
-      tmpfiles.settings."10-looking-glass" = {
+      tmpfiles.settings.looking-glass = {
         ${
           if cfg.kvmfr
           then "/dev/kvmfr0"

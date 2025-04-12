@@ -10,7 +10,7 @@ in {
 
   config = mkIf cfg.enable {
     # Set /mnt permissions
-    systemd.tmpfiles.settings."10-mnt" = {
+    systemd.tmpfiles.settings.mnt = {
       "/mnt" = {
         z = {
           mode = "0755";

@@ -81,7 +81,7 @@ in {
     };
 
     #!! Required for correct volume permissions
-    systemd.tmpfiles.settings."10-netbox" = {
+    systemd.tmpfiles.settings.netbox = {
       "${config.custom.containers.directory}/netbox/media" = {
         z = {
           mode = "0770";
