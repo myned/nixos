@@ -4,13 +4,14 @@ https://github.com/rafaelmardojai/firefox-gnome-theme
 
 :root {
   --gnome-accent: #d33682;
-  --gnome-secondary-sidebar-background: #073642;
-  --gnome-sidebar-background: #073642;
+  --gnome-accent-bg: var(--gnome-accent);
+  --gnome-secondary-sidebar-background: var(--gnome-window-background);
+  --gnome-sidebar-background: var(--gnome-window-background);
   --gnome-tabbar-tab-active-background-contrast: color-mix(in srgb, #073642, #586e75 20%);
   --gnome-tabbar-tab-active-background: color-mix(in srgb, #073642, #586e75 20%);
   --gnome-tabbar-tab-active-hover-background: color-mix(in srgb, #073642, #586e75 30%);
   --gnome-tabbar-tab-hover-background: color-mix(in srgb, #073642, #586e75 10%);
-  --gnome-view-background: #073642;
+  --gnome-view-background: var(--gnome-window-background);
   --gnome-window-background: #073642;
 
   /* Disable inactive window colors */
