@@ -30,6 +30,7 @@
       redlib.enable = true;
       searxng.enable = true;
       stremio.enable = true;
+      uptimekuma.enable = true;
       vaultwarden.enable = true;
       wikijs.enable = true;
     };
