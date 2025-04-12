@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   pkgs,
   profile ? "default",
@@ -76,6 +75,7 @@ with lib; {
       {
         "accessibility.browsewithcaret" = false;
         "accessibility.typeaheadfind" = false;
+        "app.shield.optoutstudies.enabled" = false;
         "apz.gtk.pangesture.delta_mode" = 2; # pixel
         "apz.gtk.pangesture.pixel_delta_mode_multiplier" = 30.0; # Touchpad scroll speed
         "browser.aboutConfig.showWarning" = false;
@@ -124,6 +124,7 @@ with lib; {
         "browser.safebrowsing.malware.enabled" = true;
         "browser.safebrowsing.phishing.enabled" = true;
         "browser.search.separatePrivateDefault" = false;
+        "browser.search.serpEventTelemetryCategorization.regionEnabled" = false;
         "browser.search.suggest.enabled" = true;
         "browser.search.widget.inNavBar" = false;
         "browser.sessionstore.restore_hidden_tabs" = false;
@@ -172,7 +173,8 @@ with lib; {
         "clipboard.autocopy" = false;
         "default-browser-agent.enabled" = false;
         "devtools.webconsole.input.editorOnboarding" = false;
-        "dom.security.https_only_mode" = true;
+        "dom.private-attribution.submission.enabled" = false;
+        "dom.security.https_only_mode" = false;
         "extensions.autoDisableScopes" = 0; # Auto-enable extensions
         "extensions.formautofill.addresses.enabled" = false;
         "extensions.formautofill.creditCards.enabled" = false;
@@ -246,6 +248,7 @@ with lib; {
         "toolkit.telemetry.firstShutdownPing.enabled" = false;
         "toolkit.telemetry.newProfilePing.enabled" = false;
         "toolkit.telemetry.pioneer-new-studies-available" = false;
+        "toolkit.telemetry.reportingpolicy.firstRun" = false;
         "toolkit.telemetry.shutdownPingSender.enabled" = false;
         "toolkit.telemetry.unified" = false;
         "toolkit.telemetry.updatePing.enabled" = false;
