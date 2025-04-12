@@ -12,7 +12,7 @@
       boot = true;
       actualbudget.enable = true;
       adguardhome.enable = true;
-      conduwuit.enable = true;
+      #// conduwuit.enable = true;
       coturn.enable = true;
       forgejo.enable = true;
       foundryvtt.enable = true;
@@ -30,6 +30,7 @@
       redlib.enable = true;
       searxng.enable = true;
       stremio.enable = true;
+      synapse.enable = true;
       uptimekuma.enable = true;
       vaultwarden.enable = true;
       wikijs.enable = true;
@@ -37,7 +38,6 @@
 
     services = {
       caddy.enable = true;
-      #// matrix-conduit.enable = true;
       #// modufur.enable = true;
       #// tailscale.cert = true;
 
