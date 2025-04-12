@@ -89,6 +89,8 @@ in {
   "server/rconfig/.env".publicKeys = server;
   "server/rconfig/db.env".publicKeys = server;
   "server/searxng/.env".publicKeys = server;
+  "server/synapse/db.env".publicKeys = server;
+  "server/synapse/homeserver.yaml".publicKeys = server;
   "server/users/myned.pass".publicKeys = server;
   "server/users/root.pass".publicKeys = server;
   "server/vaultwarden/.env".publicKeys = server;
