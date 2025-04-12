@@ -26,6 +26,7 @@
       openwebui.enable = true;
       oryx.enable = true;
       #// owncast.enable = true;
+      #// rconfig.enable = true;
       redlib.enable = true;
       searxng.enable = true;
       stremio.enable = true;
