@@ -143,6 +143,7 @@ with lib; {
         "browser.tabs.warnOnClose" = false;
         "browser.tabs.warnOnCloseOtherTabs" = false;
         "browser.theme.dark-private-windows" = false;
+        "browser.toolbarbuttons.introduced.sidebar-button" = true;
         "browser.toolbars.bookmarks.showOtherBookmarks" = false;
         "browser.uidensity" = 0; # Default
         "browser.urlbar.quicksuggest.dataCollection.enabled" = false;
@@ -219,6 +220,7 @@ with lib; {
         "network.http.referer.XOriginPolicy" = 0; # Relaxed
         "network.predictor.enabled" = false;
         "pref.privacy.disable_button.view_passwords" = false;
+        "privacy.donottrackheader.enabled" = false;
         "privacy.fingerprintingProtection" = false;
         "privacy.globalprivacycontrol.enabled" = true;
         "privacy.resistFingerprinting.autoDeclineNoUserInputCanvasPrompts" = false;
@@ -228,6 +230,11 @@ with lib; {
         "security.OCSP.require" = true;
         "security.protectionspopup.recordEventTelemetry" = false;
         "services.passwordSavingEnabled" = false;
+        "sidebar.expandOnHoverMessage.dismissed" = true;
+        "sidebar.main.tools" = ""; # aichat,syncedtabs,history
+        "sidebar.new-sidebar.has-used" = true;
+        "sidebar.revamp" = true;
+        "sidebar.verticalTabs" = true;
         "startup.homepage_override_url" = ""; # Disable
         "startup.homepage_welcome_url" = ""; # Disable
         "svg.context-properties.content.enabled" = true; # Dark theme icons

@@ -30,9 +30,7 @@ in {
         ];
 
         home.file = {
-          ".librewolf/profiles.ini" = {
-            force = true;
-          };
+          ".librewolf/profiles.ini".force = true;
         };
 
         # https://stylix.danth.me/options/modules/firefox.html

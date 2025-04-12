@@ -7,6 +7,7 @@
 }:
 with lib; let
   cfg = config.custom.programs.firefox;
+  hm = config.home-manager.users.${config.custom.username};
 in {
   options.custom.programs.firefox = {
     enable = mkOption {default = false;};
@@ -30,10 +31,12 @@ in {
           }
         ];
 
+        home.file = {
+          ".mozilla/firefox/profiles.ini".force = true;
+        };
+
         # https://stylix.danth.me/options/modules/firefox.html
         stylix.targets.firefox = {
-          # BUG: Tab groups not yet supported
-          # https://github.com/rafaelmardojai/firefox-gnome-theme/issues/901
           # https://github.com/rafaelmardojai/firefox-gnome-theme
           firefoxGnomeTheme.enable = true;
           profileNames = [cfg.profile];
