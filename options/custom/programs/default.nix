@@ -57,6 +57,7 @@ with lib; {
       #// gnome-shell.enable = true;
       #// goldwarden.enable = true;
       gpg.enable = true;
+      #// gns3.enable = true;
       #// gtklock.enable = true;
       hyprlock.enable = true;
       libreoffice.enable = true;
