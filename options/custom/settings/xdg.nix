@@ -4,6 +4,8 @@
   ...
 }:
 with lib; let
+  #?? ls /run/current-system/sw/share/applications
+  #?? ls /etc/profiles/per-user/myned/share/applications
   apostrophe = "org.gnome.gitlab.somas.Apostrophe.desktop";
   clapper = "com.github.rafostar.Clapper.desktop";
   decibels = "org.gnome.Decibels.desktop";
