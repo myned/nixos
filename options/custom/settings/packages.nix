@@ -42,6 +42,7 @@ in {
           rclone # File sync
           sshpass # SSH automation
           stress # CPU stress tester
+          tcpdump # Network analyzer
           testdisk # Data recovery tool
           trashy # CLI trash
           waypipe # Wayland proxy
