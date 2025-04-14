@@ -44,6 +44,7 @@ in {
         "SYNC/.backup" = folder "oxdvq-dfzjk" [];
         "SYNC/.ignore" = folder "qpvfw-j127s" ["myeck" "myxel"];
         "SYNC/android" = folder "y3omj-gpjch" ["myxel"];
+        "SYNC/android/media/camera" = folder "udj03-5kwod" ["myxel"];
         "SYNC/common" = folder "fcsij-g7cnw" ["myeck" "myxel"];
         "SYNC/dev" = folder "fsmar-4wsd3" ["myxel"];
         "SYNC/edu" = folder "4nyqw-jfkq2" ["myxel"];
