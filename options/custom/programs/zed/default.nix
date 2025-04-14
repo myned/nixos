@@ -81,6 +81,7 @@ in {
 
             "sql" # https://github.com/zed-extensions/sql
             "svelte" # https://github.com/zed-extensions/svelte
+            "toml" # https://github.com/zed-industries/zed/tree/main/extensions/toml
             "tmux" # https://github.com/dangh/zed-tmux
 
             # BUG: unocss-language-server not packaged yet
