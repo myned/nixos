@@ -44,7 +44,6 @@ in {
   ### Common
   "common/nix/access-tokens.conf".publicKeys = common;
   "common/geoclue2/geolocation".publicKeys = common;
-  "common/tailscale/tailnet".publicKeys = common;
 
   ### Console
   "console/users/myned.pass".publicKeys = console;
