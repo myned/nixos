@@ -18,10 +18,6 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:Aylur/ags";
     };
-    anyrun = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:Kirottu/anyrun";
-    };
     arion = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:hercules-ci/arion";

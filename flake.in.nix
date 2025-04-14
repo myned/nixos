@@ -43,7 +43,6 @@
     aagl-gtk-on-nix-unstable = flake "github:ezKEa/aagl-gtk-on-nix" // unstable "nixpkgs";
     agenix = flake "github:ryantm/agenix" // unstable "nixpkgs";
     ags = flake "github:Aylur/ags" // unstable "nixpkgs";
-    anyrun = flake "github:Kirottu/anyrun" // unstable "nixpkgs";
     arion = flake "github:hercules-ci/arion" // unstable "nixpkgs";
     bitwarden-menu = flake "github:firecat53/bitwarden-menu" // unstable "nixpkgs";
     compose2nix = flake "github:aksiksi/compose2nix" // unstable "nixpkgs";
@@ -140,7 +139,6 @@
                     home-manager.sharedModules = [
                       inputs."nix-index-database-${branch}".hmModules.nix-index
                       inputs.ags.homeManagerModules.default
-                      inputs.anyrun.homeManagerModules.default
                       inputs.nix-flatpak.homeManagerModules.nix-flatpak
 
                       # TODO: Use official module when supported
