@@ -29,7 +29,7 @@
       #// rconfig.enable = true;
       redlib.enable = true;
       searxng.enable = true;
-      stremio.enable = true;
+      #// stremio.enable = true;
       synapse.enable = true;
       synapseadmin.enable = true;
       uptimekuma.enable = true;
