@@ -14,6 +14,7 @@
       adguardhome.enable = true;
       #// conduwuit.enable = true;
       coturn.enable = true;
+      dashdot.enable = true;
       forgejo.enable = true;
       foundryvtt.enable = true;
       #// freshrss.enable = true;
