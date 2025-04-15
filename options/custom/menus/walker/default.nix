@@ -265,7 +265,7 @@ in {
     #     {
     #       name = "walker/themes/icon-${icon}.json";
     #       value = {
-    #         text = builtins.toJSON (recursiveUpdate hm.programs.walker.theme.layout {
+    #         text = generators.toJSON {} (recursiveUpdate hm.programs.walker.theme.layout {
     #           ui.window.box.search.prompt.icon = icon;
     #         });
     #       };

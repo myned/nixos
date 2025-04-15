@@ -26,7 +26,7 @@ in {
 
         volumes = let
           # https://github.com/etkecc/synapse-admin/blob/main/docs/config.md
-          configuration = pkgs.writeText "config.json" (builtins.toJSON {
+          configuration = pkgs.writeText "config.json" (generators.toJSON {} {
             restrictBaseUrl = ["https://${config.custom.hostname}.${config.custom.services.tailscale.tailnet}:8448"];
           });
         in [
