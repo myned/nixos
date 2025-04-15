@@ -45,6 +45,7 @@ with lib; {
       keyd.enable = true;
       #// mako.enable = true;
       #// network-manager-applet.enable = true;
+      ntfy.enable = true;
       ollama.enable = true;
       samba.enable = true;
       #// swayidle.enable = true;

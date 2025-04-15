@@ -43,6 +43,7 @@ in {
 
   ### Common
   "common/nix/access-tokens.conf".publicKeys = common;
+  "common/ntfy/token".publicKeys = desktop;
   "common/geoclue2/geolocation".publicKeys = common;
 
   ### Console
