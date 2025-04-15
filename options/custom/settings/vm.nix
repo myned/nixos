@@ -31,7 +31,7 @@ in {
       secret = filename: {
         file = "${inputs.self}/secrets/${filename}";
         owner = config.custom.username;
-        group = "users";
+        group = config.users.users.${config.custom.username}.group;
       };
     in {
       "desktop/vm/myndows.pass" = secret "desktop/vm/myndows.pass";

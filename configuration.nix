@@ -12,7 +12,7 @@ in {
     secret = filename: {
       file = "${inputs.self}/secrets/${filename}";
       owner = config.custom.username;
-      group = "users";
+      group = config.users.users.${config.custom.username}.group;
     };
   in {
     "common/nix/access-tokens.conf" = secret "common/nix/access-tokens.conf";
