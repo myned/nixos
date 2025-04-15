@@ -38,9 +38,6 @@ let
   sbc = users ++ sbcs;
   server = users ++ servers;
 in {
-  # TODO: Move secrets into each profile
-  #?? config.age.secrets."PROFILE/SECRET".path
-
   ### Common
   "common/nix/access-tokens.conf".publicKeys = common;
   "common/ntfy/token".publicKeys = desktop;
