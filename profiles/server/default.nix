@@ -22,6 +22,7 @@
       mastodon.enable = true;
       miniflux.enable = true;
       netbox.enable = true;
+      netdata.enable = true;
       #// nextcloud.enable = true;
       nextcloudaio.enable = true;
       ntfy.enable = true;
