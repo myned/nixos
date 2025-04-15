@@ -22,7 +22,7 @@ in {
         nextcloud-aio-mastercontainer.service = {
           container_name = "nextcloud-aio-mastercontainer";
           image = "ghcr.io/nextcloud-releases/all-in-one:latest";
-          ports = ["8088:8080"];
+          ports = ["8088:8080/tcp"];
           restart = "unless-stopped";
 
           volumes = [

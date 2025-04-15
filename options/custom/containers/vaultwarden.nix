@@ -31,7 +31,7 @@ in {
         container_name = "vaultwarden";
         env_file = [config.age.secrets."${config.custom.profile}/vaultwarden/.env".path];
         image = "vaultwarden/server:1.33.2";
-        ports = ["8008:80"];
+        ports = ["8008:80/tcp"];
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/vaultwarden/data:/data"];
       };
