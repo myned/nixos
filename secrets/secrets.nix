@@ -58,7 +58,7 @@ in {
   "desktop/vm/myndows.pass".publicKeys = desktop;
 
   ### SBC
-  "sbc/borgmatic/borgbase.mypi3".publicKeys = sbc;
+  "sbc/borgmatic/borgbase".publicKeys = sbc;
   "sbc/create_ap/passphrase".publicKeys = sbc;
   "sbc/create_ap/ssid".publicKeys = sbc;
   "sbc/netdata/child.conf".publicKeys = sbc;
