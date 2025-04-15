@@ -26,6 +26,7 @@ in {
           disko # Declarative disk management
           fd # File finder
           fzf # Fuzzy search
+          glances # System monitor
           inetutils # Network utilities
           jq # JSON parser
           killport # Kill processes on port
