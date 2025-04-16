@@ -61,12 +61,18 @@ with lib; {
       master = {
         color = "pink";
         icon = "circle";
-        id = 1;
+        id = 0;
       };
 
       edu = {
         color = "orange";
         icon = "fruit";
+        id = 1;
+      };
+
+      work = {
+        color = "red";
+        icon = "briefcase";
         id = 2;
       };
     };
