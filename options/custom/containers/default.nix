@@ -41,6 +41,7 @@ in {
       # https://wiki.nixos.org/wiki/Docker
       docker = mkIf cfg.docker {
         enable = true;
+        autoPrune.enable = true;
         enableOnBoot = cfg.boot; # Socket activation
         storageDriver = "overlay2";
 
