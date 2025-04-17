@@ -35,8 +35,8 @@ in {
         restart = "unless-stopped";
 
         ports = [
-          "9999:9999/tcp"
-          "9090:9090/tcp"
+          "${config.custom.services.tailscale.ip}:9999:9999/tcp"
+          "${config.custom.services.tailscale.ip}:9090:9090/tcp"
         ];
 
         volumes = [

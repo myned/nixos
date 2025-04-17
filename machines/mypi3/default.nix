@@ -14,6 +14,8 @@
     hostname = "mypi3";
 
     services = {
+      tailscale.ip = "100.125.118.95";
+
       borgmatic.repositories = [
         {
           path = "ssh://h1m9k594@h1m9k594.repo.borgbase.com/./repo";

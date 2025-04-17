@@ -7,6 +7,10 @@
   custom = {
     hostname = "myne";
 
+    services = {
+      tailscale.ip = "100.126.156.42";
+    };
+
     settings = {
       boot.grub = true;
 

@@ -21,6 +21,10 @@
       igpu = true;
     };
 
+    services = {
+      tailscale.ip = "100.67.212.39";
+    };
+
     settings = {
       games = {
         enable = true;

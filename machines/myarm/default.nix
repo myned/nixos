@@ -7,6 +7,10 @@
   custom = {
     hostname = "myarm";
 
+    services = {
+      tailscale.ip = "";
+    };
+
     settings = {
       boot.systemd-boot = true;
 

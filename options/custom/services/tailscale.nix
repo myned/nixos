@@ -16,6 +16,8 @@ in {
   options.custom.services.tailscale = {
     enable = mkOption {default = false;};
     cert = mkOption {default = false;};
+    ip = mkOption {default = "";};
+    firewall = mkOption {default = true;};
     tailnet = mkOption {default = "fenrir-musical.ts.net";};
     tray = mkOption {default = false;};
   };
@@ -26,9 +28,21 @@ in {
   config = mkIf cfg.enable {
     services.tailscale = {
       enable = true;
+      openFirewall = cfg.firewall; # 41641/udp
       permitCertUid = mkIf config.custom.services.caddy.enable "caddy"; # Allow caddy to fetch TLS certificates
       useRoutingFeatures = "both"; # Enable server/client exit nodes
     };
+
+    networking.firewall.interfaces.${config.services.tailscale.interfaceName} = let
+      all-ports = {
+        from = 0;
+        to = 65535;
+      };
+    in
+      mkIf cfg.firewall {
+        allowedTCPPortRanges = [all-ports];
+        allowedUDPPortRanges = [all-ports];
+      };
 
     # Provision Tailscale certificates in the background per machine
     systemd = mkIf cfg.cert {

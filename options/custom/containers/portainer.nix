@@ -32,7 +32,7 @@ in {
       portainer.service = mkIf cfg.server {
         container_name = "portainer";
         image = "portainer/portainer-ce:2.27.4"; # https://hub.docker.com/r/portainer/portainer-ce/tags
-        ports = ["9443:9443/tcp"];
+        ports = ["${config.custom.services.tailscale.ip}:9443:9443/tcp"];
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/portainer/data:/data"];
       };
@@ -41,7 +41,7 @@ in {
       agent.service = mkIf cfg.agent {
         container_name = "portainer-agent";
         image = "portainer/agent:2.27.4"; # https://hub.docker.com/r/portainer/agent/tags
-        #// ports = ["9001:9001/tcp"];
+        #// ports = ["${config.custom.services.tailscale.ip}:9001:9001/tcp"];
         restart = "unless-stopped";
 
         volumes = [
