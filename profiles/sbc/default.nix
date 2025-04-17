@@ -22,6 +22,8 @@ in {
     };
 
     services = {
+      prometheus.enable = true;
+
       pipewire = {
         enable = true;
         pulseaudio = false;

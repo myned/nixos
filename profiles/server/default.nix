@@ -48,6 +48,7 @@
     services = {
       caddy.enable = true;
       #// modufur.enable = true;
+      prometheus.enable = true;
       #// tailscale.cert = true;
 
       borgmatic = {
