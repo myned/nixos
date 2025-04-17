@@ -212,7 +212,14 @@ in {
               metrics = true;
             };
 
-            terminal.line_height = "standard";
+            terminal = {
+              line_height = "standard";
+
+              env = {
+                EDITOR = "zeditor --wait";
+              };
+            };
+
             ui_font_size = mkForce 19;
 
             # Language-specific
