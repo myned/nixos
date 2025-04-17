@@ -88,6 +88,26 @@
     ]
   },
 
+  "NixOS Container Arion Tmpfiles": {
+    "prefix": "ncat",
+    "description": "NixOS Container Arion Tmpfiles",
+    "body": [
+      "#?? arion-$1 run -- --rm --entrypoint='id $1' $1",
+      "systemd.tmpfiles.settings.$1 = let",
+      "  owner = mode: {",
+      "    inherit mode;",
+      "    user = \"\"; # $1",
+      "    group = \"\"; # $1",
+      "  };",
+      "in {",
+      "  \"\\${config.custom.containers.directory}/$1/data\" = {",
+      "    d = owner \"0700\"; # -rwx------",
+      "    z = owner \"0700\"; # -rwx------",
+      "  };",
+      "};"
+    ]
+  },
+
   "Nix Develop": {
     "prefix": "nd",
     "description": "Nix Develop",
