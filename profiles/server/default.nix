@@ -10,8 +10,11 @@
     containers = {
       enable = true;
       boot = true;
+
       actualbudget.enable = true;
       adguardhome.enable = true;
+      beszel.enable = true;
+      beszel.server = true;
       #// conduwuit.enable = true;
       coturn.enable = true;
       dashdot.enable = true;

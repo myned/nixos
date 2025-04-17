@@ -17,6 +17,7 @@ in {
     containers = {
       enable = true;
       boot = true;
+      beszel.enable = true;
       homeassistant.enable = true;
     };
 
