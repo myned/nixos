@@ -100,6 +100,7 @@ in {
             dp = "docker pull";
             dps = "docker ps";
             dpsa = "docker ps --all --size";
+            dpsf = "docker ps --format='table {{.ID}}\\t{{.Names}}\\t{{.Status}}'";
             dr = "docker rm";
             ds = "docker system";
             dsp = "docker system prune";
