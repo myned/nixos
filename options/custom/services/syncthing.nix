@@ -54,7 +54,7 @@ in {
         "SYNC/owo" = folder "ervqc-ebnzz" ["myxel"];
         "SYNC/windows" = folder "2hmna-vfap9" [];
         "ZEL/android" = folder "gn2l3-2hxtu" ["zendows" "zexel"] // {type = "receiveonly";};
-        "ZEL/music" = folder "nytcx-uwqs7" ["zendows"] // {type = "receiveonly";};
+        "ZEL/music" = folder "nytcx-uwqs7" ["zendows" "zexel"] // {type = "receiveonly";};
       };
     };
   };
