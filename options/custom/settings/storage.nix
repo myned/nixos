@@ -15,7 +15,7 @@ in {
       default =
         if cfg.encrypt
         then "/dev/mapper/crypted"
-        else null;
+        else "/dev/disk/by-partlabel/ROOT";
     };
 
     efi = mkOption {
@@ -35,7 +35,7 @@ in {
 
     offset = mkOption {
       default = null;
-      type = types.int;
+      type = with types; nullOr int;
     };
 
     remote = mkOption {
@@ -81,71 +81,80 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # https://wiki.nixos.org/wiki/Full_Disk_Encryption
-    # https://wiki.archlinux.org/title/Dm-crypt/Device_encryption#Adding_LUKS_keys
-    #?? echo -n '<passphrase>' > <keyfile>
-    #?? sudo cryptsetup luksAddKey /dev/disk/by-partlabel/luks <keyfile>
-    #?? sudo cryptsetup luksDump /dev/disk/by-partlabel/luks
-    boot.initrd = mkIf cfg.encrypt {
-      # https://wiki.nixos.org/wiki/Full_Disk_Encryption#Unattended_Boot_via_USB
-      kernelModules = mkIf cfg.key.enable [
-        "nls_cp437"
-        "nls_iso8859_1"
-        "uas"
-        "usb_storage"
-        "usbcore"
-        "vfat" # FAT32
-        "exfat" # exFAT
-      ];
+    boot =
+      {
+        # https://wiki.nixos.org/wiki/Full_Disk_Encryption
+        # https://wiki.archlinux.org/title/Dm-crypt/Device_encryption#Adding_LUKS_keys
+        #?? echo -n '<passphrase>' > <keyfile>
+        #?? sudo cryptsetup luksAddKey /dev/disk/by-partlabel/luks <keyfile>
+        #?? sudo cryptsetup luksDump /dev/disk/by-partlabel/luks
+        initrd = mkIf cfg.encrypt {
+          # https://wiki.nixos.org/wiki/Full_Disk_Encryption#Unattended_Boot_via_USB
+          kernelModules = mkIf cfg.key.enable [
+            "nls_cp437"
+            "nls_iso8859_1"
+            "uas"
+            "usb_storage"
+            "usbcore"
+            "vfat" # FAT32
+            "exfat" # exFAT
+          ];
 
-      luks.devices.${builtins.baseNameOf cfg.device} =
-        {
-          device = "/dev/disk/by-partlabel/LUKS";
+          luks.devices.${builtins.baseNameOf cfg.device} =
+            {
+              device = "/dev/disk/by-partlabel/LUKS";
 
-          # https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)
-          allowDiscards = true;
+              # https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)
+              allowDiscards = true;
 
-          # https://wiki.archlinux.org/title/Dm-crypt/Specialties#Disable_workqueue_for_increased_solid_state_drive_(SSD)_performance
-          bypassWorkqueues = true;
-        }
-        // optionalAttrs cfg.key.enable {
-          keyFile = "/key/${cfg.key.path}";
-        }
-        // optionalAttrs (cfg.key.enable && cfg.key.systemd) {
-          keyFileTimeout = 3; # Seconds
-        }
-        // optionalAttrs (cfg.key.enable && !cfg.key.systemd) {
-          fallbackToPassword = true;
-          preLVM = false;
-        };
-
-      postDeviceCommands = mkIf (cfg.key.enable && !cfg.key.systemd) ''
-        sleep 1
-        mkdir -p /key
-        mount -o ro ${cfg.key.device} /key
-      '';
-
-      systemd = mkIf (cfg.key.enable && cfg.key.systemd) {
-        enable = true;
-
-        mounts = [
-          {
-            what = cfg.key.device;
-            where = "/key";
-
-            # FIXME: Does not take effect in key.mount
-            # Related: https://github.com/NixOS/nixpkgs/issues/250003
-            # mountConfig = {
-            #   TimeoutSec = 3;
-            # };
-
-            unitConfig = {
-              DefaultDependencies = false; # Otherwise decryption is attempted before mount
+              # https://wiki.archlinux.org/title/Dm-crypt/Specialties#Disable_workqueue_for_increased_solid_state_drive_(SSD)_performance
+              bypassWorkqueues = true;
+            }
+            // optionalAttrs cfg.key.enable {
+              keyFile = "/key/${cfg.key.path}";
+            }
+            // optionalAttrs (cfg.key.enable && cfg.key.systemd) {
+              keyFileTimeout = 3; # Seconds
+            }
+            // optionalAttrs (cfg.key.enable && !cfg.key.systemd) {
+              fallbackToPassword = true;
+              preLVM = false;
             };
-          }
-        ];
+
+          postDeviceCommands = mkIf (cfg.key.enable && !cfg.key.systemd) ''
+            sleep 1
+            mkdir -p /key
+            mount -o ro ${cfg.key.device} /key
+          '';
+
+          systemd = mkIf (cfg.key.enable && cfg.key.systemd) {
+            enable = true;
+
+            mounts = [
+              {
+                what = cfg.key.device;
+                where = "/key";
+
+                # FIXME: Does not take effect in key.mount
+                # Related: https://github.com/NixOS/nixpkgs/issues/250003
+                # mountConfig = {
+                #   TimeoutSec = 3;
+                # };
+
+                unitConfig = {
+                  DefaultDependencies = false; # Otherwise decryption is attempted before mount
+                };
+              }
+            ];
+          };
+        };
+      }
+      # Enable hibernation on btrfs, relies on fixed-size swap device
+      // optionalAttrs ((cfg.type == "btrfs") && (isInt cfg.swap) && (isInt cfg.offset)) {
+        # https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Hibernation_into_swap_file
+        resumeDevice = cfg.device; #?? findmnt -no LABEL -T /var/lib/swapfile
+        kernelParams = ["resume_offset=${toString cfg.offset}"]; #?? sudo btrfs inspect-internal map-swapfile -r /var/lib/swapfile
       };
-    };
 
     #!! Imperative partitioning and formatting
     # https://nixos.org/manual/nixos/stable/#sec-installation-manual-partitioning
@@ -275,16 +284,6 @@ in {
           z = owner "0755"; # -rwxr-xr-x
         };
       };
-
-    # Enable hibernation with a swapfile on btrfs
-    # https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Hibernation_into_swap_file
-    boot = {
-      #?? findmnt -no LABEL -T /var/lib/swapfile
-      resumeDevice = cfg.device;
-
-      #?? sudo btrfs inspect-internal map-swapfile -r /var/lib/swapfile
-      kernelParams = ["resume_offset=${toString cfg.offset}"];
-    };
 
     # https://wiki.nixos.org/wiki/Swap
     # https://wiki.nixos.org/wiki/Btrfs#Swap_file
