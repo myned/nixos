@@ -38,7 +38,7 @@ with lib; {
       #// gamescope.enable = true;
       #// gnome-terminal.enable = true;
       kitty.enable = true;
-      #// librewolf.enable = true;
+      librewolf.enable = true;
       nautilus.enable = true;
       nvtop.enable = true;
       #// wezterm.enable = true;
