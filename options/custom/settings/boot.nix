@@ -55,6 +55,7 @@ in {
       };
 
       loader = {
+        efi.canTouchEfiVariables = true;
         timeout = cfg.timeout;
 
         systemd-boot = mkIf cfg.systemd-boot {
