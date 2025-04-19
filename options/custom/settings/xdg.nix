@@ -53,6 +53,7 @@ in {
           "application/sql" = gnome-text-editor;
           "application/toml" = gnome-text-editor;
           "application/vnd.adobe.flash.movie" = clapper;
+          "application/vnd.apple.keynote" = gnome-text-editor;
           "application/vnd.ms-excel.sheet.macroEnabled.12" = libreoffice;
           "application/vnd.ms-excel" = libreoffice;
           "application/vnd.ms-powerpoint" = libreoffice;
