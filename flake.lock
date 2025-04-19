@@ -2486,6 +2486,27 @@
         "type": "github"
       }
     },
+    "niri-overview": {
+      "inputs": {
+        "nix-filter": "nix-filter_3",
+        "nixpkgs": "nixpkgs_4",
+        "rust-overlay": "rust-overlay_2"
+      },
+      "locked": {
+        "lastModified": 1745071964,
+        "narHash": "sha256-kWPC3KjlJv4fV0j7o/vTV6TxEVxzlwfBj5ynYy6RetE=",
+        "owner": "YaLTeR",
+        "repo": "niri",
+        "rev": "0bef1c6c3b44039dac2d858d57d49d8f0ca32c23",
+        "type": "github"
+      },
+      "original": {
+        "owner": "YaLTeR",
+        "repo": "niri",
+        "rev": "0bef1c6c3b44039dac2d858d57d49d8f0ca32c23",
+        "type": "github"
+      }
+    },
     "niri-stable": {
       "flake": false,
       "locked": {
@@ -2586,6 +2607,21 @@
       }
     },
     "nix-filter_2": {
+      "locked": {
+        "lastModified": 1731533336,
+        "narHash": "sha256-oRam5PS1vcrr5UPgALW0eo1m/5/pls27Z/pabHNy2Ms=",
+        "owner": "numtide",
+        "repo": "nix-filter",
+        "rev": "f7653272fd234696ae94229839a99b73c9ab7de0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "nix-filter",
+        "type": "github"
+      }
+    },
+    "nix-filter_3": {
       "locked": {
         "lastModified": 1731533336,
         "narHash": "sha256-oRam5PS1vcrr5UPgALW0eo1m/5/pls27Z/pabHNy2Ms=",
@@ -3084,6 +3120,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_4": {
+      "locked": {
+        "lastModified": 1742707865,
+        "narHash": "sha256-RVQQZy38O3Zb8yoRJhuFgWo/iDIDj0hEdRTVfhOtzRk=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "dd613136ee91f67e5dba3f3f41ac99ae89c5406b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nur": {
       "inputs": {
         "flake-parts": "flake-parts_6",
@@ -3276,6 +3328,7 @@
         "lifx-cli": "lifx-cli",
         "niri": "niri",
         "niri-flake": "niri-flake",
+        "niri-overview": "niri-overview",
         "nix-alien": "nix-alien",
         "nix-flatpak": "nix-flatpak",
         "nix-index-database-stable": "nix-index-database-stable",
@@ -3320,6 +3373,27 @@
       "inputs": {
         "nixpkgs": [
           "niri",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1742697269,
+        "narHash": "sha256-Lpp0XyAtIl1oGJzNmTiTGLhTkcUjwSkEb0gOiNzYFGM=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "01973c84732f9275c50c5f075dd1f54cc04b3316",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "rust-overlay_2": {
+      "inputs": {
+        "nixpkgs": [
+          "niri-overview",
           "nixpkgs"
         ]
       },
