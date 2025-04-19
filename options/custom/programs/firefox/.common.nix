@@ -229,8 +229,13 @@ with lib; {
         "network.http.referer.XOriginPolicy" = 0; # Relaxed
         "network.predictor.enabled" = false;
         "pref.privacy.disable_button.view_passwords" = false;
+        "privacy.clearOnShutdown.downloads" = true;
+        "privacy.clearOnShutdown.formdata" = true;
+        "privacy.clearOnShutdown_v2.browsingHistoryAndDownloads" = false;
+        "privacy.clearOnShutdown_v2.cache" = true;
+        "privacy.clearOnShutdown_v2.cookiesAndStorage" = false;
         "privacy.donottrackheader.enabled" = false;
-        "privacy.fingerprintingProtection" = false;
+        "privacy.fingerprintingProtection" = true;
         "privacy.globalprivacycontrol.enabled" = true;
         "privacy.resistFingerprinting.autoDeclineNoUserInputCanvasPrompts" = false;
         "privacy.resistFingerprinting.letterboxing" = false;
