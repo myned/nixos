@@ -8,6 +8,7 @@ with lib; {
     (mkIf config.custom.default {
       #// automatic-timezoned.enable = true;
       geoclue2.enable = true;
+      #// kmscon.enable = true;
       #// netbird.enable = true;
       tailscale.enable = true;
       tzupdate.enable = true;
