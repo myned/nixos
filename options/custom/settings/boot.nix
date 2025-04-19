@@ -59,7 +59,7 @@ in {
 
         systemd-boot = mkIf cfg.systemd-boot {
           enable = true;
-          configurationLimit = 15;
+          configurationLimit = 5;
           consoleMode = mkIf (!isInt cfg.console-mode || cfg.console-mode <= 2) cfg.console-mode;
           editor = false; # Disable cmdline
 
