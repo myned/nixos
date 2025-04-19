@@ -73,6 +73,20 @@ in {
         generic-extlinux-compatible.enable = cfg.u-boot;
         grub.enable = cfg.grub;
       };
+
+      # https://wiki.nixos.org/wiki/Plymouth
+      plymouth = {
+        #// enable = true;
+      };
+    };
+
+    console = {
+      earlySetup = true;
+
+      # https://wiki.nixos.org/wiki/Console_Fonts
+      # https://wiki.archlinux.org/title/Linux_console#Fonts
+      # https://adeverteuil.github.io/linux-console-fonts-screenshots/
+      #// font = "Lat2-Terminus16";
     };
   };
 }
