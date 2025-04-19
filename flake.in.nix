@@ -60,6 +60,7 @@
     jovian-nixos = flake "github:Jovian-Experiments/Jovian-NixOS" // unstable "nixpkgs";
     niri = flake "github:YaLTeR/niri" // unstable "nixpkgs";
     niri-flake = flake "github:sodiboo/niri-flake" // unstable "nixpkgs";
+    niri-overview = flake "github:YaLTeR/niri/0bef1c6c3b44039dac2d858d57d49d8f0ca32c23";
     nix-alien = flake "github:thiagokokada/nix-alien" // unstable "nixpkgs";
     nix-flatpak = flake "github:gmodena/nix-flatpak?ref=v0.5.1";
     nix-index-database-unstable = flake "github:nix-community/nix-index-database" // unstable "nixpkgs";

@@ -75,6 +75,7 @@ in {
             (key "Backslash" "Mod" (spawn inhibit))
             (key "Backslash" "Mod+Shift" (spawn power))
             (key "Backspace" "Mod" center-column)
+            (key "Backspace" "Mod+Ctrl" toggle-column-tabbed-display)
             (key "Bracketleft" "Mod" (switch-layout "prev"))
             (key "Bracketright" "Mod" (switch-layout "next"))
             (key "Delete" "Ctrl+Alt" (spawn [loginctl "terminate-user" config.custom.username]))
@@ -92,7 +93,11 @@ in {
             (key "Slash" "Mod" (spawn [sushi "/tmp/wallpaper.png"]))
             (key "Slash" "Mod+Shift" show-hotkey-overlay)
             (key "Space" "Ctrl+Alt" (spawn ["lifx" "toggle"]))
-            (key "Tab" "Mod" toggle-column-tabbed-display)
+
+            # TODO: Uncomment when implemented in flake options
+            # https://github.com/YaLTeR/niri/pull/1440
+            #// (key "Tab" "Mod" toggle-overview)
+
             (key "Up" "Mod" (spawn [swayosd-client "--brightness" "raise"]))
             (key "WheelScrollDown" "Mod" focus-window-or-workspace-down)
             (key "WheelScrollDown" "Mod+Shift" move-window-down-or-to-workspace-down)

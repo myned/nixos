@@ -22,6 +22,10 @@ in {
             name = connector;
 
             value = {
+              # TODO: Uncomment when implemented in flake options
+              # https://github.com/YaLTeR/niri/pull/1440
+              #// backdrop-color = "#073642";
+
               background-color = "#073642";
 
               mode = with config.custom; {

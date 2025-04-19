@@ -51,7 +51,7 @@ in {
     programs.niri = {
       enable = true;
       #// package = pkgs.niri; # nixpkgs
-      package = inputs.niri.packages.${pkgs.system}.default;
+      package = inputs.niri-overview.packages.${pkgs.system}.default;
     };
 
     nixpkgs.overlays = [inputs.niri-flake.overlays.niri];
@@ -83,14 +83,18 @@ in {
           # HACK: Merge kdl nodes into module config
           # https://github.com/sodiboo/niri-flake/blob/main/settings.nix
           # https://github.com/sodiboo/niri-flake/blob/main/default-config.kdl.nix
+          #?? :p config.home-manager.users.<user>.xdg.configFile."niri/config.kdl".text
+          #?? :p lib.findFirst (node: lib.isAttrs node && node.name == "<node>") [] config.home-manager.users.<user>.programs.niri.config
           "niri/config.kdl".text = with inputs.niri-flake.lib;
             kdl.serialize.nodes (forEach hm.programs.niri.config (node:
-              if isAttrs node && node.name == "layout"
+              if isAttrs node && node.name == "binds"
               then
-                recursiveUpdate node {
+                node
+                // {
                   children = with kdl;
                     node.children
                     ++ [
+                      (plain "Mod+Tab" [(flag "toggle-overview")])
                     ];
                 }
               else node));
