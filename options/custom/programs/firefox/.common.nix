@@ -125,10 +125,10 @@ with lib; {
         "browser.preferences.defaultPerformanceSettings.enabled" = true;
         "browser.preferences.moreFromMozilla" = false;
         "browser.quitShortcut.disabled" = true;
-        "browser.safebrowsing.blockedURIs.enabled" = true;
-        "browser.safebrowsing.downloads.enabled" = true;
-        "browser.safebrowsing.malware.enabled" = true;
-        "browser.safebrowsing.phishing.enabled" = true;
+        "browser.safebrowsing.blockedURIs.enabled" = false;
+        "browser.safebrowsing.downloads.enabled" = false;
+        "browser.safebrowsing.malware.enabled" = false;
+        "browser.safebrowsing.phishing.enabled" = false;
         "browser.search.separatePrivateDefault" = false;
         "browser.search.serpEventTelemetryCategorization.regionEnabled" = false;
         "browser.search.suggest.enabled" = true;
