@@ -1,6 +1,5 @@
-{config, ...}: {
+{
   imports = [
-    ./disko.nix
     ./hardware-configuration.nix
   ];
 
@@ -36,11 +35,19 @@
         rocm = "10.3.0"; # 10.3.1
       };
 
-      storage.mnt = [
-        "gayme"
-        "gaymer"
-        #// "myve"
-      ];
+      storage = {
+        enable = true;
+        encrypt = true;
+        key.enable = true;
+        offset = 30753211; #?? sudo btrfs inspect-internal map-swapfile -r /var/lib/swapfile
+        swap = 32; # GB
+
+        mnt = [
+          "gayme"
+          "gaymer"
+          #// "myve"
+        ];
+      };
 
       vm.passthrough = {
         enable = true;
@@ -54,35 +61,14 @@
     };
   };
 
-  boot = {
-    # Enable hibernation with a swapfile on btrfs
-    # https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Hibernation_into_swap_file
-    #?? findmnt -no UUID -T /swap/swapfile
-    resumeDevice = "/dev/disk/by-uuid/5df5028b-a3ba-4f07-80ef-fd5abd542a81";
-
-    kernelParams = [
-      #?? sudo btrfs inspect-internal map-swapfile -r /swap/swapfile
-      "resume_offset=533760"
-
-      # https://gitlab.freedesktop.org/drm/amd/-/issues/2516#note_2119750
-      #// "gpu_sched.sched_policy=0" # Attempt to fix stutter
-    ];
-  };
+  boot.kernelParams = [
+    # https://gitlab.freedesktop.org/drm/amd/-/issues/2516#note_2119750
+    #// "gpu_sched.sched_policy=0" # Attempt to fix stutter
+  ];
 
   #  _._     _,-'""`-._
   # (,-.`._,'(       |\`-/|
   #     `-.-' \ )-`( , o o)
   #           `-    \`_`"'-
   #// services.logind.powerKey = "ignore"; # Disable power button
-
-  home-manager.users.${config.custom.username} = {
-    # Prevent secondary GPU reset from crashing window manager
-    wayland.windowManager.hyprland.settings = {
-      monitor = [
-        "HDMI-A-1, disable"
-        "HDMI-A-2, disable"
-        "HDMI-A-3, disable"
-      ];
-    };
-  };
 }

@@ -11,6 +11,7 @@
       tailscale.ip = "100.126.156.42";
     };
 
+    # TODO: Migrate to storage module
     settings = {
       boot.grub = true;
 
