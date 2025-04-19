@@ -1,12 +1,6 @@
-{
-  config,
-  inputs,
-  ...
-}: {
+{inputs, ...}: {
   imports = [
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
-
-    ./disko.nix
     ./hardware-configuration.nix
   ];
 
@@ -39,7 +33,12 @@
       };
 
       storage = {
+        enable = true;
+        encrypt = true;
+        key.enable = true;
         #// mnt = ["myve"];
+        offset = 225239338; #?? sudo btrfs inspect-internal map-swapfile -r /var/lib/swapfile
+        swap = 32; # GB
       };
     };
   };
