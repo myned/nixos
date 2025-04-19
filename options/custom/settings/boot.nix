@@ -16,7 +16,7 @@ in {
     kernel = mkOption {
       default =
         if config.custom.full
-        then pkgs.linuxPackages_6_13
+        then pkgs.linuxPackages_6_14
         else pkgs.linuxPackages;
     };
     systemd-boot = mkOption {default = config.custom.minimal;};
