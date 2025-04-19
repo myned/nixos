@@ -23,6 +23,7 @@ in {
           perf # Performance analyzer
         ])
         ++ optionals config.custom.default [
+          btrfs-list # btrfs subvolume lister
           disko # Declarative disk management
           fd # File finder
           fzf # Fuzzy search
