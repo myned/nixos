@@ -152,6 +152,7 @@ with lib; {
         "browser.theme.dark-private-windows" = false;
         "browser.toolbarbuttons.introduced.sidebar-button" = true;
         "browser.toolbars.bookmarks.showOtherBookmarks" = false;
+        "browser.toolbars.bookmarks.visibility" = "newtab";
         "browser.uidensity" = 0; # Default
         "browser.urlbar.quicksuggest.dataCollection.enabled" = false;
         "browser.urlbar.quicksuggest.shouldShowOnboardingDialog" = false;
