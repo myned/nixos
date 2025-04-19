@@ -27,7 +27,7 @@
     };
 
     services = {
-      auto-cpufreq.max.battery = 3.0; # GHz
+      auto-cpufreq.max.battery = 3.5; # GHz
       fw-fanctrl.enable = true;
       tailscale.ip = "100.100.119.16";
     };
