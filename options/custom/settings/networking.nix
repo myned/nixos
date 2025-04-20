@@ -85,13 +85,14 @@ in {
       extraConfig = "MulticastDNS=false"; # mDNS
       llmnr = "false";
 
-      # https://controld.com/free-dns
-      #?? host verify.controld.com
+      # TODO: Add testing command
+      # https://quad9.net/support/faq#testing
+      # https://quad9.net/service/service-addresses-and-features
       fallbackDns = mkIf cfg.dns [
-        "76.76.2.22#p0.freedns.controld.com"
-        "76.76.10.22#p0.freedns.controld.com"
-        "2606:1a40::22#p0.freedns.controld.com"
-        "2606:1a40:1::22#p0.freedns.controld.com"
+        "9.9.9.9#dns.quad9.net"
+        "149.112.112.112#dns.quad9.net"
+        "2620:fe::fe#dns.quad9.net"
+        "2620:fe::9#dns.quad9.net"
       ];
     };
 
