@@ -21,6 +21,7 @@
       forgejo.enable = true;
       foundryvtt.enable = true;
       #// freshrss.enable = true;
+      #// ghost.enable = true;
       grafana.enable = true;
       #// headscale.enable = true;
       mastodon.enable = true;

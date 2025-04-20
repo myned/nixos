@@ -50,6 +50,8 @@ in {
   ### Desktop
   "desktop/bitwarden/client_id".publicKeys = desktop;
   "desktop/bitwarden/client_secret".publicKeys = desktop;
+  "desktop/ghost/.env".publicKeys = desktop;
+  "desktop/ghost/db.env".publicKeys = desktop;
   "desktop/users/myned.pass".publicKeys = desktop;
   "desktop/users/root.pass".publicKeys = desktop;
   "desktop/vm/myndows.pass".publicKeys = desktop;
@@ -70,6 +72,8 @@ in {
   "server/forgejo/.env".publicKeys = server;
   "server/forgejo/db.env".publicKeys = server;
   "server/foundryvtt/.env".publicKeys = server;
+  "server/ghost/.env".publicKeys = server;
+  "server/ghost/db.env".publicKeys = server;
   "server/headscale/.env".publicKeys = server;
   "server/mastodon/.env".publicKeys = server;
   "server/mastodon/db.env".publicKeys = server;
