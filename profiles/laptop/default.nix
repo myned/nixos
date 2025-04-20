@@ -1,4 +1,4 @@
-{
+{config, ...}: {
   custom = {
     full = true;
 
@@ -6,6 +6,11 @@
     profile = "desktop"; # Inherit desktop profile
 
     desktop = "niri";
+
+    containers = {
+      enable = true;
+      user = config.custom.username;
+    };
 
     services = {
       #// auto-cpufreq.enable = true;

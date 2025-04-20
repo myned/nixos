@@ -1,8 +1,13 @@
-{
+{config, ...}: {
   custom = {
     full = true;
     profile = "desktop";
     desktop = "niri";
+
+    containers = {
+      enable = true;
+      user = config.custom.username;
+    };
 
     services = {
       ollama.download = "high";

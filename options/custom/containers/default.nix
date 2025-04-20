@@ -9,10 +9,11 @@ with lib; let
   cfg = config.custom.containers;
 in {
   options.custom.containers = {
-    enable = mkOption {default = config.custom.full;};
+    enable = mkOption {default = false;};
     boot = mkOption {default = false;};
     directory = mkOption {default = "/containers";};
     docker = mkOption {default = true;};
+    user = mkOption {default = "root";};
   };
 
   config = mkIf cfg.enable {
@@ -90,17 +91,20 @@ in {
         podman-tui
       ];
 
-    systemd.tmpfiles.settings.containers = {
-      "/containers" = {
-        d = {
-          mode = "0700";
-          user = "root";
-          group = "root";
-        };
+    systemd.tmpfiles.settings.containers = let
+      owner = mode: {
+        inherit mode;
+        user = cfg.user;
+        group = "root";
+      };
+    in {
+      ${cfg.directory} = {
+        d = owner "0700"; # -rwx------
+        z = owner "0700"; # -rwx------
       };
     };
 
-    users.users.${config.custom.username}.extraGroups = [
+    users.users.${cfg.user}.extraGroups = [
       (
         if cfg.docker
         then "docker"
