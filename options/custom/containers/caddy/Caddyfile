@@ -1,0 +1,288 @@
+### Global
+# https://caddyserver.com/docs/caddyfile/options#global-options
+{
+	email admin@bjork.tech
+
+	log {
+		format console
+		level INFO
+	}
+
+	### Plugins
+	# https://github.com/caddy-dns/cloudflare
+	# https://caddy.community/t/how-to-use-dns-provider-modules-in-caddy-2/8148
+	acme_dns cloudflare {$CLOUDFLARE_API_TOKEN}
+
+	# https://github.com/mholt/caddy-l4
+	# layer4 {
+	#  tcp/:853 {
+	#    route {
+	#      tls
+	#      proxy {
+	#        proxy_protocol v2
+	#        upstream tcp/localhost:8853
+	#      }
+	#    }
+	#  }
+
+	#  udp/:853 {
+	#    route {
+	#      proxy udp/localhost:8853
+	#    }
+	#  }
+	# }
+}
+
+### Imports
+# Admin authentication
+#?? caddy hash-password
+(admin) {
+	basic_auth {
+		myned {$ADMIN_HASH}
+	}
+}
+
+# Basic Authentication
+#?? echo -n username:password | base64
+(owo) {
+	@unauthorized {
+		path {args[:]}
+		not header Authorization "Basic {$OWO_HASH}"
+	}
+
+	header @unauthorized WWW-Authenticate "Basic"
+	respond @unauthorized 401
+}
+
+(global) {
+	encode zstd gzip
+	header X-Robots-Tag "noindex, nofollow"
+}
+
+(vpn) {
+	# Allow cross-origin requests to the Tailscale network
+	header Access-Control-Allow-Origin https://fenrir-musical.ts.net
+}
+
+### bjork.gay
+# Mastodon
+bjork.gay {
+	import global
+
+	#!! Ignore TLS certificate for localhost
+	# https://docs.linuxserver.io/FAQ/#strict-proxy
+	reverse_proxy https://localhost:3000 {
+		transport http {
+			tls_insecure_skip_verify
+		}
+	}
+}
+
+# Uptime Kuma
+status.bjork.gay {
+	import global
+	reverse_proxy localhost:3001
+}
+
+# Oryx
+stream.bjork.gay {
+	import global
+	reverse_proxy localhost:2022
+
+	route {
+		import owo /flv /hls /webrtc
+		redir /flv {$ORYX_FLV}
+		redir /hls {$ORYX_HLS}
+		redir /webrtc {$ORYX_WEBRTC}
+	}
+}
+
+# Caddy
+wallpaper.bjork.gay {
+	import global
+
+	route {
+		import owo *
+		root * /static
+		try_files /wallpaper.png
+		file_server
+	}
+}
+
+### bjork.tech
+bjork.tech {
+	import global
+
+	# Matrix delegation to matrix.bjork.tech
+	# https://element-hq.github.io/synapse/latest/reverse_proxy.html#caddy-v2
+	header /.well-known/matrix/* Content-Type application/json
+	header /.well-known/matrix/* Access-Control-Allow-Origin *
+	respond /.well-known/matrix/server `{"m.server":"matrix.bjork.tech:443"}`
+	respond /.well-known/matrix/client `{"m.homeserver":{"base_url":"https://matrix.bjork.tech"}}`
+	respond /.well-known/matrix/support `{"contacts":[{"matrix_id":"@myned:bjork.tech","email_address":"admin@bjork.tech","role":"m.role.admin"}]}`
+}
+
+# Synapse Admin
+admin.bjork.tech {
+	import global
+	import vpn
+	reverse_proxy localhost:8818
+}
+
+# Open WebUI
+ai.bjork.tech {
+	import global
+	reverse_proxy localhost:3033
+}
+
+# Actual Budget
+budget.bjork.tech {
+	import global
+	reverse_proxy localhost:5006
+}
+
+# Nextcloud
+# cloud.bjork.tech {
+#   header Strict-Transport-Security "max-age=15552000;"
+#   redir /.well-known/carddav /remote.php/dav 301
+#   redir /.well-known/caldav /remote.php/dav 301
+#   redir /.well-known/webfinger /index.php/.well-known/webfinger 301
+#   redir /.well-known/nodeinfo /index.php/.well-known/nodeinfo 301
+#   reverse_proxy localhost:8181
+# }
+
+# Nextcloud AIO
+cloud.bjork.tech {
+	reverse_proxy localhost:11000
+}
+
+# dash.
+dash.bjork.tech {
+	import global
+	reverse_proxy localhost:3011
+}
+
+# Grafana
+data.bjork.tech {
+	import global
+	reverse_proxy localhost:3100
+}
+
+# AdGuard Home
+dns.bjork.tech, *.dns.bjork.tech {
+	import global
+	reverse_proxy localhost:3003
+	reverse_proxy /dns-query localhost:8443
+
+	tls {
+		ca https://acme.zerossl.com/v2/DV90
+	}
+}
+
+# Miniflux
+feed.bjork.tech {
+	import global
+	reverse_proxy localhost:8808
+}
+
+# Foundry Virtual Tabletop
+foundry.bjork.tech {
+	import global
+	reverse_proxy localhost:30000
+}
+
+# Forgejo
+git.bjork.tech {
+	import global
+	reverse_proxy localhost:3333
+}
+
+# Home Assistant
+home.bjork.tech {
+	reverse_proxy mypi3:8123
+}
+
+# Synapse
+matrix.bjork.tech {
+	reverse_proxy /_matrix/* unix//run/synapse/synapse.sock
+	reverse_proxy /_synapse/client/* unix//run/synapse/synapse.sock
+}
+
+# Netbox
+net.bjork.tech {
+	import global
+	reverse_proxy localhost:8585
+}
+
+# ntfy
+notify.bjork.tech {
+	import global
+	reverse_proxy localhost:8188
+}
+
+# Piped
+# piped.bjork.tech, pipedapi.bjork.tech, pipedproxy.bjork.tech {
+# 	import global
+# 	reverse_proxy localhost:8080
+# }
+
+# Redlib
+reddit.bjork.tech {
+	import global
+	reverse_proxy localhost:8888
+}
+
+# SearXNG
+# search.bjork.tech {
+# 	reverse_proxy localhost:8000 {
+# 		header_up X-Real-IP {client_ip}
+# 	}
+# }
+
+# Netdata
+# stats.bjork.tech {
+# 	import global
+# 	import admin
+# 	redir / /v3
+# 	reverse_proxy localhost:19999
+# }
+
+# Uptime Kuma
+status.bjork.tech {
+	import global
+	reverse_proxy localhost:3001
+}
+
+# Stremio
+# tv.bjork.tech {
+# 	import global
+# 	reverse_proxy localhost:8470
+# }
+
+# api.tv.bjork.tech {
+# 	import global
+# 	reverse_proxy localhost:11470
+# }
+
+# Vaultwarden
+vault.bjork.tech {
+	import global
+
+	reverse_proxy localhost:8008 {
+		header_up X-Real-IP {client_ip}
+	}
+}
+
+# Wiki.js
+wiki.bjork.tech {
+	import global
+	reverse_proxy localhost:3303
+}
+
+### Tailscale
+# https://tailscale.com/kb/1153/enabling-https
+# https://tailscale.com/kb/1190/caddy-certificates
+myne.fenrir-musical.ts.net:8448 {
+	import global
+	reverse_proxy unix//run/synapse/synapse.sock
+}

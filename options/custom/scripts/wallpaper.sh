@@ -6,7 +6,7 @@
 INTERVAL=15 # Minutes/seconds between switches
 WALLPAPER=/tmp/wallpaper.png # Path to copy original
 ALTERED=/tmp/altered.png # Path to create altered image
-STATIC=/srv/static/wallpaper.png # Path to static image on server
+STATIC=/containers/caddy/static/wallpaper.png # Path to static image on server
 
 # Launch wallpaper daemon in background
 swww-daemon &

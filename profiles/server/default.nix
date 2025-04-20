@@ -15,6 +15,7 @@
       adguardhome.enable = true;
       beszel.enable = true;
       beszel.server = true;
+      caddy.enable = true;
       #// conduwuit.enable = true;
       coturn.enable = true;
       dashdot.enable = true;
@@ -48,7 +49,7 @@
     };
 
     services = {
-      caddy.enable = true;
+      #// caddy.enable = true;
       #// modufur.enable = true;
       prometheus.enable = true;
       #// tailscale.cert = true;
