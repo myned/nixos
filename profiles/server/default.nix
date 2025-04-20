@@ -18,6 +18,7 @@
       #// conduwuit.enable = true;
       coturn.enable = true;
       dashdot.enable = true;
+      #// directus.enable = true;
       forgejo.enable = true;
       foundryvtt.enable = true;
       #// freshrss.enable = true;
