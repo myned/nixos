@@ -36,7 +36,6 @@
       };
 
       storage = {
-        enable = true;
         encrypt = true;
         key.enable = true;
         offset = 30753211; #?? sudo btrfs inspect-internal map-swapfile -r /var/lib/swapfile

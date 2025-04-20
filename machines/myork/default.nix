@@ -33,7 +33,6 @@
       };
 
       storage = {
-        enable = true;
         encrypt = true;
         key.enable = true;
         #// mnt = ["myve"];
