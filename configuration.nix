@@ -58,6 +58,9 @@ in {
           inherit stable unstable master;
 
           ### Packages
+          # TODO: Remove when in stable
+          btrfs-list = unstable.btrfs-list;
+
           # TODO: Remove when fixed
           # https://github.com/NixOS/nixpkgs/issues/389638
           # https://github.com/NixOS/nixpkgs/pull/390171
