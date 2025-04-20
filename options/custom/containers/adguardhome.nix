@@ -23,8 +23,8 @@ in {
         image = "adguard/adguardhome:v0.107.59";
 
         ports = [
-          "53:53/tcp" # DNS
-          "53:53/udp" # DNS
+          "${config.custom.services.tailscale.ip}:53:53/tcp" # DNS
+          "${config.custom.services.tailscale.ip}:53:53/udp" # DNS
           "853:853/tcp" # DNS-over-TLS
           "853:853/udp" # DNS-over-QUIC
           "3003:80/tcp" # Admin panel
@@ -54,8 +54,8 @@ in {
     };
 
     # https://adguard-dns.io/kb/adguard-home/faq/#bindinuse
-    services.resolved.extraConfig = ''
-      DNSStubListener=false
-    '';
+    # services.resolved.extraConfig = ''
+    #   DNSStubListener=false
+    # '';
   };
 }
