@@ -37,6 +37,7 @@ in {
           nix-output-monitor # Nix build parser
           nix-tree # Nix store explorer
           nmap # Network scanner
+          nodejs # npm
           nvd # Nix diff viewer
           openssl # Certificate utility
           progress # Coreutils progress viewer
