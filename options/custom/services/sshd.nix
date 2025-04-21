@@ -20,8 +20,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # TODO: Set up Fail2ban
-    # https://wiki.nixos.org/wiki/Fail2ban
     # https://wiki.nixos.org/wiki/SSH_public_key_authentication
     # ssh-copy-id <user>@<host>
     services.openssh = {
