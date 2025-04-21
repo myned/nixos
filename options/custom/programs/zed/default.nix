@@ -15,6 +15,7 @@ in {
     # Extension dependencies
     environment.systemPackages = with pkgs; [
       alejandra # nix
+      astro-language-server # astro
       basedpyright # basedpyright
       blueprint-compiler # blueprint
       caddy # caddyfile
@@ -46,6 +47,7 @@ in {
           # https://zed.dev/docs/extensions
           # https://github.com/zed-industries/extensions/tree/main/extensions
           extensions = [
+            "astro" # https://github.com/zed-extensions/astro
             "bearded-icon-theme" # https://github.com/sethstha/bearded-icons-theme
             "basedpyright" # https://github.com/m1guer/basedpyright-zed
             "basher" # https://github.com/d1y/bash.zed
@@ -239,6 +241,7 @@ in {
               # https://zed.dev/docs/languages/markdown
               Markdown = {
                 format_on_save = "on";
+                remove_trailing_whitespace_on_save = false;
               };
 
               Nix = {
