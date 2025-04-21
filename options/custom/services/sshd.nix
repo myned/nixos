@@ -26,7 +26,6 @@ in {
     # ssh-copy-id <user>@<host>
     services.openssh = {
       enable = true;
-      startWhenNeeded = true; # Socket activation
       ports = [cfg.port];
 
       hostKeys = [
