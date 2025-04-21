@@ -33,16 +33,7 @@ in {
       useRoutingFeatures = "both"; # Enable server/client exit nodes
     };
 
-    networking.firewall.interfaces.${config.services.tailscale.interfaceName} = let
-      all-ports = {
-        from = 0;
-        to = 65535;
-      };
-    in
-      mkIf cfg.firewall {
-        allowedTCPPortRanges = [all-ports];
-        allowedUDPPortRanges = [all-ports];
-      };
+    networking.firewall.trustedInterfaces = mkIf cfg.firewall [config.services.tailscale.interfaceName];
 
     # Provision Tailscale certificates in the background per machine
     systemd = mkIf cfg.cert {
