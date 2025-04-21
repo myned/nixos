@@ -21,7 +21,9 @@ in {
       adguardhome.service = {
         container_name = "adguardhome";
         image = "adguard/adguardhome:v0.107.59";
+        restart = "unless-stopped";
 
+        # TODO: Use network_mode: host for Tailscale clients
         ports = [
           "${config.custom.services.tailscale.ip}:53:53/tcp" # DNS
           "${config.custom.services.tailscale.ip}:53:53/udp" # DNS
@@ -30,8 +32,6 @@ in {
           "3003:80/tcp" # Admin panel
           "8443:443/tcp" # DNS-over-HTTPS
         ];
-
-        restart = "unless-stopped";
 
         volumes = [
           "${config.custom.containers.directory}/adguardhome/config:/opt/adguardhome/conf"
