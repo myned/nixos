@@ -103,7 +103,7 @@ wallpaper.bjork.gay {
 
 	route {
 		import owo *
-		root * /static
+		root * /srv/sites/wallpaper.bjork.gay
 		try_files /wallpaper.png
 		file_server
 	}
@@ -112,6 +112,8 @@ wallpaper.bjork.gay {
 ### bjork.tech
 bjork.tech {
 	import global
+	root * /srv/sites/bjork.tech
+	file_server
 
 	# Matrix delegation to matrix.bjork.tech
 	# https://element-hq.github.io/synapse/latest/reverse_proxy.html#caddy-v2

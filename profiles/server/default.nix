@@ -15,7 +15,6 @@
       adguardhome.enable = true;
       beszel.enable = true;
       beszel.server = true;
-      caddy.enable = true;
       #// conduwuit.enable = true;
       coturn.enable = true;
       dashdot.enable = true;
@@ -46,6 +45,11 @@
       uptimekuma.enable = true;
       vaultwarden.enable = true;
       wikijs.enable = true;
+
+      caddy = {
+        enable = true;
+        public-key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBYspWeL1pBqX7Bl2pK/vnBE/B7VA93SYgz6O9YlrgNl";
+      };
     };
 
     services = {

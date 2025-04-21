@@ -2,6 +2,7 @@
   config,
   inputs,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -9,6 +10,11 @@ with lib; let
 in {
   options.custom.containers.caddy = {
     enable = mkEnableOption "caddy";
+
+    public-key = mkOption {
+      default = null;
+      type = with types; nullOr str;
+    };
   };
 
   config = mkIf cfg.enable {
@@ -39,9 +45,8 @@ in {
           [
             "${config.custom.containers.directory}/caddy/config:/config"
             "${config.custom.containers.directory}/caddy/data:/data"
-            "${config.custom.containers.directory}/caddy/static:/static:ro"
             "${./Caddyfile}:/etc/caddy/Caddyfile:ro"
-            "${./site}:/srv:ro"
+            "/srv:/srv:ro"
           ]
           ++ optionals config.custom.containers.synapse.enable [
             "/run/synapse/synapse.sock:/run/synapse/synapse.sock:ro"
@@ -54,6 +59,26 @@ in {
         80 # HTTP
         443 # HTTPS
       ];
+    };
+
+    # For write access to /srv
+    services.openssh.settings = mkIf (isString cfg.public-key) {
+      AllowUsers = ["srv"];
+    };
+
+    users = mkIf (isString cfg.public-key) {
+      users.srv = {
+        uid = 239;
+        group = "srv";
+        shell = pkgs.bash;
+
+        #?? ssh-keygen -f ./srv -N '' -C ''
+        openssh.authorizedKeys.keys = [cfg.public-key];
+      };
+
+      groups.srv = {
+        gid = 239;
+      };
     };
 
     #?? arion-caddy run -- --rm --entrypoint='id caddy' caddy
@@ -72,6 +97,12 @@ in {
       "${config.custom.containers.directory}/caddy/data" = {
         d = owner "0700"; # -rwx------
         z = owner "0700"; # -rwx------
+      };
+
+      #!! Recursive
+      "/srv" = {
+        d = owner "0700"; # -rwx------
+        Z = owner "0700"; # -rwx------
       };
     };
   };
