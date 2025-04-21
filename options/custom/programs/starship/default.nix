@@ -14,7 +14,7 @@ in {
   config = mkIf cfg.enable {
     # https://starship.rs/
     # https://wiki.nixos.org/wiki/Starship
-    programs.starship.enable = true;
+    #// programs.starship.enable = true;
 
     home-manager.sharedModules = [
       {
