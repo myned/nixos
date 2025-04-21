@@ -3,9 +3,9 @@
 # Wallpaper switcher
 #?? wallpaper DIRECTORY
 
-INTERVAL=15 # Minutes/seconds between switches
-WALLPAPER=/tmp/wallpaper.png # Path to copy original
-ALTERED=/tmp/altered.png # Path to create altered image
+INTERVAL=15                                         # Minutes/seconds between switches
+WALLPAPER=/tmp/wallpaper.png                        # Path to copy original
+ALTERED=/tmp/altered.png                            # Path to create altered image
 STATIC=/srv/sites/wallpaper.bjork.gay/wallpaper.png # Path to static image on server
 
 # Launch wallpaper daemon in background
@@ -27,7 +27,7 @@ while true; do
 
   # Send unaltered image to server in background
   #!! Hostname dependent
-  rsync --chown caddy:caddy "$WALLPAPER" root@myne:"$STATIC" &
+  rsync --chown srv:srv "$WALLPAPER" root@myne:"$STATIC" &
 
   sleep "$INTERVAL"m
 done
