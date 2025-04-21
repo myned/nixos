@@ -56,6 +56,7 @@
       #// caddy.enable = true;
       #// modufur.enable = true;
       prometheus.enable = true;
+      sshd.enable = true;
       #// tailscale.cert = true;
 
       borgmatic = {
