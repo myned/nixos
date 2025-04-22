@@ -85,19 +85,22 @@ in {
           # https://github.com/sodiboo/niri-flake/blob/main/default-config.kdl.nix
           #?? :p config.home-manager.users.<user>.xdg.configFile."niri/config.kdl".text
           #?? :p lib.findFirst (node: lib.isAttrs node && node.name == "<node>") [] config.home-manager.users.<user>.programs.niri.config
-          "niri/config.kdl".text = with inputs.niri-flake.lib;
-            kdl.serialize.nodes (forEach hm.programs.niri.config (node:
-              if isAttrs node && node.name == "binds"
-              then
-                node
-                // {
-                  children = with kdl;
-                    node.children
-                    ++ [
-                      (plain "Mod+Tab" [(flag "toggle-overview")])
-                    ];
-                }
-              else node));
+          "niri/config.kdl".text = with inputs.niri-flake.lib.kdl;
+            serialize.nodes ((forEach hm.programs.niri.config (node: let
+                isNode = name: isAttrs node && node.name == name;
+                nodeWithChildren = children: node // {children = node.children ++ children;};
+              in
+                # Inject into existing nodes
+                if isNode "binds"
+                then
+                  nodeWithChildren [
+                    (plain "Mod+Tab" [(flag "toggle-overview")])
+                  ]
+                else node))
+              ++ [
+                # Top-level nodes
+                (plain "overview" [(leaf "zoom" 0.5)])
+              ]);
         };
       }
     ];
