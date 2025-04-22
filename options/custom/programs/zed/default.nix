@@ -48,12 +48,12 @@ in {
           # https://github.com/zed-industries/extensions/tree/main/extensions
           extensions = [
             "astro" # https://github.com/zed-extensions/astro
-            "bearded-icon-theme" # https://github.com/sethstha/bearded-icons-theme
+            #// "bearded-icon-theme" # https://github.com/sethstha/bearded-icons-theme
             "basedpyright" # https://github.com/m1guer/basedpyright-zed
             "basher" # https://github.com/d1y/bash.zed
             "blueprint" # https://github.com/tfuxu/zed-blueprint
             "caddyfile" # https://github.com/nusnewob/caddyfile-zed
-            #// "colored-zed-icons-theme" # https://github.com/TheRedXD/zed-icons-colored-theme
+            "colored-zed-icons-theme" # https://github.com/TheRedXD/zed-icons-colored-theme
             "csv" # https://github.com/huacnlee/zed-csv
             #// "discord-presence" # https://github.com/xhyrom/zed-discord-presence
             "docker-compose" # https://github.com/eth0net/zed-docker-compose
@@ -67,6 +67,7 @@ in {
             "jinja2" # https://github.com/ArcherHume/jinja2-support
             "make" # https://github.com/caius/zed-make
             #// "material-icon-theme" # https://github.com/zed-extensions/material-icon-theme
+            #// "monospace-icon-theme" # https://github.com/irmhonde/monospace-icon-theme
             "nginx" # https://github.com/d1y/nginx-zed
             "nix" # https://github.com/zed-extensions/nix
             "nu" # https://github.com/zed-extensions/nu
@@ -170,7 +171,7 @@ in {
             cursor_blink = false;
             git.inline_blame.enabled = false;
             git_panel.default_width = 300;
-            icon_theme = "Bearded Icon Theme";
+            icon_theme = "Colored Zed Icons Theme Dark";
             indent_guides.active_line_width = 2;
             load_direnv = "shell_hook";
             middle_click_paste = false;
