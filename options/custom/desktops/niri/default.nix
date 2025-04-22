@@ -67,10 +67,12 @@ in {
 
           # https://github.com/YaLTeR/niri/wiki/Configuration:-Debug-Options
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsdebug
-          settings.debug = {
-            #// disable-cursor-plane = []; # Software cursor
-            #// disable-direct-scanout = [];
-          };
+          # settings = {
+          #   debug = {
+          #     disable-cursor-plane = []; # Software cursor
+          #     disable-direct-scanout = [];
+          #   };
+          # };
         };
 
         # HACK: Replace read-only finalConfig until extraConfig is supported
