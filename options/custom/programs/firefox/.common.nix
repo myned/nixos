@@ -33,7 +33,7 @@ with lib; {
         libredirect
         multi-account-containers
         #// onepassword-password-manager
-        pwas-for-firefox
+        #// pwas-for-firefox
         #// simple-tab-groups
         sponsorblock
         stylus
