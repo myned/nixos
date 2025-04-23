@@ -276,10 +276,10 @@ vault.bjork.tech {
 }
 
 # Wiki.js
-wiki.bjork.tech {
-	import global
-	reverse_proxy localhost:3303
-}
+# wiki.bjork.tech {
+# 	import global
+# 	reverse_proxy localhost:3303
+# }
 
 ### Tailscale
 # https://tailscale.com/kb/1153/enabling-https

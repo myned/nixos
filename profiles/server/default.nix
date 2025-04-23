@@ -44,7 +44,7 @@
       synapseadmin.enable = true;
       uptimekuma.enable = true;
       vaultwarden.enable = true;
-      wikijs.enable = true;
+      #// wikijs.enable = true;
 
       caddy = {
         enable = true;
