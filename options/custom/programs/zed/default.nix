@@ -186,6 +186,7 @@ in {
             preferred_line_length = 120;
 
             project_panel = {
+              auto_fold_dirs = false;
               auto_reveal_entries = false;
               default_width = 300;
               entry_spacing = "standard";
