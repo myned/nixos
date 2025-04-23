@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   ...
 }:
@@ -31,7 +30,7 @@ in {
         #?? arion-ntfy exec ntfy ntfy -- user add --role=admin <username>
         environment = {
           NTFY_ATTACHMENT_CACHE_DIR = "/var/lib/ntfy/attachments";
-          NTFY_AUTH_DEFAULT_ACCESS = "deny-all";
+          NTFY_AUTH_DEFAULT_ACCESS = "write-only"; # https://docs.ntfy.sh/config/#example-unifiedpush
           NTFY_AUTH_FILE = "/var/lib/ntfy/auth.db";
           NTFY_BASE_URL = "https://notify.${config.custom.domain}";
           NTFY_BEHIND_PROXY = "true";
