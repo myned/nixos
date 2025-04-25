@@ -131,7 +131,6 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:sodiboo/niri-flake";
     };
-    niri-overview.url = "github:YaLTeR/niri/275ba440d9850e8865b2ac5687b6c49542d6dfb4";
     nix-alien = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:thiagokokada/nix-alien";

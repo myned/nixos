@@ -93,11 +93,7 @@ in {
             (key "Slash" "Mod" (spawn [sushi "/tmp/wallpaper.png"]))
             (key "Slash" "Mod+Shift" show-hotkey-overlay)
             (key "Space" "Ctrl+Alt" (spawn ["lifx" "toggle"]))
-
-            # TODO: Uncomment when implemented in flake options
-            # https://github.com/YaLTeR/niri/pull/1440
-            #// (key "Tab" "Mod" toggle-overview)
-
+            (key "Tab" "Mod" toggle-overview)
             (key "Up" "Mod" (spawn [swayosd-client "--brightness" "raise"]))
             (key "WheelScrollDown" "Mod" focus-window-or-workspace-down)
             (key "WheelScrollDown" "Mod+Shift" move-window-down-or-to-workspace-down)

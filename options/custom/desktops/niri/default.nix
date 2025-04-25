@@ -51,7 +51,7 @@ in {
     programs.niri = {
       enable = true;
       #// package = pkgs.niri; # nixpkgs
-      package = inputs.niri-overview.packages.${pkgs.system}.default;
+      package = inputs.niri.packages.${pkgs.system}.default;
     };
 
     nixpkgs.overlays = [inputs.niri-flake.overlays.niri];
@@ -96,7 +96,6 @@ in {
                 if isNode "binds"
                 then
                   nodeWithChildren [
-                    (plain "Mod+Tab" [(flag "toggle-overview")])
                   ]
                 else node))
               ++ [
