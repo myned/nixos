@@ -40,26 +40,8 @@ in {
       };
 
       # https://stylix.danth.me/options/platforms/nixos.html#stylixfontsemoji
-      fonts = {
-        emoji = {
-          name = "Blobmoji";
-          package = pkgs.noto-fonts-emoji-blob-bin;
-        };
-
-        monospace = {
-          name = "IosevkaTermSlab NFP Medium";
-          package = pkgs.nerd-fonts.iosevka-term-slab;
-        };
-
-        sansSerif = {
-          name = "Arvo";
-          package = pkgs.google-fonts;
-        };
-
-        serif = {
-          name = "Lora";
-          package = pkgs.google-fonts;
-        };
+      fonts = with config.custom.settings.fonts; {
+        inherit emoji monospace sansSerif serif;
 
         # https://stylix.danth.me/options/platforms/nixos.html#stylixfontssizesapplications
         sizes = {
@@ -70,66 +52,6 @@ in {
         };
       };
     };
-
-    # Install packages to environment for imperative use
-    fonts.packages = with pkgs.nerd-fonts;
-      [
-        # Monospace
-        # https://www.nerdfonts.com/#home
-        #?? kitten choose-fonts
-        departure-mono
-        gohufont
-        iosevka-term
-        iosevka-term-slab
-        jetbrains-mono
-        roboto-mono
-        shure-tech-mono
-        space-mono
-        zed-mono
-      ]
-      ++ (with pkgs; [
-        (google-fonts.override {
-          fonts = [
-            # Pixel
-            "Geo"
-            "Silkscreen"
-
-            # Sans-serif
-            "Josefin Sans"
-            "Jost"
-            "Lexend"
-            "Outfit"
-            "Roboto"
-            "Roboto Flex"
-
-            # Sans-serif condensed
-            "Oswald"
-            "Roboto Condensed"
-
-            # Serif
-            "Lora"
-            "Roboto Serif"
-
-            # Slab
-            "Aleo"
-            "Arvo"
-            "Josefin Slab"
-            "Roboto Slab"
-            "Solway"
-          ];
-        })
-
-        # Emoji
-        noto-fonts-color-emoji
-        noto-fonts-emoji-blob-bin
-
-        # Microsoft
-        corefonts
-        vistafonts
-
-        # Fallback
-        unifont
-      ]);
 
     home-manager.sharedModules = [
       {

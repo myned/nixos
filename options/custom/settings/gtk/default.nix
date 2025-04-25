@@ -22,7 +22,7 @@ in {
       enable = true;
 
       font = with config.custom.settings.fonts; {
-        name = sans-serif;
+        name = sansSerif;
         size = 12;
       };
 
