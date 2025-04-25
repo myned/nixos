@@ -50,6 +50,7 @@ in {
           trashy # CLI trash
           waypipe # Wayland proxy
           wev # Wayland keysym tester
+          wget # Download utility
           wl-clipboard # Wayland clipboard
           xclip # X11 clipboard
           xorg.xev # X11 keysym tester
