@@ -196,15 +196,6 @@ in {
               jq
               libnotify
             ])
-            (bash "wallpaper" [
-              coreutils
-              fd
-              imagemagick
-              libnotify
-              rsync
-              swww
-              tailscale
-            ])
             (bash "window" [
               argc
               coreutils
