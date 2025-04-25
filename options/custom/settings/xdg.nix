@@ -12,6 +12,7 @@ with lib; let
   file-roller = "org.gnome.File Roller.desktop";
   font-viewer = "org.gnome.font-viewer.desktop";
   gnome-text-editor = "org.gnome.TextEditor.desktop";
+  inkscape = "org.inkscape.Inkscape.desktop";
   libreoffice = "base.desktop";
   loupe = "org.gnome.Loupe.desktop";
   nautilus = "org.gnome.Nautilus.desktop";
@@ -101,7 +102,7 @@ in {
           "image/heif" = loupe;
           "image/jpeg" = loupe;
           "image/png" = loupe;
-          "image/svg+xml" = loupe;
+          "image/svg+xml" = inkscape;
           "image/tiff" = loupe;
           "image/vnd.microsoft.icon" = loupe;
           "image/vnd.zbrush.pcx" = loupe;
