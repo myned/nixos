@@ -33,16 +33,16 @@ with lib; {
       appimage.enable = true;
       chromium.enable = true;
       dconf.enable = true;
-      firefox.enable = true;
+      #// firefox.enable = true;
       #// foot.enable = true;
       #// gamescope.enable = true;
       #// gnome-terminal.enable = true;
-      kitty.enable = true;
+      #// kitty.enable = true;
       librewolf.enable = true;
       nautilus.enable = true;
       nvtop.enable = true;
       #// wezterm.enable = true;
-      zen-browser.enable = true;
+      #// zen-browser.enable = true;
     })
 
     (mkIf config.custom.full {
@@ -51,7 +51,7 @@ with lib; {
       #// ags.enable = true;
       #// bitwarden-menu.enable = true;
       #// clipse.enable = true;
-      discord.enable = true;
+      #// discord.enable = true;
       element-desktop.enable = true;
       gamemode.enable = true;
       #// gnome-shell.enable = true;
@@ -62,7 +62,7 @@ with lib; {
       hyprlock.enable = true;
       libreoffice.enable = true;
       localsend.enable = true;
-      logseq.enable = true;
+      #// logseq.enable = true;
       mangohud.enable = true;
       networkmanager-dmenu.enable = true;
       #// nheko.enable = true;
@@ -79,7 +79,7 @@ with lib; {
       #// swaylock.enable = true;
       #// thunderbird.enable = true;
       tio.enable = true;
-      vscode.enable = true;
+      #// vscode.enable = true;
       waybar.enable = true;
       wireshark.enable = true;
       #// wpaperd.enable = true;

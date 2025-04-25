@@ -28,6 +28,8 @@ in {
           fd # File finder
           fzf # Fuzzy search
           glances # System monitor
+          glxinfo # Graphics tester
+          hwloc # CPU topology viewer
           inetutils # Network utilities
           jq # JSON parser
           killport # Kill processes on port
@@ -72,20 +74,20 @@ in {
           # TODO: Remove when v14 released on nixpkgs
           # https://github.com/sonic2kk/steamtinkerlaunch/issues/992
           # Build from latest commit
-          (steamtinkerlaunch.overrideAttrs {src = inputs.steamtinkerlaunch;})
+          #// (steamtinkerlaunch.overrideAttrs {src = inputs.steamtinkerlaunch;})
 
           # Dependencies
-          p7zip # steamtinkerlaunch (Special K)
+          #// p7zip # steamtinkerlaunch (Special K)
         ]
         ++ optionals config.custom.full [
           ### GUI applications
-          alpaca # AI client
+          alpaca # Ollama client
           amberol # Audio player
           apostrophe # Markdown editor
           baobab # Disk usage analyzer
           biblioteca # Documentation viewer
           bitwarden-desktop # Password manager
-          blackbox-terminal # Terminal
+          #// blackbox-terminal # Terminal
           cartridges # Game library
           cinny-desktop # Matrix client
           clapper # Video player
@@ -94,22 +96,23 @@ in {
           dconf-editor # GSettings editor
           decibels # Audio player
           decoder # QR code scanner
-          discord # Discord client
+          #// discord # Discord client
+          #// dissent # Discord client
           drawing # Image editor
           drawio # Diagram maker
           easyeffects # Audio filters
           element-desktop # Matrix client
           eyedropper # Color picker
           file-roller # Archive utility
-          flare-signal # Signal client
+          #// flare-signal # Signal client
           fluffychat # Matrix client
           footage # Video editor
-          fractal # Matrix client
+          #// fractal # Matrix client
           fragments # Torrent downloader
           gcolor3 # Color picker
           gimp # Image editor
           #// gitbutler # Git client
-          gitg # Git client
+          #// gitg # Git client
           github-desktop # Git client
           gitnuro # Git client
           gnome-boxes # Virtual machine manager
@@ -134,9 +137,8 @@ in {
           gnome-text-editor # Text editor
           gnome-tweaks # GNOME extras
           gnome-usage # System monitor
-          gradience # GTK theme editor
+          #// gradience # GTK theme editor
           gtk4.dev # GTK4 icon browser
-          gtkcord4 # Discord client
           gtkterm # Serial terminal
           helvum # Pipewire patchbay
           heroic # Game library
@@ -145,23 +147,14 @@ in {
           impression # Image writer
           inkscape # Vector graphics editor
           itch # Game library
-
-          # BUG: nixGL required to launch, imperative flatpak used as alternative
-          # https://github.com/AChep/keyguard-app/releases
-          # https://github.com/gmodena/nix-flatpak/issues/135
-          #// keyguard # Bitwarden client
-
+          keyguard # Bitwarden client
           kooha # Screen recorder
-
-          # BUG: EOL Electron dependency removed from nixpkgs
-          # https://github.com/logseq/logseq/issues/11644
           #// logseq # Knowledge base
-
           loupe # Image viewer
           lutris # Game library
           meld # Diff viewer
           mission-center # System monitor
-          monitorets # System monitor
+          #// monitorets # System monitor
           newsflash # RSS feed
           obsidian # Knowledge base
           papers # Document viewer
@@ -170,27 +163,27 @@ in {
           planify # Tasks
           pods # Podman manager
           protonplus # Wine updater
-          protonvpn-gui # Proton VPN client
-          ptyxis # Terminal
+          #// protonvpn-gui # Proton VPN client
+          #// ptyxis # Terminal
           pwvucontrol # Pipewire volume controller
           remmina # Remote desktop client
-          rustdesk-flutter # Remote desktop client
+          #// rustdesk-flutter # Remote desktop client
           signal-desktop-bin # Signal client
           smile # Emoji picker
           snapshot # Camera
           snoop # File content finder
           sourcegit # Git client
-          spotify # Spotify client
+          #// spotify # Spotify client
           stremio # Streaming client
-          syncthingtray # Syncthing client
+          #// syncthingtray # Syncthing client
           tagger # Audio file tagger
           telegram-desktop # Telegram client
-          variety # Wallpaper changer
+          #// variety # Wallpaper changer
           ventoy # Image writer
           vesktop # Discord client
           virt-viewer # Virtual machine viewer
           wildcard # Regex tester
-          wowup-cf # World of Warcraft addon manager
+          #// wowup-cf # World of Warcraft addon manager
           #// xivlauncher # Final Fantasy XIV launcher
           youtube-music # YouTube Music client
           zrythm # Digital audio workstation
@@ -208,16 +201,14 @@ in {
           ### CLI applications
           inputs.agenix.packages.${system}.default
 
-          betterdiscordctl # BetterDiscord installer
+          #// betterdiscordctl # BetterDiscord installer
           bitwarden-cli # Bitwarden client
           brightnessctl # Backlight changer
           devbox # Development environment
           er-patcher # Elden Ring fixes
-          firefoxpwa # Firefox web apps
-          glxinfo # Graphics tester
-          hwloc # CPU topology viewer
+          #// firefoxpwa # Firefox web apps
           freerdp3 # RDP client
-          grimblast # Screenshots
+          #// grimblast # Screenshots
           imagemagick # Image editor
           libinput # Libinput commands
           libnotify # Notification tester
@@ -225,12 +216,11 @@ in {
           nixos-anywhere # NixOS installer
           nvtopPackages.full # GPU monitor
           playerctl # Media controller
-          satty # Screenshot editor
+          #// satty # Screenshot editor
           usbutils # USB bus utilities
           vrrtest # VRR tester
           winetricks # Wine modifier
           xdg-utils # XDG utilities
-          ydotool # TODO: Remove when using service
 
           ### Dependencies
           wineWowPackages.unstableFull # WoW64, not World of Warcraft
