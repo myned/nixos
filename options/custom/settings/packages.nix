@@ -224,7 +224,6 @@ in {
           nvtopPackages.full # GPU monitor
           playerctl # Media controller
           satty # Screenshot editor
-          tio # Serial terminal
           usbutils # USB bus utilities
           vrrtest # VRR tester
           winetricks # Wine modifier
