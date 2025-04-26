@@ -157,6 +157,21 @@ in {
             hyv = "hyprctl version";
             hyvj = "hyprctl -j version";
 
+            i = "ip -brief";
+            ia = "ip -brief address";
+            ias = "ip -brief address show";
+            ir = "ip -brief route";
+            irs = "ip -brief route show";
+            irst = "ip -brief route show table";
+            irsta = "ip -brief route show table all";
+            i6 = "ip -6 -brief";
+            i6a = "ip -6 -brief address";
+            i6as = "ip -6 -brief address show";
+            i6r = "ip -6 -brief route";
+            i6rs = "ip -6 -brief route show";
+            i6rst = "ip -6 -brief route show table";
+            i6rsta = "ip -6 -brief route show table all";
+
             jc = "journalctl";
             jcei = "journalctl --pager-end --identifier";
             jcfi = "journalctl --follow --identifier";
