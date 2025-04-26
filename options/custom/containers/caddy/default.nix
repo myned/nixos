@@ -49,7 +49,7 @@ in {
             "/srv:/srv:ro"
           ]
           ++ optionals config.custom.containers.synapse.enable [
-            "/run/synapse/synapse.sock:/run/synapse/synapse.sock:ro"
+            "/run/synapse:/run/synapse:ro"
           ];
       };
     };
