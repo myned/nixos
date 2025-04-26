@@ -12,7 +12,7 @@
     };
 
     settings = {
-      boot.systemd-boot = true;
+      boot.systemd-boot.enable = true;
 
       networking = {
         static = true;

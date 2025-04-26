@@ -27,6 +27,8 @@
     };
 
     settings = {
+      boot.systemd-boot.enable = true;
+
       hardware = {
         gpu = "amd";
         rocm = "11.0.2"; # 11.0.3

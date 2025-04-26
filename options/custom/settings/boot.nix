@@ -5,28 +5,60 @@
   ...
 }:
 with lib; let
-  sed = "${pkgs.gnused}/bin/sed";
-
   cfg = config.custom.settings.boot;
+
+  sed = getExe pkgs.gnused;
 in {
   options.custom.settings.boot = {
-    enable = mkOption {default = false;};
-    console-mode = mkOption {default = "max";};
-    grub = mkOption {default = false;};
+    enable = mkEnableOption "boot";
+
+    grub = {
+      enable = mkOption {
+        default = false;
+        type = types.bool;
+      };
+
+      device = mkOption {
+        type = types.str;
+      };
+    };
+
     kernel = mkOption {
       default =
         if config.custom.full
         then pkgs.linuxPackages_6_14
         else pkgs.linuxPackages;
+
+      type = types.attrs;
     };
-    systemd-boot = mkOption {default = config.custom.minimal;};
+
+    systemd-boot = {
+      enable = mkOption {
+        default = false;
+        type = types.bool;
+      };
+
+      console-mode = mkOption {
+        default = "max";
+        type = with types; either int str;
+      };
+    };
+
     timeout = mkOption {
       default =
         if config.custom.minimal
         then 2
         else 10;
+
+      type = types.int;
     };
-    u-boot = mkOption {default = false;};
+
+    u-boot = {
+      enable = mkOption {
+        default = false;
+        type = types.bool;
+      };
+    };
   };
 
   config = mkIf cfg.enable {
@@ -55,23 +87,29 @@ in {
       };
 
       loader = {
-        efi.canTouchEfiVariables = true;
         timeout = cfg.timeout;
+        efi.canTouchEfiVariables = true;
 
-        systemd-boot = mkIf cfg.systemd-boot {
+        generic-extlinux-compatible = mkIf cfg.u-boot.enable {
           enable = true;
-          configurationLimit = 5;
-          consoleMode = mkIf (!isInt cfg.console-mode || cfg.console-mode <= 2) cfg.console-mode;
-          editor = false; # Disable cmdline
-
-          # HACK: consoleMode does not accept undocumented device modes (e.g. 3 4 5)
-          extraInstallCommands = mkIf (isInt cfg.console-mode && cfg.console-mode > 2) ''
-            ${sed} -i 's|console-mode.*|console-mode ${toString cfg.console-mode}|' /boot/loader/loader.conf
-          '';
         };
 
-        generic-extlinux-compatible.enable = cfg.u-boot;
-        grub.enable = cfg.grub;
+        grub = mkIf cfg.grub.enable {
+          enable = true;
+          devices = [cfg.grub.device];
+        };
+
+        systemd-boot = mkIf cfg.systemd-boot.enable {
+          enable = true;
+          configurationLimit = 5;
+          consoleMode = mkIf (!isInt cfg.systemd-boot.console-mode || cfg.systemd-boot.console-mode <= 2) cfg.systemd-boot.console-mode;
+          editor = false; # Disable interactive cmdline
+
+          # HACK: consoleMode does not accept undocumented device modes (e.g. 3 4 5)
+          extraInstallCommands = mkIf (isInt cfg.systemd-boot.console-mode && cfg.systemd-boot.console-mode > 2) ''
+            ${sed} -i 's|console-mode.*|console-mode ${toString cfg.systemd-boot.console-mode}|' /boot/loader/loader.conf
+          '';
+        };
       };
 
       # https://wiki.nixos.org/wiki/Plymouth
