@@ -10,39 +10,106 @@ in {
   # https://wiki.nixos.org/wiki/Syncthing
   # https://docs.syncthing.net/users/config.html
   options.custom.services.syncthing = {
-    enable = mkOption {default = false;};
-    configDir = mkOption {default = "${cfg.dataDir}/.config/syncthing";};
-    dataDir = mkOption {default = "/home/${cfg.user}";};
+    enable = mkEnableOption "syncthing";
+
+    configDir = mkOption {
+      default = "${cfg.dataDir}/.config/syncthing";
+      type = types.path;
+    };
+
+    dataDir = mkOption {
+      default = "/home/${cfg.user}";
+      type = types.path;
+    };
+
     devices = mkOption {
       default = [
         "myne"
         "mynix"
         "myork"
       ];
-    };
-    ignorePerms = mkOption {default = false;};
-    mount = mkOption {default = null;};
-    order = mkOption {default = "alphabetic";};
-    type = mkOption {default = "sendreceive";};
-    user = mkOption {default = config.custom.username;};
-    group = mkOption {default = "users";};
 
-    # TODO: Use staggered versioning
+      type = with types; listOf str;
+    };
+
+    ignorePerms = mkOption {
+      default = false;
+      type = types.bool;
+    };
+
+    # https://docs.syncthing.net/users/ignoring.html
+    ignores = mkOption {
+      default = ''
+        // Linux
+        (?d)*.kate-swp
+        (?d).directory
+        (?d).~*
+
+        // macOS
+        (?d).DS_Store
+        (?d).Spotlight-V100
+        (?d).Trashes
+        (?d)__MACOSX
+
+        // Windows
+        (?d)*.laccdb
+        (?d)~*
+
+        // Development
+        (?d)*.lock
+        (?d)*.meldcmp
+        (?d).data
+        (?d).direnv
+        (?d).venv
+        (?d)node_modules
+      '';
+
+      type = types.str;
+    };
+
+    # systemd mount to bind to
+    #?? mnt-local.mount
+    mount = mkOption {
+      default = null;
+      type = with types; nullOr str;
+    };
+
+    order = mkOption {
+      default = "alphabetic";
+      type = types.str;
+    };
+
+    type = mkOption {
+      default = "sendreceive";
+      type = types.str;
+    };
+
+    user = mkOption {
+      default = config.custom.username;
+      type = types.str;
+    };
+
+    group = mkOption {
+      default = config.users.users.${config.custom.username}.group;
+      type = types.str;
+    };
+
+    # https://docs.syncthing.net/users/versioning.html
     versioning = mkOption {
       default = {
         params.cleanoutDays = "7";
         type = "trashcan";
       };
+
+      type = types.attrs;
     };
 
-    # Per folder attributes override config
+    # https://docs.syncthing.net/users/foldertypes.html
     folders = mkOption {
       default = let
-        #?? "FOLDER" = folder "ID" [ "DEVICES" ]
         folder = id: devices: {inherit id devices;};
       in {
         "SYNC/.backup" = folder "oxdvq-dfzjk" [];
-        "SYNC/.ignore" = folder "qpvfw-j127s" ["myeck" "myxel"];
         "SYNC/android" = folder "y3omj-gpjch" ["myxel"];
         "SYNC/android/media/camera" = folder "udj03-5kwod" ["myxel"];
         "SYNC/common" = folder "fcsij-g7cnw" ["myeck" "myxel"];
@@ -65,8 +132,8 @@ in {
       configDir = cfg.configDir;
       dataDir = cfg.dataDir;
       extraFlags = ["-no-default-folder"]; # Disable automatic creation of Sync folder
-      #// guiAddress = "0.0.0.0:8384"; # Open to all interfaces
-      openDefaultPorts = true; # Open transfer/discovery ports
+      guiAddress = "${config.custom.services.tailscale.ip}:8384";
+      openDefaultPorts = true; # Transfer/discovery ports
       user = cfg.user;
       group = cfg.group;
 
@@ -77,34 +144,12 @@ in {
       # https://github.com/NixOS/nixpkgs/issues/121286
       #!! GUI configured imperatively
       settings = {
-        options.urAccepted = -1; # Decline usage statistics
+        options.urAccepted = 1; # Usage statistics
 
         # BUG: Defaults are not applied via API
         # https://github.com/syncthing/syncthing/issues/6748
         # https://github.com/NixOS/nixpkgs/issues/268282
-        "defaults/ignores".lines = [
-          # Linux
-          "(?d).~*"
-          "(?d).directory"
-          "(?d)*.kate-swp"
-
-          # macOS
-          "(?d).DS_Store"
-          "(?d).Spotlight-V100"
-          "(?d).Trashes"
-          "(?d)__MACOSX"
-
-          # Windows
-          "(?d)~*"
-          "(?d)*.laccdb"
-
-          # Development
-          "(?d).venv"
-          "(?d).data"
-          "(?d)*.lock"
-          "(?d)*.meldcmp"
-          "(?d)node_modules"
-        ];
+        #// "defaults/ignores".lines = [];
 
         # Devices can be declared globally without issue
         # Syncthing seems to ignore entries that match the machine's id
@@ -122,7 +167,7 @@ in {
           zexel.id = "VYG4QAC-SY7ET5F-CHIPQUN-TP6P7WN-LQCT3HO-UBS73JG-ZGOKCLG-SHWZOAN";
         };
 
-        # Simplify boilerplate folders
+        # Boilerplate folder settings
         folders =
           concatMapAttrs (name: folder: {
             "~/${name}" =
@@ -141,22 +186,37 @@ in {
     };
 
     systemd = {
-      # Ensure creation of config directory
-      tmpfiles.settings.syncthing = {
-        ${cfg.configDir} = {
-          d = {
-            user = cfg.user;
-            group = cfg.group;
-          };
+      tmpfiles.settings.syncthing = let
+        owner = mode: {
+          inherit mode;
+          user = cfg.user;
+          group = cfg.group;
         };
-      };
+      in
+        {
+          # Ensure creation of config directory
+          ${cfg.configDir} = {
+            d = owner "0700"; # -rwx------
+            z = owner "0700"; # -rwx------
+          };
+        }
+        # HACK: Manually create .stignore files in lieu of option
+        # https://github.com/NixOS/nixpkgs/pull/353770
+        // concatMapAttrs (folder: _: {
+          "${cfg.dataDir}/${folder}/.stignore" = {
+            "f+" = owner "0400" // {argument = cfg.ignores;}; # -r--------
+            z = owner "0400"; # -r--------
+          };
+        })
+        cfg.folders;
 
       #!! Syncthing needs to start after mounting or there is a risk of file deletion
       # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/networking/syncthing.nix#L646
       #?? systemctl status
-      services.syncthing = mkIf (isString cfg.mount) {
-        after = [cfg.mount];
-        bindsTo = [cfg.mount]; # Start/stop service on mount/unmount
+      services.syncthing = {
+        after = optionals (isString cfg.mount) [cfg.mount];
+        bindsTo = optionals (isString cfg.mount) [cfg.mount]; # Start/stop service on mount/unmount
+        requires = optionals config.custom.services.tailscale.enable ["tailscaled.service"];
       };
     };
   };
