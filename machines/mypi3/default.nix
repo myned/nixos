@@ -28,7 +28,7 @@
         # BUG: GPU reset issues on 3B+ causing hangs, uncomment when fixed with vc4 driver
         # https://github.com/raspberrypi/linux/issues/5780
         #// kernel = pkgs.linuxPackages_rpi3;
-        u-boot = true;
+        u-boot.enable = true;
       };
     };
   };
