@@ -48,12 +48,27 @@ in {
 
         # https://docs.docker.com/reference/cli/dockerd/#daemon-configuration-file
         daemon.settings = {
+          # https://docs.docker.com/engine/daemon/ipv6/
+          # https://docs.docker.com/engine/network/drivers/bridge/#use-ipv6-with-the-default-bridge-network
+          # https://wiki.archlinux.org/title/Docker#IPv6
+          ipv6 = true;
+          fixed-cidr-v6 = "fd00::/80";
+
           # FIXME: Container cannot route via public address to another container on the same host
           #!! Disable userland-proxy to pass client IP to containers
           # https://github.com/moby/moby/issues/15086
           # https://github.com/moby/moby/issues/14856
           # https://github.com/docker/docs/issues/17312
           #// userland-proxy = false;
+
+          # https://docs.docker.com/reference/cli/dockerd/#default-network-options
+          default-network-opts = {
+            # https://github.com/nextcloud/all-in-one/blob/main/docker-ipv6-support.md
+            # https://rexum.space/p/enabling-ipv6-support-for-docker-and-docker-compose/
+            bridge = {
+              "com.docker.network.enable_ipv6" = "true"; # Enable for default compose bridge
+            };
+          };
         };
       };
 

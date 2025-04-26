@@ -18,7 +18,11 @@
 
       networking = {
         static = true;
-        ipv6 = "2a01:4ff:f0:e193::1/64";
+
+        ipv6 = {
+          address = "2a01:4ff:f0:e193::1/64";
+          gateway = "fe80::1";
+        };
       };
 
       storage = {

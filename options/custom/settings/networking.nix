@@ -7,29 +7,81 @@ with lib; let
   cfg = config.custom.settings.networking;
 in {
   options.custom.settings.networking = {
-    enable = mkOption {default = false;};
-    dns = mkOption {default = config.custom.default;};
-    dnsmasq = mkOption {default = config.custom.full;};
-    firewall = mkOption {default = config.custom.default;};
-    ipv4 = mkOption {default = null;};
-    ipv6 = mkOption {default = null;};
-    networkd = mkOption {default = !cfg.networkmanager;};
-    networkmanager = mkOption {default = config.custom.minimal;};
-    static = mkOption {default = false;}; # Falls back to DHCP/RA
-    wifi = mkOption {default = config.custom.minimal;};
+    enable = mkEnableOption "networking";
+
+    dns = mkOption {
+      default = config.custom.default;
+      type = types.bool;
+    };
+
+    dnsmasq = mkOption {
+      default = config.custom.full;
+      type = types.bool;
+    };
+
+    firewall = mkOption {
+      default = config.custom.default;
+      type = types.bool;
+    };
 
     interface = mkOption {
       default = [
         "en*"
         "eth*"
       ];
+
+      type = types.listOf types.str;
+    };
+
+    networkd = mkOption {
+      default = !cfg.networkmanager;
+      type = types.bool;
+    };
+
+    networkmanager = mkOption {
+      default = config.custom.minimal;
+      type = types.bool;
+    };
+
+    static = mkOption {
+      default = false;
+      type = types.bool;
+    };
+
+    wifi = mkOption {
+      default = config.custom.minimal;
+      type = types.bool;
+    };
+
+    ipv4 = {
+      address = mkOption {
+        default = null;
+        type = with types; nullOr str;
+      };
+
+      gateway = mkOption {
+        default = null;
+        type = with types; nullOr str;
+      };
+    };
+
+    ipv6 = {
+      address = mkOption {
+        default = null;
+        type = with types; nullOr str;
+      };
+
+      gateway = mkOption {
+        default = null;
+        type = with types; nullOr str;
+      };
     };
   };
 
   config = mkIf cfg.enable {
     #!! Imperative networking
-    #?? nmtui or nmcli
     # https://wiki.nixos.org/wiki/Networking
+    #?? nmtui or nmcli
     networking = {
       hostName = config.custom.hostname;
       useNetworkd = cfg.networkd;
@@ -37,7 +89,7 @@ in {
 
       firewall = mkIf cfg.firewall {
         enable = true;
-        allowedUDPPorts = mkIf cfg.dnsmasq [53 67]; # dnsmasq
+        allowedUDPPorts = mkIf cfg.dnsmasq [53 67];
       };
 
       # Prefer tailscale address over 127.0.0.2 for machine hostname
@@ -54,27 +106,41 @@ in {
     users.users.${config.custom.username}.extraGroups = mkIf cfg.networkmanager ["networkmanager"];
 
     # Declarative networking
-    #?? networkctl
     # https://wiki.nixos.org/wiki/Systemd/networkd
+    #?? networkctl
+    #?? man systemd.network
     systemd.network = mkIf (!cfg.networkmanager) {
       enable = true;
 
       networks."10-static" = mkIf cfg.static {
-        linkConfig.RequiredForOnline = "routable";
-        matchConfig.Name = cfg.interface;
+        address =
+          optionals (!isNull cfg.ipv4.address) [
+            cfg.ipv4.address
+          ]
+          ++ optionals (!isNull cfg.ipv6.address) [
+            cfg.ipv6.address
+          ];
 
-        networkConfig = {
-          DHCP = mkIf (isNull cfg.ipv4) "ipv4";
-          IPv6AcceptRA = isNull cfg.ipv6;
+        gateway =
+          optionals (!isNull cfg.ipv4.gateway) [
+            cfg.ipv4.gateway
+          ]
+          ++ optionals (!isNull cfg.ipv6.gateway) [
+            cfg.ipv6.gateway
+          ];
+
+        linkConfig = {
+          RequiredForOnline = "routable";
         };
 
-        address =
-          optionals (!isNull cfg.ipv4) [
-            cfg.ipv4
-          ]
-          ++ optionals (!isNull cfg.ipv6) [
-            cfg.ipv6
-          ];
+        matchConfig = {
+          Name = cfg.interface;
+        };
+
+        networkConfig = {
+          DHCP = mkIf (isNull cfg.ipv4.address) "ipv4";
+          IPv6AcceptRA = isNull cfg.ipv6.address;
+        };
       };
     };
 
