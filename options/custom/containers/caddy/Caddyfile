@@ -249,10 +249,10 @@ reddit.bjork.tech {
 # 	reverse_proxy localhost:19999
 # }
 
-# Uptime Kuma
+# Kener
 status.bjork.tech {
 	import global
-	reverse_proxy localhost:3001
+	reverse_proxy localhost:3030
 }
 
 # Stremio

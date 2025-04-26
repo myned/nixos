@@ -77,6 +77,8 @@ in {
   "server/ghost/.env".publicKeys = server;
   "server/ghost/db.env".publicKeys = server;
   "server/headscale/.env".publicKeys = server;
+  "server/kener/.env".publicKeys = server;
+  "server/kener/db.env".publicKeys = server;
   "server/mastodon/.env".publicKeys = server;
   "server/mastodon/db.env".publicKeys = server;
   "server/matrix-conduit/conduwuit.toml".publicKeys = server;
