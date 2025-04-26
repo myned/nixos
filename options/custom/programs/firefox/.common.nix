@@ -94,6 +94,9 @@ with lib; {
         "browser.ctrlTab.sortByRecentlyUsed" = false;
         "browser.dataFeatureRecommendations.enabled" = false;
         "browser.download.always_ask_before_handling_new_types" = false;
+        "browser.download.alwaysOpenPanel" = true;
+        "browser.download.autohideButton" = true;
+        "browser.download.panel.shown" = true;
         "browser.download.useDownloadDir" = true;
         "browser.engagement.ctrlTab.has-used" = true;
         "browser.engagement.downloads-button.has-used" = true;
