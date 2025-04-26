@@ -25,6 +25,8 @@
     };
 
     settings = {
+      boot.systemd-boot.enable = true;
+
       games = {
         enable = true;
         #// abiotic-factor = true;
@@ -39,7 +41,7 @@
         encrypt = true;
         key.enable = true;
         offset = 30753211; #?? sudo btrfs inspect-internal map-swapfile -r /var/lib/swapfile
-        swap = 32; # GB
+        swap = 32; # GiB
 
         mnt = [
           "gayme"
