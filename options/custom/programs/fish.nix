@@ -54,8 +54,6 @@ in {
             poweroff = "sudo systemctl poweroff";
             shutdown = "sudo systemctl poweroff";
 
-            rsync = "rsync --info progress2";
-
             a = "adb";
             as = "adb shell";
             asa = "adb shell sh /sdcard/Android/data/com.llamalab.automate/cache/start.sh"; # Automate
@@ -77,9 +75,6 @@ in {
             bu = "sudo borgmatic unmount";
 
             c = "clear";
-            e = "exit";
-            m = "mosh";
-            r = "reset";
 
             d = "sudo docker";
             dc = "sudo docker compose";
@@ -105,6 +100,8 @@ in {
             ds = "sudo docker system";
             dsp = "sudo docker system prune";
             dspav = "sudo docker system prune --all --volumes";
+
+            e = "exit";
 
             g = "git";
             ga = "git add";
@@ -193,8 +190,10 @@ in {
             jcui = "journalctl --user --identifier";
             jcuu = "journalctl --user --unit";
 
-            k = "kitten";
-            ks = "kitten ssh";
+            k = "kill -9";
+            kj = "kill -9 (jobs --pid)";
+
+            m = "mosh";
 
             n = "nix";
             nb = "nix build";
@@ -254,6 +253,10 @@ in {
             osg = "nixos generate";
             osl = "nixos list";
             osr = "nixos repl";
+
+            r = "reset";
+
+            rs = "rsync --verbose --info=progress2";
 
             sc = "systemctl";
             scp = "sudo systemctl poweroff";
