@@ -9,20 +9,6 @@ in {
   options.custom.settings.storage = {
     enable = mkEnableOption "storage";
 
-    #!! Avoid /dev/disk/by-* for LUKS filesystems to avoid systemd timeout issues
-    # https://github.com/NixOS/nixpkgs/issues/250003
-    device = mkOption {
-      default =
-        if cfg.encrypt
-        then "/dev/mapper/crypted"
-        else "/dev/disk/by-partlabel/ROOT";
-    };
-
-    efi = mkOption {
-      default = true;
-      type = types.bool;
-    };
-
     encrypt = mkOption {
       default = false;
       type = types.bool;
@@ -30,7 +16,7 @@ in {
 
     mnt = mkOption {
       default = [];
-      type = types.listOf types.str;
+      type = with types; listOf str;
     };
 
     offset = mkOption {
@@ -48,22 +34,20 @@ in {
       type = with types; nullOr int; # GB
     };
 
-    type = mkOption {
-      default = "btrfs";
-      type = types.enum ["btrfs" "ext4"];
-    };
-
     zram = mkOption {
       default = true;
       type = types.bool;
     };
 
     key = {
-      enable = mkEnableOption "storage.key";
+      enable = mkOption {
+        default = false;
+        type = types.bool;
+      };
 
       device = mkOption {
         default = "/dev/disk/by-label/mysk";
-        type = types.str;
+        type = types.path;
       };
 
       path = mkOption {
@@ -76,6 +60,37 @@ in {
       systemd = mkOption {
         default = false;
         type = types.bool;
+      };
+    };
+
+    # https://wiki.nixos.org/wiki/Bootloader
+    boot = {
+      device = mkOption {
+        default = "/dev/disk/by-partlabel/ESP";
+        type = types.path;
+      };
+
+      type = mkOption {
+        default = "vfat";
+        type = types.enum ["vfat"]; # FAT32
+      };
+    };
+
+    root = {
+      #!! Avoid /dev/disk/by-* for LUKS filesystems to avoid systemd timeout issues
+      # https://github.com/NixOS/nixpkgs/issues/250003
+      device = mkOption {
+        default =
+          if cfg.encrypt
+          then "/dev/mapper/crypted"
+          else "/dev/disk/by-partlabel/ROOT";
+
+        type = types.path;
+      };
+
+      type = mkOption {
+        default = "btrfs";
+        type = types.enum ["btrfs" "ext4"];
       };
     };
   };
@@ -100,7 +115,7 @@ in {
             "exfat" # exFAT
           ];
 
-          luks.devices.${builtins.baseNameOf cfg.device} =
+          luks.devices.${builtins.baseNameOf cfg.root.device} =
             {
               device = "/dev/disk/by-partlabel/LUKS";
 
@@ -150,9 +165,9 @@ in {
         };
       }
       # Enable hibernation on btrfs, relies on fixed-size swap device
-      // optionalAttrs ((cfg.type == "btrfs") && (isInt cfg.swap) && (isInt cfg.offset)) {
+      // optionalAttrs ((cfg.root.type == "btrfs") && (isInt cfg.swap) && (isInt cfg.offset)) {
         # https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Hibernation_into_swap_file
-        resumeDevice = cfg.device; #?? findmnt -no LABEL -T /var/lib/swapfile
+        resumeDevice = cfg.root.device; #?? findmnt -no LABEL -T /var/lib/swapfile
         kernelParams = ["resume_offset=${toString cfg.offset}"]; #?? sudo btrfs inspect-internal map-swapfile -r /var/lib/swapfile
       };
 
@@ -165,54 +180,54 @@ in {
     fileSystems =
       {
         # Boot partition
-        "/boot" = mkIf cfg.efi {
-          device = "/dev/disk/by-partlabel/ESP";
-          fsType = "vfat"; # FAT32
+        "/boot" = {
+          device = cfg.boot.device;
+          fsType = cfg.boot.type;
           mountPoint = "/boot";
           options = ["defaults"];
         };
 
         # Root partition
         "/" = {
-          device = cfg.device;
-          fsType = cfg.type;
+          device = cfg.root.device;
+          fsType = cfg.root.type;
           mountPoint = "/";
 
           options =
             [
               "noatime"
             ]
-            ++ optionals (cfg.type == "btrfs") [
+            ++ optionals (cfg.root.type == "btrfs") [
               "compress=zstd"
               "subvol=/root"
             ];
         };
 
         "/home" = {
-          device = cfg.device;
-          fsType = cfg.type;
+          device = cfg.root.device;
+          fsType = cfg.root.type;
           mountPoint = "/home";
 
           options =
             [
               "noatime"
             ]
-            ++ optionals (cfg.type == "btrfs") [
+            ++ optionals (cfg.root.type == "btrfs") [
               "compress=zstd"
               "subvol=/home"
             ];
         };
 
         "/nix" = {
-          device = cfg.device;
-          fsType = cfg.type;
+          device = cfg.root.device;
+          fsType = cfg.root.type;
           mountPoint = "/nix";
 
           options =
             [
               "noatime"
             ]
-            ++ optionals (cfg.type == "btrfs") [
+            ++ optionals (cfg.root.type == "btrfs") [
               "compress=zstd"
               "subvol=/nix"
             ];
@@ -305,7 +320,7 @@ in {
     };
 
     # https://wiki.nixos.org/wiki/Btrfs#Scrubbing
-    services.btrfs.autoScrub = mkIf (cfg.type == "btrfs") {
+    services.btrfs.autoScrub = mkIf (cfg.root.type == "btrfs") {
       enable = true;
       interval = "weekly";
     };
