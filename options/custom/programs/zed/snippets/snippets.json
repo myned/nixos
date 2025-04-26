@@ -108,6 +108,27 @@
     ]
   },
 
+  "NixOS Container Arion VPN": {
+    "prefix": "ncav",
+    "description": "NixOS Container Arion VPN",
+    "body": [
+      "# https://tailscale.com/kb/1282/docker",
+      "vpn.service = {",
+      "  container_name = \"$1-vpn\";",
+      "  devices = [\"/dev/net/tun:/dev/net/tun\"];",
+      "  env_file = [config.age.secrets.\"common/tailscale/container.env\".path];",
+      "  hostname = \"$1\";",
+      "  image = \"ghcr.io/tailscale/tailscale:latest\"; # https://github.com/tailscale/tailscale/pkgs/container/tailscale",
+      "  restart = \"unless-stopped\";",
+      "  volumes = [\"\\${config.custom.containers.directory}/$1/vpn:/var/lib/tailscale\"];",
+      "",
+      "  capabilities = {",
+      "    NET_ADMIN = true;",
+      "  };",
+      "};"
+    ]
+  },
+
   "Nix Develop": {
     "prefix": "nd",
     "description": "Nix Develop",
