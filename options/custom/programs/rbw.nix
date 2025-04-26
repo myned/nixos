@@ -31,10 +31,12 @@ in {
             lock_timeout = 24 * 60 * 60; # Hours
             sync_interval = 15 * 60; # Minutes
 
-            pinentry =
-              if config.custom.menu == "rofi"
-              then pkgs.pinentry-rofi # https://github.com/plattfot/pinentry-rofi
-              else pkgs.pinentry-gnome3; # https://github.com/gpg/pinentry
+            # BUG: pinentry-rofi fails and creates zombie process
+            # pinentry =
+            #   if config.custom.menu == "rofi"
+            #   then pkgs.pinentry-rofi # https://github.com/plattfot/pinentry-rofi
+            #   else pkgs.pinentry-gnome3; # https://github.com/gpg/pinentry
+            pinentry = pkgs.pinentry-gnome3;
           };
         };
 
