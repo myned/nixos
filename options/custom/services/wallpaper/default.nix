@@ -27,7 +27,7 @@ in {
 
     directory = mkOption {
       default = "${config.custom.sync}/owo/unsorted";
-      type = types.str;
+      type = types.path;
     };
   };
 
