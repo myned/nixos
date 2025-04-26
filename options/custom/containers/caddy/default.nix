@@ -41,16 +41,12 @@ in {
         network_mode = "host"; # 80/tcp 443/tcp/udp
         restart = "unless-stopped";
 
-        volumes =
-          [
-            "${config.custom.containers.directory}/caddy/config:/config"
-            "${config.custom.containers.directory}/caddy/data:/data"
-            "${./Caddyfile}:/etc/caddy/Caddyfile:ro"
-            "/srv:/srv:ro"
-          ]
-          ++ optionals config.custom.containers.synapse.enable [
-            "/run/synapse:/run/synapse:ro"
-          ];
+        volumes = [
+          "${config.custom.containers.directory}/caddy/config:/config"
+          "${config.custom.containers.directory}/caddy/data:/data"
+          "${./Caddyfile}:/etc/caddy/Caddyfile:ro"
+          "/srv:/srv:ro"
+        ];
       };
     };
 

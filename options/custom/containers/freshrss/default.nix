@@ -20,7 +20,7 @@ in {
       # https://github.com/FreshRSS/FreshRSS/tree/edge/Docker
       freshrss.service = {
         container_name = "freshrss";
-        image = "freshrss/freshrss:1";
+        image = "freshrss/freshrss:latest"; # https://hub.docker.com/r/freshrss/freshrss/tags
         ports = ["127.0.0.1:8088:80/tcp"];
         restart = "unless-stopped";
 

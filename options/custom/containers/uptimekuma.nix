@@ -20,11 +20,26 @@ in {
       # https://github.com/louislam/uptime-kuma/blob/master/compose.yaml
       uptimekuma.service = {
         container_name = "uptimekuma";
-        dns = ["100.100.100.100"]; # Tailscale resolver
-        image = "louislam/uptime-kuma:2.0.0-beta.2";
-        network_mode = "host"; # 3001/tcp
+        depends_on = ["vpn"];
+        image = "louislam/uptime-kuma:latest";
+        network_mode = "service:vpn"; # 3001/tcp
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/uptimekuma/data:/app/data"];
+      };
+
+      # https://tailscale.com/kb/1282/docker
+      vpn.service = {
+        container_name = "uptimekuma-vpn";
+        devices = ["/dev/net/tun:/dev/net/tun"];
+        env_file = [config.age.secrets."common/tailscale/container.env".path];
+        hostname = "uptimekuma";
+        image = "ghcr.io/tailscale/tailscale:latest"; # https://github.com/tailscale/tailscale/pkgs/container/tailscale
+        restart = "unless-stopped";
+        volumes = ["${config.custom.containers.directory}/uptimekuma/vpn:/var/lib/tailscale"];
+
+        capabilities = {
+          NET_ADMIN = true;
+        };
       };
     };
   };

@@ -28,8 +28,8 @@ in {
         container_name = "searxng";
         depends_on = ["cache"];
         env_file = [config.age.secrets."${config.custom.profile}/searxng/.env".path];
-        image = "searxng/searxng:latest";
-        ports = ["127.0.0.1:8000:8080/tcp"];
+        image = "searxng/searxng:latest"; # https://hub.docker.com/r/searxng/searxng/tags
+        ports = ["127.0.0.1:8888:8080/tcp"];
         restart = "unless-stopped";
 
         volumes = [
@@ -42,7 +42,7 @@ in {
       cache.service = {
         command = "valkey-server --save 60 1 --loglevel warning";
         container_name = "searxng-cache";
-        image = "valkey/valkey:7-alpine";
+        image = "valkey/valkey:7";
         restart = "unless-stopped";
       };
     };

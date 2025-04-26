@@ -7,7 +7,7 @@ with lib; let
   cfg = config.custom.containers.adguardhome;
 in {
   options.custom.containers.adguardhome = {
-    enable = mkOption {default = false;};
+    enable = mkEnableOption "adguardhome";
   };
 
   config = mkIf cfg.enable {
@@ -20,38 +20,47 @@ in {
       #?? ls /var/lib/caddy/.local/share/caddy/certificates/*
       adguardhome.service = {
         container_name = "adguardhome";
-        image = "adguard/adguardhome:v0.107.59";
+        depends_on = ["vpn"];
+        image = "adguard/adguardhome:latest"; # https://hub.docker.com/r/adguard/adguardhome/tags
+        network_mode = "service:vpn"; # 80/tcp
         restart = "unless-stopped";
-
-        # TODO: Use network_mode: host for Tailscale clients
-        ports = [
-          "${config.custom.services.tailscale.ip}:53:53/tcp" # DNS
-          "${config.custom.services.tailscale.ip}:53:53/udp" # DNS
-          "853:853/tcp" # DNS-over-TLS
-          "853:853/udp" # DNS-over-QUIC
-          "3003:80/tcp" # Admin panel
-          "8443:443/tcp" # DNS-over-HTTPS
-        ];
 
         volumes = [
           "${config.custom.containers.directory}/adguardhome/config:/opt/adguardhome/conf"
           "${config.custom.containers.directory}/adguardhome/data:/opt/adguardhome/data"
         ];
       };
+
+      # https://tailscale.com/kb/1282/docker
+      vpn.service = {
+        container_name = "adguardhome-vpn";
+        devices = ["/dev/net/tun:/dev/net/tun"];
+        env_file = [config.age.secrets."common/tailscale/container.env".path];
+        hostname = "adguardhome";
+        image = "ghcr.io/tailscale/tailscale:latest"; # https://github.com/tailscale/tailscale/pkgs/container/tailscale
+        restart = "unless-stopped";
+        volumes = ["${config.custom.containers.directory}/adguardhome/vpn:/var/lib/tailscale"];
+
+        capabilities = {
+          NET_ADMIN = true;
+        };
+
+        # ports = [
+        #   "53:53/tcp" # DNS
+        #   "53:53/udp" # DNS
+        #   "853:853/tcp" # DNS-over-TLS
+        #   "853:853/udp" # DNS-over-QUIC
+        #   "3003:80/tcp" # Admin panel
+        #   "8443:443/tcp" # DNS-over-HTTPS
+        # ];
+      };
     };
 
     # https://github.com/AdguardTeam/AdGuardHome/wiki/Encryption
-    networking.firewall = {
-      allowedTCPPorts = [
-        #// 53 # DNS
-        #// 853 # DNS-over-TLS
-      ];
-
-      allowedUDPPorts = [
-        #// 53 # DNS
-        #// 853 # DNS-over-QUIC
-      ];
-    };
+    # networking.firewall = {
+    #   allowedTCPPorts = [853]; # DNS-over-TLS
+    #   allowedUDPPorts = [853]; # DNS-over-QUIC
+    # };
 
     # https://adguard-dns.io/kb/adguard-home/faq/#bindinuse
     # services.resolved.extraConfig = ''

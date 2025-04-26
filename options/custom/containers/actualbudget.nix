@@ -6,7 +6,9 @@
 with lib; let
   cfg = config.custom.containers.actualbudget;
 in {
-  options.custom.containers.actualbudget.enable = mkOption {default = false;};
+  options.custom.containers.actualbudget = {
+    enable = mkEnableOption "actualbudget";
+  };
 
   config = mkIf cfg.enable {
     #?? arion-actualbudget pull
@@ -15,7 +17,7 @@ in {
     virtualisation.arion.projects.actualbudget.settings.services = {
       actualbudget.service = {
         container_name = "actualbudget";
-        image = "actualbudget/actual-server:25.4.0";
+        image = "ghcr.io/actualbudget/actual:latest"; # https://github.com/actualbudget/actual/pkgs/container/actual
         ports = ["127.0.0.1:5006:5006/tcp"];
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/actualbudget/data:/data"];

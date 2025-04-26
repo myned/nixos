@@ -35,7 +35,7 @@ in {
           };
 
           vault = {
-            server_1 = "https://vault.${config.custom.domain}";
+            server_1 = "https://vault.vpn.${config.custom.domain}";
             login_1 = "${config.custom.username}@${config.custom.domain}";
             twofactor_1 = 0;
           };

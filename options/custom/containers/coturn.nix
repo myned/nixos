@@ -25,7 +25,7 @@ in {
       # https://conduwuit.puppyirl.gay/turn.html
       coturn.service = {
         container_name = "coturn";
-        image = "coturn/coturn:4.6";
+        image = "coturn/coturn:4"; # https://hub.docker.com/r/coturn/coturn/tags
         network_mode = "host";
         restart = "unless-stopped";
 

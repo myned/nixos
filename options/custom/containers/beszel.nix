@@ -31,7 +31,7 @@ in {
         # https://beszel.dev/guide/agent-installation
         agent.service = {
           container_name = "beszel-agent";
-          image = "ghcr.io/henrygd/beszel/beszel-agent:0.10"; # https://github.com/henrygd/beszel/pkgs/container/beszel%2Fbeszel-agent
+          image = "ghcr.io/henrygd/beszel/beszel-agent:latest"; # https://github.com/henrygd/beszel/pkgs/container/beszel%2Fbeszel-agent
           network_mode = "host"; # 45876/tcp
           restart = "unless-stopped";
           volumes = ["/var/run/docker.sock:/var/run/docker.sock:ro"];
@@ -42,14 +42,29 @@ in {
             LISTEN = "${config.custom.services.tailscale.ip}:45876";
           };
         };
+
+        # https://tailscale.com/kb/1282/docker
+        vpn.service = {
+          container_name = "beszel-vpn";
+          devices = ["/dev/net/tun:/dev/net/tun"];
+          env_file = [config.age.secrets."common/tailscale/container.env".path];
+          hostname = "beszel";
+          image = "ghcr.io/tailscale/tailscale:latest"; # https://github.com/tailscale/tailscale/pkgs/container/tailscale
+          restart = "unless-stopped";
+          volumes = ["${config.custom.containers.directory}/beszel/vpn:/var/lib/tailscale"];
+
+          capabilities = {
+            "NET_ADMIN" = true;
+          };
+        };
       }
       // optionalAttrs cfg.server {
         # https://beszel.dev/guide/hub-installation
         beszel.service = {
           container_name = "beszel";
-          dns = ["100.100.100.100"]; # Tailscale resolver
-          image = "ghcr.io/henrygd/beszel/beszel:0.10"; # https://github.com/henrygd/beszel/pkgs/container/beszel%2Fbeszel
-          ports = ["${config.custom.services.tailscale.ip}:8090:8090/tcp"];
+          depends_on = ["vpn"];
+          image = "ghcr.io/henrygd/beszel/beszel:latest"; # https://github.com/henrygd/beszel/pkgs/container/beszel%2Fbeszel
+          network_mode = "service:vpn"; # 8090/tcp
           restart = "unless-stopped";
           volumes = ["${config.custom.containers.directory}/beszel/data:/beszel_data"];
         };

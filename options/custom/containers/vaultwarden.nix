@@ -30,8 +30,8 @@ in {
       vaultwarden.service = {
         container_name = "vaultwarden";
         env_file = [config.age.secrets."${config.custom.profile}/vaultwarden/.env".path];
-        image = "vaultwarden/server:1.33.2";
-        ports = ["127.0.0.1:8008:80/tcp"];
+        image = "vaultwarden/server:1.33.2"; # https://hub.docker.com/r/vaultwarden/server/tags
+        ports = ["127.0.0.1:8088:80/tcp"];
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/vaultwarden/data:/data"];
       };

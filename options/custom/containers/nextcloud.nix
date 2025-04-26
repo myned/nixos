@@ -26,6 +26,7 @@ in {
       # https://github.com/nextcloud/docker
       nextcloud.service = {
         container_name = "nextcloud";
+        depends_on = ["db" "cache"];
         env_file = [config.age.secrets."${config.custom.profile}/nextcloud/.env".path];
         image = "nextcloud:29-apache";
         ports = ["127.0.0.1:8181:80/tcp"];
@@ -35,25 +36,15 @@ in {
           "${config.custom.containers.directory}/nextcloud/app:/var/www/html"
           "${config.custom.containers.directory}/nextcloud/data:/var/www/html/data"
         ];
-
-        depends_on = [
-          "db"
-          "cache"
-        ];
       };
 
       cron.service = {
         container_name = "nextcloud-cron";
+        depends_on = ["db" "cache"];
         entrypoint = "/cron.sh";
         image = "nextcloud:29-apache";
         restart = "unless-stopped";
-        volumes =
-          config.virtualisation.arion.projects.nextcloud.settings.services.nextcloud.service.volumes; # volumes_from
-
-        depends_on = [
-          "db"
-          "cache"
-        ];
+        volumes = config.virtualisation.arion.projects.nextcloud.settings.services.nextcloud.service.volumes; # volumes_from
       };
 
       cache.service = {
@@ -68,10 +59,7 @@ in {
         env_file = [config.age.secrets."${config.custom.profile}/nextcloud/db.env".path];
         image = "postgres:15";
         restart = "unless-stopped";
-
-        volumes = [
-          "${config.custom.containers.directory}/nextcloud/db:/var/lib/postgresql/data"
-        ];
+        volumes = ["${config.custom.containers.directory}/nextcloud/db:/var/lib/postgresql/data"];
       };
     };
   };

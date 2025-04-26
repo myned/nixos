@@ -31,7 +31,7 @@ in {
         container_name = "miniflux";
         depends_on = ["db"];
         env_file = [config.age.secrets."${config.custom.profile}/miniflux/.env".path];
-        image = "miniflux/miniflux:2.2.7";
+        image = "miniflux/miniflux:latest";
         ports = ["127.0.0.1:8808:8080/tcp"];
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/miniflux/data:/data"];

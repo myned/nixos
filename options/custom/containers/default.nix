@@ -17,6 +17,14 @@ in {
   };
 
   config = mkIf cfg.enable {
+    age.secrets = let
+      secret = filename: {
+        file = "${inputs.self}/secrets/${filename}";
+      };
+    in {
+      "common/tailscale/container.env" = secret "common/tailscale/container.env";
+    };
+
     virtualisation = {
       # https://github.com/hercules-ci/arion
       # https://docs.hercules-ci.com/arion/options
@@ -54,12 +62,11 @@ in {
           ipv6 = true;
           fixed-cidr-v6 = "fd00::/80";
 
-          # FIXME: Container cannot route via public address to another container on the same host
-          #!! Disable userland-proxy to pass client IP to containers
+          # Disable userland-proxy to pass client IP to containers
           # https://github.com/moby/moby/issues/15086
           # https://github.com/moby/moby/issues/14856
           # https://github.com/docker/docs/issues/17312
-          #// userland-proxy = false;
+          userland-proxy = false;
 
           # https://docs.docker.com/reference/cli/dockerd/#default-network-options
           default-network-opts = {

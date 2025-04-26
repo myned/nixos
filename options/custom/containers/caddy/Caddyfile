@@ -1,17 +1,26 @@
-### Global
-# https://caddyserver.com/docs/caddyfile/options#global-options
 {
+	# https://caddyserver.com/docs/caddyfile/options
 	email admin@bjork.tech
 
+	#!! Production
+	# https://letsencrypt.org/getting-started/
+	acme_ca https://acme-v02.api.letsencrypt.org/directory
+
+	#!! Staging
+	# https://letsencrypt.org/docs/staging-environment/
+	#// acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
+
+	# https://caddyserver.com/docs/automatic-https#enabling-ech
+	ech ech.bjork.tech
+
+	# https://caddyserver.com/docs/logging
 	log {
 		format console
 		level INFO
 	}
 
-	### Plugins
-	# https://github.com/caddy-dns/cloudflare
-	# https://caddy.community/t/how-to-use-dns-provider-modules-in-caddy-2/8148
-	acme_dns cloudflare {$CLOUDFLARE_API_TOKEN}
+	# https://caddyserver.com/docs/caddyfile/directives#directive-order
+	order bind first
 
 	# https://github.com/mholt/caddy-l4
 	# layer4 {
@@ -33,18 +42,23 @@
 	# }
 }
 
-### Imports
-# Admin authentication
-#?? caddy hash-password
+# https://caddyserver.com/docs/caddyfile/concepts#snippets
+
+(global) {
+	encode zstd gzip
+	header X-Robots-Tag "noindex, nofollow"
+}
+
 (admin) {
+	# https://caddyserver.com/docs/caddyfile/directives/basic_auth
+	#?? caddy hash-password
 	basic_auth {
 		myned {$ADMIN_HASH}
 	}
 }
 
-# Basic Authentication
-#?? echo -n username:password | base64
 (owo) {
+	#?? echo -n <username>:<password> | base64
 	@unauthorized {
 		path {args[:]}
 		not header Authorization "Basic {$OWO_HASH}"
@@ -54,23 +68,28 @@
 	respond @unauthorized 401
 }
 
-(global) {
-	encode zstd gzip
-	header X-Robots-Tag "noindex, nofollow"
+(cloudflare) {
+	# https://caddyserver.com/docs/caddyfile/directives/tls
+	tls {
+		# https://github.com/caddy-dns/cloudflare
+		dns cloudflare {$CLOUDFLARE_API_TOKEN}
+
+		#!! Record propagation may time out with external resolvers
+		# https://github.com/caddy-dns/cloudflare/issues/28
+		resolvers 1.1.1.1 1.0.0.1 2606:4700:4700::1111 2606:4700:4700::1001
+	}
 }
 
 (vpn) {
-	# Allow cross-origin requests to the Tailscale network
-	header Access-Control-Allow-Origin https://fenrir-musical.ts.net
+	# https://tailscale.com/kb/1015/100.x-addresses
+	bind {system.hostname}.{$TAILNET} # FQDN
 }
 
-### bjork.gay
 # Mastodon
 bjork.gay {
 	import global
+	import cloudflare
 
-	#!! Ignore TLS certificate for localhost
-	# https://docs.linuxserver.io/FAQ/#strict-proxy
 	reverse_proxy https://localhost:3000 {
 		transport http {
 			tls_insecure_skip_verify
@@ -78,40 +97,46 @@ bjork.gay {
 	}
 }
 
-# Uptime Kuma
-status.bjork.gay {
+*.bjork.gay {
 	import global
-	reverse_proxy localhost:3001
+	import cloudflare
+
+	@status host status.bjork.gay
+	redir @status https://status.bjork.tech{uri}
+
+	# https://caddyserver.com/docs/caddyfile/patterns#redirect-www-subdomain
+	@www host www.bjork.gay
+	redir @www https://bjork.gay{uri}
 }
 
-# Oryx
-stream.bjork.gay {
+*.vpn.bjork.gay {
 	import global
-	reverse_proxy localhost:2022
+	import cloudflare
+	import vpn
 
-	route {
-		import owo /flv /hls /webrtc
+	# Oryx
+	@stream host stream.vpn.bjork.gay
+	handle @stream {
+		reverse_proxy oryx:2022
 		redir /flv {$ORYX_FLV}
 		redir /hls {$ORYX_HLS}
 		redir /webrtc {$ORYX_WEBRTC}
 	}
-}
 
-# Caddy
-wallpaper.bjork.gay {
-	import global
-
-	route {
-		import owo *
+	# Caddy
+	@wallpaper host wallpaper.vpn.bjork.gay
+	handle @wallpaper {
 		root * /srv/sites/wallpaper.bjork.gay
 		try_files /wallpaper.png
 		file_server
 	}
 }
 
-### bjork.tech
 bjork.tech {
 	import global
+	import cloudflare
+
+	# Caddy
 	root * /srv/sites/bjork.tech
 	file_server
 
@@ -124,167 +149,151 @@ bjork.tech {
 	respond /.well-known/matrix/support `{"contacts":[{"matrix_id":"@myned:bjork.tech","email_address":"admin@bjork.tech","role":"m.role.admin"}]}`
 }
 
-# Synapse Admin
-admin.bjork.tech {
+*.bjork.tech {
 	import global
-	import vpn
-	reverse_proxy localhost:8818
-}
+	import cloudflare
 
-# Open WebUI
-ai.bjork.tech {
-	import global
-	reverse_proxy localhost:3033
-}
+	# Nextcloud
+	@cloud host cloud.bjork.tech
+	reverse_proxy @cloud localhost:11000
 
-# Actual Budget
-budget.bjork.tech {
-	import global
-	reverse_proxy localhost:5006
-}
+	# Miniflux
+	@feed host feed.bjork.tech
+	reverse_proxy @feed localhost:8808
 
-# Nextcloud
-# cloud.bjork.tech {
-#   header Strict-Transport-Security "max-age=15552000;"
-#   redir /.well-known/carddav /remote.php/dav 301
-#   redir /.well-known/caldav /remote.php/dav 301
-#   redir /.well-known/webfinger /index.php/.well-known/webfinger 301
-#   redir /.well-known/nodeinfo /index.php/.well-known/nodeinfo 301
-#   reverse_proxy localhost:8181
-# }
+	# Foundry Virtual Tabletop
+	@foundry host foundry.bjork.tech
+	reverse_proxy @foundry localhost:30000
 
-# Nextcloud AIO
-cloud.bjork.tech {
-	reverse_proxy localhost:11000
-}
+	# Forgejo
+	@git host git.bjork.tech
+	reverse_proxy @git localhost:3333
 
-# dash.
-dash.bjork.tech {
-	import global
-	reverse_proxy localhost:3011
-}
-
-# Grafana
-data.bjork.tech {
-	import global
-	reverse_proxy localhost:3100
-}
-
-# AdGuard Home
-dns.bjork.tech, *.dns.bjork.tech {
-	import global
-	reverse_proxy localhost:3003
-	reverse_proxy /dns-query localhost:8443
-
-	tls {
-		ca https://acme.zerossl.com/v2/DV90
+	# Synapse
+	@matrix host matrix.bjork.tech
+	handle @matrix {
+		reverse_proxy /_matrix/* localhost:8008
+		reverse_proxy /_synapse/client/* localhost:8008
 	}
+
+	# Netbox
+	@net host net.bjork.tech
+	reverse_proxy @net localhost:8585
+
+	# Kener
+	@status host status.bjork.tech
+	reverse_proxy @status kener:3000
+
+	# https://caddyserver.com/docs/caddyfile/patterns#redirect-www-subdomain
+	@www host www.bjork.tech
+	redir @www https://bjork.tech{uri}
 }
 
-# Miniflux
-feed.bjork.tech {
+*.admin.bjork.tech {
 	import global
-	reverse_proxy localhost:8808
+	import cloudflare
+	import vpn
+
+	# Nextcloud AIO
+	@cloud-admin host cloud.admin.bjork.tech
+	reverse_proxy @cloud-admin https://localhost:8080 {
+		transport http {
+			tls_insecure_skip_verify
+		}
+	}
+
+	# dash.
+	@dash-admin host dash.admin.bjork.tech
+	reverse_proxy @dash-admin localhost:3001
+
+	# Netdata
+	# @data-admin host data.admin.bjork.tech
+	# handle @data-admin {
+	# 	redir / /v3
+	# 	reverse_proxy netdata:19999
+	# }
+
+	# Grafana
+	@graph-admin host graph.admin.bjork.tech
+	reverse_proxy @graph-admin grafana:3000
+
+	# Synapse Admin
+	@matrix-admin host matrix.admin.bjork.tech
+	reverse_proxy @matrix-admin localhost:8000
+
+	# Prometheus
+	@metric-admin host metric.admin.bjork.tech
+	reverse_proxy @metric-admin grafana:9090
+
+	# Beszel
+	@monitor-admin host monitor.admin.bjork.tech
+	reverse_proxy @monitor-admin beszel:8090
 }
 
-# Foundry Virtual Tabletop
-foundry.bjork.tech {
+*.vpn.bjork.tech {
 	import global
-	reverse_proxy localhost:30000
-}
+	import cloudflare
+	import vpn
 
-# Forgejo
-git.bjork.tech {
-	import global
-	reverse_proxy localhost:3333
-}
+	# Open WebUI
+	@ai host ai.vpn.bjork.tech
+	reverse_proxy @ai openwebui:8080
 
-# Home Assistant
-home.bjork.tech {
-	reverse_proxy mypi3:8123
-}
+	# Actual Budget
+	@budget host budget.vpn.bjork.tech
+	reverse_proxy @budget localhost:5006
 
-# Synapse
-matrix.bjork.tech {
-	reverse_proxy /_matrix/* unix//run/synapse/synapse.sock
-	reverse_proxy /_synapse/client/* unix//run/synapse/synapse.sock
-}
+	# AdGuard Home
+	@dns host dns.vpn.bjork.tech *.dns.vpn.bjork.tech
+	handle @dns {
+		# tls {
+		# 	# FIXME: Certificate chain fails to import from LetsEncrypt
+		# 	ca https://acme.zerossl.com/v2/DV90
+		# }
 
-# Netbox
-net.bjork.tech {
-	import global
-	reverse_proxy localhost:8585
-}
+		reverse_proxy adguardhome:80
+		reverse_proxy /dns-query adguardhome:8443
+	}
 
-# ntfy
-notify.bjork.tech {
-	import global
-	reverse_proxy localhost:8188
-}
+	# Home Assistant
+	@home host home.vpn.bjork.tech
+	reverse_proxy @home mypi3:8123
 
-# Piped
-# piped.bjork.tech, pipedapi.bjork.tech, pipedproxy.bjork.tech {
-# 	import global
-# 	reverse_proxy localhost:8080
-# }
+	# Synapse
+	@matrix host matrix.vpn.bjork.tech
+	reverse_proxy @matrix localhost:8008
 
-# Redlib
-reddit.bjork.tech {
-	import global
-	reverse_proxy localhost:8888
-}
+	# ntfy
+	@notify host notify.vpn.bjork.tech
+	reverse_proxy @notify localhost:8800
 
-# SearXNG
-# search.bjork.tech {
-# 	reverse_proxy localhost:8000 {
-# 		header_up X-Real-IP {client_ip}
-# 	}
-# }
+	# Redlib
+	@reddit host reddit.vpn.bjork.tech
+	reverse_proxy @reddit localhost:8888
 
-# Netdata
-# stats.bjork.tech {
-# 	import global
-# 	import admin
-# 	redir / /v3
-# 	reverse_proxy localhost:19999
-# }
+	# SearXNG
+	# @search host search.vpn.bjork.tech
+	# handle @search {
+	# 	reverse_proxy localhost:8888 {
+	# 		header_up X-Real-IP {client_ip}
+	# 	}
+	# }
 
-# Kener
-status.bjork.tech {
-	import global
-	reverse_proxy localhost:3030
-}
+	# Stremio Client
+	# @tv host tv.vpn.bjork.tech
+	# handle @tv {
+	# 	reverse_proxy localhost:8470
+	# }
 
-# Stremio
-# tv.bjork.tech {
-# 	import global
-# 	reverse_proxy localhost:8470
-# }
+	# Stremio Server
+	# @tv-api host api.tv.vpn.bjork.tech
+	# handle @tv-api {
+	# 	reverse_proxy localhost:11470
+	# }
 
-# api.tv.bjork.tech {
-# 	import global
-# 	reverse_proxy localhost:11470
-# }
-
-# Vaultwarden
-vault.bjork.tech {
-	import global
-
-	reverse_proxy localhost:8008 {
+	# Vaultwarden
+	@vault host vault.vpn.bjork.tech
+	reverse_proxy @vault localhost:8088 {
 		header_up X-Real-IP {client_ip}
 	}
-}
-
-# Wiki.js
-# wiki.bjork.tech {
-# 	import global
-# 	reverse_proxy localhost:3303
-# }
-
-### Tailscale
-# https://tailscale.com/kb/1153/enabling-https
-# https://tailscale.com/kb/1190/caddy-certificates
-myne.fenrir-musical.ts.net:8448 {
-	import global
-	reverse_proxy unix//run/synapse/synapse.sock
 }

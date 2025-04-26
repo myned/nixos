@@ -20,14 +20,14 @@ in {
       # https://github.com/etkecc/synapse-admin/blob/main/docker-compose.yml
       synapseadmin.service = {
         container_name = "synapseadmin";
-        image = "ghcr.io/etkecc/synapse-admin:v0.10.3-etke38";
-        ports = ["127.0.0.1:8818:80/tcp"];
+        image = "ghcr.io/etkecc/synapse-admin:latest";
+        ports = ["127.0.0.1:8000:80/tcp"];
         restart = "unless-stopped";
 
         volumes = let
           # https://github.com/etkecc/synapse-admin/blob/main/docs/config.md
           configuration = pkgs.writeText "config.json" (generators.toJSON {} {
-            restrictBaseUrl = ["https://${config.custom.hostname}.${config.custom.services.tailscale.tailnet}:8448"];
+            restrictBaseUrl = ["https://matrix.vpn.bjork.tech"];
           });
         in [
           "${configuration}:/app/config.json:ro"

@@ -39,9 +39,10 @@ let
   server = users ++ servers;
 in {
   ### Common
-  "common/nix/access-tokens.conf".publicKeys = common;
-  "common/ntfy/token".publicKeys = desktop;
   "common/geoclue2/geolocation".publicKeys = common;
+  "common/nix/access-tokens.conf".publicKeys = common;
+  "common/ntfy/token".publicKeys = common;
+  "common/tailscale/container.env".publicKeys = common;
 
   ### Deck
   "deck/users/myned.pass".publicKeys = deck;

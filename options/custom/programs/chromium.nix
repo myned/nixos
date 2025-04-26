@@ -73,7 +73,7 @@ in {
           {
             name = "Open WebUI";
             shortcut = "ai";
-            url = "https://ai.${config.custom.domain}/?temporary-chat=true&q={searchTerms}";
+            url = "https://ai.vpn.${config.custom.domain}/?temporary-chat=true&q={searchTerms}";
           }
 
           {
@@ -265,7 +265,7 @@ in {
           {
             name = "Piped";
             shortcut = "p";
-            url = "https://piped.${config.custom.domain}/results?search_query={searchTerms}";
+            url = "https://piped.vpn.${config.custom.domain}/results?search_query={searchTerms}";
           }
 
           {
@@ -295,7 +295,7 @@ in {
           {
             name = "SearXNG";
             shortcut = "s";
-            url = "https://search.${config.custom.domain}/search?q={searchTerms}";
+            url = "https://search.vpn.${config.custom.domain}/search?q={searchTerms}";
           }
 
           {

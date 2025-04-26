@@ -29,7 +29,7 @@ in {
     services.tailscale = {
       enable = true;
       openFirewall = cfg.firewall; # 41641/udp
-      permitCertUid = mkIf config.custom.containers.caddy.enable "caddy"; # Allow caddy to fetch TLS certificates
+      permitCertUid = mkIf config.custom.containers.caddy.enable "239"; # Allow caddy to fetch TLS certificates
       useRoutingFeatures = "both"; # Enable server/client exit nodes
     };
 

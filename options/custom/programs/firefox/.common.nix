@@ -302,9 +302,9 @@ with lib; {
 
         ai = {
           definedAliases = ["ai"];
-          icon = "https://ai.${config.custom.domain}/static/favicon.ico";
+          icon = "https://ai.vpn.${config.custom.domain}/static/favicon.ico";
           name = "Open WebUI";
-          urls = [{template = "https://ai.${config.custom.domain}/?temporary-chat=true&q={searchTerms}";}];
+          urls = [{template = "https://ai.vpn.${config.custom.domain}/?temporary-chat=true&q={searchTerms}";}];
         };
 
         arch-wiki = {
@@ -511,9 +511,9 @@ with lib; {
 
         piped = {
           definedAliases = ["p"];
-          icon = "https://piped.${config.custom.domain}/favicon.ico";
+          icon = "https://piped.vpn.${config.custom.domain}/favicon.ico";
           name = "Piped";
-          urls = [{template = "https://piped.${config.custom.domain}/results?search_query={searchTerms}";}];
+          urls = [{template = "https://piped.vpn.${config.custom.domain}/results?search_query={searchTerms}";}];
         };
 
         pcgamingwiki = {
@@ -539,9 +539,9 @@ with lib; {
 
         searxng = {
           definedAliases = ["s"];
-          icon = "https://search.${config.custom.domain}/static/themes/simple/img/favicon.png";
+          icon = "https://search.vpn.${config.custom.domain}/static/themes/simple/img/favicon.png";
           name = "SearXNG";
-          urls = [{template = "https://search.${config.custom.domain}/search?q={searchTerms}";}];
+          urls = [{template = "https://search.vpn.${config.custom.domain}/search?q={searchTerms}";}];
         };
 
         sway-issues = {

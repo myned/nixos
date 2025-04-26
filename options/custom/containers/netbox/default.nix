@@ -39,7 +39,7 @@ in {
       netbox.service =
         netbox
         // {
-          ports = ["8585:8080/tcp"];
+          ports = ["127.0.0.1:8585:8080/tcp"];
 
           # https://github.com/netbox-community/netbox-docker/wiki/Using-Netbox-Plugins
           #!! Context modifications require a rebuild
@@ -67,14 +67,14 @@ in {
         container_name = "netbox-cache";
         command = ["sh" "-c" "valkey-server --requirepass $$REDIS_PASSWORD"];
         env_file = [config.age.secrets."${config.custom.profile}/netbox/cache.env".path];
-        image = "docker.io/valkey/valkey:8.0";
+        image = "valkey/valkey:8";
         restart = "unless-stopped";
       };
 
       db.service = {
         container_name = "netbox-db";
         env_file = [config.age.secrets."${config.custom.profile}/netbox/db.env".path];
-        image = "docker.io/postgres:16";
+        image = "postgres:16";
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/netbox/db:/var/lib/postgresql/data"];
       };

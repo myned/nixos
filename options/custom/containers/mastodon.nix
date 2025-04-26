@@ -27,16 +27,12 @@ in {
       # https://github.com/mastodon/mastodon/blob/main/docker-compose.yml
       mastodon.service = {
         container_name = "mastodon";
+        depends_on = ["cache" "db"];
         env_file = [config.age.secrets."${config.custom.profile}/mastodon/.env".path];
         image = "lscr.io/linuxserver/mastodon:4.3.6";
-        ports = ["3000:443/tcp"];
+        ports = ["127.0.0.1:3000:443/tcp"];
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/mastodon/config:/config"];
-
-        depends_on = [
-          "cache"
-          "db"
-        ];
       };
 
       cache.service = {

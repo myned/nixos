@@ -45,7 +45,7 @@ in {
         netdata.service = {
           container_name = "netdata";
           image = "ghcr.io/netdata/netdata:v2"; # https://github.com/netdata/netdata/pkgs/container/netdata
-          network_mode = "host";
+          network_mode = "service:vpn"; # 19999/tcp
           privileged = true;
           restart = "unless-stopped";
 
@@ -70,6 +70,16 @@ in {
             ++ optionals (!isNull cfg.settings) [
               "${pkgs.writeText "netdata.conf" (generators.toINI {} cfg.settings)}:/etc/netdata/netdata.conf:ro"
             ];
+        };
+
+        # https://tailscale.com/kb/1282/docker
+        vpn.service = {
+          container_name = "netdata-vpn";
+          env_file = [config.age.secrets."common/tailscale/container.env".path];
+          hostname = "netdata";
+          image = "ghcr.io/tailscale/tailscale:latest"; # https://github.com/tailscale/tailscale/pkgs/container/tailscale
+          restart = "unless-stopped";
+          volumes = ["${config.custom.containers.directory}/netdata/vpn:/var/lib/tailscale"];
         };
       };
 

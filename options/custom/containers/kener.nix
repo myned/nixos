@@ -29,11 +29,10 @@ in {
       # https://kener.ing/docs/deployment
       kener.service = {
         container_name = "kener";
-        depends_on = ["db"];
-        dns = ["100.100.100.100"]; # Tailscale resolver
+        depends_on = ["db" "vpn"];
         env_file = [config.age.secrets."${config.custom.profile}/kener/.env".path];
-        image = "ghcr.io/rajnandan1/kener:3"; # https://github.com/rajnandan1/kener/pkgs/container/kener
-        ports = ["127.0.0.1:3030:3000/tcp"];
+        image = "ghcr.io/rajnandan1/kener:latest"; # https://github.com/rajnandan1/kener/pkgs/container/kener
+        network_mode = "service:vpn"; # 3000/tcp
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/kener/data:/app/uploads"];
       };
@@ -43,8 +42,24 @@ in {
         container_name = "kener-db";
         env_file = [config.age.secrets."${config.custom.profile}/kener/db.env".path];
         image = "postgres:17"; # https://hub.docker.com/_/postgres/tags
+        network_mode = "service:vpn";
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/kener/db:/var/lib/postgresql/data"];
+      };
+
+      # https://tailscale.com/kb/1282/docker
+      vpn.service = {
+        container_name = "kener-vpn";
+        devices = ["/dev/net/tun:/dev/net/tun"];
+        env_file = [config.age.secrets."common/tailscale/container.env".path];
+        hostname = "kener";
+        image = "ghcr.io/tailscale/tailscale:latest"; # https://github.com/tailscale/tailscale/pkgs/container/tailscale
+        restart = "unless-stopped";
+        volumes = ["${config.custom.containers.directory}/kener/vpn:/var/lib/tailscale"];
+
+        capabilities = {
+          NET_ADMIN = true;
+        };
       };
     };
 

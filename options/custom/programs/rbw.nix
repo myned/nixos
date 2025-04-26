@@ -26,7 +26,7 @@ in {
 
           # https://github.com/doy/rbw?tab=readme-ov-file#configuration
           settings = {
-            base_url = "https://vault.${config.custom.domain}";
+            base_url = "https://vault.vpn.${config.custom.domain}";
             email = "${config.custom.username}@${config.custom.domain}";
             lock_timeout = 24 * 60 * 60; # Hours
             sync_interval = 15 * 60; # Minutes

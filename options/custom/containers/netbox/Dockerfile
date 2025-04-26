@@ -1,4 +1,5 @@
-FROM docker.io/netboxcommunity/netbox:v4.1.11
+# https://hub.docker.com/r/netboxcommunity/netbox/tags
+FROM netboxcommunity/netbox:v4.1
 
 # Install extra configuration
 COPY ./extra.py /etc/netbox/config/

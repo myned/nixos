@@ -12,9 +12,9 @@ in {
 
   config = mkIf cfg.enable {
     #?? arion-nextcloudaio pull
-    environment.shellAliases.arion-nextcloudaio = "sudo arion --prebuilt-file ${config.virtualisation.arion.projects.nextcloudaio.settings.out.dockerComposeYaml}";
+    environment.shellAliases.arion-nextcloudaio = "sudo arion --prebuilt-file ${config.virtualisation.arion.projects.nextcloud-aio.settings.out.dockerComposeYaml}";
 
-    virtualisation.arion.projects.nextcloudaio.settings = {
+    virtualisation.arion.projects.nextcloud-aio.settings = {
       services = {
         # https://github.com/nextcloud/all-in-one
         # https://github.com/nextcloud/all-in-one/blob/main/reverse-proxy.md
@@ -22,7 +22,7 @@ in {
         nextcloud-aio-mastercontainer.service = {
           container_name = "nextcloud-aio-mastercontainer";
           image = "ghcr.io/nextcloud-releases/all-in-one:latest";
-          ports = ["${config.custom.services.tailscale.ip}:8088:8080/tcp"];
+          ports = ["127.0.0.1:8080:8080/tcp"];
           restart = "unless-stopped";
 
           volumes = [
@@ -45,13 +45,17 @@ in {
       };
     };
 
-    systemd.tmpfiles.settings.nextcloud = {
+    #?? arion-nextcloudaio run -- --rm --entrypoint='id' nextcloudaio
+    systemd.tmpfiles.settings.nextcloudaio = let
+      owner = mode: {
+        inherit mode;
+        user = "33"; # www-data
+        group = "33"; # www-data
+      };
+    in {
       "/mnt/local/nextcloud" = {
-        z = {
-          mode = "0700";
-          user = "33"; # www-data
-          group = "33"; # www-data
-        };
+        d = owner "0700"; # -rwx------
+        z = owner "0700"; # -rwx------
       };
     };
   };

@@ -19,7 +19,7 @@ in {
       # https://github.com/tsaridas/stremio-docker
       stremio.service = {
         container_name = "stremio";
-        image = "tsaridas/stremio-docker:v1.1.118";
+        image = "tsaridas/stremio-docker:latest";
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/stremio/data:/root/.stremio-server"];
 
@@ -32,8 +32,8 @@ in {
           # TODO: Use internal server when implemented
           # https://github.com/tsaridas/stremio-docker/issues/78
           DISABLE_CACHING = 1;
-          SERVER_URL = "https://api.tv.${config.custom.domain}/";
-          WEBUI_LOCATION = "https://tv.${config.custom.domain}/";
+          SERVER_URL = "https://api.tv.vpn.${config.custom.domain}/";
+          WEBUI_LOCATION = "https://tv.vpn.${config.custom.domain}/";
         };
       };
     };

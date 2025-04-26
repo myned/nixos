@@ -31,8 +31,9 @@ in {
       # https://github.com/portainer/portainer-compose/blob/master/docker-stack.yml
       portainer.service = mkIf cfg.server {
         container_name = "portainer";
-        image = "portainer/portainer-ce:2.27.4"; # https://hub.docker.com/r/portainer/portainer-ce/tags
-        ports = ["${config.custom.services.tailscale.ip}:9443:9443/tcp"];
+        depends_on = ["vpn"];
+        image = "portainer/portainer-ce:latest"; # https://hub.docker.com/r/portainer/portainer-ce/tags
+        network_mode = "service:vpn"; # 9443/tcp
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/portainer/data:/data"];
       };
@@ -40,8 +41,9 @@ in {
       # https://docs.portainer.io/admin/environments/add/docker/agent
       agent.service = mkIf cfg.agent {
         container_name = "portainer-agent";
-        image = "portainer/agent:2.27.4"; # https://hub.docker.com/r/portainer/agent/tags
-        #// ports = ["${config.custom.services.tailscale.ip}:9001:9001/tcp"];
+        depends_on = ["vpn"];
+        image = "portainer/agent:latest"; # https://hub.docker.com/r/portainer/agent/tags
+        network_mode = "service:vpn"; # 9001/tcp
         restart = "unless-stopped";
 
         volumes = [
@@ -49,6 +51,21 @@ in {
           "/var/run/docker.sock:/var/run/docker.sock:ro"
           "/var/lib/docker/volumes:/var/lib/docker/volumes:ro"
         ];
+      };
+
+      # https://tailscale.com/kb/1282/docker
+      vpn.service = {
+        container_name = "portainer-vpn";
+        devices = ["/dev/net/tun:/dev/net/tun"];
+        env_file = [config.age.secrets."common/tailscale/container.env".path];
+        hostname = "portainer";
+        image = "ghcr.io/tailscale/tailscale:latest"; # https://github.com/tailscale/tailscale/pkgs/container/tailscale
+        restart = "unless-stopped";
+        volumes = ["${config.custom.containers.directory}/portainer/vpn:/var/lib/tailscale"];
+
+        capabilities = {
+          NET_ADMIN = true;
+        };
       };
     };
   };

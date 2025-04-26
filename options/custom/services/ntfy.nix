@@ -17,13 +17,18 @@ in {
   options.custom.services.ntfy = {
     enable = mkEnableOption "ntfy";
 
+    token = mkOption {
+      default = false;
+      type = types.bool;
+    };
+
     topics = mkOption {
       default = ["charge"]; # Used as XDG icons
       type = types.listOf types.str;
     };
 
     url = mkOption {
-      default = "https://notify.${config.custom.domain}";
+      default = "https://notify.vpn.${config.custom.domain}";
       type = types.str;
     };
   };
@@ -35,9 +40,10 @@ in {
         owner = config.custom.username;
         group = config.users.users.${config.custom.username}.group;
       };
-    in {
-      "common/ntfy/token" = secret "common/ntfy/token";
-    };
+    in
+      mkIf cfg.token {
+        "common/ntfy/token" = secret "common/ntfy/token";
+      };
 
     # https://ntfy.sh/
     # https://github.com/binwiederhier/ntfy
@@ -76,7 +82,7 @@ in {
               # https://docs.ntfy.sh/subscribe/cli/#subscribe-to-multiple-topics
               subscribe = forEach cfg.topics (topic: {
                 inherit topic;
-                token = "%PLACEHOLDER%";
+                token = mkIf cfg.token "%PLACEHOLDER%";
               });
             };
 
@@ -85,7 +91,7 @@ in {
         };
 
         # HACK: Replace placeholder with decrypted token after activation
-        home.activation.ntfy = hm.lib.dag.entryAfter ["writeBoundary"] ''
+        home.activation.ntfy = mkIf cfg.token (hm.lib.dag.entryAfter ["writeBoundary"] ''
           run ${sed} \
             "s|%PLACEHOLDER%|$(${cat} ${config.age.secrets."common/ntfy/token".path})|" \
             ${hm.xdg.configFile."ntfy/client.yml".source} \
@@ -93,7 +99,7 @@ in {
 
           run ${mv} \
             ${hm.xdg.configHome}/ntfy/client.yml.tmp ${hm.xdg.configHome}/ntfy/client.yml
-        '';
+        '');
       }
     ];
   };

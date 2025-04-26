@@ -40,13 +40,12 @@ in {
         container_name = "synapse";
         depends_on = ["db"];
         image = "ghcr.io/element-hq/synapse:v1.128.0"; # https://github.com/element-hq/synapse/pkgs/container/synapse
-        #// ports = ["127.0.0.1:8008:8008/tcp"];
+        ports = ["127.0.0.1:8008:8008/tcp"];
         restart = "unless-stopped";
 
         volumes = [
           "${config.custom.containers.directory}/synapse/data:/data"
           "${config.age.secrets."${config.custom.profile}/synapse/homeserver.yaml".path}:/data/homeserver.yaml"
-          "/run/synapse:/run/synapse" # Directory for unix socket
         ];
 
         environment = {
@@ -74,11 +73,6 @@ in {
       "${config.custom.containers.directory}/synapse/data" = {
         d = owner "0700";
         z = owner "0700";
-      };
-
-      "/run/synapse" = {
-        d = owner "0755";
-        z = owner "0755";
       };
     };
   };

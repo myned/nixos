@@ -44,42 +44,55 @@ in {
     environment.shellAliases.arion-grafana = "sudo arion --prebuilt-file ${config.virtualisation.arion.projects.grafana.settings.out.dockerComposeYaml}";
 
     virtualisation.arion.projects.grafana.settings = {
-      services =
-        {
-          # https://github.com/grafana/grafana
-          # https://grafana.com/
-          # https://grafana.com/docs/grafana/latest/setup-grafana/installation/docker/
-          grafana.service = {
-            container_name = "grafana";
-            image = "grafana/grafana-oss:11.6.0"; # https://hub.docker.com/r/grafana/grafana-oss/tags
-            ports = ["127.0.0.1:3100:3000/tcp"];
-            restart = "unless-stopped";
-            volumes = ["${config.custom.containers.directory}/grafana/data:/var/lib/grafana"];
+      services = {
+        # https://github.com/grafana/grafana
+        # https://grafana.com/
+        # https://grafana.com/docs/grafana/latest/setup-grafana/installation/docker/
+        grafana.service = {
+          container_name = "grafana";
+          depends_on = ["vpn"];
+          image = "grafana/grafana-oss:latest"; # https://hub.docker.com/r/grafana/grafana-oss/tags
+          network_mode = "service:vpn"; # 3000/tcp
+          restart = "unless-stopped";
+          volumes = ["${config.custom.containers.directory}/grafana/data:/var/lib/grafana"];
 
-            # https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/
-            environment = {
-              GF_PLUGINS_PREINSTALL_DISABLED = "true";
-            };
-          };
-        }
-        // optionalAttrs cfg.prometheus.enable {
-          # https://github.com/prometheus/prometheus
-          # https://prometheus.io/
-          # https://prometheus.io/docs/prometheus/latest/installation/
-          # https://grafana.com/docs/grafana/latest/datasources/prometheus/configure-prometheus-data-source/
-          prometheus.service = {
-            container_name = "grafana-prometheus";
-            dns = mkIf config.services.tailscale.enable ["100.100.100.100"]; # Tailscale resolver
-            image = "quay.io/prometheus/prometheus:v3.3.0"; # https://quay.io/repository/prometheus/prometheus?tab=tags
-            ports = ["${config.custom.services.tailscale.ip}:9090:9090/tcp"];
-            restart = "unless-stopped";
-
-            volumes = [
-              "${pkgs.writeText "prometheus.yml" (generators.toYAML {} cfg.prometheus.settings)}:/etc/prometheus/prometheus.yml"
-              "${config.custom.containers.directory}/grafana/prometheus/data:/prometheus"
-            ];
+          # https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/
+          environment = {
+            GF_PLUGINS_PREINSTALL_DISABLED = "true";
           };
         };
+
+        # https://github.com/prometheus/prometheus
+        # https://prometheus.io/
+        # https://prometheus.io/docs/prometheus/latest/installation/
+        # https://grafana.com/docs/grafana/latest/datasources/prometheus/configure-prometheus-data-source/
+        prometheus.service = mkIf cfg.prometheus.enable {
+          container_name = "grafana-prometheus";
+          image = "quay.io/prometheus/prometheus:latest"; # https://quay.io/repository/prometheus/prometheus?tab=tags
+          network_mode = "service:vpn"; # 9090/tcp
+          restart = "unless-stopped";
+
+          volumes = [
+            "${pkgs.writeText "prometheus.yml" (generators.toYAML {} cfg.prometheus.settings)}:/etc/prometheus/prometheus.yml"
+            "${config.custom.containers.directory}/grafana/prometheus/data:/prometheus"
+          ];
+        };
+
+        # https://tailscale.com/kb/1282/docker
+        vpn.service = {
+          container_name = "grafana-vpn";
+          devices = ["/dev/net/tun:/dev/net/tun"];
+          env_file = [config.age.secrets."common/tailscale/container.env".path];
+          hostname = "grafana";
+          image = "ghcr.io/tailscale/tailscale:latest"; # https://github.com/tailscale/tailscale/pkgs/container/tailscale
+          restart = "unless-stopped";
+          volumes = ["${config.custom.containers.directory}/grafana/vpn:/var/lib/tailscale"];
+
+          capabilities = {
+            NET_ADMIN = true;
+          };
+        };
+      };
     };
 
     # https://github.com/grafana/grafana/blob/main/packaging/docker/custom/Dockerfile

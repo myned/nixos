@@ -31,7 +31,7 @@ in {
         command = "serve";
         container_name = "headscale";
         env_file = [config.age.secrets."${config.custom.profile}/headscale/.env".path];
-        image = "headscale/headscale:v0.23.0-beta.4";
+        image = "headscale/headscale:v0"; # https://hub.docker.com/r/headscale/headscale/tags
         restart = "unless-stopped";
 
         ports = [
