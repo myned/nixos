@@ -39,7 +39,7 @@
         key.enable = true;
         #// mnt = ["myve"];
         offset = 225239338; #?? sudo btrfs inspect-internal map-swapfile -r /var/lib/swapfile
-        swap = 32; # GB
+        swap = 32; # GiB
       };
     };
   };
