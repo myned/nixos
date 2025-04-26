@@ -40,6 +40,11 @@ in {
         allowedUDPPorts = mkIf cfg.dnsmasq [53 67]; # dnsmasq
       };
 
+      # Prefer tailscale address over 127.0.0.2 for machine hostname
+      hosts = mkIf config.custom.services.tailscale.enable {
+        ${config.custom.services.tailscale.ip} = [config.custom.hostname];
+      };
+
       networkmanager = mkIf cfg.networkmanager {
         enable = true;
         wifi.backend = mkIf cfg.wifi "iwd";
