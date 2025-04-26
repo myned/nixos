@@ -185,7 +185,7 @@
       mypi3 = stable "aarch64" [./profiles/sbc ./machines/mypi3];
 
       ### Unstable
-      myeck = unstable "x86_64" [./profiles/console ./machines/myeck];
+      myeck = unstable "x86_64" [./profiles/deck ./machines/myeck];
       mynix = unstable "x86_64" [./profiles/desktop ./machines/mynix];
       myork = unstable "x86_64" [./profiles/laptop ./machines/myork];
     };

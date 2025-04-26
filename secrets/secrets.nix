@@ -15,7 +15,7 @@ let
   # Profiles that decrypt age files during activation
   #!! Imperative host key generation without sshd service
   #?? sudo ssh-keygen -f /etc/ssh/id_ed25519 -N ''
-  consoles = [
+  decks = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJh8nTTOUsmKQa7zIftN2k8BgbQbXENc98KSJIyorMON root@myeck"
   ];
 
@@ -32,8 +32,8 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAgrWvzp14Vj+aMd3b9w6e3/xbkHfNZoswsAg9QtUcDc root@myne"
   ];
 
-  common = users ++ consoles ++ desktops ++ sbcs ++ servers;
-  console = users ++ consoles;
+  common = users ++ decks ++ desktops ++ sbcs ++ servers;
+  deck = users ++ decks;
   desktop = users ++ desktops;
   sbc = users ++ sbcs;
   server = users ++ servers;
@@ -43,9 +43,9 @@ in {
   "common/ntfy/token".publicKeys = desktop;
   "common/geoclue2/geolocation".publicKeys = common;
 
-  ### Console
-  "console/users/myned.pass".publicKeys = console;
-  "console/users/root.pass".publicKeys = console;
+  ### Deck
+  "deck/users/myned.pass".publicKeys = deck;
+  "deck/users/root.pass".publicKeys = deck;
 
   ### Desktop
   "desktop/bitwarden/client_id".publicKeys = desktop;

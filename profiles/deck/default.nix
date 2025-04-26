@@ -12,7 +12,7 @@
 
   custom = {
     minimal = true;
-    profile = "console";
+    profile = "deck";
     desktop = "kde";
 
     programs = {
