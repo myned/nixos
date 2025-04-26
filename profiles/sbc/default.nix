@@ -30,8 +30,6 @@ in {
         system = true;
       };
 
-      #// tailscale.cert = true;
-
       borgmatic = {
         enable = true;
 
@@ -43,11 +41,6 @@ in {
             hm.programs.kodi.datadir
           ];
       };
-
-      # netdata = {
-      #   enable = true;
-      #   child = true;
-      # };
     };
 
     settings = {

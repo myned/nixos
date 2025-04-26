@@ -53,11 +53,8 @@
     };
 
     services = {
-      #// caddy.enable = true;
-      #// modufur.enable = true;
       prometheus.enable = true;
       sshd.enable = true;
-      #// tailscale.cert = true;
 
       borgmatic = {
         enable = true;
@@ -67,7 +64,6 @@
           "/home"
           "/mnt/local"
           "/srv"
-          #// "/var/lib/matrix-conduit"
         ];
 
         repositories = [
@@ -77,12 +73,6 @@
           }
         ];
       };
-
-      # TODO: Setup netdata
-      # netdata = {
-      #   enable = true;
-      #   parent = true;
-      # };
 
       syncthing = {
         enable = true;
