@@ -11,7 +11,7 @@ in {
     ### Profiles
     default = mkOption {default = true;};
     full = mkOption {default = false;};
-    minimal = mkOption {default = cfg.full;};
+    minimal = mkOption {default = cfg.full;}; # TODO: Use "interactive" instead
     profile = mkOption {};
 
     ### Users
