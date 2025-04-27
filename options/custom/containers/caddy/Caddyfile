@@ -251,8 +251,8 @@ bjork.tech {
 		# 	ca https://acme.zerossl.com/v2/DV90
 		# }
 
-		reverse_proxy adguardhome:80
-		reverse_proxy /dns-query adguardhome:8443
+		reverse_proxy {system.hostname}-adguardhome:80
+		reverse_proxy /dns-query {system.hostname}-adguardhome:8443
 	}
 
 	# Home Assistant
