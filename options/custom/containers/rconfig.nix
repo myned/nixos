@@ -52,7 +52,7 @@ in {
         container_name = "rconfig-vpn";
         devices = ["/dev/net/tun:/dev/net/tun"];
         env_file = [config.age.secrets."common/tailscale/container.env".path];
-        hostname = "rconfig";
+        hostname = "${config.custom.hostname}-rconfig";
         image = "ghcr.io/tailscale/tailscale:latest"; # https://github.com/tailscale/tailscale/pkgs/container/tailscale
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/rconfig/vpn:/var/lib/tailscale"];

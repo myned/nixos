@@ -52,7 +52,7 @@ in {
         container_name = "kener-vpn";
         devices = ["/dev/net/tun:/dev/net/tun"];
         env_file = [config.age.secrets."common/tailscale/container.env".path];
-        hostname = "kener";
+        hostname = "${config.custom.hostname}-kener";
         image = "ghcr.io/tailscale/tailscale:latest"; # https://github.com/tailscale/tailscale/pkgs/container/tailscale
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/kener/vpn:/var/lib/tailscale"];

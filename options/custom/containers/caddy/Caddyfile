@@ -117,7 +117,7 @@ bjork.gay {
 	# Oryx
 	@stream host stream.vpn.bjork.gay
 	handle @stream {
-		reverse_proxy oryx:2022
+		reverse_proxy {system.hostname}-oryx:2022
 		redir /flv {$ORYX_FLV}
 		redir /hls {$ORYX_HLS}
 		redir /webrtc {$ORYX_WEBRTC}
@@ -182,7 +182,7 @@ bjork.tech {
 
 	# Kener
 	@status host status.bjork.tech
-	reverse_proxy @status kener:3000
+	reverse_proxy @status {system.hostname}-kener:3000
 
 	# https://caddyserver.com/docs/caddyfile/patterns#redirect-www-subdomain
 	@www host www.bjork.tech
@@ -210,12 +210,12 @@ bjork.tech {
 	# @data-admin host data.admin.bjork.tech
 	# handle @data-admin {
 	# 	redir / /v3
-	# 	reverse_proxy netdata:19999
+	# 	reverse_proxy {system.hostname}-netdata:19999
 	# }
 
 	# Grafana
 	@graph-admin host graph.admin.bjork.tech
-	reverse_proxy @graph-admin grafana:3000
+	reverse_proxy @graph-admin {system.hostname}-grafana:3000
 
 	# Synapse Admin
 	@matrix-admin host matrix.admin.bjork.tech
@@ -223,11 +223,11 @@ bjork.tech {
 
 	# Prometheus
 	@metric-admin host metric.admin.bjork.tech
-	reverse_proxy @metric-admin grafana:9090
+	reverse_proxy @metric-admin {system.hostname}-prometheus:9090
 
 	# Beszel
 	@monitor-admin host monitor.admin.bjork.tech
-	reverse_proxy @monitor-admin beszel:8090
+	reverse_proxy @monitor-admin {system.hostname}-beszel:8090
 }
 
 *.vpn.bjork.tech {
@@ -237,7 +237,7 @@ bjork.tech {
 
 	# Open WebUI
 	@ai host ai.vpn.bjork.tech
-	reverse_proxy @ai openwebui:8080
+	reverse_proxy @ai {system.hostname}-openwebui:8080
 
 	# Actual Budget
 	@budget host budget.vpn.bjork.tech

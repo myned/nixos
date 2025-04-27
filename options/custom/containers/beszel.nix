@@ -48,7 +48,7 @@ in {
           container_name = "beszel-vpn";
           devices = ["/dev/net/tun:/dev/net/tun"];
           env_file = [config.age.secrets."common/tailscale/container.env".path];
-          hostname = "beszel";
+          hostname = "${config.custom.hostname}-beszel";
           image = "ghcr.io/tailscale/tailscale:latest"; # https://github.com/tailscale/tailscale/pkgs/container/tailscale
           restart = "unless-stopped";
           volumes = ["${config.custom.containers.directory}/beszel/vpn:/var/lib/tailscale"];

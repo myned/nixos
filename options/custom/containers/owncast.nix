@@ -27,7 +27,7 @@ in {
         container_name = "owncast-vpn";
         devices = ["/dev/net/tun:/dev/net/tun"];
         env_file = [config.age.secrets."common/tailscale/container.env".path];
-        hostname = "owncast";
+        hostname = "${config.custom.hostname}-owncast";
         image = "ghcr.io/tailscale/tailscale:latest"; # https://github.com/tailscale/tailscale/pkgs/container/tailscale
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/owncast/vpn:/var/lib/tailscale"];

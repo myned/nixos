@@ -37,7 +37,7 @@ in {
         container_name = "oryx-vpn";
         devices = ["/dev/net/tun:/dev/net/tun"];
         env_file = [config.age.secrets."common/tailscale/container.env".path];
-        hostname = "oryx";
+        hostname = "${config.custom.hostname}-oryx";
         image = "ghcr.io/tailscale/tailscale:latest"; # https://github.com/tailscale/tailscale/pkgs/container/tailscale
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/oryx/vpn:/var/lib/tailscale"];

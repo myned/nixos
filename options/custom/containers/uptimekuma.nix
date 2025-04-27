@@ -32,7 +32,7 @@ in {
         container_name = "uptimekuma-vpn";
         devices = ["/dev/net/tun:/dev/net/tun"];
         env_file = [config.age.secrets."common/tailscale/container.env".path];
-        hostname = "uptimekuma";
+        hostname = "${config.custom.hostname}-uptimekuma";
         image = "ghcr.io/tailscale/tailscale:latest"; # https://github.com/tailscale/tailscale/pkgs/container/tailscale
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/uptimekuma/vpn:/var/lib/tailscale"];

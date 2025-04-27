@@ -36,7 +36,7 @@ in {
         container_name = "adguardhome-vpn";
         devices = ["/dev/net/tun:/dev/net/tun"];
         env_file = [config.age.secrets."common/tailscale/container.env".path];
-        hostname = "adguardhome";
+        hostname = "${config.custom.hostname}-adguardhome";
         image = "ghcr.io/tailscale/tailscale:latest"; # https://github.com/tailscale/tailscale/pkgs/container/tailscale
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/adguardhome/vpn:/var/lib/tailscale"];

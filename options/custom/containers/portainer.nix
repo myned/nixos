@@ -58,7 +58,7 @@ in {
         container_name = "portainer-vpn";
         devices = ["/dev/net/tun:/dev/net/tun"];
         env_file = [config.age.secrets."common/tailscale/container.env".path];
-        hostname = "portainer";
+        hostname = "${config.custom.hostname}-portainer";
         image = "ghcr.io/tailscale/tailscale:latest"; # https://github.com/tailscale/tailscale/pkgs/container/tailscale
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/portainer/vpn:/var/lib/tailscale"];

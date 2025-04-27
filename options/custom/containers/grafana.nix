@@ -83,7 +83,7 @@ in {
           container_name = "grafana-vpn";
           devices = ["/dev/net/tun:/dev/net/tun"];
           env_file = [config.age.secrets."common/tailscale/container.env".path];
-          hostname = "grafana";
+          hostname = "${config.custom.hostname}-grafana";
           image = "ghcr.io/tailscale/tailscale:latest"; # https://github.com/tailscale/tailscale/pkgs/container/tailscale
           restart = "unless-stopped";
           volumes = ["${config.custom.containers.directory}/grafana/vpn:/var/lib/tailscale"];
