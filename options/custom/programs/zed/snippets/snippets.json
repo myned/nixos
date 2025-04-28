@@ -92,7 +92,7 @@
     "prefix": "ncat",
     "description": "NixOS Container Arion Tmpfiles",
     "body": [
-      "#?? arion-$1 run -- --rm --entrypoint='id $1' $1",
+      "#?? arion-$1 run -- --rm --entrypoint=id $1",
       "systemd.tmpfiles.settings.$1 = let",
       "  owner = mode: {",
       "    inherit mode;",
