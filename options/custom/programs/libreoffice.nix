@@ -9,20 +9,40 @@ with lib; let
   hm = config.home-manager.users.${config.custom.username};
 in {
   options.custom.programs.libreoffice = {
-    enable = mkOption {default = false;};
-    package = mkOption {default = pkgs.libreoffice-fresh;};
+    enable = mkEnableOption "libreoffice";
+
+    package = mkOption {
+      default = pkgs.libreoffice-fresh;
+      type = types.package;
+    };
+
+    spellcheck = mkOption {
+      default = true;
+      type = types.bool;
+    };
   };
 
   config = mkIf cfg.enable {
     # https://www.libreoffice.org
-    environment.systemPackages = [cfg.package];
+    # https://wiki.nixos.org/wiki/LibreOffice
+    environment.systemPackages =
+      [
+        cfg.package
+      ]
+      ++ optionals cfg.spellcheck [
+        pkgs.hunspell
+      ];
 
-    #!! Options not available, files synced
-    home-manager.users.${config.custom.username} = {
-      xdg.configFile."libreoffice/4/user" = {
-        force = true;
-        source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/linux/config/libreoffice/user";
-      };
-    };
+    home-manager.sharedModules = [
+      {
+        #!! Options not available, files synced
+        xdg.configFile = {
+          "libreoffice/4/user" = {
+            source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/linux/config/libreoffice/user";
+            force = true;
+          };
+        };
+      }
+    ];
   };
 }
