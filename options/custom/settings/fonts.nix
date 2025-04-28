@@ -152,6 +152,8 @@ in {
           noto-fonts-emoji-blob-bin
 
           # Microsoft
+          carlito
+          corefonts
           vista-fonts
 
           # Fallback
