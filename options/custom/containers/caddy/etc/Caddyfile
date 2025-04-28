@@ -1,0 +1,47 @@
+{
+	# https://caddyserver.com/docs/caddyfile/options
+
+	email admin@bjork.tech
+
+	#!! Production
+	# https://letsencrypt.org/getting-started/
+	acme_ca https://acme-v02.api.letsencrypt.org/directory
+
+	#!! Staging
+	# https://letsencrypt.org/docs/staging-environment/
+	#// acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
+
+	# https://caddyserver.com/docs/automatic-https#enabling-ech
+	ech ech.bjork.tech
+
+	# https://caddyserver.com/docs/logging
+	log {
+		format console
+		level INFO
+	}
+
+	# https://caddyserver.com/docs/caddyfile/directives#directive-order
+	order bind first
+
+	# https://github.com/mholt/caddy-l4
+	# layer4 {
+	#  tcp/:853 {
+	#    route {
+	#      tls
+	#      proxy {
+	#        proxy_protocol v2
+	#        upstream tcp/localhost:8853
+	#      }
+	#    }
+	#  }
+
+	#  udp/:853 {
+	#    route {
+	#      proxy udp/localhost:8853
+	#    }
+	#  }
+	# }
+}
+
+import snippets/*.caddyfile
+import sites/*.caddyfile

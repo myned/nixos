@@ -115,21 +115,22 @@ in {
           z = owner "0700"; # -rwx------
         };
 
+        #!! Recursive
+        # HACK: Copy files directly to trigger reloads
+        # https://github.com/caddyserver/caddy/issues/5735#issuecomment-1675896585
         "${config.custom.containers.directory}/caddy/etc" = {
-          d = owner "0500"; # -r-x------
-          z = owner "0500"; # -r-x------
+          C = owner "0500" // {argument = toString ./etc;}; # -r-x------
         };
 
-        # HACK: Copy Caddyfile directly to trigger reloads
-        "${config.custom.containers.directory}/caddy/etc/Caddyfile" = {
-          C = owner "0400" // {argument = toString ./Caddyfile;};
-          r = {}; #!! Overwrite existing file
+        #!! Recursive
+        "${config.custom.containers.directory}/caddy/etc/*" = {
+          R = {}; # Replace existing files
         };
 
         #!! Recursive
         "/srv" = {
-          d = owner "0700"; # -rwx------
-          Z = owner "0700"; # -rwx------
+          d = owner "0500"; # -r-x------
+          Z = owner "0500"; # -r-x------
         };
       };
     };

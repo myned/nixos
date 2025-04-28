@@ -1,0 +1,20 @@
+# https://caddyserver.com/docs/caddyfile/directives/basic_auth
+
+(admin) {
+	#?? caddy hash-password
+	basic_auth {
+		{$ADMIN_USER} {$ADMIN_HASH}
+	}
+}
+
+#?? import owo [path ...]
+(owo) {
+	#?? echo -n '<username>:<password>' | base64
+	@unauthorized {
+		path {args[:]}
+		not header Authorization "Basic {$OWO_HASH}"
+	}
+
+	header @unauthorized WWW-Authenticate Basic
+	respond @unauthorized 401
+}

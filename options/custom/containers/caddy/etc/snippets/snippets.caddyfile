@@ -1,0 +1,11 @@
+# https://caddyserver.com/docs/caddyfile/concepts#snippets
+
+(global) {
+	encode zstd gzip
+	header X-Robots-Tag "noindex, nofollow"
+}
+
+(vpn) {
+	# https://tailscale.com/kb/1015/100.x-addresses
+	bind {system.hostname}.{$TAILNET} # FQDN
+}

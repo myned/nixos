@@ -1,0 +1,68 @@
+# https://caddyserver.com/docs/caddyfile/directives/import
+
+# BUG: Unrecognized subdirective {block}, requires block when importing if defined
+# https://github.com/caddyserver/caddy/issues/6821
+
+#?? import handle <host> [host ...]
+(handle) {
+	@handle-{args[0]} host {args[:]}
+	handle @handle-{args[0]} {
+		{block}
+	}
+}
+
+#?? import proxy <host> <upstream> [upstream ...]
+(proxy) {
+	@proxy-{args[0]} host {args[0]}
+	reverse_proxy @proxy-{args[0]} {args[1:]}
+}
+
+#?? import proxy-insecure <host> <upstream> [upstream ...]
+(proxy-insecure) {
+	@proxy-insecure-{args[0]} host {args[0]}
+	reverse_proxy @proxy-insecure-{args[0]} {args[1:]} {
+		transport http {
+			tls_insecure_skip_verify
+		}
+	}
+}
+
+#?? import proxy-ip <host> <upstream> [upstream ...]
+(proxy-ip) {
+	@proxy-ip-{args[0]} host {args[0]}
+	reverse_proxy @proxy-ip-{args[0]} {args[1:]} {
+		header_up X-Real-IP {client_ip}
+	}
+}
+
+#?? import redirect <host> <to>
+(redirect) {
+	@redirect-{args[0]} host {args[0]}
+	redir @redirect-{args[0]} https://{args[1]}{uri}
+}
+
+#?? import serve <host>
+(serve) {
+	@serve-{args[0]} host {args[0]}
+	handle @serve-{args[0]} {
+		root * /srv/sites/{args[0]}
+		file_server
+	}
+}
+
+#?? import serve-files <host> <file> [file ...]
+(serve-files) {
+	@serve-files-{args[0]} host {args[0]}
+	handle @serve-files-{args[0]} {
+		root * /srv/sites/{args[0]}
+		try_files {args[1:]}
+		file_server
+	}
+}
+
+#?? import www <domain>
+(www) {
+	# https://caddyserver.com/docs/caddyfile/patterns#redirect-www-subdomain
+	@www host www.{args[0]}
+	redir @www https://{args[0]}{uri}
+}

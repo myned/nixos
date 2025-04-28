@@ -1,0 +1,31 @@
+bjork.gay {
+	import global
+	import cloudflare
+
+	# Mastodon
+	import proxy-insecure bjork.gay https://localhost:3000
+}
+
+*.bjork.gay {
+	import global
+	import cloudflare
+	import www bjork.gay
+	import redirect status.bjork.gay status.bjork.tech
+}
+
+*.vpn.bjork.gay {
+	import global
+	import cloudflare
+	import vpn
+
+	# Oryx
+	import handle stream.vpn.bjork.gay {
+		reverse_proxy {system.hostname}-oryx:2022
+		redir /flv {$ORYX_FLV}
+		redir /hls {$ORYX_HLS}
+		redir /webrtc {$ORYX_WEBRTC}
+	}
+
+	# Caddy
+	import serve-files wallpaper.vpn.bjork.gay /wallpaper.png
+}
