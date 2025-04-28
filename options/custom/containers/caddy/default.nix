@@ -34,17 +34,18 @@ in {
       # https://caddyserver.com/
       # https://caddyserver.com/docs/running#docker-compose
       caddy.service = {
-        build.context = "${./.}";
+        build.context = toString ./.;
         container_name = "caddy";
         env_file = [config.age.secrets."${config.custom.profile}/caddy/.env".path];
         image = "localhost/caddy";
         network_mode = "host"; # 80/tcp 443/tcp/udp
         restart = "unless-stopped";
+        user = "239:239";
 
         volumes = [
           "${config.custom.containers.directory}/caddy/config:/config"
           "${config.custom.containers.directory}/caddy/data:/data"
-          "${./Caddyfile}:/etc/caddy/Caddyfile:ro"
+          "${config.custom.containers.directory}/caddy/etc:/etc/caddy:ro"
           "/srv:/srv:ro"
         ];
       };
@@ -55,9 +56,13 @@ in {
         80 # HTTP
         443 # HTTPS
       ];
+
+      allowedUDPPorts = [
+        443 # HTTP/3
+      ];
     };
 
-    # For write access to /srv
+    # For remote access to /srv
     services.openssh.settings = mkIf (isString cfg.public-key) {
       AllowUsers = ["srv"];
     };
@@ -77,28 +82,55 @@ in {
       };
     };
 
-    #?? arion-caddy run -- --rm --entrypoint='id caddy' caddy
-    systemd.tmpfiles.settings.caddy = let
-      owner = mode: {
-        inherit mode;
-        user = "239"; # caddy
-        group = "239"; # caddy
-      };
-    in {
-      "${config.custom.containers.directory}/caddy/config" = {
-        d = owner "0700"; # -rwx------
-        z = owner "0700"; # -rwx------
+    systemd = {
+      # HACK: Reload config instead of restarting service
+      # https://nixos.org/manual/nixos/unstable/index.html#sec-unit-handling
+      # https://discourse.nixos.org/t/reload-triggers-now-on-unstable-call-for-migration/17815
+      services.arion-caddy = {
+        # FIXME: Reload not triggered via file modification
+        #// reloadTriggers = [./Caddyfile];
+        reloadIfChanged = true; #!! Certain changes require service restart
+
+        reload = ''
+          arion --prebuilt-file "$ARION_PREBUILT" exec -- caddy \
+            caddy reload --config /etc/caddy/Caddyfile
+        '';
       };
 
-      "${config.custom.containers.directory}/caddy/data" = {
-        d = owner "0700"; # -rwx------
-        z = owner "0700"; # -rwx------
-      };
+      #?? arion-caddy run -- --rm --entrypoint='id caddy' caddy
+      tmpfiles.settings.caddy = let
+        owner = mode: {
+          inherit mode;
+          user = "239"; # caddy
+          group = "239"; # caddy
+        };
+      in {
+        "${config.custom.containers.directory}/caddy/config" = {
+          d = owner "0700"; # -rwx------
+          z = owner "0700"; # -rwx------
+        };
 
-      #!! Recursive
-      "/srv" = {
-        d = owner "0700"; # -rwx------
-        Z = owner "0700"; # -rwx------
+        "${config.custom.containers.directory}/caddy/data" = {
+          d = owner "0700"; # -rwx------
+          z = owner "0700"; # -rwx------
+        };
+
+        "${config.custom.containers.directory}/caddy/etc" = {
+          d = owner "0500"; # -r-x------
+          z = owner "0500"; # -r-x------
+        };
+
+        # HACK: Copy Caddyfile directly to trigger reloads
+        "${config.custom.containers.directory}/caddy/etc/Caddyfile" = {
+          C = owner "0400" // {argument = toString ./Caddyfile;};
+          r = {}; #!! Overwrite existing file
+        };
+
+        #!! Recursive
+        "/srv" = {
+          d = owner "0700"; # -rwx------
+          Z = owner "0700"; # -rwx------
+        };
       };
     };
   };
