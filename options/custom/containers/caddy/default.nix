@@ -129,8 +129,8 @@ in {
 
         #!! Recursive
         "/srv" = {
-          d = owner "0500"; # -r-x------
-          Z = owner "0500"; # -r-x------
+          d = owner "0700"; # -rwx------
+          Z = owner "0700"; # -rwx------
         };
       };
     };
