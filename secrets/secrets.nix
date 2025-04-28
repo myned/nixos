@@ -92,6 +92,8 @@ in {
   "server/nextcloud/.env".publicKeys = server;
   "server/nextcloud/db.env".publicKeys = server;
   "server/oryx/.env".publicKeys = server;
+  "server/passbolt/.env".publicKeys = server;
+  "server/passbolt/db.env".publicKeys = server;
   "server/rconfig/.env".publicKeys = server;
   "server/rconfig/db.env".publicKeys = server;
   "server/searxng/.env".publicKeys = server;
