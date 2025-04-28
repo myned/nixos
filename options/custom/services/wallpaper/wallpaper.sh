@@ -3,10 +3,10 @@
 # Script to periodically switch wallpapers in given directory
 #?? wallpaper <directory>
 
-WALLPAPER=/tmp/wallpaper.png                                 # Path to copy original
-ALTERED=/tmp/altered.png                                     # Path to create altered image
-STATIC=srv@myne:/srv/sites/wallpaper.bjork.gay/wallpaper.png # Rsync URI to static image on remote server
-INTERVAL=15                                                  # Minutes between switches
+WALLPAPER=/tmp/wallpaper.png                                     # Path to copy original
+ALTERED=/tmp/altered.png                                         # Path to create altered image
+STATIC=srv@myne:/srv/sites/wallpaper.vpn.bjork.gay/wallpaper.png # Rsync URI to static image on remote server
+INTERVAL=15                                                      # Minutes between switches
 
 # Delay before initial switch
 sleep 15s
