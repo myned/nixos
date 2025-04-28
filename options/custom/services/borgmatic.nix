@@ -29,8 +29,8 @@ in {
       # https://torsion.org/borgmatic/docs/reference/configuration/
       settings = {
         keep_hourly = 24;
-        keep_daily = 7;
-        keep_weekly = 4;
+        keep_daily = 1;
+        keep_weekly = 1;
         keep_monthly = 1;
         keep_yearly = 0;
         retries = 10;
