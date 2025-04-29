@@ -19,6 +19,7 @@ in {
       boot = true;
       beszel.enable = true;
       homeassistant.enable = true;
+      portainer.enable = true;
     };
 
     services = {

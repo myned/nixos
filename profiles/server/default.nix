@@ -39,7 +39,8 @@
       oryx.enable = true;
       #// owncast.enable = true;
       #// passbolt.enable = true;
-      #// portainer.enable = true;
+      portainer.enable = true;
+      portainer.server = true;
       #// rconfig.enable = true;
       redlib.enable = true;
       #// searxng.enable = true;

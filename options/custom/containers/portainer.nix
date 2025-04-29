@@ -15,7 +15,7 @@ in {
     };
 
     server = mkOption {
-      default = true;
+      default = false;
       type = types.bool;
     };
   };
@@ -32,7 +32,7 @@ in {
       portainer.service = mkIf cfg.server {
         container_name = "portainer";
         depends_on = ["vpn"];
-        image = "portainer/portainer-ce:latest"; # https://hub.docker.com/r/portainer/portainer-ce/tags
+        image = "portainer/portainer-ee:latest"; # https://hub.docker.com/r/portainer/portainer-ee/tags
         network_mode = "service:vpn"; # 9443/tcp
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/portainer/data:/data"];
