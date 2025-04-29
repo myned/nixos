@@ -36,7 +36,8 @@ bjork.tech {
 	import global
 	import cloudflare
 	import vpn
-	import proxy-insecure cloud.admin.bjork.tech https://localhost:8080 # Nextcloud AIO
+	import proxy-insecure cloud.admin.bjork.tech localhost:8080 # Nextcloud AIO
+	import proxy-insecure container.admin.bjork.tech {system.hostname}-portainer:9443 # Portainer
 	import proxy dash.admin.bjork.tech localhost:3001 # dash.
 	import proxy graph.admin.bjork.tech {system.hostname}-grafana:3000 # Grafana
 	import proxy matrix.admin.bjork.tech localhost:8000 # Synapse Admin
