@@ -95,56 +95,44 @@ in {
           ];
 
           # https://zed.dev/docs/key-bindings
-          userKeymaps = [
-            {
-              # Global
-              bindings = {
-                "alt-\\" = "workspace::ToggleBottomDock";
-                "alt-a" = "assistant::ToggleFocus";
-                "alt-c" = "collab_panel::ToggleFocus";
-                "alt-f" = "project_search::ToggleFocus";
-                "alt-g" = "git_panel::ToggleFocus";
-                "alt-p" = "project_panel::ToggleFocus";
-                "alt-t" = "terminal_panel::ToggleFocus";
+          userKeymaps = let
+            global = bindings: {inherit bindings;};
+            context = context: bindings: {inherit context bindings;};
+          in [
+            (global {
+              "alt-\\" = "workspace::ToggleBottomDock";
+              "alt-a" = "assistant::ToggleFocus";
+              "alt-c" = "collab_panel::ToggleFocus";
+              "alt-f" = "project_search::ToggleFocus";
+              "alt-g" = "git_panel::ToggleFocus";
+              "alt-p" = "project_panel::ToggleFocus";
+              "alt-t" = "terminal_panel::ToggleFocus";
 
-                "alt-escape" = "workspace::CloseAllDocks";
-                "alt-space" = "command_palette::Toggle";
-                "alt-tab" = "workspace::ToggleLeftDock";
+              "alt-escape" = "workspace::CloseAllDocks";
+              "alt-space" = "command_palette::Toggle";
+              "alt-tab" = "workspace::ToggleLeftDock";
 
-                "alt-shift-tab" = "workspace::ToggleRightDock";
-              };
-            }
+              "alt-shift-tab" = "workspace::ToggleRightDock";
+            })
 
-            {
-              # Editor
-              context = "Editor";
-              bindings = {
-                "alt-backspace" = "editor::DeleteLine";
-                "alt-enter" = "editor::DuplicateLineDown";
-                "alt-left" = "editor::MoveToBeginningOfLine";
-                "alt-right" = "editor::MoveToEndOfLine";
-                "ctrl-enter" = "editor::NewlineBelow";
+            (context "Editor" {
+              "alt-backspace" = "editor::DeleteLine";
+              "alt-enter" = "editor::DuplicateLineDown";
+              "alt-left" = "editor::MoveToBeginningOfLine";
+              "alt-right" = "editor::MoveToEndOfLine";
+              "ctrl-enter" = "editor::NewlineBelow";
 
-                "alt-shift-enter" = "editor::DuplicateLineUp";
-              };
-            }
+              "alt-shift-enter" = "editor::DuplicateLineUp";
+            })
 
-            {
-              # Editor completions
-              context = "Editor && showing_completions";
-              bindings = {
-                "enter" = "editor::Newline";
-              };
-            }
+            (context "Editor && showing_completions" {
+              "enter" = "editor::Newline";
+            })
 
-            {
-              # Terminal
-              # https://zed.dev/docs/key-bindings#forward-keys-to-terminal
-              context = "Terminal";
-              bindings = {
-                "ctrl-s" = ["terminal::SendKeystroke" "ctrl-s"];
-              };
-            }
+            # https://zed.dev/docs/key-bindings#forward-keys-to-terminal
+            (context "Terminal" {
+              "ctrl-s" = ["terminal::SendKeystroke" "ctrl-s"];
+            })
           ];
 
           # https://zed.dev/docs/configuring-zed
@@ -295,6 +283,12 @@ in {
               "background" = "#${base01}";
               "border" = "#${base00}";
               "border.variant" = "#${base00}";
+              "created" = "#${base0B}";
+              "created.background" = "#${base0B}20";
+              "created.border" = "#${base0B}40";
+              "deleted" = "#${base08}";
+              "deleted.background" = "#${base08}20";
+              "deleted.border" = "#${base08}40";
               "editor.active_wrap_guide" = "#${base01}";
               "editor.document_highlight.read_background" = "#${base01}";
               "editor.document_highlight.write_background" = "#${base01}";
@@ -318,6 +312,9 @@ in {
               "icon.accent" = "#${base0F}";
               "panel.background" = "#${base01}";
               "panel.focused_border" = "#${base0F}";
+              "predictive" = "#${base06}";
+              "predictive.background" = "#${base06}20";
+              "predictive.border" = "#${base06}40";
               "scrollbar.thumb.background" = "#${base03}40";
               "scrollbar.thumb.border" = "#${base03}00";
               "scrollbar.thumb.hover_background" = "#${base03}";
