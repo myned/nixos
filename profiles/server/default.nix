@@ -34,6 +34,7 @@
       #// nextcloud.enable = true;
       nextcloudaio.enable = true;
       ntfy.enable = true;
+      opengist.enable = true;
       openwebui.enable = true;
       oryx.enable = true;
       #// owncast.enable = true;
