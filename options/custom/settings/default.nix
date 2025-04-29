@@ -10,6 +10,7 @@ with lib; {
       environment.enable = true;
       hardware.enable = true;
       networking.enable = true;
+      nixgl.enable = true;
       packages.enable = true;
       users.enable = true;
     })

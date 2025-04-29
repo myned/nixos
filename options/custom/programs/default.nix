@@ -18,7 +18,6 @@ with lib; {
       nano.enable = true;
       nh.enable = true;
       nix-index.enable = true;
-      nixgl.enable = true;
       nushell.enable = true;
       polkit.enable = true;
       qalculate.enable = true;
