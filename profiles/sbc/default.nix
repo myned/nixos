@@ -8,7 +8,7 @@ with lib; let
 in {
   custom = {
     profile = "sbc";
-    desktop = "kodi";
+    #// desktop = "kodi";
 
     programs = {
       fastfetch.greet = true;
@@ -25,11 +25,11 @@ in {
     services = {
       prometheus.enable = true;
 
-      pipewire = {
-        enable = true;
-        pulseaudio = false;
-        system = true;
-      };
+      # pipewire = {
+      #   enable = true;
+      #   pulseaudio = false;
+      #   system = true;
+      # };
 
       borgmatic = {
         enable = true;
