@@ -20,6 +20,7 @@
       dashdot.enable = true;
       #// directus.enable = true;
       forgejo.enable = true;
+      forgejo.server = true;
       foundryvtt.enable = true;
       #// freshrss.enable = true;
       #// ghost.enable = true;
