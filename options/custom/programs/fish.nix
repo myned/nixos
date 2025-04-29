@@ -266,7 +266,6 @@ in {
             scsdn = "sudo systemctl --system disable --now";
             scse = "sudo systemctl --system reenable";
             scsen = "sudo systemctl --system reenable --now";
-            scsh = "sudo systemctl --system show";
             scsld = "sudo systemctl --system list-dependencies";
             scsls = "sudo systemctl --system list-sockets";
             scslt = "sudo systemctl --system list-timers";
@@ -276,6 +275,7 @@ in {
             scsr = "sudo systemctl --system restart";
             scsrr = "sudo systemctl --system reload-or-restart";
             scss = "sudo systemctl --system status";
+            scssh = "sudo systemctl --system show";
             scst = "sudo systemctl --system stop";
             scsu = "sudo systemctl --system unmask";
             scu = "systemctl --user";
@@ -283,7 +283,6 @@ in {
             scudn = "systemctl --user disable --now";
             scue = "systemctl --user reenable";
             scuen = "systemctl --user reenable --now";
-            scuh = "systemctl --user show";
             sculd = "systemctl --user list-dependencies";
             sculs = "systemctl --user list-sockets";
             scult = "systemctl --user list-timers";
@@ -293,6 +292,7 @@ in {
             scur = "systemctl --user restart";
             scurr = "systemctl --user reload-or-restart";
             scus = "systemctl --user status";
+            scush = "systemctl --user show";
             scut = "systemctl --user stop";
             scuu = "systemctl --user unmask";
 
@@ -305,6 +305,7 @@ in {
             ti = "tailscale ip --4";
             tl = "sudo tailscale login";
             tp = "tailscale ping";
+            tn = "tailscale netcheck";
             ts = "tailscale status";
             tss = "tailscale ssh";
             tt = "sudo tailscale set";
