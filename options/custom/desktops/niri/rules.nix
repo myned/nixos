@@ -228,7 +228,13 @@ in {
               matches = [
                 {app-id = "^1Password$";}
                 {app-id = "^Bitwarden$";}
+                {app-id = "^com-artemchep-keyguard-MainKt$";}
               ];
+
+              default-column-width.proportion =
+                if config.custom.ultrawide
+                then 0.4
+                else 0.8;
             }
 
             {

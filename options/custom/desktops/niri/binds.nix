@@ -18,6 +18,7 @@ with lib; let
   hyprlock = "${config.home-manager.users.${config.custom.username}.programs.hyprlock.package}/bin/hyprlock";
   hyprpicker = "${pkgs.hyprpicker}/bin/hyprpicker";
   inhibit = config.home-manager.users.${config.custom.username}.home.file.".local/bin/inhibit".source;
+  keyguard = "${pkgs.keyguard}/bin/Keyguard";
   loginctl = "${pkgs.systemd}/bin/loginctl";
   nautilus = "${pkgs.nautilus}/bin/nautilus";
   networkmanager_dmenu = "${pkgs.networkmanager_dmenu}/bin/networkmanager_dmenu";
@@ -157,8 +158,8 @@ in {
             (key "M" "Mod" (spawn youtube-music))
             (key "O" "Mod" (spawn [hyprpicker "--autocopy"]))
             (key "O" "Mod+Shift" (spawn [hyprpicker "--autocopy --format rgb"]))
-            (key "P" "Ctrl+Alt" (spawn [pkill "bitwarden"]))
-            (key "P" "Mod" (spawn bitwarden))
+            (key "P" "Ctrl+Alt" (spawn [pkill "Keyguard"]))
+            (key "P" "Mod" (spawn keyguard))
             (key "Q" "Mod" close-window)
             (key "R" "Mod" focus-window-or-workspace-down)
             (key "R" "Mod+Ctrl+Shift" move-column-to-workspace-down)
