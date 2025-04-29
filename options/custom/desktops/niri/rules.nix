@@ -152,6 +152,7 @@ in {
               matches = [
                 {app-id = "^codium$";}
                 {app-id = "^dev\.zed\.Zed$";}
+                {app-id = "^GitHub Desktop$";}
               ];
 
               default-column-width.proportion =
