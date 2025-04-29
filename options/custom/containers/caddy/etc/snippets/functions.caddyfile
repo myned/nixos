@@ -14,7 +14,9 @@
 #?? import proxy <host> <upstream> [upstream ...]
 (proxy) {
 	@proxy-{args[0]} host {args[0]}
-	reverse_proxy @proxy-{args[0]} {args[1:]}
+	reverse_proxy @proxy-{args[0]} {args[1:]} {
+		header_up X-Real-IP {client_ip}
+	}
 }
 
 #?? import proxy-insecure <host> <upstream> [upstream ...]
@@ -24,14 +26,6 @@
 		transport http {
 			tls_insecure_skip_verify
 		}
-	}
-}
-
-#?? import proxy-ip <host> <upstream> [upstream ...]
-(proxy-ip) {
-	@proxy-ip-{args[0]} host {args[0]}
-	reverse_proxy @proxy-ip-{args[0]} {args[1:]} {
-		header_up X-Real-IP {client_ip}
 	}
 }
 
