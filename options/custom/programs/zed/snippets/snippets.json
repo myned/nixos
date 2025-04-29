@@ -117,7 +117,7 @@
       "  container_name = \"$1-vpn\";",
       "  devices = [\"/dev/net/tun:/dev/net/tun\"];",
       "  env_file = [config.age.secrets.\"common/tailscale/container.env\".path];",
-      "  hostname = \"$1\";",
+      "  hostname = \"\\${config.custom.hostname}-$1\";",
       "  image = \"ghcr.io/tailscale/tailscale:latest\"; # https://github.com/tailscale/tailscale/pkgs/container/tailscale",
       "  restart = \"unless-stopped\";",
       "  volumes = [\"\\${config.custom.containers.directory}/$1/vpn:/var/lib/tailscale\"];",
