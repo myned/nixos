@@ -1,0 +1,18 @@
+# https://github.com/mholt/caddy-l4
+layer4 {
+	#  tcp/:853 {
+	#    route {
+	#      tls
+	#      proxy {
+	#        proxy_protocol v2
+	#        upstream tcp/localhost:8853
+	#      }
+	#    }
+	#  }
+
+	#  udp/:853 {
+	#    route {
+	#      proxy udp/localhost:8853
+	#    }
+	#  }
+}
