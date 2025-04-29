@@ -201,5 +201,20 @@
       "",
       "eval \"\\$(argc --argc-eval \"\\$0\" \"\\$@\")\""
     ]
+  },
+
+  "Write Shell Application": {
+    "prefix": "wsa",
+    "description": "Write Shell Application",
+    "body": [
+      "$1 = getExe (pkgs.writeShellApplication {",
+      "  name = \"$1.sh\";",
+      "  text = readFile ./$1.sh;",
+      "",
+      "  runtimeInputs = with pkgs; [",
+      "    coreutils",
+      "  ];",
+      "});"
+    ]
   }
 }
