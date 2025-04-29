@@ -1,8 +1,6 @@
 bjork.tech {
 	import global
 	import cloudflare
-
-	# Caddy
 	import serve bjork.tech
 
 	# Delegation to matrix.bjork.tech
@@ -18,75 +16,53 @@ bjork.tech {
 	import global
 	import cloudflare
 	import www bjork.tech
-
-	# Nextcloud
-	import proxy cloud.bjork.tech localhost:11000
-
-	# Miniflux
-	import proxy feed.bjork.tech localhost:8808
-
-	# Foundry Virtual Tabletop
-	import proxy foundry.bjork.tech localhost:30000
-
-	# Forgejo
-	import proxy git.bjork.tech localhost:3333
+	import proxy cloud.bjork.tech localhost:11000 # Nextcloud
+	import proxy feed.bjork.tech localhost:8808 # Miniflux
+	import proxy foundry.bjork.tech localhost:30000 # Foundry Virtual Tabletop
+	import proxy gist.bjork.tech {system.hostname}-opengist:6157 # Opengist
+	import proxy git.bjork.tech {system.hostname}-forgejo:3000 # Forgejo
+	import proxy net.bjork.tech localhost:8585 # Netbox
+	import proxy status.bjork.tech {system.hostname}-kener:3000 # Kener
+	import proxy vault.bjork.tech localhost:8088 # Vaultwarden
 
 	# Synapse
 	import handle matrix.bjork.tech {
 		reverse_proxy /_matrix/* localhost:8008
 		reverse_proxy /_synapse/client/* localhost:8008
 	}
-
-	# Netbox
-	import proxy net.bjork.tech localhost:8585
-
-	# Kener
-	import proxy status.bjork.tech {system.hostname}-kener:3000
-
-	# Vaultwarden
-	import proxy-ip vault.bjork.tech localhost:8088
 }
 
 *.admin.bjork.tech {
 	import global
 	import cloudflare
 	import vpn
-
-	# Nextcloud AIO
-	import proxy-insecure cloud.admin.bjork.tech https://localhost:8080
-
-	# dash.
-	import proxy dash.admin.bjork.tech localhost:3001
+	import proxy-insecure cloud.admin.bjork.tech https://localhost:8080 # Nextcloud AIO
+	import proxy dash.admin.bjork.tech localhost:3001 # dash.
+	import proxy graph.admin.bjork.tech {system.hostname}-grafana:3000 # Grafana
+	import proxy matrix.admin.bjork.tech localhost:8000 # Synapse Admin
+	import proxy metric.admin.bjork.tech {system.hostname}-prometheus:9090 # Synapse Admin
+	import proxy monitor.admin.bjork.tech {system.hostname}-beszel:8090 # Beszel
 
 	# Netdata
 	# import handle data.admin.bjork.tech {
 	# 	redir / /v3
 	# 	reverse_proxy {system.hostname}-netdata:19999
 	# }
-
-	# Grafana
-	import proxy graph.admin.bjork.tech {system.hostname}-grafana:3000
-
-	# Synapse Admin
-	import proxy matrix.admin.bjork.tech localhost:8000
-
-	# Prometheus
-	import proxy metric.admin.bjork.tech {system.hostname}-prometheus:9090
-
-	# Beszel
-	import proxy monitor.admin.bjork.tech {system.hostname}-beszel:8090
 }
 
 *.vpn.bjork.tech {
 	import global
 	import cloudflare
 	import vpn
-
-	# Open WebUI
-	import proxy ai.vpn.bjork.tech {system.hostname}-openwebui:8080
-
-	# Actual Budget
-	import proxy budget.vpn.bjork.tech localhost:5006
+	import proxy ai.vpn.bjork.tech {system.hostname}-openwebui:8080 # Open WebUI
+	import proxy budget.vpn.bjork.tech localhost:5006 # Actual Budget
+	import proxy home.vpn.bjork.tech mypi3:8123 # Home Assistant
+	import proxy matrix.vpn.bjork.tech localhost:8008 # Synapse
+	import proxy notify.vpn.bjork.tech localhost:8800 # ntfy
+	import proxy reddit.vpn.bjork.tech localhost:8888 # Redlib
+	#// import proxy search.vpn.bjork.tech localhost:8888 # SearXNG
+	#// import proxy tv.vpn.bjork.tech localhost:8470 # Stremio Client
+	#// import proxy api.tv.vpn.bjork.tech localhost:11470 # Stremio Server
 
 	# AdGuard Home
 	import handle dns.vpn.bjork.tech *.dns.vpn.bjork.tech {
@@ -98,25 +74,4 @@ bjork.tech {
 		reverse_proxy {system.hostname}-adguardhome:80
 		reverse_proxy /dns-query {system.hostname}-adguardhome:8443
 	}
-
-	# Home Assistant
-	import proxy home.vpn.bjork.tech mypi3:8123
-
-	# Synapse
-	import proxy matrix.vpn.bjork.tech localhost:8008
-
-	# ntfy
-	import proxy notify.vpn.bjork.tech localhost:8800
-
-	# Redlib
-	import proxy reddit.vpn.bjork.tech localhost:8888
-
-	# SearXNG
-	# import proxy-ip search.vpn.bjork.tech localhost:8888
-
-	# Stremio Client
-	# import proxy tv.vpn.bjork.tech localhost:8470
-
-	# Stremio Server
-	# import proxy api.tv.vpn.bjork.tech localhost:11470
 }

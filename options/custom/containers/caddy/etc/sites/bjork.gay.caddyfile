@@ -1,9 +1,7 @@
 bjork.gay {
 	import global
 	import cloudflare
-
-	# Mastodon
-	import proxy-insecure bjork.gay https://localhost:3000
+	import proxy-insecure bjork.gay https://localhost:3000 # Mastodon
 }
 
 *.bjork.gay {
@@ -17,6 +15,7 @@ bjork.gay {
 	import global
 	import cloudflare
 	import vpn
+	import serve-files wallpaper.vpn.bjork.gay /wallpaper.png
 
 	# Oryx
 	import handle stream.vpn.bjork.gay {
@@ -25,7 +24,4 @@ bjork.gay {
 		redir /hls {$ORYX_HLS}
 		redir /webrtc {$ORYX_WEBRTC}
 	}
-
-	# Caddy
-	import serve-files wallpaper.vpn.bjork.gay /wallpaper.png
 }
