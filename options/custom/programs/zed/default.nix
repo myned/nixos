@@ -15,6 +15,9 @@ in {
     # Extension dependencies
     environment.systemPackages = with pkgs; [
       alejandra # nix
+      ansible # ansible
+      ansible-language-server # ansible
+      ansible-lint # ansible
       astro-language-server # astro
       basedpyright # basedpyright
       blueprint-compiler # blueprint
@@ -34,6 +37,7 @@ in {
       simple-completion-language-server # snippets
       svelte-language-server # svelte
       vscode-langservers-extracted # html
+      yaml-language-server # yaml
     ];
 
     home-manager.sharedModules = [
@@ -47,6 +51,7 @@ in {
           # https://zed.dev/docs/extensions
           # https://github.com/zed-industries/extensions/tree/main/extensions
           extensions = [
+            "ansible" # https://github.com/kartikvashistha/zed-ansible
             "astro" # https://github.com/zed-extensions/astro
             #// "bearded-icon-theme" # https://github.com/sethstha/bearded-icons-theme
             "basedpyright" # https://github.com/m1guer/basedpyright-zed
@@ -65,6 +70,7 @@ in {
             "ini" # https://github.com/bajrangCoder/zed-ini
             "java" # https://github.com/zed-extensions/java
             "jinja2" # https://github.com/ArcherHume/jinja2-support
+            "log" # https://github.com/zed-extensions/log
             "make" # https://github.com/caius/zed-make
             #// "material-icon-theme" # https://github.com/zed-extensions/material-icon-theme
             #// "monospace-icon-theme" # https://github.com/irmhonde/monospace-icon-theme
@@ -214,7 +220,31 @@ in {
 
             ui_font_size = mkForce 19;
 
-            # Language-specific
+            # Filetype associations
+            # https://zed.dev/docs/configuring-languages#file-associations
+            file_types = {
+              # https://github.com/kartikvashistha/zed-ansible?tab=readme-ov-file#filetype-detection
+              Ansible = [
+                "**.ansible.yml"
+                "**.ansible.yaml"
+                "**/defaults/*.yml"
+                "**/defaults/*.yaml"
+                "**/meta/*.yml"
+                "**/meta/*.yaml"
+                "**/tasks/*.yml"
+                "**/tasks/*.yaml"
+                "**/handlers/*.yml"
+                "**/handlers/*.yaml"
+                "**/group_vars/*.yml"
+                "**/group_vars/*.yaml"
+                "**/playbooks/*.yaml"
+                "**/playbooks/*.yml"
+                "**playbook*.yaml"
+                "**playbook*.yml"
+              ];
+            };
+
+            # Languages
             # https://zed.dev/docs/configuring-languages
             languages = {
               # https://github.com/nusnewob/caddyfile-zed
@@ -238,6 +268,10 @@ in {
                 # https://github.com/oxalica/nil
                 # https://github.com/nix-community/nixd
                 language_servers = ["nil" "!nixd"];
+              };
+
+              YAML = {
+                language_servers = ["ansible" "ansible-lint"];
               };
             };
 
