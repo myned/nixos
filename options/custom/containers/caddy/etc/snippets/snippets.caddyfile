@@ -22,6 +22,10 @@
 }
 
 (vpn) {
+	# TODO: Use system resolver when AAAA records are supported
+	# https://github.com/tailscale/tailscale/issues/1152
 	# https://tailscale.com/kb/1015/100.x-addresses
-	bind {system.hostname}.{$TAILNET} # FQDN
+	# https://tailscale.com/kb/1121/ipv6
+	#// bind {system.hostname}.{$TAILNET} # FQDN
+	bind {$TAILSCALE_IPV4} [{$TAILSCALE_IPV6}]
 }
