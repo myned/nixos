@@ -27,6 +27,7 @@ in {
     refresh = mkOption {default = 60.0;};
     vrr = mkOption {default = false;};
     ultrawide = mkOption {default = cfg.width * 9 / 16 > cfg.height;}; # Wider than 16:9
+    hdr = mkOption {default = false;};
     hidpi = mkOption {default = cfg.scale > 1;};
     scale = mkOption {default = 1.0;};
     border = mkOption {default = 3.0;};
