@@ -7,42 +7,71 @@ with lib; let
   cfg = config.custom.programs.looking-glass;
 in {
   options.custom.programs.looking-glass = {
-    enable = mkOption {default = false;};
-    igpu = mkOption {default = false;};
-    kvmfr = mkOption {default = true;};
+    enable = mkEnableOption "looking-glass";
+
+    igpu = mkOption {
+      default = false;
+      type = types.bool;
+    };
+
+    kvmfr = mkOption {
+      default = true;
+      type = types.bool;
+    };
+
+    # https://looking-glass.io/docs/B7/install_libvirt/#libvirt-determining-memory
+    memory = mkOption {
+      default = with config.custom;
+        (
+          if ultrawide
+          then 128
+          else 64
+        )
+        * (
+          if hdr
+          then 2
+          else 1
+        );
+
+      type = types.int;
+    };
   };
 
   config = mkIf cfg.enable {
     #!! Imperative libvirt xml configuration
     # https://looking-glass.io/
-    # https://looking-glass.io/docs/B6/install/
+    # https://looking-glass.io/docs/B7/install/
     # BUG: CPU host-passthrough causes error on VM start
     # https://github.com/tianocore/edk2/discussions/4662
     #?? <cpu><maxphysaddr mode="passthrough" limit="40"/></cpu>
 
-    # https://looking-glass.io/docs/B6/module/#kernel-module
+    # https://looking-glass.io/docs/B7/ivshmem_kvmfr/
     boot = mkIf cfg.kvmfr {
       extraModulePackages = [config.boot.kernelPackages.kvmfr];
-      extraModprobeConfig = "options kvmfr static_size_mb=128";
+      extraModprobeConfig = "options kvmfr static_size_mb=${toString cfg.memory}";
       kernelModules = ["kvmfr"];
     };
 
     systemd = {
-      tmpfiles.settings.looking-glass = {
-        ${
+      tmpfiles.settings.looking-glass = let
+        owner = mode: {
+          mode = "0660";
+          user = config.custom.username;
+          group = "qemu-libvirtd";
+        };
+
+        file =
           if cfg.kvmfr
           then "/dev/kvmfr0"
-          else "/dev/shm/looking-glass"
-        } = {
-          ${
-            if cfg.kvmfr
-            then "z"
-            else "f"
-          } = {
-            mode = "0660";
-            user = config.custom.username;
-            group = "qemu-libvirtd";
-          };
+          else "/dev/shm/looking-glass";
+
+        type =
+          if cfg.kvmfr
+          then "z" # Set permissions only
+          else "f"; # Create file
+      in {
+        ${file} = {
+          ${type} = owner "0660";
         };
       };
 
@@ -54,7 +83,7 @@ in {
       };
     };
 
-    # https://looking-glass.io/docs/B6/module/#libvirt
+    # https://looking-glass.io/docs/B7/ivshmem_kvmfr/#libvirt
     virtualisation.libvirtd.qemu.verbatimConfig = mkIf cfg.kvmfr ''
       cgroup_device_acl = [
         "/dev/null", "/dev/full", "/dev/zero",
@@ -68,46 +97,41 @@ in {
       namespaces = []
     '';
 
-    home-manager.users.${config.custom.username} = {
-      # BUG: Crashes when reconnecting to spice channel
-      programs.looking-glass-client = {
-        enable = true;
+    home-manager.sharedModules = [
+      {
+        programs.looking-glass-client = {
+          enable = true;
 
-        # https://looking-glass.io/docs/B6/usage/#all-command-line-options
-        settings = {
-          app = {
-            shmFile =
-              if cfg.kvmfr
-              then "/dev/kvmfr0"
-              else "/dev/shm/looking-glass";
-          };
+          # https://looking-glass.io/docs/B7/usage/#all-command-line-options
+          settings = {
+            app = {
+              shmFile =
+                if cfg.kvmfr
+                then "/dev/kvmfr0"
+                else "/dev/shm/looking-glass";
+            };
 
-          egl = {
-            doubleBuffer = true;
-            vsync = true;
-          };
+            egl = {
+              doubleBuffer = true;
+              vsync = true;
+            };
 
-          input = {
-            grabKeyboard = false;
-            ignoreWindowsKeys = true;
-          };
+            input = {
+              grabKeyboard = false;
+              ignoreWindowsKeys = true;
+            };
 
-          spice = {
-            # BUG: SPICE audio causes disconnections, remove with QEMU >= 9.1.2
-            # https://gitlab.com/qemu-project/qemu/-/commit/8d9c6f6fa9eebd09ad8d0b4b4de4a0ec57e756d1
-            audio = false;
-          };
-
-          win = {
-            borderless = true;
-            fullScreen = true;
-            quickSplash = true;
-            size = "${toString (config.custom.width / 2)}x${toString (config.custom.height / 2)}";
-            uiFont = config.stylix.fonts.monospace.name;
-            uiSize = 24;
+            win = {
+              borderless = true;
+              #// fullScreen = true;
+              quickSplash = true;
+              #// size = "${toString (config.custom.width / 2)}x${toString (config.custom.height / 2)}";
+              uiFont = config.stylix.fonts.monospace.name;
+              uiSize = 24;
+            };
           };
         };
-      };
-    };
+      }
+    ];
   };
 }
