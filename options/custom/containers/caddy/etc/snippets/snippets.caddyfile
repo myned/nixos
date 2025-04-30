@@ -3,6 +3,12 @@
 (global) {
 	encode zstd gzip
 	header X-Robots-Tag "noindex, nofollow"
+
+	# TODO: Use custom error pages
+	# https://caddyserver.com/docs/caddyfile/directives/handle_errors
+	handle_errors {
+		respond "{err.status_code} {err.status_text}"
+	}
 }
 
 (matrix) {
