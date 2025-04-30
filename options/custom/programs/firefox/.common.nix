@@ -199,7 +199,7 @@ with lib; {
         "general.autoScroll" = false;
         "general.smoothScroll" = true;
         "general.smoothScroll.msdPhysics.enabled" = false;
-        "gfx.webrender.software" = false;
+        "gfx.webrender.software" = config.custom.settings.vm.passthrough.enable; # iGPU
         "identity.fxaccounts.enabled" = true;
         "layers.acceleration.force-enabled" = true;
         "layout.css.always_underline_links" = false;
