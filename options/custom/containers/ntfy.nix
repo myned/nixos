@@ -21,11 +21,12 @@ in {
         command = "serve";
         container_name = "ntfy";
         image = "binwiederhier/ntfy:latest"; # https://hub.docker.com/r/binwiederhier/ntfy/tags
-        ports = ["127.0.0.1:8800:80/tcp"];
+        ports = ["2586:80/tcp"];
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/ntfy/db:/var/lib/ntfy"];
 
         # https://docs.ntfy.sh/config/
+        # https://docs.ntfy.sh/config/#behind-a-proxy-tls-etc
         # https://github.com/binwiederhier/ntfy/blob/main/server/server.yml
         #?? arion-ntfy exec ntfy ntfy -- user add --role=admin <username>
         environment = {
@@ -37,6 +38,7 @@ in {
           NTFY_CACHE_DURATION = "7d";
           NTFY_CACHE_FILE = "/var/lib/ntfy/cache.db";
           NTFY_ENABLE_LOGIN = "true";
+          NTFY_LOG_LEVEL = "INFO";
         };
       };
     };

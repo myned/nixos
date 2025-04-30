@@ -55,7 +55,7 @@ bjork.tech {
 	import proxy budget.vpn.bjork.tech localhost:5006 # Actual Budget
 	import proxy home.vpn.bjork.tech mypi3:8123 # Home Assistant
 	import proxy matrix.vpn.bjork.tech localhost:8008 # Synapse
-	import proxy notify.vpn.bjork.tech localhost:8800 # ntfy
+	import proxy notify.vpn.bjork.tech localhost:2586 # ntfy
 	import proxy reddit.vpn.bjork.tech localhost:8888 # Redlib
 	#// import proxy search.vpn.bjork.tech localhost:8888 # SearXNG
 	#// import proxy tv.vpn.bjork.tech localhost:8470 # Stremio Client
