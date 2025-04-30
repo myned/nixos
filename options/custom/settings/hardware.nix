@@ -7,9 +7,22 @@ with lib; let
   cfg = config.custom.settings.hardware;
 in {
   options.custom.settings.hardware = {
-    enable = mkOption {default = false;};
-    gpu = mkOption {default = null;};
-    rocm = mkOption {default = null;};
+    enable = mkEnableOption "hardware";
+
+    gpu = mkOption {
+      default = null;
+      type = with types; nullOr str;
+    };
+
+    igpu = mkOption {
+      default = false;
+      type = types.bool;
+    };
+
+    rocm = mkOption {
+      default = null;
+      type = with types; nullOr str;
+    };
   };
 
   config = mkIf cfg.enable {

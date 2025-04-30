@@ -9,11 +9,6 @@ in {
   options.custom.programs.looking-glass = {
     enable = mkEnableOption "looking-glass";
 
-    igpu = mkOption {
-      default = false;
-      type = types.bool;
-    };
-
     kvmfr = mkOption {
       default = true;
       type = types.bool;

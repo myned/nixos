@@ -15,9 +15,8 @@
       disabled = ["HDMI-A-1" "HDMI-A-2" "HDMI-A-3" "HDMI-A-4" "HDMI-A-5"];
     };
 
-    programs.looking-glass = {
-      enable = true;
-      igpu = true;
+    programs = {
+      looking-glass.enable = true;
     };
 
     services = {
@@ -34,6 +33,7 @@
 
       hardware = {
         gpu = "amd";
+        igpu = true;
         rocm = "10.3.0"; # 10.3.1
       };
 
