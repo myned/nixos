@@ -40,12 +40,14 @@ in {
         systemd.user.services.wallpaper = {
           Unit = {
             Description = "Periodically change wallpaper";
+            Requires = ["swww.service"];
             After = ["graphical-session.target" "swww.service"];
           };
 
           Service = {
             Type = "simple";
             ExecStart = "${wallpaper} ${cfg.directory}";
+            Restart = "always";
           };
 
           Install = {
