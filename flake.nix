@@ -185,6 +185,10 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:danth/stylix";
     };
+    swaynotificationcenter = {
+      flake = false;
+      url = "github:ErikReider/SwayNotificationCenter?ref=v0.11.0";
+    };
     thunderbird-gnome-theme = {
       flake = false;
       url = "github:rafaelmardojai/thunderbird-gnome-theme";
