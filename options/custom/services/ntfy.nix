@@ -23,7 +23,7 @@ in {
     };
 
     topics = mkOption {
-      default = ["charge"]; # Used as XDG icons
+      default = ["status"];
       type = types.listOf types.str;
     };
 
@@ -74,16 +74,19 @@ in {
 
               default-command = concatStringsSep " " [
                 notify-send
-                ''--icon="$NTFY_TOPIC"''
+                ''--icon="$NTFY_TAGS"''
                 ''"$NTFY_TITLE"''
                 ''"$NTFY_MESSAGE"''
               ];
 
               # https://docs.ntfy.sh/subscribe/cli/#subscribe-to-multiple-topics
-              subscribe = forEach cfg.topics (topic: {
-                inherit topic;
-                token = mkIf cfg.token "%PLACEHOLDER%";
-              });
+              subscribe = forEach cfg.topics (topic:
+                {
+                  inherit topic;
+                }
+                // optionalAttrs cfg.token {
+                  token = "%PLACEHOLDER%";
+                });
             };
 
             force = true;
