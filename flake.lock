@@ -2924,6 +2924,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-myned": {
+      "locked": {
+        "lastModified": 1746056831,
+        "narHash": "sha256-mfMOiQ3IXAij7R7AkzqcKf9strpOuMZHd+8N7GIm5w0=",
+        "owner": "myned",
+        "repo": "nixpkgs",
+        "rev": "508af1e8664cb9de811625d1d4d6903af5132ddf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "myned",
+        "ref": "master",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-regression": {
       "locked": {
         "lastModified": 1643052045,
@@ -3286,6 +3302,7 @@
         "nixgl-unstable": "nixgl-unstable",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs-master": "nixpkgs-master",
+        "nixpkgs-myned": "nixpkgs-myned",
         "nixpkgs-stable": "nixpkgs-stable_5",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur-stable": "nur-stable",
@@ -3293,6 +3310,7 @@
         "steamtinkerlaunch": "steamtinkerlaunch",
         "stylix-stable": "stylix-stable",
         "stylix-unstable": "stylix-unstable",
+        "swaynotificationcenter": "swaynotificationcenter",
         "thunderbird-gnome-theme": "thunderbird-gnome-theme",
         "virtio-win": "virtio-win",
         "walker": "walker",
@@ -3422,6 +3440,23 @@
       "original": {
         "owner": "danth",
         "repo": "stylix",
+        "type": "github"
+      }
+    },
+    "swaynotificationcenter": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1744053426,
+        "narHash": "sha256-kRawYbBLVx0ie4t7tChkA8QJShS83fUcGrJSKkxBy8Q=",
+        "owner": "ErikReider",
+        "repo": "SwayNotificationCenter",
+        "rev": "4ac4cea53bda33b753c5c0883ab06e53035a682f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ErikReider",
+        "ref": "v0.11.0",
+        "repo": "SwayNotificationCenter",
         "type": "github"
       }
     },
