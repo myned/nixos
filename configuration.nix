@@ -52,10 +52,11 @@ in {
           stable = nixpkgs "stable";
           unstable = nixpkgs "unstable";
           master = nixpkgs "master";
+          myned = nixpkgs "myned";
         in {
           # Overlay nixpkgs branches
           #?? nixpkgs.BRANCH.PACKAGE
-          inherit stable unstable master;
+          inherit stable unstable master myned;
 
           ### Packages
           # TODO: Remove when in stable
