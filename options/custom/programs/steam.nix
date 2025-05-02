@@ -20,6 +20,14 @@ in {
         enable = true;
         extest.enable = cfg.extest; # Work around invisible cursor on Wayland
         extraCompatPackages = [pkgs.proton-ge-bin];
+
+        # HACK: Work around black main window with xwayland-satellite
+        # https://github.com/ValveSoftware/steam-for-linux/issues/10543 et al.
+        package = mkIf config.custom.services.xwayland-satellite.enable (
+          pkgs.steam.override {
+            extraArgs = "-system-composer";
+          }
+        );
       }
       // optionalAttrs (versionAtLeast version "24.11") {protontricks.enable = true;};
   };
