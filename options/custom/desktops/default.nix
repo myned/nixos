@@ -8,6 +8,7 @@ with lib; let
 in {
   options.custom.desktops = {
     enable = mkOption {default = isString config.custom.desktop;};
+    tiling = mkOption {default = false;};
   };
 
   config = mkIf cfg.enable {

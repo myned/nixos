@@ -10,6 +10,8 @@ in {
 
   config = mkIf cfg.enable {
     custom.desktops = mkIf config.custom.full {
+      tiling = true;
+
       sway = {
         binds.enable = true;
         input.enable = true;

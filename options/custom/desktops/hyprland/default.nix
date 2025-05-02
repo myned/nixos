@@ -15,6 +15,8 @@ in {
   config = mkIf cfg.enable {
     custom = {
       desktops = mkIf config.custom.full {
+        tiling = true;
+
         hyprland = {
           binds.enable = true;
           keywords.enable = true;
