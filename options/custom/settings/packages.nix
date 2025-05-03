@@ -43,6 +43,7 @@ in {
           nodejs # npm
           nvd # Nix diff viewer
           openssl # Certificate utility
+          pciutils # PCI device information
           progress # Coreutils progress viewer
           q # DNS tester
           rclone # File sync
