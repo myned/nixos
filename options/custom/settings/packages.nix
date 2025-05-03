@@ -35,6 +35,7 @@ in {
           killport # Kill processes on port
           lf # Terminal file manager
           lm_sensors # System sensors
+          lsof # List open files
           lz4 # Compression utility
           nix-output-monitor # Nix build parser
           nix-tree # Nix store explorer
