@@ -18,7 +18,9 @@ with lib; let
   hyprlock = "${config.home-manager.users.${config.custom.username}.programs.hyprlock.package}/bin/hyprlock";
   hyprpicker = "${pkgs.hyprpicker}/bin/hyprpicker";
   inhibit = config.home-manager.users.${config.custom.username}.home.file.".local/bin/inhibit".source;
+  jq = "${pkgs.jq}/bin/jq";
   keyguard = "${pkgs.keyguard}/bin/Keyguard";
+  kill = "${pkgs.coreutils}/bin/kill";
   loginctl = "${pkgs.systemd}/bin/loginctl";
   nautilus = "${pkgs.nautilus}/bin/nautilus";
   networkmanager_dmenu = "${pkgs.networkmanager_dmenu}/bin/networkmanager_dmenu";
@@ -160,6 +162,7 @@ in {
             (key "O" "Mod+Shift" (spawn [hyprpicker "--autocopy --format rgb"]))
             (key "P" "Ctrl+Alt" (spawn [pkill "Keyguard"]))
             (key "P" "Mod" (spawn keyguard))
+            (key "Q" "Ctrl+Alt" (spawn [bash "-c" ''${kill} -9 "$(${niri} msg -j windows | ${jq} '.[] | select(.is_focused == true).pid')"'']))
             (key "Q" "Mod" close-window)
             (key "R" "Mod" focus-window-or-workspace-down)
             (key "R" "Mod+Ctrl+Shift" move-column-to-workspace-down)
