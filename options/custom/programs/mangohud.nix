@@ -32,7 +32,7 @@ in {
             engine_color = "dc322f";
             font_file = "${pkgs.nerd-fonts.iosevka}/share/fonts/truetype/NerdFonts/Iosevka/IosevkaNerdFontPropo-SemiBold.ttf";
             font_size = 24;
-            fps_limit = "100,75,60,50"; # !! Monitor dependent
+            fps_limit = "100,75,60,50"; #!! Monitor dependent
             fps_limit_method = "early"; # Smoother frametimes compared to late
             frametime = true;
             frametime_color = "859900";
