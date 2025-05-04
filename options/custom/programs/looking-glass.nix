@@ -118,11 +118,11 @@ in {
 
             win = {
               borderless = true;
-              #// fullScreen = true;
+              fullScreen = true;
               quickSplash = true;
               #// size = "${toString (config.custom.width / 2)}x${toString (config.custom.height / 2)}";
               uiFont = config.stylix.fonts.monospace.name;
-              uiSize = 24;
+              uiSize = 20;
             };
           };
         };
