@@ -78,6 +78,13 @@ in {
               fprintd
               libnotify
             ])
+            (bash "gpurun" [
+              coreutils
+              kmod
+              libnotify
+              procps
+              systemd
+            ])
             (bash "inhibit" [
               coreutils
               libnotify
