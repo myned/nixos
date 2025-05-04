@@ -199,7 +199,7 @@ with lib; {
         "general.autoScroll" = false;
         "general.smoothScroll" = true;
         "general.smoothScroll.msdPhysics.enabled" = false;
-        "gfx.webrender.software" = config.custom.settings.hardware.igpu;
+        "gfx.webrender.software" = false;
         "identity.fxaccounts.enabled" = true;
         "layers.acceleration.force-enabled" = true;
         "layout.css.always_underline_links" = false;
