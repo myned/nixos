@@ -9,14 +9,49 @@ in {
   options.custom.settings.hardware = {
     enable = mkEnableOption "hardware";
 
-    gpu = mkOption {
+    cpu = mkOption {
       default = null;
-      type = with types; nullOr str;
+      type = with types; nullOr (enum ["amd" "intel"]);
     };
 
-    igpu = mkOption {
-      default = false;
-      type = types.bool;
+    dgpu = {
+      #?? lspci -k
+      driver = mkOption {
+        default = null;
+        type = with types; nullOr str;
+      };
+
+      #?? lspci -nn
+      ids = mkOption {
+        default = null;
+        type = with types; listOf str;
+      };
+
+      #?? ls -l /dev/dri/by-path
+      node = mkOption {
+        default = null;
+        type = with types; nullOr str;
+      };
+    };
+
+    igpu = {
+      #?? lspci -k
+      driver = mkOption {
+        default = null;
+        type = with types; nullOr str;
+      };
+
+      #?? lspci -nn
+      ids = mkOption {
+        default = null;
+        type = with types; listOf str;
+      };
+
+      #?? ls -l /dev/dri/by-path
+      node = mkOption {
+        default = null;
+        type = with types; nullOr str;
+      };
     };
 
     rocm = mkOption {
@@ -26,16 +61,24 @@ in {
   };
 
   config = mkIf cfg.enable {
-    hardware = {
-      enableAllFirmware = config.custom.default; # Non-free firmware
+    hardware =
+      {
+        enableAllFirmware = config.custom.default; # Non-free firmware
 
-      # https://wiki.nixos.org/wiki/Bluetooth
-      bluetooth.enable = config.custom.minimal;
-    };
+        # https://wiki.nixos.org/wiki/Bluetooth
+        bluetooth.enable = config.custom.minimal;
+      }
+      // optionalAttrs (with config.custom.settings.hardware; dgpu.driver == "amdgpu" || igpu.driver == "amdgpu") {
+        # Fix initramfs boot resolution
+        amdgpu.initrd.enable = !(with config.custom.settings.vm.passthrough; enable && blacklist);
+      };
 
-    nixpkgs.config = {
-      cudaSupport = mkIf (cfg.gpu == "nvidia") true;
-      rocmSupport = mkIf (cfg.gpu == "amd") true;
-    };
+    nixpkgs.config =
+      optionalAttrs (cfg.dgpu.driver == "nvidia" || cfg.dgpu.driver == "nouveau") {
+        cudaSupport = true;
+      }
+      // optionalAttrs (cfg.dgpu.driver == "amdgpu") {
+        rocmSupport = true;
+      };
   };
 }

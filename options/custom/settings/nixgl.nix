@@ -13,7 +13,7 @@ in {
 
     wrapper = mkOption {
       default =
-        if config.custom.settings.hardware.gpu == "nvidia"
+        if with config.custom.settings.hardware.dgpu; driver == "nvidia" || driver == "nouveau"
         then "nvidia"
         else "mesa";
 

@@ -39,11 +39,12 @@ in {
         if cfg.acceleration
         then
           (
-            if config.custom.settings.hardware.gpu == "amd"
-            then "rocm"
-            else if config.custom.settings.hardware.gpu == "nvidia"
-            then "cuda"
-            else null
+            with config.custom.settings.hardware.dgpu;
+              if driver == "amdgpu"
+              then "rocm"
+              else if driver == "nvidia" || driver == "nouveau"
+              then "cuda"
+              else null
           )
         else false; # CPU
 

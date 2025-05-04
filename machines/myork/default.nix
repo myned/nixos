@@ -30,7 +30,8 @@
       boot.systemd-boot.enable = true;
 
       hardware = {
-        gpu = "amd";
+        cpu = "amd";
+        dgpu.driver = "amdgpu";
         rocm = "11.0.2"; # 11.0.3
       };
 

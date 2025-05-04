@@ -32,9 +32,23 @@
       };
 
       hardware = {
-        gpu = "amd";
-        igpu = true;
+        cpu = "intel";
         rocm = "10.3.0"; # 10.3.1
+
+        dgpu = {
+          driver = "amdgpu";
+          node = "pci-0000:03:00.0";
+
+          ids = [
+            #// "1002:73df" # amdgpu
+            "1002:ab28" # snd_hda_intel
+          ];
+        };
+
+        igpu = {
+          driver = "i915";
+          node = "pci-0000:00:02.0";
+        };
       };
 
       storage = {
@@ -53,11 +67,7 @@
       vm.passthrough = {
         enable = true;
         #// blacklist = true;
-        driver = "amdgpu";
         guest = "myndows";
-        id = "1002:73df";
-        intel = true;
-        node = "pci_0000_03_00_0";
       };
     };
   };

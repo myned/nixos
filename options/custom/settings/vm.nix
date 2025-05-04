@@ -18,11 +18,7 @@ in {
     passthrough = {
       enable = mkOption {default = false;};
       blacklist = mkOption {default = false;};
-      driver = mkOption {default = null;}; #?? lspci -k
       guest = mkOption {default = null;}; #?? virsh list --all
-      id = mkOption {default = null;}; #?? lspci -nn
-      intel = mkOption {default = false;};
-      node = mkOption {default = null;}; #?? virsh nodedev-list
     };
   };
 
@@ -48,21 +44,25 @@ in {
         # https://libvirt.org/hooks.html
         hooks.qemu = {
           # Attach/detach GPU for passthrough
-          passthrough = mkIf cfg.passthrough.enable (pkgs.writeShellScript "passthrough" ''
-            if [[ "$1" == "${cfg.passthrough.guest}" ]]; then
-              case "$2" in
-                prepare)
-                  ${virsh} nodedev-detach ${cfg.passthrough.node}
-                  ;;
-                release)
-                  ${virsh} nodedev-reattach ${cfg.passthrough.node}
-                  ;;
-                *)
-                  exit
-                  ;;
-              esac
-            fi
-          '');
+          passthrough = let
+            #?? virsh nodedev-list
+            node = replaceStrings ["-" ":" "."] ["_" "_" "_"] config.custom.settings.hardware.dgpu.node;
+          in
+            mkIf cfg.passthrough.enable (pkgs.writeShellScript "passthrough" ''
+              if [[ "$1" == "${cfg.passthrough.guest}" ]]; then
+                case "$2" in
+                  prepare)
+                    ${virsh} nodedev-detach ${node}
+                    ;;
+                  release)
+                    ${virsh} nodedev-reattach ${node}
+                    ;;
+                  *)
+                    exit
+                    ;;
+                esac
+              fi
+            '');
         };
 
         qemu = {
@@ -119,8 +119,15 @@ in {
     # https://github.com/virt-manager/virt-manager
     programs.virt-manager.enable = cfg.libvirt;
 
-    # https://libvirt.org/uri.html#default-uri-choice
-    environment.sessionVariables.LIBVIRT_DEFAULT_URI = mkIf cfg.libvirt "qemu:///system";
+    environment.sessionVariables =
+      optionalAttrs cfg.libvirt {
+        # https://libvirt.org/uri.html#default-uri-choice
+        LIBVIRT_DEFAULT_URI = "qemu:///system";
+      }
+      // optionalAttrs (with cfg.passthrough; (enable && blacklist)) {
+        # https://wiki.archlinux.org/title/PRIME#For_open_source_drivers_-_PRIME
+        DRI_PRIME = replaceStrings [":" "."] ["_" "_"] config.custom.settings.hardware.igpu.node;
+      };
 
     users.users.${config.custom.username}.extraGroups =
       lib.optionals cfg.libvirt ["libvirtd"]
@@ -159,10 +166,27 @@ in {
 
     boot = mkIf cfg.passthrough.enable {
       # https://wiki.archlinux.org/title/PCI_passthrough_via_OVMF#Isolating_the_GPU
-      blacklistedKernelModules = mkIf cfg.passthrough.blacklist [cfg.passthrough.driver];
+      blacklistedKernelModules = optionals cfg.passthrough.blacklist [
+        config.custom.settings.hardware.dgpu.driver
+      ];
+
+      initrd.kernelModules = optionals cfg.passthrough.blacklist [
+        "vfio_pci"
+        "vfio"
+        "vfio_iommu_type1"
+      ];
+
+      extraModprobeConfig = let
+        ids = concatStringsSep "," config.custom.settings.hardware.dgpu.ids;
+      in
+        optionalString cfg.passthrough.blacklist ''
+          options vfio-pci ids=${ids}
+        '';
 
       # https://wiki.archlinux.org/title/PCI_passthrough_via_OVMF#Enabling_IOMMU
-      kernelParams = mkIf cfg.passthrough.intel ["intel_iommu=on"];
+      kernelParams = optionals (config.custom.settings.hardware.cpu == "intel") [
+        "intel_iommu=on"
+      ];
     };
   };
 }
