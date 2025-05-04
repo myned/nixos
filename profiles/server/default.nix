@@ -17,7 +17,7 @@
       beszel.server = true;
       #// conduwuit.enable = true;
       coturn.enable = true;
-      dashdot.enable = true;
+      #// dashdot.enable = true;
       #// directus.enable = true;
       forgejo.enable = true;
       forgejo.server = true;
