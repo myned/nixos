@@ -145,7 +145,7 @@ in {
           userSettings = {
             always_treat_brackets_as_autoclosed = true;
             auto_install_extensions = false;
-            auto_signature_help = true;
+            auto_signature_help_after_edits = true;
             base_keymap = "VSCode";
 
             # BUG: Font variations are not currently supported
@@ -167,6 +167,7 @@ in {
             git_panel.default_width = 300;
             icon_theme = "Colored Zed Icons Theme Dark";
             indent_guides.active_line_width = 2;
+            inlay_hints.enabled = true;
             load_direnv = "shell_hook";
             middle_click_paste = false;
             notification_panel.default_width = 300;
@@ -247,6 +248,14 @@ in {
             # Languages
             # https://zed.dev/docs/configuring-languages
             languages = {
+              # https://zed.dev/docs/languages/astro
+              Astro = {
+                formatter.external = {
+                  command = "npx";
+                  arguments = ["prettier" "--parser=astro" "--write"];
+                };
+              };
+
               # https://github.com/nusnewob/caddyfile-zed
               Caddyfile = {
                 format_on_save = "on";
