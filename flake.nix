@@ -22,59 +22,11 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:hercules-ci/arion";
     };
-    bitwarden-menu = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:firecat53/bitwarden-menu";
-    };
-    cisco-packettracer8 = {
-      flake = false;
-      url = "file:///home/myned/SYNC/linux/config/cisco/CiscoPacketTracer822_amd64_signed.deb";
-    };
-    compose2nix = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:aksiksi/compose2nix";
-    };
-    conduwuit = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:Myned/conduwuit";
-    };
     disko = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:nix-community/disko";
     };
     flakegen.url = "github:jorsn/flakegen";
-    freshrss-autorefresh = {
-      flake = false;
-      url = "github:Eisa01/FreshRSS---Auto-Refresh-Extension";
-    };
-    freshrss-cntools = {
-      flake = false;
-      url = "github:cn-tools/cntools_FreshRssExtensions";
-    };
-    freshrss-comicsinfeed = {
-      flake = false;
-      url = "github:giventofly/freshrss-comicsinfeed";
-    };
-    freshrss-dateformat = {
-      flake = false;
-      url = "github:aledeg/xExtension-DateFormat";
-    };
-    freshrss-extensions = {
-      flake = false;
-      url = "github:FreshRSS/Extensions";
-    };
-    freshrss-kagisummarizer = {
-      flake = false;
-      url = "git+https://code.sitosis.com/rudism/freshrss-kagi-summarizer";
-    };
-    freshrss-kapdap = {
-      flake = false;
-      url = "github:kapdap/freshrss-extensions";
-    };
-    freshrss-markpreviousasread = {
-      flake = false;
-      url = "github:kalvn/freshrss-mark-previous-as-read";
-    };
     fw-fanctrl = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:TamtamHero/fw-fanctrl/packaging/nix";
@@ -91,25 +43,9 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:hyprwm/hypridle";
     };
-    hyprland = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:hyprwm/Hyprland?ref=v0.45.2";
-    };
-    hyprland-contrib = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:hyprwm/contrib";
-    };
-    hyprland-plugins = {
-      inputs.hyprland.follows = "hyprland";
-      url = "github:hyprwm/hyprland-plugins";
-    };
     hyprlock = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:hyprwm/hyprlock";
-    };
-    hyprpaper = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:hyprwm/hyprpaper";
     };
     hyprpicker = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -144,10 +80,6 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:nix-community/nix-index-database";
     };
-    nix-vscode-extensions = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:nix-community/nix-vscode-extensions";
-    };
     nixd = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:nix-community/nixd";
@@ -173,10 +105,6 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:nix-community/NUR";
     };
-    steamtinkerlaunch = {
-      flake = false;
-      url = "github:sonic2kk/steamtinkerlaunch";
-    };
     stylix-stable = {
       inputs.nixpkgs.follows = "nixpkgs-stable";
       url = "github:danth/stylix/release-24.11";
@@ -189,17 +117,9 @@
       flake = false;
       url = "github:ErikReider/SwayNotificationCenter?ref=v0.11.0";
     };
-    thunderbird-gnome-theme = {
-      flake = false;
-      url = "github:rafaelmardojai/thunderbird-gnome-theme";
-    };
     virtio-win = {
       flake = false;
       url = "https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.262-2/virtio-win.iso";
-    };
-    walker = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:abenz1267/walker?ref=v0.12.8";
     };
     zen-browser = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";

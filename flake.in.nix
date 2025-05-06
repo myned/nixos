@@ -44,18 +44,18 @@
     agenix = flake "github:ryantm/agenix" // unstable "nixpkgs";
     ags = flake "github:Aylur/ags" // unstable "nixpkgs";
     arion = flake "github:hercules-ci/arion" // unstable "nixpkgs";
-    bitwarden-menu = flake "github:firecat53/bitwarden-menu" // unstable "nixpkgs";
-    compose2nix = flake "github:aksiksi/compose2nix" // unstable "nixpkgs";
-    conduwuit = flake "github:Myned/conduwuit" // unstable "nixpkgs";
+    # bitwarden-menu = flake "github:firecat53/bitwarden-menu" // unstable "nixpkgs";
+    # compose2nix = flake "github:aksiksi/compose2nix" // unstable "nixpkgs";
+    # conduwuit = flake "github:Myned/conduwuit" // unstable "nixpkgs";
     disko = flake "github:nix-community/disko" // unstable "nixpkgs";
     fw-fanctrl = flake "github:TamtamHero/fw-fanctrl/packaging/nix" // unstable "nixpkgs";
     home-manager-unstable = flake "github:nix-community/home-manager" // unstable "nixpkgs";
     hypridle = flake "github:hyprwm/hypridle" // unstable "nixpkgs";
-    hyprland = flake "github:hyprwm/Hyprland?ref=v0.45.2" // unstable "nixpkgs";
-    hyprland-contrib = flake "github:hyprwm/contrib" // unstable "nixpkgs";
-    hyprland-plugins = flake "github:hyprwm/hyprland-plugins" // unstable "nixpkgs" // follows "hyprland";
+    # hyprland = flake "github:hyprwm/Hyprland?ref=v0.45.2" // unstable "nixpkgs";
+    # hyprland-contrib = flake "github:hyprwm/contrib" // unstable "nixpkgs";
+    # hyprland-plugins = flake "github:hyprwm/hyprland-plugins" // unstable "nixpkgs" // follows "hyprland";
     hyprlock = flake "github:hyprwm/hyprlock" // unstable "nixpkgs";
-    hyprpaper = flake "github:hyprwm/hyprpaper" // unstable "nixpkgs";
+    # hyprpaper = flake "github:hyprwm/hyprpaper" // unstable "nixpkgs";
     hyprpicker = flake "github:hyprwm/hyprpicker" // unstable "nixpkgs";
     jovian-nixos = flake "github:Jovian-Experiments/Jovian-NixOS" // unstable "nixpkgs";
     niri = flake "github:YaLTeR/niri" // unstable "nixpkgs";
@@ -63,12 +63,12 @@
     nix-alien = flake "github:thiagokokada/nix-alien" // unstable "nixpkgs";
     nix-flatpak = flake "github:gmodena/nix-flatpak?ref=v0.5.1";
     nix-index-database-unstable = flake "github:nix-community/nix-index-database" // unstable "nixpkgs";
-    nix-vscode-extensions = flake "github:nix-community/nix-vscode-extensions" // unstable "nixpkgs";
+    # nix-vscode-extensions = flake "github:nix-community/nix-vscode-extensions" // unstable "nixpkgs";
     nixd = flake "github:nix-community/nixd" // unstable "nixpkgs";
     nixgl-unstable = flake "github:nix-community/nixGL" // unstable "nixpkgs";
     nur-unstable = flake "github:nix-community/NUR" // unstable "nixpkgs";
     stylix-unstable = flake "github:danth/stylix" // unstable "nixpkgs";
-    walker = flake "github:abenz1267/walker?ref=v0.12.8" // unstable "nixpkgs";
+    # walker = flake "github:abenz1267/walker?ref=v0.12.8" // unstable "nixpkgs";
     zen-browser = flake "github:youwen5/zen-browser-flake" // unstable "nixpkgs";
 
     ### Branches
@@ -76,19 +76,19 @@
     nixpkgs-myned = flake "github:myned/nixpkgs/master";
 
     ### Source code
-    cisco-packettracer8 = source "file:///home/myned/SYNC/linux/config/cisco/CiscoPacketTracer822_amd64_signed.deb";
-    freshrss-autorefresh = source "github:Eisa01/FreshRSS---Auto-Refresh-Extension";
-    freshrss-cntools = source "github:cn-tools/cntools_FreshRssExtensions";
-    freshrss-comicsinfeed = source "github:giventofly/freshrss-comicsinfeed";
-    freshrss-dateformat = source "github:aledeg/xExtension-DateFormat";
-    freshrss-extensions = source "github:FreshRSS/Extensions";
-    freshrss-kagisummarizer = source "git+https://code.sitosis.com/rudism/freshrss-kagi-summarizer";
-    freshrss-kapdap = source "github:kapdap/freshrss-extensions";
-    freshrss-markpreviousasread = source "github:kalvn/freshrss-mark-previous-as-read";
+    # cisco-packettracer8 = source "file:///home/myned/SYNC/linux/config/cisco/CiscoPacketTracer822_amd64_signed.deb";
+    # freshrss-autorefresh = source "github:Eisa01/FreshRSS---Auto-Refresh-Extension";
+    # freshrss-cntools = source "github:cn-tools/cntools_FreshRssExtensions";
+    # freshrss-comicsinfeed = source "github:giventofly/freshrss-comicsinfeed";
+    # freshrss-dateformat = source "github:aledeg/xExtension-DateFormat";
+    # freshrss-extensions = source "github:FreshRSS/Extensions";
+    # freshrss-kagisummarizer = source "git+https://code.sitosis.com/rudism/freshrss-kagi-summarizer";
+    # freshrss-kapdap = source "github:kapdap/freshrss-extensions";
+    # freshrss-markpreviousasread = source "github:kalvn/freshrss-mark-previous-as-read";
     lifx-cli = source "github:Rawa/lifx-cli";
-    steamtinkerlaunch = source "github:sonic2kk/steamtinkerlaunch";
+    # steamtinkerlaunch = source "github:sonic2kk/steamtinkerlaunch";
     swaynotificationcenter = source "github:ErikReider/SwayNotificationCenter?ref=v0.11.0";
-    thunderbird-gnome-theme = source "github:rafaelmardojai/thunderbird-gnome-theme";
+    # thunderbird-gnome-theme = source "github:rafaelmardojai/thunderbird-gnome-theme";
     virtio-win = source "https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.262-2/virtio-win.iso";
   };
 
