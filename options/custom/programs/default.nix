@@ -32,12 +32,12 @@ with lib; {
       appimage.enable = true;
       chromium.enable = true;
       dconf.enable = true;
-      #// firefox.enable = true;
+      firefox.enable = true;
       #// foot.enable = true;
       #// gamescope.enable = true;
       #// gnome-terminal.enable = true;
       #// kitty.enable = true;
-      librewolf.enable = true;
+      #// librewolf.enable = true;
       nautilus.enable = true;
       nvtop.enable = true;
       #// wezterm.enable = true;
