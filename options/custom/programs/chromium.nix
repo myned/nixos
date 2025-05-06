@@ -9,7 +9,7 @@ with lib; let
 in {
   options.custom.programs.chromium = {
     enable = mkOption {default = false;};
-    package = mkOption {default = pkgs.brave;};
+    package = mkOption {default = pkgs.chromium;};
   };
 
   config = mkIf cfg.enable {
