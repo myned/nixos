@@ -22,6 +22,7 @@ in {
           (import ./.common.nix {
             inherit config inputs lib pkgs;
             profile = cfg.profile;
+            telemetry = true;
             theme = true;
           })
 

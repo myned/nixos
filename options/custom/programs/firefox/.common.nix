@@ -3,6 +3,7 @@
   lib,
   pkgs,
   profile ? "default",
+  telemetry ? false,
   theme ? false,
   ...
 }:
@@ -11,7 +12,7 @@ with lib; {
   #?? hm.programs.firefox.finalPackage
   # https://wiki.nixos.org/wiki/Firefox#Tips
   nativeMessagingHosts = with pkgs; [
-    firefoxpwa
+    #// firefoxpwa
   ];
 
   #!! Prefer policies over profiles when possible
@@ -81,7 +82,7 @@ with lib; {
       {
         "accessibility.browsewithcaret" = false;
         "accessibility.typeaheadfind" = false;
-        "app.shield.optoutstudies.enabled" = false;
+        "app.shield.optoutstudies.enabled" = true;
         "apz.gtk.pangesture.delta_mode" = 2; # pixel
         "apz.gtk.pangesture.pixel_delta_mode_multiplier" = 30.0; # Touchpad scroll speed
         "browser.aboutConfig.showWarning" = false;
@@ -90,9 +91,9 @@ with lib; {
         "browser.contentblocking.report.hide_vpn_banner" = true;
         "browser.contentblocking.report.show_mobile_app" = false;
         "browser.contentblocking.report.vpn.enabled" = false;
-        "browser.crashReports.unsubmittedCheck.autoSubmit2" = false;
         "browser.ctrlTab.sortByRecentlyUsed" = false;
         "browser.dataFeatureRecommendations.enabled" = false;
+        "browser.discovery.enabled" = false;
         "browser.download.always_ask_before_handling_new_types" = false;
         "browser.download.alwaysOpenPanel" = true;
         "browser.download.autohideButton" = true;
@@ -116,15 +117,12 @@ with lib; {
         "browser.newtabpage.activity-stream.feeds.section.highlights" = false;
         "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
         "browser.newtabpage.activity-stream.feeds.system.topstories" = false;
-        "browser.newtabpage.activity-stream.feeds.telemetry" = false;
         "browser.newtabpage.activity-stream.feeds.topsites" = false;
         "browser.newtabpage.activity-stream.showSearch" = false;
         "browser.newtabpage.activity-stream.showSponsored" = false;
         "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
         "browser.newtabpage.activity-stream.showWeather" = false;
-        "browser.newtabpage.activity-stream.telemetry" = false;
         "browser.newtabpage.enabled" = true;
-        "browser.ping-centre.telemetry" = false;
         "browser.preferences.defaultPerformanceSettings.enabled" = true;
         "browser.preferences.moreFromMozilla" = false;
         "browser.quitShortcut.disabled" = true;
@@ -133,7 +131,6 @@ with lib; {
         "browser.safebrowsing.malware.enabled" = false;
         "browser.safebrowsing.phishing.enabled" = false;
         "browser.search.separatePrivateDefault" = false;
-        "browser.search.serpEventTelemetryCategorization.regionEnabled" = false;
         "browser.search.suggest.enabled" = true;
         "browser.search.widget.inNavBar" = false;
         "browser.sessionstore.restore_hidden_tabs" = false;
@@ -206,7 +203,7 @@ with lib; {
         "layout.css.backdrop-filter.enabled" = true;
         "layout.forms.reveal-password-button.enabled" = true;
         "layout.forms.reveal-password-context-menu.enabled" = false;
-        "layout.spellcheckDefault" = 0; # Disabled
+        "layout.spellcheckDefault" = 1; # Enabled
         "media.autoplay.blocking_policy" = 1; # Transient
         "media.eme.enabled" = true; # DRM
         "media.ffmpeg.vaapi.enabled" = true;
@@ -243,34 +240,49 @@ with lib; {
         "privacy.resistFingerprinting.autoDeclineNoUserInputCanvasPrompts" = false;
         "privacy.resistFingerprinting.letterboxing" = false;
         "privacy.resistFingerprinting" = false; #!! Forces light theme
+        "privacy.trackingprotection.enabled" = true;
         "remote.prefs.recommended" = false;
-        "security.OCSP.require" = true;
-        "security.protectionspopup.recordEventTelemetry" = false;
+        "security.OCSP.require" = false;
         "services.passwordSavingEnabled" = false;
         "sidebar.expandOnHoverMessage.dismissed" = true;
-        "sidebar.main.tools" = ""; # aichat,syncedtabs,history
+        "sidebar.main.tools" = "syncedtabs"; # aichat,syncedtabs,history
         "sidebar.new-sidebar.has-used" = true;
         "sidebar.revamp" = true;
         "sidebar.verticalTabs" = true;
+        "signon.rememberSignons" = false;
         "startup.homepage_override_url" = ""; # Disable
         "startup.homepage_welcome_url" = ""; # Disable
         "svg.context-properties.content.enabled" = true; # Dark theme icons
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-        "toolkit.telemetry.archive.enabled" = false;
-        "toolkit.telemetry.bhrPing.enabled" = false;
-        "toolkit.telemetry.coverage.opt-out" = true;
-        "toolkit.telemetry.enabled" = false;
-        "toolkit.telemetry.firstShutdownPing.enabled" = false;
-        "toolkit.telemetry.newProfilePing.enabled" = false;
-        "toolkit.telemetry.pioneer-new-studies-available" = false;
-        "toolkit.telemetry.reportingpolicy.firstRun" = false;
-        "toolkit.telemetry.shutdownPingSender.enabled" = false;
-        "toolkit.telemetry.unified" = false;
-        "toolkit.telemetry.updatePing.enabled" = false;
         "ui.key.menuAccessKey" = 0; # Disable menu key
         "webgl.disabled" = false;
         "widget.gtk.overlay-scrollbars.enabled" = true;
         "widget.gtk.rounded-bottom-corners.enabled" = true;
+      }
+      // {
+        #!! Telemetry
+        "browser.crashReports.unsubmittedCheck.autoSubmit2" = telemetry;
+        "browser.newtabpage.activity-stream.feeds.telemetry" = telemetry;
+        "browser.newtabpage.activity-stream.telemetry" = telemetry;
+        "browser.newtabpage.activity-stream.telemetry.ut.events" = telemetry;
+        "browser.ping-centre.telemetry" = telemetry;
+        "browser.search.serpEventTelemetryCategorization.enabled" = telemetry;
+        "browser.search.serpEventTelemetryCategorization.regionEnabled" = telemetry;
+        "identity.fxaccounts.telemetry.clientAssociationPing.enabled" = telemetry;
+        "network.trr.confirmation_telemetry_enabled" = telemetry;
+        "nimbus.telemetry.targetingContextEnabled" = telemetry;
+        "security.protectionspopup.recordEventTelemetry" = telemetry;
+        "toolkit.telemetry.archive.enabled" = telemetry;
+        "toolkit.telemetry.bhrPing.enabled" = telemetry;
+        "toolkit.telemetry.coverage.opt-out" = !telemetry;
+        "toolkit.telemetry.enabled" = telemetry;
+        "toolkit.telemetry.firstShutdownPing.enabled" = telemetry;
+        "toolkit.telemetry.newProfilePing.enabled" = telemetry;
+        "toolkit.telemetry.pioneer-new-studies-available" = telemetry;
+        "toolkit.telemetry.reportingpolicy.firstRun" = telemetry;
+        "toolkit.telemetry.shutdownPingSender.enabled" = telemetry;
+        "toolkit.telemetry.unified" = telemetry;
+        "toolkit.telemetry.updatePing.enabled" = telemetry;
       }
       // optionalAttrs theme {
         # https://github.com/rafaelmardojai/firefox-gnome-theme?tab=readme-ov-file#features
