@@ -135,7 +135,11 @@ in {
 
             {
               # Games
-              matches = [
+              matches = map (match:
+                match
+                // {
+                  is-focused = true;
+                }) [
                 {app-id = "^.*\.(exe|x86_64)$";}
                 {app-id = "^love$";} # vrrtest
                 {app-id = "^moe\.launcher\..+$";} # Anime Game Launcher
