@@ -26,6 +26,7 @@
       #// ghost.enable = true;
       grafana.enable = true;
       #// headscale.enable = true;
+      jellyfin.enable = true;
       kener.enable = true;
       mastodon.enable = true;
       miniflux.enable = true;
