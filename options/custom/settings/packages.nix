@@ -184,6 +184,7 @@ in {
           ventoy # Image writer
           vesktop # Discord client
           virt-viewer # Virtual machine viewer
+          vorta # Borg backup client
           wildcard # Regex tester
           #// wowup-cf # World of Warcraft addon manager
           #// xivlauncher # Final Fantasy XIV launcher
