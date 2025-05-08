@@ -59,12 +59,6 @@ with lib; {
     containersForce = true;
 
     containers = {
-      master = {
-        color = "pink";
-        icon = "circle";
-        id = 0;
-      };
-
       edu = {
         color = "orange";
         icon = "fruit";
