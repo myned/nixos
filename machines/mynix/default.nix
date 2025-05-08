@@ -8,7 +8,7 @@
     width = 3440;
     height = 1440;
     refresh = 100;
-    #// vrr = true;
+    vrr = true;
 
     desktops.niri.output = {
       connectors = ["DP-1" "DP-2" "DP-3" "DP-4" "DP-5"];
