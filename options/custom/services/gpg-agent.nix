@@ -13,7 +13,7 @@ in {
     # https://wiki.archlinux.org/title/GnuPG#gpg-agent
     services.gpg-agent = {
       enable = true;
-      pinentryPackage = pkgs.pinentry-gnome3; # Default: curses
+      pinentry.package = pkgs.pinentry-gnome3; # Default: curses
     };
   };
 }
