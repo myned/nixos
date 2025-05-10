@@ -75,12 +75,12 @@ in {
           ### Python
           # https://nixos.org/manual/nixpkgs/unstable/#how-to-override-a-python-package-for-all-python-versions-using-extensions
           #?? PKG = pyprev.PKG.overridePythonAttrs {};
-          pythonPackagesExtensions =
-            prev.pythonPackagesExtensions
-            ++ [
-              (pyfinal: pyprev: {
-              })
-            ];
+          # pythonPackagesExtensions =
+          #   prev.pythonPackagesExtensions
+          #   ++ [
+          #     (pyfinal: pyprev: {
+          #     })
+          #   ];
         }
       )
     ];
