@@ -67,10 +67,6 @@ in {
           # https://github.com/NixOS/nixpkgs/pull/390171
           rustdesk-flutter = stable.rustdesk-flutter;
 
-          # TODO: Remove when v0.11.0 in unstable
-          # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/by-name/sw/swaynotificationcenter/package.nix
-          swaynotificationcenter = myned.swaynotificationcenter;
-
           # TODO: Use official package when available
           # https://github.com/NixOS/nixpkgs/issues/327982
           zen-browser = inputs.zen-browser.packages.${prev.system}.zen-browser;
