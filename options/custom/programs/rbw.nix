@@ -45,17 +45,19 @@ in {
         # https://github.com/fdw/rofi-rbw?tab=readme-ov-file#configuration
         xdg.configFile = {
           "rofi-rbw.rc".text = let
+            # BUG: Alt binds nonfunctional after update, use Alt+Meta as workaround until next rofi-wayland release
+            # https://github.com/davatorium/rofi/issues/2095
             keybindings = concatStringsSep "," [
               "Ctrl+1:print:username"
               "Ctrl+2:print:password"
               "Ctrl+3:print:totp"
-              "Alt+1:type:delay:username"
-              "Alt+2:type:delay:password"
-              "Alt+3:type:delay:totp"
-              "Alt+u:copy:username"
-              "Alt+p:copy:password"
-              "Alt+t:copy:totp"
-              "Alt+s:sync"
+              "Alt+Meta+1:type:delay:username"
+              "Alt+Meta+2:type:delay:password"
+              "Alt+Meta+3:type:delay:totp"
+              "Alt+Meta+u:copy:username"
+              "Alt+Meta+p:copy:password"
+              "Alt+Meta+t:copy:totp"
+              "Alt+Meta+s:sync"
             ];
           in ''
             action=copy
