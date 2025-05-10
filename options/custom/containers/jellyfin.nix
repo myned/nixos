@@ -8,6 +8,26 @@ with lib; let
 in {
   options.custom.containers.jellyfin = {
     enable = mkEnableOption "jellyfin";
+
+    dataDir = mkOption {
+      default = "${config.custom.containers.directory}/jellyfin/data";
+      type = types.str;
+    };
+
+    uid = mkOption {
+      default = "1000";
+      type = types.str;
+    };
+
+    gid = mkOption {
+      default = "1000";
+      type = types.str;
+    };
+
+    vue = mkOption {
+      default = true;
+      type = types.bool;
+    };
   };
 
   config = mkIf cfg.enable {
@@ -21,15 +41,15 @@ in {
       # https://github.com/Morzomb/All-jellyfin-media-server
       jellyfin.service = {
         container_name = "jellyfin";
-        image = "ghcr.io/jellyfin/jellyfin:2025050505"; # https://github.com/jellyfin/jellyfin/pkgs/container/jellyfin
-        ports = ["8096:8096/tcp"];
+        image = "ghcr.io/jellyfin/jellyfin:10.10"; # https://github.com/jellyfin/jellyfin/pkgs/container/jellyfin
+        ports = ["127.0.0.1:8096:8096/tcp"];
         restart = "unless-stopped";
-        user = "1001:1001";
+        user = "${cfg.uid}:${cfg.gid}";
 
         volumes = [
           "${config.custom.containers.directory}/jellyfin/cache:/cache"
           "${config.custom.containers.directory}/jellyfin/config:/config"
-          "${config.custom.containers.directory}/jellyfin/data:/data"
+          "${cfg.dataDir}:/data"
         ];
       };
 
@@ -39,38 +59,39 @@ in {
       # flaresolverr.service = {
       #   container_name = "jellyfin-flaresolverr";
       #   image = "ghcr.io/flaresolverr/flaresolverr:latest"; # https://github.com/FlareSolverr/FlareSolverr/pkgs/container/flaresolverr
-      #   ports = ["8191:8191/tcp"];
+      #   ports = ["127.0.0.1:8191:8191/tcp"];
       #   restart = "unless-stopped";
-      #   user = "1001:1001";
+      #   user = "${cfg.uid}:${cfg.gid}";
       # };
-
-      # https://github.com/Jackett/Jackett
-      jackett.service = {
-        container_name = "jellyfin-jackett";
-        image = "ghcr.io/linuxserver/jackett:latest"; # https://github.com/linuxserver/docker-jackett/pkgs/container/jackett
-        ports = ["9117:9117/tcp"];
-        restart = "unless-stopped";
-
-        volumes = [
-          "${config.custom.containers.directory}/jellyfin/jackett:/config"
-          "${config.custom.containers.directory}/jellyfin/blackhole:/downloads"
-        ];
-
-        environment = {
-          PUID = "1001";
-          PGID = "1001";
-        };
-      };
 
       # https://docs.jellyseerr.dev/
       # https://github.com/Fallenbagel/jellyseerr
       jellyseerr.service = {
         container_name = "jellyfin-jellyseerr";
         image = "ghcr.io/fallenbagel/jellyseerr:latest"; # https://github.com/fallenbagel/jellyseerr/pkgs/container/jellyseerr
-        ports = ["5055:5055/tcp"];
+        ports = ["127.0.0.1:5055:5055/tcp"];
         restart = "unless-stopped";
-        user = "1001:1001";
+        user = "${cfg.uid}:${cfg.gid}";
         volumes = ["${config.custom.containers.directory}/jellyfin/jellyseerr:/app/config"];
+      };
+
+      # https://lidarr.audio/
+      # https://github.com/Lidarr/Lidarr
+      lidarr.service = {
+        container_name = "jellyfin-lidarr";
+        image = "ghcr.io/linuxserver/lidarr:latest"; # https://github.com/linuxserver/docker-lidarr/pkgs/container/lidarr
+        ports = ["127.0.0.1:8686:8686/tcp"];
+        restart = "unless-stopped";
+
+        volumes = [
+          "${config.custom.containers.directory}/jellyfin/lidarr:/config"
+          "${cfg.dataDir}:/data"
+        ];
+
+        environment = {
+          PUID = cfg.uid;
+          PGID = cfg.gid;
+        };
       };
 
       # https://prowlarr.com/
@@ -78,13 +99,13 @@ in {
       prowlarr.service = {
         container_name = "jellyfin-prowlarr";
         image = "ghcr.io/linuxserver/prowlarr:latest"; # https://github.com/linuxserver/docker-prowlarr/pkgs/container/prowlarr
-        ports = ["9696:9696/tcp"];
+        ports = ["127.0.0.1:9696:9696/tcp"];
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/jellyfin/prowlarr:/config"];
 
         environment = {
-          PUID = "1001";
-          PGID = "1001";
+          PUID = cfg.uid;
+          PGID = cfg.gid;
         };
       };
 
@@ -96,19 +117,21 @@ in {
         restart = "unless-stopped";
 
         ports = [
-          "8881:8881/tcp"
+          "127.0.0.1:8881:8881/tcp"
+
+          # TODO: Consider opening ports
           #// "6881:6881/tcp"
           #// "6881:6881/udp"
         ];
 
         volumes = [
           "${config.custom.containers.directory}/jellyfin/qbittorrent:/config"
-          "${config.custom.containers.directory}/jellyfin/data:/data"
+          "${cfg.dataDir}:/data"
         ];
 
         environment = {
-          PUID = "1001";
-          PGID = "1001";
+          PUID = cfg.uid;
+          PGID = cfg.gid;
           WEBUI_PORT = 8881;
         };
       };
@@ -118,17 +141,17 @@ in {
       radarr.service = {
         container_name = "jellyfin-radarr";
         image = "ghcr.io/linuxserver/radarr:latest"; # https://github.com/linuxserver/docker-radarr/pkgs/container/radarr
-        ports = ["7878:7878/tcp"];
+        ports = ["127.0.0.1:7878:7878/tcp"];
         restart = "unless-stopped";
 
         volumes = [
           "${config.custom.containers.directory}/jellyfin/radarr:/config"
-          "${config.custom.containers.directory}/jellyfin/data:/data"
+          "${cfg.dataDir}:/data"
         ];
 
         environment = {
-          PUID = "1001";
-          PGID = "1001";
+          PUID = cfg.uid;
+          PGID = cfg.gid;
         };
       };
 
@@ -137,17 +160,32 @@ in {
       sonarr.service = {
         container_name = "jellyfin-sonarr";
         image = "ghcr.io/linuxserver/sonarr:latest"; # https://github.com/linuxserver/docker-sonarr/pkgs/container/sonarr
-        ports = ["8989:8989/tcp"];
+        ports = ["127.0.0.1:8989:8989/tcp"];
         restart = "unless-stopped";
 
         volumes = [
           "${config.custom.containers.directory}/jellyfin/sonarr:/config"
-          "${config.custom.containers.directory}/jellyfin/data:/data"
+          "${cfg.dataDir}:/data"
         ];
 
         environment = {
-          PUID = "1001";
-          PGID = "1001";
+          PUID = cfg.uid;
+          PGID = cfg.gid;
+        };
+      };
+
+      # https://jellyfin.org/docs/general/clients/jellyfin-vue
+      # https://github.com/jellyfin/jellyfin-vue
+      vue.service = mkIf cfg.vue {
+        container_name = "jellyfin-vue";
+        image = "ghcr.io/jellyfin/jellyfin-vue:unstable"; # https://github.com/jellyfin/jellyfin-vue/pkgs/container/jellyfin-vue
+        ports = ["127.0.0.1:8097:80/tcp"];
+        restart = "unless-stopped";
+
+        # https://github.com/jellyfin/jellyfin-vue/wiki/Configuration
+        environment = {
+          DEFAULT_SERVERS = "media.vpn.${config.custom.domain}";
+          DISABLE_SERVER_SELECTION = "1";
         };
       };
     };
@@ -156,79 +194,34 @@ in {
     systemd.tmpfiles.settings.jellyfin = let
       owner = mode: {
         inherit mode;
-        user = "1001";
-        group = "1001";
+        user = cfg.uid;
+        group = cfg.gid;
       };
-    in {
-      "${config.custom.containers.directory}/jellyfin/blackhole" = {
-        d = owner "0700"; # -rwx------
-        z = owner "0700"; # -rwx------
-      };
-
-      "${config.custom.containers.directory}/jellyfin/cache" = {
-        d = owner "0700"; # -rwx------
-        z = owner "0700"; # -rwx------
-      };
-
-      "${config.custom.containers.directory}/jellyfin/config" = {
-        d = owner "0700"; # -rwx------
-        z = owner "0700"; # -rwx------
-      };
-
-      "${config.custom.containers.directory}/jellyfin/data" = {
-        d = owner "0700"; # -rwx------
-        z = owner "0700"; # -rwx------
-      };
-
-      "${config.custom.containers.directory}/jellyfin/data/downloads" = {
-        d = owner "0700"; # -rwx------
-        z = owner "0700"; # -rwx------
-      };
-
-      "${config.custom.containers.directory}/jellyfin/data/movies" = {
-        d = owner "0700"; # -rwx------
-        z = owner "0700"; # -rwx------
-      };
-
-      "${config.custom.containers.directory}/jellyfin/data/music" = {
-        d = owner "0700"; # -rwx------
-        z = owner "0700"; # -rwx------
-      };
-
-      "${config.custom.containers.directory}/jellyfin/data/shows" = {
-        d = owner "0700"; # -rwx------
-        z = owner "0700"; # -rwx------
-      };
-
-      "${config.custom.containers.directory}/jellyfin/jackett" = {
-        d = owner "0700"; # -rwx------
-        z = owner "0700"; # -rwx------
-      };
-
-      "${config.custom.containers.directory}/jellyfin/jellyseerr" = {
-        d = owner "0700"; # -rwx------
-        z = owner "0700"; # -rwx------
-      };
-
-      "${config.custom.containers.directory}/jellyfin/prowlarr" = {
-        d = owner "0700"; # -rwx------
-        z = owner "0700"; # -rwx------
-      };
-
-      "${config.custom.containers.directory}/jellyfin/qbittorrent" = {
-        d = owner "0700"; # -rwx------
-        z = owner "0700"; # -rwx------
-      };
-
-      "${config.custom.containers.directory}/jellyfin/radarr" = {
-        d = owner "0700"; # -rwx------
-        z = owner "0700"; # -rwx------
-      };
-
-      "${config.custom.containers.directory}/jellyfin/sonarr" = {
-        d = owner "0700"; # -rwx------
-        z = owner "0700"; # -rwx------
-      };
-    };
+    in
+      listToAttrs (map (name: {
+          inherit name;
+          value = {
+            d = owner "0700"; # -rwx------
+            z = owner "0700"; # -rwx------
+          };
+        }) [
+          "${cfg.dataDir}"
+          "${cfg.dataDir}/downloads"
+          "${cfg.dataDir}/downloads/lidarr"
+          "${cfg.dataDir}/downloads/radarr"
+          "${cfg.dataDir}/downloads/sonarr"
+          "${cfg.dataDir}/movies"
+          "${cfg.dataDir}/music"
+          "${cfg.dataDir}/shows"
+          "${config.custom.containers.directory}/jellyfin/blackhole"
+          "${config.custom.containers.directory}/jellyfin/cache"
+          "${config.custom.containers.directory}/jellyfin/config"
+          "${config.custom.containers.directory}/jellyfin/jellyseerr"
+          "${config.custom.containers.directory}/jellyfin/lidarr"
+          "${config.custom.containers.directory}/jellyfin/prowlarr"
+          "${config.custom.containers.directory}/jellyfin/qbittorrent"
+          "${config.custom.containers.directory}/jellyfin/radarr"
+          "${config.custom.containers.directory}/jellyfin/sonarr"
+        ]);
   };
 }
