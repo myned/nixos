@@ -1808,6 +1808,7 @@
         "stylix-stable": "stylix-stable",
         "stylix-unstable": "stylix-unstable",
         "swaynotificationcenter": "swaynotificationcenter",
+        "upmpdcli": "upmpdcli",
         "virtio-win": "virtio-win",
         "zen-browser": "zen-browser"
       }
@@ -2242,6 +2243,19 @@
         "owner": "numtide",
         "repo": "treefmt-nix",
         "type": "github"
+      }
+    },
+    "upmpdcli": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1746510191,
+        "narHash": "sha256-XRuLlnPJC8pZiH86G7RgLUIeh27ziOUBA1l3nWphjVw=",
+        "type": "tarball",
+        "url": "https://www.lesbonscomptes.com/upmpdcli/downloads/upmpdcli-1.9.5.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://www.lesbonscomptes.com/upmpdcli/downloads/upmpdcli-1.9.5.tar.gz"
       }
     },
     "virtio-win": {

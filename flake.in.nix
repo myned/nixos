@@ -89,15 +89,37 @@
     # steamtinkerlaunch = source "github:sonic2kk/steamtinkerlaunch";
     swaynotificationcenter = source "github:ErikReider/SwayNotificationCenter?ref=v0.11.0";
     # thunderbird-gnome-theme = source "github:rafaelmardojai/thunderbird-gnome-theme";
+    upmpdcli = source "https://www.lesbonscomptes.com/upmpdcli/downloads/upmpdcli-1.9.5.tar.gz";
     virtio-win = source "https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.262-2/virtio-win.iso";
   };
 
-  outputs = inputs: {
+  outputs = inputs: let
+    pkgs = import inputs.nixpkgs-unstable {
+      system = "x86_64-linux";
+
+      overlays = [
+        (final: prev: {
+          # TODO: Remove if packaged in nixpkgs
+          upmpdcli = prev.callPackage "${inputs.self}/packages/upmpdcli.nix" {};
+          libnpupnp = prev.callPackage "${inputs.self}/packages/libnpupnp.nix" {};
+          libupnpp = prev.callPackage "${inputs.self}/packages/libupnpp.nix" {};
+        })
+      ];
+    };
+  in {
     # TODO: Use forAllSystems
     # FIXME: nixd always uses nixfmt when importing flakes
     # https://nix.dev/manual/nix/2.18/command-ref/new-cli/nix3-fmt
     # https://github.com/kamadorueda/alejandra/blob/main/STYLE.md
     formatter.x86_64-linux = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.alejandra;
+
+    devShells.x86_64-linux.default = pkgs.mkShell {
+      packages = with pkgs; [
+        libnpupnp
+        libupnpp
+        upmpdcli
+      ];
+    };
 
     nixosConfigurations = let
       # TODO: Use inline modules instead of specialArgs

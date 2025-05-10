@@ -117,6 +117,10 @@
       flake = false;
       url = "github:ErikReider/SwayNotificationCenter?ref=v0.11.0";
     };
+    upmpdcli = {
+      flake = false;
+      url = "https://www.lesbonscomptes.com/upmpdcli/downloads/upmpdcli-1.9.5.tar.gz";
+    };
     virtio-win = {
       flake = false;
       url = "https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.262-2/virtio-win.iso";

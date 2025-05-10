@@ -40,6 +40,7 @@ let
 in {
   ### Common
   "common/geoclue2/geolocation".publicKeys = common;
+  "common/mopidy/mopidy.conf".publicKeys = common;
   "common/nix/access-tokens.conf".publicKeys = common;
   "common/ntfy/token".publicKeys = common;
   "common/tailscale/container.env".publicKeys = common;
