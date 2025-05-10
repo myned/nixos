@@ -163,6 +163,19 @@ in {
             };
 
             cursor_blink = false;
+
+            edit_predictions.disabled_globs = [
+              "**/*.env*"
+              "**/*.pem"
+              "**/*.key"
+              "**/*.cert"
+              "**/*.crt"
+              "**/.dev.vars"
+              "**/secrets.yml"
+              "**/secrets/"
+            ];
+
+            edit_predictions_disabled_in = ["comment"];
             git.inline_blame.enabled = false;
             git_panel.default_width = 300;
             icon_theme = "Colored Zed Icons Theme Dark";
@@ -191,6 +204,7 @@ in {
             };
 
             seed_search_query_from_cursor = "selection";
+            show_edit_predictions = false;
             show_user_picture = false;
 
             # TODO: Show trailing whitespace when supported
