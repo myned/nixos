@@ -58,8 +58,8 @@ bjork.tech {
 	import proxy notify.vpn.bjork.tech localhost:2586 # ntfy
 	import proxy reddit.vpn.bjork.tech localhost:8888 # Redlib
 	#// import proxy search.vpn.bjork.tech localhost:8888 # SearXNG
-	#// import proxy tv.vpn.bjork.tech localhost:8470 # Stremio Client
-	#// import proxy api.tv.vpn.bjork.tech localhost:11470 # Stremio Server
+	import proxy tv.vpn.bjork.tech localhost:8470 # Stremio Client
+	import proxy tv-api.vpn.bjork.tech localhost:11470 # Stremio Server
 
 	# AdGuard Home
 	import handle dns.vpn.bjork.tech *.dns.vpn.bjork.tech {
