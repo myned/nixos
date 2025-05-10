@@ -91,9 +91,14 @@ in {
           "application/xml" = gnome-text-editor;
           "application/yaml" = gnome-text-editor;
           "application/zip" = file-roller;
+          "audio/aac" = decibels;
+          "audio/flac" = decibels;
           "audio/midi" = decibels;
           "audio/mpeg" = decibels;
+          "audio/ogg" = decibels;
+          "audio/opus" = decibels;
           "audio/vnd.wave" = decibels;
+          "audio/vorbis" = decibels;
           "audio/x-mod" = gnome-text-editor;
           "font/ttf" = font-viewer;
           "font/woff2" = font-viewer;
