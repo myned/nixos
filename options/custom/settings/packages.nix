@@ -158,6 +158,7 @@ in {
           mission-center # System monitor
           #// monitorets # System monitor
           newsflash # RSS feed
+          nicotine-plus # SoulSeek client
           obsidian # Knowledge base
           papers # Document viewer
           path-of-building # Path of Exile planner
