@@ -114,7 +114,7 @@ in {
           fragments # Torrent downloader
           gcolor3 # Color picker
           gimp # Image editor
-          #// gitbutler # Git client
+          gitbutler # Git client
           #// gitg # Git client
           github-desktop # Git client
           gitnuro # Git client
