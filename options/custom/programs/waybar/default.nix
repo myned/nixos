@@ -199,9 +199,9 @@ in {
                   format-disabled = "󰂲";
                   format-off = "󰂲";
                   format-on = "󰂯";
-                  on-click = "${rfkill} toggle bluetooth";
+                  on-click = blueberry;
                   on-click-middle = "${bluetoothctl} disconnect";
-                  on-click-right = blueberry;
+                  on-click-right = "${rfkill} toggle bluetooth";
                 };
 
               # https://github.com/Alexays/Waybar/wiki/Module:-Cava
@@ -327,8 +327,8 @@ in {
                     wifi = ["󰤯" "󰤟" "󰤢" "󰤥" "󰤨"];
                   };
 
-                  on-click = network;
-                  on-click-right = nm-connection-editor;
+                  on-click = nm-connection-editor;
+                  on-click-right = network;
                 };
 
               # https://github.com/Alexays/Waybar/wiki/Module:-Niri
@@ -367,8 +367,8 @@ in {
                   format = "{icon} {volume}%";
                   format-icons = ["󰕿" "󰖀" "󰕾"];
                   format-muted = "󰸈";
-                  on-click = "${swayosd-client} --output-volume mute-toggle";
-                  on-click-right = pwvucontrol;
+                  on-click = pwvucontrol;
+                  on-click-right = "${swayosd-client} --output-volume mute-toggle";
                   on-scroll-down = "${swayosd-client} --output-volume lower";
                   on-scroll-up = "${swayosd-client} --output-volume raise";
                 };
@@ -384,8 +384,8 @@ in {
                   '';
 
                   interval = 5; # Seconds
-                  on-click = audio;
-                  on-click-right = easyeffects;
+                  on-click = easyeffects;
+                  on-click-right = audio;
                 };
 
               "custom/inhibitor" =
@@ -490,7 +490,7 @@ in {
                   format = "{}°";
                   interval = 60 * 60; # Seconds
                   return-type = "json";
-                  on-click-right = gnome-weather;
+                  on-click = gnome-weather;
                 };
             };
           };
