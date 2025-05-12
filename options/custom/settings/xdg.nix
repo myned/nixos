@@ -18,6 +18,7 @@ with lib; let
   nautilus = "org.gnome.Nautilus.desktop";
   onlyoffice = "onlyoffice-desktopeditors.desktop";
   papers = "org.gnome.Papers.desktop";
+  showtime = "org.gnome.Showtime.desktop";
 
   cfg = config.custom.settings.xdg;
 in {
@@ -53,7 +54,7 @@ in {
           "application/schema+json" = gnome-text-editor;
           "application/sql" = gnome-text-editor;
           "application/toml" = gnome-text-editor;
-          "application/vnd.adobe.flash.movie" = clapper;
+          "application/vnd.adobe.flash.movie" = showtime;
           "application/vnd.apple.keynote" = gnome-text-editor;
           "application/vnd.ms-excel.sheet.macroEnabled.12" = libreoffice;
           "application/vnd.ms-excel" = libreoffice;
@@ -139,8 +140,8 @@ in {
           "text/x-readme" = gnome-text-editor;
           "text/x-rst" = gnome-text-editor;
           "text/x-scss" = gnome-text-editor;
-          "video/mp4" = clapper;
-          "video/x-matroska" = clapper;
+          "video/mp4" = showtime;
+          "video/x-matroska" = showtime;
           "x-scheme-handler/http" = config.custom.browser.desktop;
           "x-scheme-handler/https" = config.custom.browser.desktop;
         };

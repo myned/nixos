@@ -92,7 +92,7 @@ in {
           #// blackbox-terminal # Terminal
           cartridges # Game library
           cinny-desktop # Matrix client
-          clapper # Video player
+          #// clapper # Video player
           concessio # Permissions converter
           d-spy # D-Bus introspection
           dconf-editor # GSettings editor
