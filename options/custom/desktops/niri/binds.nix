@@ -66,7 +66,7 @@ in {
           vm = [
             bash
             "-c"
-            ''${remote} --vm --client sdl-freerdp --username Myned --password "$(${cat} ${config.age.secrets."desktop/vm/myndows.pass".path})" myndows''
+            ''${remote} --vm --client=remmina --username=Myned --password="$(${cat} ${config.age.secrets."desktop/vm/myndows.pass".path})" myndows''
           ];
         in
           listToAttrs (with hm.lib.niri.actions; [

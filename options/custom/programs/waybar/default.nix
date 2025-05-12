@@ -451,10 +451,9 @@ in {
 
                   interval = 5;
 
-                  on-click = ''${remote} --vm --client sdl-freerdp --username Myned --password "$(${cat} ${config.age.secrets."desktop/vm/myndows.pass".path})" myndows'';
-
+                  on-click = virt-manager;
                   on-click-middle = "${virsh} shutdown myndows";
-                  on-click-right = virt-manager;
+                  on-click-right = ''${remote} --vm --client=remmina --username=Myned --password="$(${cat} ${config.age.secrets."desktop/vm/myndows.pass".path})" myndows'';
                 };
 
               "custom/vpn" =
