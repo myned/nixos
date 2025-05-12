@@ -8,7 +8,10 @@
     width = 3440;
     height = 1440;
     refresh = 100;
-    vrr = true;
+
+    # BUG: Cursor updates cause refresh rate fluctuation, so disable for now
+    # https://github.com/YaLTeR/niri/issues/1214
+    #// vrr = true;
 
     desktops.niri.output = {
       connectors = ["DP-1" "DP-2" "DP-3" "DP-4" "DP-5"];
