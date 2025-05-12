@@ -67,11 +67,11 @@
         ];
       };
 
-      vm.passthrough = {
-        enable = true;
-        #// blacklist = true;
-        guest = "myndows";
-      };
+      # vm.passthrough = {
+      #   enable = true;
+      #   blacklist = true;
+      #   guest = "myndows";
+      # };
     };
   };
 
