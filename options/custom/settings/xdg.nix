@@ -48,6 +48,7 @@ in {
           "application/gzip" = file-roller;
           "application/java-archive" = gnome-text-editor;
           "application/json" = gnome-text-editor;
+          "application/msword" = libreoffice;
           "application/octet-stream" = "";
           "application/pdf" = papers;
           "application/rtf" = libreoffice;
