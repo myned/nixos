@@ -135,6 +135,7 @@ in {
           gnome-podcasts # Podcast feed
           gnome-resources # System monitor
           gnome-software # Flatpak manager
+          gnome-sound-recorder # Sound recorder
           gnome-system-monitor # System monitor
           gnome-text-editor # Text editor
           gnome-tweaks # GNOME extras
