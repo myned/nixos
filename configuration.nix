@@ -29,13 +29,17 @@ in {
         # HACK: Allow all insecure electron versions
         name
         == "electron"
+        # HACK: Ventoy uses opaque binary blobs, causing security concerns
+        # https://github.com/NixOS/nixpkgs/issues/404663
+        || name == "ventoy"
         # HACK: Some Matrix clients rely on libolm, which is deprecated
         # https://github.com/NixOS/nixpkgs/pull/334638
         || name == "cinny"
         || name == "cinny-unwrapped"
         || name == "fluffychat-linux"
         || name == "olm"
-        || name == "openssl"; # Cisco Packet Tracer
+        # Cisco Packet Tracer
+        || name == "openssl";
     };
   in {
     inherit config;
