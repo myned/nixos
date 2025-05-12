@@ -105,6 +105,7 @@ in {
           easyeffects # Audio filters
           element-desktop # Matrix client
           eyedropper # Color picker
+          feishin # Jellyfin client
           file-roller # Archive utility
           #// flare-signal # Signal client
           fluffychat # Matrix client
