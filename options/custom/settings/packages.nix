@@ -171,6 +171,7 @@ in {
           pwvucontrol # Pipewire volume controller
           remmina # Remote desktop client
           #// rustdesk-flutter # Remote desktop client
+          showtime # Video player
           signal-desktop-bin # Signal client
           smile # Emoji picker
           snapshot # Camera
