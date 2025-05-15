@@ -102,6 +102,7 @@ in {
           #// dissent # Discord client
           drawing # Image editor
           drawio # Diagram maker
+          eartag # Music tagger
           easyeffects # Audio filters
           element-desktop # Matrix client
           eyedropper # Color picker
