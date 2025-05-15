@@ -34,7 +34,7 @@
 
     settings = {
       boot = {
-        console-mode = 5; # Proper orientation
+        systemd-boot.console-mode = 5; # Proper orientation
         kernel = pkgs.linuxPackages_jovian;
       };
 
