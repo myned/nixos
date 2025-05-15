@@ -17,7 +17,7 @@ bjork.tech {
 	import proxy foundry.bjork.tech localhost:30000 # Foundry Virtual Tabletop
 	import proxy gist.bjork.tech {system.hostname}-opengist:6157 # Opengist
 	import proxy git.bjork.tech {system.hostname}-forgejo:3000 # Forgejo
-	import proxy net.bjork.tech localhost:8585 # Netbox
+	#// import proxy net.bjork.tech localhost:8585 # Netbox
 	import proxy status.bjork.tech {system.hostname}-kener:3000 # Kener
 	import proxy vault.bjork.tech localhost:8088 # Vaultwarden
 
