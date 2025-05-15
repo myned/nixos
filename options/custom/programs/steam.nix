@@ -20,6 +20,8 @@ in {
         enable = true;
         extest.enable = cfg.extest; # Work around invisible cursor on Wayland
         extraCompatPackages = [pkgs.proton-ge-bin];
+        localNetworkGameTransfers.openFirewall = true; # 27040/tcp 27036/udp
+        remotePlay.openFirewall = true; # 27036/tcp/udp 27031-27035/udp
 
         # HACK: Work around black main window with xwayland-satellite
         # https://github.com/ValveSoftware/steam-for-linux/issues/10543 et al.
