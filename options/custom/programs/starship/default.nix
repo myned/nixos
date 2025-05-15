@@ -217,7 +217,11 @@ in {
                   style = "bold #657b83";
 
                   # https://docs.rs/chrono/latest/chrono/format/strftime/index.html
-                  time_format = "%a %b %-d %-I:%M %p";
+                  time_format = "%a %b %-d ${
+                    if config.custom.time == "24h"
+                    then "%-H:%M" # 0:00
+                    else "%-I:%M %p" # 12:00 AM
+                  }"; # Sun Jan 1
                 };
 
                 # https://starship.rs/config/#username

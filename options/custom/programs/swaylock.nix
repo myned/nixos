@@ -62,7 +62,10 @@ in {
 
         # https://strftime.org/
         datestr = "%a %b %d";
-        timestr = "%I:%M %p";
+        timestr =
+          if config.custom.time == "24h"
+          then "%H:%M"
+          else "%I:%M %p";
       };
     };
   };

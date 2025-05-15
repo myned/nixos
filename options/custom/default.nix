@@ -37,7 +37,6 @@ in {
 
     ### Misc
     desktop = mkOption {default = null;};
-
     lockscreen = mkOption {default = "hyprlock";};
     menu = mkOption {default = "rofi";};
 
@@ -45,6 +44,11 @@ in {
       # TODO: Use lib.getExe' instead of /bin/ where possible
       command = mkOption {default = getExe hm.programs.firefox.finalPackage;};
       desktop = mkOption {default = "firefox.desktop";};
+    };
+
+    time = mkOption {
+      default = "24h";
+      type = types.enum ["12h" "24h"];
     };
   };
 }

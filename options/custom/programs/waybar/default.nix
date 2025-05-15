@@ -231,7 +231,12 @@ in {
               "clock#time" =
                 common
                 // {
-                  format = "<span text_transform='lowercase'>{:%-I:%M %p}</span>";
+                  format = "<span text_transform='lowercase'>{:${
+                    if config.custom.time == "24h"
+                    then "%-H:%M"
+                    else "%-I:%M %p"
+                  }</span>";
+
                   on-click = "${swaync-client} --toggle-panel";
                   on-click-right = gnome-clocks;
                 };
@@ -419,7 +424,12 @@ in {
               "custom/time" =
                 common
                 // {
-                  exec = "${date} '+%-I:%M %p'";
+                  exec = "${date} '+${
+                    if config.custom.time == "24h"
+                    then "%-H:%M"
+                    else "%-I:%M %p"
+                  }'";
+
                   interval = 60; # Seconds
                   on-click = "${swaync-client} --toggle-panel";
                   on-click-right = gnome-clocks;

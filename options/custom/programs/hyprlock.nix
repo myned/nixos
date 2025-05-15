@@ -70,9 +70,12 @@ in {
                 font_size = 64;
                 halign = "center";
                 position = "0, 200";
-                text = "$TIME12";
                 text_align = "center";
                 valign = "center";
+                text =
+                  if config.custom.time == "24h"
+                  then "$TIME"
+                  else "$TIME12";
               }
 
               {
