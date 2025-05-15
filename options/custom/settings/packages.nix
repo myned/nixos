@@ -165,6 +165,7 @@ in {
           obsidian # Knowledge base
           papers # Document viewer
           path-of-building # Path of Exile planner
+          picard # Music tagger
           pika-backup # Borg backup manager
           planify # Tasks
           pods # Podman manager
