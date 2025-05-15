@@ -25,7 +25,6 @@
         enable = true;
         folders =
           lib.getAttrs [
-            "SYNC/.ignore"
             "SYNC/common"
             "SYNC/game"
           ]
