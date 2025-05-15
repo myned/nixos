@@ -50,7 +50,7 @@ with lib; {
       #// ags.enable = true;
       #// bitwarden-menu.enable = true;
       #// clipse.enable = true;
-      #// discord.enable = true;
+      discord.enable = true;
       element-desktop.enable = true;
       gamemode.enable = true;
       #// gnome-shell.enable = true;

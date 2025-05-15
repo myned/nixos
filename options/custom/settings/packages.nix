@@ -98,8 +98,6 @@ in {
           dconf-editor # GSettings editor
           decibels # Audio player
           decoder # QR code scanner
-          #// discord # Discord client
-          #// dissent # Discord client
           drawing # Image editor
           drawio # Diagram maker
           eartag # Music tagger
@@ -188,7 +186,6 @@ in {
           telegram-desktop # Telegram client
           #// variety # Wallpaper changer
           ventoy # Image writer
-          vesktop # Discord client
           virt-viewer # Virtual machine viewer
           vorta # Borg backup client
           wildcard # Regex tester
@@ -210,7 +207,6 @@ in {
           ### CLI applications
           inputs.agenix.packages.${system}.default
 
-          #// betterdiscordctl # BetterDiscord installer
           bitwarden-cli # Bitwarden client
           brightnessctl # Backlight changer
           devbox # Development environment
