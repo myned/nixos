@@ -16,7 +16,7 @@
     desktop = "kde";
 
     programs = {
-      kodi.enable = true;
+      #// kodi.enable = true;
       steam.enable = true;
     };
 
