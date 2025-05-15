@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   ...
 }:
@@ -31,6 +32,16 @@ in {
   };
 
   config = mkIf cfg.enable {
+    age.secrets = let
+      secret = filename: {
+        file = "${inputs.self}/secrets/${filename}";
+        owner = cfg.uid;
+        group = cfg.gid;
+      };
+    in {
+      "server/jellyfin/soularr.ini" = secret "server/jellyfin/soularr.ini";
+    };
+
     #?? arion-jellyfin pull
     environment.shellAliases.arion-jellyfin = "sudo arion --prebuilt-file ${config.virtualisation.arion.projects.jellyfin.settings.out.dockerComposeYaml}";
 
@@ -155,6 +166,27 @@ in {
         };
       };
 
+      # https://github.com/slskd/slskd
+      # https://github.com/slskd/slskd/blob/master/docs/docker.md
+      slskd.service = {
+        container_name = "jellyfin-slskd";
+        image = "ghcr.io/slskd/slskd:latest"; # https://github.com/slskd/slskd/pkgs/container/slskd
+        ports = ["127.0.0.1:5030:5030/tcp"]; # 5031/tcp 50300/tcp
+        restart = "unless-stopped";
+        user = "${cfg.uid}:${cfg.gid}";
+
+        volumes = [
+          "${config.custom.containers.directory}/jellyfin/slskd:/app"
+          "${cfg.dataDir}:/data"
+        ];
+
+        # https://github.com/slskd/slskd/blob/master/docs/config.md
+        environment = {
+          SLSKD_DOWNLOADS_DIR = "${cfg.dataDir}/downloads/slskd";
+          SLSKD_REMOTE_CONFIGURATION = "true";
+        };
+      };
+
       # https://sonarr.tv/
       # https://github.com/Sonarr/Sonarr
       sonarr.service = {
@@ -172,6 +204,20 @@ in {
           PUID = cfg.uid;
           PGID = cfg.gid;
         };
+      };
+
+      # https://soularr.net/
+      # https://github.com/mrusse/soularr
+      soularr.service = {
+        container_name = "jellyfin-soularr";
+        image = "mrusse08/soularr:latest"; # https://hub.docker.com/r/mrusse08/soularr
+        restart = "unless-stopped";
+        user = "${cfg.uid}:${cfg.gid}";
+
+        volumes = [
+          "${config.age.secrets."server/jellyfin/soularr.ini".path}:/data/config.ini:ro"
+          "${cfg.dataDir}:/data"
+        ];
       };
 
       # https://jellyfin.org/docs/general/clients/jellyfin-vue
@@ -209,6 +255,7 @@ in {
           "${cfg.dataDir}/downloads"
           "${cfg.dataDir}/downloads/lidarr"
           "${cfg.dataDir}/downloads/radarr"
+          "${cfg.dataDir}/downloads/slskd"
           "${cfg.dataDir}/downloads/sonarr"
           "${cfg.dataDir}/movies"
           "${cfg.dataDir}/music"
@@ -221,6 +268,7 @@ in {
           "${config.custom.containers.directory}/jellyfin/prowlarr"
           "${config.custom.containers.directory}/jellyfin/qbittorrent"
           "${config.custom.containers.directory}/jellyfin/radarr"
+          "${config.custom.containers.directory}/jellyfin/slskd"
           "${config.custom.containers.directory}/jellyfin/sonarr"
         ]);
   };

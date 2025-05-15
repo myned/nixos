@@ -44,6 +44,7 @@ bjork.tech {
 	import proxy prowlarr.admin.bjork.tech localhost:9696 # Prowlarr
 	import proxy qbittorrent.admin.bjork.tech localhost:8881 # qBittorrent
 	import proxy radarr.admin.bjork.tech localhost:7878 # Radarr
+	import proxy slskd.admin.bjork.tech localhost:5030 # slskd
 	import proxy sonarr.admin.bjork.tech localhost:8989 # Sonarr
 
 	# Netdata
