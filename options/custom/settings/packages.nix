@@ -184,7 +184,7 @@ in {
           #// spotify # Spotify client
           stremio # Streaming client
           #// syncthingtray # Syncthing client
-          tagger # Audio file tagger
+          tagger # Music tagger
           telegram-desktop # Telegram client
           #// variety # Wallpaper changer
           ventoy # Image writer
