@@ -36,16 +36,16 @@ bjork.tech {
 	import proxy-insecure cloud.admin.bjork.tech localhost:8080 # Nextcloud AIO
 	#// import proxy dash.admin.bjork.tech localhost:3001 # dash.
 	import proxy grafana.admin.bjork.tech {system.hostname}-grafana:3000 # Grafana
-	import proxy jackett.admin.bjork.tech localhost:9117 # Jackett
-	import proxy lidarr.admin.bjork.tech localhost:8686 # Lidarr
+	#// import proxy jackett.admin.bjork.tech {system.hostname}-jellyfin:9117 # Jackett
+	import proxy lidarr.admin.bjork.tech {system.hostname}-jellyfin:8686 # Lidarr
 	import proxy matrix.admin.bjork.tech localhost:8000 # Synapse Admin
 	import proxy-insecure portainer.admin.bjork.tech {system.hostname}-portainer:9443 # Portainer
 	import proxy prometheus.admin.bjork.tech {system.hostname}-grafana:9090 # Prometheus
-	import proxy prowlarr.admin.bjork.tech localhost:9696 # Prowlarr
-	import proxy qbittorrent.admin.bjork.tech localhost:8881 # qBittorrent
-	import proxy radarr.admin.bjork.tech localhost:7878 # Radarr
-	import proxy slskd.admin.bjork.tech localhost:5030 # slskd
-	import proxy sonarr.admin.bjork.tech localhost:8989 # Sonarr
+	import proxy prowlarr.admin.bjork.tech {system.hostname}-jellyfin:9696 # Prowlarr
+	import proxy qbittorrent.admin.bjork.tech {system.hostname}-jellyfin:8881 # qBittorrent
+	import proxy radarr.admin.bjork.tech {system.hostname}-jellyfin:7878 # Radarr
+	import proxy slskd.admin.bjork.tech {system.hostname}-jellyfin:5030 # slskd
+	import proxy sonarr.admin.bjork.tech {system.hostname}-jellyfin:8989 # Sonarr
 
 	# Netdata
 	# import handle netdata.admin.bjork.tech {
@@ -60,11 +60,11 @@ bjork.tech {
 	import vpn
 	import proxy ai.vpn.bjork.tech {system.hostname}-openwebui:8080 # Open WebUI
 	import proxy budget.vpn.bjork.tech localhost:5006 # Actual Budget
-	import proxy discover.vpn.bjork.tech localhost:5055 # Jellyseerr
+	import proxy discover.vpn.bjork.tech {system.hostname}-jellyfin:5055 # Jellyseerr
 	import proxy home.vpn.bjork.tech mypi3:8123 # Home Assistant
 	import proxy matrix.vpn.bjork.tech localhost:8008 # Synapse
-	import proxy media.vpn.bjork.tech localhost:8096 # Jellyfin
-	import proxy media-next.vpn.bjork.tech localhost:8097 # Jellyfin Vue
+	import proxy media.vpn.bjork.tech {system.hostname}-jellyfin:8096 # Jellyfin
+	import proxy media-next.vpn.bjork.tech {system.hostname}-jellyfin:8097 # Jellyfin Vue
 	import proxy notify.vpn.bjork.tech localhost:2586 # ntfy
 	import proxy reddit.vpn.bjork.tech localhost:8888 # Redlib
 	#// import proxy search.vpn.bjork.tech localhost:8888 # SearXNG

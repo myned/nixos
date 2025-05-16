@@ -79,6 +79,7 @@ in {
   "server/ghost/db.env".publicKeys = server;
   "server/headscale/.env".publicKeys = server;
   "server/jellyfin/soularr.ini".publicKeys = server;
+  "server/jellyfin/vpn.env".publicKeys = server;
   "server/kener/.env".publicKeys = server;
   "server/kener/db.env".publicKeys = server;
   "server/mastodon/.env".publicKeys = server;
