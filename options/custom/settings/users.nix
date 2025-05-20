@@ -49,10 +49,10 @@ in {
         ${config.custom.username} = {
           isNormalUser = true;
           extraGroups = ["wheel"] ++ cfg.${config.custom.username}.groups;
-          hashedPasswordFile =
-            config.age.secrets."${config.custom.profile}/users/${config.custom.username}.pass".path;
+          hashedPasswordFile = config.age.secrets."${config.custom.profile}/users/${config.custom.username}.pass".path;
           linger = cfg.${config.custom.username}.linger;
           packages = cfg.${config.custom.username}.packages;
+          uid = 1000;
         };
       };
     };
