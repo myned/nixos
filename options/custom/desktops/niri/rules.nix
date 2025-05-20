@@ -26,7 +26,125 @@ in {
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingswindow-rules
           #?? niri msg windows
-          window-rules = [
+          window-rules = let
+            forEachMatch = matches: rule:
+              if isNull matches
+              then [rule]
+              else forEach matches (match: match // rule);
+
+            floating = matches: forEachMatch matches {is-floating = true;};
+            focused = matches: forEachMatch matches {is-focused = true;};
+            startup = matches: forEachMatch matches {at-startup = true;};
+
+            app-id = app-id: {inherit app-id;};
+            title = title: {inherit title;};
+
+            app-ids = ids: forEach ids (id: app-id id);
+            titles = ids: forEach ids (id: title id);
+
+            android = app-ids [
+              "^[Ww]aydroid.*$"
+            ];
+
+            browsers = app-ids [
+              "^brave-browser$"
+              "^chromium-browser$"
+              "^firefox.*$"
+              "^google-chrome$"
+              "^librewolf$"
+              "^vivaldi.*$"
+              "^zen$"
+            ];
+
+            chats = app-ids [
+              "^cinny$"
+              "^de\.schmidhuberj\.Flare$"
+              "^discord$"
+              "^Element$"
+              "^fluffychat$"
+              "^nheko$"
+              "^org\.gnome\.Fractal$"
+              "^org\.telegram\.desktop$"
+              "^signal$"
+              "^so\.libdb\.dissent$"
+              "^vesktop$"
+            ];
+
+            dropdown = app-ids [
+              "^dropdown$"
+            ];
+
+            editors = app-ids [
+              "^obsidian$"
+              "^org\.gnome\.TextEditor$"
+              "^org\.wireshark\.Wireshark$"
+            ];
+
+            files = app-ids [
+              "^org\.gnome\.Nautilus$"
+            ];
+
+            games = app-ids [
+              "^.*\.(exe|x86_64)$"
+              "^love$" # vrrtest
+              "^moe\.launcher\..+$" # Anime Game Launcher
+              "^net\.retrodeck\.retrodeck$"
+              "^steam_app_.+$"
+            ];
+
+            ides = app-ids [
+              "^codium$"
+              "^dev\.zed\.Zed$"
+              "^GitHub Desktop$"
+            ];
+
+            media = app-ids [
+              "^com\.github\.th_ch\.youtube_music$"
+              "^org\.gnome\.Loupe$"
+              "^Spotify$"
+              "^totem$"
+              "^YouTube Music$"
+            ];
+
+            office = app-ids [
+              "^draw\.io$"
+              "^libreoffice.*$"
+              "^ONLYOFFICE$"
+              "^org\.gnome\.Papers$"
+            ];
+
+            picture-in-picture = titles [
+              "^Picture.in.[Pp]icture$"
+            ];
+
+            previewer = app-ids [
+              "^org\.gnome\.NautilusPreviewer$"
+            ];
+
+            steam = app-ids [
+              "^steam$"
+            ];
+
+            terminals = app-ids [
+              "^com\.mitchellh\.ghostty$"
+              "^foot$"
+              "^kitty$"
+              "^org\.wezfurlong\.wezterm$"
+            ];
+
+            vaults = app-ids [
+              "^1Password$"
+              "^Bitwarden$"
+              "^com-artemchep-keyguard-MainKt$"
+            ];
+
+            vms = app-ids [
+              "^(sdl-|wl|x)freerdp$"
+              "^looking-glass-client$"
+              "^org\.remmina\.Remmina$"
+              "^.*virt-manager.*$"
+            ];
+          in [
             ### Defaults
             {
               # Global
@@ -42,47 +160,28 @@ in {
             }
 
             {
-              # Floating
-              matches = [
-                {is-floating = true;}
-              ];
-
+              # Global floating
+              matches = floating null;
               border.enable = false;
               focus-ring.enable = false;
               shadow.enable = true;
             }
 
             {
-              # Startup
+              # Global startup
               #?? <= 60 secs after niri launches
-              matches = [
-                {at-startup = true;}
-              ];
+              matches = startup null;
             }
 
             {
               # Android
-              matches = [
-                {app-id = "^[Ww]aydroid.*$";}
-              ];
+              matches = android;
             }
 
             {
               # Browsers
-              matches = [
-                {app-id = "^brave-browser$";}
-                {app-id = "^chromium-browser$";}
-                {app-id = "^firefox.*$";}
-                {app-id = "^google-chrome$";}
-                {app-id = "^librewolf$";}
-                {app-id = "^vivaldi.*$";}
-                {app-id = "^zen$";}
-              ];
-
-              excludes = [
-                {title = "^Picture.in.[Pp]icture$";}
-              ];
-
+              matches = browsers;
+              excludes = picture-in-picture;
               default-column-width.proportion =
                 if config.custom.ultrawide
                 then 0.4
@@ -91,74 +190,40 @@ in {
 
             {
               # Chats
-              matches = [
-                {app-id = "^cinny$";}
-                {app-id = "^de\.schmidhuberj\.Flare$";}
-                {app-id = "^discord$";}
-                {app-id = "^Element$";}
-                {app-id = "^fluffychat$";}
-                {app-id = "^nheko$";}
-                {app-id = "^org\.gnome\.Fractal$";}
-                {app-id = "^org\.telegram\.desktop$";}
-                {app-id = "^signal$";}
-                {app-id = "^so\.libdb\.dissent$";}
-                {app-id = "^vesktop$";}
-              ];
-
+              matches = chats;
               default-column-display = "tabbed";
             }
 
             {
               # Dropdown terminal
-              matches = [
-                {app-id = "^dropdown$";}
-              ];
-
+              matches = dropdown;
               open-floating = true;
             }
 
             {
               # Editors
-              matches = [
-                {app-id = "^obsidian$";}
-                {app-id = "^org\.gnome\.TextEditor$";}
-                {app-id = "^org\.wireshark\.Wireshark$";}
-              ];
+              matches = editors;
             }
 
             {
               # Files
-              matches = [
-                {app-id = "^org\.gnome\.Nautilus$";}
-              ];
+              matches = files;
             }
 
             {
               # Games
-              matches = map (match:
-                match
-                // {
-                  is-focused = true;
-                }) [
-                {app-id = "^.*\.(exe|x86_64)$";}
-                {app-id = "^love$";} # vrrtest
-                {app-id = "^moe\.launcher\..+$";} # Anime Game Launcher
-                {app-id = "^net\.retrodeck\.retrodeck$";}
-                {app-id = "^steam_app_.+$";}
-              ];
+              matches = games;
+            }
 
-              default-column-width = {}; # Window-defined
+            {
+              # Games (focused)
+              matches = focused games;
               variable-refresh-rate = true;
             }
 
             {
               # IDEs
-              matches = [
-                {app-id = "^codium$";}
-                {app-id = "^dev\.zed\.Zed$";}
-                {app-id = "^GitHub Desktop$";}
-              ];
-
+              matches = ides;
               default-column-width.proportion =
                 if config.custom.ultrawide
                 then 0.4
@@ -167,23 +232,12 @@ in {
 
             {
               # Media
-              matches = [
-                {app-id = "^com\.github\.th_ch\.youtube_music$";}
-                {app-id = "^org\.gnome\.Loupe$";}
-                {app-id = "^Spotify$";}
-                {app-id = "^totem$";}
-                {app-id = "^YouTube Music$";}
-              ];
+              matches = media;
             }
 
             {
               # Office
-              matches = [
-                {app-id = "^draw\.io$";}
-                {app-id = "^libreoffice.*$";}
-                {app-id = "^ONLYOFFICE$";}
-                {app-id = "^org\.gnome\.Papers$";}
-              ];
+              matches = office;
             }
 
             (let
@@ -195,9 +249,7 @@ in {
               };
             in {
               # PiP
-              matches = [
-                {title = "^Picture.in.[Pp]icture$";}
-              ];
+              matches = picture-in-picture;
 
               default-floating-position = {
                 relative-to = "top-right";
@@ -212,30 +264,25 @@ in {
             })
 
             {
+              # Previewer
+              matches = previewer;
+              default-column-width = {};
+              open-floating = true;
+            }
+
+            {
               # Steam
-              matches = [
-                {app-id = "^steam$";}
-              ];
+              matches = steam;
             }
 
             {
               # Terminals
-              matches = [
-                {app-id = "^com\.mitchellh\.ghostty$";}
-                {app-id = "^foot$";}
-                {app-id = "^kitty$";}
-                {app-id = "^org\.wezfurlong\.wezterm$";}
-              ];
+              matches = terminals;
             }
 
             {
               # Vaults
-              matches = [
-                {app-id = "^1Password$";}
-                {app-id = "^Bitwarden$";}
-                {app-id = "^com-artemchep-keyguard-MainKt$";}
-              ];
-
+              matches = vaults;
               default-column-width.proportion =
                 if config.custom.ultrawide
                 then 0.4
@@ -244,12 +291,7 @@ in {
 
             {
               # Virtual machines
-              matches = [
-                {app-id = "^(sdl-|wl|x)freerdp$";}
-                {app-id = "^looking-glass-client$";}
-                {app-id = "^org\.remmina\.Remmina$";}
-                {app-id = "^.*virt-manager.*$";}
-              ];
+              matches = vms;
             }
 
             ### Overrides
@@ -258,36 +300,17 @@ in {
               height = builtins.floor (config.custom.height * 0.4); # 40%
             in {
               # 1Password Quick Access
-              matches = [
-                {
-                  app-id = "^1Password";
-                  title = "^Quick Access — 1Password$";
-                }
-              ];
-
+              matches = [((app-id "^1Password") // (title "^Quick Access — 1Password$"))];
               open-floating = true;
               max-height = height;
               min-height = height;
             })
 
             {
-              # Sushi
-              matches = [
-                {app-id = "^org\.gnome\.NautilusPreviewer$";}
-              ];
-
-              default-column-width = {};
-              open-floating = true;
-            }
-
-            {
               # Rofi
               # FIXME: Figure out why pinentry-rofi opens as a window
               # HACK: pinentry-rofi opens as a window, so attempt to style as a layer
-              matches = [
-                {app-id = "^Rofi$";}
-              ];
-
+              matches = app-ids ["^Rofi$"];
               border.enable = false;
               clip-to-geometry = false;
               focus-ring.enable = false;
