@@ -86,7 +86,8 @@ in {
 
       fontconfig = {
         # https://wiki.nixos.org/wiki/Fonts#Noto_Color_Emoji_doesn't_render_on_Firefox
-        useEmbeddedBitmaps = true;
+        #!! Causes some fonts like Calibri to render without antialiasing
+        #// useEmbeddedBitmaps = true;
 
         #?? fc-list : family | sort
         defaultFonts = mkIf (!config.custom.settings.stylix.enable) {
