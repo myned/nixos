@@ -7,15 +7,17 @@
     hostname = "mynix";
     width = 3440;
     height = 1440;
-    refresh = 100;
+    refresh = 74.979;
 
     # BUG: Cursor updates cause refresh rate fluctuation, so disable for now
     # https://github.com/YaLTeR/niri/issues/1214
     #// vrr = true;
 
-    desktops.niri.output = {
-      connectors = ["DP-1" "DP-2" "DP-3" "DP-4" "DP-5"];
-      disabled = ["HDMI-A-1" "HDMI-A-2" "HDMI-A-3" "HDMI-A-4" "HDMI-A-5"];
+    desktops = {
+      niri.output = {
+        connectors = ["DP-1" "DP-2" "DP-3" "DP-4" "DP-5"];
+        disabled = ["HDMI-A-1" "HDMI-A-2" "HDMI-A-3" "HDMI-A-4" "HDMI-A-5"];
+      };
     };
 
     programs = {
@@ -37,6 +39,7 @@
       hardware = {
         cpu = "intel";
         rocm = "10.3.0"; # 10.3.1
+        display.forceModesFor = ["DP-1" "DP-2" "DP-3" "DP-4" "DP-5"];
 
         dgpu = {
           driver = "amdgpu";

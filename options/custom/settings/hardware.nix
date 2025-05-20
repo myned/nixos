@@ -14,6 +14,14 @@ in {
       type = with types; nullOr (enum ["amd" "intel"]);
     };
 
+    # TODO: Move top-level display vars to specific options
+    display = {
+      forceModesFor = mkOption {
+        default = null;
+        type = with types; nullOr (listOf str);
+      };
+    };
+
     dgpu = {
       #?? lspci -k
       driver = mkOption {
@@ -67,6 +75,13 @@ in {
 
         # https://wiki.nixos.org/wiki/Bluetooth
         bluetooth.enable = config.custom.minimal;
+
+        # https://wiki.archlinux.org/title/Kernel_mode_setting#Forcing_modes_and_EDID
+        # https://docs.kernel.org/fb/modedb.html
+        display.outputs = mkIf (!isNull cfg.display.forceModesFor) (listToAttrs (forEach cfg.display.forceModesFor (output: {
+          name = output;
+          value = with config.custom; {mode = "${toString width}x${toString height}MR@${toString refresh}";};
+        })));
       }
       // optionalAttrs (with config.custom.settings.hardware; dgpu.driver == "amdgpu" || igpu.driver == "amdgpu") {
         # Fix initramfs boot resolution
