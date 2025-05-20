@@ -241,8 +241,8 @@ with lib; {
         "sidebar.expandOnHoverMessage.dismissed" = true;
         "sidebar.main.tools" = "syncedtabs"; # aichat,syncedtabs,history
         "sidebar.new-sidebar.has-used" = true;
-        "sidebar.revamp" = true;
-        "sidebar.verticalTabs" = true;
+        "sidebar.revamp" = false;
+        "sidebar.verticalTabs" = false;
         "signon.rememberSignons" = false;
         "startup.homepage_override_url" = ""; # Disable
         "startup.homepage_welcome_url" = ""; # Disable
