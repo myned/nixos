@@ -266,6 +266,7 @@ in {
                 y = pip.y;
               };
 
+              baba-is-float = false;
               default-column-width.fixed = pip.w;
               default-window-height.fixed = pip.h;
               open-floating = true;
