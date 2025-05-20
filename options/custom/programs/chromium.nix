@@ -9,7 +9,7 @@ with lib; let
 in {
   options.custom.programs.chromium = {
     enable = mkOption {default = false;};
-    package = mkOption {default = pkgs.chromium;};
+    package = mkOption {default = pkgs.google-chrome;};
   };
 
   config = mkIf cfg.enable {
@@ -37,15 +37,15 @@ in {
             ++ optionals config.custom.full [
               #// "khgocmkkpikpnmmkgmdnfckapcdkgfaf" # 1Password Beta
               #// "ajopnjidmegmdimjlfnijceegpefgped" # BetterTTV
-              "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
+              #// "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
               #// "enamippconapkdmgfgjchkhakpfinmaj" # DeArrow
-              "ponfpcnoihfmfllpaingbgckeeldkhle" # Enhancer for YouTube
+              #// "ponfpcnoihfmfllpaingbgckeeldkhle" # Enhancer for YouTube
               #// "fnaicdffflnofjppbagibeoednhnbjhg" # floccus
               #// "bnomihfieiccainjcjblhegjgglakjdd" # Improve YouTube
               #// "pnjaodmkngahhkoihejjehlcdlnohgmp" # RSS Feed Reader
-              "kfimphpokifbjgmjflanmfeppcjimgah" # RSS Reader Extension (by Inoreader)
-              "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock
-              "clngdbkpkpeebahjckkjfobafhncgmne" # Stylus
+              #// "kfimphpokifbjgmjflanmfeppcjimgah" # RSS Reader Extension (by Inoreader)
+              #// "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock
+              #// "clngdbkpkpeebahjckkjfobafhncgmne" # Stylus
               #// "kfidecgcdjjfpeckbblhmfkhmlgecoff" # Svelte DevTools
               #// "nplimhmoanghlebhdiboeellhgmgommi" # Tab Groups Extension
               #// "enboaomnljigfhfjfoalacienlhjlfil" # UnTrap for YouTube
