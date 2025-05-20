@@ -162,6 +162,7 @@ in {
             {
               # Global floating
               matches = floating null;
+              baba-is-float = true;
               border.enable = false;
               focus-ring.enable = false;
               shadow.enable = true;
