@@ -162,8 +162,11 @@ in {
             {
               # Global floating
               matches = floating null;
+
               baba-is-float = true;
               border.enable = false;
+              default-column-width = {};
+              default-window-height = {};
               focus-ring.enable = false;
               shadow.enable = true;
             }
@@ -183,6 +186,7 @@ in {
               # Browsers
               matches = browsers;
               excludes = picture-in-picture;
+
               default-column-width.proportion =
                 if config.custom.ultrawide
                 then 0.4
@@ -192,12 +196,14 @@ in {
             {
               # Chats
               matches = chats;
+
               default-column-display = "tabbed";
             }
 
             {
               # Dropdown terminal
               matches = dropdown;
+
               open-floating = true;
             }
 
@@ -219,12 +225,14 @@ in {
             {
               # Games (focused)
               matches = focused games;
+
               variable-refresh-rate = true;
             }
 
             {
               # IDEs
               matches = ides;
+
               default-column-width.proportion =
                 if config.custom.ultrawide
                 then 0.4
@@ -267,7 +275,13 @@ in {
             {
               # Previewer
               matches = previewer;
-              default-column-width = {};
+
+              default-column-width.proportion =
+                if config.custom.ultrawide
+                then 0.4
+                else 0.8;
+
+              default-window-height.proportion = 0.8;
               open-floating = true;
             }
 
@@ -284,6 +298,7 @@ in {
             {
               # Vaults
               matches = vaults;
+
               default-column-width.proportion =
                 if config.custom.ultrawide
                 then 0.4
@@ -312,6 +327,7 @@ in {
               # FIXME: Figure out why pinentry-rofi opens as a window
               # HACK: pinentry-rofi opens as a window, so attempt to style as a layer
               matches = app-ids ["^Rofi$"];
+
               border.enable = false;
               clip-to-geometry = false;
               focus-ring.enable = false;
