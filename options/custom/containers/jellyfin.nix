@@ -295,6 +295,7 @@ in {
           "${cfg.dataDir}/downloads/radarr"
           "${cfg.dataDir}/downloads/slskd"
           "${cfg.dataDir}/downloads/sonarr"
+          "${cfg.dataDir}/downloads/soularr"
           "${cfg.dataDir}/movies"
           "${cfg.dataDir}/music"
           "${cfg.dataDir}/shows"
