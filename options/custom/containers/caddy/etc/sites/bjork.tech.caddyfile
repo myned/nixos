@@ -4,6 +4,7 @@ bjork.tech {
 
 	route {
 		import matrix
+		import cors /stream/* https://stream.vpn.bjork.tech
 		import serve bjork.tech
 	}
 }
