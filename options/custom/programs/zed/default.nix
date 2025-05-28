@@ -204,7 +204,7 @@ in {
             };
 
             seed_search_query_from_cursor = "selection";
-            show_edit_predictions = false;
+            show_edit_predictions = true;
             show_user_picture = false;
 
             # TODO: Show trailing whitespace when supported
