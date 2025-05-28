@@ -35,12 +35,12 @@ bjork.tech {
 	import proxy beszel.admin.bjork.tech {system.hostname}-beszel:8090 # Beszel
 	import proxy-insecure cloud.admin.bjork.tech localhost:8080 # Nextcloud AIO
 	#// import proxy dash.admin.bjork.tech localhost:3001 # dash.
-	import proxy grafana.admin.bjork.tech {system.hostname}-grafana:3000 # Grafana
+	#// import proxy grafana.admin.bjork.tech {system.hostname}-grafana:3000 # Grafana
 	#// import proxy jackett.admin.bjork.tech {system.hostname}-jellyfin:9117 # Jackett
 	import proxy lidarr.admin.bjork.tech {system.hostname}-jellyfin:8686 # Lidarr
 	import proxy matrix.admin.bjork.tech localhost:8000 # Synapse Admin
 	import proxy-insecure portainer.admin.bjork.tech {system.hostname}-portainer:9443 # Portainer
-	import proxy prometheus.admin.bjork.tech {system.hostname}-grafana:9090 # Prometheus
+	#// import proxy prometheus.admin.bjork.tech {system.hostname}-grafana:9090 # Prometheus
 	import proxy prowlarr.admin.bjork.tech {system.hostname}-jellyfin:9696 # Prowlarr
 	import proxy qbittorrent.admin.bjork.tech {system.hostname}-jellyfin:8881 # qBittorrent
 	import proxy radarr.admin.bjork.tech {system.hostname}-jellyfin:7878 # Radarr

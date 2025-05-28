@@ -24,7 +24,7 @@
       foundryvtt.enable = true;
       #// freshrss.enable = true;
       #// ghost.enable = true;
-      grafana.enable = true;
+      #// grafana.enable = true;
       #// headscale.enable = true;
       kener.enable = true;
       mastodon.enable = true;
