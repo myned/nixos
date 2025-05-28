@@ -164,15 +164,17 @@ in {
 
             cursor_blink = false;
 
+            # BUG: Does not disable
             edit_predictions.disabled_globs = [
-              "**/*.env*"
+              "**/*.env"
               "**/*.pem"
               "**/*.key"
               "**/*.cert"
               "**/*.crt"
               "**/.dev.vars"
               "**/secrets.yml"
-              "**/secrets/"
+              "**/secrets/**"
+              "**/tmp/**"
             ];
 
             edit_predictions_disabled_in = ["comment"];
@@ -204,7 +206,7 @@ in {
             };
 
             seed_search_query_from_cursor = "selection";
-            show_edit_predictions = true;
+            show_edit_predictions = false;
             show_user_picture = false;
 
             # TODO: Show trailing whitespace when supported
