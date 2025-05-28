@@ -16,12 +16,4 @@ bjork.gay {
 	import cloudflare
 	import vpn
 	import serve-files wallpaper.vpn.bjork.gay /wallpaper.png
-
-	# Oryx
-	import handle stream.vpn.bjork.gay {
-		reverse_proxy {system.hostname}-oryx:2022
-		redir /flv {$ORYX_FLV}
-		redir /hls {$ORYX_HLS}
-		redir /webrtc {$ORYX_WEBRTC}
-	}
 }

@@ -68,6 +68,7 @@ bjork.tech {
 	import proxy notify.vpn.bjork.tech localhost:2586 # ntfy
 	import proxy reddit.vpn.bjork.tech localhost:8888 # Redlib
 	#// import proxy search.vpn.bjork.tech localhost:8888 # SearXNG
+	#// import proxy stream.vpn.bjork.tech localhost:8800 # Owncast
 	import proxy tv.vpn.bjork.tech localhost:8470 # Stremio Client
 	import proxy tv-api.vpn.bjork.tech localhost:11470 # Stremio Server
 
@@ -81,5 +82,21 @@ bjork.tech {
 
 		reverse_proxy {system.hostname}-adguardhome:80
 		reverse_proxy /dns-query {system.hostname}-adguardhome:8443
+	}
+
+	# Oryx
+	# import handle stream.vpn.bjork.tech {
+	# 	reverse_proxy localhost:2022
+	# 	redir /flv {$ORYX_FLV}
+	# 	redir /hls {$ORYX_HLS}
+	# 	redir /webrtc {$ORYX_WEBRTC}
+	# }
+
+	# SRS
+	# https://ossrs.io/lts/en-us/docs/v6/doc/http-server#caddy-proxy
+	import handle stream.vpn.bjork.tech {
+		reverse_proxy localhost:8800
+		reverse_proxy /api/* localhost:1985
+		reverse_proxy /rtc/* localhost:1985
 	}
 }
