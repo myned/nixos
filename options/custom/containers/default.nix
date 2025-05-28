@@ -62,7 +62,7 @@ in {
           ipv6 = true;
           fixed-cidr-v6 = "fd00::/80";
 
-          # Disable userland-proxy to pass client IP to containers
+          # Disable userland-proxy to only allow privileged users to connect to containers
           # https://github.com/moby/moby/issues/15086
           # https://github.com/moby/moby/issues/14856
           # https://github.com/docker/docs/issues/17312
