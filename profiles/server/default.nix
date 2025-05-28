@@ -36,7 +36,7 @@
       ntfy.enable = true;
       opengist.enable = true;
       openwebui.enable = true;
-      oryx.enable = true;
+      #// oryx.enable = true;
       #// owncast.enable = true;
       #// passbolt.enable = true;
       portainer.enable = true;
@@ -44,6 +44,7 @@
       #// rconfig.enable = true;
       redlib.enable = true;
       #// searxng.enable = true;
+      srs.enable = true;
       stremio.enable = true;
       synapse.enable = true;
       synapseadmin.enable = true;
