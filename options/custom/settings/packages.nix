@@ -183,7 +183,7 @@ in {
           stremio # Streaming client
           #// syncthingtray # Syncthing client
           tagger # Music tagger
-          telegram-desktop # Telegram client
+          #// telegram-desktop # Telegram client
           #// variety # Wallpaper changer
           ventoy # Image writer
           virt-viewer # Virtual machine viewer
