@@ -46,7 +46,7 @@ tooltip label {
 }
 
 .module {
-  margin: 0 1px;
+  margin: 0px 1px;
   padding: 4px 12px;
 }
 
@@ -140,11 +140,11 @@ tooltip label {
 
 #workspaces {
   background: #073642;
-  padding: 0;
+  padding: 0px;
 }
 
 #workspaces > button {
-  margin: 0 1px;
+  margin: 0px 1px;
   padding: 4px 8px;
 }
 
