@@ -26,9 +26,11 @@ with lib; let
   nm-connection-editor = "${pkgs.networkmanagerapplet}/bin/nm-connection-editor";
   notify-send = "${pkgs.libnotify}/bin/notify-send";
   pgrep = "${pkgs.procps}/bin/pgrep";
+  pkill = "${pkgs.procps}/bin/pkill";
   pwvucontrol = "${pkgs.pwvucontrol}/bin/pwvucontrol";
   remote = config.home-manager.users.${config.custom.username}.home.file.".local/bin/remote".source;
   rfkill = "${pkgs.util-linux}/bin/rfkill";
+  sleep = "${pkgs.coreutils}/bin/sleep";
   swaync-client = "${config.home-manager.users.${config.custom.username}.services.swaync.package}/bin/swaync-client";
   swayosd-client = "${pkgs.swayosd}/bin/swayosd-client";
   system76-power = "${pkgs.system76-power}/bin/system76-power";
@@ -43,7 +45,7 @@ with lib; let
   cfg = config.custom.programs.waybar;
 in {
   options.custom.programs.waybar = {
-    enable = mkOption {default = false;};
+    enable = mkEnableOption "waybar";
   };
 
   config = mkIf cfg.enable {
@@ -395,7 +397,8 @@ in {
 
                   interval = 5; # Seconds
                   on-click = easyeffects;
-                  on-click-right = audio;
+                  on-click-right = "${audio} && ${sleep} 0.1 && ${pkill} -SIGRTMIN+1 waybar";
+                  signal = 1; # SIGRTMIN+1
                 };
 
               "custom/inhibitor" =
@@ -414,7 +417,8 @@ in {
                   '';
 
                   interval = 5; # Seconds
-                  on-click = inhibit;
+                  on-click = "${inhibit} & ${sleep} 0.1 && ${pkill} -SIGRTMIN+1 waybar";
+                  signal = 1; # SIGRTMIN+1
                 };
 
               "custom/power" =
@@ -511,7 +515,6 @@ in {
                   '';
 
                   interval = 5;
-
                   on-click = virt-manager;
                   on-click-middle = "${virsh} shutdown myndows";
                   on-click-right = ''${remote} --vm --client=remmina --username=Myned --password="$(${cat} ${config.age.secrets."desktop/vm/myndows.pass".path})" myndows'';
@@ -533,25 +536,30 @@ in {
                   '';
 
                   interval = 5; # Seconds
-                  on-click = "${vpn} myne";
+                  on-click = "${vpn} myne && ${sleep} 0.1 && ${pkill} -SIGRTMIN+1 waybar";
+                  signal = 1; # SIGRTMIN+1
                 };
 
               # https://github.com/bjesus/wttrbar
               "custom/weather" =
                 common
                 // {
-                  exec = lib.strings.concatStringsSep " " [
-                    wttrbar
-                    "--ampm"
-                    "--fahrenheit"
-                    "--hide-conditions"
-                    "--main-indicator temp_F"
-                  ];
+                  exec = concatStringsSep " " ([
+                      wttrbar
+                      "--fahrenheit"
+                      "--hide-conditions"
+                      "--main-indicator temp_F"
+                    ]
+                    ++ optionals (config.custom.time == "12h") [
+                      "--ampm"
+                    ]);
 
                   format = "{}°";
                   interval = 60 * 60; # Seconds
                   return-type = "json";
                   on-click = gnome-weather;
+                  on-click-right = "${pkill} -SIGRTMIN+1 waybar"; # Force update
+                  signal = 1; # SIGRTMIN+1
                 };
             };
           };
