@@ -68,7 +68,6 @@
           #// "gaymer"
           "myve"
         ];
-        ];
       };
 
       # vm.passthrough = {
