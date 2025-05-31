@@ -7,7 +7,7 @@
     hostname = "mynix";
     width = 3440;
     height = 1440;
-    refresh = 74.979;
+    refresh = 73.995;
 
     # BUG: Cursor updates cause refresh rate fluctuation, so disable for now
     # https://github.com/YaLTeR/niri/issues/1214
