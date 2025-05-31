@@ -16,22 +16,19 @@ in {
   config = mkIf cfg.enable {
     # https://wiki.nixos.org/wiki/GNOME
     # FIXME: xdg-desktop-portal-[gnome|gtk] not working through steam
-    services = {
-      xserver = mkIf (!cfg.minimal) {
-        enable = true;
+    services =
+      {
+        gnome.core-os-services.enable = cfg.minimal;
+
+        displayManager.autoLogin = {
+          enable = cfg.auto;
+          user = config.custom.username;
+        };
+      }
+      // optionalAttrs (!cfg.minimal) {
         desktopManager.gnome.enable = true;
         displayManager.gdm.enable = cfg.gdm;
+        gnome.gnome-browser-connector.enable = true;
       };
-
-      gnome = {
-        core-os-services.enable = mkIf cfg.minimal true;
-        gnome-browser-connector.enable = !cfg.minimal;
-      };
-
-      displayManager.autoLogin = {
-        enable = cfg.auto;
-        user = config.custom.username;
-      };
-    };
   };
 }

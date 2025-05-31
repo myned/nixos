@@ -28,7 +28,7 @@ in {
 
       gnome =
         {
-          core-utilities.enable = true;
+          core-apps.enable = true;
           sushi.enable = true; # Quick preview with spacebar
         }
         // optionalAttrs (versionAtLeast version "24.11") {
@@ -38,7 +38,7 @@ in {
         };
     };
 
-    # Alternative fix to services.gnome.core-utilities.enable
+    # Alternative fix to services.gnome.core-apps.enable
     # https://github.com/NixOS/nixpkgs/pull/240780
     #?? echo $NAUTILUS_4_EXTENSION_DIR
     programs.nautilus-open-any-terminal = {
