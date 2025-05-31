@@ -11,8 +11,12 @@
 
     services = {
       ollama.download = "high";
-      power-profiles-daemon.enable = true;
+      #// power-profiles-daemon.enable = true;
       wallpaper.enable = true;
+    };
+
+    settings = {
+      system76.enable = true;
     };
   };
 }
