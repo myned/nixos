@@ -10,6 +10,11 @@ in {
     enable = mkOption {default = false;};
     connectors = mkOption {default = [];};
     disabled = mkOption {default = [];};
+
+    refresh = mkOption {
+      default = config.custom.refresh + 0.0; # Convert to float
+      type = types.float;
+    };
   };
 
   config = mkIf cfg.enable {
@@ -30,7 +35,7 @@ in {
 
               mode = with config.custom; {
                 inherit width height;
-                refresh = refresh + 0.0; # Convert to float
+                refresh = cfg.refresh;
               };
 
               scale = config.custom.scale;
