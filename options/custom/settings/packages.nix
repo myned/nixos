@@ -165,7 +165,11 @@ in {
           path-of-building # Path of Exile planner
           picard # Music tagger
           pika-backup # Borg backup manager
-          planify # Tasks
+
+          # BUG: gxml build failure, uncomment when fixed
+          # https://github.com/NixOS/nixpkgs/issues/407969
+          #// planify # Task list
+
           pods # Podman manager
           protonplus # Wine updater
           #// protonvpn-gui # Proton VPN client
