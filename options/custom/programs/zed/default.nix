@@ -107,7 +107,7 @@ in {
           in [
             (global {
               "alt-\\" = "workspace::ToggleBottomDock";
-              "alt-a" = "assistant::ToggleFocus";
+              "alt-a" = "agent::ToggleFocus";
               "alt-c" = "collab_panel::ToggleFocus";
               "alt-f" = "project_search::ToggleFocus";
               "alt-g" = "git_panel::ToggleFocus";
