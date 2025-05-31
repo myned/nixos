@@ -82,6 +82,22 @@ tooltip label {
   color: #cb4b16;
 }
 
+#custom-system76-power.battery {
+  color: #859900;
+}
+
+#custom-system76-power.balanced {
+  color: #93a1a1;
+}
+
+#custom-system76-power.performance {
+  color: #cb4b16;
+}
+
+#custom-system76-power.unknown {
+  color: #dc322f;
+}
+
 #custom-vm.online {
   color: #268bd2;
 }

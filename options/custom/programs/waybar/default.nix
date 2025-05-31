@@ -10,24 +10,28 @@ with lib; let
   blueberry = "${pkgs.blueberry}/bin/blueberry";
   bluetoothctl = "${pkgs.bluez}/bin/bluetoothctl";
   cat = "${pkgs.coreutils}/bin/cat";
+  cut = "${pkgs.coreutils}/bin/cut";
   date = "${pkgs.coreutils}/bin/date";
   easyeffects = "${pkgs.easyeffects}/bin/easyeffects";
   echo = "${pkgs.coreutils}/bin/echo";
   gnome-calendar = "${pkgs.gnome-calendar}/bin/gnome-calendar";
   gnome-clocks = "${pkgs.gnome-clocks}/bin/gnome-clocks";
   gnome-weather = "${pkgs.gnome-weather}/bin/gnome-weather";
+  grep = "${pkgs.gnugrep}/bin/grep";
   inhibit = config.home-manager.users.${config.custom.username}.home.file.".local/bin/inhibit".source;
   jq = "${pkgs.jq}/bin/jq";
   loginctl = "${pkgs.systemd}/bin/loginctl";
   network = config.home-manager.users.${config.custom.username}.home.file.".local/bin/network".source;
   niri = "${config.programs.niri.package}/bin/niri";
   nm-connection-editor = "${pkgs.networkmanagerapplet}/bin/nm-connection-editor";
+  notify-send = "${pkgs.libnotify}/bin/notify-send";
   pgrep = "${pkgs.procps}/bin/pgrep";
   pwvucontrol = "${pkgs.pwvucontrol}/bin/pwvucontrol";
   remote = config.home-manager.users.${config.custom.username}.home.file.".local/bin/remote".source;
   rfkill = "${pkgs.util-linux}/bin/rfkill";
   swaync-client = "${config.home-manager.users.${config.custom.username}.services.swaync.package}/bin/swaync-client";
   swayosd-client = "${pkgs.swayosd}/bin/swayosd-client";
+  system76-power = "${pkgs.system76-power}/bin/system76-power";
   systemctl = "${pkgs.systemd}/bin/systemctl";
   tailscale = "${pkgs.tailscale}/bin/tailscale";
   tr = "${pkgs.coreutils}/bin/tr";
@@ -174,6 +178,7 @@ in {
                 "bluetooth"
                 "network"
                 (mkIf config.services.power-profiles-daemon.enable "power-profiles-daemon")
+                (mkIf config.hardware.system76.power-daemon.enable "custom/system76-power")
                 "battery"
               ];
 
@@ -419,6 +424,52 @@ in {
                   on-click = "${systemctl} poweroff";
                   on-click-middle = "${loginctl} terminate-session ${config.custom.username}";
                   on-click-right = "${systemctl} reboot";
+                };
+
+              "custom/system76-power" =
+                common
+                // {
+                  exec = pkgs.writeShellScript "system76-power.sh" ''
+                    case "$(${system76-power} profile | ${grep} 'Profile:' | ${cut} -d ' ' -f 3)" in
+                      'Battery')
+                        ${echo} 
+                        ${echo} Battery
+                        ${echo} battery;;
+                      'Balanced')
+                        ${echo} 
+                        ${echo} Balanced
+                        ${echo} balanced;;
+                      'Performance')
+                        ${echo} 
+                        ${echo} Performance
+                        ${echo} performance;;
+                      *)
+                        ${echo} 
+                        ${echo} Unknown
+                        ${echo} unknown;;
+                    esac
+                  '';
+
+                  interval = 5;
+
+                  on-click = pkgs.writeShellScript "system76-power-switch.sh" ''
+                    case "$(${system76-power} profile | ${grep} 'Profile:' | ${cut} -d ' ' -f 3)" in
+                      'Battery')
+                        sudo ${system76-power} profile balanced;;
+                      'Balanced')
+                        sudo ${system76-power} profile performance;;
+                      'Performance')
+                        sudo ${system76-power} profile battery || sudo ${system76-power} profile balanced;;
+                      *)
+                        ${notify-send} '> system76-power-switch' 'Unknown profile' --urgency critical;;
+                    esac
+
+                    ${sleep} 0.1
+                    ${pkill} -SIGRTMIN+1 waybar
+                  '';
+
+                  on-click-right = "sudo ${system76-power} profile balanced && ${sleep} 0.1 && ${pkill} -SIGRTMIN+1 waybar";
+                  signal = 1; # SIGRTMIN+1
                 };
 
               "custom/time" =
