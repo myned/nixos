@@ -227,19 +227,19 @@ in {
 
       # https://soularr.net/
       # https://github.com/mrusse/soularr
-      soularr.service = {
-        container_name = "jellyfin-soularr";
-        depends_on = ["lidarr" "slskd" "vpn"];
-        image = "mrusse08/soularr:latest"; # https://hub.docker.com/r/mrusse08/soularr
-        network_mode = "service:vpn";
-        restart = "unless-stopped";
-        user = "${cfg.uid}:${cfg.gid}";
+      # soularr.service = {
+      #   container_name = "jellyfin-soularr";
+      #   depends_on = ["lidarr" "slskd" "vpn"];
+      #   image = "mrusse08/soularr:latest"; # https://hub.docker.com/r/mrusse08/soularr
+      #   network_mode = "service:vpn";
+      #   restart = "unless-stopped";
+      #   user = "${cfg.uid}:${cfg.gid}";
 
-        volumes = [
-          "${config.age.secrets."server/jellyfin/soularr.ini".path}:/data/config.ini:ro"
-          "${cfg.dataDir}:/data"
-        ];
-      };
+      #   volumes = [
+      #     "${config.age.secrets."server/jellyfin/soularr.ini".path}:/data/config.ini:ro"
+      #     "${cfg.dataDir}:/data"
+      #   ];
+      # };
 
       # https://jellyfin.org/docs/general/clients/jellyfin-vue
       # https://github.com/jellyfin/jellyfin-vue
