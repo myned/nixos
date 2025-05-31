@@ -26,7 +26,7 @@ in {
     kernel = mkOption {
       default =
         if config.custom.full
-        then pkgs.linuxPackages_zen
+        then pkgs.linuxPackages_6_14
         else pkgs.linuxPackages;
 
       type = types.attrs;
