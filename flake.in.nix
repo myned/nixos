@@ -28,14 +28,14 @@
     nixos-hardware = flake "github:NixOS/nixos-hardware";
 
     ### Stable
-    nixpkgs-stable = flake "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs-stable = flake "github:NixOS/nixpkgs/nixos-25.05";
 
-    aagl-gtk-on-nix-stable = flake "github:ezKEa/aagl-gtk-on-nix/release-24.11" // stable "nixpkgs";
-    home-manager-stable = flake "github:nix-community/home-manager/release-24.11" // stable "nixpkgs";
+    aagl-gtk-on-nix-stable = flake "github:ezKEa/aagl-gtk-on-nix/release-25.05" // stable "nixpkgs";
+    home-manager-stable = flake "github:nix-community/home-manager/release-25.05" // stable "nixpkgs";
     nix-index-database-stable = flake "github:nix-community/nix-index-database" // stable "nixpkgs";
     nixgl-stable = flake "github:nix-community/nixGL" // stable "nixpkgs";
     nur-stable = flake "github:nix-community/NUR" // stable "nixpkgs";
-    stylix-stable = flake "github:danth/stylix/release-24.11" // stable "nixpkgs";
+    stylix-stable = flake "github:danth/stylix/release-25.05" // stable "nixpkgs";
 
     ### Unstable
     nixpkgs-unstable = flake "github:NixOS/nixpkgs/nixos-unstable";

@@ -4,7 +4,7 @@
   inputs = {
     aagl-gtk-on-nix-stable = {
       inputs.nixpkgs.follows = "nixpkgs-stable";
-      url = "github:ezKEa/aagl-gtk-on-nix/release-24.11";
+      url = "github:ezKEa/aagl-gtk-on-nix/release-25.05";
     };
     aagl-gtk-on-nix-unstable = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -33,7 +33,7 @@
     };
     home-manager-stable = {
       inputs.nixpkgs.follows = "nixpkgs-stable";
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
     };
     home-manager-unstable = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -95,7 +95,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs-myned.url = "github:myned/nixpkgs/master";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nur-stable = {
       inputs.nixpkgs.follows = "nixpkgs-stable";
@@ -107,7 +107,7 @@
     };
     stylix-stable = {
       inputs.nixpkgs.follows = "nixpkgs-stable";
-      url = "github:danth/stylix/release-24.11";
+      url = "github:danth/stylix/release-25.05";
     };
     stylix-unstable = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
