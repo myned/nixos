@@ -7,6 +7,11 @@
     containers = {
       enable = true;
       user = config.custom.username;
+
+      ovenmediaengine = {
+        #// enable = true;
+        bind = "127.0.0.1";
+      };
     };
 
     services = {
