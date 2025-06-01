@@ -28,8 +28,6 @@
   			</Signalling>
   			<IceCandidates>
   				<IceCandidate>*:10000/udp</IceCandidate>
-  				<TcpRelay>*:3478</TcpRelay>
-  				<TcpRelayWorkerCount>1</TcpRelayWorkerCount>
   			</IceCandidates>
   		</WebRTC>
 			<RTMP>
@@ -45,8 +43,6 @@
   			</Signalling>
   			<IceCandidates>
   				<IceCandidate>*:10000/udp</IceCandidate>
-  				<TcpRelay>*:3478</TcpRelay>
-  				<TcpRelayWorkerCount>1</TcpRelayWorkerCount>
   			</IceCandidates>
   		</WebRTC>
 			<LLHLS>
