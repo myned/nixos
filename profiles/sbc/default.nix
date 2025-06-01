@@ -23,7 +23,7 @@ in {
     };
 
     services = {
-      prometheus.enable = true;
+      #// prometheus.enable = true;
 
       # pipewire = {
       #   enable = true;

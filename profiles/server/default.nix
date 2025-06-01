@@ -65,7 +65,7 @@
     };
 
     services = {
-      prometheus.enable = true;
+      #// prometheus.enable = true;
       sshd.enable = true;
 
       borgmatic = {
