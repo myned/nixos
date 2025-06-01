@@ -25,10 +25,21 @@ in {
           user = config.custom.username;
         };
       }
-      // optionalAttrs (!cfg.minimal) {
-        desktopManager.gnome.enable = true;
-        displayManager.gdm.enable = cfg.gdm;
-        gnome.gnome-browser-connector.enable = true;
-      };
+      // optionalAttrs (!cfg.minimal) (
+        if (versionAtLeast version "25.11")
+        then {
+          gnome.gnome-browser-connector.enable = true;
+          desktopManager.gnome.enable = true;
+          displayManager.gdm.enable = cfg.gdm;
+        }
+        else {
+          gnome.gnome-browser-connector.enable = true;
+
+          xserver = {
+            desktopManager.gnome.enable = true;
+            displayManager.gdm.enable = cfg.gdm;
+          };
+        }
+      );
   };
 }
