@@ -1,10 +1,10 @@
 bjork.tech {
 	import global
 	import cloudflare
+	import cors
 
 	route {
 		import matrix
-		import cors /stream/* https://stream.vpn.bjork.tech
 		import serve bjork.tech
 	}
 }

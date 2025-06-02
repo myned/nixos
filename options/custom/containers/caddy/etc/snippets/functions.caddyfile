@@ -3,11 +3,6 @@
 # BUG: Unrecognized subdirective {block}, requires block when importing if defined
 # https://github.com/caddyserver/caddy/issues/6821
 
-#?? import cors <matcher> <origin>
-(cors) {
-	header {args[0]} Access-Control-Allow-Origin {args[1]}
-}
-
 #?? import handle <host> [host ...]
 (handle) {
 	@handle-{args[0]} host {args[:]}

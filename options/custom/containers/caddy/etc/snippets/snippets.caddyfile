@@ -11,6 +11,10 @@
 	}
 }
 
+(cors) {
+	header Access-Control-Allow-Origin *
+}
+
 (matrix) {
 	# Delegation to matrix.bjork.tech
 	# https://element-hq.github.io/synapse/latest/reverse_proxy.html#caddy-v2
