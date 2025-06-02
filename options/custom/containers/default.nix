@@ -62,11 +62,11 @@ in {
           ipv6 = true;
           fixed-cidr-v6 = "fd00::/80";
 
-          # Disable userland-proxy to only allow privileged users to connect to containers
+          #!! userland-proxy has many implications, do not touch for now
           # https://github.com/moby/moby/issues/15086
           # https://github.com/moby/moby/issues/14856
           # https://github.com/docker/docs/issues/17312
-          userland-proxy = false;
+          #// userland-proxy = false;
 
           # https://docs.docker.com/reference/cli/dockerd/#default-network-options
           default-network-opts = {
