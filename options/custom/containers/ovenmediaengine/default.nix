@@ -28,8 +28,8 @@ in {
         restart = "unless-stopped";
 
         ports = [
-          "127.0.0.1:3333:3333/tcp" # LLHLS / WebRTC Signaling
-          "127.0.0.1:3333:3333/udp" # WebRTC Signaling
+          "${cfg.bind}:3333:3333/tcp" # LLHLS / WebRTC Signaling
+          "${cfg.bind}:3333:3333/udp" # WebRTC Signaling
           "${cfg.bind}:1935:1935/tcp" # RTMP
           "${cfg.bind}:10000:10000/udp" # WebRTC Candidate
         ];
