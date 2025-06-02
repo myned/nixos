@@ -23,6 +23,7 @@
 (proxy-insecure) {
 	@proxy-insecure-{args[0]} host {args[0]}
 	reverse_proxy @proxy-insecure-{args[0]} {args[1:]} {
+		header_up X-Real-IP {client_ip}
 		transport http {
 			tls_insecure_skip_verify
 		}
