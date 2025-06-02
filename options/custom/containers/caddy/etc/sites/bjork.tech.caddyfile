@@ -32,6 +32,7 @@ bjork.tech {
 *.admin.bjork.tech {
 	import global
 	import cloudflare
+	import cors
 	import vpn
 	import proxy beszel.admin.bjork.tech {system.hostname}-beszel:8090 # Beszel
 	import proxy-insecure cloud.admin.bjork.tech localhost:8080 # Nextcloud AIO
@@ -58,6 +59,7 @@ bjork.tech {
 *.vpn.bjork.tech {
 	import global
 	import cloudflare
+	import cors
 	import vpn
 	import proxy ai.vpn.bjork.tech {system.hostname}-openwebui:8080 # Open WebUI
 	import proxy budget.vpn.bjork.tech localhost:5006 # Actual Budget

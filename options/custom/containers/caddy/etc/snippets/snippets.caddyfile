@@ -12,7 +12,8 @@
 }
 
 (cors) {
-	header Access-Control-Allow-Origin *
+	# Set CORS header if unset upstream
+	header ?Access-Control-Allow-Origin *
 }
 
 (matrix) {

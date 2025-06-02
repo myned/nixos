@@ -14,6 +14,7 @@ bjork.gay {
 *.vpn.bjork.gay {
 	import global
 	import cloudflare
+	import cors
 	import vpn
 	import serve-files wallpaper.vpn.bjork.gay /wallpaper.png
 }
