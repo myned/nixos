@@ -124,7 +124,8 @@ with lib; {
         "browser.safebrowsing.downloads.enabled" = false;
         "browser.safebrowsing.malware.enabled" = false;
         "browser.safebrowsing.phishing.enabled" = false;
-        "browser.search.separatePrivateDefault" = false;
+        "browser.search.separatePrivateDefault" = true;
+        "browser.search.separatePrivateDefault.ui.enabled" = true;
         "browser.search.suggest.enabled" = true;
         "browser.search.widget.inNavBar" = false;
         "browser.sessionstore.restore_hidden_tabs" = false;
@@ -134,12 +135,12 @@ with lib; {
         "browser.shell.checkDefaultBrowser" = false;
         "browser.startup.homepage" = "about:home";
         "browser.startup.page" = 3; # Previous session
-        "browser.tabs.allowTabDetach" = false;
+        "browser.tabs.allowTabDetach" = true;
         "browser.tabs.closeTabByDblclick" = true;
-        "browser.tabs.closeWindowWithLastTab" = false;
+        "browser.tabs.closeWindowWithLastTab" = true;
         "browser.tabs.groups.enabled" = true;
         "browser.tabs.insertAfterCurrent" = false;
-        "browser.tabs.insertRelatedAfterCurrent" = false;
+        "browser.tabs.insertRelatedAfterCurrent" = true;
         "browser.tabs.loadInBackground" = true;
         "browser.tabs.warnOnClose" = false;
         "browser.tabs.warnOnCloseOtherTabs" = false;
@@ -182,9 +183,9 @@ with lib; {
         "extensions.htmlaboutaddons.recommendations.enabled" = false;
         "extensions.pictureinpicture.enable_picture_in_picture_overrides" = true;
         "extensions.pocket.enabled" = false;
-        "extensions.update.autoUpdateDefault" = true;
-        "extensions.update.enabled" = true;
-        "full-screen-api.ignore-widgets" = false; # Fake fullscreen
+        "extensions.update.autoUpdateDefault" = false;
+        "extensions.update.enabled" = false;
+        "full-screen-api.ignore-widgets" = true; # Fake fullscreen
         "full-screen-api.warning.delay" = -1;
         "full-screen-api.warning.timeout" = 0;
         "general.autoScroll" = false;
@@ -241,7 +242,7 @@ with lib; {
         "sidebar.expandOnHoverMessage.dismissed" = true;
         "sidebar.main.tools" = "syncedtabs"; # aichat,syncedtabs,history
         "sidebar.new-sidebar.has-used" = true;
-        "sidebar.revamp" = false;
+        "sidebar.revamp" = true;
         "sidebar.verticalTabs" = false;
         "signon.rememberSignons" = false;
         "startup.homepage_override_url" = ""; # Disable
@@ -288,7 +289,7 @@ with lib; {
     search = {
       force = true;
       default = "kagi";
-      privateDefault = "kagi";
+      privateDefault = "ddg";
 
       engines = {
         ### Builtins
