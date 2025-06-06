@@ -68,6 +68,10 @@
 					<Name>live</Name>
 					<Type>live</Type>
 					<OutputProfiles>
+					  <Decodes>
+							<ThreadCount>3</ThreadCount>
+							<OnlyKeyframes>true</OnlyKeyframes>
+						</Decodes>
 						<OutputProfile>
 							<Name>default</Name>
 							<OutputStreamName>stream</OutputStreamName>
@@ -152,7 +156,11 @@
 					<Publishers>
 						<AppWorkerCount>1</AppWorkerCount>
 						<StreamWorkerCount>8</StreamWorkerCount>
-						<WebRTC />
+						<WebRTC>
+  						<Rtx>true</Rtx>
+  						<Ulpfec>true</Ulpfec>
+  						<JitterBuffer>true</JitterBuffer>
+						</WebRTC>
 						<LLHLS />
 					</Publishers>
 				</Application>
