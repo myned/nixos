@@ -90,24 +90,17 @@
 									</VideoTemplate>
 								</RenditionTemplate>
 							</Playlist>
-							<!-- BUG: Framerate required until next release -->
+							<!-- TODO: Enable transcoding when conditions are further developed -->
+							<!-- BUG: Framerate required for transcoding until next release -->
 							<!-- https://github.com/AirenSoft/OvenMediaEngine/issues/1793 -->
 							<Encodes>
-								<Video>
-									<Name>1440p</Name>
-									<Codec>h264</Codec>
-									<Bitrate>5000000</Bitrate>
-									<Height>1440</Height>
-									<Framerate>60</Framerate>
-									<BypassIfMatch>
-										<Codec>eq</Codec>
-										<Height>lte</Height>
-									</BypassIfMatch>
+							  <Video>
+									<Bypass>true</Bypass>
 								</Video>
-								<Video>
+								<!-- <Video>
 									<Name>1080p</Name>
 									<Codec>h264</Codec>
-									<Bitrate>4000000</Bitrate>
+									<Bitrate>5000000</Bitrate>
 									<Height>1080</Height>
 									<Framerate>60</Framerate>
 									<BypassIfMatch>
@@ -118,7 +111,7 @@
 								<Video>
 									<Name>720p</Name>
 									<Codec>h264</Codec>
-									<Bitrate>3000000</Bitrate>
+									<Bitrate>4000000</Bitrate>
 									<Height>720</Height>
 									<Framerate>60</Framerate>
 									<BypassIfMatch>
@@ -126,10 +119,21 @@
 										<Height>lte</Height>
 									</BypassIfMatch>
 								</Video>
+								<Video>
+									<Name>480p</Name>
+									<Codec>h264</Codec>
+									<Bitrate>3000000</Bitrate>
+									<Height>480</Height>
+									<Framerate>60</Framerate>
+									<BypassIfMatch>
+										<Codec>eq</Codec>
+										<Height>lte</Height>
+									</BypassIfMatch>
+								</Video> -->
 								<Audio>
 									<Name>opus</Name>
 									<Codec>opus</Codec>
-									<Bitrate>128000</Bitrate>
+									<Bitrate>192000</Bitrate>
 									<Samplerate>48000</Samplerate>
 									<Channel>2</Channel>
 									<BypassIfMatch>
@@ -139,7 +143,7 @@
 								<Audio>
 									<Name>aac</Name>
 									<Codec>aac</Codec>
-									<Bitrate>128000</Bitrate>
+									<Bitrate>192000</Bitrate>
 									<Samplerate>48000</Samplerate>
 									<Channel>2</Channel>
 									<BypassIfMatch>
