@@ -80,7 +80,6 @@
 								<FileName>adaptive</FileName>
 								<Options>
 									<WebRtcAutoAbr>true</WebRtcAutoAbr>
-									<HLSChunklistPathDepth>0</HLSChunklistPathDepth>
 									<EnableTsPackaging>true</EnableTsPackaging>
 								</Options>
 								<RenditionTemplate>
