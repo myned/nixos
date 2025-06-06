@@ -88,9 +88,12 @@
 									<VideoTemplate>
 										<EncodingType>all</EncodingType>
 									</VideoTemplate>
+									<AudioTemplate>
+										<EncodingType>all</EncodingType>
+									</AudioTemplate>
 								</RenditionTemplate>
 							</Playlist>
-							<!-- TODO: Enable transcoding when conditions are further developed -->
+							<!-- TODO: Enable video transcoding when conditions are further developed -->
 							<!-- BUG: Framerate required for transcoding until next release -->
 							<!-- https://github.com/AirenSoft/OvenMediaEngine/issues/1793 -->
 							<Encodes>
