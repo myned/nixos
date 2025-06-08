@@ -16,12 +16,14 @@
 
     services = {
       ollama.download = "high";
-      #// power-profiles-daemon.enable = true;
+      power-profiles-daemon.enable = true;
       wallpaper.enable = true;
     };
 
     settings = {
-      system76.enable = true;
+      # TODO: Enable when profile is persisted across reboots
+      # https://github.com/pop-os/system76-power/issues/263
+      #// system76.enable = true;
     };
   };
 }
