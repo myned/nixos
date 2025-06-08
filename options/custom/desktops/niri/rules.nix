@@ -163,7 +163,7 @@ in {
               # Global floating
               matches = floating null;
 
-              baba-is-float = true;
+              #// baba-is-float = true;
               border.enable = false;
               default-column-width = {};
               default-window-height = {};
