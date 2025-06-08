@@ -1,5 +1,6 @@
-{
+{inputs, ...}: {
   imports = [
+    "${inputs.nixos-hardware}/common/cpu/intel/alder-lake"
     ./hardware-configuration.nix
   ];
 
