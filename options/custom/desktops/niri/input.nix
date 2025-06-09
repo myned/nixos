@@ -56,9 +56,9 @@ in {
           trackball = {
             accel-profile = "adaptive";
             accel-speed = -0.8;
-            #// left-handed = true;
+            left-handed = true;
             middle-emulation = true;
-            #// natural-scroll = true;
+            natural-scroll = true;
           };
         };
       }
