@@ -20,22 +20,6 @@ in {
     environment = {
       localBinInPath = true;
 
-
-      shellAliases = {
-        # https://github.com/aksiksi/compose2nix?tab=readme-ov-file#usage
-        # https://github.com/aksiksi/compose2nix?tab=readme-ov-file#agenix
-        compose2nix = concatStringsSep " " [
-          "compose2nix"
-          "--inputs compose.yaml"
-          "--output compose.nix"
-          "--root_path /containers"
-          "--auto_format"
-          "--check_systemd_mounts"
-          "--env_files_only"
-          "--ignore_missing_env_files"
-          "--include_env_files"
-          #?? --env_files /run/agenix/containers/*/.env
-        ];
       sessionVariables = {
         # Allow all unfree packages
         #?? nix shell nixpkgs#<package> --impure

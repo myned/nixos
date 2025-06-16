@@ -97,21 +97,40 @@ in {
       };
     };
 
-    environment.systemPackages = with pkgs;
-      [
-        # https://github.com/hercules-ci/arion/issues/210
-        #?? arion-CONTAINER
-        arion
+    environment = {
+      systemPackages = with pkgs;
+        [
+          # https://github.com/hercules-ci/arion/issues/210
+          #?? arion-CONTAINER
+          arion
 
-        # https://github.com/aksiksi/compose2nix
-        # Convert docker-compose.yml to NixOS oci-containers
-        #?? compose2nix
-        #// inputs.compose2nix.packages.${system}.default
-      ]
-      ++ optionals (!cfg.docker) [
-        podman-compose
-        podman-tui
-      ];
+          # https://github.com/aksiksi/compose2nix
+          # Convert docker-compose.yml to NixOS oci-containers
+          #?? compose2nix
+          #// inputs.compose2nix.packages.${system}.default
+        ]
+        ++ optionals (!cfg.docker) [
+          podman-compose
+          podman-tui
+        ];
+
+      shellAliases = {
+        # https://github.com/aksiksi/compose2nix?tab=readme-ov-file#usage
+        # https://github.com/aksiksi/compose2nix?tab=readme-ov-file#agenix
+        compose2nix = concatStringsSep " " [
+          "compose2nix"
+          "--inputs compose.yaml"
+          "--output compose.nix"
+          "--root_path /containers"
+          "--auto_format"
+          "--check_systemd_mounts"
+          "--env_files_only"
+          "--ignore_missing_env_files"
+          "--include_env_files"
+          #?? --env_files /run/agenix/containers/*/.env
+        ];
+      };
+    };
 
     systemd.tmpfiles.settings.containers = let
       owner = mode: {
