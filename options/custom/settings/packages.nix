@@ -83,7 +83,7 @@ in {
         ]
         ++ optionals config.custom.full [
           ### GUI applications
-          alpaca # Ollama client
+          #// alpaca # Ollama client
           amberol # Audio player
           apostrophe # Markdown editor
           baobab # Disk usage analyzer
