@@ -220,6 +220,8 @@ in {
             {
               # Games
               matches = games;
+
+              open-floating = false;
             }
 
             {
