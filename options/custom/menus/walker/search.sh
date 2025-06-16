@@ -122,6 +122,12 @@ case "$1" in
     url="https://git.lix.systems/lix-project/lix/issues?state=open&q="
     query="${1:3}"
     ;;
+  'm '*)
+    label="Maps"
+    icon="com.github.zren.bugzilla"
+    url="https://www.google.com/maps/place/"
+    query="${1:2}"
+    ;;
   'mdn '*)
     label="Mozilla Web Docs"
     icon="emblem-web"

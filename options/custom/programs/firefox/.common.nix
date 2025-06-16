@@ -426,6 +426,13 @@ with lib; {
           urls = [{template = "https://git.lix.systems/lix-project/lix/issues?state=open&q={searchTerms}";}];
         };
 
+        maps = {
+          definedAliases = ["m"];
+          icon = "https://www.google.com/images/branding/product/ico/maps15_bnuw3a_32dp.ico";
+          name = "Maps";
+          urls = [{template = "https://www.google.com/maps/place/{searchTerms}/";}];
+        };
+
         mdn-web-docs = {
           definedAliases = ["mdn"];
           icon = "https://developer.mozilla.org/favicon-48x48.cbbd161b.png";

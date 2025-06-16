@@ -185,6 +185,12 @@ in {
           }
 
           {
+            name = "Maps";
+            shortcut = "m";
+            url = "https://www.google.com/maps/place/{searchTerms}/";
+          }
+
+          {
             name = "Mozilla Web Docs";
             shortcut = "mdn";
             url = "https://developer.mozilla.org/en-US/search?q={searchTerms}";
