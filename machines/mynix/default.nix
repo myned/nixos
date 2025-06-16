@@ -1,6 +1,7 @@
 {inputs, ...}: {
   imports = [
     "${inputs.nixos-hardware}/common/cpu/intel/alder-lake"
+    "${inputs.nixos-hardware}/common/gpu/amd"
     ./hardware-configuration.nix
   ];
 
@@ -80,9 +81,11 @@
     };
   };
 
+  # https://www.kernel.org/doc/html/v4.20/gpu/amdgpu.html
+  # https://dri.freedesktop.org/docs/drm/gpu/amdgpu/display/dc-debug.html
   boot.kernelParams = [
-    # https://gitlab.freedesktop.org/drm/amd/-/issues/2516#note_2119750
-    #// "gpu_sched.sched_policy=0" # Attempt to fix stutter
+    # https://wiki.archlinux.org/title/AMDGPU#Frozen_or_unresponsive_display_(flip_done_timed_out)
+    "amdgpu.dcdebugmask=0x10" # Attempt to fix random freezes by disabling panel self refresh
   ];
 
   #  _._     _,-'""`-._
