@@ -82,11 +82,13 @@ in {
           };
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutstruts
-          struts = {
-            left = gap;
-            right = gap;
-            top = gap;
-            bottom = gap;
+          struts = let
+            strut = gap + config.custom.border;
+          in {
+            left = strut;
+            right = strut;
+            top = strut;
+            bottom = strut;
           };
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayouttab-indicator
