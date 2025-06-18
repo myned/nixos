@@ -55,7 +55,9 @@ in {
           spawn-at-startup = [
             {command = [audio "--init"];} # Enforce audio profile state
             {command = [config.custom.menus.clipboard.clear-silent];} # Clear clipboard history
-            {command = [sway-audio-idle-inhibit];} # Inhibit while audio is playing
+
+            # FIXME: Does not inhibit
+            #// {command = [sway-audio-idle-inhibit];} # Inhibit while audio is playing
           ];
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsswitch-eventslid-close
