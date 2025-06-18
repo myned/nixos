@@ -21,14 +21,14 @@
         server = "mynix";
       };
 
-      # power-profiles-daemon = {
-      #   enable = true;
-      #   auto = true;
-      # };
+      power-profiles-daemon = {
+        enable = true;
+        auto = true;
+      };
     };
 
     settings = {
-      system76.enable = true;
+      #// system76.enable = true;
     };
   };
 
