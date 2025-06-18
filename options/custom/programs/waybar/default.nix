@@ -86,7 +86,7 @@ in {
             }
 
             .horizontal > box {
-              border: ${border} solid #073642;
+              /* border: ${border} solid #073642; */
               margin: 0 ${gap}px ${gap}px;
             }
 
