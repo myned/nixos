@@ -24,11 +24,7 @@ in {
     };
 
     kernel = mkOption {
-      default =
-        if config.custom.full
-        then pkgs.linuxPackages_6_14
-        else pkgs.linuxPackages;
-
+      default = pkgs.linuxPackages;
       type = types.attrs;
     };
 
