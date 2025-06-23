@@ -46,6 +46,47 @@ with lib; let
 in {
   options.custom.programs.waybar = {
     enable = mkEnableOption "waybar";
+
+    #?? upower --dump
+    battery = {
+      controller = mkOption {
+        default = "ps-controller-battery-7c:66:ef:38:c5:ac";
+        type = types.str;
+      };
+
+      earbuds = mkOption {
+        default = "/org/bluez/hci0/dev_E8_EE_CC_6B_0B_CD";
+        type = types.str;
+      };
+    };
+
+    #?? grep . /sys/class/thermal/thermal_zone*/type
+    #?? grep . /sys/class/hwmon/hwmon*/temp*_input
+    temperature = {
+      cpu = {
+        sensor = mkOption {
+          default = null;
+          type = with types; nullOr str;
+        };
+
+        zone = mkOption {
+          default = null;
+          type = with types; nullOr int;
+        };
+      };
+
+      gpu = {
+        sensor = mkOption {
+          default = null;
+          type = with types; nullOr str;
+        };
+
+        zone = mkOption {
+          default = null;
+          type = with types; nullOr int;
+        };
+      };
+    };
   };
 
   config = mkIf cfg.enable {
@@ -157,6 +198,8 @@ in {
                 "custom/vm"
                 (mkIf config.custom.desktops.hyprland.enable "hyprland/workspaces")
                 (mkIf config.custom.desktops.niri.enable "niri/workspaces")
+                "gamemode"
+                "privacy"
               ];
 
               modules-center = [
@@ -170,19 +213,31 @@ in {
 
                 "custom/weather"
                 #// "cava#reverse"
+                "temperature#cpu"
+                "temperature#gpu"
               ];
 
               modules-right = [
                 "mpris"
                 "tray"
+                "backlight"
                 "custom/equalizer"
                 "wireplumber"
                 "bluetooth"
+                "upower#controller"
+                "upower#earbuds"
                 "network"
                 (mkIf config.services.power-profiles-daemon.enable "power-profiles-daemon")
                 (mkIf config.hardware.system76.power-daemon.enable "custom/system76-power")
                 "battery"
               ];
+
+              # https://github.com/Alexays/Waybar/wiki/Module:-Backlight
+              backlight =
+                common
+                // {
+                  format = "󰃠 {percent}%";
+                };
 
               # https://github.com/Alexays/Waybar/wiki/Module:-Battery
               battery =
@@ -246,6 +301,15 @@ in {
 
                   on-click = "${swaync-client} --toggle-panel";
                   on-click-right = gnome-clocks;
+                };
+
+              # https://github.com/Alexays/Waybar/wiki/Module:-Gamemode
+              gamemode =
+                common
+                // {
+                  # BUG: Icon spacing is not disabled with glyph
+                  #// glyph = "󰊖";
+                  #// use-icon = false;
                 };
 
               # https://github.com/Alexays/Waybar/wiki/Module:-Hyprland
@@ -370,6 +434,47 @@ in {
                   };
 
                   tooltip = false;
+                };
+
+              # https://github.com/Alexays/Waybar/wiki/Module:-Privacy
+              privacy =
+                common
+                // {
+                  expand = true;
+                };
+
+              # https://github.com/Alexays/Waybar/wiki/Module:-Temperature
+              "temperature#cpu" =
+                common
+                // {
+                  format = " {temperatureC}°C";
+                  hwmon-path = cfg.temperature.cpu.sensor;
+                  thermal-zone = cfg.temperature.cpu.zone;
+                };
+
+              "temperature#gpu" =
+                common
+                // {
+                  format = " {temperatureC}°C";
+                  hwmon-path = cfg.temperature.gpu.sensor;
+                  thermal-zone = cfg.temperature.gpu.zone;
+                };
+
+              # https://github.com/Alexays/Waybar/wiki/Module:-UPower
+              "upower#controller" =
+                common
+                // {
+                  format = " {percentage}";
+                  show-icon = false;
+                  native-path = cfg.battery.controller;
+                };
+
+              "upower#earbuds" =
+                common
+                // {
+                  format = "󱡏 {percentage}";
+                  show-icon = false;
+                  native-path = cfg.battery.earbuds;
                 };
 
               # https://github.com/Alexays/Waybar/wiki/Module:-WirePlumber
@@ -554,7 +659,7 @@ in {
                       "--ampm"
                     ]);
 
-                  format = "{}°";
+                  format = "{}°F";
                   interval = 60 * 60; # Seconds
                   return-type = "json";
                   on-click = gnome-weather;

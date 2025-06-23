@@ -9,6 +9,7 @@ GTK_DEBUG=interactive waybar
 ***/
 
 button:hover,
+image:hover,
 label:hover {
   background: #073642;
 }
@@ -45,6 +46,7 @@ tooltip label {
   padding: 4px;
 }
 
+.horizontal > widget > box,
 .module {
   margin: 0px 1px;
   padding: 4px 12px;
@@ -72,6 +74,72 @@ tooltip label {
 
 #bluetooth.disabled {
   color: #dc322f;
+}
+
+#network.disabled {
+  color: #dc322f;
+}
+
+#network.disconnected {
+  color: #b58900;
+}
+
+#power-profiles-daemon.default {
+  color: #dc322f;
+}
+
+#power-profiles-daemon.performance {
+  color: #cb4b16;
+}
+
+#power-profiles-daemon.power-saver {
+  color: #859900;
+}
+
+#privacy image {
+  color: #dc322f;
+}
+
+#temperature.critical {
+  color: #cb4b16;
+}
+
+#tray {
+  background: #073642;
+}
+
+#tray > widget {
+  background: none;
+}
+
+#tray > widget:hover {
+  background: rgba(88, 110, 117, 0.25);
+}
+
+#tray > widget > image {
+  padding: 4px 8px;
+}
+
+#wireplumber.muted {
+  color: #dc322f;
+}
+
+#upower label {
+  color: #268bd2;
+}
+
+#workspaces {
+  background: #073642;
+  padding: 0px;
+}
+
+#workspaces > button {
+  margin: 0px 1px;
+  padding: 4px 8px;
+}
+
+#workspaces > button:hover {
+  background: rgba(88, 110, 117, 0.25);
 }
 
 #custom-equalizer.normalizer {
@@ -112,58 +180,4 @@ tooltip label {
 
 #custom-vpn.connected {
   color: #d33682;
-}
-
-#network.disabled {
-  color: #dc322f;
-}
-
-#network.disconnected {
-  color: #b58900;
-}
-
-#power-profiles-daemon.default {
-  color: #dc322f;
-}
-
-#power-profiles-daemon.performance {
-  color: #cb4b16;
-}
-
-#power-profiles-daemon.power-saver {
-  color: #859900;
-}
-
-#tray {
-  background: #073642;
-}
-
-#tray > widget {
-  background: none;
-}
-
-#tray > widget:hover {
-  background: rgba(88, 110, 117, 0.25);
-}
-
-#tray > widget > image {
-  padding: 4px 8px;
-}
-
-#wireplumber.muted {
-  color: #dc322f;
-}
-
-#workspaces {
-  background: #073642;
-  padding: 0px;
-}
-
-#workspaces > button {
-  margin: 0px 1px;
-  padding: 4px 8px;
-}
-
-#workspaces > button:hover {
-  background: rgba(88, 110, 117, 0.25);
 }
