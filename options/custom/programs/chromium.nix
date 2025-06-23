@@ -161,6 +161,12 @@ in {
           }
 
           {
+            name = "Images";
+            shortcut = "i";
+            url = "https://kagi.com/images?q={searchTerms}";
+          }
+
+          {
             name = "i3 Issues";
             shortcut = "ii";
             url = "https://github.com/i3/i3/issues?q=is%3Aissue+is%3Aopen+{searchTerms}";
@@ -308,6 +314,12 @@ in {
             name = "Sway Issues";
             shortcut = "si";
             url = "https://github.com/swaywm/sway/issues?q=is%3Aissue+is%3Aopen+{searchTerms}";
+          }
+
+          {
+            name = "Verbatim";
+            shortcut = "v";
+            url = "https://kagi.com/search?verbatim=1&q={searchTerms}";
           }
 
           {

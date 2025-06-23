@@ -398,6 +398,13 @@ with lib; {
           urls = [{template = "https://github.com/hyprwm/Hyprland/issues?q=is%3Aissue+is%3Aopen+{searchTerms}";}];
         };
 
+        images = {
+          definedAliases = ["i"];
+          icon = "https://kagi.com/asset/v2/favicon-32x32.png";
+          name = "Images";
+          urls = [{template = "https://kagi.com/images?q={searchTerms}";}];
+        };
+
         i3-issues = {
           definedAliases = ["ii"];
           icon = "https://github.com/favicon.ico";
@@ -563,6 +570,13 @@ with lib; {
           icon = "https://github.com/favicon.ico";
           name = "Sway Issues";
           urls = [{template = "https://github.com/swaywm/sway/issues?q=is%3Aissue+is%3Aopen+{searchTerms}";}];
+        };
+
+        verbatim = {
+          definedAliases = ["v"];
+          icon = "https://kagi.com/asset/v2/favicon-32x32.png";
+          name = "Verbatim";
+          urls = [{template = "https://kagi.com/search?verbatim=1&q={searchTerms}";}];
         };
 
         wolfram-alpha = {

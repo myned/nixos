@@ -98,6 +98,12 @@ case "$1" in
     url="https://github.com/hyprwm/Hyprland/issues?q=is%3Aissue+is%3Aopen+"
     query="${1:4}"
     ;;
+  'i '*)
+    label="Images"
+    icon="plasma-search"
+    url="https://kagi.com/images?q="
+    query="${1:2}"
+    ;;
   'ii '*)
     label="i3 Issues"
     icon="com.github.zren.bugzilla"
@@ -247,6 +253,12 @@ case "$1" in
     icon="com.github.zren.bugzilla"
     url="https://github.com/swaywm/sway/issues?q=is%3Aissue+is%3Aopen+"
     query="${1:3}"
+    ;;
+  'v '*)
+    label="Verbatim"
+    icon="plasma-search"
+    url="https://kagi.com/search?verbatim=1&q="
+    query="${1:2}"
     ;;
   'w '*)
     label="Wikipedia"
