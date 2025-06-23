@@ -18,6 +18,13 @@
     # https://github.com/Cryolitia/ryzen_smu/issues/1
     programs = {
       #// ryzenadj.enable = true;
+
+      waybar = {
+        temperature = {
+          cpu.zone = 0;
+          gpu.sensor = "/sys/devices/pci0000:00/0000:00:08.1/0000:c1:00.0/hwmon/hwmon0/temp1_input";
+        };
+      };
     };
 
     services = {
