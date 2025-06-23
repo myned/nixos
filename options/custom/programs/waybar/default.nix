@@ -448,6 +448,7 @@ in {
                 common
                 // {
                   format = " {temperatureC}°C";
+                  critical-threshold = 80; # Celsius
                   hwmon-path = cfg.temperature.cpu.sensor;
                   thermal-zone = cfg.temperature.cpu.zone;
                 };
@@ -456,6 +457,7 @@ in {
                 common
                 // {
                   format = " {temperatureC}°C";
+                  critical-threshold = 80; # Celsius
                   hwmon-path = cfg.temperature.gpu.sensor;
                   thermal-zone = cfg.temperature.gpu.zone;
                 };
