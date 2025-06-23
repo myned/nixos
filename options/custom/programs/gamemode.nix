@@ -8,6 +8,7 @@ with lib; let
   hm = config.home-manager.users.${config.custom.username};
 
   gpurun = hm.home.file.".local/bin/gpurun".source;
+  mangohud = getExe' hm.programs.mangohud.package "mangohud";
 in {
   options.custom.programs.gamemode = {
     enable = mkEnableOption "gamemode";
@@ -18,8 +19,11 @@ in {
     programs.gamemode.enable = true;
 
     # https://github.com/FeralInteractive/gamemode?tab=readme-ov-file#note-for-hybrid-gpu-users
-    environment.sessionVariables = mkIf (with config.custom.settings.vm.passthrough; (enable && blacklist)) {
-      GAMEMODERUNEXEC = "${gpurun} ${config.custom.settings.hardware.dgpu.driver}";
+    environment.sessionVariables = {
+      GAMEMODERUNEXEC =
+        if with config.custom.settings.vm.passthrough; (enable && blacklist)
+        then "${gpurun} ${config.custom.settings.hardware.dgpu.driver}"
+        else "${mangohud}";
     };
   };
 }
