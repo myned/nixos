@@ -196,7 +196,7 @@ with lib; {
         "layers.acceleration.force-enabled" = true;
         "layout.css.always_underline_links" = false;
         "layout.css.backdrop-filter.enabled" = true;
-        "layout.forms.reveal-password-button.enabled" = true;
+        "layout.forms.reveal-password-button.enabled" = false;
         "layout.forms.reveal-password-context-menu.enabled" = false;
         "layout.spellcheckDefault" = 1; # Enabled
         "media.autoplay.blocking_policy" = 1; # Transient
