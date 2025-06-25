@@ -27,7 +27,7 @@ in {
               #// grace = 60; # Seconds
               #// hide_cursor = true;
               #// ignore_empty_input = true;
-              immediate_render = true;
+              #// immediate_render = true;
             };
 
             # https://wiki.hyprland.org/Hypr-Ecosystem/hyprlock/#authentication
