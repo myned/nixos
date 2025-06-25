@@ -32,9 +32,11 @@ in {
 
             # https://wiki.hyprland.org/Hypr-Ecosystem/hyprlock/#authentication
             auth = {
-              "fingerprint:enabled" = true;
+              #!! Keeps fingerprint device active despite display off
+              "fingerprint:enabled" = false;
               "fingerprint:present_message" = "<span foreground='##d33682'>󰈷</span>";
               "fingerprint:ready_message" = "󰈷";
+              "fingerprint:retry_delay" = 500; # Milliseconds
             };
 
             # https://wiki.hyprland.org/Hypr-Ecosystem/hyprlock/#background
