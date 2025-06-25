@@ -9,6 +9,7 @@ with lib; let
   hyprctl = "${config.programs.hyprland.package}/bin/hyprctl";
   loginctl = "${pkgs.systemd}/bin/loginctl";
   niri = "${config.programs.niri.package}/bin/niri";
+  pgrep = "${pkgs.procps}/bin/pgrep";
   pw-cli = "${pkgs.pipewire}/bin/pw-cli";
   systemctl = "${pkgs.systemd}/bin/systemctl";
 
@@ -35,13 +36,18 @@ in {
 
       settings.listener = [
         {
+          timeout = 15; # Seconds
+          on-timeout = ''${pgrep} --exact hyprlock && ${cfg.dpms}''; # Turn off display if currently locked
+        }
+
+        {
           timeout = 15 * 60; # Seconds
-          on-timeout = cfg.dpms;
+          on-timeout = cfg.dpms; # Turn off display
         }
 
         {
           timeout = 20 * 60; # Seconds
-          on-timeout = "${loginctl} lock-session";
+          on-timeout = "${loginctl} lock-session"; # Lock session
         }
 
         {
