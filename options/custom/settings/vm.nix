@@ -119,16 +119,6 @@ in {
     # https://github.com/virt-manager/virt-manager
     programs.virt-manager.enable = cfg.libvirt;
 
-    environment.sessionVariables =
-      optionalAttrs cfg.libvirt {
-        # https://libvirt.org/uri.html#default-uri-choice
-        LIBVIRT_DEFAULT_URI = "qemu:///system";
-      }
-      // optionalAttrs (with cfg.passthrough; (enable && blacklist)) {
-        # https://wiki.archlinux.org/title/PRIME#For_open_source_drivers_-_PRIME
-        DRI_PRIME = replaceStrings [":" "."] ["_" "_"] config.custom.settings.hardware.igpu.node;
-      };
-
     users.users.${config.custom.username}.extraGroups =
       lib.optionals cfg.libvirt ["libvirtd"]
       ++ lib.optionals cfg.virtualbox ["vboxusers"];
@@ -188,5 +178,19 @@ in {
         "intel_iommu=on"
       ];
     };
+
+    home-manager.sharedModules = [
+      {
+        home.sessionVariables =
+          optionalAttrs cfg.libvirt {
+            # https://libvirt.org/uri.html#default-uri-choice
+            LIBVIRT_DEFAULT_URI = "qemu:///system";
+          }
+          // optionalAttrs (with cfg.passthrough; (enable && blacklist)) {
+            # https://wiki.archlinux.org/title/PRIME#For_open_source_drivers_-_PRIME
+            DRI_PRIME = replaceStrings [":" "."] ["_" "_"] config.custom.settings.hardware.igpu.node;
+          };
+      }
+    ];
   };
 }

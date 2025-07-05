@@ -43,10 +43,6 @@ in {
       wantedBy = ["graphical-session.target"];
     };
 
-    environment.sessionVariables = {
-      DISPLAY = cfg.display;
-    };
-
     home-manager.users.${config.custom.username} = {
       home.sessionVariables = {
         DISPLAY = cfg.display;
