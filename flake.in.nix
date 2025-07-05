@@ -183,6 +183,7 @@
     in {
       ### Stable
       myarm = stable "aarch64" [./profiles/server ./machines/myarm];
+      myeye = stable "x86_64" [./profiles/server ./machines/myeye];
       myne = stable "x86_64" [./profiles/server ./machines/myne];
       mypi3 = stable "aarch64" [./profiles/sbc ./machines/mypi3];
 
