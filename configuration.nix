@@ -63,6 +63,9 @@ in {
           inherit stable unstable master myned;
 
           ### Packages
+          # https://github.com/NixOS/nixpkgs/issues/384555
+          bottles = prev.bottles.override {removeWarningPopup = true;};
+
           # TODO: Remove when in stable
           btrfs-list = unstable.btrfs-list;
 

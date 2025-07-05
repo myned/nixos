@@ -90,6 +90,7 @@ in {
           biblioteca # Documentation viewer
           bitwarden-desktop # Password manager
           #// blackbox-terminal # Terminal
+          bottles
           cartridges # Game library
           cinny-desktop # Matrix client
           #// clapper # Video player
