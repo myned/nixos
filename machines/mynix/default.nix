@@ -74,9 +74,8 @@
         swap = 32; # GiB
 
         mnt = [
-          "gayme"
-          #// "gaymer"
-          "myve"
+          "gaymes1"
+          "gaymes2"
         ];
       };
 
