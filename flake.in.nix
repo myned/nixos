@@ -74,20 +74,19 @@
     nixpkgs-myned = flake "github:myned/nixpkgs/master";
 
     ### Source code
-    # cisco-packettracer8 = source "file:///home/myned/SYNC/linux/config/cisco/CiscoPacketTracer822_amd64_signed.deb";
-    # freshrss-autorefresh = source "github:Eisa01/FreshRSS---Auto-Refresh-Extension";
-    # freshrss-cntools = source "github:cn-tools/cntools_FreshRssExtensions";
-    # freshrss-comicsinfeed = source "github:giventofly/freshrss-comicsinfeed";
-    # freshrss-dateformat = source "github:aledeg/xExtension-DateFormat";
-    # freshrss-extensions = source "github:FreshRSS/Extensions";
-    # freshrss-kagisummarizer = source "git+https://code.sitosis.com/rudism/freshrss-kagi-summarizer";
-    # freshrss-kapdap = source "github:kapdap/freshrss-extensions";
-    # freshrss-markpreviousasread = source "github:kalvn/freshrss-mark-previous-as-read";
+    #// cisco-packettracer8 = source "file:///home/myned/SYNC/linux/config/cisco/CiscoPacketTracer822_amd64_signed.deb";
+    #// freshrss-autorefresh = source "github:Eisa01/FreshRSS---Auto-Refresh-Extension";
+    #// freshrss-cntools = source "github:cn-tools/cntools_FreshRssExtensions";
+    #// freshrss-comicsinfeed = source "github:giventofly/freshrss-comicsinfeed";
+    #// freshrss-dateformat = source "github:aledeg/xExtension-DateFormat";
+    #// freshrss-extensions = source "github:FreshRSS/Extensions";
+    #// freshrss-kagisummarizer = source "git+https://code.sitosis.com/rudism/freshrss-kagi-summarizer";
+    #// freshrss-kapdap = source "github:kapdap/freshrss-extensions";
+    #// freshrss-markpreviousasread = source "github:kalvn/freshrss-mark-previous-as-read";
     lifx-cli = source "github:Rawa/lifx-cli";
-    # steamtinkerlaunch = source "github:sonic2kk/steamtinkerlaunch";
-    swaynotificationcenter = source "github:ErikReider/SwayNotificationCenter?ref=v0.11.0";
-    # thunderbird-gnome-theme = source "github:rafaelmardojai/thunderbird-gnome-theme";
-    virtio-win = source "https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.262-2/virtio-win.iso";
+    #// steamtinkerlaunch = source "github:sonic2kk/steamtinkerlaunch";
+    #// swaynotificationcenter = source "github:ErikReider/SwayNotificationCenter?ref=v0.11.0";
+    #// thunderbird-gnome-theme = source "github:rafaelmardojai/thunderbird-gnome-theme";
   };
 
   outputs = inputs: {
