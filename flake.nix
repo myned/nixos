@@ -26,6 +26,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:nix-community/disko";
     };
+    flake-parts.url = "github:hercules-ci/flake-parts";
     flakegen.url = "github:jorsn/flakegen";
     fw-fanctrl = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
