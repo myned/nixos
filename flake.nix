@@ -113,13 +113,9 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:danth/stylix";
     };
-    swaynotificationcenter = {
-      flake = false;
-      url = "github:ErikReider/SwayNotificationCenter?ref=v0.11.0";
-    };
     virtio-win = {
       flake = false;
-      url = "https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.262-2/virtio-win.iso";
+      url = "https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.271-1/virtio-win.iso";
     };
     zen-browser = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
