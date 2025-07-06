@@ -11,9 +11,7 @@
   # https://nix.dev/manual/nix/2.18/command-ref/new-cli/nix3-flake.html
   inputs = let
     flake = url: {inherit url;};
-    follows = input: {inputs.${input}.follows = input;};
-    stable = input: {inputs.${input}.follows = "${input}-stable";};
-    unstable = input: {inputs.${input}.follows = "${input}-unstable";};
+    follows = branch: {inputs.nixpkgs.follows = "nixpkgs-${branch}";};
 
     source = url: {
       inherit url;
@@ -30,46 +28,46 @@
     ### Stable
     nixpkgs-stable = flake "github:NixOS/nixpkgs/nixos-25.05";
 
-    aagl-gtk-on-nix-stable = flake "github:ezKEa/aagl-gtk-on-nix/release-25.05" // stable "nixpkgs";
-    home-manager-stable = flake "github:nix-community/home-manager/release-25.05" // stable "nixpkgs";
-    nix-index-database-stable = flake "github:nix-community/nix-index-database" // stable "nixpkgs";
-    nixgl-stable = flake "github:nix-community/nixGL" // stable "nixpkgs";
-    nur-stable = flake "github:nix-community/NUR" // stable "nixpkgs";
-    stylix-stable = flake "github:danth/stylix/release-25.05" // stable "nixpkgs";
+    aagl-gtk-on-nix-stable = flake "github:ezKEa/aagl-gtk-on-nix/release-25.05" // follows "stable";
+    home-manager-stable = flake "github:nix-community/home-manager/release-25.05" // follows "stable";
+    nix-index-database-stable = flake "github:nix-community/nix-index-database" // follows "stable";
+    nixgl-stable = flake "github:nix-community/nixGL" // follows "stable";
+    nur-stable = flake "github:nix-community/NUR" // follows "stable";
+    stylix-stable = flake "github:danth/stylix/release-25.05" // follows "stable";
 
     ### Unstable
     nixpkgs-unstable = flake "github:NixOS/nixpkgs/nixos-unstable";
 
-    aagl-gtk-on-nix-unstable = flake "github:ezKEa/aagl-gtk-on-nix" // unstable "nixpkgs";
-    agenix = flake "github:ryantm/agenix" // unstable "nixpkgs";
-    ags = flake "github:Aylur/ags" // unstable "nixpkgs";
-    arion = flake "github:hercules-ci/arion" // unstable "nixpkgs";
-    # bitwarden-menu = flake "github:firecat53/bitwarden-menu" // unstable "nixpkgs";
-    # compose2nix = flake "github:aksiksi/compose2nix" // unstable "nixpkgs";
-    # conduwuit = flake "github:Myned/conduwuit" // unstable "nixpkgs";
-    disko = flake "github:nix-community/disko" // unstable "nixpkgs";
-    fw-fanctrl = flake "github:TamtamHero/fw-fanctrl/packaging/nix" // unstable "nixpkgs";
-    home-manager-unstable = flake "github:nix-community/home-manager" // unstable "nixpkgs";
-    hypridle = flake "github:hyprwm/hypridle" // unstable "nixpkgs";
-    # hyprland = flake "github:hyprwm/Hyprland?ref=v0.45.2" // unstable "nixpkgs";
-    # hyprland-contrib = flake "github:hyprwm/contrib" // unstable "nixpkgs";
-    # hyprland-plugins = flake "github:hyprwm/hyprland-plugins" // unstable "nixpkgs" // follows "hyprland";
-    hyprlock = flake "github:hyprwm/hyprlock" // unstable "nixpkgs";
-    # hyprpaper = flake "github:hyprwm/hyprpaper" // unstable "nixpkgs";
-    hyprpicker = flake "github:hyprwm/hyprpicker" // unstable "nixpkgs";
-    jovian-nixos = flake "github:Jovian-Experiments/Jovian-NixOS" // unstable "nixpkgs";
-    niri = flake "github:YaLTeR/niri" // unstable "nixpkgs";
-    niri-flake = flake "github:sodiboo/niri-flake" // unstable "nixpkgs";
-    nix-alien = flake "github:thiagokokada/nix-alien" // unstable "nixpkgs";
+    aagl-gtk-on-nix-unstable = flake "github:ezKEa/aagl-gtk-on-nix" // follows "unstable";
+    agenix = flake "github:ryantm/agenix" // follows "unstable";
+    ags = flake "github:Aylur/ags" // follows "unstable";
+    arion = flake "github:hercules-ci/arion" // follows "unstable";
+    #// bitwarden-menu = flake "github:firecat53/bitwarden-menu" // follows "unstable";
+    #// compose2nix = flake "github:aksiksi/compose2nix" // follows "unstable";
+    #// conduwuit = flake "github:Myned/conduwuit" // follows "unstable";
+    disko = flake "github:nix-community/disko" // follows "unstable";
+    fw-fanctrl = flake "github:TamtamHero/fw-fanctrl/packaging/nix" // follows "unstable";
+    home-manager-unstable = flake "github:nix-community/home-manager" // follows "unstable";
+    hypridle = flake "github:hyprwm/hypridle" // follows "unstable";
+    #// hyprland = flake "github:hyprwm/Hyprland?ref=v0.45.2" // follows "unstable";
+    #// hyprland-contrib = flake "github:hyprwm/contrib" // follows "unstable";
+    #// hyprland-plugins = flake "github:hyprwm/hyprland-plugins" // follows "unstable" // follows "hyprland";
+    hyprlock = flake "github:hyprwm/hyprlock" // follows "unstable";
+    #// hyprpaper = flake "github:hyprwm/hyprpaper" // follows "unstable";
+    hyprpicker = flake "github:hyprwm/hyprpicker" // follows "unstable";
+    jovian-nixos = flake "github:Jovian-Experiments/Jovian-NixOS" // follows "unstable";
+    niri = flake "github:YaLTeR/niri" // follows "unstable";
+    niri-flake = flake "github:sodiboo/niri-flake" // follows "unstable";
+    nix-alien = flake "github:thiagokokada/nix-alien" // follows "unstable";
     nix-flatpak = flake "github:gmodena/nix-flatpak?ref=v0.5.1";
-    nix-index-database-unstable = flake "github:nix-community/nix-index-database" // unstable "nixpkgs";
-    # nix-vscode-extensions = flake "github:nix-community/nix-vscode-extensions" // unstable "nixpkgs";
-    nixd = flake "github:nix-community/nixd" // unstable "nixpkgs";
-    nixgl-unstable = flake "github:nix-community/nixGL" // unstable "nixpkgs";
-    nur-unstable = flake "github:nix-community/NUR" // unstable "nixpkgs";
-    stylix-unstable = flake "github:danth/stylix" // unstable "nixpkgs";
-    # walker = flake "github:abenz1267/walker?ref=v0.12.8" // unstable "nixpkgs";
-    zen-browser = flake "github:youwen5/zen-browser-flake" // unstable "nixpkgs";
+    nix-index-database-unstable = flake "github:nix-community/nix-index-database" // follows "unstable";
+    #// nix-vscode-extensions = flake "github:nix-community/nix-vscode-extensions" // follows "unstable";
+    nixd = flake "github:nix-community/nixd" // follows "unstable";
+    nixgl-unstable = flake "github:nix-community/nixGL" // follows "unstable";
+    nur-unstable = flake "github:nix-community/NUR" // follows "unstable";
+    stylix-unstable = flake "github:danth/stylix" // follows "unstable";
+    #// walker = flake "github:abenz1267/walker?ref=v0.12.8" // follows "unstable";
+    zen-browser = flake "github:youwen5/zen-browser-flake" // follows "unstable";
 
     ### Branches
     nixpkgs-master = flake "github:NixOS/nixpkgs/master";
