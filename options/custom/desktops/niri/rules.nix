@@ -221,7 +221,8 @@ in {
               # Games
               matches = games;
 
-              open-floating = false;
+              # BUG: Reapplies when moving windows, causing games to force resize to default-column-width
+              #// open-floating = false;
             }
 
             {
