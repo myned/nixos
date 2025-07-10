@@ -24,6 +24,10 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGoIYRj59beHz2S1NNQaC34SteLHbhG7BZAeQ8bmUp0g root@myork"
   ];
 
+  nodes = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK13dVhLVjW85Ol+Q0j0xHtE887M9jurZKpZ0p4Wfo6L root@myeye"
+  ];
+
   sbcs = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPUu7C0uj4Ia5Xzttbeq3em1DbhEdMDrm9MOoFcw+BLU root@mypi3"
   ];
@@ -32,9 +36,10 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAgrWvzp14Vj+aMd3b9w6e3/xbkHfNZoswsAg9QtUcDc root@myne"
   ];
 
-  common = users ++ decks ++ desktops ++ sbcs ++ servers;
+  common = users ++ decks ++ desktops ++ nodes ++ sbcs ++ servers;
   deck = users ++ decks;
   desktop = users ++ desktops;
+  node = users ++ nodes;
   sbc = users ++ sbcs;
   server = users ++ servers;
 in {
@@ -56,6 +61,12 @@ in {
   "desktop/users/myned.pass".publicKeys = desktop;
   "desktop/users/root.pass".publicKeys = desktop;
   "desktop/vm/myndows.pass".publicKeys = desktop;
+
+  ### Nodes
+  "node/borgmatic/borgbase".publicKeys = node;
+  "node/netdata/child.conf".publicKeys = node;
+  "node/users/myned.pass".publicKeys = node;
+  "node/users/root.pass".publicKeys = node;
 
   ### SBC
   "sbc/borgmatic/borgbase".publicKeys = sbc;

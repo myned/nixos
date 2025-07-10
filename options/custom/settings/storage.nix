@@ -305,7 +305,7 @@ in {
     swapDevices = mkIf (isInt cfg.swap) [
       {
         device = "/var/lib/swapfile";
-        size = cfg.swap * 1024; # MB
+        size = cfg.swap * 1024; # MiB
       }
     ];
 

@@ -24,6 +24,7 @@ in {
 
     devices = mkOption {
       default = [
+        "myeye"
         "myne"
         "mynix"
         "myork"

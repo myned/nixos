@@ -23,6 +23,7 @@
     services = {
       syncthing = {
         enable = true;
+
         folders =
           lib.getAttrs [
             "SYNC/common"

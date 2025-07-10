@@ -8,7 +8,7 @@
     hostname = "myeye";
 
     services = {
-      #tailscale.ip = "100.126.156.42";
+      # TODO: tailscale.ip = "100.126.156.42";
     };
 
     settings = {
