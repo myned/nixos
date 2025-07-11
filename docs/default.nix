@@ -7,7 +7,7 @@
 with lib; let
   # https://github.com/NixOS/nixpkgs/blob/master/lib/modules.nix
   eval = evalModules {
-    check = false; # Exclude option declarations (config)
+    check = false; # Exclude option definitions (config)
 
     modules =
       filter (

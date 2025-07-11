@@ -190,10 +190,11 @@
               };
         in {
           ### Stable
-          myarm = nixos "stable" "aarch64-linux" [./profiles/server ./machines/myarm];
-          myeye = nixos "stable" "x86_64-linux" [./profiles/node ./machines/myeye];
-          myne = nixos "stable" "x86_64-linux" [./profiles/server ./machines/myne];
+          #// myarm = nixos "stable" "aarch64-linux" [./profiles/server ./machines/myarm];
+          myeye = nixos "stable" "x86_64-linux" [./profiles/compute ./machines/myeye];
+          #// myne = nixos "stable" "x86_64-linux" [./profiles/server ./machines/myne];
           myore = nixos "stable" "x86_64-linux" [./profiles/core ./machines/myore];
+          myosh = nixos "stable" "x86_64-linux" [./profiles/server ./machines/myosh];
           mypi3 = nixos "stable" "aarch64-linux" [./profiles/sbc ./machines/mypi3];
 
           ### Unstable

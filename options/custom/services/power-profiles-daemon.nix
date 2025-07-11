@@ -26,6 +26,7 @@ in {
       auto-cpufreq.enable = false;
       tlp.enable = false;
 
+      # FIXME: Randomly sets profile to power-saver
       # Switch to power-saver mode when on battery
       # https://wiki.archlinux.org/title/Power_management#Using_a_script_and_an_udev_rule
       udev.extraRules = mkIf cfg.auto ''

@@ -14,11 +14,11 @@
     settings = {
       boot.systemd-boot.enable = true;
 
-      storage = {
-        enable = true;
-        mnt = ["local"];
-        swap = 32; # GiB
-      };
+      # storage = {
+      #   enable = true;
+      #   mnt = ["local"];
+      #   swap = 32; # GiB
+      # };
     };
   };
 }

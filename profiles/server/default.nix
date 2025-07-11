@@ -9,37 +9,68 @@
     containers = {
       enable = true;
       boot = true;
-      adguardhome.enable = true;
+      actualbudget.enable = true;
       beszel.enable = true;
-      beszel.server = true;
-      coturn.enable = true;
-      #// grafana.enable = true;
-      headscale.enable = true;
-      kener.enable = true;
+      #// conduwuit.enable = true;
+      #// dashdot.enable = true;
+      #// directus.enable = true;
+      forgejo.enable = true;
+      forgejo.server = true;
+      foundryvtt.enable = true;
+      #// freshrss.enable = true;
+      #// ghost.enable = true;
+      mastodon.enable = true;
+      miniflux.enable = true;
+      #// netbox.enable = true;
       #// netdata.enable = true;
-      ntfy.enable = true;
+      #// nextcloud.enable = true;
+      nextcloudaio.enable = true;
+      opengist.enable = true;
+      openwebui.enable = true;
+      #// oryx.enable = true;
+      ovenmediaengine.enable = true;
+      #// owncast.enable = true;
+      #// passbolt.enable = true;
       portainer.enable = true;
-      portainer.server = true;
-      #// uptimekuma.enable = true;
+      #// rconfig.enable = true;
+      redlib.enable = true;
+      #// searxng.enable = true;
+      #// srs.enable = true;
+      stremio.enable = true;
+      synapse.enable = true;
+      synapseadmin.enable = true;
+      vaultwarden.enable = true;
+      #// wikijs.enable = true;
 
-      caddy = {
+      jellyfin = {
         enable = true;
-        public-key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBYspWeL1pBqX7Bl2pK/vnBE/B7VA93SYgz6O9YlrgNl";
+        dataDir = "/mnt/local/jellyfin";
       };
     };
 
     services = {
-      sshd.enable = true;
-
       borgmatic = {
         enable = true;
-        repositories = ["ssh://yu4dt0wh@yu4dt0wh.repo.borgbase.com/./repo"];
+        repositories = ["ssh://ysrll00y@ysrll00y.repo.borgbase.com/./repo"];
 
         sources = [
           config.custom.containers.directory
           "/home"
-          "/srv"
+          "/mnt/local"
         ];
+      };
+
+      syncthing = {
+        enable = true;
+
+        # TODO: Use passthru?
+        configDir = "/var/lib/syncthing";
+        dataDir = "/mnt/local/syncthing";
+
+        mount = "mnt-local.mount";
+        type = "receiveonly";
+        user = "syncthing";
+        group = "syncthing";
       };
     };
   };
