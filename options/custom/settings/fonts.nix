@@ -171,7 +171,7 @@ in {
           # https://github.com/RsyncProject/rsync/issues/609
           copy-fonts = hm.lib.dag.entryAfter ["writeBoundary"] ''
             run ${rsync} --recursive --copy-links --times --delete \
-              /run/current-system/sw/share/X11/fonts "$XDG_DATA_HOME/"
+              /run/current-system/sw/share/X11/fonts "${hm.home.sessionVariables.XDG_DATA_HOME}/"
           '';
         };
       }

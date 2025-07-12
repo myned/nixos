@@ -193,16 +193,14 @@ in {
           group = cfg.group;
         };
       in
-        {
-          # Ensure creation of config directory
-          ${cfg.configDir} = {
-            d = owner "0700"; # -rwx------
-            z = owner "0700"; # -rwx------
-          };
-        }
         # HACK: Manually create .stignore files in lieu of option
         # https://github.com/NixOS/nixpkgs/pull/353770
-        // concatMapAttrs (folder: _: {
+        concatMapAttrs (folder: _: {
+          "${cfg.dataDir}/${folder}" = {
+            d = owner "0755"; # -rwxr-xr-x
+            z = owner "0755"; # -rwxr-xr-x
+          };
+
           "${cfg.dataDir}/${folder}/.stignore" = {
             "f+" = owner "0400" // {argument = cfg.ignores;}; # -r--------
             z = owner "0400"; # -r--------
