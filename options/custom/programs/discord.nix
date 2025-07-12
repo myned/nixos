@@ -29,25 +29,23 @@ in {
         dissent
       ];
 
-    home-manager.sharedModules = [
-      {
-        # https://github.com/Vencord/Vesktop
-        programs.vesktop = mkIf (cfg.client == "vesktop") {
-          enable = true;
-          vencord.useSystem = true;
-        };
+    home-manager.users.${config.custom.username} = {
+      # https://github.com/Vencord/Vesktop
+      programs.vesktop = mkIf (cfg.client == "vesktop") {
+        enable = true;
+        vencord.useSystem = true;
+      };
 
-        # https://betterdiscord.app/
-        # https://github.com/BetterDiscord/BetterDiscord
-        #!! Imperative config and patching
-        #?? betterdiscordctl install
-        xdg.configFile = mkIf (cfg.client == "betterdiscord") {
-          "BetterDiscord" = {
-            force = true;
-            source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/common/config/discord/BetterDiscord";
-          };
+      # https://betterdiscord.app/
+      # https://github.com/BetterDiscord/BetterDiscord
+      #!! Imperative config and patching
+      #?? betterdiscordctl install
+      xdg.configFile = mkIf (cfg.client == "betterdiscord") {
+        "BetterDiscord" = {
+          force = true;
+          source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/common/config/discord/BetterDiscord";
         };
-      }
-    ];
+      };
+    };
   };
 }

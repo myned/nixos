@@ -33,7 +33,7 @@ in {
     environment.systemPackages = [cfg.cursor.package cfg.icon.package];
 
     # HACK: Copy home-manager implementation without setting XCURSOR_* environment variables
-    home-manager.sharedModules = let
+    home-manager.users.${config.custom.username} = let
       # https://github.com/nix-community/home-manager/blob/59a4c43e9ba6db24698c112720a58a334117de83/modules/config/home-cursor.nix#L66C3-L77C8
       defaultIndexThemePackage = pkgs.writeTextFile {
         name = "index.theme";
@@ -46,26 +46,24 @@ in {
           Inherits=${cfg.cursor.name}
         '';
       };
-    in [
-      {
-        # BUG: home.pointerCursor breaks XCURSOR_PATH for some child windows, so avoid that workaround
-        # https://github.com/nix-community/home-manager/blob/59a4c43e9ba6db24698c112720a58a334117de83/modules/config/home-cursor.nix#L154
-        home.sessionVariables = with cfg.cursor; {
-          XCURSOR_SIZE = size;
-          XCURSOR_THEME = name;
-        };
+    in {
+      # BUG: home.pointerCursor breaks XCURSOR_PATH for some child windows, so avoid that workaround
+      # https://github.com/nix-community/home-manager/blob/59a4c43e9ba6db24698c112720a58a334117de83/modules/config/home-cursor.nix#L154
+      home.sessionVariables = with cfg.cursor; {
+        XCURSOR_SIZE = size;
+        XCURSOR_THEME = name;
+      };
 
-        # https://github.com/nix-community/home-manager/blob/59a4c43e9ba6db24698c112720a58a334117de83/modules/config/home-cursor.nix#L161
-        home.file = {
-          ".icons/default/index.theme".source = "${defaultIndexThemePackage}/share/icons/default/index.theme";
-          ".icons/${cfg.cursor.name}".source = "${cfg.cursor.package}/share/icons/${cfg.cursor.name}";
-        };
+      # https://github.com/nix-community/home-manager/blob/59a4c43e9ba6db24698c112720a58a334117de83/modules/config/home-cursor.nix#L161
+      home.file = {
+        ".icons/default/index.theme".source = "${defaultIndexThemePackage}/share/icons/default/index.theme";
+        ".icons/${cfg.cursor.name}".source = "${cfg.cursor.package}/share/icons/${cfg.cursor.name}";
+      };
 
-        xdg.dataFile = {
-          "icons/default/index.theme".source = "${defaultIndexThemePackage}/share/icons/default/index.theme";
-          "icons/${cfg.cursor.name}".source = "${cfg.cursor.package}/share/icons/${cfg.cursor.name}";
-        };
-      }
-    ];
+      xdg.dataFile = {
+        "icons/default/index.theme".source = "${defaultIndexThemePackage}/share/icons/default/index.theme";
+        "icons/${cfg.cursor.name}".source = "${cfg.cursor.package}/share/icons/${cfg.cursor.name}";
+      };
+    };
   };
 }

@@ -1,6 +1,39 @@
+# About
+
+Monorepo for @myned's personal NixOS configuration and partial homelab infrastructure
+
+# Caveats
+
+Security considerations are practically lax, but always open for improvement:
+
+- Secrets handled via agenix, inheriting its [threat model](https://github.com/ryantm/agenix?tab=readme-ov-file#threat-modelwarnings)
+- Storage module supports LUKS encryption at rest via disko and systemd initrd
+- Prioritizes usability over hardening (ex. some home-manager modules apply to the root user)
+
+Assumes a single-user machine plus root
+
+Containers assume root-based docker, with rootless docker and podman untested
+
+Various tools are undocumented prerequisites:
+
+- agenix (for secrets management)
+- disko (for disk formatting and declaration)
+- flakes (for reproducibility)
+- genflake (for use of normal nix in flake.in.nix)
+- home-manager (for user modules)
+- nixos-anywhere (for remote installation)
+- nixos-hardware (for hardware quirks)
+- stylix
+- tailscale (for machine-to-machine communication)
+
+...combined with some nix abstractions used by custom modules:
+
+- machines (hardware-specific options identified by hostname)
+- profiles (shared options between machines identified by purpose)
+
 # Install
 
-## Remote (with [nixos-anywhere](https://github.com/nix-community/nixos-anywhere))
+General instructions for how to use this configuration, may not include all requirements
 
 1. Clone this repository
 
@@ -38,7 +71,37 @@ git clone https://git.bjork.tech/myned/nixos
 nixos-generate-config --show-hardware-config
 ```
 
-5. Choose or create a profile in `profiles/<profile>/default.nix` and add the machine to `flake.in.nix`
+5. Choose or create a profile in `profiles/<profile>/default.nix`
+
+```nix
+{
+  ...
+  custom = {
+    profile = "<profile>";
+  };
+  ...
+}
+```
+
+6. Add encrypted password declarations to `secrets/secrets.nix`
+
+```nix
+{
+  ...
+  "<profile>/users/<username>.pass".publicKeys = <profile>;
+  "<profile>/users/root.pass".publicKeys = <profile>;
+  ...
+}
+```
+
+7. Create encrypted password files with agenix
+
+```sh
+agenix -e secrets/<profile>/<username>.pass
+agenix -e secrets/<profile>/root.pass
+```
+
+8. Add the machine to `flake.in.nix`
 
 ```nix
 {
@@ -48,7 +111,7 @@ nixos-generate-config --show-hardware-config
 }
 ```
 
-6. Generate and lock `flake.nix` with [flakegen](https://github.com/jorsn/flakegen)
+9. Generate and lock `flake.nix` with [flakegen](https://github.com/jorsn/flakegen)
 
 ```sh
 cd nixos
@@ -57,7 +120,7 @@ nix run .#genflake flake.nix
 nix flake lock
 ```
 
-7. Generate machine SSH key and copy to clipboard
+10. Generate machine SSH key and copy public key to clipboard
 
 ```sh
 mkdir -p tmp/etc/ssh/
@@ -65,7 +128,19 @@ ssh-keygen -f tmp/etc/ssh/id_ed25519 -N '' -C root@<machine>
 cat tmp/etc/ssh/id_ed25519.pub | wl-copy -n
 ```
 
-8. Rekey agenix secrets after adding public key to `secrets/secrets.nix`
+11. Add public key to the machine's profile in `secrets/secrets.nix`
+
+```nix
+{
+  ...
+  <profile> = [
+    "<ssh public key>"
+  ];
+  ...
+}
+```
+
+12. Rekey agenix secrets
 
 ```sh
 cd secrets/
@@ -73,7 +148,7 @@ agenix -r
 cd -
 ```
 
-9. If encrypting with LUKS, write the passphrase to `/tmp/secret.key` and mount the key device containing the keyfile if `custom.settings.storage.key.enable = true`
+13. If encrypting with LUKS, write the passphrase to `/tmp/secret.key` and mount the key device containing the keyfile if `custom.settings.storage.key.enable = true`
 
 ```sh
 # On machine
@@ -82,23 +157,39 @@ sudo mkdir -p /key
 sudo mount /dev/<device> /key
 ```
 
-10. Create a temporary password for the root user (or use SSH keys)
+14. Create a temporary password for the nixos user (or use SSH keys)
 
 ```sh
 # On machine
-sudo passwd
+passwd
 ```
 
-11. Execute nixos-anywhere to install
+15. Execute [nixos-anywhere](https://github.com/nix-community/nixos-anywhere) to install remotely
 
 ```sh
-nixos-anywhere --extra-files tmp/ --flake .#<machine> root@<ip>
+nixos-anywhere --extra-files tmp/ --flake .#<machine> nixos@<ip>
 ```
 
-12. Reboot machine
+16. Reboot machine
 
-13. Remove temporary files
+17. Remove temporary files
 
 ```sh
 rm -r tmp/
+```
+
+# Deploy
+
+Subsequent deployment of configuration changes, implies `/etc/nixos` as repo location
+
+## Local builds
+
+```sh
+sudo nixos-rebuild switch
+```
+
+## Remote builds
+
+```sh
+nixos-rebuild switch --flake .#<machine> --target-host root@<ip>
 ```

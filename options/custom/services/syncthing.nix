@@ -160,7 +160,7 @@ in {
           };
 
           mynix.id = "UFLECA5-QQUKD5J-FQB55TE-YKKHD37-VT5ASXU-4EGUZNV-KW7Z434-FBI7CQ2";
-          myork.id = "UTVTIWY-6YCR2XG-UPCUFDX-O6AVZQP-XJM7ZA6-CPAL6LP-YS4LFUA-XMTO6QG";
+          myork.id = "AZZZVMU-G2WA5T7-CAAAULE-2N6SVJL-RWN6RIE-THJRG6Y-QRDZ2LP-56K7BQ2";
           myxel.id = "6ER5UMP-KVYYKVY-AL5NAC6-W4KRXTB-UYRQG4R-AFWK66C-RWOULMW-EATTVQV";
           myeck.id = "NLGUPGG-XFGRDSE-43MQEXO-TLEW2XD-DMOL6RM-RPQ4IFQ-GENDXPF-PM7NQAO";
           zendows.id = "4JS6YSF-OBZFPYW-B3OUF4G-R6DVOZ4-KFAVGFY-NT4J223-E44HK3D-GPYAFQP";
@@ -195,12 +195,9 @@ in {
       in
         # HACK: Manually create .stignore files in lieu of option
         # https://github.com/NixOS/nixpkgs/pull/353770
+        # BUG: Parent directories are created with root:root ownership
+        # https://github.com/systemd/systemd/issues/4497
         concatMapAttrs (folder: _: {
-          "${cfg.dataDir}/${folder}" = {
-            d = owner "0755"; # -rwxr-xr-x
-            z = owner "0755"; # -rwxr-xr-x
-          };
-
           "${cfg.dataDir}/${folder}/.stignore" = {
             "f+" = owner "0400" // {argument = cfg.ignores;}; # -r--------
             z = owner "0400"; # -r--------

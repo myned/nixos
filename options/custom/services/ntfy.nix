@@ -63,47 +63,45 @@ in {
       };
     };
 
-    home-manager.sharedModules = [
-      {
-        xdg.configFile = {
-          # TODO: Use official module if available
-          # https://github.com/binwiederhier/ntfy/blob/main/client/client.yml
-          "ntfy/client.yml" = {
-            text = generators.toYAML {} {
-              default-host = cfg.url;
+    home-manager.users.${config.custom.username} = {
+      xdg.configFile = {
+        # TODO: Use official module if available
+        # https://github.com/binwiederhier/ntfy/blob/main/client/client.yml
+        "ntfy/client.yml" = {
+          text = generators.toYAML {} {
+            default-host = cfg.url;
 
-              default-command = concatStringsSep " " [
-                notify-send
-                ''--icon="$NTFY_TAGS"''
-                ''"$NTFY_TITLE"''
-                ''"$NTFY_MESSAGE"''
-              ];
+            default-command = concatStringsSep " " [
+              notify-send
+              ''--icon="$NTFY_TAGS"''
+              ''"$NTFY_TITLE"''
+              ''"$NTFY_MESSAGE"''
+            ];
 
-              # https://docs.ntfy.sh/subscribe/cli/#subscribe-to-multiple-topics
-              subscribe = forEach cfg.topics (topic:
-                {
-                  inherit topic;
-                }
-                // optionalAttrs cfg.token {
-                  token = "%PLACEHOLDER%";
-                });
-            };
-
-            force = true;
+            # https://docs.ntfy.sh/subscribe/cli/#subscribe-to-multiple-topics
+            subscribe = forEach cfg.topics (topic:
+              {
+                inherit topic;
+              }
+              // optionalAttrs cfg.token {
+                token = "%PLACEHOLDER%";
+              });
           };
+
+          force = true;
         };
+      };
 
-        # HACK: Replace placeholder with decrypted token after activation
-        home.activation.ntfy = mkIf cfg.token (hm.lib.dag.entryAfter ["writeBoundary"] ''
-          run ${sed} \
-            "s|%PLACEHOLDER%|$(${cat} ${config.age.secrets."common/ntfy/token".path})|" \
-            ${hm.xdg.configFile."ntfy/client.yml".source} \
-            > ${hm.xdg.configHome}/ntfy/client.yml.tmp
+      # HACK: Replace placeholder with decrypted token after activation
+      home.activation.ntfy = mkIf cfg.token (hm.lib.dag.entryAfter ["writeBoundary"] ''
+        run ${sed} \
+          "s|%PLACEHOLDER%|$(${cat} ${config.age.secrets."common/ntfy/token".path})|" \
+          ${hm.xdg.configFile."ntfy/client.yml".source} \
+          > ${hm.xdg.configHome}/ntfy/client.yml.tmp
 
-          run ${mv} \
-            ${hm.xdg.configHome}/ntfy/client.yml.tmp ${hm.xdg.configHome}/ntfy/client.yml
-        '');
-      }
-    ];
+        run ${mv} \
+          ${hm.xdg.configHome}/ntfy/client.yml.tmp ${hm.xdg.configHome}/ntfy/client.yml
+      '');
+    };
   };
 }

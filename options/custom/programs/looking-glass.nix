@@ -92,41 +92,39 @@ in {
       namespaces = []
     '';
 
-    home-manager.sharedModules = [
-      {
-        programs.looking-glass-client = {
-          enable = true;
+    home-manager.users.${config.custom.username} = {
+      programs.looking-glass-client = {
+        enable = true;
 
-          # https://looking-glass.io/docs/B7/usage/#all-command-line-options
-          settings = {
-            app = {
-              shmFile =
-                if cfg.kvmfr
-                then "/dev/kvmfr0"
-                else "/dev/shm/looking-glass";
-            };
+        # https://looking-glass.io/docs/B7/usage/#all-command-line-options
+        settings = {
+          app = {
+            shmFile =
+              if cfg.kvmfr
+              then "/dev/kvmfr0"
+              else "/dev/shm/looking-glass";
+          };
 
-            egl = {
-              doubleBuffer = true;
-              vsync = true;
-            };
+          egl = {
+            doubleBuffer = true;
+            vsync = true;
+          };
 
-            input = {
-              grabKeyboard = false;
-              ignoreWindowsKeys = true;
-            };
+          input = {
+            grabKeyboard = false;
+            ignoreWindowsKeys = true;
+          };
 
-            win = {
-              borderless = true;
-              fullScreen = true;
-              quickSplash = true;
-              #// size = "${toString (config.custom.width / 2)}x${toString (config.custom.height / 2)}";
-              uiFont = config.stylix.fonts.monospace.name;
-              uiSize = 20;
-            };
+          win = {
+            borderless = true;
+            fullScreen = true;
+            quickSplash = true;
+            #// size = "${toString (config.custom.width / 2)}x${toString (config.custom.height / 2)}";
+            uiFont = config.stylix.fonts.monospace.name;
+            uiSize = 20;
           };
         };
-      }
-    ];
+      };
+    };
   };
 }
