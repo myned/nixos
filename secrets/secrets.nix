@@ -21,7 +21,7 @@ let
 
   desktops = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBKKqfRtKZ+8Qm9DjurAJ8Ob4IZjAWZQjNGQXgQVRr8M root@mynix"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGoIYRj59beHz2S1NNQaC34SteLHbhG7BZAeQ8bmUp0g root@myork"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPGOW4uG/uGV/0VxyHlEzctMhfixv/dlRMhDdAuUsF6X root@myork"
   ];
 
   nodes = [

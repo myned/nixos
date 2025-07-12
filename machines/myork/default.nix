@@ -30,7 +30,7 @@
     services = {
       auto-cpufreq.max.battery = 3.5; # GHz
       fw-fanctrl.enable = true;
-      tailscale.ip = "100.100.119.16";
+      tailscale.ip = "100.81.241.17";
     };
 
     settings = {
@@ -44,7 +44,7 @@
 
       storage = {
         defaultMounts = ["/dev/disk/by-label/myve"];
-        swapSize = 32; # GiB
+        swapSize = 32;
         key.enable = true;
 
         root = {

@@ -25,7 +25,7 @@ in {
 
     zramSize = mkOption {
       default = 100;
-      description = "Size of ZRAM device in percentage of memory capacity";
+      description = "Size of the zram device to create, in percentage of memory capacity";
       example = 50;
       type = with types; nullOr int;
     };
@@ -76,11 +76,6 @@ in {
       initrd = {
         systemd.enable = true;
 
-        # https://wiki.nixos.org/wiki/Full_Disk_Encryption
-        # https://wiki.archlinux.org/title/Dm-crypt/Device_encryption#Adding_LUKS_keys
-        #?? echo -n '<passphrase>' > <keyfile>
-        #?? sudo cryptsetup luksAddKey /dev/disk/by-partlabel/luks <keyfile>
-        #?? sudo cryptsetup luksDump /dev/disk/by-partlabel/luks
         # https://wiki.nixos.org/wiki/Full_Disk_Encryption#Unattended_Boot_via_USB
         kernelModules = optionals cfg.key.enable [
           "nls_cp437"
@@ -92,6 +87,8 @@ in {
           "exfat" # exFAT
         ];
 
+        # FIXME: Does not work
+        # TODO: Wait for graphics driver to initialize before decryption prompt appears
         systemd.mounts = optionals cfg.key.enable [
           {
             what = cfg.key.device;
@@ -149,41 +146,44 @@ in {
           content = {
             type = "gpt";
 
-            partitions = {
-              esp = {
-                type = "EF00";
-                size = "1G";
+            partitions =
+              {
+                esp = {
+                  type = "EF00";
+                  size = "1G";
 
-                content = {
-                  type = "filesystem";
-                  format = "vfat";
-                  mountpoint = "/boot";
+                  content = {
+                    type = "filesystem";
+                    format = "vfat";
+                    mountpoint = "/boot";
+                  };
                 };
-              };
-
-              # https://github.com/nix-community/disko/blob/master/example/luks-btrfs-subvolumes.nix
-              luks = mkIf cfg.root.encrypted {
-                size = "100%";
-
-                content = {
+              }
+              // optionalAttrs (!cfg.root.encrypted) {
+                root = {
                   inherit content;
-                  type = "luks";
-                  name = "crypted";
-                  passwordFile = "/tmp/secret.key"; # Only during installation
-                  additionalKeyFiles = [cfg.key.path];
+                  size = "100%";
+                };
+              }
+              // optionalAttrs cfg.root.encrypted {
+                # https://github.com/nix-community/disko/blob/master/example/luks-btrfs-subvolumes.nix
+                luks = {
+                  size = "100%";
 
-                  settings = {
-                    allowDiscards = true; # https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)
-                    bypassWorkqueues = true; # https://wiki.archlinux.org/title/Dm-crypt/Specialties#Disable_workqueue_for_increased_solid_state_drive_(SSD)_performance
+                  content = {
+                    inherit content;
+                    type = "luks";
+                    name = "crypted";
+                    passwordFile = "/tmp/secret.key"; # Only during installation
+                    additionalKeyFiles = [cfg.key.path];
+
+                    settings = {
+                      allowDiscards = true; # https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)
+                      bypassWorkqueues = true; # https://wiki.archlinux.org/title/Dm-crypt/Specialties#Disable_workqueue_for_increased_solid_state_drive_(SSD)_performance
+                    };
                   };
                 };
               };
-
-              root = mkIf (!cfg.root.encrypted) {
-                inherit content;
-                size = "100%";
-              };
-            };
           };
         };
       };

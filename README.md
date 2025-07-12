@@ -1,49 +1,51 @@
-# WARNING
-
-## This configuration is not meant for public usage
-
 # Install
 
-## Remote (with NixOS Anywhere)
+## Remote (with [nixos-anywhere](https://github.com/nix-community/nixos-anywhere))
 
 1. Clone this repository
 
 ```sh
-git clone https://github.com/myned/nixos
+git clone https://git.bjork.tech/myned/nixos
 ```
 
-2. Enable [Flakes](https://wiki.nixos.org/wiki/Flakes)
+2. Boot from the [NixOS installer](https://nixos.org/download.html#nixos-iso)
 
-3. Boot from NixOS [minimal installer](https://nixos.org/download.html#nixos-iso)
-
-4. Create machine-specific modules in `machines/MACHINE/`
-
-a. Machine configuration and hostname in `default.nix`
+3. Add machine-specific configuration to `machines/<machine>/default.nix`
 
 ```nix
-{ custom.hostname = "MACHINE"; }
+{
+  ...
+  imports = [
+    ./hardware-configuration.nix
+  ];
+
+  custom = {
+    hostname = "<machine>";
+
+    settings = {
+      boot.systemd-boot.enable = true;
+      storage.root.device = "/dev/disk/by-*/<disk>"
+    }
+  };
+  ...
+}
 ```
 
-b. [Disko](https://github.com/nix-community/disko) layout in `disko.nix`
+4. Add generated hardware configuration to `machines/<machine>/hardware-configuration.nix`
 
 ```sh
-# Verify /dev identifier on machine
-lsblk
-
-# Verify EFI/BIOS firmware on machine
-[ -d /sys/firmware/efi/efivars ] && echo "UEFI" || echo "BIOS"
+# On machine
+nixos-generate-config --show-hardware-config
 ```
 
-c. Generated hardware configuration in `hardware-configuration.nix`
-
-```sh
-nixos-generate-config --show-hardware-config --no-filesystems --root /mnt
-```
-
-5. Choose profile and add machine-specific modules to `flake.in.nix`
+5. Choose or create a profile in `profiles/<profile>/default.nix` and add the machine to `flake.in.nix`
 
 ```nix
-MACHINE = BRANCH "ARCHITECTURE" [ ./profiles/PROFILE ./machines/MACHINE ];
+{
+  ...
+  <machine> = nixos "<architecture>" [ ./profiles/<profile> ./machines/<machine> ];
+  ...
+}
 ```
 
 6. Generate and lock `flake.nix` with [flakegen](https://github.com/jorsn/flakegen)
@@ -55,38 +57,48 @@ nix run .#genflake flake.nix
 nix flake lock
 ```
 
-7. Generate machine SSH key and rekey agenix secrets with added public key
+7. Generate machine SSH key and copy to clipboard
 
 ```sh
 mkdir -p tmp/etc/ssh/
-ssh-keygen -f tmp/etc/ssh/id_ed25519 -N '' -C root@MACHINE
-cd secrets
-agenix -r
+ssh-keygen -f tmp/etc/ssh/id_ed25519 -N '' -C root@<machine>
+cat tmp/etc/ssh/id_ed25519.pub | wl-copy -n
 ```
 
-8. Add user SSH key to root authorized_keys on machine
+8. Rekey agenix secrets after adding public key to `secrets/secrets.nix`
 
 ```sh
-# On host
-cat ~/.ssh/id_ed25519.pub | wl-copy
+cd secrets/
+agenix -r
+cd -
 ```
+
+9. If encrypting with LUKS, write the passphrase to `/tmp/secret.key` and mount the key device containing the keyfile if `custom.settings.storage.key.enable = true`
 
 ```sh
 # On machine
-sudo mkdir /root/.ssh/
-sudo nano /root/.ssh/authorized_keys
+echo -n '<passphrase>' > /tmp/secret.key
+sudo mkdir -p /key
+sudo mount /dev/<device> /key
 ```
 
-9. Execute [NixOS Anywhere](https://github.com/nix-community/nixos-anywhere)
+10. Create a temporary password for the root user (or use SSH keys)
 
 ```sh
-nixos-anywhere --extra-files tmp --flake .#MACHINE root@IP
+# On machine
+sudo passwd
 ```
 
-10. Shutdown, detach ISO, and reboot
-
-11. Remove temporary files
+11. Execute nixos-anywhere to install
 
 ```sh
-rm -r tmp
+nixos-anywhere --extra-files tmp/ --flake .#<machine> root@<ip>
+```
+
+12. Reboot machine
+
+13. Remove temporary files
+
+```sh
+rm -r tmp/
 ```

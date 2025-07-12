@@ -102,6 +102,24 @@ generate() {
   fi
 }
 
+# @cmd Install NixOS with nixos-anywhere
+# @alias i,in,ins,inst,insta,instal
+# @arg machine Hostname of the machine to install to
+install() {
+  echo Generating flake.nix...
+  git add .
+  nix run .#genflake flake.nix
+  nix flake lock
+
+  echo Generating ssh key...
+  mkdir -p tmp/etc/ssh/
+  ssh-keygen -f tmp/etc/ssh/id_ed25519 -N '' -C root@"${argc_machine:-}"
+
+  echo Copy the below public key to secrets/secrets.nix
+  echo tmp/etc/ssh/id_ed25519.pub
+  cat tmp/etc/ssh/id_ed25519.pub
+}
+
 # @cmd List NixOS generations
 # @alias l,li,lis
 # @arg extra~ Pass extra arguments to nixos-rebuild
