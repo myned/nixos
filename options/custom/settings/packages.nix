@@ -25,6 +25,7 @@ in {
         ++ optionals config.custom.default [
           btrfs-list # btrfs subvolume lister
           disko # Declarative disk management
+          ethtool # Network device configuration
           fd # File finder
           fzf # Fuzzy search
           glances # System monitor
