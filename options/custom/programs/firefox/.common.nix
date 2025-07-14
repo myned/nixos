@@ -238,6 +238,7 @@ with lib; {
         "privacy.trackingprotection.enabled" = true;
         "remote.prefs.recommended" = false;
         "security.OCSP.require" = false;
+        "security.tls.version.enable-deprecated" = true; # IPMI
         "services.passwordSavingEnabled" = false;
         "sidebar.expandOnHoverMessage.dismissed" = true;
         "sidebar.main.tools" = "syncedtabs"; # aichat,syncedtabs,history
