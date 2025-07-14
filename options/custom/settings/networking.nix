@@ -1,10 +1,15 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
   cfg = config.custom.settings.networking;
+
+  cut = getExe' pkgs.coreutils "cut";
+  ethtool = getExe pkgs.ethtool;
+  ip = getExe' pkgs.iproute2 "ip";
 in {
   options.custom.settings.networking = {
     enable = mkEnableOption "networking";
@@ -94,7 +99,7 @@ in {
 
       # Prefer tailscale address over 127.0.0.2 for machine hostname
       hosts = mkIf config.custom.services.tailscale.enable {
-        ${config.custom.services.tailscale.ip} = [config.custom.hostname];
+        ${config.custom.services.tailscale.ipv4} = [config.custom.hostname];
       };
 
       networkmanager = mkIf cfg.networkmanager {
@@ -109,38 +114,66 @@ in {
     # https://wiki.nixos.org/wiki/Systemd/networkd
     #?? networkctl
     #?? man systemd.network
-    systemd.network = mkIf (!cfg.networkmanager) {
-      enable = true;
+    systemd = mkIf (!cfg.networkmanager) {
+      network = {
+        enable = true;
 
-      networks."10-static" = mkIf cfg.static {
-        address =
-          optionals (!isNull cfg.ipv4.address) [
-            cfg.ipv4.address
-          ]
-          ++ optionals (!isNull cfg.ipv6.address) [
-            cfg.ipv6.address
-          ];
+        # https://www.freedesktop.org/software/systemd/man/latest/systemd.link.html
+        links."10-links" = {
+          linkConfig = {
+            # BUG: Some features are not exposed as systemd.link options
+            # https://github.com/systemd/systemd/blob/391ad5d8aa533010bed02079c95eab34de0408c5/src/shared/ethtool-util.c#L150
+            # https://github.com/systemd/systemd/blob/391ad5d8aa533010bed02079c95eab34de0408c5/src/shared/ethtool-util.c#L148
+            #// GenericReceiveOffload = true;
+          };
 
-        gateway =
-          optionals (!isNull cfg.ipv4.gateway) [
-            cfg.ipv4.gateway
-          ]
-          ++ optionals (!isNull cfg.ipv6.gateway) [
-            cfg.ipv6.gateway
-          ];
-
-        linkConfig = {
-          RequiredForOnline = "routable";
+          matchConfig = {
+            OriginalName = cfg.interface;
+          };
         };
 
-        matchConfig = {
-          Name = cfg.interface;
-        };
+        networks."10-static" = mkIf cfg.static {
+          address =
+            optionals (!isNull cfg.ipv4.address) [
+              cfg.ipv4.address
+            ]
+            ++ optionals (!isNull cfg.ipv6.address) [
+              cfg.ipv6.address
+            ];
 
-        networkConfig = {
-          DHCP = mkIf (isNull cfg.ipv4.address) "ipv4";
-          IPv6AcceptRA = isNull cfg.ipv6.address;
+          gateway =
+            optionals (!isNull cfg.ipv4.gateway) [
+              cfg.ipv4.gateway
+            ]
+            ++ optionals (!isNull cfg.ipv6.gateway) [
+              cfg.ipv6.gateway
+            ];
+
+          linkConfig = {
+            RequiredForOnline = "routable";
+          };
+
+          matchConfig = {
+            Name = cfg.interface;
+          };
+
+          networkConfig = {
+            DHCP = mkIf (isNull cfg.ipv4.address) "ipv4";
+            IPv6AcceptRA = isNull cfg.ipv6.address;
+          };
         };
+      };
+
+      # HACK: Manually set interface features via ethtool
+      # https://tailscale.com/kb/1320/performance-best-practices?q=udp#linux-optimizations-for-subnet-routers-and-exit-nodes
+      services.set-interface-features = {
+        description = "Set interface features via ethtool";
+        wants = ["network-online.target"];
+
+        script = ''
+          interface="$(${ip} -o route get 9.9.9.9 | ${cut} -d ' ' -f 5)"
+          ${ethtool} -K "$interface" rx-udp-gro-forwarding on rx-gro-list off
+        '';
       };
     };
 
