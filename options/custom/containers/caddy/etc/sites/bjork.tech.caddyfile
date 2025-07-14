@@ -13,19 +13,19 @@ bjork.tech {
 	import global
 	import cloudflare
 	import www bjork.tech
-	import proxy cloud.bjork.tech localhost:11000 # Nextcloud
-	import proxy feed.bjork.tech localhost:8808 # Miniflux
-	import proxy foundry.bjork.tech localhost:30000 # Foundry Virtual Tabletop
-	import proxy gist.bjork.tech {system.hostname}-opengist:6157 # Opengist
-	import proxy git.bjork.tech {system.hostname}-forgejo:3000 # Forgejo
-	#// import proxy net.bjork.tech localhost:8585 # Netbox
+	import proxy cloud.bjork.tech myosh:11000 # Nextcloud
+	import proxy feed.bjork.tech myosh:8808 # Miniflux
+	import proxy foundry.bjork.tech myosh:30000 # Foundry Virtual Tabletop
+	import proxy gist.bjork.tech myosh-opengist:6157 # Opengist
+	import proxy git.bjork.tech myosh-forgejo:3000 # Forgejo
+	#// import proxy net.bjork.tech myosh:8585 # Netbox
 	import proxy status.bjork.tech {system.hostname}-kener:3000 # Kener
-	import proxy vault.bjork.tech localhost:8088 # Vaultwarden
+	import proxy vault.bjork.tech myosh:8088 # Vaultwarden
 
 	# Synapse
 	import handle matrix.bjork.tech {
-		reverse_proxy /_matrix/* localhost:8008
-		reverse_proxy /_synapse/client/* localhost:8008
+		reverse_proxy /_matrix/* myosh:8008
+		reverse_proxy /_synapse/client/* myosh:8008
 	}
 }
 
@@ -35,19 +35,19 @@ bjork.tech {
 	import cors
 	import vpn
 	import proxy beszel.admin.bjork.tech {system.hostname}-beszel:8090 # Beszel
-	import proxy-insecure cloud.admin.bjork.tech localhost:8080 # Nextcloud AIO
-	#// import proxy dash.admin.bjork.tech localhost:3001 # dash.
+	import proxy-insecure cloud.admin.bjork.tech myosh:8080 # Nextcloud AIO
+	#// import proxy dash.admin.bjork.tech myosh:3001 # dash.
 	#// import proxy grafana.admin.bjork.tech {system.hostname}-grafana:3000 # Grafana
-	#// import proxy jackett.admin.bjork.tech {system.hostname}-jellyfin:9117 # Jackett
-	import proxy lidarr.admin.bjork.tech {system.hostname}-jellyfin:8686 # Lidarr
-	import proxy matrix.admin.bjork.tech localhost:8000 # Synapse Admin
+	#// import proxy jackett.admin.bjork.tech myosh-jellyfin:9117 # Jackett
+	import proxy lidarr.admin.bjork.tech myosh-jellyfin:8686 # Lidarr
+	import proxy matrix.admin.bjork.tech myosh:8000 # Synapse Admin
 	import proxy-insecure portainer.admin.bjork.tech {system.hostname}-portainer:9443 # Portainer
 	#// import proxy prometheus.admin.bjork.tech {system.hostname}-grafana:9090 # Prometheus
-	import proxy prowlarr.admin.bjork.tech {system.hostname}-jellyfin:9696 # Prowlarr
-	import proxy qbittorrent.admin.bjork.tech {system.hostname}-jellyfin:8881 # qBittorrent
-	import proxy radarr.admin.bjork.tech {system.hostname}-jellyfin:7878 # Radarr
-	import proxy slskd.admin.bjork.tech {system.hostname}-jellyfin:5030 # slskd
-	import proxy sonarr.admin.bjork.tech {system.hostname}-jellyfin:8989 # Sonarr
+	import proxy prowlarr.admin.bjork.tech myosh-jellyfin:9696 # Prowlarr
+	import proxy qbittorrent.admin.bjork.tech myosh-jellyfin:8881 # qBittorrent
+	import proxy radarr.admin.bjork.tech myosh-jellyfin:7878 # Radarr
+	import proxy slskd.admin.bjork.tech myosh-jellyfin:5030 # slskd
+	import proxy sonarr.admin.bjork.tech myosh-jellyfin:8989 # Sonarr
 
 	# Netdata
 	# import handle netdata.admin.bjork.tech {
@@ -61,20 +61,20 @@ bjork.tech {
 	import cloudflare
 	import cors
 	import vpn
-	import proxy ai.vpn.bjork.tech {system.hostname}-openwebui:8080 # Open WebUI
-	import proxy budget.vpn.bjork.tech localhost:5006 # Actual Budget
-	import proxy discover.vpn.bjork.tech {system.hostname}-jellyfin:5055 # Jellyseerr
+	import proxy ai.vpn.bjork.tech myosh-openwebui:8080 # Open WebUI
+	import proxy budget.vpn.bjork.tech myosh:5006 # Actual Budget
+	import proxy discover.vpn.bjork.tech myosh-jellyfin:5055 # Jellyseerr
 	import proxy home.vpn.bjork.tech mypi3:8123 # Home Assistant
-	import proxy matrix.vpn.bjork.tech localhost:8008 # Synapse
-	import proxy media.vpn.bjork.tech {system.hostname}-jellyfin:8096 # Jellyfin
-	import proxy media-next.vpn.bjork.tech {system.hostname}-jellyfin:8097 # Jellyfin Vue
+	import proxy matrix.vpn.bjork.tech myosh:8008 # Synapse
+	import proxy media.vpn.bjork.tech myosh-jellyfin:8096 # Jellyfin
+	import proxy media-next.vpn.bjork.tech myosh-jellyfin:8097 # Jellyfin Vue
 	import proxy notify.vpn.bjork.tech localhost:2586 # ntfy
-	import proxy reddit.vpn.bjork.tech localhost:8888 # Redlib
-	#// import proxy search.vpn.bjork.tech localhost:8888 # SearXNG
-	import proxy stream.vpn.bjork.tech {system.hostname}.{$TAILNET}:3333 # OvenMediaEngine
-	#// import proxy stream.vpn.bjork.tech localhost:8800 # Owncast
-	import proxy tv.vpn.bjork.tech localhost:8470 # Stremio Client
-	import proxy tv-api.vpn.bjork.tech localhost:11470 # Stremio Server
+	import proxy reddit.vpn.bjork.tech myosh:8888 # Redlib
+	#// import proxy search.vpn.bjork.tech myosh:8888 # SearXNG
+	import proxy stream.vpn.bjork.tech myosh.{$TAILNET}:3333 # OvenMediaEngine
+	#// import proxy stream.vpn.bjork.tech myosh:8800 # Owncast
+	import proxy tv.vpn.bjork.tech myosh:8470 # Stremio Client
+	import proxy tv-api.vpn.bjork.tech myosh:11470 # Stremio Server
 
 	# FIXME: Move wildcard to another block
 	# AdGuard Home
@@ -90,7 +90,7 @@ bjork.tech {
 
 	# Oryx
 	# import handle stream.vpn.bjork.tech {
-	# 	reverse_proxy localhost:2022
+	# 	reverse_proxy myosh:2022
 	# 	redir /flv {$ORYX_FLV}
 	# 	redir /hls {$ORYX_HLS}
 	# 	redir /webrtc {$ORYX_WEBRTC}
@@ -99,8 +99,8 @@ bjork.tech {
 	# SRS
 	# https://ossrs.io/lts/en-us/docs/v6/doc/http-server#caddy-proxy
 	# import handle stream.vpn.bjork.tech {
-	# 	reverse_proxy localhost:8800
-	# 	reverse_proxy /api/* localhost:1985
-	# 	reverse_proxy /rtc/* localhost:1985
+	# 	reverse_proxy myosh:8800
+	# 	reverse_proxy /api/* myosh:1985
+	# 	reverse_proxy /rtc/* myosh:1985
 	# }
 }

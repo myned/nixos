@@ -1,7 +1,7 @@
 bjork.gay {
 	import global
 	import cloudflare
-	import proxy-insecure bjork.gay localhost:3000 # Mastodon
+	import proxy-insecure bjork.gay myosh:3000 # Mastodon
 }
 
 *.bjork.gay {

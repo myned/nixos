@@ -33,7 +33,7 @@ in {
       };
 
       targets = mkOption {
-        default = ["myne:9100" "mypi3:9100"];
+        default = ["myore:9100" "mypi3:9100"];
         type = with types; listOf str;
       };
     };

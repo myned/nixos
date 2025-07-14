@@ -24,7 +24,7 @@ in {
 
     devices = mkOption {
       default = [
-        "myne"
+        "myosh" # Introducer
         "mynix"
         "myork"
       ];
@@ -154,13 +154,13 @@ in {
         # Devices can be declared globally without issue
         # Syncthing seems to ignore entries that match the machine's id
         devices = {
-          myne = {
+          myosh = {
             introducer = true;
-            id = "3YFGJ2J-X2653BB-WHKO54B-7FSL4LH-4CP4AUX-ZSUNIXW-NOBWBAN-324UOQR";
+            id = "H6UYGJ6-ST2BKYH-5A45PSN-XEKYCSW-XXTE6CK-7PHKSDF-7AK6OZC-KRWNFAO";
           };
 
           mynix.id = "UFLECA5-QQUKD5J-FQB55TE-YKKHD37-VT5ASXU-4EGUZNV-KW7Z434-FBI7CQ2";
-          myork.id = "UTVTIWY-6YCR2XG-UPCUFDX-O6AVZQP-XJM7ZA6-CPAL6LP-YS4LFUA-XMTO6QG";
+          myork.id = "AZZZVMU-G2WA5T7-CAAAULE-2N6SVJL-RWN6RIE-THJRG6Y-QRDZ2LP-56K7BQ2";
           myxel.id = "6ER5UMP-KVYYKVY-AL5NAC6-W4KRXTB-UYRQG4R-AFWK66C-RWOULMW-EATTVQV";
           myeck.id = "NLGUPGG-XFGRDSE-43MQEXO-TLEW2XD-DMOL6RM-RPQ4IFQ-GENDXPF-PM7NQAO";
           zendows.id = "4JS6YSF-OBZFPYW-B3OUF4G-R6DVOZ4-KFAVGFY-NT4J223-E44HK3D-GPYAFQP";
