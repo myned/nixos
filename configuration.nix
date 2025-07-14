@@ -57,6 +57,7 @@ in {
           unstable = nixpkgs "unstable";
           master = nixpkgs "master";
           myned = nixpkgs "myned";
+          gitbutler = nixpkgs "gitbutler";
         in {
           # Overlay nixpkgs branches
           #?? nixpkgs.BRANCH.PACKAGE
@@ -68,6 +69,10 @@ in {
 
           # TODO: Remove when in stable
           btrfs-list = unstable.btrfs-list;
+
+          # TODO: Remove when merged into unstable
+          # https://github.com/NixOS/nixpkgs/pull/424156
+          gitbutler = gitbutler.gitbutler;
 
           # TODO: Remove when fixed
           # https://github.com/NixOS/nixpkgs/issues/389638

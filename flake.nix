@@ -94,6 +94,7 @@
       url = "github:nix-community/nixGL";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nixpkgs-gitbutler.url = "github:25huizengek1/nixpkgs/gitbutler";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs-myned.url = "github:myned/nixpkgs/master";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
