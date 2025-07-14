@@ -15,8 +15,8 @@ in {
         file = "${inputs.self}/secrets/${filename}";
       };
     in {
-      "${config.custom.profile}/mastodon/.env" = secret "${config.custom.profile}/mastodon/.env";
-      "${config.custom.profile}/mastodon/db.env" = secret "${config.custom.profile}/mastodon/db.env";
+      "${config.custom.hostname}/mastodon/.env" = secret "${config.custom.hostname}/mastodon/.env";
+      "${config.custom.hostname}/mastodon/db.env" = secret "${config.custom.hostname}/mastodon/db.env";
     };
 
     #?? arion-mastodon pull
@@ -28,7 +28,7 @@ in {
       mastodon.service = {
         container_name = "mastodon";
         depends_on = ["cache" "db"];
-        env_file = [config.age.secrets."${config.custom.profile}/mastodon/.env".path];
+        env_file = [config.age.secrets."${config.custom.hostname}/mastodon/.env".path];
         image = "lscr.io/linuxserver/mastodon:4.3.6";
         ports = ["3000:443/tcp"];
         restart = "unless-stopped";
@@ -44,7 +44,7 @@ in {
 
       db.service = {
         container_name = "mastodon-db";
-        env_file = [config.age.secrets."${config.custom.profile}/mastodon/db.env".path];
+        env_file = [config.age.secrets."${config.custom.hostname}/mastodon/db.env".path];
         image = "postgres:15";
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/mastodon/db:/var/lib/postgresql/data"];

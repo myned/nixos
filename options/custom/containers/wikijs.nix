@@ -17,8 +17,8 @@ in {
         file = "${inputs.self}/secrets/${filename}";
       };
     in {
-      "${config.custom.profile}/wikijs/.env" = secret "${config.custom.profile}/wikijs/.env";
-      "${config.custom.profile}/wikijs/db.env" = secret "${config.custom.profile}/wikijs/db.env";
+      "${config.custom.hostname}/wikijs/.env" = secret "${config.custom.hostname}/wikijs/.env";
+      "${config.custom.hostname}/wikijs/db.env" = secret "${config.custom.hostname}/wikijs/db.env";
     };
 
     #?? arion-wikijs pull
@@ -31,7 +31,7 @@ in {
       wikijs.service = {
         container_name = "wikijs";
         depends_on = ["db"];
-        env_file = [config.age.secrets."${config.custom.profile}/wikijs/.env".path];
+        env_file = [config.age.secrets."${config.custom.hostname}/wikijs/.env".path];
         image = "ghcr.io/requarks/wiki:2";
         ports = ["3303:3000/tcp"];
         restart = "unless-stopped";
@@ -39,7 +39,7 @@ in {
 
       db.service = {
         container_name = "wikijs-db";
-        env_file = [config.age.secrets."${config.custom.profile}/wikijs/db.env".path];
+        env_file = [config.age.secrets."${config.custom.hostname}/wikijs/db.env".path];
         image = "postgres:15";
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/wikijs/db:/var/lib/postgresql/data"];

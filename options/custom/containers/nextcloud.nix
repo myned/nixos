@@ -15,8 +15,8 @@ in {
         file = "${inputs.self}/secrets/${filename}";
       };
     in {
-      "${config.custom.profile}/nextcloud/.env" = secret "${config.custom.profile}/nextcloud/.env";
-      "${config.custom.profile}/nextcloud/db.env" = secret "${config.custom.profile}/nextcloud/db.env";
+      "${config.custom.hostname}/nextcloud/.env" = secret "${config.custom.hostname}/nextcloud/.env";
+      "${config.custom.hostname}/nextcloud/db.env" = secret "${config.custom.hostname}/nextcloud/db.env";
     };
 
     #?? arion-nextcloud pull
@@ -27,7 +27,7 @@ in {
       nextcloud.service = {
         container_name = "nextcloud";
         depends_on = ["db" "cache"];
-        env_file = [config.age.secrets."${config.custom.profile}/nextcloud/.env".path];
+        env_file = [config.age.secrets."${config.custom.hostname}/nextcloud/.env".path];
         image = "nextcloud:29-apache";
         ports = ["8181:80/tcp"];
         restart = "unless-stopped";
@@ -56,7 +56,7 @@ in {
 
       db.service = {
         container_name = "nextcloud-db";
-        env_file = [config.age.secrets."${config.custom.profile}/nextcloud/db.env".path];
+        env_file = [config.age.secrets."${config.custom.hostname}/nextcloud/db.env".path];
         image = "postgres:15";
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/nextcloud/db:/var/lib/postgresql/data"];

@@ -15,7 +15,7 @@ in {
         file = "${inputs.self}/secrets/${filename}";
       };
     in {
-      "${config.custom.profile}/searxng/.env" = secret "${config.custom.profile}/searxng/.env";
+      "${config.custom.hostname}/searxng/.env" = secret "${config.custom.hostname}/searxng/.env";
     };
 
     #?? arion-searxng pull
@@ -27,7 +27,7 @@ in {
       searxng.service = {
         container_name = "searxng";
         depends_on = ["cache"];
-        env_file = [config.age.secrets."${config.custom.profile}/searxng/.env".path];
+        env_file = [config.age.secrets."${config.custom.hostname}/searxng/.env".path];
         image = "searxng/searxng:latest"; # https://hub.docker.com/r/searxng/searxng/tags
         ports = ["8888:8080/tcp"];
         restart = "unless-stopped";

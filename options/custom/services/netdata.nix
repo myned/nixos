@@ -49,7 +49,7 @@ in {
           mkIf (
             role != ""
           )
-          config.age.secrets."${config.custom.profile}/netdata/${role}.conf".path;
+          config.age.secrets."${config.custom.hostname}/netdata/${role}.conf".path;
       };
 
       age.secrets = let
@@ -60,7 +60,7 @@ in {
         };
       in
         mkIf (role != "") {
-          "${config.custom.profile}/netdata/${role}.conf" = secret "${config.custom.profile}/netdata/${role}.conf";
+          "${config.custom.hostname}/netdata/${role}.conf" = secret "${config.custom.hostname}/netdata/${role}.conf";
         };
     };
 }

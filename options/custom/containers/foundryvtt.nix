@@ -15,7 +15,7 @@ in {
         file = "${inputs.self}/secrets/${filename}";
       };
     in {
-      "${config.custom.profile}/foundryvtt/.env" = secret "${config.custom.profile}/foundryvtt/.env";
+      "${config.custom.hostname}/foundryvtt/.env" = secret "${config.custom.hostname}/foundryvtt/.env";
     };
 
     #?? arion-foundryvtt pull
@@ -24,7 +24,7 @@ in {
     virtualisation.arion.projects.foundryvtt.settings.services = {
       foundryvtt.service = {
         container_name = "foundryvtt";
-        env_file = [config.age.secrets."${config.custom.profile}/foundryvtt/.env".path];
+        env_file = [config.age.secrets."${config.custom.hostname}/foundryvtt/.env".path];
         image = "felddy/foundryvtt:12";
         ports = ["30000:30000/tcp"];
         restart = "unless-stopped";

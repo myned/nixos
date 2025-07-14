@@ -30,7 +30,7 @@ in {
         group = config.users.users.${config.custom.username}.group;
       };
     in {
-      "desktop/vm/myndows.pass" = secret "desktop/vm/myndows.pass";
+      "${config.custom.hostname}/vm/myndows.pass" = secret "${config.custom.hostname}/vm/myndows.pass";
     };
 
     virtualisation = {

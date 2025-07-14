@@ -27,8 +27,8 @@ in {
         file = "${inputs.self}/secrets/${filename}";
       };
     in {
-      "${config.custom.profile}/forgejo/.env" = secret "${config.custom.profile}/forgejo/.env";
-      "${config.custom.profile}/forgejo/db.env" = secret "${config.custom.profile}/forgejo/db.env";
+      "${config.custom.hostname}/forgejo/.env" = secret "${config.custom.hostname}/forgejo/.env";
+      "${config.custom.hostname}/forgejo/db.env" = secret "${config.custom.hostname}/forgejo/db.env";
     };
 
     #?? arion-forgejo pull
@@ -43,7 +43,7 @@ in {
         forgejo.service = {
           container_name = "forgejo";
           depends_on = ["db" "vpn"];
-          env_file = [config.age.secrets."${config.custom.profile}/forgejo/.env".path];
+          env_file = [config.age.secrets."${config.custom.hostname}/forgejo/.env".path];
           image = "code.forgejo.org/forgejo/forgejo:11-rootless"; # https://code.forgejo.org/forgejo/-/packages/container/forgejo/11-rootless
           network_mode = "service:vpn"; # 22/tcp 3000/tcp
           restart = "unless-stopped";
@@ -52,7 +52,7 @@ in {
 
         db.service = {
           container_name = "forgejo-db";
-          env_file = [config.age.secrets."${config.custom.profile}/forgejo/db.env".path];
+          env_file = [config.age.secrets."${config.custom.hostname}/forgejo/db.env".path];
           image = "postgres:15";
           network_mode = "service:vpn";
           restart = "unless-stopped";

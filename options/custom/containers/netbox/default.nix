@@ -15,9 +15,9 @@ in {
         file = "${inputs.self}/secrets/${filename}";
       };
     in {
-      "${config.custom.profile}/netbox/.env" = secret "${config.custom.profile}/netbox/.env";
-      "${config.custom.profile}/netbox/cache.env" = secret "${config.custom.profile}/netbox/cache.env";
-      "${config.custom.profile}/netbox/db.env" = secret "${config.custom.profile}/netbox/db.env";
+      "${config.custom.hostname}/netbox/.env" = secret "${config.custom.hostname}/netbox/.env";
+      "${config.custom.hostname}/netbox/cache.env" = secret "${config.custom.hostname}/netbox/cache.env";
+      "${config.custom.hostname}/netbox/db.env" = secret "${config.custom.hostname}/netbox/db.env";
     };
 
     #?? arion-netbox pull
@@ -29,7 +29,7 @@ in {
       netbox = {
         container_name = "netbox";
         depends_on = ["cache" "db"];
-        env_file = [config.age.secrets."${config.custom.profile}/netbox/.env".path];
+        env_file = [config.age.secrets."${config.custom.hostname}/netbox/.env".path];
         image = "localhost/netbox"; # Built image
         restart = "unless-stopped";
         user = "unit:root";
@@ -66,14 +66,14 @@ in {
       cache.service = {
         container_name = "netbox-cache";
         command = ["sh" "-c" "valkey-server --requirepass $$REDIS_PASSWORD"];
-        env_file = [config.age.secrets."${config.custom.profile}/netbox/cache.env".path];
+        env_file = [config.age.secrets."${config.custom.hostname}/netbox/cache.env".path];
         image = "valkey/valkey:8";
         restart = "unless-stopped";
       };
 
       db.service = {
         container_name = "netbox-db";
-        env_file = [config.age.secrets."${config.custom.profile}/netbox/db.env".path];
+        env_file = [config.age.secrets."${config.custom.hostname}/netbox/db.env".path];
         image = "postgres:16";
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/netbox/db:/var/lib/postgresql/data"];

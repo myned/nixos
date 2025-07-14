@@ -17,8 +17,8 @@ in {
         file = "${inputs.self}/secrets/${filename}";
       };
     in {
-      "${config.custom.profile}/miniflux/.env" = secret "${config.custom.profile}/miniflux/.env";
-      "${config.custom.profile}/miniflux/db.env" = secret "${config.custom.profile}/miniflux/db.env";
+      "${config.custom.hostname}/miniflux/.env" = secret "${config.custom.hostname}/miniflux/.env";
+      "${config.custom.hostname}/miniflux/db.env" = secret "${config.custom.hostname}/miniflux/db.env";
     };
 
     #?? arion-miniflux pull
@@ -30,7 +30,7 @@ in {
       miniflux.service = {
         container_name = "miniflux";
         depends_on = ["db"];
-        env_file = [config.age.secrets."${config.custom.profile}/miniflux/.env".path];
+        env_file = [config.age.secrets."${config.custom.hostname}/miniflux/.env".path];
         image = "miniflux/miniflux:latest";
         ports = ["8808:8080/tcp"];
         restart = "unless-stopped";
@@ -39,7 +39,7 @@ in {
 
       db.service = {
         container_name = "miniflux-db";
-        env_file = [config.age.secrets."${config.custom.profile}/miniflux/db.env".path];
+        env_file = [config.age.secrets."${config.custom.hostname}/miniflux/db.env".path];
         image = "postgres:17";
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/miniflux/db:/var/lib/postgresql/data"];

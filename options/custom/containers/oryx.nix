@@ -17,7 +17,7 @@ in {
         file = "${inputs.self}/secrets/${filename}";
       };
     in {
-      "${config.custom.profile}/oryx/.env" = secret "${config.custom.profile}/oryx/.env";
+      "${config.custom.hostname}/oryx/.env" = secret "${config.custom.hostname}/oryx/.env";
     };
 
     #?? arion-oryx pull
@@ -26,7 +26,7 @@ in {
     virtualisation.arion.projects.oryx.settings.services = {
       oryx.service = {
         container_name = "oryx";
-        env_file = [config.age.secrets."${config.custom.profile}/oryx/.env".path];
+        env_file = [config.age.secrets."${config.custom.hostname}/oryx/.env".path];
         image = "ossrs/oryx:5"; # https://hub.docker.com/r/ossrs/oryx/tags
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/oryx/data:/data"];

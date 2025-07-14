@@ -15,7 +15,7 @@ in {
         file = "${inputs.self}/secrets/${filename}";
       };
     in {
-      "${config.custom.profile}/conduwuit/conduwuit.toml" = secret "${config.custom.profile}/conduwuit/conduwuit.toml";
+      "${config.custom.hostname}/conduwuit/conduwuit.toml" = secret "${config.custom.hostname}/conduwuit/conduwuit.toml";
     };
 
     #?? arion-conduwuit pull
@@ -35,7 +35,7 @@ in {
 
         volumes = [
           "${config.custom.containers.directory}/conduwuit/db:/var/lib/conduwuit"
-          "${config.age.secrets."${config.custom.profile}/conduwuit/conduwuit.toml".path}:/etc/conduwuit/conduwuit.toml"
+          "${config.age.secrets."${config.custom.hostname}/conduwuit/conduwuit.toml".path}:/etc/conduwuit/conduwuit.toml"
         ];
       };
     };

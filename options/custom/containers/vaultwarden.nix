@@ -18,7 +18,7 @@ in {
         file = "${inputs.self}/secrets/${filename}";
       };
     in {
-      "${config.custom.profile}/vaultwarden/.env" = secret "${config.custom.profile}/vaultwarden/.env";
+      "${config.custom.hostname}/vaultwarden/.env" = secret "${config.custom.hostname}/vaultwarden/.env";
     };
 
     #?? arion-vaultwarden pull
@@ -29,7 +29,7 @@ in {
       # https://github.com/dani-garcia/vaultwarden/wiki
       vaultwarden.service = {
         container_name = "vaultwarden";
-        env_file = [config.age.secrets."${config.custom.profile}/vaultwarden/.env".path];
+        env_file = [config.age.secrets."${config.custom.hostname}/vaultwarden/.env".path];
         image = "vaultwarden/server:1.33.2"; # https://hub.docker.com/r/vaultwarden/server/tags
         ports = ["8088:80/tcp"];
         restart = "unless-stopped";

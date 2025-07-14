@@ -16,7 +16,7 @@ in {
         file = "${inputs.self}/secrets/${filename}";
       };
     in {
-      "${config.custom.profile}/headscale/.env" = secret "${config.custom.profile}/headscale/.env";
+      "${config.custom.hostname}/headscale/.env" = secret "${config.custom.hostname}/headscale/.env";
     };
 
     #?? arion-headscale pull
@@ -30,7 +30,7 @@ in {
       headscale.service = {
         command = "serve";
         container_name = "headscale";
-        env_file = [config.age.secrets."${config.custom.profile}/headscale/.env".path];
+        env_file = [config.age.secrets."${config.custom.hostname}/headscale/.env".path];
         image = "headscale/headscale:v0"; # https://hub.docker.com/r/headscale/headscale/tags
         restart = "unless-stopped";
 

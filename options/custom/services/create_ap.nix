@@ -26,8 +26,8 @@ in {
     age.secrets = let
       secret = filename: {file = "${inputs.self}/secrets/${filename}";};
     in {
-      "${config.custom.profile}/create_ap/passphrase" = secret "${config.custom.profile}/create_ap/passphrase";
-      "${config.custom.profile}/create_ap/ssid" = secret "${config.custom.profile}/create_ap/ssid";
+      "${config.custom.hostname}/create_ap/passphrase" = secret "${config.custom.hostname}/create_ap/passphrase";
+      "${config.custom.hostname}/create_ap/ssid" = secret "${config.custom.hostname}/create_ap/ssid";
     };
 
     # https://github.com/lakinduakash/linux-wifi-hotspot
@@ -64,8 +64,8 @@ in {
             "--config ${configFile}"
             "${cfg.wifi}"
             "${cfg.internet}"
-            "$(${cat} ${config.age.secrets."${config.custom.profile}/create_ap/ssid".path})"
-            "$(${cat} ${config.age.secrets."${config.custom.profile}/create_ap/passphrase".path})'"
+            "$(${cat} ${config.age.secrets."${config.custom.hostname}/create_ap/ssid".path})"
+            "$(${cat} ${config.age.secrets."${config.custom.hostname}/create_ap/passphrase".path})'"
           ]
         );
     };

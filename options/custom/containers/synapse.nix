@@ -17,10 +17,10 @@ in {
         file = "${inputs.self}/secrets/${filename}";
       };
     in {
-      "${config.custom.profile}/synapse/db.env" = secret "${config.custom.profile}/synapse/db.env";
+      "${config.custom.hostname}/synapse/db.env" = secret "${config.custom.hostname}/synapse/db.env";
 
-      "${config.custom.profile}/synapse/homeserver.yaml" =
-        secret "${config.custom.profile}/synapse/homeserver.yaml"
+      "${config.custom.hostname}/synapse/homeserver.yaml" =
+        secret "${config.custom.hostname}/synapse/homeserver.yaml"
         // {
           owner = "991"; # synapse
           group = "991"; # synapse
@@ -45,7 +45,7 @@ in {
 
         volumes = [
           "${config.custom.containers.directory}/synapse/data:/data"
-          "${config.age.secrets."${config.custom.profile}/synapse/homeserver.yaml".path}:/data/homeserver.yaml"
+          "${config.age.secrets."${config.custom.hostname}/synapse/homeserver.yaml".path}:/data/homeserver.yaml"
         ];
 
         environment = {
@@ -56,7 +56,7 @@ in {
 
       db.service = {
         container_name = "synapse-db";
-        env_file = [config.age.secrets."${config.custom.profile}/synapse/db.env".path];
+        env_file = [config.age.secrets."${config.custom.hostname}/synapse/db.env".path];
         image = "postgres:15";
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/synapse/db:/var/lib/postgresql/data"];

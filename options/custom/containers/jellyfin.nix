@@ -39,8 +39,8 @@ in {
         group = cfg.gid;
       };
     in {
-      "server/jellyfin/soularr.ini" = secret "server/jellyfin/soularr.ini";
-      "server/jellyfin/vpn.env" = secret "server/jellyfin/vpn.env";
+      "${config.custom.hostname}/jellyfin/soularr.ini" = secret "${config.custom.hostname}/jellyfin/soularr.ini";
+      "${config.custom.hostname}/jellyfin/vpn.env" = secret "${config.custom.hostname}/jellyfin/vpn.env";
     };
 
     #?? arion-jellyfin pull

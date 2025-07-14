@@ -17,8 +17,8 @@ in {
         file = "${inputs.self}/secrets/${filename}";
       };
     in {
-      "${config.custom.profile}/kener/.env" = secret "${config.custom.profile}/kener/.env";
-      "${config.custom.profile}/kener/db.env" = secret "${config.custom.profile}/kener/db.env";
+      "${config.custom.hostname}/kener/.env" = secret "${config.custom.hostname}/kener/.env";
+      "${config.custom.hostname}/kener/db.env" = secret "${config.custom.hostname}/kener/db.env";
     };
 
     #?? arion-kener pull
@@ -30,7 +30,7 @@ in {
       kener.service = {
         container_name = "kener";
         depends_on = ["db" "vpn"];
-        env_file = [config.age.secrets."${config.custom.profile}/kener/.env".path];
+        env_file = [config.age.secrets."${config.custom.hostname}/kener/.env".path];
         image = "ghcr.io/rajnandan1/kener:latest"; # https://github.com/rajnandan1/kener/pkgs/container/kener
         network_mode = "service:vpn"; # 3000/tcp
         restart = "unless-stopped";
@@ -40,7 +40,7 @@ in {
       # https://kener.ing/docs/database
       db.service = {
         container_name = "kener-db";
-        env_file = [config.age.secrets."${config.custom.profile}/kener/db.env".path];
+        env_file = [config.age.secrets."${config.custom.hostname}/kener/db.env".path];
         image = "postgres:17"; # https://hub.docker.com/_/postgres/tags
         network_mode = "service:vpn";
         restart = "unless-stopped";

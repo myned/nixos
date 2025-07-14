@@ -31,7 +31,7 @@ in {
       };
     in
       optionalAttrs (!isNull cfg.role) {
-        "${config.custom.profile}/netdata/${cfg.role}.conf" = secret "${config.custom.profile}/netdata/${cfg.role}.conf";
+        "${config.custom.hostname}/netdata/${cfg.role}.conf" = secret "${config.custom.hostname}/netdata/${cfg.role}.conf";
       };
 
     #?? arion-netdata pull
@@ -65,7 +65,7 @@ in {
               "/var/run/docker.sock:/var/run/docker.sock:ro"
             ]
             ++ optionals (!isNull cfg.role) [
-              "${config.age.secrets."${config.custom.profile}/netdata/${cfg.role}.conf".path}:/etc/netdata/stream.conf:ro"
+              "${config.age.secrets."${config.custom.hostname}/netdata/${cfg.role}.conf".path}:/etc/netdata/stream.conf:ro"
             ]
             ++ optionals (!isNull cfg.settings) [
               "${pkgs.writeText "netdata.conf" (generators.toINI {} cfg.settings)}:/etc/netdata/netdata.conf:ro"

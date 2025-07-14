@@ -17,8 +17,8 @@ in {
         file = "${inputs.self}/secrets/${filename}";
       };
     in {
-      "${config.custom.profile}/rconfig/.env" = secret "${config.custom.profile}/rconfig/.env";
-      "${config.custom.profile}/rconfig/db.env" = secret "${config.custom.profile}/rconfig/db.env";
+      "${config.custom.hostname}/rconfig/.env" = secret "${config.custom.hostname}/rconfig/.env";
+      "${config.custom.hostname}/rconfig/db.env" = secret "${config.custom.hostname}/rconfig/db.env";
     };
 
     #?? arion-rconfig pull
@@ -31,7 +31,7 @@ in {
       rconfig.service = {
         container_name = "rconfig";
         depends_on = ["db" "vpn"];
-        env_file = [config.age.secrets."${config.custom.profile}/rconfig/.env".path];
+        env_file = [config.age.secrets."${config.custom.hostname}/rconfig/.env".path];
         image = "rconfig/rconfigv6:latest";
         network_mode = "service:vpn"; # 80/tcp
         restart = "unless-stopped";
@@ -40,7 +40,7 @@ in {
 
       db.service = {
         container_name = "rconfig-db";
-        env_file = [config.age.secrets."${config.custom.profile}/rconfig/db.env".path];
+        env_file = [config.age.secrets."${config.custom.hostname}/rconfig/db.env".path];
         image = "mariadb:11";
         network_mode = "service:vpn";
         restart = "unless-stopped";

@@ -33,8 +33,8 @@ in {
         file = "${inputs.self}/secrets/${filename}";
       };
     in {
-      "${config.custom.profile}/users/${config.custom.username}.pass" = secret "${config.custom.profile}/users/${config.custom.username}.pass";
-      "${config.custom.profile}/users/root.pass" = secret "${config.custom.profile}/users/root.pass";
+      "${config.custom.hostname}/users/${config.custom.username}.pass" = secret "${config.custom.hostname}/users/${config.custom.username}.pass";
+      "${config.custom.hostname}/users/root.pass" = secret "${config.custom.hostname}/users/root.pass";
     };
 
     users = {
@@ -44,12 +44,12 @@ in {
       users = {
         #!! secrets/PROFILE/users/USERNAME.pass hashedPasswordFile is required
 
-        root.hashedPasswordFile = config.age.secrets."${config.custom.profile}/users/root.pass".path;
+        root.hashedPasswordFile = config.age.secrets."${config.custom.hostname}/users/root.pass".path;
 
         ${config.custom.username} = {
           isNormalUser = true;
           extraGroups = ["wheel"] ++ cfg.${config.custom.username}.groups;
-          hashedPasswordFile = config.age.secrets."${config.custom.profile}/users/${config.custom.username}.pass".path;
+          hashedPasswordFile = config.age.secrets."${config.custom.hostname}/users/${config.custom.username}.pass".path;
           linger = cfg.${config.custom.username}.linger;
           packages = cfg.${config.custom.username}.packages;
           uid = 1000;

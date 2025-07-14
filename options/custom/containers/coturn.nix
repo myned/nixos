@@ -15,7 +15,7 @@ in {
         file = "${inputs.self}/secrets/${filename}";
       };
     in {
-      "${config.custom.profile}/coturn/coturn.conf" = secret "${config.custom.profile}/coturn/coturn.conf";
+      "${config.custom.hostname}/coturn/coturn.conf" = secret "${config.custom.hostname}/coturn/coturn.conf";
     };
 
     #?? arion-coturn pull
@@ -42,7 +42,7 @@ in {
       "${config.custom.containers.directory}/coturn/coturn.conf" = {
         C = {
           mode = "0444";
-          argument = "${config.age.secrets."${config.custom.profile}/coturn/coturn.conf".path}";
+          argument = "${config.age.secrets."${config.custom.hostname}/coturn/coturn.conf".path}";
         };
       };
     };

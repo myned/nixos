@@ -17,7 +17,7 @@ in {
         file = "${inputs.self}/secrets/${filename}";
       };
     in {
-      "${config.custom.profile}/directus/.env" = secret "${config.custom.profile}/directus/.env";
+      "${config.custom.hostname}/directus/.env" = secret "${config.custom.hostname}/directus/.env";
     };
 
     #?? arion-directus pull
@@ -30,7 +30,7 @@ in {
       # https://directus.io/docs/self-hosting/overview
       directus.service = {
         container_name = "directus";
-        env_file = [config.age.secrets."${config.custom.profile}/directus/.env".path];
+        env_file = [config.age.secrets."${config.custom.hostname}/directus/.env".path];
         image = "directus/directus:11"; # https://hub.docker.com/r/directus/directus/tags
         ports = ["${config.custom.services.tailscale.ipv4}:8055:8055/tcp"];
         restart = "unless-stopped";

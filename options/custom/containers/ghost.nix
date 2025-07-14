@@ -22,8 +22,8 @@ in {
         file = "${inputs.self}/secrets/${filename}";
       };
     in {
-      "${config.custom.profile}/ghost/.env" = secret "${config.custom.profile}/ghost/.env";
-      "${config.custom.profile}/ghost/db.env" = secret "${config.custom.profile}/ghost/db.env";
+      "${config.custom.hostname}/ghost/.env" = secret "${config.custom.hostname}/ghost/.env";
+      "${config.custom.hostname}/ghost/db.env" = secret "${config.custom.hostname}/ghost/db.env";
     };
 
     #?? arion-ghost pull
@@ -42,7 +42,7 @@ in {
       in {
         container_name = "ghost";
         depends_on = ["db"];
-        env_file = [config.age.secrets."${config.custom.profile}/ghost/.env".path];
+        env_file = [config.age.secrets."${config.custom.hostname}/ghost/.env".path];
         image = "ghost:5";
         ports = ["${ip}:2368:2368/tcp"];
         restart = "unless-stopped";
@@ -55,7 +55,7 @@ in {
 
       db.service = {
         container_name = "ghost-db";
-        env_file = [config.age.secrets."${config.custom.profile}/ghost/db.env".path];
+        env_file = [config.age.secrets."${config.custom.hostname}/ghost/db.env".path];
         image = "mysql:8";
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/ghost/db:/var/lib/mysql"];

@@ -18,7 +18,7 @@ in {
         group = "300";
       };
     in {
-      "${config.custom.profile}/matrix-conduit/conduwuit.toml" = secret "${config.custom.profile}/matrix-conduit/conduwuit.toml";
+      "${config.custom.hostname}/matrix-conduit/conduwuit.toml" = secret "${config.custom.hostname}/matrix-conduit/conduwuit.toml";
     };
 
     # https://wiki.nixos.org/wiki/Matrix
@@ -43,7 +43,7 @@ in {
       # Override module's attempt to use conduit default config
       # https://github.com/girlbossceo/conduwuit/blob/main/conduwuit-example.toml
       environment = lib.mkForce {
-        CONDUWUIT_CONFIG = config.age.secrets."${config.custom.profile}/matrix-conduit/conduwuit.toml".path;
+        CONDUWUIT_CONFIG = config.age.secrets."${config.custom.hostname}/matrix-conduit/conduwuit.toml".path;
       };
     };
 

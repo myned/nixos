@@ -18,7 +18,7 @@ in {
         group = "caddy";
       };
     in {
-      "${config.custom.profile}/caddy/Caddyfile" = secret "${config.custom.profile}/caddy/Caddyfile";
+      "${config.custom.hostname}/caddy/Caddyfile" = secret "${config.custom.hostname}/caddy/Caddyfile";
     };
 
     # https://caddyserver.com/
@@ -53,7 +53,7 @@ in {
         # https://github.com/tailscale/tailscale/issues/7081
         # https://github.com/tailscale/caddy-tailscale
         # https://github.com/NixOS/nixpkgs/pull/317881
-        configFile = config.age.secrets."${config.custom.profile}/caddy/Caddyfile".path;
+        configFile = config.age.secrets."${config.custom.hostname}/caddy/Caddyfile".path;
       };
     };
 

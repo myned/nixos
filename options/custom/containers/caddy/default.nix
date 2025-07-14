@@ -23,7 +23,7 @@ in {
         file = "${inputs.self}/secrets/${filename}";
       };
     in {
-      "${config.custom.profile}/caddy/.env" = secret "${config.custom.profile}/caddy/.env";
+      "${config.custom.hostname}/caddy/.env" = secret "${config.custom.hostname}/caddy/.env";
     };
 
     #?? arion-caddy pull
@@ -36,7 +36,7 @@ in {
       caddy.service = {
         build.context = toString ./.;
         container_name = "caddy";
-        env_file = [config.age.secrets."${config.custom.profile}/caddy/.env".path];
+        env_file = [config.age.secrets."${config.custom.hostname}/caddy/.env".path];
         image = "localhost/caddy";
         network_mode = "host"; # 80/tcp 443/tcp/udp
         restart = "unless-stopped";
