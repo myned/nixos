@@ -114,8 +114,8 @@
         nixosConfigurations = let
           # Boilerplate systems with global imports
           #!! There is no default nixpkgs, inputs.nixpkgs-BRANCH must exist
-          #?? MACHINE = branch "BRANCH" "ARCHITECTURE" [ MODULES ]
-          branch = branch: arch: modules:
+          #?? MACHINE = nixos "BRANCH" "ARCHITECTURE" [ MODULES ]
+          nixos = branch: arch: modules:
             with inputs."nixpkgs-${branch}".lib;
               nixosSystem {
                 system = arch;
@@ -191,15 +191,15 @@
               };
         in {
           ### Stable
-          myarm = branch "stable" "aarch64-linux" [./profiles/server ./machines/myarm];
-          myeye = branch "stable" "x86_64-linux" [./profiles/server ./machines/myeye];
-          myne = branch "stable" "x86_64-linux" [./profiles/server ./machines/myne];
-          mypi3 = branch "stable" "aarch64-linux" [./profiles/sbc ./machines/mypi3];
+          myeye = nixos "stable" "x86_64-linux" [./profiles/compute ./machines/myeye];
+          myore = nixos "stable" "x86_64-linux" [./profiles/core ./machines/myore];
+          myosh = nixos "stable" "x86_64-linux" [./profiles/server ./machines/myosh];
+          mypi3 = nixos "stable" "aarch64-linux" [./profiles/sbc ./machines/mypi3];
 
           ### Unstable
-          myeck = branch "unstable" "x86_64-linux" [./profiles/deck ./machines/myeck];
-          mynix = branch "unstable" "x86_64-linux" [./profiles/desktop ./machines/mynix];
-          myork = branch "unstable" "x86_64-linux" [./profiles/laptop ./machines/myork];
+          myeck = nixos "unstable" "x86_64-linux" [./profiles/deck ./machines/myeck];
+          mynix = nixos "unstable" "x86_64-linux" [./profiles/desktop ./machines/mynix];
+          myork = nixos "unstable" "x86_64-linux" [./profiles/laptop ./machines/myork];
         };
       };
     };
