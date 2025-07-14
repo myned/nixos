@@ -6,7 +6,14 @@
 with lib; let
   cfg = config.custom.programs.nh;
 in {
-  options.custom.programs.nh.enable = mkOption {default = false;};
+  options.custom.programs.nh = {
+    enable = mkEnableOption "nh";
+
+    clean = mkOption {
+      default = false;
+      type = types.bool;
+    };
+  };
 
   config = mkIf cfg.enable {
     # https://github.com/viperML/nh
@@ -15,7 +22,7 @@ in {
       flake = "/etc/nixos";
 
       clean = {
-        enable = true;
+        enable = cfg.clean;
         extraArgs = "--keep 3 --keep-since 7d";
       };
     };

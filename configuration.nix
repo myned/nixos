@@ -139,13 +139,14 @@ in {
       ];
     };
 
-    #!! Handled by programs.nh.clean
-    # Garbage collection
-    # gc = {
-    #   automatic = true;
-    #   dates = "weekly";
-    #   options = "--delete-older-than 7d"; # Delete old generations
-    # };
+    # Nix store garbage collection
+    # Alternative: custom.programs.nh.clean
+    # https://nix.dev/manual/nix/latest/command-ref/nix-collect-garbage
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than +10"; # Keep last 10 generations
+    };
 
     # API access tokens to increase rate limits
     #!! Requires nix to be run as root for read access to agenix secrets
@@ -180,7 +181,7 @@ in {
 
         nix.gc = {
           automatic = config.nix.gc.automatic;
-          frequency = config.nix.gc.dates;
+          frequency = toString config.nix.gc.dates;
           options = config.nix.gc.options;
         };
       }
