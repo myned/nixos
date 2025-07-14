@@ -151,7 +151,7 @@
                         ];
 
                         home-manager.sharedModules = [
-                          inputs."nix-index-database-${branch}".hmModules.nix-index
+                          inputs."nix-index-database-${branch}".homeModules.nix-index
                           inputs.ags.homeManagerModules.default
                           inputs.nix-flatpak.homeManagerModules.nix-flatpak
 
