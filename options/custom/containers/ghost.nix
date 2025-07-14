@@ -48,8 +48,8 @@ in {
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/ghost/data:/var/lib/ghost/content"];
 
-        environment = {
-          NODE_ENV = mkIf cfg.develop "development";
+        environment = optionalAttrs cfg.develop {
+          NODE_ENV = "development";
         };
       };
 

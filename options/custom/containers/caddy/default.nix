@@ -69,11 +69,11 @@ in {
     };
 
     # For remote access to /srv
-    services.openssh.settings = mkIf (isString cfg.public-key) {
+    services.openssh.settings = optionalAttrs (isString cfg.public-key) {
       AllowUsers = ["srv"];
     };
 
-    users = mkIf (isString cfg.public-key) {
+    users = optionalAttrs (isString cfg.public-key) {
       users.srv = {
         uid = 239;
         group = "srv";
