@@ -110,6 +110,7 @@ in {
         folder = id: devices: {inherit id devices;};
       in {
         "SYNC/.backup" = folder "oxdvq-dfzjk" [];
+        "SYNC/admin" = folder "l6odm-rmjep" [];
         "SYNC/android" = folder "y3omj-gpjch" ["myxel"];
         "SYNC/android/media/camera" = folder "udj03-5kwod" ["myxel"];
         "SYNC/common" = folder "fcsij-g7cnw" ["myeck" "myxel"];
