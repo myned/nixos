@@ -17,9 +17,17 @@ in {
   #?? sudo borgmatic key export
   #?? sudo borgmatic -v 1 create --progress --stats
   options.custom.services.borgmatic = {
-    enable = mkOption {default = false;};
-    repositories = mkOption {default = [];};
-    sources = mkOption {default = [];};
+    enable = mkEnableOption "borgmatic";
+
+    repositories = mkOption {
+      default = [];
+      type = with types; listOf str;
+    };
+
+    sources = mkOption {
+      default = [];
+      type = with types; listOf str;
+    };
   };
 
   config = mkIf cfg.enable {
@@ -36,10 +44,15 @@ in {
         retries = 10;
         retry_wait = 60; # Additive seconds per retry
         compression = "auto,zstd"; # Use heuristics to decide whether to compress with zstd
-        ssh_command = "ssh -i /etc/ssh/id_ed25519"; # !! Imperative key generation
-        encryption_passcommand = "${cat} ${config.age.secrets."${config.custom.profile}/borgmatic/borgbase".path}";
-        repositories = cfg.repositories;
+        ssh_command = "ssh -i /etc/ssh/id_ed25519"; #!! Imperative key generation
+        encryption_passcommand = "${cat} ${config.age.secrets."${config.custom.hostname}/borgmatic/borgbase".path}";
         source_directories = cfg.sources;
+
+        #!! Assume separate repository for each profile
+        repositories = forEach cfg.repositories (repository: {
+          label = config.custom.profile;
+          path = repository;
+        });
 
         # TODO: Add more databases
         #?? sudo borgmatic restore --archive latest
@@ -66,7 +79,7 @@ in {
     age.secrets = let
       secret = filename: {file = "${inputs.self}/secrets/${filename}";};
     in {
-      "${config.custom.profile}/borgmatic/borgbase" = secret "${config.custom.profile}/borgmatic/borgbase";
+      "${config.custom.hostname}/borgmatic/borgbase" = secret "${config.custom.hostname}/borgmatic/borgbase";
     };
   };
 }
