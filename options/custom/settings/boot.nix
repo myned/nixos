@@ -97,7 +97,7 @@ in {
 
         systemd-boot = mkIf cfg.systemd-boot.enable {
           enable = true;
-          configurationLimit = 5;
+          configurationLimit = 10;
           consoleMode = mkIf (!isInt cfg.systemd-boot.console-mode || cfg.systemd-boot.console-mode <= 2) cfg.systemd-boot.console-mode;
           editor = false; # Disable interactive cmdline
 
