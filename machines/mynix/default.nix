@@ -41,11 +41,6 @@
     settings = {
       boot.systemd-boot.enable = true;
 
-      games = {
-        enable = true;
-        #// abiotic-factor = true;
-      };
-
       hardware = {
         cpu = "intel";
         rocm = "10.3.0"; # 10.3.1
