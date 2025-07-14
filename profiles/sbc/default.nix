@@ -1,14 +1,6 @@
-{
-  config,
-  lib,
-  ...
-}:
-with lib; let
-  hm = config.home-manager.users.${config.custom.username};
-in {
+{config, ...}: {
   custom = {
     profile = "sbc";
-    #// desktop = "kodi";
 
     programs = {
       fastfetch.greet = true;
@@ -23,24 +15,10 @@ in {
     };
 
     services = {
-      #// prometheus.enable = true;
-
-      # pipewire = {
-      #   enable = true;
-      #   pulseaudio = false;
-      #   system = true;
-      # };
-
       borgmatic = {
         enable = true;
-
-        sources =
-          [
-            config.custom.containers.directory
-          ]
-          ++ optionals hm.programs.kodi.enable [
-            hm.programs.kodi.datadir
-          ];
+        repositories = ["ssh://h1m9k594@h1m9k594.repo.borgbase.com/./repo"];
+        sources = [config.custom.containers.directory];
       };
     };
 
