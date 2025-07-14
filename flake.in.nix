@@ -150,7 +150,6 @@
                           inputs.niri-flake.nixosModules.niri
                         ];
 
-                        # TODO: Use home-manager.sharedModules for all options
                         home-manager.sharedModules = [
                           inputs."nix-index-database-${branch}".hmModules.nix-index
                           inputs.ags.homeManagerModules.default
