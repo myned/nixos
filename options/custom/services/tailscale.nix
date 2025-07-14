@@ -16,7 +16,8 @@ in {
   options.custom.services.tailscale = {
     enable = mkOption {default = false;};
     cert = mkOption {default = false;};
-    ip = mkOption {default = "";};
+    ipv4 = mkOption {default = "";};
+    ipv6 = mkOption {default = "";};
     firewall = mkOption {default = true;};
     tailnet = mkOption {default = "fenrir-musical.ts.net";};
     tray = mkOption {default = false;};
