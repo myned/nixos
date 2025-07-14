@@ -14,9 +14,9 @@
       niri.output.connectors = ["eDP-1"];
     };
 
-    # BUG: Phoenix support not currently functional
-    # https://github.com/Cryolitia/ryzen_smu/issues/1
     programs = {
+      # BUG: Phoenix support not currently functional
+      # https://github.com/Cryolitia/ryzen_smu/issues/1
       #// ryzenadj.enable = true;
 
       waybar = {
