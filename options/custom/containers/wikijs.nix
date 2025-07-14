@@ -33,7 +33,7 @@ in {
         depends_on = ["db"];
         env_file = [config.age.secrets."${config.custom.profile}/wikijs/.env".path];
         image = "ghcr.io/requarks/wiki:2";
-        ports = ["127.0.0.1:3303:3000/tcp"];
+        ports = ["3303:3000/tcp"];
         restart = "unless-stopped";
       };
 

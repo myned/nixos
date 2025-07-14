@@ -21,7 +21,7 @@ in {
       freshrss.service = {
         container_name = "freshrss";
         image = "freshrss/freshrss:latest"; # https://hub.docker.com/r/freshrss/freshrss/tags
-        ports = ["127.0.0.1:8088:80/tcp"];
+        ports = ["8088:80/tcp"];
         restart = "unless-stopped";
 
         environment = {

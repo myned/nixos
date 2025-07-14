@@ -29,7 +29,7 @@ in {
         depends_on = ["cache"];
         env_file = [config.age.secrets."${config.custom.profile}/searxng/.env".path];
         image = "searxng/searxng:latest"; # https://hub.docker.com/r/searxng/searxng/tags
-        ports = ["127.0.0.1:8888:8080/tcp"];
+        ports = ["8888:8080/tcp"];
         restart = "unless-stopped";
 
         volumes = [

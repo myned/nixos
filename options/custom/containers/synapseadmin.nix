@@ -21,7 +21,7 @@ in {
       synapseadmin.service = {
         container_name = "synapseadmin";
         image = "ghcr.io/etkecc/synapse-admin:latest";
-        ports = ["127.0.0.1:8000:80/tcp"];
+        ports = ["8000:80/tcp"];
         restart = "unless-stopped";
 
         volumes = let

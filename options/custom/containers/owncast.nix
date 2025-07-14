@@ -22,8 +22,8 @@ in {
         volumes = ["${config.custom.containers.directory}/owncast/data:/app/data"];
 
         ports = [
-          "127.0.0.1:8800:8080/tcp" # HTTP
-          "${config.custom.services.tailscale.ip}:1935:1935/tcp" # RTMP
+          "8800:8080/tcp" # HTTP
+          "${config.custom.services.tailscale.ipv4}:1935:1935/tcp" # RTMP
         ];
       };
     };

@@ -23,11 +23,11 @@ in {
         restart = "unless-stopped";
 
         ports = [
-          "127.0.0.1:1985:1985/tcp" # HTTP API
-          "127.0.0.1:8800:8080/tcp" # HTTP
-          "${config.custom.services.tailscale.ip}:1935:1935/tcp" # RTMP
-          "${config.custom.services.tailscale.ip}:8000:8000/udp" # WebRTC
-          "${config.custom.services.tailscale.ip}:10080:10080/udp" # SRT
+          "1985:1985/tcp" # HTTP API
+          "8800:8080/tcp" # HTTP
+          "${config.custom.services.tailscale.ipv4}:1935:1935/tcp" # RTMP
+          "${config.custom.services.tailscale.ipv4}:8000:8000/udp" # WebRTC
+          "${config.custom.services.tailscale.ipv4}:10080:10080/udp" # SRT
         ];
 
         # https://github.com/ossrs/srs/blob/develop/trunk/conf/full.conf

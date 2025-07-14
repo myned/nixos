@@ -24,8 +24,8 @@ in {
         volumes = ["${config.custom.containers.directory}/stremio/data:/root/.stremio-server"];
 
         ports = [
-          "127.0.0.1:8470:8080/tcp"
-          "127.0.0.1:11470:11470/tcp"
+          "8470:8080/tcp"
+          "11470:11470/tcp"
         ];
 
         environment = {

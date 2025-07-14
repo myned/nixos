@@ -26,7 +26,7 @@ in {
       conduwuit.service = {
         container_name = "conduwuit";
         image = "ghcr.io/girlbossceo/conduwuit:v0.5.0-rc3-b6e9dc3d98704c56027219d3775336910a0136c6";
-        ports = ["127.0.0.1:6167:6167/tcp"];
+        ports = ["6167:6167/tcp"];
         restart = "unless-stopped";
 
         environment = {

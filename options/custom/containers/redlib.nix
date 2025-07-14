@@ -17,7 +17,7 @@ in {
       redlib.service = {
         container_name = "redlib";
         image = "quay.io/redlib/redlib:latest";
-        ports = ["127.0.0.1:8888:8080/tcp"];
+        ports = ["8888:8080/tcp"];
         restart = "unless-stopped";
 
         environment = {

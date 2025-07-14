@@ -29,7 +29,7 @@ in {
         depends_on = ["db" "cache"];
         env_file = [config.age.secrets."${config.custom.profile}/nextcloud/.env".path];
         image = "nextcloud:29-apache";
-        ports = ["127.0.0.1:8181:80/tcp"];
+        ports = ["8181:80/tcp"];
         restart = "unless-stopped";
 
         volumes = [

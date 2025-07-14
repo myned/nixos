@@ -40,7 +40,7 @@ in {
         container_name = "synapse";
         depends_on = ["db"];
         image = "ghcr.io/element-hq/synapse:v1.128.0"; # https://github.com/element-hq/synapse/pkgs/container/synapse
-        ports = ["127.0.0.1:8008:8008/tcp"];
+        ports = ["8008:8008/tcp"];
         restart = "unless-stopped";
 
         volumes = [
