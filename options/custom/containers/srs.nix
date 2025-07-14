@@ -33,7 +33,7 @@ in {
         # https://github.com/ossrs/srs/blob/develop/trunk/conf/full.conf
         environment = {
           # https://ossrs.io/lts/en-us/docs/v6/doc/webrtc#config-candidate
-          CANDIDATE = toString config.custom.services.tailscale.ip;
+          CANDIDATE = toString config.custom.services.tailscale.ipv4;
 
           SRS_HTTP_API_ENABLED = "on";
           SRS_HTTP_SERVER_ENABLED = "on";

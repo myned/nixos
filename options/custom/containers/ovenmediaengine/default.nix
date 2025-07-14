@@ -10,7 +10,7 @@ in {
     enable = mkEnableOption "ovenmediaengine";
 
     bind = mkOption {
-      default = config.custom.services.tailscale.ip;
+      default = config.custom.services.tailscale.ipv4;
       type = types.str;
     };
   };

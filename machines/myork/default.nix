@@ -30,7 +30,11 @@
     services = {
       auto-cpufreq.max.battery = 3.5; # GHz
       fw-fanctrl.enable = true;
-      tailscale.ip = "100.100.119.16";
+
+      tailscale = {
+        ipv4 = "100.81.241.17";
+        ipv6 = "fd7a:115c:a1e0::3801:f111";
+      };
     };
 
     settings = {

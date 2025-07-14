@@ -23,7 +23,7 @@ in {
       # https://github.com/prometheus/node_exporter
       exporters.node = {
         enable = true;
-        listenAddress = config.custom.services.tailscale.ip;
+        listenAddress = config.custom.services.tailscale.ipv4;
         openFirewall = true; # 9100/tcp
       };
     };

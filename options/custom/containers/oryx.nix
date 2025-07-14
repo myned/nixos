@@ -32,10 +32,10 @@ in {
         volumes = ["${config.custom.containers.directory}/oryx/data:/data"];
 
         ports = [
-          "127.0.0.1:2022:2022/tcp" # HTTP
-          "${config.custom.services.tailscale.ip}:1935:1935/tcp" # RTMP
-          "${config.custom.services.tailscale.ip}:8000:8000/udp" # WebRTC
-          "${config.custom.services.tailscale.ip}:10080:10080/udp" # SRT
+          "2022:2022/tcp" # HTTP
+          "${config.custom.services.tailscale.ipv4}:1935:1935/tcp" # RTMP
+          "${config.custom.services.tailscale.ipv4}:8000:8000/udp" # WebRTC
+          "${config.custom.services.tailscale.ipv4}:10080:10080/udp" # SRT
         ];
       };
     };

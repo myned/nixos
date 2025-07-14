@@ -7,7 +7,10 @@
     hostname = "myeck";
 
     services = {
-      tailscale.ip = "100.73.230.39";
+      tailscale = {
+        ipv4 = "100.73.230.39";
+        ipv6 = "fd7a:115c:a1e0::fa01:e627";
+      };
     };
 
     settings = {

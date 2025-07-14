@@ -13,14 +13,10 @@
     hostname = "mypi3";
 
     services = {
-      tailscale.ip = "100.125.118.95";
-
-      borgmatic.repositories = [
-        {
-          path = "ssh://h1m9k594@h1m9k594.repo.borgbase.com/./repo";
-          label = "mypi3";
-        }
-      ];
+      tailscale = {
+        ipv4 = "100.125.118.95";
+        ipv6 = "fd7a:115c:a1e0::ac01:7660";
+      };
     };
 
     settings = {

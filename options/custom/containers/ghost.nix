@@ -38,7 +38,7 @@ in {
         ip =
           if cfg.develop
           then "127.0.0.1"
-          else config.custom.services.tailscale.ip;
+          else config.custom.services.tailscale.ipv4;
       in {
         container_name = "ghost";
         depends_on = ["db"];

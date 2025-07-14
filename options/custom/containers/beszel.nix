@@ -70,7 +70,7 @@ in {
           # https://beszel.dev/guide/environment-variables#agent
           environment = {
             KEY = cfg.key;
-            LISTEN = "${config.custom.services.tailscale.ip}:45876";
+            LISTEN = "${config.custom.services.tailscale.ipv4}:45876";
           };
         };
       };

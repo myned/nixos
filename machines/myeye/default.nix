@@ -8,7 +8,10 @@
     hostname = "myeye";
 
     services = {
-      #tailscale.ip = "100.126.156.42";
+      tailscale = {
+        ipv4 = "";
+        ipv6 = "";
+      };
     };
 
     settings = {

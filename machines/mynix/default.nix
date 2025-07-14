@@ -35,7 +35,10 @@
     };
 
     services = {
-      tailscale.ip = "100.67.212.39";
+      tailscale = {
+        ipv4 = "100.67.212.39";
+        ipv6 = "fd7a:115c:a1e0::6b03:d427";
+      };
     };
 
     settings = {
