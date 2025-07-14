@@ -12,6 +12,7 @@ with lib; {
       networking.enable = true;
       nixgl.enable = true;
       packages.enable = true;
+      storage.enable = true;
       users.enable = true;
     })
 
@@ -27,7 +28,6 @@ with lib; {
 
     (mkIf config.custom.full {
       accounts.enable = true;
-      storage.enable = true;
       vm.enable = true;
       waydroid.enable = true;
     })
