@@ -22,7 +22,7 @@
       waybar = {
         temperature = {
           cpu.zone = 0;
-          gpu.sensor = "/sys/devices/pci0000:00/0000:00:08.1/0000:c1:00.0/hwmon/hwmon0/temp1_input";
+          gpu.zone = 3;
         };
       };
     };
