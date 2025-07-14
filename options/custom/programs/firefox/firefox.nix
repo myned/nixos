@@ -15,34 +15,32 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home-manager.sharedModules = [
-      {
-        # https://www.mozilla.org/en-US/firefox/developer
-        programs.firefox = mkMerge [
-          (import ./.common.nix {
-            inherit config inputs lib pkgs;
-            profile = cfg.profile;
-            telemetry = true;
-            theme = true;
-          })
+    home-manager.users.${config.custom.username} = {
+      # https://www.mozilla.org/en-US/firefox/developer
+      programs.firefox = mkMerge [
+        (import ./.common.nix {
+          inherit config inputs lib pkgs;
+          profile = cfg.profile;
+          telemetry = true;
+          theme = true;
+        })
 
-          {
-            enable = true;
-            #// package = pkgs.firefox-devedition-bin;
-          }
-        ];
+        {
+          enable = true;
+          #// package = pkgs.firefox-devedition-bin;
+        }
+      ];
 
-        home.file = {
-          ".mozilla/firefox/profiles.ini".force = true;
-        };
+      home.file = {
+        ".mozilla/firefox/profiles.ini".force = true;
+      };
 
-        # https://stylix.danth.me/options/modules/firefox.html
-        stylix.targets.firefox = {
-          # https://github.com/rafaelmardojai/firefox-gnome-theme
-          firefoxGnomeTheme.enable = true;
-          profileNames = [cfg.profile];
-        };
-      }
-    ];
+      # https://stylix.danth.me/options/modules/firefox.html
+      stylix.targets.firefox = {
+        # https://github.com/rafaelmardojai/firefox-gnome-theme
+        firefoxGnomeTheme.enable = true;
+        profileNames = [cfg.profile];
+      };
+    };
   };
 }

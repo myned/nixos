@@ -22,52 +22,50 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home-manager.sharedModules = [
-      {
-        # https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous
-        programs.niri.settings = {
-          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsclipboarddisable-primary
-          clipboard.disable-primary = true;
+    home-manager.users.${config.custom.username} = {
+      # https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous
+      programs.niri.settings = {
+        # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsclipboarddisable-primary
+        clipboard.disable-primary = true;
 
-          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingscursorhide-after-inactive-ms
-          cursor = with config.stylix.cursor; {
-            inherit size;
-            theme = name;
+        # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingscursorhide-after-inactive-ms
+        cursor = with config.stylix.cursor; {
+          inherit size;
+          theme = name;
 
-            #// hide-after-inactive-ms = 1000 * 15; # Milliseconds
-            hide-when-typing = true;
-          };
-
-          # HACK: Inherit home-manager environment variables in lieu of upstream fix
-          # https://github.com/nix-community/home-manager/issues/2659
-          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsenvironment
-          environment = mapAttrs (name: value: toString value) hm.home.sessionVariables;
-
-          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingshotkey-overlayskip-at-startup
-          hotkey-overlay.skip-at-startup = true;
-
-          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsprefer-no-csd
-          prefer-no-csd = true;
-
-          #!! Not executed in a shell
-          # https://github.com/YaLTeR/niri/wiki/Configuration:-Key-Bindings#spawn
-          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsspawn-at-startup
-          spawn-at-startup = [
-            {command = [audio "--init"];} # Enforce audio profile state
-            {command = [config.custom.menus.clipboard.clear-silent];} # Clear clipboard history
-
-            # FIXME: Does not inhibit
-            #// {command = [sway-audio-idle-inhibit];} # Inhibit while audio is playing
-          ];
-
-          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsswitch-eventslid-close
-          switch-events = {
-            # Turn display off while inhibiting suspend
-            lid-close.action.spawn = [niri "msg" "action" "power-off-monitors"];
-            lid-open.action.spawn = [niri "msg" "action" "power-on-monitors"];
-          };
+          #// hide-after-inactive-ms = 1000 * 15; # Milliseconds
+          hide-when-typing = true;
         };
-      }
-    ];
+
+        # HACK: Inherit home-manager environment variables in lieu of upstream fix
+        # https://github.com/nix-community/home-manager/issues/2659
+        # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsenvironment
+        environment = mapAttrs (name: value: toString value) hm.home.sessionVariables;
+
+        # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingshotkey-overlayskip-at-startup
+        hotkey-overlay.skip-at-startup = true;
+
+        # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsprefer-no-csd
+        prefer-no-csd = true;
+
+        #!! Not executed in a shell
+        # https://github.com/YaLTeR/niri/wiki/Configuration:-Key-Bindings#spawn
+        # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsspawn-at-startup
+        spawn-at-startup = [
+          {command = [audio "--init"];} # Enforce audio profile state
+          {command = [config.custom.menus.clipboard.clear-silent];} # Clear clipboard history
+
+          # FIXME: Does not inhibit
+          #// {command = [sway-audio-idle-inhibit];} # Inhibit while audio is playing
+        ];
+
+        # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsswitch-eventslid-close
+        switch-events = {
+          # Turn display off while inhibiting suspend
+          lid-close.action.spawn = [niri "msg" "action" "power-off-monitors"];
+          lid-open.action.spawn = [niri "msg" "action" "power-on-monitors"];
+        };
+      };
+    };
   };
 }

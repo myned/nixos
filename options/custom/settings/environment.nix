@@ -21,31 +21,29 @@ in {
       localBinInPath = true;
     };
 
-    home-manager.sharedModules = [
-      {
-        home.sessionVariables =
-          optionalAttrs config.custom.minimal {
-            # https://wiki.archlinux.org/title/Wayland#Java
-            _JAVA_AWT_WM_NONREPARENTING = "1";
-          }
-          // optionalAttrs (!config.custom.services.xwayland-satellite.enable) {
-            GDK_SCALE = toString config.custom.scale; # Steam HiDPI
-          }
-          // optionalAttrs config.custom.desktops.tiling {
-            # https://github.com/krille-chan/fluffychat/wiki/Manual#i-use-tiling-wm-how-do-i-disable-the-title-bar
-            GTK_CSD = "0";
-          }
-          // optionalAttrs cfg.wayland {
-            # https://wiki.nixos.org/wiki/Wayland#Electron_and_Chromium
-            ELECTRON_OZONE_PLATFORM_HINT = "auto";
-            NIXOS_OZONE_WL = "1";
-          }
-          // {
-            # Allow all unfree packages
-            #?? nix shell nixpkgs#<package> --impure
-            NIXPKGS_ALLOW_UNFREE = "1";
-          };
-      }
-    ];
+    home-manager.users.${config.custom.username} = {
+      home.sessionVariables =
+        optionalAttrs config.custom.minimal {
+          # https://wiki.archlinux.org/title/Wayland#Java
+          _JAVA_AWT_WM_NONREPARENTING = "1";
+        }
+        // optionalAttrs (!config.custom.services.xwayland-satellite.enable) {
+          GDK_SCALE = toString config.custom.scale; # Steam HiDPI
+        }
+        // optionalAttrs config.custom.desktops.tiling {
+          # https://github.com/krille-chan/fluffychat/wiki/Manual#i-use-tiling-wm-how-do-i-disable-the-title-bar
+          GTK_CSD = "0";
+        }
+        // optionalAttrs cfg.wayland {
+          # https://wiki.nixos.org/wiki/Wayland#Electron_and_Chromium
+          ELECTRON_OZONE_PLATFORM_HINT = "auto";
+          NIXOS_OZONE_WL = "1";
+        }
+        // {
+          # Allow all unfree packages
+          #?? nix shell nixpkgs#<package> --impure
+          NIXPKGS_ALLOW_UNFREE = "1";
+        };
+    };
   };
 }

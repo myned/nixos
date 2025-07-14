@@ -14,33 +14,31 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home-manager.sharedModules = [
-      {
-        # https://librewolf.net/
-        # https://codeberg.org/librewolf
-        programs.librewolf = mkMerge [
-          (import ./.common.nix {
-            inherit config inputs lib pkgs;
-            profile = cfg.profile;
-            theme = true;
-          })
+    home-manager.users.${config.custom.username} = {
+      # https://librewolf.net/
+      # https://codeberg.org/librewolf
+      programs.librewolf = mkMerge [
+        (import ./.common.nix {
+          inherit config inputs lib pkgs;
+          profile = cfg.profile;
+          theme = true;
+        })
 
-          {
-            enable = true;
-          }
-        ];
+        {
+          enable = true;
+        }
+      ];
 
-        home.file = {
-          ".librewolf/profiles.ini".force = true;
-        };
+      home.file = {
+        ".librewolf/profiles.ini".force = true;
+      };
 
-        # https://stylix.danth.me/options/modules/firefox.html
-        stylix.targets.librewolf = {
-          # https://github.com/rafaelmardojai/firefox-gnome-theme
-          firefoxGnomeTheme.enable = true;
-          profileNames = [cfg.profile];
-        };
-      }
-    ];
+      # https://stylix.danth.me/options/modules/firefox.html
+      stylix.targets.librewolf = {
+        # https://github.com/rafaelmardojai/firefox-gnome-theme
+        firefoxGnomeTheme.enable = true;
+        profileNames = [cfg.profile];
+      };
+    };
   };
 }

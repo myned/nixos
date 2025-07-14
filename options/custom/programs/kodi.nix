@@ -46,30 +46,28 @@ in {
       allowedUDPPorts = [9777];
     };
 
-    home-manager.sharedModules = [
-      {
-        # https://github.com/xbmc/xbmc
-        # https://kodi.wiki/view/Main_Page
-        # https://wiki.archlinux.org/title/Kodi
-        # https://wiki.nixos.org/wiki/Kodi
-        programs.kodi = {
-          enable = true;
-          package = cfg.package;
-        };
+    home-manager.users.${config.custom.username} = {
+      # https://github.com/xbmc/xbmc
+      # https://kodi.wiki/view/Main_Page
+      # https://wiki.archlinux.org/title/Kodi
+      # https://wiki.nixos.org/wiki/Kodi
+      programs.kodi = {
+        enable = true;
+        package = cfg.package;
+      };
 
-        #!! Imperative synced files
-        # https://kodi.wiki/view/Advancedsettings.xml
-        # https://kodi.wiki/view/Advancedsettings.xml#guisettings.xml_Setting_Conversion
-        # https://github.com/xbmc/xbmc/blob/master/system/settings/settings.xml
-        home.file = let
-          sync = source: {
-            source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/${source}";
-            force = true;
-          };
-        in {
-          ".kodi/userdata" = sync "common/config/kodi/userdata";
+      #!! Imperative synced files
+      # https://kodi.wiki/view/Advancedsettings.xml
+      # https://kodi.wiki/view/Advancedsettings.xml#guisettings.xml_Setting_Conversion
+      # https://github.com/xbmc/xbmc/blob/master/system/settings/settings.xml
+      home.file = let
+        sync = source: {
+          source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/${source}";
+          force = true;
         };
-      }
-    ];
+      in {
+        ".kodi/userdata" = sync "common/config/kodi/userdata";
+      };
+    };
   };
 }

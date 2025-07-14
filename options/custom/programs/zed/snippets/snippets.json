@@ -17,11 +17,9 @@
       "  };",
       "",
       "  config = mkIf cfg.enable {",
-      "    home-manager.sharedModules = [",
-      "      {",
-      "        $0",
-      "      }",
-      "    ];",
+      "    home-manager.users.${config.custom.username} = {",
+      "      $0",
+      "    };",
       "  };",
       "}"
     ]

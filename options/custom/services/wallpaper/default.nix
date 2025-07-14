@@ -32,29 +32,27 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home-manager.sharedModules = [
-      {
-        # https://github.com/LGFae/swww
-        services.swww.enable = true;
+    home-manager.users.${config.custom.username} = {
+      # https://github.com/LGFae/swww
+      services.swww.enable = true;
 
-        systemd.user.services.wallpaper = {
-          Unit = {
-            Description = "Periodically change wallpaper";
-            Requires = ["swww.service"];
-            After = ["graphical-session.target" "swww.service"];
-          };
-
-          Service = {
-            Type = "simple";
-            ExecStart = "${wallpaper} ${cfg.directory}";
-            Restart = "always";
-          };
-
-          Install = {
-            WantedBy = ["default.target"];
-          };
+      systemd.user.services.wallpaper = {
+        Unit = {
+          Description = "Periodically change wallpaper";
+          Requires = ["swww.service"];
+          After = ["graphical-session.target" "swww.service"];
         };
-      }
-    ];
+
+        Service = {
+          Type = "simple";
+          ExecStart = "${wallpaper} ${cfg.directory}";
+          Restart = "always";
+        };
+
+        Install = {
+          WantedBy = ["default.target"];
+        };
+      };
+    };
   };
 }

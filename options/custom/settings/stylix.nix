@@ -53,45 +53,43 @@ in {
       };
     };
 
-    home-manager.sharedModules = [
-      {
-        # https://stylix.danth.me/options/platforms/home_manager.html
-        stylix = {
-          # https://stylix.danth.me/options/platforms/home_manager.html#stylixiconthemedark
-          iconTheme = {
-            # BUG: GTK4 apps start slower with Papirus
-            # https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/issues/3860
-            # https://github.com/PapirusDevelopmentTeam/papirus-icon-theme
-            # https://github.com/vinceliuice/Tela-icon-theme
-            enable = true;
-            dark = "Tela-pink-dark";
-            light = "Tela-pink-light";
-            package = pkgs.tela-icon-theme;
-          };
-
-          #!! Accent colors are not the same globally, so override each target individually
-          # https://github.com/danth/stylix/issues/402
-          targets = {
-            # TODO: Use gtksourceview target when merged
-            # https://github.com/danth/stylix/issues/954
-            gnome-text-editor.enable = false;
-
-            gtk.extraCss = ''
-              @define-color accent_color #d33682;
-              @define-color accent_bg_color #d33682;
-              @define-color window_bg_color #073642;
-              @define-color borders #073642;
-              @define-color unfocused_borders #073642;
-            '';
-          };
+    home-manager.users.${config.custom.username} = {
+      # https://stylix.danth.me/options/platforms/home_manager.html
+      stylix = {
+        # https://stylix.danth.me/options/platforms/home_manager.html#stylixiconthemedark
+        iconTheme = {
+          # BUG: GTK4 apps start slower with Papirus
+          # https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/issues/3860
+          # https://github.com/PapirusDevelopmentTeam/papirus-icon-theme
+          # https://github.com/vinceliuice/Tela-icon-theme
+          enable = true;
+          dark = "Tela-pink-dark";
+          light = "Tela-pink-light";
+          package = pkgs.tela-icon-theme;
         };
 
-        # BUG: home.pointerCursor breaks XCURSOR_PATH for some child windows, so avoid ${} bashism
-        # https://github.com/nix-community/home-manager/blob/59a4c43e9ba6db24698c112720a58a334117de83/modules/config/home-cursor.nix#L154
-        home.sessionVariables = {
-          XCURSOR_PATH = "$XCURSOR_PATH:${hm.home.profileDirectory}/share/icons";
+        #!! Accent colors are not the same globally, so override each target individually
+        # https://github.com/danth/stylix/issues/402
+        targets = {
+          # TODO: Use gtksourceview target when merged
+          # https://github.com/danth/stylix/issues/954
+          gnome-text-editor.enable = false;
+
+          gtk.extraCss = ''
+            @define-color accent_color #d33682;
+            @define-color accent_bg_color #d33682;
+            @define-color window_bg_color #073642;
+            @define-color borders #073642;
+            @define-color unfocused_borders #073642;
+          '';
         };
-      }
-    ];
+      };
+
+      # BUG: home.pointerCursor breaks XCURSOR_PATH for some child windows, so avoid ${} bashism
+      # https://github.com/nix-community/home-manager/blob/59a4c43e9ba6db24698c112720a58a334117de83/modules/config/home-cursor.nix#L154
+      home.sessionVariables = {
+        XCURSOR_PATH = "$XCURSOR_PATH:${hm.home.profileDirectory}/share/icons";
+      };
+    };
   };
 }

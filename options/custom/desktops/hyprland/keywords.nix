@@ -27,90 +27,88 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home-manager.sharedModules = [
-      {
-        wayland.windowManager.hyprland.settings = {
-          # https://wiki.hyprland.org/Configuring/Keywords/#per-device-input-configs
-          #?? device = { name = NAME ... }
-          # https://wiki.hyprland.org/Configuring/Variables/#custom-accel-profiles
-          # https://wayland.freedesktop.org/libinput/doc/latest/pointer-acceleration.html#the-custom-acceleration-profile
-          #?? custom <STEP> <POINTS...>
-          device = let
-            # Combine duplicate devices into one attrset
-            #?? (devices ["NAME"] {ATTRS})
-            devices = names: attrs: map (name: {inherit name;} // attrs) names;
-          in
-            flatten [
-              ### Trackballs
-              (devices ["compx-2.4g-receiver-mouse" "protoarc-em04"] {
-                accel_profile = "custom 1 0 1 5 10";
-              })
+    home-manager.users.${config.custom.username} = {
+      wayland.windowManager.hyprland.settings = {
+        # https://wiki.hyprland.org/Configuring/Keywords/#per-device-input-configs
+        #?? device = { name = NAME ... }
+        # https://wiki.hyprland.org/Configuring/Variables/#custom-accel-profiles
+        # https://wayland.freedesktop.org/libinput/doc/latest/pointer-acceleration.html#the-custom-acceleration-profile
+        #?? custom <STEP> <POINTS...>
+        device = let
+          # Combine duplicate devices into one attrset
+          #?? (devices ["NAME"] {ATTRS})
+          devices = names: attrs: map (name: {inherit name;} // attrs) names;
+        in
+          flatten [
+            ### Trackballs
+            (devices ["compx-2.4g-receiver-mouse" "protoarc-em04"] {
+              accel_profile = "custom 1 0 1 5 10";
+            })
 
-              (devices ["kensington-orbit-wireless-tb-mouse" "orbit-bt5.0-mouse"] {
-                left_handed = true;
-                middle_button_emulation = true;
-                natural_scroll = true;
-                sensitivity = -0.7;
-              })
+            (devices ["kensington-orbit-wireless-tb-mouse" "orbit-bt5.0-mouse"] {
+              left_handed = true;
+              middle_button_emulation = true;
+              natural_scroll = true;
+              sensitivity = -0.7;
+            })
 
-              (devices ["logitech-m570"] {
-                accel_profile = "custom 1 0 1 3";
-                sensitivity = -0.2;
-              })
+            (devices ["logitech-m570"] {
+              accel_profile = "custom 1 0 1 3";
+              sensitivity = -0.2;
+            })
 
-              ### Mice
-              (devices ["nordic-2.4g-wireless-receiver-mouse" "protoarc-em11-nl-mouse"] {
-                accel_profile = "flat";
-                sensitivity = -0.1;
-              })
+            ### Mice
+            (devices ["nordic-2.4g-wireless-receiver-mouse" "protoarc-em11-nl-mouse"] {
+              accel_profile = "flat";
+              sensitivity = -0.1;
+            })
 
-              (devices ["razer-razer-viper-ultimate" "razer-razer-viper-ultimate-dongle" "razer-razer-viper-ultimate-dongle-1"] {
-                accel_profile = "flat";
-                sensitivity = -0.1;
-              })
+            (devices ["razer-razer-viper-ultimate" "razer-razer-viper-ultimate-dongle" "razer-razer-viper-ultimate-dongle-1"] {
+              accel_profile = "flat";
+              sensitivity = -0.1;
+            })
 
-              ### Touchpads
-              (devices ["wireless-controller-touchpad"] {
-                enabled = false;
-              })
-            ];
-
-          # https://wiki.hyprland.org/Configuring/Keywords/#setting-the-environment
-          #?? envd = VARIABLE, VALUE
-          # HACK: Mapped home-manager variables to envd in lieu of upstream fix
-          # https://github.com/nix-community/home-manager/issues/2659
-          envd = with builtins;
-            attrValues (
-              mapAttrs (
-                name: value: "${name}, ${toString value}"
-              )
-              hm.home.sessionVariables
-            )
-            ++ [
-              "EDITOR, ${gnome-text-editor}"
-            ];
-
-          # https://wiki.hyprland.org/Configuring/Keywords/#executing
-          exec = [
-            (command "${left} --init --scroll kensington-orbit-wireless-tb-mouse") # Enforce left-pawed state
+            ### Touchpads
+            (devices ["wireless-controller-touchpad"] {
+              enabled = false;
+            })
           ];
 
-          exec-once =
-            [
-              (command sway-audio-idle-inhibit) # Inhibit idle while audio is playing
-              (command "${audio} --init") # Enforce audio profile state
-              (command config.custom.menus.clipboard.clear-silent) # Clear clipboard history
+        # https://wiki.hyprland.org/Configuring/Keywords/#setting-the-environment
+        #?? envd = VARIABLE, VALUE
+        # HACK: Mapped home-manager variables to envd in lieu of upstream fix
+        # https://github.com/nix-community/home-manager/issues/2659
+        envd = with builtins;
+          attrValues (
+            mapAttrs (
+              name: value: "${name}, ${toString value}"
+            )
+            hm.home.sessionVariables
+          )
+          ++ [
+            "EDITOR, ${gnome-text-editor}"
+          ];
 
-              # HACK: Launch hidden GTK windows to reduce startup time
-              "[workspace special:hidden silent] ${command loupe}"
-              "[workspace special:hidden silent] ${command nautilus}"
-            ]
-            ++ optionals config.custom.settings.vm.passthrough.blacklist [
-              # HACK: Delay driver initialization to work around reset issues
-              (command "${virsh} list | ${grep} ${config.custom.settings.vm.passthrough.guest} || sudo ${modprobe} ${config.custom.settings.vm.passthrough.driver}")
-            ];
-        };
-      }
-    ];
+        # https://wiki.hyprland.org/Configuring/Keywords/#executing
+        exec = [
+          (command "${left} --init --scroll kensington-orbit-wireless-tb-mouse") # Enforce left-pawed state
+        ];
+
+        exec-once =
+          [
+            (command sway-audio-idle-inhibit) # Inhibit idle while audio is playing
+            (command "${audio} --init") # Enforce audio profile state
+            (command config.custom.menus.clipboard.clear-silent) # Clear clipboard history
+
+            # HACK: Launch hidden GTK windows to reduce startup time
+            "[workspace special:hidden silent] ${command loupe}"
+            "[workspace special:hidden silent] ${command nautilus}"
+          ]
+          ++ optionals config.custom.settings.vm.passthrough.blacklist [
+            # HACK: Delay driver initialization to work around reset issues
+            (command "${virsh} list | ${grep} ${config.custom.settings.vm.passthrough.guest} || sudo ${modprobe} ${config.custom.settings.vm.passthrough.driver}")
+          ];
+      };
+    };
   };
 }

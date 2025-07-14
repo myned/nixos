@@ -62,50 +62,48 @@ in {
     # https://github.com/sodiboo/niri-flake?tab=readme-ov-file#additional-notes
     systemd.user.services.niri-flake-polkit.enable = cfg.polkit;
 
-    home-manager.sharedModules = [
-      {
-        programs.niri = {
-          package = config.programs.niri.package;
+    home-manager.users.${config.custom.username} = {
+      programs.niri = {
+        package = config.programs.niri.package;
 
-          # https://github.com/YaLTeR/niri/wiki/Configuration:-Debug-Options
-          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsdebug
-          # settings = {
-          #   debug = {
-          #     disable-cursor-plane = []; # Software cursor
-          #     disable-direct-scanout = [];
-          #   };
-          # };
-        };
+        # https://github.com/YaLTeR/niri/wiki/Configuration:-Debug-Options
+        # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsdebug
+        # settings = {
+        #   debug = {
+        #     disable-cursor-plane = []; # Software cursor
+        #     disable-direct-scanout = [];
+        #   };
+        # };
+      };
 
-        # HACK: Replace read-only finalConfig until extraConfig is supported
-        # https://github.com/sodiboo/niri-flake/issues/825
-        xdg.configFile = {
-          # https://github.com/sodiboo/niri-flake/blob/59ed19d431324af3fcebbf623c081eae2e67ab97/flake.nix#L395
-          niri-config.enable = mkForce false;
+      # HACK: Replace read-only finalConfig until extraConfig is supported
+      # https://github.com/sodiboo/niri-flake/issues/825
+      xdg.configFile = {
+        # https://github.com/sodiboo/niri-flake/blob/59ed19d431324af3fcebbf623c081eae2e67ab97/flake.nix#L395
+        niri-config.enable = mkForce false;
 
-          # TODO: Move to niri-flake when supported
-          # HACK: Merge kdl nodes into module config
-          # https://github.com/sodiboo/niri-flake/blob/main/settings.nix
-          # https://github.com/sodiboo/niri-flake/blob/main/default-config.kdl.nix
-          #?? :p config.home-manager.users.<user>.xdg.configFile."niri/config.kdl".text
-          #?? :p lib.findFirst (node: lib.isAttrs node && node.name == "<node>") [] config.home-manager.users.<user>.programs.niri.config
-          "niri/config.kdl".text = with inputs.niri-flake.lib.kdl;
-            serialize.nodes ((forEach hm.programs.niri.config (node: let
-                isNode = name: isAttrs node && node.name == name;
-                nodeWithChildren = children: node // {children = node.children ++ children;};
-              in
-                # Inject into existing nodes
-                if isNode "binds"
-                then
-                  nodeWithChildren [
-                  ]
-                else node))
-              ++ [
-                # Top-level nodes
-                (plain "overview" [(leaf "zoom" 0.5)])
-              ]);
-        };
-      }
-    ];
+        # TODO: Move to niri-flake when supported
+        # HACK: Merge kdl nodes into module config
+        # https://github.com/sodiboo/niri-flake/blob/main/settings.nix
+        # https://github.com/sodiboo/niri-flake/blob/main/default-config.kdl.nix
+        #?? :p config.home-manager.users.<user>.xdg.configFile."niri/config.kdl".text
+        #?? :p lib.findFirst (node: lib.isAttrs node && node.name == "<node>") [] config.home-manager.users.<user>.programs.niri.config
+        "niri/config.kdl".text = with inputs.niri-flake.lib.kdl;
+          serialize.nodes ((forEach hm.programs.niri.config (node: let
+              isNode = name: isAttrs node && node.name == name;
+              nodeWithChildren = children: node // {children = node.children ++ children;};
+            in
+              # Inject into existing nodes
+              if isNode "binds"
+              then
+                nodeWithChildren [
+                ]
+              else node))
+            ++ [
+              # Top-level nodes
+              (plain "overview" [(leaf "zoom" 0.5)])
+            ]);
+      };
+    };
   };
 }
