@@ -3,4 +3,5 @@
 result
 result-*
 
-install.log
+# Custom
+tmp
