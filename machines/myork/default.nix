@@ -43,11 +43,14 @@
       };
 
       storage = {
-        encrypt = true;
+        defaultMounts = ["/dev/disk/by-label/myve"];
+        swapSize = 32;
         key.enable = true;
-        #// mnt = ["myve"];
-        offset = 225239338; #?? sudo btrfs inspect-internal map-swapfile -r /var/lib/swapfile
-        swap = 32; # GiB
+
+        root = {
+          device = "/dev/disk/by-id/nvme-WD_BLACK_SN770_2TB_23414P805868";
+          encrypted = true;
+        };
       };
     };
   };

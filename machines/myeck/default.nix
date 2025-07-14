@@ -1,6 +1,5 @@
 {
   imports = [
-    ./disko.nix
     ./hardware-configuration.nix
   ];
 
@@ -13,6 +12,11 @@
 
     settings = {
       boot.systemd-boot.enable = true;
+
+      storage = {
+        swapSize = 16;
+        root.device = "/dev/disk/by-id/nvme-KINGSTON_OM3PDP3512B-A01_50026B7685DF927E";
+      };
     };
   };
 }

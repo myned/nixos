@@ -15,9 +15,8 @@
       boot.systemd-boot.enable = true;
 
       storage = {
-        enable = true;
-        mnt = ["local"];
-        swap = 32; # GiB
+        swapSize = 32;
+        root.device = "/dev/disk/by-id/?";
       };
     };
   };

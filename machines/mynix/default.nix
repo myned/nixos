@@ -68,15 +68,18 @@
       };
 
       storage = {
-        encrypt = true;
+        swapSize = 32;
         key.enable = true;
-        offset = 30753211; #?? sudo btrfs inspect-internal map-swapfile -r /var/lib/swapfile
-        swap = 32; # GiB
 
-        mnt = [
-          "gaymes1"
-          "gaymes2"
+        defaultMounts = [
+          "/dev/disk/by-label/gaymes1"
+          "/dev/disk/by-label/gaymes2"
         ];
+
+        root = {
+          device = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_500GB_S5H7NS1NB31826A";
+          encrypted = true;
+        };
       };
 
       # vm.passthrough = {
