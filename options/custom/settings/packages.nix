@@ -245,7 +245,7 @@ in {
           # TODO: Separate into standalone package for absolute path reference
           # https://wiki.nixos.org/wiki/Python#Package_unavailable_in_Nixpkgs
           # https://wiki.nixos.org/wiki/Packaging/Python
-          (python311.withPackages (
+          (python312.withPackages (
             ps:
               with ps; [
                 # lifx-cli
@@ -255,6 +255,8 @@ in {
                   version = "master";
                   src = inputs.lifx-cli;
                   doCheck = false;
+                  pyproject = true;
+                  build-system = with ps; [setuptools];
                   propagatedBuildInputs = [requests];
                 })
               ]
