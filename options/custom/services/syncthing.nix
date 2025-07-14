@@ -133,7 +133,7 @@ in {
       configDir = cfg.configDir;
       dataDir = cfg.dataDir;
       extraFlags = ["-no-default-folder"]; # Disable automatic creation of Sync folder
-      guiAddress = "${config.custom.services.tailscale.ip}:8384";
+      guiAddress = "${config.custom.services.tailscale.ipv4}:8384";
       openDefaultPorts = true; # Transfer/discovery ports
       user = cfg.user;
       group = cfg.group;
@@ -195,15 +195,23 @@ in {
         };
       in
         {
-          # Ensure creation of config directory
+          # BUG: configDir not created with proper permissions
+          # https://github.com/NixOS/nixpkgs/issues/97389
           ${cfg.configDir} = {
             d = owner "0700"; # -rwx------
             z = owner "0700"; # -rwx------
           };
         }
-        # HACK: Manually create .stignore files in lieu of option
-        # https://github.com/NixOS/nixpkgs/pull/353770
         // concatMapAttrs (folder: _: {
+          # BUG: Parent directories are created with root:root ownership
+          # https://github.com/systemd/systemd/issues/4497
+          "${cfg.dataDir}/${folder}" = {
+            d = owner "0700"; # -rwx------
+            z = owner "0700"; # -rwx------
+          };
+
+          # HACK: Manually create .stignore files in lieu of option
+          # https://github.com/NixOS/nixpkgs/pull/353770
           "${cfg.dataDir}/${folder}/.stignore" = {
             "f+" = owner "0400" // {argument = cfg.ignores;}; # -r--------
             z = owner "0400"; # -r--------
