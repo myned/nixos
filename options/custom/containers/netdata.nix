@@ -77,7 +77,7 @@ in {
           container_name = "netdata-vpn";
           env_file = [config.age.secrets."common/tailscale/container.env".path];
           hostname = "${config.custom.hostname}-netdata";
-          image = "ghcr.io/tailscale/tailscale:latest"; # https://github.com/tailscale/tailscale/pkgs/container/tailscale
+          image = "ghcr.io/tailscale/tailscale:v1.84.3"; # https://github.com/tailscale/tailscale/pkgs/container/tailscale
           restart = "unless-stopped";
           volumes = ["${config.custom.containers.directory}/netdata/vpn:/var/lib/tailscale"];
         };
