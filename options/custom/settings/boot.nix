@@ -17,10 +17,6 @@ in {
         default = false;
         type = types.bool;
       };
-
-      device = mkOption {
-        type = types.str;
-      };
     };
 
     kernel = mkOption {
@@ -92,7 +88,6 @@ in {
 
         grub = mkIf cfg.grub.enable {
           enable = true;
-          devices = [cfg.grub.device];
         };
 
         systemd-boot = mkIf cfg.systemd-boot.enable {
