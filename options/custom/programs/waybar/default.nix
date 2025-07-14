@@ -60,7 +60,7 @@ in {
       };
     };
 
-    #?? grep . /sys/class/thermal/thermal_zone*/type
+    #?? grep . /sys/class/thermal/thermal_zone*/temp
     #?? grep . /sys/class/hwmon/hwmon*/temp*_input
     temperature = {
       cpu = {
