@@ -39,11 +39,9 @@ in {
 
     users = {
       defaultUserShell = cfg.shell;
-      mutableUsers = false; # !! Immutable users
+      mutableUsers = false; #!! Immutable users
 
       users = {
-        #!! secrets/PROFILE/users/USERNAME.pass hashedPasswordFile is required
-
         root.hashedPasswordFile = config.age.secrets."${config.custom.hostname}/users/root.pass".path;
 
         ${config.custom.username} = {
@@ -55,6 +53,11 @@ in {
           uid = 1000;
         };
       };
+    };
+
+    home-manager.users = {
+      root.home.homeDirectory = config.users.users.root.home;
+      ${config.custom.username}.home.homeDirectory = config.users.users.${config.custom.username}.home;
     };
   };
 }
