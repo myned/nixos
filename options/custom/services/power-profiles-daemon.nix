@@ -26,14 +26,13 @@ in {
       auto-cpufreq.enable = false;
       tlp.enable = false;
 
-      # FIXME: Randomly sets profile to power-saver
-      # Switch to power-saver mode when on battery
+      # Switch to power-saver mode when on battery or balanced when charging
       # https://wiki.archlinux.org/title/Power_management#Using_a_script_and_an_udev_rule
       udev.extraRules = mkIf cfg.auto ''
         # AC
-        SUBSYSTEM=="power_supply", ATTR{online}=="1", RUN+="${powerprofilesctl} set balanced"
+        SUBSYSTEM=="power_supply", ATTR{type}=="Battery", ATTR{status}=="Charging", RUN+="${powerprofilesctl} set balanced"
         # Battery
-        SUBSYSTEM=="power_supply", ATTR{online}=="0", RUN+="${powerprofilesctl} set power-saver"
+        SUBSYSTEM=="power_supply", ATTR{type}=="Battery", ATTR{status}=="Discharging", RUN+="${powerprofilesctl} set power-saver"
       '';
     };
 
