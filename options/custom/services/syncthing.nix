@@ -145,7 +145,11 @@ in {
       # https://github.com/NixOS/nixpkgs/issues/121286
       #!! GUI configured imperatively
       settings = {
-        options.urAccepted = 1; # Usage statistics
+        options = {
+          globalAnnounceEnabled = false; # Global discovery allows device spoofing
+          urAccepted = 1; # Usage report enabled
+          urSeen = 3; # Usage report version
+        };
 
         # BUG: Defaults are not applied via API
         # https://github.com/syncthing/syncthing/issues/6748
