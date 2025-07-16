@@ -13,6 +13,7 @@ with lib; {
       nixgl.enable = true;
       packages.enable = true;
       storage.enable = true;
+      stylix.enable = true;
       users.enable = true;
     })
 
@@ -22,7 +23,6 @@ with lib; {
       #// gtk.enable = true;
       #// icons.enable = true;
       #// qt.enable = true;
-      stylix.enable = true;
       xdg.enable = true;
     })
 
