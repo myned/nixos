@@ -3,6 +3,9 @@
 # BUG: Unrecognized subdirective {block}, requires block when importing if defined
 # https://github.com/caddyserver/caddy/issues/6821
 
+# BUG: Anonymous blocks are not supported when importing with a subdirective block
+# https://github.com/caddyserver/caddy/issues/7083
+
 #?? import handle <host> [host ...]
 (handle) {
 	@handle-{args[0]} host {args[:]}

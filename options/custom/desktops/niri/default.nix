@@ -56,6 +56,9 @@ in {
       package = inputs.niri.packages.${pkgs.system}.default;
     };
 
+    # BUG: Dependent on automatic home-manager module import via stylix.homeManagerIntegration.autoImport
+    # https://github.com/sodiboo/niri-flake/issues/135
+    #?? Attribute config.stylix.enable missing, used in niri-flake
     nixpkgs.overlays = [inputs.niri-flake.overlays.niri];
 
     # Disable bundled KDE polkit agent by default
