@@ -139,6 +139,8 @@ in {
           };
         };
 
+        # TODO: Revisit when merged
+        # https://github.com/NixOS/nixpkgs/pull/421549
         # HACK: Fix libvirt not automatically locating firmware
         # https://github.com/NixOS/nixpkgs/issues/115996#issuecomment-2224296279
         # https://libvirt.org/formatdomain.html#bios-bootloader
