@@ -21,8 +21,8 @@
 
       waybar = {
         temperature = {
-          cpu.zone = 0;
-          gpu.zone = 3;
+          cpu.zone = 3;
+          gpu.sensor = "/sys/class/hwmon/hwmon1/temp1_input";
         };
       };
     };
