@@ -60,8 +60,8 @@ in {
       };
     };
 
-    #?? grep . /sys/class/thermal/thermal_zone*/temp
-    #?? grep . /sys/class/hwmon/hwmon*/temp*_input
+    #?? sensors && grep . /sys/class/thermal/thermal_zone*/temp
+    #?? sensors && grep . /sys/class/hwmon/hwmon*/temp*_input
     temperature = {
       cpu = {
         sensor = mkOption {
