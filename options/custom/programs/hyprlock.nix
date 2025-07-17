@@ -23,7 +23,6 @@ in {
           # https://wiki.hyprland.org/Hypr-Ecosystem/hyprlock/#general
           general = {
             disable_loading_bar = true;
-            #// grace = 60; # Seconds
             #// hide_cursor = true;
             #// ignore_empty_input = true;
             #// immediate_render = true;
