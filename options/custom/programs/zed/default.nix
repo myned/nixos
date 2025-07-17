@@ -311,7 +311,7 @@ in {
 
           # Language models
           # https://zed.dev/docs/assistant/assistant
-          assistant = {
+          agent = {
             default_model = {
               model = "codegemma:7b";
               provider = "ollama";
