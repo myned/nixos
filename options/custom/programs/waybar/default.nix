@@ -219,9 +219,9 @@ in {
             modules-right = [
               "mpris"
               "tray"
-              "backlight"
               "custom/equalizer"
               "wireplumber"
+              "backlight"
               "bluetooth"
               "upower#controller"
               "upower#earbuds"
