@@ -181,3 +181,7 @@ tooltip label {
 #custom-vpn.connected {
   color: #d33682;
 }
+
+#custom-vpn.disabled {
+  color: #dc322f;
+}

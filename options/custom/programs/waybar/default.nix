@@ -630,7 +630,11 @@ in {
               common
               // {
                 exec = pkgs.writeShellScript "vpn.sh" ''
-                  if [[ $(${tailscale} status --json | ${jq} .ExitNodeStatus.Online) == 'true' ]]; then
+                  if ! ${tailscale} status &> /dev/null; then
+                    ${echo} 󰖂
+                    ${echo} Disabled
+                    ${echo} disabled
+                  elif [[ $(${tailscale} status --json | ${jq} .ExitNodeStatus.Online) == 'true' ]]; then
                     ${echo} 󰖂
                     ${echo} Connected
                     ${echo} connected
