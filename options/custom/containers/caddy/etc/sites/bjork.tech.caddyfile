@@ -44,7 +44,7 @@ bjork.tech {
 	import cors
 	import vpn
 	import proxy beszel.admin.bjork.tech {system.hostname}-beszel:8090 # Beszel
-	import proxy-insecure cloud.admin.bjork.tech myosh:8080 # Nextcloud AIO
+	import proxy-insecure nextcloud.admin.bjork.tech myosh:8080 # Nextcloud AIO
 	#// import proxy dash.admin.bjork.tech myosh:3001 # dash.
 	#// import proxy grafana.admin.bjork.tech {system.hostname}-grafana:3000 # Grafana
 	#// import proxy jackett.admin.bjork.tech myosh-jellyfin:9117 # Jackett
