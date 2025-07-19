@@ -17,7 +17,7 @@ in {
     virtualisation.arion.projects.adguardhome.settings.services = {
       # https://github.com/AdguardTeam/AdGuardHome
       # https://adguard-dns.io/kb/adguard-home/overview/
-      #?? ls /var/lib/caddy/.local/share/caddy/certificates/*
+      #?? ls /containers/caddy/data/caddy/certificates/*
       adguardhome.service = {
         container_name = "adguardhome";
         depends_on = ["vpn"];
@@ -26,6 +26,7 @@ in {
         restart = "unless-stopped";
 
         volumes = [
+          # https://github.com/AdguardTeam/AdGuardHome/wiki/Configuration#configuration-file
           "${config.custom.containers.directory}/adguardhome/config:/opt/adguardhome/conf"
           "${config.custom.containers.directory}/adguardhome/data:/opt/adguardhome/data"
         ];
@@ -45,22 +46,22 @@ in {
           NET_ADMIN = true;
         };
 
-        # ports = [
-        #   "53:53/tcp" # DNS
-        #   "53:53/udp" # DNS
-        #   "853:853/tcp" # DNS-over-TLS
-        #   "853:853/udp" # DNS-over-QUIC
-        #   "3003:80/tcp" # Admin panel
-        #   "8443:443/tcp" # DNS-over-HTTPS
-        # ];
+        ports = [
+          #// "53:53/tcp" # DNS
+          #// "53:53/udp" # DNS
+          "853:853/tcp" # DNS-over-TLS
+          "853:853/udp" # DNS-over-QUIC
+          #// "3003:80/tcp" # Admin panel
+          #// "8443:443/tcp" # DNS-over-HTTPS
+        ];
       };
     };
 
     # https://github.com/AdguardTeam/AdGuardHome/wiki/Encryption
-    # networking.firewall = {
-    #   allowedTCPPorts = [853]; # DNS-over-TLS
-    #   allowedUDPPorts = [853]; # DNS-over-QUIC
-    # };
+    networking.firewall = {
+      allowedTCPPorts = [853]; # DNS-over-TLS
+      allowedUDPPorts = [853]; # DNS-over-QUIC
+    };
 
     # https://adguard-dns.io/kb/adguard-home/faq/#bindinuse
     # services.resolved.extraConfig = ''

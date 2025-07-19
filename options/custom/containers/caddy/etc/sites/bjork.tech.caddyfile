@@ -22,6 +22,16 @@ bjork.tech {
 	import proxy status.bjork.tech {system.hostname}-kener:3000 # Kener
 	import proxy vault.bjork.tech myosh:8088 # Vaultwarden
 
+	# AdGuard Home DNS-over-HTTPS
+	@dns host dns.bjork.tech
+	handle @dns {
+		#!! Requires trusted_proxies in AdGuardHome.yaml
+		#?? sudo nano /containers/adguardhome/config/AdGuardHome.yaml
+		reverse_proxy /dns-query/* {system.hostname}-adguardhome:80 {
+			header_up X-Real-IP {client_ip}
+		}
+	}
+
 	# Synapse
 	import handle matrix.bjork.tech {
 		reverse_proxy /_matrix/* myosh:8008
@@ -38,6 +48,12 @@ bjork.tech {
 	# }
 }
 
+# AdGuard Home DNS-over-TLS
+*.dns.bjork.tech {
+	import global
+	import cloudflare
+}
+
 *.admin.bjork.tech {
 	import global
 	import cloudflare
@@ -46,6 +62,7 @@ bjork.tech {
 	import proxy beszel.admin.bjork.tech {system.hostname}-beszel:8090 # Beszel
 	import proxy-insecure nextcloud.admin.bjork.tech myosh:8080 # Nextcloud AIO
 	#// import proxy dash.admin.bjork.tech myosh:3001 # dash.
+	import proxy adguardhome.admin.bjork.tech {system.hostname}-adguardhome:80
 	#// import proxy grafana.admin.bjork.tech {system.hostname}-grafana:3000 # Grafana
 	#// import proxy jackett.admin.bjork.tech myosh-jellyfin:9117 # Jackett
 	import proxy lidarr.admin.bjork.tech myosh-jellyfin:8686 # Lidarr
@@ -84,18 +101,6 @@ bjork.tech {
 	#// import proxy stream.vpn.bjork.tech myosh:8800 # Owncast
 	import proxy tv.vpn.bjork.tech myosh:8470 # Stremio Client
 	import proxy tv-api.vpn.bjork.tech myosh:11470 # Stremio Server
-
-	# FIXME: Move wildcard to another block
-	# AdGuard Home
-	import handle dns.vpn.bjork.tech *.dns.vpn.bjork.tech {
-		# tls {
-		# 	# FIXME: Certificate chain fails to import from LetsEncrypt
-		# 	ca https://acme.zerossl.com/v2/DV90
-		# }
-
-		reverse_proxy {system.hostname}-adguardhome:80
-		reverse_proxy /dns-query {system.hostname}-adguardhome:8443
-	}
 
 	# Oryx
 	# import handle stream.vpn.bjork.tech {
