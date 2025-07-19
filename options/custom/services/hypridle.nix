@@ -36,7 +36,7 @@ in {
 
       settings.listener = [
         {
-          timeout = 15; # Seconds
+          timeout = 30; # Seconds
           on-timeout = ''${pgrep} --exact hyprlock && ${cfg.dpms}''; # Turn off display if currently locked
         }
 
