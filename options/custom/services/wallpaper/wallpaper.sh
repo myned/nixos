@@ -24,7 +24,7 @@ while true; do
 
   # Send unaltered image to server in background
   #!! Hostname dependent
-  rsync "$WALLPAPER" "$STATIC" &
+  rsync --mkpath "$WALLPAPER" "$STATIC" &
 
   sleep "$INTERVAL"m
 done
