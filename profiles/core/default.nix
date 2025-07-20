@@ -20,6 +20,7 @@
       ntfy.enable = true;
       portainer.enable = true;
       portainer.server = true;
+      rustdesk.enable = true;
       #// syncthing.enable = true;
       #// syncthing.server = true;
       #// uptimekuma.enable = true;
