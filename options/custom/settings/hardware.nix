@@ -14,11 +14,35 @@ in {
       type = with types; nullOr (enum ["amd" "intel"]);
     };
 
-    # TODO: Move top-level display vars to specific options
     display = {
-      forceModesFor = mkOption {
-        default = null;
-        type = with types; nullOr (listOf str);
+      # TODO: Parse over outputs instead of using separate option
+      forceModes = mkOption {
+        default = false;
+        type = types.bool;
+      };
+
+      # TODO: Use submodule type
+      outputs = mkOption {
+        default = [];
+        description = "List of output attrsets";
+        type = types.attrs;
+
+        example = [
+          {
+            DP-1 = {
+              width = 1920;
+              height = 1080;
+              refresh = 60;
+              force = true;
+              vrr = true;
+
+              position = {
+                x = 0;
+                y = 0;
+              };
+            };
+          }
+        ];
       };
     };
 
@@ -78,10 +102,10 @@ in {
 
         # https://wiki.archlinux.org/title/Kernel_mode_setting#Forcing_modes_and_EDID
         # https://docs.kernel.org/fb/modedb.html
-        display.outputs = mkIf (!isNull cfg.display.forceModesFor) (listToAttrs (forEach cfg.display.forceModesFor (output: {
-          name = output;
-          value = with config.custom; {mode = "${toString width}x${toString height}MR@${toString refresh}";};
-        })));
+        display.outputs = mkIf cfg.display.forceModes (mapAttrs (name: value: {
+            mode = with value; "${toString width}x${toString height}MR@${toString refresh}";
+          })
+          cfg.display.outputs);
       }
       // optionalAttrs (with config.custom.settings.hardware; dgpu.driver == "amdgpu" || igpu.driver == "amdgpu") {
         # Fix initramfs boot resolution

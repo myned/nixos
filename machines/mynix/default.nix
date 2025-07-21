@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  config,
+  inputs,
+  ...
+}: {
   imports = [
     "${inputs.nixos-hardware}/common/cpu/intel/alder-lake"
     "${inputs.nixos-hardware}/common/gpu/amd"
@@ -10,18 +14,6 @@
     width = 3440;
     height = 1440;
     refresh = 75;
-
-    # BUG: Cursor updates cause refresh rate fluctuation, so disable for now
-    # https://github.com/YaLTeR/niri/issues/1214
-    #// vrr = true;
-
-    desktops = {
-      niri.output = {
-        connectors = ["DP-1" "DP-2" "DP-3" "DP-4" "DP-5"];
-        disabled = ["HDMI-A-1" "HDMI-A-2" "HDMI-A-3" "HDMI-A-4" "HDMI-A-5"];
-        refresh = 74.979;
-      };
-    };
 
     programs = {
       looking-glass.enable = true;
@@ -47,7 +39,39 @@
       hardware = {
         cpu = "intel";
         rocm = "10.3.0"; # 10.3.1
-        display.forceModesFor = ["DP-1" "DP-2" "DP-3" "DP-4" "DP-5"];
+
+        display = with config.custom; {
+          forceModes = true;
+
+          outputs = {
+            DP-1 = {
+              width = 1920;
+              height = 1200;
+              refresh = 60;
+              vrr = false;
+
+              position = {
+                x = width;
+                y = 0;
+              };
+            };
+
+            DP-2 = {
+              inherit width height;
+              refresh = 74.979;
+              force = true;
+
+              # BUG: Cursor updates cause refresh rate fluctuation, so disable for now
+              # https://github.com/YaLTeR/niri/issues/1214
+              vrr = false;
+
+              position = {
+                x = 0;
+                y = 0;
+              };
+            };
+          };
+        };
 
         dgpu = {
           driver = "amdgpu";

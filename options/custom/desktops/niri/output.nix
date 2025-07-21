@@ -7,14 +7,7 @@ with lib; let
   cfg = config.custom.desktops.niri.output;
 in {
   options.custom.desktops.niri.output = {
-    enable = mkOption {default = false;};
-    connectors = mkOption {default = [];};
-    disabled = mkOption {default = [];};
-
-    refresh = mkOption {
-      default = config.custom.refresh + 0.0; # Convert to float
-      type = types.float;
-    };
+    enable = mkEnableOption "output";
   };
 
   config = mkIf cfg.enable {
@@ -22,29 +15,24 @@ in {
       # https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
       # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsoutputs
       #?? niri msg outputs
-      programs.niri.settings.outputs = listToAttrs (forEach cfg.connectors (connector: {
-          name = connector;
+      programs.niri.settings.outputs =
+        mapAttrs (name: value: {
+          backdrop-color = "#073642";
+          background-color = "#073642";
+          position = value.position;
 
-          value = {
-            # TODO: Uncomment when implemented in flake options
-            # https://github.com/YaLTeR/niri/pull/1440
-            #// backdrop-color = "#073642";
-
-            background-color = "#073642";
-
-            mode = with config.custom; {
-              inherit width height;
-              refresh = cfg.refresh;
-            };
-
-            scale = config.custom.scale;
-            variable-refresh-rate = mkIf config.custom.vrr "on-demand"; #!! Requires window-rule
+          mode = {
+            width = value.width;
+            height = value.height;
+            refresh = value.refresh + 0.0;
           };
+
+          variable-refresh-rate =
+            if value.vrr
+            then "on-demand" #!! Requires window-rule
+            else false;
         })
-        ++ (forEach cfg.disabled (connector: {
-          name = connector;
-          value = {enable = false;};
-        })));
+        config.custom.settings.hardware.display.outputs;
     };
   };
 }
