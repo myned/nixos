@@ -29,15 +29,13 @@
     "prefix": "na",
     "description": "NixOS Agenix",
     "body": [
-      "age.secrets =",
-      "  let",
-      "    secret = filename: {",
-      "      file = \"\\${inputs.self}/secrets/\\${filename}\";",
-      "    };",
-      "  in",
-      "  {",
-      "    \"$1\" = secret \"$1\";",
-      "  };"
+      "age.secrets = listToAttrs (map (name: {",
+      "    inherit name;",
+      "    value = {file = \"\\${inputs.self}/secrets/\\${name}\";};",
+      "  })",
+      "  [",
+      "    \"\\${config.custom.hostname}/$1/.env\"",
+      "  ]);"
     ]
   },
 
