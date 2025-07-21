@@ -6,6 +6,8 @@
 }:
 with lib; let
   cfg = config.custom.programs.zed;
+
+  hujsonfmt = getExe pkgs.hujsonfmt;
 in {
   options.custom.programs.zed = {
     enable = mkOption {default = false;};
@@ -44,6 +46,7 @@ in {
       # https://zed.dev/
       # https://github.com/zed-industries/zed
       # https://wiki.nixos.org/wiki/Zed
+      #!! Mutable settings
       programs.zed-editor = {
         enable = true;
 
@@ -241,22 +244,27 @@ in {
           file_types = {
             # https://github.com/kartikvashistha/zed-ansible?tab=readme-ov-file#filetype-detection
             Ansible = [
-              "**.ansible.yml"
-              "**.ansible.yaml"
-              "**/defaults/*.yml"
               "**/defaults/*.yaml"
-              "**/meta/*.yml"
-              "**/meta/*.yaml"
-              "**/tasks/*.yml"
-              "**/tasks/*.yaml"
-              "**/handlers/*.yml"
-              "**/handlers/*.yaml"
-              "**/group_vars/*.yml"
+              "**/defaults/*.yml"
               "**/group_vars/*.yaml"
+              "**/group_vars/*.yml"
+              "**/handlers/*.yaml"
+              "**/handlers/*.yml"
+              "**/meta/*.yaml"
+              "**/meta/*.yml"
               "**/playbooks/*.yaml"
               "**/playbooks/*.yml"
-              "**playbook*.yaml"
-              "**playbook*.yml"
+              "**/tasks/*.yaml"
+              "**/tasks/*.yml"
+              "*.ansible.yaml"
+              "*.ansible.yml"
+              "*playbook*.yaml"
+              "*playbook*.yml"
+            ];
+
+            # https://github.com/tailscale/hujson?tab=readme-ov-file#visual-studio-code-association
+            JSONC = [
+              "*.hujson"
             ];
           };
 
@@ -267,7 +275,7 @@ in {
             Astro = {
               formatter.external = {
                 command = "npx";
-                arguments = ["prettier" "--parser=astro" "--write"];
+                arguments = ["prettier" "--parser=astro"];
               };
             };
 
@@ -280,6 +288,11 @@ in {
                 command = "caddy";
                 arguments = ["fmt" "-"];
               };
+            };
+
+            # https://zed.dev/docs/languages/json
+            JSONC = {
+              formatter.external.command = hujsonfmt;
             };
 
             # https://zed.dev/docs/languages/markdown
@@ -302,6 +315,14 @@ in {
           # Language servers
           # https://zed.dev/docs/configuring-languages#configuring-language-servers
           lsp = {
+            # https://github.com/tailscale/hujson?tab=readme-ov-file#visual-studio-code-association
+            json-language-server.settings.json.schemas = [
+              {
+                fileMatch = ["*.hujson"];
+                schema.allowTrailingCommas = true;
+              }
+            ];
+
             # https://github.com/oxalica/nil/blob/main/docs/configuration.md
             nil.initialization_options = {
               formatting.command = ["alejandra"];
