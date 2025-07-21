@@ -68,6 +68,16 @@ in {
         default = null;
         type = with types; nullOr str;
       };
+
+      ppp = mkOption {
+        default = false;
+        type = types.bool;
+      };
+
+      prefix = mkOption {
+        default = null;
+        type = with types; nullOr str;
+      };
     };
 
     ipv6 = {
@@ -77,6 +87,16 @@ in {
       };
 
       gateway = mkOption {
+        default = null;
+        type = with types; nullOr str;
+      };
+
+      ppp = mkOption {
+        default = false;
+        type = types.bool;
+      };
+
+      prefix = mkOption {
         default = null;
         type = with types; nullOr str;
       };
@@ -135,10 +155,10 @@ in {
         networks."10-static" = mkIf cfg.static {
           address =
             optionals (!isNull cfg.ipv4.address) [
-              cfg.ipv4.address
+              "${cfg.ipv4.address}${cfg.ipv4.prefix}"
             ]
             ++ optionals (!isNull cfg.ipv6.address) [
-              cfg.ipv6.address
+              "${cfg.ipv6.address}${cfg.ipv6.prefix}"
             ];
 
           gateway =
@@ -157,10 +177,27 @@ in {
             Name = cfg.interface;
           };
 
-          networkConfig = {
-            DHCP = mkIf (isNull cfg.ipv4.address) "ipv4";
-            IPv6AcceptRA = isNull cfg.ipv6.address;
-          };
+          networkConfig =
+            optionalAttrs (isNull cfg.ipv4.address) {
+              DHCP = "ipv4";
+            }
+            // optionalAttrs (isNull cfg.ipv6.address) {
+              IPv6AcceptRA = true;
+            };
+
+          routes =
+            optionals cfg.ipv4.ppp [
+              {
+                Gateway = cfg.ipv4.gateway;
+                GatewayOnLink = true;
+              }
+            ]
+            ++ optionals cfg.ipv6.ppp [
+              {
+                Gateway = cfg.ipv6.gateway;
+                GatewayOnLink = true;
+              }
+            ];
         };
       };
 

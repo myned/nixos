@@ -19,9 +19,18 @@
       networking = {
         static = true;
 
+        ipv4 = {
+          address = "5.161.105.159";
+          gateway = "172.31.1.1";
+          ppp = true;
+          prefix = "/32";
+        };
+
         ipv6 = {
-          address = "2a01:4ff:f0:d346::1/64";
+          address = "2a01:4ff:f0:d346::1";
           gateway = "fe80::1";
+          ppp = true;
+          prefix = "/64";
         };
       };
 
