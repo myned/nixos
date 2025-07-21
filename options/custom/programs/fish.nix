@@ -296,16 +296,19 @@ in {
               si = "ssh -o KexAlgorithms=+diffie-hellman-group1-sha1 -o HostkeyAlgorithms=+ssh-rsa -o Ciphers=aes256-cbc";
 
               t = "sudo tailscale";
+              t4 = "tailscale ip --4";
+              t6 = "tailscale ip --6";
               td = "sudo tailscale down";
               te = "sudo tailscale exit-node";
-              ti = "tailscale ip --4";
+              ti = "tailscale ip --4 % | wl-copy -n";
+              tii = "tailscale ip --6 % | wl-copy -n";
               tl = "sudo tailscale login";
               tlo = "sudo tailscale logout";
               tp = "tailscale ping";
               tn = "tailscale netcheck";
               ts = "tailscale status";
               tss = "tailscale ssh";
-              tsw = "sudo tailscale switch";
+              tw = "sudo tailscale switch";
               tt = "sudo tailscale set";
               tu = "sudo tailscale up";
               tuu = "sudo tailscale up --ssh --advertise-exit-node --accept-routes --qr --reset --login-server=https://ts.${config.custom.domain} --auth-key=%";
