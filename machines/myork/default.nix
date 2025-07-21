@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  config,
+  inputs,
+  ...
+}: {
   imports = [
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
     ./hardware-configuration.nix
@@ -9,10 +13,6 @@
     width = 2256;
     height = 1504;
     scale = 1.5;
-
-    desktops = {
-      niri.output.connectors = ["eDP-1"];
-    };
 
     programs = {
       # BUG: Phoenix support not currently functional
@@ -44,6 +44,19 @@
         cpu = "amd";
         dgpu.driver = "amdgpu";
         rocm = "11.0.2"; # 11.0.3
+
+        display.outputs = with config.custom; {
+          eDP-1 = {
+            inherit width height refresh scale vrr;
+            finalRefresh = refresh;
+            force = false;
+
+            position = {
+              x = 0;
+              y = 0;
+            };
+          };
+        };
       };
 
       storage = {

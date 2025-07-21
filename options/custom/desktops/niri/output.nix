@@ -20,11 +20,12 @@ in {
           backdrop-color = "#073642";
           background-color = "#073642";
           position = value.position;
+          scale = value.scale + 0.0;
 
           mode = {
             width = value.width;
             height = value.height;
-            refresh = value.refresh + 0.0;
+            refresh = value.finalRefresh + 0.0;
           };
 
           variable-refresh-rate =

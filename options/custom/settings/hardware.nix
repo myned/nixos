@@ -33,8 +33,9 @@ in {
               width = 1920;
               height = 1080;
               refresh = 60;
-              force = true;
+              scale = 1;
               vrr = true;
+              force = true;
 
               position = {
                 x = 0;

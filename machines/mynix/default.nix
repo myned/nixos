@@ -48,7 +48,10 @@
               width = 1920;
               height = 1200;
               refresh = 60;
+              finalRefresh = 60;
+              scale = 1;
               vrr = false;
+              force = false;
 
               position = {
                 x = width;
@@ -57,13 +60,13 @@
             };
 
             DP-2 = {
-              inherit width height;
-              refresh = 74.979;
+              inherit width height refresh scale vrr;
+              finalRefresh = 74.979;
               force = true;
 
               # BUG: Cursor updates cause refresh rate fluctuation, so disable for now
               # https://github.com/YaLTeR/niri/issues/1214
-              vrr = false;
+              #// vrr = true;
 
               position = {
                 x = 0;
