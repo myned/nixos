@@ -12,7 +12,6 @@ in {
   # https://tailscale.com/kb/1320/performance-best-practices
   # https://github.com/tailscale/tailscale
   #!! Configuration is imperative
-  #?? sudo tailscale up --ssh --advertise-exit-node --accept-routes --operator=$USER --reset --qr
   options.custom.services.tailscale = {
     enable = mkOption {default = false;};
     cert = mkOption {default = false;};

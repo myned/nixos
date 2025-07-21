@@ -295,18 +295,20 @@ in {
               s = "ssh";
               si = "ssh -o KexAlgorithms=+diffie-hellman-group1-sha1 -o HostkeyAlgorithms=+ssh-rsa -o Ciphers=aes256-cbc";
 
-              t = "tailscale";
+              t = "sudo tailscale";
               td = "sudo tailscale down";
               te = "sudo tailscale exit-node";
               ti = "tailscale ip --4";
               tl = "sudo tailscale login";
+              tlo = "sudo tailscale logout";
               tp = "tailscale ping";
               tn = "tailscale netcheck";
               ts = "tailscale status";
               tss = "tailscale ssh";
+              tsw = "sudo tailscale switch";
               tt = "sudo tailscale set";
               tu = "sudo tailscale up";
-              tw = "sudo tailscale switch";
+              tuu = "sudo tailscale up --ssh --advertise-exit-node --accept-routes --qr --reset --login-server=https://ts.${config.custom.domain} --auth-key=%";
 
               txa = "tmux attach";
               txd = "tmux detach";
