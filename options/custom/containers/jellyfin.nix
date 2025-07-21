@@ -32,17 +32,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    age.secrets = let
-      secret = filename: {
-        file = "${inputs.self}/secrets/${filename}";
-        owner = cfg.uid;
-        group = cfg.gid;
-      };
-    in {
-      "${config.custom.hostname}/jellyfin/soularr.ini" = secret "${config.custom.hostname}/jellyfin/soularr.ini";
-      "${config.custom.hostname}/jellyfin/vpn.env" = secret "${config.custom.hostname}/jellyfin/vpn.env";
-    };
-
     #?? arion-jellyfin pull
     environment.shellAliases.arion-jellyfin = "sudo arion --prebuilt-file ${config.virtualisation.arion.projects.jellyfin.settings.out.dockerComposeYaml}";
 
@@ -246,7 +235,7 @@ in {
         vpn.service = {
           container_name = "jellyfin-vpn";
           devices = ["/dev/net/tun:/dev/net/tun"];
-          env_file = [config.age.secrets."${config.custom.hostname}/jellyfin/vpn.env".path];
+          env_file = [config.age.secrets."common/tailscale/container.env".path];
           hostname = "${config.custom.hostname}-jellyfin";
           image = "ghcr.io/tailscale/tailscale:v1.84.3"; # https://github.com/tailscale/tailscale/pkgs/container/tailscale
           restart = "unless-stopped";
@@ -312,5 +301,18 @@ in {
           "${config.custom.containers.directory}/jellyfin/slskd"
           "${config.custom.containers.directory}/jellyfin/sonarr"
         ]);
+
+    age.secrets = listToAttrs (map (name: {
+        inherit name;
+
+        value = {
+          file = "${inputs.self}/secrets/${name}";
+          owner = cfg.uid;
+          group = cfg.gid;
+        };
+      })
+      [
+        "${config.custom.hostname}/jellyfin/soularr.ini"
+      ]);
   };
 }
