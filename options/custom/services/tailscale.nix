@@ -19,7 +19,7 @@ in {
     ipv4 = mkOption {default = "";};
     ipv6 = mkOption {default = "";};
     firewall = mkOption {default = true;};
-    tailnet = mkOption {default = "fenrir-musical.ts.net";};
+    tailnet = mkOption {default = "vpn.${config.custom.domain}";};
     tray = mkOption {default = false;};
   };
 

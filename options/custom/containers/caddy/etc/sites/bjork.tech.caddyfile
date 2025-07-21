@@ -46,6 +46,14 @@ bjork.tech {
 	# 	header_up X-Client-Port {http.request.remote.port}
 	# 	header_up X-Tls-Client-Cert-Der-Base64 {http.request.tls.client.certificate_der_base64}
 	# }
+
+	# Tailscale
+	@ts host ts.bjork.tech
+	handle @ts {
+		redir / /admin
+		reverse_proxy /admin* {system.hostname}:3003 # Headplane
+		reverse_proxy ts.bjork.tech {system.hostname}:9999 # Headscale
+	}
 }
 
 # AdGuard Home DNS-over-TLS

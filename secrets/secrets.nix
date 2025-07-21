@@ -48,7 +48,9 @@ in {
   "myore/caddy/.env" = key myore;
   "myore/caddy/Caddyfile" = key myore;
   "myore/coturn/coturn.conf" = key myore;
-  "myore/headscale/.env" = key myore;
+  "myore/headscale/config.yaml" = key myore;
+  "myore/headscale/policy.hujson" = key myore;
+  "myore/headscale/ui.yaml" = key myore;
   "myore/kener/.env" = key myore;
   "myore/kener/db.env" = key myore;
   "myore/netdata/parent.conf" = key myore;
