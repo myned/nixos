@@ -35,14 +35,21 @@ _build() {
     nix flake update
   fi
 
-  # Build and send closures to remote machine
-  if [[ "${argc_target:-}" ]]; then
-    nixos-rebuild --flake ".#${argc_target}" --target-host "root@${argc_target}" "$1" --show-trace ${argc_extra:+"${argc_extra[@]}"}
-  else
-    # Build current system
-    if [[ "${argc_builder:-}" == nh ]]; then
+  # Build current system
+  if [[ "${argc_builder:-}" == nh ]]; then
+    if [[ "${argc_target:-}" ]]; then
+      # Build and send closures to remote machine
+      nh os "$1" --hostname "${argc_target}" --target-host "root@${argc_target}" -- --show-trace ${argc_extra:+"${argc_extra[@]}"}
+    else
+      # Build local machine
       nh os "$1" -- --show-trace ${argc_extra:+"${argc_extra[@]}"}
-    elif [[ "${argc_builder:-}" == nixos ]]; then
+    fi
+  elif [[ "${argc_builder:-}" == nixos ]]; then
+    if [[ "${argc_target:-}" ]]; then
+      # Build and send closures to remote machine
+      nixos-rebuild --flake ".#${argc_target}" --target-host "root@${argc_target}" "$1" --show-trace ${argc_extra:+"${argc_extra[@]}"}
+    else
+      # Build local machine
       sudo nixos-rebuild "$1" --show-trace ${argc_extra:+"${argc_extra[@]}"}
     fi
   fi
