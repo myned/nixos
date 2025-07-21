@@ -145,7 +145,11 @@ in {
     gc = {
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than +10"; # Keep last 10 generations
+
+      # BUG: Does not support +N period
+      # https://github.com/NixOS/nix/issues/9455
+      # https://github.com/NixOS/nix/pull/10426
+      options = "--delete-older-than 7d";
     };
 
     # API access tokens to increase rate limits
