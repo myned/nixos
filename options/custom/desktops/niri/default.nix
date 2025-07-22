@@ -7,8 +7,6 @@
 }:
 with lib; let
   cfg = config.custom.desktops.niri;
-
-  # TODO: Use let bindings for hm config everywhere
   hm = config.home-manager.users.${config.custom.username};
 in {
   options.custom.desktops.niri = {
@@ -52,8 +50,8 @@ in {
     # https://github.com/sodiboo/niri-flake
     programs.niri = {
       enable = true;
-      #// package = pkgs.niri; # nixpkgs
-      package = inputs.niri.packages.${pkgs.system}.default;
+      package = pkgs.niri;
+      #// package = inputs.niri.packages.${pkgs.system}.default;
     };
 
     # BUG: Dependent on automatic home-manager module import via stylix.homeManagerIntegration.autoImport
