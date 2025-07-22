@@ -32,8 +32,6 @@
     };
 
     services = {
-      sshd.enable = true;
-
       borgmatic = {
         enable = true;
         repositories = ["ssh://ylnb45tz@ylnb45tz.repo.borgbase.com/./repo"];
