@@ -18,7 +18,7 @@ in {
     ipv4 = mkOption {default = "";};
     ipv6 = mkOption {default = "";};
     firewall = mkOption {default = true;};
-    tailnet = mkOption {default = "vpn.${config.custom.domain}";};
+    tailnet = mkOption {default = "vpn";};
     tray = mkOption {default = false;};
   };
 
