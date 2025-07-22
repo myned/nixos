@@ -115,7 +115,7 @@ in {
     };
 
     console = {
-      earlySetup = true;
+      #// earlySetup = true;
 
       # https://wiki.nixos.org/wiki/Console_Fonts
       # https://wiki.archlinux.org/title/Linux_console#Fonts
