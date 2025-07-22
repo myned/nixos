@@ -14,8 +14,8 @@
 
     services = {
       tailscale = {
-        ipv4 = "100.125.118.95";
-        ipv6 = "fd7a:115c:a1e0::ac01:7660";
+        ipv4 = "100.127.25.101";
+        ipv6 = "fd7a:115c:a1e0:c329:ce5d:fa94:76dc:7eb5";
       };
     };
 
