@@ -65,8 +65,8 @@ in {
 
       kernel.sysctl = mkIf config.custom.default {
         # https://wiki.archlinux.org/title/Sysctl#Virtual_memory
-        "vm.dirty_bytes" = 256 * 1024 * 1024; # 256MB
-        "vm.dirty_background_bytes" = 128 * 1024 * 1024; # 128MB
+        "vm.dirty_bytes" = 256 * 1024 * 1024; # 256 MiB
+        "vm.dirty_background_bytes" = 128 * 1024 * 1024; # 128 MiB
         "vm.vfs_cache_pressure" = 50; # Default: 100
 
         # https://wiki.archlinux.org/title/Swap#Swappiness
