@@ -102,7 +102,7 @@ bjork.tech {
 	import proxy matrix.vpn.bjork.tech myosh:8008 # Synapse
 	import proxy media.vpn.bjork.tech myosh-jellyfin:8096 # Jellyfin
 	import proxy media-next.vpn.bjork.tech myosh-jellyfin:8097 # Jellyfin Vue
-	import proxy notify.vpn.bjork.tech localhost:2586 # ntfy
+	import proxy notify.vpn.bjork.tech {system.hostname}:2586 # ntfy
 	import proxy reddit.vpn.bjork.tech myosh:8888 # Redlib
 	#// import proxy search.vpn.bjork.tech myosh:8888 # SearXNG
 	import proxy stream.vpn.bjork.tech myosh.{$TAILNET}:3333 # OvenMediaEngine
