@@ -20,6 +20,7 @@ bjork.tech {
 	import proxy git.bjork.tech myosh-forgejo:3000 # Forgejo
 	#// import proxy net.bjork.tech myosh:8585 # Netbox
 	import proxy status.bjork.tech {system.hostname}-kener:3000 # Kener
+	import proxy ts.bjork.tech {system.hostname}:9999 # Headscale
 	import proxy vault.bjork.tech myosh:8088 # Vaultwarden
 
 	# AdGuard Home DNS-over-HTTPS
@@ -46,14 +47,6 @@ bjork.tech {
 	# 	header_up X-Client-Port {http.request.remote.port}
 	# 	header_up X-Tls-Client-Cert-Der-Base64 {http.request.tls.client.certificate_der_base64}
 	# }
-
-	# Tailscale
-	@ts host ts.bjork.tech
-	handle @ts {
-		redir / /admin
-		reverse_proxy /admin* {system.hostname}:3003 # Headplane
-		reverse_proxy ts.bjork.tech {system.hostname}:9999 # Headscale
-	}
 }
 
 # AdGuard Home DNS-over-TLS
@@ -67,14 +60,14 @@ bjork.tech {
 	import cloudflare
 	import cors
 	import vpn
-	import proxy beszel.admin.bjork.tech {system.hostname}-beszel:8090 # Beszel
-	import proxy-insecure nextcloud.admin.bjork.tech myosh:8080 # Nextcloud AIO
-	#// import proxy dash.admin.bjork.tech myosh:3001 # dash.
 	import proxy adguardhome.admin.bjork.tech {system.hostname}-adguardhome:80
+	import proxy beszel.admin.bjork.tech {system.hostname}-beszel:8090 # Beszel
+	#// import proxy dash.admin.bjork.tech myosh:3001 # dash.
 	#// import proxy grafana.admin.bjork.tech {system.hostname}-grafana:3000 # Grafana
 	#// import proxy jackett.admin.bjork.tech myosh-jellyfin:9117 # Jackett
 	import proxy lidarr.admin.bjork.tech myosh-jellyfin:8686 # Lidarr
 	import proxy matrix.admin.bjork.tech myosh:8000 # Synapse Admin
+	import proxy-insecure nextcloud.admin.bjork.tech myosh:8080 # Nextcloud AIO
 	import proxy-insecure portainer.admin.bjork.tech {system.hostname}-portainer:9443 # Portainer
 	#// import proxy prometheus.admin.bjork.tech {system.hostname}-grafana:9090 # Prometheus
 	import proxy prowlarr.admin.bjork.tech myosh-jellyfin:9696 # Prowlarr
@@ -82,6 +75,13 @@ bjork.tech {
 	import proxy radarr.admin.bjork.tech myosh-jellyfin:7878 # Radarr
 	import proxy slskd.admin.bjork.tech myosh-jellyfin:5030 # slskd
 	import proxy sonarr.admin.bjork.tech myosh-jellyfin:8989 # Sonarr
+
+	# Headplane
+	@headscale host headscale.admin.bjork.tech
+	handle @headscale {
+		redir / /admin
+		reverse_proxy /admin* {system.hostname}:3003
+	}
 
 	# Netdata
 	# import handle netdata.admin.bjork.tech {
