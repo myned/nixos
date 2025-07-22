@@ -179,6 +179,7 @@ in {
           #// protonvpn-gui # Proton VPN client
           #// ptyxis # Terminal
           pwvucontrol # Pipewire volume controller
+          qdiskinfo # Disk information
           remmina # Remote desktop client
           rustdesk-flutter # Remote desktop client
           showtime # Video player
