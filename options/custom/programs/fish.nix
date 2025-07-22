@@ -26,17 +26,53 @@ in {
               position = "anywhere";
               setCursor = true;
             }) {
+              "/b" = "/boot/%";
+              "/bi" = "/bin/%";
+              "/c" = "/containers/%";
+              "/d" = "/dev/%";
+              "/dd" = "/dev/disk/%";
+              "/ddb" = "/dev/disk/by-%";
               "/e" = "/etc/%";
               "/en" = "/etc/nixos/%";
               "/h" = "~/%";
-              "/hd" = "~/.dev/%";
+              "/h.c" = "~/.config/%";
+              "/h.d" = "~/.dev/%";
+              "/h.l" = "~/.local/%";
+              "/h.lb" = "~/.local/bin/%";
+              "/h.ls" = "~/.local/share/%";
+              "/h.s" = "~/.ssh/%";
+              "/hde" = "~/Desktop/%";
+              "/hdo" = "~/Downloads/%";
+              "/hdoc" = "~/Documents/%";
+              "/hm" = "~/Music/%";
+              "/hp" = "~/Pictures/%";
+              "/hps" = "~/Pictures/Screenshots/%";
+              "/hpub" = "~/Public/%";
+              "/hs" = "~/${config.custom.sync}/%";
+              "/hv" = "~/Videos/%";
+              "/m" = "/mnt/%";
+              "/ml" = "/mnt/local/%";
+              "/mr" = "/mnt/remote/%";
               "/n" = "/nix/%";
               "/nv" = "/nix/var/%";
               "/nvn" = "/nix/var/nix/%";
               "/nvnp" = "/nix/var/nix/profiles/%";
               "/nvnps" = "/nix/var/nix/profiles/system/%";
+              "/o" = "/opt/%";
+              "/p" = "/proc/%";
               "/r" = "/run/%";
               "/rc" = "/run/current-system/%";
+              "/ro" = "/root/%";
+              "/s" = "/srv/%";
+              "/sy" = "/sys/%";
+              "/syc" = "/sys/class/%";
+              "/t" = "/tmp/%";
+              "/u" = "/usr/%";
+              "/ub" = "/usr/bin/%";
+              "/v" = "/var/%";
+              "/vl" = "/var/lib/%";
+              "/vlo" = "/var/log/%";
+              "/vr" = "/var/run/%";
             }
             //
             # Set all cursor positions to %
@@ -96,6 +132,16 @@ in {
               ds = "sudo docker system";
               dsp = "sudo docker system prune";
               dspav = "sudo docker system prune --all --volumes";
+
+              dd = "sudo dd if=% of= status=progress";
+
+              dir = "direnv";
+              dira = "direnv allow";
+              dire = "direnv edit";
+              dirr = "direnv reload";
+              dirs = "direnv status";
+              dirt = "direnv export";
+              dirx = "direnv exec";
 
               e = "exit";
 
