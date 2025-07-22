@@ -26,6 +26,16 @@
         #// kernel = pkgs.linuxPackages_rpi3;
         u-boot.enable = true;
       };
+
+      storage = {
+        prebuiltImage = true;
+        swapSize = 4;
+
+        root = {
+          device = "/dev/disk/by-label/NIXOS_SD";
+          type = "ext4";
+        };
+      };
     };
   };
 
@@ -38,11 +48,4 @@
       options brcmfmac feature_disable=0x282000 roamoff=1
     '';
   };
-
-  swapDevices = [
-    {
-      device = "/var/swapfile";
-      size = 4 * 1024; # GiB * 1024
-    }
-  ];
 }

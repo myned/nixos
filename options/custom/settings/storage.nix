@@ -16,6 +16,13 @@ in {
       type = with types; listOf path;
     };
 
+    prebuiltImage = mkOption {
+      default = false;
+      description = "Whether the disk layout follows the official NixOS image";
+      example = true;
+      type = types.bool;
+    };
+
     swapSize = mkOption {
       default = null;
       description = "Size of the swapfile to create, in GiB";
@@ -162,90 +169,91 @@ in {
         else if cfg.root.type == "ext4"
         then ext4
         else null;
-    in {
-      disk =
-        {
-          main = {
-            type = "disk";
-            device = cfg.root.device;
+    in
+      mkIf (!cfg.prebuiltImage) {
+        disk =
+          {
+            main = {
+              type = "disk";
+              device = cfg.root.device;
 
-            content = {
-              type = "gpt";
+              content = {
+                type = "gpt";
 
-              partitions =
-                # https://github.com/nix-community/disko/blob/master/example/gpt-bios-compat.nix
-                optionalAttrs config.custom.settings.boot.grub.enable {
-                  boot = {
-                    type = "EF02";
-                    size = "1M";
-                  };
-                }
-                # https://github.com/nix-community/disko/blob/master/example/simple-efi.nix
-                // optionalAttrs config.custom.settings.boot.systemd-boot.enable {
-                  esp = {
-                    type = "EF00";
-                    size = "1G";
-
-                    content = {
-                      type = "filesystem";
-                      format = "vfat";
-                      mountpoint = "/boot";
+                partitions =
+                  # https://github.com/nix-community/disko/blob/master/example/gpt-bios-compat.nix
+                  optionalAttrs config.custom.settings.boot.grub.enable {
+                    boot = {
+                      type = "EF02";
+                      size = "1M";
                     };
-                  };
-                }
-                // optionalAttrs (!cfg.root.encrypted) {
-                  root = {
-                    inherit content;
-                    size = "100%";
-                  };
-                }
-                // optionalAttrs cfg.root.encrypted {
-                  # https://github.com/nix-community/disko/blob/master/example/luks-btrfs-subvolumes.nix
-                  luks = {
-                    size = "100%";
+                  }
+                  # https://github.com/nix-community/disko/blob/master/example/simple-efi.nix
+                  // optionalAttrs config.custom.settings.boot.systemd-boot.enable {
+                    esp = {
+                      type = "EF00";
+                      size = "1G";
 
-                    content = {
+                      content = {
+                        type = "filesystem";
+                        format = "vfat";
+                        mountpoint = "/boot";
+                      };
+                    };
+                  }
+                  // optionalAttrs (!cfg.root.encrypted) {
+                    root = {
                       inherit content;
-                      type = "luks";
-                      name = "crypted";
-                      passwordFile = "/tmp/secret.key"; # Only during installation
-                      additionalKeyFiles = [cfg.key.path];
+                      size = "100%";
+                    };
+                  }
+                  // optionalAttrs cfg.root.encrypted {
+                    # https://github.com/nix-community/disko/blob/master/example/luks-btrfs-subvolumes.nix
+                    luks = {
+                      size = "100%";
 
-                      settings = {
-                        allowDiscards = true; # https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)
-                        bypassWorkqueues = true; # https://wiki.archlinux.org/title/Dm-crypt/Specialties#Disable_workqueue_for_increased_solid_state_drive_(SSD)_performance
+                      content = {
+                        inherit content;
+                        type = "luks";
+                        name = "crypted";
+                        passwordFile = "/tmp/secret.key"; # Only during installation
+                        additionalKeyFiles = [cfg.key.path];
+
+                        settings = {
+                          allowDiscards = true; # https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)
+                          bypassWorkqueues = true; # https://wiki.archlinux.org/title/Dm-crypt/Specialties#Disable_workqueue_for_increased_solid_state_drive_(SSD)_performance
+                        };
                       };
                     };
                   };
-                };
+              };
             };
-          };
-        }
-        # BUG: Formatting only, disko does not use filesystem labels to mount
-        # https://github.com/nix-community/disko/issues/184
-        // optionalAttrs cfg.raid.enable {
-          raid = {
-            type = "disk";
-            device = elemAt cfg.raid.devices 0; # Arbitrarily use the first device
+          }
+          # BUG: Formatting only, disko does not use filesystem labels to mount
+          # https://github.com/nix-community/disko/issues/184
+          // optionalAttrs cfg.raid.enable {
+            raid = {
+              type = "disk";
+              device = elemAt cfg.raid.devices 0; # Arbitrarily use the first device
 
-            content = {
-              type = "gpt";
+              content = {
+                type = "gpt";
 
-              partitions = {
-                ${cfg.raid.label} = {
-                  label = cfg.raid.label;
-                  size = "100%";
+                partitions = {
+                  ${cfg.raid.label} = {
+                    label = cfg.raid.label;
+                    size = "100%";
 
-                  content = {
-                    type = "btrfs";
-                    extraArgs = ["-f" "-m" cfg.raid.type "-d" cfg.raid.type] ++ cfg.raid.devices;
+                    content = {
+                      type = "btrfs";
+                      extraArgs = ["-f" "-m" cfg.raid.type "-d" cfg.raid.type] ++ cfg.raid.devices;
+                    };
                   };
                 };
               };
             };
           };
-        };
-    };
+      };
 
     # https://wiki.nixos.org/wiki/Filesystems
     # https://nixos.org/manual/nixos/stable/#sec-installation-manual-partitioning
@@ -265,6 +273,15 @@ in {
           ];
         };
       }))
+      # Mount filesystem without disko, assumes prebuilt image instead of iso installer
+      # https://wiki.nixos.org/wiki/NixOS_on_ARM/Installation
+      // optionalAttrs (cfg.prebuiltImage) {
+        "/" = {
+          device = cfg.root.device;
+          fsType = cfg.root.type;
+          options = ["noatime"];
+        };
+      }
       # Mount RAID filesystem created by disko
       // optionalAttrs cfg.raid.enable {
         "/mnt/${cfg.raid.label}" = {
