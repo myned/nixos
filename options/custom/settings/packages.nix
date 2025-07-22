@@ -143,6 +143,7 @@ in {
           gnome-text-editor # Text editor
           gnome-tweaks # GNOME extras
           gnome-usage # System monitor
+          gparted # Disk utility
           #// gradience # GTK theme editor
           gtk4.dev # GTK4 icon browser
           gtkterm # Serial terminal
