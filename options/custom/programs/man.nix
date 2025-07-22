@@ -16,7 +16,7 @@ in {
 
       man = {
         generateCaches = true; # Index manpages for search
-        man-db.enable = false; # !! Hangs on building man-cache
+        man-db.enable = false; #!! Hangs on building man-cache
         mandoc.enable = true;
       };
     };
