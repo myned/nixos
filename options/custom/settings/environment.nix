@@ -14,7 +14,14 @@ in {
 
   config = mkIf cfg.enable {
     # https://wiki.nixos.org/wiki/Cross_Compiling
-    boot.binfmt.emulatedSystems = mkIf cfg.builder ["aarch64-linux"]; # Emulate architecture
+    boot.binfmt = {
+      emulatedSystems = optionals cfg.builder ["aarch64-linux"];
+
+      # Fix binaries in chroot (nixos-enter)
+      # https://github.com/NixOS/nixpkgs/issues/346504
+      preferStaticEmulators = true;
+    };
+
     #// nixpkgs.buildPlatform = "x86_64-linux"; # Binary caches often not available
 
     environment = {
