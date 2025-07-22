@@ -81,9 +81,9 @@ in {
           display-keys = "󰌌";
           display-run = "";
           display-ssh = "";
-          drun-display-format = "{name}";
-          #// drun-match-fields = "name";
-          matching = "fuzzy";
+          #// drun-display-format = "{name}";
+          drun-match-fields = "name,generic";
+          matching = "prefix";
           sort = true;
           sorting-method = "fzf"; # https://github.com/jhawthorn/fzy/blob/master/ALGORITHM.md
         };
