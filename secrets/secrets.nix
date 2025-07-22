@@ -21,7 +21,7 @@ let
   myore = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBn/6eJvcDsjphoqFrGlPqMUf3wya3LYgFf2RoutpRVu root@myore";
   myork = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDMhK3IdmV57jEtvUeEQn+NrWP5Wlh4sYlxq2eDi39nW root@myork";
   myosh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIENq879QYYHnC8542PB+nzrU0SyWiAEkzWhTFrZxJ5n6 root@myosh";
-  mypi3 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPUu7C0uj4Ia5Xzttbeq3em1DbhEdMDrm9MOoFcw+BLU root@mypi3";
+  mypi3 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHfJT4DX8pakYra4CDSTksFG1RCPkuoGt2YC3MNF2H1f root@mypi3";
 
   common = [myeck myeye mynix myore myork myosh mypi3];
 
