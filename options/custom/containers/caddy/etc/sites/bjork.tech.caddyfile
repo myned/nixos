@@ -110,6 +110,17 @@ bjork.tech {
 	import proxy tv.vpn.bjork.tech myosh:8470 # Stremio Client
 	import proxy tv-api.vpn.bjork.tech myosh:11470 # Stremio Server
 
+	# OpenSpeedTest
+	# https://github.com/openspeedtest/Speed-Test/issues/67
+	@speed host speed.vpn.bjork.tech
+	handle @speed {
+		reverse_proxy {system.hostname}-openspeedtest:3000 {
+			request_buffers 35MiB
+			response_buffers 35MiB
+			flush_interval -1
+		}
+	}
+
 	# Oryx
 	# import handle stream.vpn.bjork.tech {
 	# 	reverse_proxy myosh:2022

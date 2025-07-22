@@ -18,6 +18,7 @@
       kener.enable = true;
       #// netdata.enable = true;
       ntfy.enable = true;
+      openspeedtest.enable = true;
       portainer.enable = true;
       portainer.server = true;
       rustdesk.enable = true;
