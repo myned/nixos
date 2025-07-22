@@ -124,6 +124,12 @@ in {
           ".zen/${cfg.profile}/zen-themes.json" = sync "linux/config/zen/zen-themes.json";
         };
       };
+
+      # https://nix-community.github.io/stylix/options/modules/zen-browser.html
+      stylix.targets.zen-browser = {
+        enable = false;
+        profileNames = [cfg.profile];
+      };
     };
   };
 }

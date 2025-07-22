@@ -13,6 +13,8 @@ in {
     # https://github.com/fish-shell/fish-shell
     programs.fish.enable = true;
 
+    stylix.targets.fish.enable = true;
+
     home-manager.sharedModules = [
       {
         programs.fish = {
@@ -386,6 +388,9 @@ in {
             set -g fish_greeting
           '';
         };
+
+        # https://nix-community.github.io/stylix/options/modules/fish.html
+        stylix.targets.fish.enable = true;
       }
     ];
   };

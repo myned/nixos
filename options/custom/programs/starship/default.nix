@@ -240,6 +240,9 @@ in {
             '';
           };
         };
+
+        # https://nix-community.github.io/stylix/options/modules/starship.html
+        stylix.targets.starship.enable = true;
       }
     ];
   };

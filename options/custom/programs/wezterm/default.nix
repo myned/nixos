@@ -63,5 +63,8 @@ in {
         ];
       };
     };
+
+    # https://nix-community.github.io/stylix/options/modules/wezterm.html
+    stylix.targets.wezterm.enable = false;
   };
 }

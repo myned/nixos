@@ -63,6 +63,9 @@ in {
         # https://nix-community.github.io/home-manager/options.xhtml#opt-wayland.windowManager.sway.wrapperFeatures
         wrapperFeatures.gtk = true;
       };
+
+      # https://nix-community.github.io/stylix/options/modules/sway.html
+      stylix.targets.sway.enable = true;
     };
   };
 }

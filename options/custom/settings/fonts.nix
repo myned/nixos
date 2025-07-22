@@ -162,6 +162,11 @@ in {
         ]);
     };
 
+    stylix.targets = {
+      font-packages.enable = true;
+      fontconfig.enable = true;
+    };
+
     home-manager.users.${config.custom.username} = {
       # HACK: Some applications do not support fontconfig nor symlinks, so copy fonts to user directory
       # https://github.com/ONLYOFFICE/DocumentServer/issues/1859 et al.
@@ -172,6 +177,11 @@ in {
           run ${rsync} --recursive --copy-links --times --delete \
             /run/current-system/sw/share/X11/fonts "${hm.home.sessionVariables.XDG_DATA_HOME}/"
         '';
+      };
+
+      stylix.targets = {
+        font-packages.enable = true; # https://nix-community.github.io/stylix/options/modules/font-packages.html
+        fontconfig.enable = true; # https://nix-community.github.io/stylix/options/modules/fontconfig.html
       };
     };
   };

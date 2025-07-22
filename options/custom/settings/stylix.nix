@@ -17,7 +17,10 @@ in {
     # https://stylix.danth.me/configuration.html
     stylix = {
       enable = true;
-      autoEnable = true;
+
+      # BUG: Modules not guarded by enabled NixOS option, causing unnecessary builds
+      # https://github.com/nix-community/stylix/issues/543
+      autoEnable = false;
 
       # https://stylix.danth.me/configuration.html#color-scheme
       # https://github.com/tinted-theming/schemes
@@ -51,6 +54,12 @@ in {
           terminal = 14;
         };
       };
+
+      targets = {
+        gtk.enable = true; # https://nix-community.github.io/stylix/options/modules/gtk.html
+        gtksourceview.enable = true; # https://nix-community.github.io/stylix/options/modules/gtksourceview.html
+        qt.enable = true; # https://nix-community.github.io/stylix/options/modules/qt.html
+      };
     };
 
     home-manager.users.${config.custom.username} = {
@@ -71,17 +80,21 @@ in {
         #!! Accent colors are not the same globally, so override each target individually
         # https://github.com/danth/stylix/issues/402
         targets = {
-          # TODO: Use gtksourceview target when merged
-          # https://github.com/danth/stylix/issues/954
-          gnome-text-editor.enable = false;
+          gtksourceview.enable = true;
+          qt.enable = true;
 
-          gtk.extraCss = ''
-            @define-color accent_color #d33682;
-            @define-color accent_bg_color #d33682;
-            @define-color window_bg_color #073642;
-            @define-color borders #073642;
-            @define-color unfocused_borders #073642;
-          '';
+          gtk = {
+            enable = true;
+            flatpakSupport.enable = true;
+
+            extraCss = ''
+              @define-color accent_color #d33682;
+              @define-color accent_bg_color #d33682;
+              @define-color window_bg_color #073642;
+              @define-color borders #073642;
+              @define-color unfocused_borders #073642;
+            '';
+          };
         };
       };
 

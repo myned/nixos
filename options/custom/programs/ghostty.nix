@@ -98,6 +98,9 @@ in {
           };
         };
       };
+
+      # https://nix-community.github.io/stylix/options/modules/ghostty.html
+      stylix.targets.ghostty.enable = true;
     };
   };
 }

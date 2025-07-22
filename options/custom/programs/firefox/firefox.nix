@@ -37,8 +37,8 @@ in {
 
       # https://stylix.danth.me/options/modules/firefox.html
       stylix.targets.firefox = {
-        # https://github.com/rafaelmardojai/firefox-gnome-theme
-        firefoxGnomeTheme.enable = true;
+        enable = true;
+        firefoxGnomeTheme.enable = true; # https://github.com/rafaelmardojai/firefox-gnome-theme
         profileNames = [cfg.profile];
       };
     };

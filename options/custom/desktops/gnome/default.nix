@@ -41,5 +41,12 @@ in {
           };
         }
       );
+
+    # https://nix-community.github.io/stylix/options/modules/gnome.html
+    stylix.targets.gnome.enable = true;
+
+    home-manager.users.${config.custom.username} = {
+      stylix.targets.gnome.enable = true;
+    };
   };
 }

@@ -54,5 +54,8 @@ in {
         }
       '';
     };
+
+    # https://nix-community.github.io/stylix/options/modules/wofi.html
+    stylix.targets.wofi.enable = false;
   };
 }

@@ -77,6 +77,9 @@ in {
         # };
       };
 
+      # https://github.com/sodiboo/niri-flake/blob/main/docs.md#homemodulesstylix
+      stylix.targets.niri.enable = true;
+
       # HACK: Replace read-only finalConfig until extraConfig is supported
       # https://github.com/sodiboo/niri-flake/issues/825
       xdg.configFile = {

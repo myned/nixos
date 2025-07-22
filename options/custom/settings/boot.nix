@@ -24,6 +24,11 @@ in {
       type = types.attrs;
     };
 
+    plymouth = mkOption {
+      default = false;
+      type = types.bool;
+    };
+
     systemd-boot = {
       enable = mkOption {
         default = false;
@@ -104,8 +109,8 @@ in {
       };
 
       # https://wiki.nixos.org/wiki/Plymouth
-      plymouth = {
-        #// enable = true;
+      plymouth = optionalAttrs cfg.plymouth {
+        enable = true;
       };
     };
 
@@ -116,6 +121,12 @@ in {
       # https://wiki.archlinux.org/title/Linux_console#Fonts
       # https://adeverteuil.github.io/linux-console-fonts-screenshots/
       #// font = "Lat2-Terminus16";
+    };
+
+    stylix.targets = {
+      console.enable = true; # https://nix-community.github.io/stylix/options/modules/console.html
+      grub.enable = cfg.grub; # https://nix-community.github.io/stylix/options/modules/grub.html
+      plymouth.enable = cfg.plymouth; # https://nix-community.github.io/stylix/options/modules/plymouth.html
     };
   };
 }

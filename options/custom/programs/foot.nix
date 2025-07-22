@@ -43,5 +43,8 @@ in {
         };
       };
     };
+
+    # https://nix-community.github.io/stylix/options/modules/foot.html
+    stylix.targets.foot.enable = false;
   };
 }

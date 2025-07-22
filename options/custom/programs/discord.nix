@@ -46,6 +46,9 @@ in {
           source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/common/config/discord/BetterDiscord";
         };
       };
+
+      # https://nix-community.github.io/stylix/options/modules/discord.html
+      stylix.targets.vesktop.enable = cfg.client == "vesktop";
     };
   };
 }

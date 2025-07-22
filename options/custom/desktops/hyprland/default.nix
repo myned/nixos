@@ -56,9 +56,10 @@ in {
     };
 
     home-manager.users.${config.custom.username} = {
-      wayland.windowManager.hyprland = {
-        enable = true;
-      };
+      wayland.windowManager.hyprland.enable = true;
+
+      # https://nix-community.github.io/stylix/options/modules/hyprland.html
+      stylix.targets.hyprland.enable = true;
     };
   };
 }

@@ -498,6 +498,9 @@ in {
       xdg.configFile = {
         "zed/snippets/".source = ./snippets;
       };
+
+      # https://nix-community.github.io/stylix/options/modules/zed.html
+      stylix.targets.zed.enable = false;
     };
   };
 }

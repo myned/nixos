@@ -355,6 +355,9 @@ in {
       };
     };
 
+    # https://nix-community.github.io/stylix/options/modules/chromium.html
+    stylix.targets.chromium.enable = true;
+
     home-manager.users.${config.custom.username} = {
       programs.chromium = {
         enable = true;

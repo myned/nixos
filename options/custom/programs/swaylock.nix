@@ -67,6 +67,9 @@ in {
           then "%H:%M"
           else "%I:%M %p";
       };
+
+      # https://nix-community.github.io/stylix/options/modules/swaylock.html
+      stylix.targets.swaylock.enable = false;
     };
   };
 }

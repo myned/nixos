@@ -6,18 +6,25 @@
 with lib; let
   cfg = config.custom.services.hyprpaper;
 in {
-  options.custom.services.hyprpaper.enable = mkOption {default = false;};
+  options.custom.services.hyprpaper = {
+    enable = mkEnableOption "hyprpaper";
+  };
 
-  config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
-    # https://wiki.hyprland.org/Hypr-Ecosystem/hyprpaper
-    # https://github.com/hyprwm/hyprpaper
-    services.hyprpaper = {
-      enable = true;
+  config = mkIf cfg.enable {
+    home-manager.users.${config.custom.username} = {
+      # https://wiki.hyprland.org/Hypr-Ecosystem/hyprpaper
+      # https://github.com/hyprwm/hyprpaper
+      services.hyprpaper = {
+        enable = true;
 
-      settings = {
-        preload = ["/tmp/altered.png"];
-        wallpaper = [", /tmp/altered.png"];
+        settings = {
+          preload = ["/tmp/altered.png"];
+          wallpaper = [", /tmp/altered.png"];
+        };
       };
+
+      # https://nix-community.github.io/stylix/options/modules/hyprpaper.html
+      stylix.targets.hyprpaper.enable = true;
     };
   };
 }

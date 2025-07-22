@@ -16,5 +16,10 @@ in {
       shortcut = "t";
       terminal = "tmux-256color";
     };
+
+    home-manager.users.${config.custom.username} = {
+      # https://nix-community.github.io/stylix/options/modules/tmux.html
+      stylix.targets.tmux.enable = true;
+    };
   };
 }
