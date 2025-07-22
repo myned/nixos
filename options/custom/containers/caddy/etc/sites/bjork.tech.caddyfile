@@ -90,6 +90,14 @@ bjork.tech {
 	# }
 }
 
+vpn.bjork.tech {
+	import global
+	import cloudflare
+	import cors
+	import vpn
+	import serve vpn.bjork.tech
+}
+
 *.vpn.bjork.tech {
 	import global
 	import cloudflare
