@@ -125,7 +125,7 @@ in {
 
     stylix.targets = {
       console.enable = true; # https://nix-community.github.io/stylix/options/modules/console.html
-      grub.enable = cfg.grub; # https://nix-community.github.io/stylix/options/modules/grub.html
+      grub.enable = cfg.grub.enable; # https://nix-community.github.io/stylix/options/modules/grub.html
       plymouth.enable = cfg.plymouth; # https://nix-community.github.io/stylix/options/modules/plymouth.html
     };
   };

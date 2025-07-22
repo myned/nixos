@@ -500,7 +500,7 @@ in {
       };
 
       # https://nix-community.github.io/stylix/options/modules/zed.html
-      stylix.targets.zed.enable = false;
+      stylix.targets.zed.enable = true;
     };
   };
 }
