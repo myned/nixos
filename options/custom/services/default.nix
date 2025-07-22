@@ -11,6 +11,7 @@ with lib; {
       geoclue2.enable = true;
       #// kmscon.enable = true;
       #// netbird.enable = true;
+      #// postfix.enable = true;
       smartd.enable = true;
       sshd.enable = true;
       tailscale.enable = true;
