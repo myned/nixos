@@ -45,8 +45,7 @@ in {
           container_name = "jellyfin";
           depends_on = ["vpn"];
           image = "ghcr.io/jellyfin/jellyfin:10.10"; # https://github.com/jellyfin/jellyfin/pkgs/container/jellyfin
-          network_mode = "service:vpn";
-          #// ports = ["8096:8096/tcp"];
+          network_mode = "service:vpn"; # 8096/tcp
           restart = "unless-stopped";
           user = "${cfg.uid}:${cfg.gid}";
 
@@ -64,8 +63,7 @@ in {
         #   container_name = "jellyfin-flaresolverr";
         #   depends_on = ["vpn"];
         #   image = "ghcr.io/flaresolverr/flaresolverr:latest"; # https://github.com/FlareSolverr/FlareSolverr/pkgs/container/flaresolverr
-        #   network_mode = "service:vpn";
-        #   #// ports = ["8191:8191/tcp"];
+        #   network_mode = "service:vpn"; # 8191/tcp
         #   restart = "unless-stopped";
         #   user = "${cfg.uid}:${cfg.gid}";
         # };
@@ -76,8 +74,7 @@ in {
           container_name = "jellyfin-jellyseerr";
           depends_on = ["jellyfin" "vpn"];
           image = "ghcr.io/fallenbagel/jellyseerr:latest"; # https://github.com/fallenbagel/jellyseerr/pkgs/container/jellyseerr
-          network_mode = "service:vpn";
-          #// ports = ["5055:5055/tcp"];
+          network_mode = "service:vpn"; # 5055/tcp
           restart = "unless-stopped";
           user = "${cfg.uid}:${cfg.gid}";
           volumes = ["${config.custom.containers.directory}/jellyfin/jellyseerr:/app/config"];
@@ -89,8 +86,7 @@ in {
           container_name = "jellyfin-lidarr";
           depends_on = ["vpn"];
           image = "ghcr.io/linuxserver/lidarr:latest"; # https://github.com/linuxserver/docker-lidarr/pkgs/container/lidarr
-          network_mode = "service:vpn";
-          #// ports = ["8686:8686/tcp"];
+          network_mode = "service:vpn"; # 8686/tcp
           restart = "unless-stopped";
 
           volumes = [
@@ -110,8 +106,7 @@ in {
           container_name = "jellyfin-prowlarr";
           depends_on = ["vpn"];
           image = "ghcr.io/linuxserver/prowlarr:latest"; # https://github.com/linuxserver/docker-prowlarr/pkgs/container/prowlarr
-          network_mode = "service:vpn";
-          #// ports = ["9696:9696/tcp"];
+          network_mode = "service:vpn"; # 9696/tcp
           restart = "unless-stopped";
           volumes = ["${config.custom.containers.directory}/jellyfin/prowlarr:/config"];
 
@@ -127,16 +122,8 @@ in {
           container_name = "jellyfin-qbittorrent";
           depends_on = ["vpn"];
           image = "ghcr.io/linuxserver/qbittorrent:latest"; # https://github.com/linuxserver/docker-qbittorrent/pkgs/container/qbittorrent
-          network_mode = "service:vpn";
+          network_mode = "service:vpn"; # 8881/tcp
           restart = "unless-stopped";
-
-          # ports = [
-          #   "8881:8881/tcp"
-
-          #   # TODO: Consider opening ports
-          #   #// "6881:6881/tcp"
-          #   #// "6881:6881/udp"
-          # ];
 
           volumes = [
             "${config.custom.containers.directory}/jellyfin/qbittorrent:/config"
@@ -156,8 +143,7 @@ in {
           container_name = "jellyfin-radarr";
           depends_on = ["vpn"];
           image = "ghcr.io/linuxserver/radarr:latest"; # https://github.com/linuxserver/docker-radarr/pkgs/container/radarr
-          network_mode = "service:vpn";
-          #// ports = ["7878:7878/tcp"];
+          network_mode = "service:vpn"; # 7878/tcp
           restart = "unless-stopped";
 
           volumes = [
@@ -177,8 +163,7 @@ in {
           container_name = "jellyfin-slskd";
           depends_on = ["vpn"];
           image = "ghcr.io/slskd/slskd:latest"; # https://github.com/slskd/slskd/pkgs/container/slskd
-          network_mode = "service:vpn";
-          #// ports = ["5030:5030/tcp"]; # 5031/tcp 50300/tcp
+          network_mode = "service:vpn"; # 5030/tcp 5031/tcp 50300/tcp
           restart = "unless-stopped";
           user = "${cfg.uid}:${cfg.gid}";
 
@@ -200,8 +185,7 @@ in {
           container_name = "jellyfin-sonarr";
           depends_on = ["vpn"];
           image = "ghcr.io/linuxserver/sonarr:latest"; # https://github.com/linuxserver/docker-sonarr/pkgs/container/sonarr
-          network_mode = "service:vpn";
-          #// ports = ["8989:8989/tcp"];
+          network_mode = "service:vpn"; # 8989/tcp
           restart = "unless-stopped";
 
           volumes = [
@@ -231,15 +215,28 @@ in {
         #   ];
         # };
 
-        # https://tailscale.com/kb/1282/docker
+        # https://github.com/qdm12/gluetun
+        # https://github.com/qdm12/gluetun-wiki
         vpn.service = {
           container_name = "jellyfin-vpn";
           devices = ["/dev/net/tun:/dev/net/tun"];
-          env_file = [config.age.secrets."common/tailscale/container.env".path];
+          env_file = [config.age.secrets."common/gluetun/container.env".path];
           hostname = "${config.custom.hostname}-jellyfin";
-          image = "ghcr.io/tailscale/tailscale:v1.84.3"; # https://github.com/tailscale/tailscale/pkgs/container/tailscale
+          image = "qmcgaw/gluetun:v3.40.0"; # https://hub.docker.com/r/qmcgaw/gluetun/tags
           restart = "unless-stopped";
-          volumes = ["${config.custom.containers.directory}/jellyfin/vpn:/var/lib/tailscale"];
+
+          ports = [
+            "5030:5030/tcp"
+            "5055:5055/tcp"
+            "7878:7878/tcp"
+            "8096:8096/tcp"
+            "8097:80/tcp"
+            #// "8191:8191/tcp"
+            "8686:8686/tcp"
+            "8881:8881/tcp"
+            "8989:8989/tcp"
+            "9696:9696/tcp"
+          ];
 
           capabilities = {
             NET_ADMIN = true;
@@ -253,8 +250,7 @@ in {
           container_name = "jellyfin-vue";
           depends_on = ["jellyfin" "vpn"];
           image = "ghcr.io/jellyfin/jellyfin-vue:unstable"; # https://github.com/jellyfin/jellyfin-vue/pkgs/container/jellyfin-vue
-          network_mode = "service:vpn";
-          #// ports = ["8097:80/tcp"];
+          network_mode = "service:vpn"; # 80/tcp
           restart = "unless-stopped";
 
           # https://github.com/jellyfin/jellyfin-vue/wiki/Configuration

@@ -31,6 +31,7 @@ in {
   "common/geoclue2/geolocation" = keys common;
   "common/nix/access-tokens.conf" = keys common;
   "common/ntfy/token" = keys common;
+  "common/gluetun/container.env" = keys common;
   "common/tailscale/container.env" = keys common;
 
   "myeck/users/myned.pass" = key myeck;

@@ -17,14 +17,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    age.secrets = let
-      secret = filename: {
-        file = "${inputs.self}/secrets/${filename}";
-      };
-    in {
-      "common/tailscale/container.env" = secret "common/tailscale/container.env";
-    };
-
     virtualisation = {
       # https://github.com/hercules-ci/arion
       # https://docs.hercules-ci.com/arion/options
@@ -152,5 +144,14 @@ in {
         else "podman"
       )
     ];
+
+    age.secrets = listToAttrs (map (name: {
+        inherit name;
+        value = {file = "${inputs.self}/secrets/${name}";};
+      })
+      [
+        "common/gluetun/container.env"
+        "common/tailscale/container.env"
+      ]);
   };
 }
