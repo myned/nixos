@@ -21,6 +21,7 @@
       #// ghost.enable = true;
       mastodon.enable = true;
       miniflux.enable = true;
+      mullvad.enable = true;
       #// netbox.enable = true;
       #// netdata.enable = true;
       #// nextcloud.enable = true;
