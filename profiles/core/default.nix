@@ -22,9 +22,10 @@
       portainer.enable = true;
       portainer.server = true;
       rustdesk.enable = true;
+      statping.enable = true;
       #// syncthing.enable = true;
       #// syncthing.server = true;
-      #// uptimekuma.enable = true;
+      uptimekuma.enable = true;
 
       caddy = {
         enable = true;
