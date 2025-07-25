@@ -150,7 +150,6 @@ in {
         value = {file = "${inputs.self}/secrets/${name}";};
       })
       [
-        "common/gluetun/container.env"
         "common/tailscale/container.env"
       ]);
   };
