@@ -31,7 +31,6 @@ in {
   "common/geoclue2/geolocation" = keys common;
   "common/nix/access-tokens.conf" = keys common;
   "common/ntfy/token" = keys common;
-  "common/gluetun/container.env" = keys common;
   "common/tailscale/container.env" = keys common;
 
   "myeck/users/myned.pass" = key myeck;
@@ -71,12 +70,15 @@ in {
   "myosh/ghost/.env" = key myosh;
   "myosh/ghost/db.env" = key myosh;
   "myosh/jellyfin/soularr.ini" = key myosh;
-  "myosh/jellyfin/vpn.env" = key myosh;
+  "myosh/jellyfin/slskd.env" = key myosh;
+  "myosh/jellyfin/tailscale.env" = key myosh;
   "myosh/mastodon/.env" = key myosh;
   "myosh/mastodon/db.env" = key myosh;
   "myosh/matrix-conduit/conduwuit.toml" = key myosh;
   "myosh/miniflux/.env" = key myosh;
   "myosh/miniflux/db.env" = key myosh;
+  "myosh/mullvad/gluetun.env" = key myosh;
+  "myosh/mullvad/wireguard.conf" = key myosh;
   "myosh/netbox/.env" = key myosh;
   "myosh/netbox/cache.env" = key myosh;
   "myosh/netbox/db.env" = key myosh;
