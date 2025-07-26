@@ -70,10 +70,19 @@ in {
         # https://github.com/YaLTeR/niri/wiki/Configuration:-Debug-Options
         # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsdebug
         # settings = {
-        #   debug = {
-        #     disable-cursor-plane = []; # Software cursor
-        #     disable-direct-scanout = [];
-        #   };
+        #   debug =
+        #     {
+        #       #// disable-cursor-plane = []; # Software cursor
+        #       #// disable-direct-scanout = [];
+        #       #// enable-overlay-planes = [];
+
+        #       # TODO: Enable next release > v25.05.1
+        #       #// deactivate-unfocused-windows = [];
+        #       #// honor-xdg-activation-with-invalid-serial = [];
+        #     }
+        #     // optionalAttrs config.custom.vrr {
+        #       #// skip-cursor-only-updates-during-vrr = [];
+        #     };
         # };
       };
 
