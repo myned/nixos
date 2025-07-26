@@ -119,7 +119,7 @@
   # https://dri.freedesktop.org/docs/drm/gpu/amdgpu/display/dc-debug.html
   boot.kernelParams = [
     # https://wiki.archlinux.org/title/AMDGPU#Frozen_or_unresponsive_display_(flip_done_timed_out)
-    "amdgpu.dcdebugmask=0x10" # Attempt to fix random freezes by disabling panel self refresh
+    #// "amdgpu.dcdebugmask=0x10" # Attempt to fix random freezes by disabling panel self refresh
   ];
 
   #  _._     _,-'""`-._
