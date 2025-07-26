@@ -32,6 +32,8 @@ in {
           glxinfo # Graphics tester
           hwloc # CPU topology viewer
           inetutils # Network utilities
+          inotify-info # File notify lister
+          inotify-tools # File notify
           jq # JSON parser
           killport # Kill processes on port
           lf # Terminal file manager
