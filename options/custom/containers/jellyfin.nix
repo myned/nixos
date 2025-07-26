@@ -207,8 +207,9 @@ in {
             user = "${cfg.uid}:${cfg.gid}";
 
             volumes = [
+              "${config.custom.containers.directory}/jellyfin/soularr:/data"
+              "${cfg.dataDir}/downloads:/data/downloads"
               "${config.age.secrets."${config.custom.hostname}/jellyfin/soularr.ini".path}:/data/config.ini:ro"
-              "${cfg.dataDir}:/data"
             ];
           };
         }
