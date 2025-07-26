@@ -34,6 +34,10 @@
     };
 
     services = {
+      # TODO: Revisit when addons are supported
+      # https://github.com/NixOS/nixpkgs/issues/408699
+      #// cockpit.enable = true;
+
       borgmatic = {
         enable = true;
         repositories = ["ssh://ylnb45tz@ylnb45tz.repo.borgbase.com/./repo"];
