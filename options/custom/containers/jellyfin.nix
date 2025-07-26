@@ -2,6 +2,7 @@
   config,
   inputs,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -13,6 +14,11 @@ in {
     dataDir = mkOption {
       default = "${config.custom.containers.directory}/jellyfin/data";
       type = types.str;
+    };
+
+    inotify = mkOption {
+      default = true;
+      type = types.bool;
     };
 
     uid = mkOption {
@@ -227,6 +233,40 @@ in {
             environment = {
               DEFAULT_SERVERS = "media.vpn.${config.custom.domain}";
               DISABLE_SERVER_SELECTION = "1";
+            };
+          };
+        }
+        // optionalAttrs cfg.inotify {
+          # Watch soularr for failed searches
+          # https://github.com/devodev/docker-inotify
+          inotify.service = {
+            container_name = "jellyfin-inotify";
+            image = "devodev/inotify:0.3.0"; # https://hub.docker.com/r/devodev/inotify/tags
+            restart = "unless-stopped";
+            user = "${cfg.uid}:${cfg.gid}";
+
+            volumes = let
+              # https://docs.ntfy.sh/publish/
+              notify = pkgs.writeScript "notify.sh" ''
+                #! /usr/bin/env bash
+                last_entry="$(tail -n 1 /data/failure_list.txt | sed 's|.*- \(.*\),\(.*\),.*|\2 by \1|')"
+
+                curl \
+                  -H "Title: Soularr" \
+                  -H "Tags: warning" \
+                  -d "Failed: $last_entry" \
+                  https://notify.vpn.${config.custom.domain}/status
+              '';
+            in [
+              "${config.custom.containers.directory}/jellyfin/soularr:/data:ro"
+              "${notify}:/notify.sh"
+            ];
+
+            # https://github.com/devodev/docker-inotify?tab=readme-ov-file#environment-variables
+            environment = {
+              INOTIFY_TARGET = "/data/failure_list.txt";
+              INOTIFY_SCRIPT = "/notify.sh";
+              INOTIFY_CFG_EVENTS = "close_write";
             };
           };
         };
