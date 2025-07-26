@@ -5,6 +5,7 @@
 
   custom = {
     hostname = "myore";
+    vm = true;
 
     services = {
       tailscale = {
