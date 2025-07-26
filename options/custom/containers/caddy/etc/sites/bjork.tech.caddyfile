@@ -65,6 +65,7 @@ bjork.tech {
 	#// import proxy dash.admin.bjork.tech myosh:3001 # dash.
 	#// import proxy grafana.admin.bjork.tech {system.hostname}-grafana:3000 # Grafana
 	#// import proxy jackett.admin.bjork.tech myosh:9117 # Jackett
+	import proxy-insecure kasm.admin.bjork.tech myosh:3443 # Kasm
 	import proxy lidarr.admin.bjork.tech myosh:8686 # Lidarr
 	import proxy matrix.admin.bjork.tech myosh:8000 # Synapse Admin
 	import proxy-insecure nextcloud.admin.bjork.tech myosh:8080 # Nextcloud AIO
@@ -119,6 +120,7 @@ vpn.bjork.tech {
 	#// import proxy stream.vpn.bjork.tech myosh:8800 # Owncast
 	import proxy tv.vpn.bjork.tech myosh:8470 # Stremio Client
 	import proxy tv-api.vpn.bjork.tech myosh:11470 # Stremio Server
+	import proxy-insecure workspace.vpn.bjork.tech myosh:4443 # Kasm Workspaces
 
 	# OpenSpeedTest
 	# https://github.com/openspeedtest/Speed-Test/issues/67

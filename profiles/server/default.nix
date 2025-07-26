@@ -19,6 +19,7 @@
       foundryvtt.enable = true;
       #// freshrss.enable = true;
       #// ghost.enable = true;
+      kasm.enable = true;
       mastodon.enable = true;
       miniflux.enable = true;
       mullvad.enable = true;
