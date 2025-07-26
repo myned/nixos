@@ -9,6 +9,7 @@ with lib; {
       automatic-timezoned.enable = true;
       fail2ban.enable = true;
       geoclue2.enable = true;
+      glances.enable = true;
       #// kmscon.enable = true;
       #// netbird.enable = true;
       #// postfix.enable = true;

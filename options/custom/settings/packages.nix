@@ -28,7 +28,6 @@ in {
           ethtool # Network device configuration
           fd # File finder
           fzf # Fuzzy search
-          glances # System monitor
           glxinfo # Graphics tester
           hwloc # CPU topology viewer
           inetutils # Network utilities
