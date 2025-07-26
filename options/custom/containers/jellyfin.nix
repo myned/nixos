@@ -249,7 +249,7 @@ in {
               # https://docs.ntfy.sh/publish/
               notify = pkgs.writeScript "notify.sh" ''
                 #! /usr/bin/env bash
-                last_entry="$(tail -n 1 /data/failure_list.txt | sed 's|.*- \(.*\),\(.*\),.*|\2 by \1|')"
+                last_entry="$(tail -n 1 /data/failure_list.txt | sed 's|.*- \(.*\), \(.*\),.*|\2 by \1|')"
 
                 curl \
                   -H "Title: Soularr" \
