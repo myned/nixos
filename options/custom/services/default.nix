@@ -13,6 +13,7 @@ with lib; {
       #// kmscon.enable = true;
       #// netbird.enable = true;
       #// postfix.enable = true;
+      scrutiny.enable = true;
       smartd.enable = !config.custom.vm;
       sshd.enable = true;
       tailscale.enable = true;
