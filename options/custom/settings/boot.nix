@@ -20,7 +20,11 @@ in {
     };
 
     kernel = mkOption {
-      default = pkgs.linuxPackages;
+      default =
+        if config.custom.full
+        then pkgs.linuxPackages_latest
+        else pkgs.linuxPackages;
+
       type = types.attrs;
     };
 
