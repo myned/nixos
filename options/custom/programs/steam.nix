@@ -28,6 +28,14 @@ in {
         package = mkIf config.custom.services.xwayland-satellite.enable (
           pkgs.steam.override {
             extraArgs = "-system-composer";
+
+            extraEnv = {
+              # HACK: Force XInput controller so only Steam Input is used, requires Proton GE
+              # https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/issues/4168
+              # https://github.com/GloriousEggroll/proton-ge-custom/wiki/Changelog#ge-proton10-7-hotfix
+              PROTON_DISABLE_HIDRAW = 1;
+              PROTON_PREFER_SDL = 1;
+            };
           }
         );
       }
