@@ -26,9 +26,11 @@ in {
       enable = cfg.server;
       port = 61208;
 
-      package = pkgs.glances.overrideAttrs (final: prev: {
-        propagatedBuildInputs =
-          prev.propagatedBuildInputs
+      package = pkgs.glances.overridePythonAttrs (prev: {
+        doCheck = false; # Tests fail for aarch64
+
+        dependencies =
+          prev.dependencies
           ++ (with pkgs.python3Packages; [
             batinfo # Battery
             docker
