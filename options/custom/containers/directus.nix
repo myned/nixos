@@ -31,7 +31,7 @@ in {
       directus.service = {
         container_name = "directus";
         env_file = [config.age.secrets."${config.custom.hostname}/directus/.env".path];
-        image = "directus/directus:11"; # https://hub.docker.com/r/directus/directus/tags
+        image = "directus/directus:11.9.3"; # https://hub.docker.com/r/directus/directus/tags
         ports = ["${config.custom.services.tailscale.ipv4}:8055:8055/tcp"];
         restart = "unless-stopped";
 

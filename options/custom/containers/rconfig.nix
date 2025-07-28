@@ -32,7 +32,7 @@ in {
         container_name = "rconfig";
         depends_on = ["db" "vpn"];
         env_file = [config.age.secrets."${config.custom.hostname}/rconfig/.env".path];
-        image = "rconfig/rconfigv6:latest";
+        image = "rconfig/rconfigv6:1.0.0"; # https://hub.docker.com/r/rconfig/rconfigv6/tags
         network_mode = "service:vpn"; # 80/tcp
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/rconfig/data:/var/www/html/rconfig/storage"];
@@ -41,7 +41,7 @@ in {
       db.service = {
         container_name = "rconfig-db";
         env_file = [config.age.secrets."${config.custom.hostname}/rconfig/db.env".path];
-        image = "mariadb:11";
+        image = "mariadb:11.8.2"; # https://hub.docker.com/_/mariadb/tags
         network_mode = "service:vpn";
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/rconfig/db:/var/lib/mysql"];

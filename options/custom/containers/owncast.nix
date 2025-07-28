@@ -17,7 +17,7 @@ in {
     virtualisation.arion.projects.owncast.settings.services = {
       owncast.service = {
         container_name = "owncast";
-        image = "owncast/owncast:latest";
+        image = "owncast/owncast:0.2.3"; # https://hub.docker.com/r/owncast/owncast/tags
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/owncast/data:/app/data"];
 

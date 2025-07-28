@@ -21,7 +21,7 @@ in {
         # https://github.com/nextcloud/all-in-one/blob/main/compose.yaml
         nextcloud-aio-mastercontainer.service = {
           container_name = "nextcloud-aio-mastercontainer";
-          image = "ghcr.io/nextcloud-releases/all-in-one:latest";
+          image = "ghcr.io/nextcloud-releases/all-in-one:20250717_090710"; # https://github.com/nextcloud-releases/all-in-one/pkgs/container/all-in-one
           ports = ["8080:8080/tcp"];
           restart = "unless-stopped";
 

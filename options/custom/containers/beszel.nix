@@ -37,7 +37,7 @@ in {
         beszel.service = {
           container_name = "beszel";
           depends_on = ["vpn"];
-          image = "ghcr.io/henrygd/beszel/beszel:latest"; # https://github.com/henrygd/beszel/pkgs/container/beszel%2Fbeszel
+          image = "ghcr.io/henrygd/beszel/beszel:0.12.1"; # https://github.com/henrygd/beszel/pkgs/container/beszel%2Fbeszel
           network_mode = "service:vpn"; # 8090/tcp
           restart = "unless-stopped";
           volumes = ["${config.custom.containers.directory}/beszel/data:/beszel_data"];
@@ -62,7 +62,7 @@ in {
         # https://beszel.dev/guide/agent-installation
         agent.service = {
           container_name = "beszel-agent";
-          image = "ghcr.io/henrygd/beszel/beszel-agent:latest"; # https://github.com/henrygd/beszel/pkgs/container/beszel%2Fbeszel-agent
+          image = "ghcr.io/henrygd/beszel/beszel-agent:0.12.1"; # https://github.com/henrygd/beszel/pkgs/container/beszel%2Fbeszel-agent
           network_mode = "host"; # 45876/tcp
           restart = "unless-stopped";
           volumes = ["/var/run/docker.sock:/var/run/docker.sock:ro"];

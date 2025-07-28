@@ -44,7 +44,7 @@ in {
           container_name = "forgejo";
           depends_on = ["db" "vpn"];
           env_file = [config.age.secrets."${config.custom.hostname}/forgejo/.env".path];
-          image = "code.forgejo.org/forgejo/forgejo:11-rootless"; # https://code.forgejo.org/forgejo/-/packages/container/forgejo/11-rootless
+          image = "code.forgejo.org/forgejo/forgejo:12.0.1-rootless"; # https://code.forgejo.org/forgejo/-/packages/container/forgejo/versions
           network_mode = "service:vpn"; # 22/tcp 3000/tcp
           restart = "unless-stopped";
           volumes = ["${config.custom.containers.directory}/forgejo/data:/var/lib/gitea"];
@@ -53,7 +53,7 @@ in {
         db.service = {
           container_name = "forgejo-db";
           env_file = [config.age.secrets."${config.custom.hostname}/forgejo/db.env".path];
-          image = "postgres:15";
+          image = "postgres:15.13"; # https://hub.docker.com/_/postgres/tags
           network_mode = "service:vpn";
           restart = "unless-stopped";
           volumes = ["${config.custom.containers.directory}/forgejo/db:/var/lib/postgresql/data"];
@@ -83,7 +83,7 @@ in {
           # https://github.com/docker/for-linux/issues/1313
           command = ["dockerd" "--host" "tcp://0.0.0.0:2375" "--tls=false"];
           container_name = "forgejo-dind";
-          image = "code.forgejo.org/oci/docker:dind"; # https://code.forgejo.org/oci/-/packages/container/docker/dind
+          image = "code.forgejo.org/oci/docker:dind"; # https://code.forgejo.org/oci/-/packages/container/docker/versions
           privileged = true;
           restart = "unless-stopped";
         };
@@ -94,7 +94,7 @@ in {
           command = ["forgejo-runner" "daemon"];
           container_name = "forgejo-runner";
           depends_on = ["dind" "forgejo"];
-          image = "code.forgejo.org/forgejo/runner:6"; # https://code.forgejo.org/forgejo/runner
+          image = "code.forgejo.org/forgejo/runner:8.0.1"; # https://code.forgejo.org/forgejo/-/packages/container/runner/versions
           restart = "unless-stopped";
           user = "1001:1001";
           volumes = ["${config.custom.containers.directory}/forgejo/runner:/data"];

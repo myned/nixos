@@ -16,7 +16,7 @@ in {
       # https://github.com/redlib-org/redlib
       redlib.service = {
         container_name = "redlib";
-        image = "quay.io/redlib/redlib:latest";
+        image = "quay.io/redlib/redlib:latest"; # https://quay.io/repository/redlib/redlib
         ports = ["8888:8080/tcp"];
         restart = "unless-stopped";
 

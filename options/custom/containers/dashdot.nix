@@ -20,7 +20,7 @@ in {
       # https://github.com/MauriceNino/dashdot
       dashdot.service = {
         container_name = "dashdot";
-        image = "mauricenino/dashdot:latest"; # https://hub.docker.com/r/mauricenino/dashdot/tags
+        image = "mauricenino/dashdot:6.1.0"; # https://hub.docker.com/r/mauricenino/dashdot/tags
         ports = ["3001:3001/tcp"];
         privileged = true;
         restart = "unless-stopped";

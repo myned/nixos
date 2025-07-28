@@ -24,7 +24,7 @@ in {
       # https://docs.ovenmediaengine.com/getting-started/getting-started-with-docker
       ovenmediaengine.service = {
         container_name = "ovenmediaengine";
-        image = "airensoft/ovenmediaengine:latest"; # https://hub.docker.com/r/airensoft/ovenmediaengine/tags
+        image = "airensoft/ovenmediaengine:0.18.0"; # https://hub.docker.com/r/airensoft/ovenmediaengine/tags
         restart = "unless-stopped";
 
         ports = [

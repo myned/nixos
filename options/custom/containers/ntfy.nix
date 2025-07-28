@@ -20,7 +20,7 @@ in {
       ntfy.service = {
         command = "serve";
         container_name = "ntfy";
-        image = "binwiederhier/ntfy:latest"; # https://hub.docker.com/r/binwiederhier/ntfy/tags
+        image = "binwiederhier/ntfy:v2.13.0"; # https://hub.docker.com/r/binwiederhier/ntfy/tags
         ports = ["2586:80/tcp"];
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/ntfy/db:/var/lib/ntfy"];

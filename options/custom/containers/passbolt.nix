@@ -36,7 +36,7 @@ in {
         container_name = "passbolt";
         depends_on = ["db"];
         env_file = [config.age.secrets."${config.custom.hostname}/passbolt/.env".path];
-        image = "passbolt/passbolt:5.0.0-1-ce-non-root"; # https://hub.docker.com/r/passbolt/passbolt/tags
+        image = "passbolt/passbolt:5.3.2-1-ce-non-root"; # https://hub.docker.com/r/passbolt/passbolt/tags
         ports = ["8181:8080/tcp"]; # 80/tcp for root
         restart = "unless-stopped";
 
@@ -49,7 +49,7 @@ in {
       db.service = {
         container_name = "passbolt-db";
         env_file = [config.age.secrets."${config.custom.hostname}/passbolt/db.env".path];
-        image = "postgres:17";
+        image = "postgres:17.5"; # https://hub.docker.com/_/postgres/tags
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/passbolt/db:/var/lib/postgresql/data"];
       };

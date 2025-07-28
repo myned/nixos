@@ -43,7 +43,7 @@ in {
         container_name = "ghost";
         depends_on = ["db"];
         env_file = [config.age.secrets."${config.custom.hostname}/ghost/.env".path];
-        image = "ghost:5";
+        image = "ghost:5.130.2"; # https://hub.docker.com/_/ghost/tags
         ports = ["${ip}:2368:2368/tcp"];
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/ghost/data:/var/lib/ghost/content"];
@@ -56,7 +56,7 @@ in {
       db.service = {
         container_name = "ghost-db";
         env_file = [config.age.secrets."${config.custom.hostname}/ghost/db.env".path];
-        image = "mysql:8";
+        image = "mysql:8.0.43"; # https://hub.docker.com/_/mysql/tags
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/ghost/db:/var/lib/mysql"];
       };

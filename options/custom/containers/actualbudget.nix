@@ -17,7 +17,7 @@ in {
     virtualisation.arion.projects.actualbudget.settings.services = {
       actualbudget.service = {
         container_name = "actualbudget";
-        image = "ghcr.io/actualbudget/actual:latest"; # https://github.com/actualbudget/actual/pkgs/container/actual
+        image = "ghcr.io/actualbudget/actual:25.7.1"; # https://github.com/actualbudget/actual/pkgs/container/actual
         ports = ["5006:5006/tcp"];
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/actualbudget/data:/data"];

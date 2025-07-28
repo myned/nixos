@@ -21,7 +21,7 @@ in {
       adguardhome.service = {
         container_name = "adguardhome";
         depends_on = ["vpn"];
-        image = "adguard/adguardhome:latest"; # https://hub.docker.com/r/adguard/adguardhome/tags
+        image = "adguard/adguardhome:v0.107.63"; # https://hub.docker.com/r/adguard/adguardhome/tags
         network_mode = "service:vpn"; # 80/tcp
         restart = "unless-stopped";
 

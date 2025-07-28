@@ -27,7 +27,7 @@ in {
       oryx.service = {
         container_name = "oryx";
         env_file = [config.age.secrets."${config.custom.hostname}/oryx/.env".path];
-        image = "ossrs/oryx:5"; # https://hub.docker.com/r/ossrs/oryx/tags
+        image = "ossrs/oryx:5.15.20"; # https://hub.docker.com/r/ossrs/oryx/tags
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/oryx/data:/data"];
 

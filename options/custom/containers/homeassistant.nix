@@ -15,7 +15,7 @@ in {
     virtualisation.arion.projects.homeassistant.settings.services = {
       homeassistant.service = {
         container_name = "homeassistant";
-        image = "homeassistant/home-assistant:latest"; # https://hub.docker.com/r/homeassistant/home-assistant/tags
+        image = "homeassistant/home-assistant:2025.7"; # https://hub.docker.com/r/homeassistant/home-assistant/tags
         network_mode = "host"; # 8123/tcp
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/homeassistant/config:/config"];

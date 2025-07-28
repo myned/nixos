@@ -44,7 +44,7 @@ in {
         # https://learn.netdata.cloud/docs/netdata-agent/installation/docker
         netdata.service = {
           container_name = "netdata";
-          image = "ghcr.io/netdata/netdata:v2"; # https://github.com/netdata/netdata/pkgs/container/netdata
+          image = "ghcr.io/netdata/netdata:v2.6.1"; # https://github.com/netdata/netdata/pkgs/container/netdata
           network_mode = "service:vpn"; # 19999/tcp
           privileged = true;
           restart = "unless-stopped";

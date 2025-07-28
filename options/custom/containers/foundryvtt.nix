@@ -25,7 +25,7 @@ in {
       foundryvtt.service = {
         container_name = "foundryvtt";
         env_file = [config.age.secrets."${config.custom.hostname}/foundryvtt/.env".path];
-        image = "felddy/foundryvtt:12";
+        image = "felddy/foundryvtt:12.343.0"; # https://hub.docker.com/r/felddy/foundryvtt/tags
         ports = ["30000:30000/tcp"];
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/foundryvtt/data:/data"];

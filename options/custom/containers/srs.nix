@@ -19,7 +19,7 @@ in {
       # https://github.com/ossrs/srs
       srs.service = {
         container_name = "srs";
-        image = "ossrs/srs:6"; # https://hub.docker.com/r/ossrs/srs/tags
+        image = "ossrs/srs:6.0.166"; # https://hub.docker.com/r/ossrs/srs/tags
         restart = "unless-stopped";
 
         ports = [

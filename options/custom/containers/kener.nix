@@ -31,7 +31,7 @@ in {
         container_name = "kener";
         depends_on = ["db" "vpn"];
         env_file = [config.age.secrets."${config.custom.hostname}/kener/.env".path];
-        image = "ghcr.io/rajnandan1/kener:latest"; # https://github.com/rajnandan1/kener/pkgs/container/kener
+        image = "ghcr.io/rajnandan1/kener:3.2.18"; # https://github.com/rajnandan1/kener/pkgs/container/kener
         network_mode = "service:vpn"; # 3000/tcp
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/kener/data:/app/uploads"];
@@ -41,7 +41,7 @@ in {
       db.service = {
         container_name = "kener-db";
         env_file = [config.age.secrets."${config.custom.hostname}/kener/db.env".path];
-        image = "postgres:17"; # https://hub.docker.com/_/postgres/tags
+        image = "postgres:17.5"; # https://hub.docker.com/_/postgres/tags
         network_mode = "service:vpn";
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/kener/db:/var/lib/postgresql/data"];

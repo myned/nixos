@@ -21,7 +21,7 @@ in {
       opengist.service = {
         container_name = "opengist";
         depends_on = ["vpn"];
-        image = "ghcr.io/thomiceli/opengist:1"; # https://github.com/thomiceli/opengist/pkgs/container/opengist
+        image = "ghcr.io/thomiceli/opengist:1.10.0"; # https://github.com/thomiceli/opengist/pkgs/container/opengist
         network_mode = "service:vpn"; # 6157/tcp
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/opengist/data:/opengist"];

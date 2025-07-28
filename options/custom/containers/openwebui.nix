@@ -20,7 +20,7 @@ in {
       openwebui.service = {
         container_name = "openwebui";
         depends_on = ["vpn"];
-        image = "ghcr.io/open-webui/open-webui:latest";
+        image = "ghcr.io/open-webui/open-webui:v0.6.18"; # https://github.com/open-webui/open-webui/pkgs/container/open-webui
         network_mode = "service:vpn"; # 8080/tcp
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/openwebui/data:/app/backend/data"];

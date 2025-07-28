@@ -29,7 +29,7 @@ in {
         container_name = "mastodon";
         depends_on = ["cache" "db"];
         env_file = [config.age.secrets."${config.custom.hostname}/mastodon/.env".path];
-        image = "lscr.io/linuxserver/mastodon:4.3.6";
+        image = "ghcr.io/linuxserver/mastodon:4.4.2"; # https://github.com/linuxserver/docker-mastodon/pkgs/container/mastodon
         ports = ["3000:443/tcp"];
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/mastodon/config:/config"];
@@ -37,7 +37,7 @@ in {
 
       cache.service = {
         container_name = "mastodon-cache";
-        image = "redis:latest";
+        image = "redis:8.0.3"; # https://hub.docker.com/_/redis/tags
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/mastodon/cache:/data"];
       };
@@ -45,7 +45,7 @@ in {
       db.service = {
         container_name = "mastodon-db";
         env_file = [config.age.secrets."${config.custom.hostname}/mastodon/db.env".path];
-        image = "postgres:15";
+        image = "postgres:15.13"; # https://hub.docker.com/_/postgres/tags
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/mastodon/db:/var/lib/postgresql/data"];
       };

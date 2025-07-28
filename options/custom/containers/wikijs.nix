@@ -32,15 +32,15 @@ in {
         container_name = "wikijs";
         depends_on = ["db"];
         env_file = [config.age.secrets."${config.custom.hostname}/wikijs/.env".path];
-        image = "ghcr.io/requarks/wiki:2";
-        ports = ["3303:3000/tcp"];
+        image = "ghcr.io/requarks/wiki:2.5.307";
+        ports = ["3303:3000/tcp"]; # https://github.com/requarks/wiki/pkgs/container/wiki
         restart = "unless-stopped";
       };
 
       db.service = {
         container_name = "wikijs-db";
         env_file = [config.age.secrets."${config.custom.hostname}/wikijs/db.env".path];
-        image = "postgres:15";
+        image = "postgres:15.13"; # https://hub.docker.com/_/postgres/tags
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/wikijs/db:/var/lib/postgresql/data"];
       };

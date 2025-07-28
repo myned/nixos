@@ -33,7 +33,7 @@ in {
         portainer.service = {
           container_name = "portainer";
           depends_on = ["vpn"];
-          image = "portainer/portainer-ee:2.31.3"; # https://hub.docker.com/r/portainer/portainer-ee/tags
+          image = "portainer/portainer-ee:2.32.0"; # https://hub.docker.com/r/portainer/portainer-ee/tags
           network_mode = "service:vpn"; # 9443/tcp
           restart = "unless-stopped";
           volumes = ["${config.custom.containers.directory}/portainer/data:/data"];
@@ -44,7 +44,7 @@ in {
         agent.service = {
           container_name = "portainer-agent";
           depends_on = ["vpn"];
-          image = "portainer/agent:2.31.3"; # https://hub.docker.com/r/portainer/agent/tags
+          image = "portainer/agent:2.32.0"; # https://hub.docker.com/r/portainer/agent/tags
           network_mode = "service:vpn"; # 9001/tcp
           restart = "unless-stopped";
 

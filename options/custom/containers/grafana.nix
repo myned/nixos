@@ -52,7 +52,7 @@ in {
           grafana.service = {
             container_name = "grafana";
             depends_on = ["vpn"];
-            image = "grafana/grafana-oss:latest"; # https://hub.docker.com/r/grafana/grafana-oss/tags
+            image = "grafana/grafana-oss:12.1.0"; # https://hub.docker.com/r/grafana/grafana-oss/tags
             network_mode = "service:vpn"; # 3000/tcp
             restart = "unless-stopped";
             volumes = ["${config.custom.containers.directory}/grafana/data:/var/lib/grafana"];
@@ -85,7 +85,7 @@ in {
           # https://grafana.com/docs/grafana/latest/datasources/prometheus/configure-prometheus-data-source/
           prometheus.service = {
             container_name = "grafana-prometheus";
-            image = "quay.io/prometheus/prometheus:latest"; # https://quay.io/repository/prometheus/prometheus?tab=tags
+            image = "quay.io/prometheus/prometheus:v3.5.0"; # https://quay.io/repository/prometheus/prometheus?tab=tags
             network_mode = "service:vpn"; # 9090/tcp
             restart = "unless-stopped";
 

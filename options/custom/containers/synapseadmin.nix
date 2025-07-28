@@ -20,7 +20,7 @@ in {
       # https://github.com/etkecc/synapse-admin/blob/main/docker-compose.yml
       synapseadmin.service = {
         container_name = "synapseadmin";
-        image = "ghcr.io/etkecc/synapse-admin:latest";
+        image = "ghcr.io/etkecc/synapse-admin:v0.11.1-etke45"; # https://github.com/etkecc/synapse-admin/pkgs/container/synapse-admin
         ports = ["8000:80/tcp"];
         restart = "unless-stopped";
 

@@ -39,7 +39,7 @@ in {
       synapse.service = {
         container_name = "synapse";
         depends_on = ["db"];
-        image = "ghcr.io/element-hq/synapse:v1.128.0"; # https://github.com/element-hq/synapse/pkgs/container/synapse
+        image = "ghcr.io/element-hq/synapse:v1.134.0"; # https://github.com/element-hq/synapse/pkgs/container/synapse
         ports = ["8008:8008/tcp"];
         restart = "unless-stopped";
 
@@ -57,7 +57,7 @@ in {
       db.service = {
         container_name = "synapse-db";
         env_file = [config.age.secrets."${config.custom.hostname}/synapse/db.env".path];
-        image = "postgres:15";
+        image = "postgres:15.13"; # https://hub.docker.com/_/postgres/tags
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/synapse/db:/var/lib/postgresql/data"];
       };

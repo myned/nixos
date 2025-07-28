@@ -19,7 +19,7 @@ in {
       # https://github.com/tsaridas/stremio-docker
       stremio.service = {
         container_name = "stremio";
-        image = "tsaridas/stremio-docker:latest";
+        image = "tsaridas/stremio-docker:v1.2.3"; # https://hub.docker.com/r/tsaridas/stremio-docker/tags
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/stremio/data:/root/.stremio-server"];
 

@@ -28,7 +28,7 @@ in {
         container_name = "searxng";
         depends_on = ["cache"];
         env_file = [config.age.secrets."${config.custom.hostname}/searxng/.env".path];
-        image = "searxng/searxng:latest"; # https://hub.docker.com/r/searxng/searxng/tags
+        image = "searxng/searxng:2025.7.27-f04c273"; # https://hub.docker.com/r/searxng/searxng/tags
         ports = ["8888:8080/tcp"];
         restart = "unless-stopped";
 
