@@ -7,6 +7,7 @@ with lib; {
   config.custom.services = mkMerge [
     (mkIf config.custom.default {
       automatic-timezoned.enable = true;
+      earlyoom.enable = true;
       fail2ban.enable = true;
       geoclue2.enable = true;
       glances.enable = true;
