@@ -15,6 +15,13 @@
     profile = "deck";
     desktop = "kde";
 
+    games = {
+      enable = true;
+      cemu.enable = true;
+      fist.enable = true;
+      tunic.enable = true;
+    };
+
     programs = {
       #// kodi.enable = true;
       steam.enable = true;

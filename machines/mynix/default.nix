@@ -15,6 +15,10 @@
     height = 1440;
     refresh = 75;
 
+    games = {
+      steamDir = "/mnt/gaymes1/steam/steamapps/compatdata";
+    };
+
     programs = {
       looking-glass.enable = true;
 

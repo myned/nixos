@@ -14,6 +14,18 @@
       };
     };
 
+    games = {
+      enable = true;
+      #// _7-days-to-die.enable = true;
+      #// abiotic-factor.enable = true;
+      #// baba-is-you.enable = true;
+      cemu.enable = true;
+      elden-ring.enable = true;
+      fist.enable = true;
+      #// remnant.enable = true;
+      tunic.enable = true;
+    };
+
     services = {
       ollama.download = "high";
       power-profiles-daemon.enable = true;
