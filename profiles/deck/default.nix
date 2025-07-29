@@ -13,7 +13,11 @@
   custom = {
     minimal = true;
     profile = "deck";
-    desktop = "kde";
+    desktop = "gnome";
+
+    desktops = {
+      gnome.gdm = false;
+    };
 
     games = {
       enable = true;
@@ -75,7 +79,7 @@
     steam = {
       enable = true;
       autoStart = true;
-      desktopSession = "plasma"; #?? services.displayManager.sessionData.sessionNames
+      desktopSession = "gnome"; #?? services.displayManager.sessionData.sessionNames
       user = config.custom.username;
     };
   };
