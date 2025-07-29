@@ -339,6 +339,18 @@ in {
             open-floating = true;
             shadow.enable = false;
           }
+
+          {
+            # Steam notifications
+            # https://github.com/YaLTeR/niri/wiki/Application-Issues#steam
+            matches = [((app-id "^steam$") // (title "^notificationtoasts.*$"))];
+
+            default-floating-position = {
+              x = config.custom.gap;
+              y = config.custom.gap;
+              relative-to = "bottom-right";
+            };
+          }
         ];
       };
     };
