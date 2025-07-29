@@ -40,5 +40,18 @@ in {
         );
       }
       // optionalAttrs (versionAtLeast version "24.11") {protontricks.enable = true;};
+
+    environment.systemPackages = with pkgs; [
+      adwsteamgtk # https://github.com/Foldex/AdwSteamGtk
+      sgdboop # https://github.com/SteamGridDB/SGDBoop
+      steam-rom-manager # https://github.com/SteamGridDB/steam-rom-manager
+
+      # https://github.com/sonic2kk/steamtinkerlaunch
+      # TODO: Remove when v14 released on nixpkgs
+      # https://github.com/sonic2kk/steamtinkerlaunch/issues/992
+      # Build from latest commit
+      #// (steamtinkerlaunch.overrideAttrs {src = inputs.steamtinkerlaunch;})
+      #// p7zip # steamtinkerlaunch (Special K)
+    ];
   };
 }
