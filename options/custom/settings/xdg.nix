@@ -156,6 +156,7 @@ in {
           templates = "${config.custom.sync}/linux/config/templates";
 
           extraConfig = {
+            XDG_GAMES_DIR = "${hm.home.homeDirectory}/Games";
             XDG_SCREENSHOTS_DIR = "${hm.xdg.userDirs.pictures}/Screenshots";
           };
         };
