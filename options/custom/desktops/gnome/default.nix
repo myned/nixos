@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -25,22 +26,25 @@ in {
           user = config.custom.username;
         };
       }
-      // optionalAttrs (!cfg.minimal) (
-        if (versionAtLeast version "25.11")
-        then {
+      // optionalAttrs (!cfg.minimal) ({
           gnome.gnome-browser-connector.enable = true;
-          desktopManager.gnome.enable = true;
-          displayManager.gdm.enable = cfg.gdm;
         }
-        else {
-          gnome.gnome-browser-connector.enable = true;
-
-          xserver = {
+        // (
+          if (versionAtLeast version "25.11")
+          then {
             desktopManager.gnome.enable = true;
             displayManager.gdm.enable = cfg.gdm;
-          };
-        }
-      );
+          }
+          else {
+            xserver = {
+              desktopManager.gnome.enable = true;
+              displayManager.gdm.enable = cfg.gdm;
+            };
+          }
+        ));
+
+    # https://github.com/mjakeman/extension-manager
+    environment.systemPackages = optionals (!cfg.minimal) [pkgs.gnome-extension-manager];
 
     # https://nix-community.github.io/stylix/options/modules/gnome.html
     stylix.targets.gnome.enable = true;
