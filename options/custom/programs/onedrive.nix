@@ -18,7 +18,7 @@ in {
     xdg.configFile = {
       # https://github.com/abraunegg/onedrive/blob/master/docs/USAGE.md#configuration
       "onedrive/config".text = ''
-        sync_dir = "~/SYNC/edu/hawkeye"
+        sync_dir = "~/SYNC/onedrive"
       '';
 
       # https://github.com/abraunegg/onedrive/blob/master/docs/USAGE.md#performing-a-selective-sync-via-sync_list-file
