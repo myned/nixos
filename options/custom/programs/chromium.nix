@@ -311,6 +311,12 @@ in {
           }
 
           {
+            name = "SteamGridDB";
+            shortcut = "sgdb";
+            url = "https://www.steamgriddb.com/search/grids?term={searchTerms}";
+          }
+
+          {
             name = "Sway Issues";
             shortcut = "si";
             url = "https://github.com/swaywm/sway/issues?q=is%3Aissue+is%3Aopen+{searchTerms}";

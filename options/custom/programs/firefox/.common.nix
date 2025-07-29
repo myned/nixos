@@ -566,6 +566,13 @@ with lib; {
           urls = [{template = "https://search.vpn.${config.custom.domain}/search?q={searchTerms}";}];
         };
 
+        steamgriddb = {
+          definedAliases = ["sgdb"];
+          icon = "https://www.steamgriddb.com/static/favicon/16.png";
+          name = "SteamGridDB";
+          urls = [{template = "https://www.steamgriddb.com/search/grids?term={searchTerms}";}];
+        };
+
         sway-issues = {
           definedAliases = ["si"];
           icon = "https://github.com/favicon.ico";

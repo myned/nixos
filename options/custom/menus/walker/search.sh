@@ -248,6 +248,12 @@ case "$1" in
     url="https://search.bjork.tech/search?q="
     query="${1:2}"
     ;;
+  'sgdb '*)
+    label="SteamGridDB"
+    icon="steam"
+    url="https://www.steamgriddb.com/search/grids?term="
+    query="${1:5}"
+    ;;
   'si '*)
     label="Sway Issues"
     icon="com.github.zren.bugzilla"
