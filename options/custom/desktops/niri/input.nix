@@ -54,7 +54,7 @@ in {
         # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsinputtrackballaccel-profile
         trackball = {
           accel-profile = "adaptive";
-          accel-speed = -0.8;
+          accel-speed = -0.7;
           left-handed = true;
           middle-emulation = true;
           natural-scroll = true;
