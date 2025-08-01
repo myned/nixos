@@ -187,6 +187,7 @@ in {
           stremio # Streaming client
           #// syncthingtray # Syncthing client
           tagger # Music tagger
+          teams-for-linux # Microsoft Teams client
           #// telegram-desktop # Telegram client
           #// variety # Wallpaper changer
           ventoy # Image writer
