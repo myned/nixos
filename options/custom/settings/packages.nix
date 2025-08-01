@@ -178,6 +178,7 @@ in {
           rustdesk-flutter # Remote desktop client
           showtime # Video player
           signal-desktop-bin # Signal client
+          slack # Slack client
           smile # Emoji picker
           snapshot # Camera
           snoop # File content finder
