@@ -49,6 +49,8 @@
 
           outputs = {
             DP-1 = {
+              x = width;
+              y = 0;
               width = 1920;
               height = 1200;
               refresh = 60;
@@ -56,11 +58,6 @@
               scale = 1;
               vrr = false;
               force = false;
-
-              position = {
-                x = width;
-                y = 0;
-              };
             };
 
             DP-2 = {

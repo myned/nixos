@@ -30,17 +30,14 @@ in {
         example = [
           {
             DP-1 = {
+              x = 0;
+              y = 0;
               width = 1920;
               height = 1080;
               refresh = 60;
               scale = 1;
               vrr = true;
               force = true;
-
-              position = {
-                x = 0;
-                y = 0;
-              };
             };
           }
         ];
