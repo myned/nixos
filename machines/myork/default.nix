@@ -45,15 +45,40 @@
         dgpu.driver = "amdgpu";
         rocm = "11.0.2"; # 11.0.3
 
-        display.outputs = with config.custom; {
-          eDP-1 = {
-            inherit width height refresh scale vrr;
-            finalRefresh = refresh;
-            force = false;
+        display = {
+          forceModes = true;
 
-            position = {
+          outputs = with config.custom; {
+            eDP-1 = {
+              inherit width height refresh scale vrr;
               x = 0;
               y = 0;
+              finalRefresh = refresh;
+              force = false;
+            };
+
+            DP-1 = {
+              x = -1920;
+              y = 0;
+              width = 1920;
+              height = 1080;
+              refresh = 75;
+              scale = 1;
+              vrr = false;
+              finalRefresh = 74.977;
+              force = true;
+            };
+
+            DP-2 = {
+              x = width / scale;
+              y = 0;
+              width = 1920;
+              height = 1080;
+              refresh = 75;
+              scale = 1;
+              vrr = false;
+              finalRefresh = 74.977;
+              force = true;
             };
           };
         };
