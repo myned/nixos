@@ -34,9 +34,6 @@ in {
           # https://wiki.archlinux.org/title/Wayland#Java
           _JAVA_AWT_WM_NONREPARENTING = "1";
         }
-        // optionalAttrs (!config.custom.services.xwayland-satellite.enable) {
-          GDK_SCALE = toString config.custom.scale; # Steam HiDPI
-        }
         // optionalAttrs config.custom.desktops.tiling {
           # https://github.com/krille-chan/fluffychat/wiki/Manual#i-use-tiling-wm-how-do-i-disable-the-title-bar
           GTK_CSD = "0";

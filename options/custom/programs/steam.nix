@@ -53,5 +53,11 @@ in {
       #// (steamtinkerlaunch.overrideAttrs {src = inputs.steamtinkerlaunch;})
       #// p7zip # steamtinkerlaunch (Special K)
     ];
+
+    home-manager.users.${config.custom.username} = {
+      home.sessionVariables = {
+        GDK_SCALE = toString config.custom.scale; # Steam HiDPI
+      };
+    };
   };
 }
