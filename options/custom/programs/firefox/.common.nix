@@ -10,9 +10,9 @@
 with lib; {
   #!! Creates package derivation
   #?? hm.programs.firefox.finalPackage
-  # https://wiki.nixos.org/wiki/Firefox#Tips
+  # https://wiki.nixos.org/wiki/Firefox#Tips_and_Tricks
   nativeMessagingHosts = with pkgs; [
-    #// firefoxpwa
+    firefoxpwa
   ];
 
   #!! Prefer policies over profiles when possible
@@ -34,7 +34,7 @@ with lib; {
         libredirect
         multi-account-containers
         #// onepassword-password-manager
-        #// pwas-for-firefox
+        pwas-for-firefox
         #// simple-tab-groups
         sponsorblock
         stylus
