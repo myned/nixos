@@ -68,7 +68,10 @@ in {
         ]
         ++ optionals config.custom.minimal [
           ### GUI applications
+          deskflow # Software KVM client
+          input-leap # Software KVM client
           kdiskmark # Must be system package for polkit
+          lan-mouse # Software KVM client
 
           ### CLI applications
           mesa-demos # <glx|vk>gears
