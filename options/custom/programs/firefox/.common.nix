@@ -56,22 +56,6 @@ with lib; {
     userChrome = mkAfter ''@import "${./customChrome.css}";'';
     userContent = mkAfter ''@import "${./customContent.css}";'';
 
-    containersForce = true;
-
-    containers = {
-      edu = {
-        color = "orange";
-        icon = "fruit";
-        id = 1;
-      };
-
-      work = {
-        color = "red";
-        icon = "briefcase";
-        id = 2;
-      };
-    };
-
     settings =
       {
         "accessibility.browsewithcaret" = false;
