@@ -62,17 +62,14 @@
 
             DP-2 = {
               inherit width height refresh scale vrr;
+              x = 0;
+              y = 0;
               finalRefresh = 74.979;
               force = true;
 
               # BUG: Cursor updates cause refresh rate fluctuation, so disable for now
               # https://github.com/YaLTeR/niri/issues/1214
               #// vrr = true;
-
-              position = {
-                x = 0;
-                y = 0;
-              };
             };
           };
         };
