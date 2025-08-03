@@ -37,8 +37,8 @@ in {
               "zen.glance.open-essential-external-links" = true;
               "zen.keyboard.shortcuts.disable-mainkeyset-clear" = true;
               "zen.keyboard.shortcuts.enabled" = true;
-              "zen.mediacontrols.enabled" = false;
-              "zen.pinned-tab-manager.close-shortcut-behavior" = "reset-unload-switch";
+              "zen.mediacontrols.enabled" = true;
+              "zen.pinned-tab-manager.close-shortcut-behavior" = "reset";
               "zen.pinned-tab-manager.restore-pinned-tabs-to-pinned-url" = false;
               "zen.splitView.change-on-hover" = true;
               "zen.splitView.enable-tab-drop" = true;
@@ -60,7 +60,7 @@ in {
               "zen.themes.updated-value-observer" = true;
               "zen.urlbar.behavior" = "normal";
               "zen.urlbar.hide-one-offs" = true;
-              "zen.urlbar.replace-newtab" = false;
+              "zen.urlbar.replace-newtab" = true;
               "zen.urlbar.show-domain-only-in-sidebar" = true;
               "zen.urlbar.show-protections-icon" = false;
               "zen.view.compact.animate-sidebar" = true;
@@ -74,15 +74,15 @@ in {
               # BUG: Rounded corners causes increased GPU usage
               # https://github.com/zen-browser/desktop/issues/6302
               # https://zen-browser.app/mods/c6813222-6571-4ba6-8faf-58f3343324f6/
-              "zen.view.experimental-rounded-view" = false;
+              "zen.view.experimental-rounded-view" = true;
 
               "zen.view.grey-out-inactive-windows" = false;
               "zen.view.hide-window-controls" = true;
               "zen.view.show-newtab-button-border-top" = true;
-              "zen.view.show-newtab-button-top" = true;
+              "zen.view.show-newtab-button-top" = false;
               "zen.view.sidebar-collapsed.hide-mute-button" = true;
               "zen.view.sidebar-expanded" = true;
-              "zen.view.use-single-toolbar" = false;
+              "zen.view.use-single-toolbar" = true;
               "zen.watermark.enabled" = true;
               "zen.welcome-screen.enabled" = false;
               "zen.welcome-screen.seen" = true;
@@ -126,10 +126,10 @@ in {
       };
 
       # https://nix-community.github.io/stylix/options/modules/zen-browser.html
-      stylix.targets.zen-browser = {
-        enable = false;
-        profileNames = [cfg.profile];
-      };
+      # stylix.targets.zen-browser = {
+      #   enable = false;
+      #   profileNames = [cfg.profile];
+      # };
     };
   };
 }
