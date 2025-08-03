@@ -82,7 +82,7 @@ in {
 
         # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutstruts
         struts = let
-          strut = gap + config.custom.border;
+          strut = gap;
         in {
           left = strut;
           right = strut;
