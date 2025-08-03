@@ -133,7 +133,7 @@
   #?? sudo udevadm trigger /dev/dri/by-path/*
   #?? grep '*' /sys/class/drm/card*/device/pp_power_profile_mode
   services.udev.extraRules = ''
-    KERNEL=="renderD129", SUBSYSTEM=="drm", DRIVERS=="amdgpu", ATTR{device/power_dpm_force_performance_level}="manual", ATTR{device/pp_power_profile_mode}="1"
+    KERNEL=="renderD129", SUBSYSTEM=="drm", DRIVERS=="amdgpu", ATTR{device/power_dpm_force_performance_level}="manual", ATTR{device/pp_power_profile_mode}="4"
   '';
 
   #  _._     _,-'""`-._
