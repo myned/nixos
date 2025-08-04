@@ -40,7 +40,7 @@ in {
     # Set power profile at boot/resume
     powerManagement = let
       set_profile = toString (pkgs.writeShellScript "set_profile" ''
-        if ${grep} 1 /sys/class/power_supply/*/online; then
+        if [[ $(${grep} 1 /sys/class/power_supply/BAT*/status) != 'Discharging' ]]; then
           # AC
           ${powerprofilesctl} set balanced
         else
