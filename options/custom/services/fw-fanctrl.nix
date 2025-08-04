@@ -32,8 +32,7 @@ in {
             (curve 70 40)
             (curve 80 50)
             (curve 90 60)
-            (curve 100 70)
-            #!! Max fan speed of 70%
+            #!! Max fan speed of 60%
           ];
         };
       };
