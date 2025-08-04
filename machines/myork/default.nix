@@ -80,6 +80,18 @@
               finalRefresh = 74.977;
               force = true;
             };
+
+            DP-3 = {
+              x = width / scale + 1920;
+              y = 0;
+              width = 1920;
+              height = 1080;
+              refresh = 75;
+              scale = 1;
+              vrr = false;
+              finalRefresh = 74.977;
+              force = true;
+            };
           };
         };
       };
