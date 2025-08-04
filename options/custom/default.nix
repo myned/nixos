@@ -47,8 +47,8 @@ in {
 
     browser = {
       # TODO: Use lib.getExe' instead of /bin/ where possible
-      command = mkOption {default = getExe hm.programs.firefox.finalPackage;};
-      desktop = mkOption {default = "firefox.desktop";};
+      command = mkOption {default = getExe hm.programs.zen-browser.finalPackage;};
+      desktop = mkOption {default = "zen.desktop";};
     };
 
     time = mkOption {
