@@ -266,6 +266,7 @@ with lib; {
       }
       // optionalAttrs theme {
         # https://github.com/rafaelmardojai/firefox-gnome-theme?tab=readme-ov-file#features
+        "gnomeTheme.allTabsButton" = true;
         "gnomeTheme.allTabsButtonOnOverflow" = true;
         "gnomeTheme.bookmarksToolbarUnderTabs" = true;
       };
