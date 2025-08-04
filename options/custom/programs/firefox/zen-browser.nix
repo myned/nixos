@@ -30,6 +30,8 @@ in {
 
           profiles.${cfg.profile} = {
             settings = {
+              "browser.toolbars.bookmarks.visibility" = mkForce "always";
+
               "zen.browser.is-cool" = true;
               "zen.essentials.enabled" = true;
               "zen.glance.activation-method" = "alt";
@@ -79,7 +81,7 @@ in {
               "zen.view.grey-out-inactive-windows" = false;
               "zen.view.hide-window-controls" = true;
               "zen.view.show-newtab-button-border-top" = true;
-              "zen.view.show-newtab-button-top" = false;
+              "zen.view.show-newtab-button-top" = true;
               "zen.view.sidebar-collapsed.hide-mute-button" = true;
               "zen.view.sidebar-expanded" = true;
               "zen.view.use-single-toolbar" = true;
