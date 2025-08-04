@@ -67,6 +67,7 @@ with lib; {
       #// nheko.enable = true;
       nix-ld.enable = true;
       obs-studio.enable = true;
+      onedrive.enable = true;
       onlyoffice.enable = true;
       #// onedrive.enable = true;
       #// path-of-building.enable = true;

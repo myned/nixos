@@ -12,21 +12,22 @@ in {
     # https://github.com/abraunegg/onedrive
     #!! Login is imperative
     #?? onedrive
-    #?? systemctl --user enable --now onedrive@onedrive.service
+    programs.onedrive = {
+      enable = true;
 
-    #!! Option not available, files written directly
-    xdg.configFile = {
       # https://github.com/abraunegg/onedrive/blob/master/docs/USAGE.md#configuration
-      "onedrive/config".text = ''
-        sync_dir = "~/SYNC/onedrive"
-      '';
-
-      # https://github.com/abraunegg/onedrive/blob/master/docs/USAGE.md#performing-a-selective-sync-via-sync_list-file
-      "onedrive/sync_list".text = ''
-        !/Apps/
-        !/Attachments/
-        /*
-      '';
+      settings = {
+        sync_dir = "~/OneDrive";
+      };
     };
+
+    # xdg.configFile = {
+    #   # https://github.com/abraunegg/onedrive/blob/master/docs/USAGE.md#performing-a-selective-sync-via-sync_list-file
+    #   "onedrive/sync_list".text = ''
+    #     !/Apps/
+    #     !/Attachments/
+    #     /*
+    #   '';
+    # };
   };
 }
