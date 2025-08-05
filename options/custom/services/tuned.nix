@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -30,5 +31,8 @@ in {
       power-profiles-daemon.enable = false;
       tlp.enable = false;
     };
+
+    #?? powerprofilesctl
+    environment.systemPackages = optionals config.services.tuned.ppdSupport [pkgs.power-profiles-daemon];
   };
 }
