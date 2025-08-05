@@ -14,6 +14,7 @@
 
     services = {
       #// auto-cpufreq.enable = true;
+      wluma.enable = true;
 
       ollama = {
         acceleration = false;
