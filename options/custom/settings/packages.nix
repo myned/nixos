@@ -91,8 +91,12 @@ in {
           #// blackbox-terminal # Terminal
           blueberry # Bluetooth manager
           bottles # Wine manager
-          cartridges # Game library
-          cinny-desktop # Matrix client
+          #// cartridges # Game library
+
+          # BUG: lipsoup deprecated, uncomment when updated to Tauri v2
+          # https://github.com/cinnyapp/cinny-desktop/pull/429
+          #// cinny-desktop # Matrix client
+
           #// clapper # Video player
           concessio # Permissions converter
           d-spy # D-Bus introspection
@@ -152,7 +156,7 @@ in {
           impression # Image writer
           inkscape # Vector graphics editor
           itch # Game library
-          keyguard # Bitwarden client
+          #// keyguard # Bitwarden client
           kooha # Screen recorder
           #// logseq # Knowledge base
           loupe # Image viewer
@@ -164,7 +168,7 @@ in {
           nicotine-plus # SoulSeek client
           obsidian # Knowledge base
           papers # Document viewer
-          path-of-building # Path of Exile planner
+          #// path-of-building # Path of Exile planner
           picard # Music tagger
           pika-backup # Borg backup manager
 
