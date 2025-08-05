@@ -5,7 +5,7 @@
   ...
 }:
 with lib; let
-  grep = "${pkgs.gnugrep}/bin/grep";
+  cat = "${pkgs.coreutils}/bin/cat";
   powerprofilesctl = "${pkgs.power-profiles-daemon}/bin/powerprofilesctl";
 
   cfg = config.custom.services.power-profiles-daemon;
@@ -40,7 +40,7 @@ in {
     # Set power profile at boot/resume
     powerManagement = let
       set_profile = toString (pkgs.writeShellScript "set_profile" ''
-        if [[ $(${grep} 1 /sys/class/power_supply/BAT*/status) != 'Discharging' ]]; then
+        if [[ $(${cat} /sys/class/power_supply/BAT*/status) != 'Discharging' ]]; then
           # AC
           ${powerprofilesctl} set balanced
         else
