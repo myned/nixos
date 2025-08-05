@@ -43,6 +43,7 @@
       hardware = {
         cpu = "amd";
         dgpu.driver = "amdgpu";
+        igpu.driver = "amdgpu";
         rocm = "11.0.2"; # 11.0.3
 
         display = {
