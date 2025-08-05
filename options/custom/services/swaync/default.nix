@@ -13,30 +13,31 @@ in {
     services.swaync = {
       enable = true;
 
+      # FIXME: Fix GTK4 theme or use stylix
       # https://github.com/ErikReider/SwayNotificationCenter/blob/main/data/style/style.scss
-      style = let
-        border = toString config.custom.border;
-        gap = toString config.custom.gap;
-      in ''
-        .control-center {
-          border: ${border} solid #073642;
-          margin: ${gap}px;
-        }
+      # style = let
+      #   border = toString config.custom.border;
+      #   gap = toString config.custom.gap;
+      # in ''
+      #   .control-center {
+      #     border: ${border} solid #073642;
+      #     margin: ${gap}px;
+      #   }
 
-        .notification.low {
-          border: ${border} solid #6c71c4;
-        }
+      #   .notification.low {
+      #     border: ${border} solid #6c71c4;
+      #   }
 
-        .notification.normal {
-          border: ${border} solid #d33682;
-        }
+      #   .notification.normal {
+      #     border: ${border} solid #d33682;
+      #   }
 
-        .notification.critical {
-          border: ${border} solid #dc322f;
-        }
+      #   .notification.critical {
+      #     border: ${border} solid #dc322f;
+      #   }
 
-        ${readFile ./style.css}
-      '';
+      #   ${readFile ./style.css}
+      # '';
 
       # https://github.com/ErikReider/SwayNotificationCenter/blob/main/src/configSchema.json
       settings = {
@@ -65,6 +66,6 @@ in {
     };
 
     # https://stylix.danth.me/options/modules/swaync.html
-    stylix.targets.swaync.enable = false;
+    stylix.targets.swaync.enable = true;
   };
 }
