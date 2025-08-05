@@ -62,7 +62,7 @@
     nix-alien = flake "github:thiagokokada/nix-alien" // follows "unstable";
     nix-flatpak = flake "github:gmodena/nix-flatpak?ref=v0.5.1";
     nix-index-database-unstable = flake "github:nix-community/nix-index-database" // follows "unstable";
-    #// nix-vscode-extensions = flake "github:nix-community/nix-vscode-extensions" // follows "unstable";
+    nix-vscode-extensions = flake "github:nix-community/nix-vscode-extensions" // follows "unstable";
     nixd = flake "github:nix-community/nixd" // follows "unstable";
     nixgl-unstable = flake "github:nix-community/nixGL" // follows "unstable";
     nur-unstable = flake "github:nix-community/NUR" // follows "unstable";

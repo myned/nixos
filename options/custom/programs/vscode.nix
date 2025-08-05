@@ -43,14 +43,14 @@ in {
           extensions = with pkgs.open-vsx;
             [
               aaron-bond.better-comments
-              antfu.iconify
-              antfu.unocss
-              bedsteler20.gnome-magic
-              bilelmoussaoui.flatpak-vscode
+              #// antfu.iconify
+              #// antfu.unocss
+              #// bedsteler20.gnome-magic
+              #// bilelmoussaoui.flatpak-vscode
               bmalehorn.vscode-fish
-              bmewburn.vscode-intelephense-client
+              #// bmewburn.vscode-intelephense-client
               bradlc.vscode-tailwindcss
-              csstools.postcss
+              #// csstools.postcss
               dbaeumer.vscode-eslint
               detachhead.basedpyright
               #// eamodio.gitlens
@@ -59,7 +59,7 @@ in {
               #// ginfuru.ginfuru-better-solarized-dark-theme
               gruntfuggly.todo-tree
               jnoortheen.nix-ide
-              koihik.vscode-lua-format
+              #// koihik.vscode-lua-format
               matthewpi.caddyfile-support
               mhutchie.git-graph
               mkhl.direnv
@@ -71,14 +71,14 @@ in {
               pkief.material-icon-theme
               pkief.material-product-icons
               sketchbuch.vsc-workspace-sidebar
-              svelte.svelte-vscode
+              #// svelte.svelte-vscode
               timonwong.shellcheck
               vincaslt.highlight-matching-tag
             ]
             ++ (with pkgs.vscode-marketplace; [
               #!! Some extensions go missing from open-vsx, so use official marketplace as fallback
               # https://github.com/nix-community/nix-vscode-extensions?tab=readme-ov-file#note
-              bodil.blueprint-gtk
+              #// bodil.blueprint-gtk
               cormoran.disable-default-keybinding
               ms-python.python
               sirmspencer.vscode-autohide
@@ -90,7 +90,7 @@ in {
       # https://stylix.danth.me/options/modules/vscode.html
       stylix.targets.vscode = {
         enable = false;
-        #// profileNames = ["default"];
+        profileNames = ["default"];
       };
 
       home.sessionVariables = {

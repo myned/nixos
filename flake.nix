@@ -81,6 +81,10 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:nix-community/nix-index-database";
     };
+    nix-vscode-extensions = {
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "github:nix-community/nix-vscode-extensions";
+    };
     nixd = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:nix-community/nixd";

@@ -79,7 +79,7 @@ with lib; {
       #// swaylock.enable = true;
       #// thunderbird.enable = true;
       tio.enable = true;
-      #// vscode.enable = true;
+      vscode.enable = true;
       waybar.enable = true;
       wireshark.enable = true;
       #// wpaperd.enable = true;
