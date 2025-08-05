@@ -1,0 +1,25 @@
+{
+  "Script Bash": {
+    "prefix": "sb",
+    "description": "Script Bash",
+    "body": ["#! /usr/bin/env bash", "", "$0"]
+  },
+
+  "Script Bash Argc": {
+    "prefix": "sba",
+    "description": "Script Bash Argc",
+    "body": [
+      "#! /usr/bin/env bash",
+      "",
+      "# @describe $1",
+      "#",
+      "# https://github.com/sigoden/argc",
+      "",
+      "# @meta combine-shorts",
+      "",
+      "$0",
+      "",
+      "eval \"\\$(argc --argc-eval \"\\$0\" \"\\$@\")\""
+    ]
+  }
+}
