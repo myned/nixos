@@ -227,6 +227,7 @@ in {
               "upower#earbuds"
               "network"
               (mkIf config.services.power-profiles-daemon.enable "power-profiles-daemon")
+              (mkIf (with config.services.tuned; enable && ppdSupport) "power-profiles-daemon")
               (mkIf config.hardware.system76.power-daemon.enable "custom/system76-power")
               "battery"
             ];
