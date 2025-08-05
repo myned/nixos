@@ -25,6 +25,7 @@ in {
       #!! Conflicts with power-profiles-daemon
       auto-cpufreq.enable = false;
       tlp.enable = false;
+      tuned.enable = false;
 
       # Switch to power-saver mode when on battery or balanced when charging
       # https://wiki.archlinux.org/title/Power_management#Using_a_script_and_an_udev_rule

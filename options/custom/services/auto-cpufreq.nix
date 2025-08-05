@@ -49,6 +49,7 @@ in {
       #!! Conflicts with auto-cpufreq
       power-profiles-daemon.enable = false;
       tlp.enable = false;
+      tuned.enable = false;
     };
   };
 }
