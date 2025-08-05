@@ -14,6 +14,7 @@
 
     services = {
       #// auto-cpufreq.enable = true;
+      tuned.enable = true;
       wluma.enable = true;
 
       ollama = {
@@ -22,10 +23,10 @@
         server = "mynix";
       };
 
-      power-profiles-daemon = {
-        enable = true;
-        auto = true;
-      };
+      # power-profiles-daemon = {
+      #   enable = true;
+      #   auto = true;
+      # };
     };
 
     settings = {
