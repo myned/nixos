@@ -23,6 +23,7 @@ in {
           perf # Performance analyzer
         ])
         ++ optionals config.custom.default [
+          bluetui # Bluetooth manager
           btrfs-list # btrfs subvolume lister
           disko # Declarative disk management
           ethtool # Network device configuration
