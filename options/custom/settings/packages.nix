@@ -78,9 +78,18 @@ in {
           firefoxpwa # Web app manager
           mesa-demos # <glx|vk>gears
           vulkan-tools # vkcube
-
-          ### Dependencies
         ]
+        ++ optionals config.custom.minimal (with gst_all_1; [
+          ### Dependencies
+          # https://wiki.nixos.org/wiki/GStreamer
+          gst-libav
+          gst-plugins-bad
+          gst-plugins-base
+          gst-plugins-good
+          gst-plugins-ugly
+          gst-vaapi
+          gstreamer
+        ])
         ++ optionals config.custom.full [
           ### GUI applications
           #// alpaca # Ollama client
