@@ -14,36 +14,6 @@ in {
       type = with types; nullOr (enum ["amd" "intel"]);
     };
 
-    display = {
-      # TODO: Parse over outputs instead of using separate option
-      forceModes = mkOption {
-        default = false;
-        type = types.bool;
-      };
-
-      # TODO: Use submodule type
-      outputs = mkOption {
-        default = [];
-        description = "List of output attrsets";
-        type = types.attrs;
-
-        example = [
-          {
-            DP-1 = {
-              x = 0;
-              y = 0;
-              width = 1920;
-              height = 1080;
-              refresh = 60;
-              scale = 1;
-              vrr = true;
-              force = true;
-            };
-          }
-        ];
-      };
-    };
-
     dgpu = {
       #?? lspci -k
       driver = mkOption {
@@ -88,6 +58,26 @@ in {
       default = null;
       type = with types; nullOr str;
     };
+
+    # TODO: Use submodule type
+    outputs = mkOption {
+      default = {};
+      description = "Attrset of output submodules";
+      type = types.attrs;
+
+      example = {
+        DP-1 = {
+          x = 0;
+          y = 0;
+          width = 1920;
+          height = 1080;
+          refresh = 60;
+          scale = 1;
+          vrr = true;
+          force = true;
+        };
+      };
+    };
   };
 
   config = mkIf cfg.enable {
@@ -100,12 +90,14 @@ in {
 
         # https://wiki.archlinux.org/title/Kernel_mode_setting#Forcing_modes_and_EDID
         # https://docs.kernel.org/fb/modedb.html
-        display.outputs = mkIf cfg.display.forceModes (mapAttrs (name: value: {
+        display.outputs = let
+          forcedOutputs = filterAttrs (name: value: value.force == true) cfg.outputs;
+        in (mapAttrs (name: value: {
             mode = with value; "${toString width}x${toString height}MR@${toString refresh}";
           })
-          cfg.display.outputs);
+          forcedOutputs);
       }
-      // optionalAttrs (with config.custom.settings.hardware; dgpu.driver == "amdgpu" || igpu.driver == "amdgpu") {
+      // optionalAttrs (cfg.dgpu.driver == "amdgpu" || cfg.igpu.driver == "amdgpu") {
         # Fix initramfs boot resolution
         amdgpu.initrd.enable = !(with config.custom.settings.vm.passthrough; enable && blacklist);
       };

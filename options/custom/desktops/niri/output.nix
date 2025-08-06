@@ -37,7 +37,7 @@ in {
             then "on-demand" #!! Requires window-rule
             else false;
         })
-      config.custom.settings.hardware.display.outputs;
+      config.custom.settings.hardware.outputs;
     };
   };
 }
