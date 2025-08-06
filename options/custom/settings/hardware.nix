@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -86,7 +87,10 @@ in {
         enableAllFirmware = config.custom.default; # Non-free firmware
 
         # https://wiki.nixos.org/wiki/Bluetooth
-        bluetooth.enable = config.custom.minimal;
+        bluetooth = {
+          enable = config.custom.minimal;
+          package = pkgs.bluez-experimental;
+        };
 
         # https://wiki.archlinux.org/title/Kernel_mode_setting#Forcing_modes_and_EDID
         # https://docs.kernel.org/fb/modedb.html
