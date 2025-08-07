@@ -54,17 +54,14 @@ in {
         spawn-at-startup = [
           {command = [audio "--init"];} # Enforce audio profile state
           {command = [config.custom.menus.clipboard.clear-silent];} # Clear clipboard history
-
-          # FIXME: Does not inhibit
-          #// {command = [sway-audio-idle-inhibit];} # Inhibit while audio is playing
         ];
 
         # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsswitch-eventslid-close
-        switch-events = {
-          # Turn display off while inhibiting suspend
-          lid-close.action.spawn = [niri "msg" "action" "power-off-monitors"];
-          lid-open.action.spawn = [niri "msg" "action" "power-on-monitors"];
-        };
+        # switch-events = optionalAttrs (config.custom.profile == "laptop") {
+        #   # Turn lid display off while inhibiting suspend
+        #   lid-close.action.spawn = [niri "msg" "output" "eDP-1" "off"];
+        #   lid-open.action.spawn = [niri "msg" "output" "eDP-1" "on"];
+        # };
       };
     };
   };
