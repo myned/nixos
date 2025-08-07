@@ -190,6 +190,11 @@ in {
             position = "bottom";
             reload_style_on_change = true;
 
+            output = let
+              mainOutputs = filterAttrs (n: v: v.main == true) config.custom.settings.hardware.display.outputs;
+            in
+              mapAttrsToList (name: _: name) mainOutputs;
+
             modules-left = [
               "custom/power"
               "custom/inhibitor"
