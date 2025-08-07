@@ -6,27 +6,46 @@
 }:
 with lib; let
   cfg = config.custom.services.systemd-lock-handler;
+  hm = config.home-manager.users.${config.custom.username};
 
   gtklock = getExe pkgs.gtklock;
-  hyprlock = getExe config.programs.hyprlock.package;
+  hyprlock = getExe hm.programs.hyprlock.package;
   niri = getExe config.programs.niri.package;
   pgrep = getExe' pkgs.procps "pgrep";
   sleep = getExe' pkgs.coreutils "sleep";
+  swaylock = getExe hm.programs.swaylock.package;
 in {
   options.custom.services.systemd-lock-handler = {
-    enable = mkOption {default = false;};
-    delay = mkOption {default = 1;}; # Seconds
+    enable = mkEnableOption "systemd-lock-handler";
 
-    lock = mkOption {
-      default =
-        if config.custom.lockscreen == "gtklock"
-        then gtklock
-        else if config.custom.lockscreen == "hyprlock"
-        then hyprlock
-        else "";
+    delay = mkOption {
+      default = 1;
+      description = "Time in seconds to wait for the lockscreen before suspending";
+      example = 5;
+      type = types.int;
     };
 
-    transition = mkOption {default = true;};
+    lockCommand = mkOption {
+      default = with config.custom;
+        if lockscreen == "gtklock"
+        then gtklock
+        else if lockscreen == "hyprlock"
+        then hyprlock
+        else if lockscreen == "swaylock"
+        then swaylock
+        else "";
+
+      description = "Command of the lockscreen to execute";
+      example = getExe pkgs.swaylock;
+      type = types.str;
+    };
+
+    transition = mkOption {
+      default = false;
+      description = "Whether to fade into the lockscreen";
+      example = false;
+      type = types.bool;
+    };
   };
 
   config = mkIf cfg.enable {
@@ -36,9 +55,7 @@ in {
     # https://sr.ht/~whynothugo/systemd-lock-handler/#usage
     # https://github.com/hyprwm/hypridle/issues/49
     systemd.user.services = {
-      handle-lock = let
-        delay-ms = toString (cfg.delay * 1000); # Milliseconds
-      in {
+      handle-lock = {
         unitConfig = {
           Description = "Lockscreen";
 
@@ -60,13 +77,16 @@ in {
 
           # HACK: Default red background immediately shows while lockscreen starts, so use transition
           # https://github.com/YaLTeR/niri/issues/808
-          ExecStartPre = mkIf cfg.transition (
-            if config.custom.desktop == "niri"
-            then "${niri} msg action do-screen-transition --delay-ms ${delay-ms}"
-            else ""
-          );
+          ExecStartPre = let
+            delay-ms = toString (cfg.delay * 1000); # Milliseconds
+          in
+            mkIf cfg.transition (
+              if config.custom.desktop == "niri"
+              then "${niri} msg action do-screen-transition --delay-ms ${delay-ms}"
+              else ""
+            );
 
-          ExecStart = cfg.lock;
+          ExecStart = cfg.lockCommand;
         };
 
         requiredBy = ["lock.target" "sleep.target"];

@@ -5,66 +5,74 @@
   ...
 }:
 with lib; let
-  chayang = "${pkgs.chayang}/bin/chayang";
-  hyprctl = "${config.programs.hyprland.package}/bin/hyprctl";
-  loginctl = "${pkgs.systemd}/bin/loginctl";
-  pgrep = "${pkgs.procps}/bin/pgrep";
-  swaylock = "${
-    config.home-manager.users.${config.custom.username}.programs.swaylock.package
-  }/bin/swaylock";
-  systemctl = "${pkgs.systemd}/bin/systemctl";
-
   cfg = config.custom.services.swayidle;
+
+  chayang = getExe pkgs.chayang;
+  grep = getExe pkgs.gnugrep;
+  hyprctl = getExe config.programs.hyprland.package;
+  loginctl = getExe' pkgs.systemd "loginctl";
+  niri = getExe config.programs.niri.package;
+  pgrep = getExe' pkgs.procps "pgrep";
+  pw-cli = getExe' pkgs.pipewire "pw-cli";
+  swaymsg = getExe' config.programs.sway.package "swaymsg";
+  systemctl = getExe' pkgs.systemd "systemctl";
 in {
-  options.custom.services.swayidle.enable = mkOption {default = false;};
+  options.custom.services.swayidle = {
+    enable = mkEnableOption "swayidle";
 
-  config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
-    # https://github.com/swaywm/swayidle
-    # https://wiki.archlinux.org/title/Sway#Idle
-    services.swayidle = {
-      enable = true;
+    dpmsCommand = mkOption {
+      default = with config.custom;
+        if desktop == "hyprland"
+        then "${chayang} -d 15 && ${hyprctl} dispatch dpms off"
+        # TODO: Use chayang when wp_single_pixel_buffer_manager_v1 supported
+        # https://github.com/YaLTeR/niri/issues/619
+        else if desktop == "niri"
+        then "${niri} msg action power-off-monitors"
+        else if desktop == "sway"
+        then "${chayang} -d 15 && ${swaymsg} 'output * dpms off'"
+        else "";
 
-      events = [
-        {
-          command = "${pgrep} swaylock || ${swaylock}";
-          event = "before-sleep";
-        }
+      description = "Command to turn off display outputs";
+      example = "swaymsg 'output * dpms off'";
+      type = types.str;
+    };
+  };
 
-        {
-          command = "${pgrep} swaylock || ${swaylock}";
-          event = "lock";
-        }
-      ];
+  config = mkIf cfg.enable {
+    home-manager.users.${config.custom.username} = {
+      # https://github.com/swaywm/swayidle
+      # https://wiki.archlinux.org/title/Sway#Idle
+      services.swayidle = {
+        enable = true;
 
-      # https://github.com/swaywm/swayidle/blob/master/swayidle.1.scd
-      #?? man swayidle
-      timeouts = [
-        # Lock session
-        {
-          # FIXME: Grace period likely broken by Hyprland (flicker)
-          #// command = "${pgrep} swaylock || ${swaylock} --grace 300"; # 5 minute grace period
-          command = "${pgrep} swaylock || ${swaylock}";
-          timeout = 15 * 60; # Minutes * 60
-        }
+        # https://github.com/swaywm/swayidle/blob/master/swayidle.1.scd
+        #?? man swayidle
+        timeouts = [
+          {
+            # Turn off display if currently locked
+            command = ''${pgrep} ${config.custom.lockscreen} && ${cfg.dpmsCommand}'';
+            timeout = 10 * 60; # Seconds
+          }
 
-        # Fade out display
-        {
-          # TODO: Use chayang when supported by Hyprland
-          # https://github.com/hyprwm/Hyprland/issues/6624
-          #// command = "${chayang} -d 15 && ${hyprctl} dispatch dpms off";
-          command = "${hyprctl} dispatch dpms off";
-          timeout = 20 * 60; # Minutes * 60
-          # Resume handled by Hyprland
-        }
+          {
+            # Turn off display
+            command = cfg.dpmsCommand;
+            timeout = 15 * 60; # Seconds
+          }
 
-        # TODO: Possibly migrate to systemd-lock-handler for suspend
-        # https://github.com/NixOS/nixpkgs/pull/259196
-        # Suspend system
-        {
-          command = "${systemctl} suspend";
-          timeout = 60 * 60; # Minutes * 60
-        }
-      ];
+          {
+            # Lock session
+            command = "${loginctl} lock-session";
+            timeout = 20 * 60; # Seconds
+          }
+
+          {
+            # Suspend if no audio
+            command = "${pw-cli} info all | ${grep} running || ${systemctl} suspend";
+            timeout = 60 * 60; # Seconds
+          }
+        ];
+      };
     };
   };
 }

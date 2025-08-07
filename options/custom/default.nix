@@ -38,11 +38,7 @@ in {
 
     ### Misc
     desktop = mkOption {default = null;};
-
-    # FIXME: Use --grace when hyprlock >= v0.9.0 in unstable
-    # https://search.nixos.org/packages?channel=unstable&query=hyprlock
-    lockscreen = mkOption {default = "hyprlock";};
-
+    lockscreen = mkOption {default = "swaylock";};
     menu = mkOption {default = "rofi";};
 
     browser = {

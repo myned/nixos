@@ -46,7 +46,7 @@ with lib; {
       gnome-keyring.enable = true;
       gpg-agent.enable = true;
       greetd.enable = true;
-      hypridle.enable = true;
+      #// hypridle.enable = true;
       #// hyprpaper.enable = true;
       kdeconnect.enable = true;
       keyd.enable = true;
@@ -56,7 +56,7 @@ with lib; {
       ntfy.enable = true;
       ollama.enable = true;
       samba.enable = true;
-      #// swayidle.enable = true;
+      swayidle.enable = true;
       swaync.enable = true;
       swayosd.enable = true;
       sysprof.enable = true;

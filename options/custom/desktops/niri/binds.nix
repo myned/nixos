@@ -15,7 +15,6 @@ with lib; let
   codium = "${config.home-manager.users.${config.custom.username}.programs.vscode.package}/bin/codium";
   ghostty = "${hm.programs.ghostty.package}/bin/ghostty";
   gnome-text-editor = "${pkgs.gnome-text-editor}/bin/gnome-text-editor";
-  hyprlock = "${config.home-manager.users.${config.custom.username}.programs.hyprlock.package}/bin/hyprlock";
   hyprpicker = "${pkgs.hyprpicker}/bin/hyprpicker";
   inhibit = config.home-manager.users.${config.custom.username}.home.file.".local/bin/inhibit".source;
   jq = "${pkgs.jq}/bin/jq";
@@ -142,7 +141,7 @@ in {
           (key "I" "Mod" (spawn zeditor))
           (key "K" "Ctrl+Alt" (spawn [pkill "obsidian"]))
           (key "K" "Mod" (spawn obsidian))
-          (key "L" "Mod" (spawn [bash "-c" "${hyprlock} --immediate & ${niri} msg action power-off-monitors"]))
+          (key "L" "Mod" (spawn [bash "-c" "${loginctl} lock-session && ${niri} msg action power-off-monitors"]))
           (key "L" "Mod+Shift" suspend)
           (key "M" "Ctrl+Alt" (spawn [pkill "youtube-music"]))
           (key "M" "Mod" (spawn youtube-music))

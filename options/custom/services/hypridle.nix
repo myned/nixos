@@ -5,6 +5,8 @@
   ...
 }:
 with lib; let
+  cfg = config.custom.services.hypridle;
+
   grep = "${pkgs.gnugrep}/bin/grep";
   hyprctl = "${config.programs.hyprland.package}/bin/hyprctl";
   loginctl = "${pkgs.systemd}/bin/loginctl";
@@ -12,13 +14,11 @@ with lib; let
   pgrep = "${pkgs.procps}/bin/pgrep";
   pw-cli = "${pkgs.pipewire}/bin/pw-cli";
   systemctl = "${pkgs.systemd}/bin/systemctl";
-
-  cfg = config.custom.services.hypridle;
 in {
   options.custom.services.hypridle = {
     enable = mkOption {default = false;};
 
-    dpms = mkOption {
+    dpmsCommand = mkOption {
       default =
         if config.custom.desktop == "hyprland"
         then "${hyprctl} dispatch dpms off"
@@ -36,13 +36,13 @@ in {
 
       settings.listener = [
         {
-          timeout = 30; # Seconds
-          on-timeout = ''${pgrep} --exact hyprlock && ${cfg.dpms}''; # Turn off display if currently locked
+          timeout = 1 * 60; # Seconds
+          on-timeout = ''${pgrep} ${config.custom.lockscreen} && ${cfg.dpmsCommand}''; # Turn off display if currently locked
         }
 
         {
           timeout = 15 * 60; # Seconds
-          on-timeout = cfg.dpms; # Turn off display
+          on-timeout = cfg.dpmsCommand; # Turn off display
         }
 
         {
