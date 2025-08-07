@@ -12,6 +12,7 @@ in {
     # https://github.com/abraunegg/onedrive
     #!! Login is imperative
     #?? onedrive
+    #?? systemctl --user enable --now onedrive.service
     programs.onedrive = {
       enable = true;
 
