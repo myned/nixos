@@ -191,7 +191,7 @@ in {
             reload_style_on_change = true;
 
             output = let
-              mainOutputs = filterAttrs (n: v: v.main == true) config.custom.settings.hardware.display.outputs;
+              mainOutputs = filterAttrs (n: v: v.main == true) config.custom.settings.hardware.outputs;
             in
               mapAttrsToList (name: _: name) mainOutputs;
 

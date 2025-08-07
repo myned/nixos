@@ -47,40 +47,39 @@
         rocm = "11.0.2"; # 11.0.3
 
         outputs = with config.custom; {
-            eDP-1 = {
-              inherit width height refresh scale vrr;
-              x = 0;
-              y = 0;
-              finalRefresh = refresh;
-              force = false;
-              main = true;
-            };
+          eDP-1 = {
+            inherit width height refresh scale vrr;
+            x = 0;
+            y = 0;
+            finalRefresh = refresh;
+            force = false;
+            main = true;
+          };
 
-            DP-10 = {
-              x = width / scale;
-              y = 0;
-              width = 1920;
-              height = 1080;
-              refresh = 75;
-              scale = 1;
-              vrr = false;
-              finalRefresh = 74.977;
-              force = true;
-              main = false;
-            };
+          DP-10 = {
+            x = width / scale;
+            y = 0;
+            width = 1920;
+            height = 1080;
+            refresh = 75;
+            scale = 1;
+            vrr = false;
+            finalRefresh = 74.977;
+            force = true;
+            main = false;
+          };
 
-            DP-12 = {
-              x = width / scale + 1920;
-              y = 0;
-              width = 1920;
-              height = 1080;
-              refresh = 75;
-              finalRefresh = 74.977;
-              scale = 1;
-              force = true;
-              main = true;
-              vrr = false;
-            };
+          DP-12 = {
+            x = width / scale + 1920;
+            y = 0;
+            width = 1920;
+            height = 1080;
+            refresh = 75;
+            finalRefresh = 74.977;
+            scale = 1;
+            force = true;
+            main = true;
+            vrr = false;
           };
         };
       };
