@@ -1,10 +1,7 @@
 {config, ...}: {
   custom = {
     full = true;
-
-    # FIXME: Use "laptop" profile
-    profile = "desktop"; # Inherit desktop profile
-
+    profile = "laptop";
     desktop = "niri";
 
     containers = {
