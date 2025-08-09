@@ -44,5 +44,10 @@ in {
         };
       };
     };
+
+    # Wait for tailscale to connect before running
+    systemd.services.scrutiny-collector = mkIf config.services.scrutiny.collector.enable {
+      after = optionals config.custom.services.tailscale.enable ["tailscaled.service"];
+    };
   };
 }
