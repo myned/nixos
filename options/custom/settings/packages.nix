@@ -109,6 +109,7 @@ in {
 
           #// clapper # Video player
           concessio # Permissions converter
+          czkawka # Duplicate file finder
           d-spy # D-Bus introspection
           dconf-editor # GSettings editor
           decibels # Audio player
