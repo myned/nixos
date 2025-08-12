@@ -179,6 +179,7 @@ in {
           newsflash # RSS feed
           nicotine-plus # SoulSeek client
           obsidian # Knowledge base
+          pantheon.switchboard-with-plugs # System settings
           papers # Document viewer
           #// path-of-building # Path of Exile planner
           picard # Music tagger
