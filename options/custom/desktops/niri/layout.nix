@@ -84,8 +84,8 @@ in {
         struts = let
           strut = gap;
         in {
-          left = strut;
-          right = strut;
+          left = strut * 2;
+          right = strut * 2;
           top = strut;
           bottom = strut;
         };
