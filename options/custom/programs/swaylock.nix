@@ -46,10 +46,10 @@ in {
             line-uses-inside = true;
             indicator-caps-lock = true;
             indicator-idle-visible = true;
-            indicator-radius = 150;
+            indicator-radius = 100;
             font = config.stylix.fonts.monospace.name;
             font-size = 24 * config.custom.scale;
-            image = mkIf config.custom.services.wallpaper.enable "/tmp/altered.png";
+            #// image = mkIf config.custom.services.wallpaper.enable "/tmp/altered.png";
 
             bs-hl-color = "93a1a1";
             color = "073642";
