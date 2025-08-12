@@ -59,16 +59,22 @@ with lib; {
     containersForce = true;
 
     containers = {
-      edu = {
-        color = "orange";
-        icon = "fruit";
-        id = 1;
-      };
-
       work = {
         color = "red";
         icon = "briefcase";
+        id = 1;
+      };
+
+      edu = {
+        color = "orange";
+        icon = "fruit";
         id = 2;
+      };
+
+      temp = {
+        color = "toolbar";
+        icon = "fingerprint";
+        id = 9;
       };
     };
 
