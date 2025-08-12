@@ -19,20 +19,22 @@ in {
         defaultStrategy = "custom";
 
         strategies.custom = {
-          fanSpeedUpdateFrequency = 10; # Seconds
+          fanSpeedUpdateFrequency = 5; # Seconds
           movingAverageInterval = 30; # Seconds
 
           speedCurve = let
             curve = temp: speed: {inherit temp speed;};
           in [
             (curve 0 0) # Always active
-            (curve 40 20)
-            (curve 50 30)
-            (curve 60 35)
-            (curve 70 40)
+            (curve 30 10)
+            (curve 40 15)
+            (curve 50 20)
+            (curve 60 25)
+            (curve 70 30)
             (curve 80 50)
-            (curve 90 60)
-            #!! Max fan speed of 60%
+            #!! Max fan speed of 50%
+            #// (curve 90 70)
+            #// (curve 100 100)
           ];
         };
       };
