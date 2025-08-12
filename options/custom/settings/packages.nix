@@ -75,6 +75,7 @@ in {
           lan-mouse # Software KVM client
 
           ### CLI applications
+          ffmpeg # Media converter
           firefoxpwa # Web app manager
           mesa-demos # <glx|vk>gears
           vulkan-tools # vkcube
