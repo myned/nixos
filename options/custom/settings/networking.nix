@@ -124,6 +124,7 @@ in {
 
       networkmanager = mkIf cfg.networkmanager {
         enable = true;
+        plugins = [pkgs.networkmanager-openvpn];
         wifi.backend = mkIf cfg.wifi "iwd";
       };
     };
