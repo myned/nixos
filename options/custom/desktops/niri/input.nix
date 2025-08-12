@@ -59,6 +59,11 @@ in {
           middle-emulation = true;
           natural-scroll = true;
         };
+
+        warp-mouse-to-focus = {
+          enable = true;
+          mode = "center-xy-always";
+        };
       };
     };
   };
