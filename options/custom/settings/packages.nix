@@ -209,7 +209,7 @@ in {
           teams-for-linux # Microsoft Teams client
           #// telegram-desktop # Telegram client
           #// variety # Wallpaper changer
-          ventoy # Image writer
+          ventoy-full-gtk # Image writer
           virt-viewer # Virtual machine viewer
           vorta # Borg backup client
           webex # Conferencing client

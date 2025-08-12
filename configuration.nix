@@ -31,7 +31,7 @@ in {
         == "electron"
         # HACK: Ventoy uses opaque binary blobs, causing security concerns
         # https://github.com/NixOS/nixpkgs/issues/404663
-        || name == "ventoy"
+        || name == "ventoy-gtk3"
         # HACK: Some Matrix clients rely on libolm, which is deprecated
         # https://github.com/NixOS/nixpkgs/pull/334638
         || name == "cinny"
