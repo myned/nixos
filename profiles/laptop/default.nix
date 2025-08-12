@@ -12,7 +12,7 @@
     services = {
       #// auto-cpufreq.enable = true;
       tuned.enable = true;
-      wluma.enable = true;
+      #// wluma.enable = true;
 
       ollama = {
         acceleration = false;
