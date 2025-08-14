@@ -12,7 +12,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    custom.desktops = {
+    custom.desktops = mkDefault {
       gnome.enable = config.custom.desktop == "gnome";
       hyprland.enable = config.custom.desktop == "hyprland";
       kde.enable = config.custom.desktop == "kde";
