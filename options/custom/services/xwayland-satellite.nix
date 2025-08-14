@@ -5,13 +5,12 @@
   ...
 }:
 with lib; let
-  xwayland-satellite = "${pkgs.xwayland-satellite}/bin/xwayland-satellite";
-
   cfg = config.custom.services.xwayland-satellite;
+
+  xwayland-satellite = getExe pkgs.xwayland-satellite;
 in {
   options.custom.services.xwayland-satellite = {
-    enable = mkOption {default = false;};
-    display = mkOption {default = ":${toString config.services.xserver.display}";};
+    enable = mkEnableOption "xwayland-satellite";
   };
 
   config = mkIf cfg.enable {
@@ -20,11 +19,8 @@ in {
     # https://github.com/Supreeeme/xwayland-satellite/issues/11
     # Rootless Xwayland support as a user service
     # https://github.com/Supreeeme/xwayland-satellite
-
     # https://github.com/Supreeeme/xwayland-satellite/blob/main/resources/xwayland-satellite.service
     systemd.user.services.xwayland-satellite = {
-      enable = true;
-
       unitConfig = {
         Description = "Xwayland outside your Wayland";
         BindsTo = ["graphical-session.target"];
@@ -41,12 +37,6 @@ in {
       };
 
       wantedBy = ["graphical-session.target"];
-    };
-
-    home-manager.users.${config.custom.username} = {
-      home.sessionVariables = {
-        DISPLAY = cfg.display;
-      };
     };
   };
 }
