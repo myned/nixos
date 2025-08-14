@@ -19,9 +19,38 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # Allow swaylock to unlock the session
     # https://wiki.nixos.org/wiki/Sway#Swaylock_cannot_be_unlocked_with_the_correct_password
-    security.pam.services.swaylock = {};
+    # https://wiki.archlinux.org/title/Fprint#Login_configuration
+    # https://github.com/swaywm/swaylock/issues/61
+    #?? Original: config.security.pam.services.swaylock.text
+    security.pam.services.swaylock.text = let
+      # https://github.com/NixOS/nixpkgs/blob/c2ae88e026f9525daf89587f3cbee584b92b6134/nixos/modules/security/pam.nix#L1501
+      makeLimitsConf = limits:
+        pkgs.writeText "limits.conf" (
+          concatMapStrings (
+            {
+              domain,
+              type,
+              item,
+              value,
+            }: "${domain} ${type} ${item} ${toString value}\n"
+          )
+          limits
+        );
+    in ''
+      account required pam_unix.so
+
+      auth sufficient pam_unix.so likeauth try_first_pass nullok
+      auth sufficient pam_fprintd.so
+      auth required pam_deny.so
+
+      password sufficient pam_unix.so nullok yescrypt
+
+      session required pam_env.so conffile=/etc/pam/environment readenv=0
+      session required pam_unix.so
+
+      session required pam_limits.so conf=${makeLimitsConf config.security.pam.services.swaylock.limits}
+    '';
 
     home-manager.users.${config.custom.username} = {
       # https://github.com/swaywm/swaylock
