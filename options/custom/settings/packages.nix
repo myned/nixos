@@ -147,6 +147,7 @@ in {
           gnome-frog # Text extraction
           gnome-graphs # Data plotter
           gnome-maps # OpenStreetMap client
+          gnome-network-displays # Miracast client
           gnome-obfuscate # Image redacter
           gnome-online-accounts-gtk # GNOME accounts
           gnome-podcasts # Podcast feed
