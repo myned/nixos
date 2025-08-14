@@ -18,8 +18,8 @@ in {
       services.gammastep = {
         enable = true;
         enableVerboseLogging = true;
-        #// dawnTime = "06:00-08:00";
-        #// duskTime = "18:00-20:00";
+        dawnTime = "06:00-08:00";
+        duskTime = "18:00-20:00";
         provider = mkIf config.services.geoclue2.enable "geoclue2";
 
         temperature = {
