@@ -18,18 +18,20 @@ in {
 
         # https://github.com/maximbaz/wluma/blob/main/config.toml
         settings = {
-          als.iio = {
-            path = "/sys/bus/iio/devices";
+          # als.iio = {
+          #   path = "/sys/bus/iio/devices";
 
-            thresholds = {
-              "0" = "night";
-              "20" = "dark";
-              "250" = "normal";
-              "500" = "bright";
-              "80" = "dim";
-              "800" = "outdoors";
-            };
-          };
+          #   thresholds = {
+          #     "0" = "night";
+          #     "20" = "dark";
+          #     "250" = "normal";
+          #     "500" = "bright";
+          #     "80" = "dim";
+          #     "800" = "outdoors";
+          #   };
+          # };
+          #
+          als.none = {};
 
           output.backlight = [
             {
@@ -43,6 +45,13 @@ in {
                 then "intel_backlight"
                 else ""
               }";
+
+              # BUG: Adaptive algorithm incurs noticeable idle battery usage, so use manual
+              # https://github.com/maximbaz/wluma/issues/143
+              # https://github.com/maximbaz/wluma?tab=readme-ov-file#algorithm
+              output.backlight.predictor.manual.thresholds = {
+                none = {"0" = 0;};
+              };
             }
           ];
         };
