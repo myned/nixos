@@ -56,7 +56,7 @@
             main = true;
           };
 
-          DP-10 = {
+          DP-9 = {
             x = width / scale;
             y = 0;
             width = 1920;
@@ -66,10 +66,10 @@
             vrr = false;
             finalRefresh = 74.977;
             force = true;
-            main = false;
+            main = true;
           };
 
-          DP-12 = {
+          DP-10 = {
             x = width / scale + 1920;
             y = 0;
             width = 1920;
