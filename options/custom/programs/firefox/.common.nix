@@ -197,6 +197,8 @@ with lib; {
         "general.autoScroll" = false;
         "general.smoothScroll" = true;
         "general.smoothScroll.msdPhysics.enabled" = false;
+        "geo.provider.network.url" = "https://api.beacondb.net/v1/geolocate"; # https://beacondb.net/
+        "geo.provider.use_geoclue" = false; # FIXME: geoclue2 not allowed via desktop id
         "gfx.webrender.software" = false;
         "identity.fxaccounts.enabled" = true;
         "layers.acceleration.force-enabled" = true;
