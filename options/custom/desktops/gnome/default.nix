@@ -8,10 +8,21 @@ with lib; let
   cfg = config.custom.desktops.gnome;
 in {
   options.custom.desktops.gnome = {
-    enable = mkOption {default = false;};
-    auto = mkOption {default = false;};
-    gdm = mkOption {default = true;};
-    minimal = mkOption {default = false;};
+    enable = mkEnableOption "gnome";
+
+    autoLogin = mkOption {
+      default = false;
+      description = "Whether to log in automatically";
+      example = true;
+      type = types.bool;
+    };
+
+    minimal = mkOption {
+      default = config.custom.desktop != "gnome";
+      description = "Whether to enable the minimum amount of GNOME services";
+      example = false;
+      type = types.bool;
+    };
   };
 
   config = mkIf cfg.enable {
@@ -19,29 +30,29 @@ in {
     # FIXME: xdg-desktop-portal-[gnome|gtk] not working through steam
     services =
       {
-        gnome.core-os-services.enable = cfg.minimal;
+        # Minimal installation
+        gnome = mkIf cfg.minimal {
+          core-os-services.enable = true;
+        };
 
         displayManager.autoLogin = {
-          enable = cfg.auto;
+          enable = cfg.autoLogin;
           user = config.custom.username;
         };
       }
-      // optionalAttrs (!cfg.minimal) ({
-          gnome.gnome-browser-connector.enable = true;
+      // (
+        if (versionAtLeast version "25.11")
+        then {
+          desktopManager.gnome.enable = true;
+          displayManager.gdm.enable = !cfg.minimal;
         }
-        // (
-          if (versionAtLeast version "25.11")
-          then {
+        else {
+          xserver = {
             desktopManager.gnome.enable = true;
-            displayManager.gdm.enable = cfg.gdm;
-          }
-          else {
-            xserver = {
-              desktopManager.gnome.enable = true;
-              displayManager.gdm.enable = cfg.gdm;
-            };
-          }
-        ));
+            displayManager.gdm.enable = !cfg.minimal;
+          };
+        }
+      );
 
     # https://github.com/mjakeman/extension-manager
     environment.systemPackages = optionals (!cfg.minimal) [pkgs.gnome-extension-manager];

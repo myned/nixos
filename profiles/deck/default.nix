@@ -16,7 +16,7 @@
     desktop = "gnome";
 
     desktops = {
-      gnome.gdm = false;
+      gnome.minimal = true;
     };
 
     games = {
