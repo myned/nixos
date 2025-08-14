@@ -46,7 +46,7 @@ in {
           gtk-single-instance = true;
 
           # https://ghostty.org/docs/config/reference#gtk-titlebar
-          gtk-titlebar = false;
+          gtk-titlebar = true;
 
           # https://ghostty.org/docs/config/reference#mouse-hide-while-typing
           mouse-hide-while-typing = true;
@@ -62,7 +62,7 @@ in {
           shell-integration-features = "no-cursor";
 
           # https://ghostty.org/docs/config/reference#window-decoration
-          window-decoration = false;
+          window-decoration = "auto";
 
           # https://ghostty.org/docs/config/reference#window-new-tab-position
           window-new-tab-position = "end";
