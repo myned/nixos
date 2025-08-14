@@ -19,35 +19,35 @@ with lib; {
   #?? about:profiles
   profiles.${profile} = {
     # https://nur.nix-community.org/repos/rycee/
-    extensions.packages = with pkgs.nur.repos.rycee.firefox-addons;
-      optionals config.custom.minimal [
-        ublock-origin
-      ]
-      ++ optionals config.custom.full [
-        #// awesome-rss
-        #// betterttv
-        bitwarden
-        enhancer-for-youtube
-        #// firefox-color
-        #// gnome-shell-integration
-        #// improved-tube
-        libredirect
-        multi-account-containers
-        #// onepassword-password-manager
-        pwas-for-firefox
-        #// simple-tab-groups
-        sponsorblock
-        stylus
-        #// untrap-for-youtube
-        #// user-agent-string-switcher
+    # extensions.packages = with pkgs.nur.repos.rycee.firefox-addons;
+    #   optionals config.custom.minimal [
+    #     ublock-origin
+    #   ]
+    #   ++ optionals config.custom.full [
+    #     #// awesome-rss
+    #     #// betterttv
+    #     bitwarden
+    #     #// enhancer-for-youtube
+    #     #// firefox-color
+    #     #// gnome-shell-integration
+    #     #// improved-tube
+    #     libredirect
+    #     multi-account-containers
+    #     #// onepassword-password-manager
+    #     pwas-for-firefox
+    #     #// simple-tab-groups
+    #     sponsorblock
+    #     stylus
+    #     #// untrap-for-youtube
+    #     #// user-agent-string-switcher
 
-        # TODO: Convert to NUR addons
-        #// "{248e6a49-f636-4c81-9899-a456eb6291a8}" = extension "ground-news-bias-checker"; # Ground News Bias Checker
-        #// "select-after-closing-current@qw.linux-2g64.local" = extension "select-after-closing-current"; # Select After Closing Current
-        #// "myallychou@gmail.com" = extension "youtube-recommended-videos"; # Unhook: Remove YouTube Recommended Videos Comments
-        #// "{a0370179-acc3-452f-9530-246b6adb2768}" = extension "svelte-devtools"; # Svelte Devtools
-        #// "{c49b13b1-5dee-4345-925e-0c793377e3fa}" = extension "youtube-enhancer-vc"; # YouTube Enhancer
-      ];
+    #     # TODO: Convert to NUR addons
+    #     #// "{248e6a49-f636-4c81-9899-a456eb6291a8}" = extension "ground-news-bias-checker"; # Ground News Bias Checker
+    #     #// "select-after-closing-current@qw.linux-2g64.local" = extension "select-after-closing-current"; # Select After Closing Current
+    #     #// "myallychou@gmail.com" = extension "youtube-recommended-videos"; # Unhook: Remove YouTube Recommended Videos Comments
+    #     #// "{a0370179-acc3-452f-9530-246b6adb2768}" = extension "svelte-devtools"; # Svelte Devtools
+    #     #// "{c49b13b1-5dee-4345-925e-0c793377e3fa}" = extension "youtube-enhancer-vc"; # YouTube Enhancer
+    #   ];
 
     # TODO: Consider other themes
     # https://github.com/soulhotel/FF-ULTIMA
