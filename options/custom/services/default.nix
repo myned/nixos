@@ -36,6 +36,7 @@ with lib; {
     })
 
     (mkIf config.custom.full {
+      avahi.enable = true;
       #// avizo.enable = true;
       #// blueman-applet.enable = true;
       #// clipcat.enable = true;
