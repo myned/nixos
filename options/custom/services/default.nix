@@ -12,6 +12,7 @@ with lib; {
       geoclue2.enable = true;
       glances.enable = true;
       #// kmscon.enable = true;
+      logind.enable = true;
       #// netbird.enable = true;
       #// postfix.enable = true;
       scrutiny.enable = true;
