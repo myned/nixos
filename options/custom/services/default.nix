@@ -45,6 +45,7 @@ with lib; {
       #// clipmenu.enable = true;
       easyeffects.enable = true;
       gammastep.enable = true;
+      gdm.enable = true;
       gnome-keyring.enable = true;
       gpg-agent.enable = true;
       greetd.enable = true;

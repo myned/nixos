@@ -17,21 +17,16 @@ in {
 
   config = mkIf cfg.enable {
     custom = {
-      desktops = mkIf config.custom.full {
+      desktops = {
         tiling = true;
 
-        niri = {
+        niri = mkIf config.custom.full {
           binds.enable = true;
           input.enable = true;
           layout.enable = true;
           misc.enable = true;
           output.enable = true;
           rules.enable = true;
-        };
-
-        gnome = {
-          enable = true;
-          minimal = true;
         };
       };
 

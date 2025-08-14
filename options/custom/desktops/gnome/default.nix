@@ -18,7 +18,7 @@ in {
     };
 
     minimal = mkOption {
-      default = config.custom.desktop != "gnome";
+      default = !config.services.desktopManager.gnome.enable;
       description = "Whether to enable the minimum amount of GNOME services";
       example = false;
       type = types.bool;
@@ -44,13 +44,9 @@ in {
         if (versionAtLeast version "25.11")
         then {
           desktopManager.gnome.enable = true;
-          displayManager.gdm.enable = !cfg.minimal;
         }
         else {
-          xserver = {
-            desktopManager.gnome.enable = true;
-            displayManager.gdm.enable = !cfg.minimal;
-          };
+          xserver.desktopManager.gnome.enable = true;
         }
       );
 
