@@ -11,6 +11,7 @@
 
     services = {
       #// auto-cpufreq.enable = true;
+      colord.enable = true;
       tuned.enable = true;
       #// wluma.enable = true;
 
