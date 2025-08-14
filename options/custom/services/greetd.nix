@@ -5,36 +5,54 @@
   ...
 }:
 with lib; let
-  systemd-cat = "${pkgs.systemd}/bin/systemd-cat";
-  tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
-
   cfg = config.custom.services.greetd;
+
+  cage = getExe pkgs.cage;
+  gtkgreet = getExe pkgs.gtkgreet;
+  tuigreet = getExe pkgs.tuigreet;
 in {
-  options.custom.services.greetd.enable = mkOption {default = false;};
+  options.custom.services.greetd = {
+    enable = mkEnableOption "greetd";
+
+    greeter = mkOption {
+      default = "tuigreet";
+      description = "Which greeter to use";
+      example = "tuigreet";
+      type = types.enum ["gtkgreet" "tuigreet"];
+    };
+  };
 
   config = mkIf cfg.enable {
     # https://sr.ht/~kennylevinsen/greetd
-    # https://github.com/apognu/tuigreet
+    # https://wiki.nixos.org/wiki/Greetd
+    # https://wiki.archlinux.org/title/Greetd
     services.greetd = {
       enable = true;
 
-      settings.default_session = {
-        command = lib.concatStringsSep " " [
-          tuigreet
-          "--session-wrapper '${systemd-cat} --identifier wm'" # ?? journalctl --identifier wm
-          "--remember"
-          "--remember-user-session"
-          "--time"
-          "--time-format '%a %b %-m ${
+      settings.default_session.command =
+        # https://git.sr.ht/~kennylevinsen/gtkgreet
+        if cfg.greeter == "gtkgreet"
+        then "${cage} -s -- ${gtkgreet}"
+        # https://github.com/apognu/tuigreet
+        else if cfg.greeter == "tuigreet"
+        then let
+          # https://strftime.org/
+          time =
             if config.custom.time == "24h"
             then "%-H:%M"
-            else "%-I:%M %p"
-          }'" # https://strftime.org/
-          "--asterisks"
-          "--window-padding 1"
-          "--greeting owo"
-        ];
-      };
+            else "%-I:%M %p";
+        in
+          lib.concatStringsSep " " [
+            tuigreet
+            "--remember"
+            "--remember-user-session"
+            "--time"
+            "--time-format '%a %b %-m ${time}'"
+            "--asterisks"
+            "--window-padding 1"
+            "--greeting owo"
+          ]
+        else null;
     };
 
     # Use password at login to unlock keyring
