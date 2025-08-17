@@ -20,9 +20,9 @@ in {
         programs.fish = {
           enable = true;
 
+          # TODO: Move to individual modules
           shellAbbrs =
             # Expand abbreviations anywhere in the shell
-            #?? sudo ABBREVIATION
             mapAttrs (name: value: {
               expansion = value;
               position = "anywhere";
@@ -78,7 +78,6 @@ in {
             }
             //
             # Set all cursor positions to %
-            #?? % | EXPANSION
             mapAttrs (name: value: {
               expansion = value;
               setCursor = true;
