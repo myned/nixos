@@ -177,6 +177,7 @@ with lib; {
         "browser.urlbar.suggest.trending" = false;
         "browser.urlbar.suggest.weather" = false;
         "browser.urlbar.suggest.yelp" = false;
+        "browser.display.use_document_fonts" = 0; # Force custom fonts
         "browser.warnOnQuitShortcut" = true;
         "clipboard.autocopy" = false;
         "default-browser-agent.enabled" = false;
@@ -191,6 +192,10 @@ with lib; {
         "extensions.pocket.enabled" = false;
         "extensions.update.autoUpdateDefault" = false;
         "extensions.update.enabled" = false;
+        "font.default.x-western" = "sans-serif";
+        "font.name.monospace.x-western" = config.stylix.fonts.monospace.name;
+        "font.name.sans-serif.x-western" = config.stylix.fonts.sansSerif.name;
+        "font.name.serif.x-western" = config.stylix.fonts.serif.name;
         "full-screen-api.ignore-widgets" = true; # Fake fullscreen
         "full-screen-api.warning.delay" = -1;
         "full-screen-api.warning.timeout" = 0;

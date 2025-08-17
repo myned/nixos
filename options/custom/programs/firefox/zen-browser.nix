@@ -129,7 +129,7 @@ in {
 
       # https://nix-community.github.io/stylix/options/modules/zen-browser.html
       # stylix.targets.zen-browser = {
-      #   enable = false;
+      #   enable = true;
       #   profileNames = [cfg.profile];
       # };
     };
