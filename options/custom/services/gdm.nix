@@ -13,8 +13,17 @@ in {
   config = mkIf cfg.enable {
     # https://wiki.nixos.org/wiki/GNOME
     # https://wiki.archlinux.org/title/GDM
-    services.displayManager.gdm = {
-      enable = true;
-    };
+    services =
+      if (versionAtLeast version "25.11")
+      then {
+        displayManager.gdm = {
+          enable = true;
+        };
+      }
+      else {
+        xserver.displayManager.gdm = {
+          enable = true;
+        };
+      };
   };
 }
