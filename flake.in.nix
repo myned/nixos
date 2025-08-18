@@ -110,84 +110,82 @@
       };
 
       # https://flake.parts/options/flake-parts.html#opt-flake
-      flake = {
+      flake = let
+        globalModules = branch: [
+          ./options
+          ./configuration.nix
+
+          #!! Avoid globally importing modules that are not guarded by .enable
+          # https://github.com/NixOS/nixpkgs/issues/137168
+          {
+            home-manager.sharedModules = [
+              inputs."nix-index-database-${branch}".homeModules.nix-index
+              inputs.ags.homeManagerModules.default
+              inputs.nix-flatpak.homeManagerModules.nix-flatpak
+
+              # TODO: Use official module when supported
+              # https://github.com/nix-community/home-manager/blob/master/modules/programs/floorp.nix
+              (let
+                modulePath = ["programs" "zen-browser"];
+                mkFirefoxModule = import "${inputs."home-manager-${branch}"}/modules/programs/firefox/mkFirefoxModule.nix";
+              in
+                mkFirefoxModule {
+                  inherit modulePath;
+                  name = "Zen";
+                  wrappedPackageName = "zen-browser";
+                  unwrappedPackageName = "zen-browser-unwrapped";
+                  visible = true;
+
+                  platforms.linux = {
+                    configPath = ".zen";
+                    vendorPath = ".mozilla";
+                  };
+
+                  platforms.darwin = {
+                    configPath = "Library/Application Support/Zen";
+                    vendorPath = "Library/Application Support/Mozilla";
+                  };
+                })
+            ];
+
+            # Branch-specific overlays
+            nixpkgs.overlays = [
+              inputs."nixgl-${branch}".overlays.default
+            ];
+          }
+        ];
+      in {
+        # NixOS systems with global imports
+        #!! There is no default nixpkgs, inputs.nixpkgs-<branch> must exist
         nixosConfigurations = let
-          # Boilerplate systems with global imports
-          #!! There is no default nixpkgs, inputs.nixpkgs-BRANCH must exist
-          #?? MACHINE = nixos "BRANCH" "ARCHITECTURE" [ MODULES ]
-          nixos = branch: arch: modules:
-            with inputs."nixpkgs-${branch}".lib;
-              nixosSystem {
-                system = arch;
+          nixos = branch: system: modules:
+            inputs."nixpkgs-${branch}".lib.nixosSystem {
+              inherit system;
 
-                # TODO: Use inline modules instead of specialArgs
-                # https://jade.fyi/blog/flakes-arent-real#nixos-modules
-                specialArgs = {inherit inputs;};
+              # TODO: Use inline modules instead of specialArgs
+              # https://jade.fyi/blog/flakes-arent-real#nixos-modules
+              specialArgs = {inherit inputs;};
 
-                # TODO: Clean up optional attributes with each new release
-                #!! Options will diverge between branches over time
-                #?? with lib; optionalAttrs (versionAtLeast version "VERSION") { ... };
-                modules =
-                  modules
-                  ++ [
-                    ./options
-                    ./configuration.nix
-
-                    #!! Avoid globally importing modules that are not guarded by .enable
-                    # https://github.com/NixOS/nixpkgs/issues/137168
-                    (
-                      {inputs, ...}: {
-                        imports = [
-                          inputs."aagl-gtk-on-nix-${branch}".nixosModules.default
-                          inputs."home-manager-${branch}".nixosModules.home-manager
-                          inputs."nix-index-database-${branch}".nixosModules.nix-index
-                          inputs."nur-${branch}".modules.nixos.default
-                          inputs."stylix-${branch}".nixosModules.stylix
-                          inputs.agenix.nixosModules.default
-                          inputs.arion.nixosModules.arion
-                          inputs.disko.nixosModules.disko
-                          inputs.fw-fanctrl.nixosModules.default
-                          inputs.niri-flake.nixosModules.niri
-                        ];
-
-                        home-manager.sharedModules = [
-                          inputs."nix-index-database-${branch}".homeModules.nix-index
-                          inputs.ags.homeManagerModules.default
-                          inputs.nix-flatpak.homeManagerModules.nix-flatpak
-
-                          # TODO: Use official module when supported
-                          # https://github.com/nix-community/home-manager/blob/master/modules/programs/floorp.nix
-                          (let
-                            modulePath = ["programs" "zen-browser"];
-                            mkFirefoxModule = import "${inputs."home-manager-${branch}"}/modules/programs/firefox/mkFirefoxModule.nix";
-                          in
-                            mkFirefoxModule {
-                              inherit modulePath;
-                              name = "Zen";
-                              wrappedPackageName = "zen-browser";
-                              unwrappedPackageName = "zen-browser-unwrapped";
-                              visible = true;
-
-                              platforms.linux = {
-                                configPath = ".zen";
-                                vendorPath = ".mozilla";
-                              };
-
-                              platforms.darwin = {
-                                configPath = "Library/Application Support/Zen";
-                                vendorPath = "Library/Application Support/Mozilla";
-                              };
-                            })
-                        ];
-
-                        # Branch-specific overlays
-                        nixpkgs.overlays = [
-                          inputs."nixgl-${branch}".overlays.default
-                        ];
-                      }
-                    )
-                  ];
-              };
+              modules =
+                modules
+                ++ (globalModules branch)
+                ++ [
+                  {
+                    imports = [
+                      inputs."aagl-gtk-on-nix-${branch}".nixosModules.default
+                      inputs."home-manager-${branch}".nixosModules.home-manager
+                      inputs."nix-index-database-${branch}".nixosModules.nix-index
+                      inputs."nur-${branch}".modules.nixos.default
+                      inputs."stylix-${branch}".nixosModules.stylix
+                      inputs.agenix.nixosModules.default
+                      inputs.arion.nixosModules.arion
+                      inputs.disko.nixosModules.disko
+                      inputs.fw-fanctrl.nixosModules.default
+                      inputs.niri-flake.nixosModules.niri
+                    ];
+                  }
+                ];
+            };
         in {
           ### Stable
           myeye = nixos "stable" "x86_64-linux" [./profiles/compute ./machines/myeye];
@@ -199,6 +197,18 @@
           myeck = nixos "unstable" "x86_64-linux" [./profiles/deck ./machines/myeck];
           mynix = nixos "unstable" "x86_64-linux" [./profiles/desktop ./machines/mynix];
           myork = nixos "unstable" "x86_64-linux" [./profiles/laptop ./machines/myork];
+        };
+
+        # Standalone home-manager configurations
+        # https://nix-community.github.io/home-manager/#sec-upgrade-release-understanding-flake
+        homeConfigurations = let
+          home = branch: system: modules:
+            inputs."home-manager-${branch}".lib.homeManagerConfiguration {
+              modules = modules ++ (globalModules branch);
+              pkgs = inputs."nixpkgs-${branch}".legacyPackages.${system};
+            };
+        in {
+          myned = home "stable" "x86_64-linux" [];
         };
       };
     };
