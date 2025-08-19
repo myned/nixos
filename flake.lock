@@ -1625,6 +1625,27 @@
         "type": "github"
       }
     },
+    "nixvirt": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1748140003,
+        "narHash": "sha256-DNBZmuk1YRM2PmwbHzVdXumRjCUzQkMarg4iI/37rOQ=",
+        "owner": "AshleyYakeley",
+        "repo": "NixVirt",
+        "rev": "5dfe108fd859b122f9a96981cb6bc12297653d6c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "AshleyYakeley",
+        "ref": "v0.6.0",
+        "repo": "NixVirt",
+        "type": "github"
+      }
+    },
     "nur": {
       "inputs": {
         "flake-parts": [
@@ -1752,6 +1773,7 @@
         "nixpkgs-myned": "nixpkgs-myned",
         "nixpkgs-stable": "nixpkgs-stable_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "nixvirt": "nixvirt",
         "nur-stable": "nur-stable",
         "nur-unstable": "nur-unstable",
         "stylix-stable": "stylix-stable",
