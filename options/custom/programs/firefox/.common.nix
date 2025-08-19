@@ -94,6 +94,7 @@ with lib; {
         "browser.ctrlTab.sortByRecentlyUsed" = false;
         "browser.dataFeatureRecommendations.enabled" = false;
         "browser.discovery.enabled" = false;
+        "browser.display.use_document_fonts" = 1; # 0 = force custom fonts
         "browser.download.always_ask_before_handling_new_types" = false;
         "browser.download.alwaysOpenPanel" = true;
         "browser.download.autohideButton" = true;
@@ -177,7 +178,6 @@ with lib; {
         "browser.urlbar.suggest.trending" = false;
         "browser.urlbar.suggest.weather" = false;
         "browser.urlbar.suggest.yelp" = false;
-        "browser.display.use_document_fonts" = 0; # Force custom fonts
         "browser.warnOnQuitShortcut" = true;
         "clipboard.autocopy" = false;
         "default-browser-agent.enabled" = false;
