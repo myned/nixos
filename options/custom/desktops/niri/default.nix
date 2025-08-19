@@ -64,21 +64,20 @@ in {
 
         # https://github.com/YaLTeR/niri/wiki/Configuration:-Debug-Options
         # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsdebug
-        # settings = {
-        #   debug =
-        #     {
-        #       #// disable-cursor-plane = []; # Software cursor
-        #       #// disable-direct-scanout = [];
-        #       #// enable-overlay-planes = [];
+        settings.debug =
+          {
+            # TODO: Enable next release
+            #// deactivate-unfocused-windows = [];
 
-        #       # TODO: Enable next release > v25.05.1
-        #       #// deactivate-unfocused-windows = [];
-        #       #// honor-xdg-activation-with-invalid-serial = [];
-        #     }
-        #     // optionalAttrs config.custom.vrr {
-        #       #// skip-cursor-only-updates-during-vrr = [];
-        #     };
-        # };
+            #// disable-cursor-plane = []; # Software cursor
+            #// disable-direct-scanout = [];
+            #// enable-overlay-planes = [];
+            honor-xdg-activation-with-invalid-serial = [];
+            keep-laptop-panel-on-when-lid-is-closed = [];
+          }
+          // optionalAttrs config.custom.vrr {
+            skip-cursor-only-updates-during-vrr = [];
+          };
       };
 
       # https://github.com/sodiboo/niri-flake/blob/main/docs.md#homemodulesstylix
