@@ -38,5 +38,10 @@
       # https://github.com/pop-os/system76-power/issues/263
       #// system76.enable = true;
     };
+
+    vms = {
+      enable = true;
+      myndows.enable = true;
+    };
   };
 }

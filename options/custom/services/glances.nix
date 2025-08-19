@@ -74,7 +74,7 @@ in {
             disable = false;
           };
         }
-        // optionalAttrs config.custom.settings.vm.enable {
+        // optionalAttrs config.custom.vms.enable {
           # https://glances.readthedocs.io/en/latest/aoa/vms.html
           vms = {
             disable = false;

@@ -104,9 +104,9 @@ in {
             "[workspace special:hidden silent] ${command loupe}"
             "[workspace special:hidden silent] ${command nautilus}"
           ]
-          ++ optionals config.custom.settings.vm.passthrough.blacklist [
+          ++ optionals config.custom.vms.passthrough.blacklist [
             # HACK: Delay driver initialization to work around reset issues
-            (command "${virsh} list | ${grep} ${config.custom.settings.vm.passthrough.guest} || sudo ${modprobe} ${config.custom.settings.vm.passthrough.driver}")
+            (command "${virsh} list | ${grep} ${config.custom.vms.passthrough.guest} || sudo ${modprobe} ${config.custom.settings.vm.passthrough.driver}")
           ];
       };
     };

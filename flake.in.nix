@@ -65,6 +65,7 @@
     nix-vscode-extensions = flake "github:nix-community/nix-vscode-extensions" // follows "unstable";
     nixd = flake "github:nix-community/nixd" // follows "unstable";
     nixgl-unstable = flake "github:nix-community/nixGL" // follows "unstable";
+    nixvirt = flake "github:AshleyYakeley/NixVirt/v0.6.0" // follows "unstable";
     nur-unstable = flake "github:nix-community/NUR" // follows "unstable";
     stylix-unstable = flake "github:danth/stylix" // follows "unstable";
     #// walker = flake "github:abenz1267/walker?ref=v0.12.8" // follows "unstable";
@@ -182,6 +183,7 @@
                       inputs.disko.nixosModules.disko
                       inputs.fw-fanctrl.nixosModules.default
                       inputs.niri-flake.nixosModules.niri
+                      inputs.nixvirt.nixosModules.default
                     ];
                   }
                 ];

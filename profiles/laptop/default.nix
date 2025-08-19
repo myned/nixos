@@ -30,6 +30,11 @@
     settings = {
       #// system76.enable = true;
     };
+
+    vms = {
+      enable = true;
+      myndows.enable = true;
+    };
   };
 
   #!! Rebuild offline - drastically increases initial download and resulting closure size

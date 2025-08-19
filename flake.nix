@@ -103,6 +103,10 @@
     nixpkgs-myned.url = "github:myned/nixpkgs/master";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixvirt = {
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "github:AshleyYakeley/NixVirt/v0.6.0";
+    };
     nur-stable = {
       inputs.nixpkgs.follows = "nixpkgs-stable";
       url = "github:nix-community/NUR";
