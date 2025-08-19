@@ -63,11 +63,11 @@ in {
         ];
 
         # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsswitch-eventslid-close
-        # switch-events = optionalAttrs (config.custom.profile == "laptop") {
-        #   # Turn lid display off while inhibiting suspend
-        #   lid-close.action.spawn = [niri "msg" "output" "eDP-1" "off"];
-        #   lid-open.action.spawn = [niri "msg" "output" "eDP-1" "on"];
-        # };
+        switch-events = mkIf (config.custom.profile == "laptop") {
+          # Turn lid display off while inhibiting suspend
+          lid-close.action.spawn = [niri "msg" "output" "eDP-1" "off"];
+          lid-open.action.spawn = [niri "msg" "output" "eDP-1" "on"];
+        };
       };
     };
   };
