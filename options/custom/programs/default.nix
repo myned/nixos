@@ -52,6 +52,7 @@ with lib; {
       #// bitwarden-menu.enable = true;
       #// clipse.enable = true;
       discord.enable = true;
+      distrobox.enable = true;
       element-desktop.enable = true;
       gamemode.enable = true;
       #// gnome-shell.enable = true;
