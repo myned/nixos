@@ -8,6 +8,13 @@ with lib; let
 in {
   options.custom.programs.onedrive = {
     enable = mkEnableOption "onedrive";
+
+    syncDir = mkOption {
+      default = "~/OneDrive";
+      description = "Path to synced directory";
+      example = "/mnt/local/onedrive";
+      type = types.str;
+    };
   };
 
   config = mkIf cfg.enable {
@@ -30,7 +37,8 @@ in {
           disable_upload_validation = "true";
 
           local_first = "true"; # Use local files as source of truth
-          sync_dir = "~/OneDrive";
+          upload_only = "true";
+          sync_dir = cfg.syncDir;
         };
       };
     };
