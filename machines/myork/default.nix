@@ -104,7 +104,7 @@
 
     # Set maximum brightness adjustment
     # https://wiki.archlinux.org/title/Framework_Laptop_13#(AMD)_Washed-out_colors_when_using_power-profiles-daemon_in_power-saver_or_balanced_mode
-    "amdgpu.abmlevel=2" # 0-4
+    "amdgpu.abmlevel=1" # 0-4
 
     # Attempt to fix battery drain with suspend
     # https://wiki.archlinux.org/title/Framework_Laptop_13#Suspend-then-hibernate_on_AMD_version
