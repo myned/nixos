@@ -46,7 +46,7 @@ in {
           ENV{ID_INPUT_TRACKBALL}="1"
 
         # https://wiki.archlinux.org/title/Gamepad#Disable_touchpad_acting_as_mouse
-        ATTRS{name}=="Wireless Controller Touchpad", \
+        ATTRS{name}=="DualSense Wireless Controller Touchpad", \
           ENV{LIBINPUT_IGNORE_DEVICE}="1"
       '';
   };
