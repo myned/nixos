@@ -61,7 +61,7 @@ in {
         };
 
         warp-mouse-to-focus = {
-          enable = true;
+          #// enable = true;
           #// mode = "center-xy-always";
         };
       };
