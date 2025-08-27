@@ -42,7 +42,7 @@ with lib; {
       nautilus.enable = true;
       nvtop.enable = true;
       #// wezterm.enable = true;
-      zen-browser.enable = true;
+      #// zen-browser.enable = true;
     })
 
     (mkIf config.custom.full {
