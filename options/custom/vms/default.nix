@@ -158,9 +158,6 @@ in {
             }
 
             {
-              active = true;
-              restart = true;
-
               definition = writeXML {
                 name = "ventoy";
                 uuid = "877fa518-901e-4fda-a8c7-f01480ca4699";
