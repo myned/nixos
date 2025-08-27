@@ -254,10 +254,10 @@ with lib; {
         "security.tls.version.enable-deprecated" = true; # IPMI
         "services.passwordSavingEnabled" = false;
         "sidebar.expandOnHoverMessage.dismissed" = true;
-        "sidebar.main.tools" = "syncedtabs"; # aichat,syncedtabs,history
+        "sidebar.main.tools" = ""; # aichat,syncedtabs,history
         "sidebar.new-sidebar.has-used" = true;
         "sidebar.revamp" = true;
-        "sidebar.verticalTabs" = false;
+        "sidebar.verticalTabs" = true;
         "signon.rememberSignons" = false;
         "startup.homepage_override_url" = ""; # Disable
         "startup.homepage_welcome_url" = ""; # Disable
@@ -296,7 +296,7 @@ with lib; {
       // optionalAttrs theme {
         # https://github.com/rafaelmardojai/firefox-gnome-theme?tab=readme-ov-file#features
         "gnomeTheme.allTabsButton" = true;
-        "gnomeTheme.allTabsButtonOnOverflow" = true;
+        "gnomeTheme.allTabsButtonOnOverflow" = false;
         "gnomeTheme.bookmarksToolbarUnderTabs" = true;
       };
 
