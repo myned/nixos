@@ -44,6 +44,7 @@ with lib; {
       #// cliphist.enable = true;
       #// clipmenu.enable = true;
       easyeffects.enable = true;
+      envfs.enable = true;
       gammastep.enable = true;
       gdm.enable = true;
       gnome-keyring.enable = true;
