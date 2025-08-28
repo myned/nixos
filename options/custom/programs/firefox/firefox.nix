@@ -7,11 +7,9 @@
 }:
 with lib; let
   cfg = config.custom.programs.firefox;
-  hm = config.home-manager.users.${config.custom.username};
 in {
   options.custom.programs.firefox = {
-    enable = mkOption {default = false;};
-    profile = mkOption {default = "default";};
+    enable = mkEnableOption "firefox";
   };
 
   config = mkIf cfg.enable {
@@ -20,7 +18,6 @@ in {
       programs.firefox = mkMerge [
         (import ./.common.nix {
           inherit config inputs lib pkgs;
-          profile = cfg.profile;
           telemetry = true;
           theme = true;
         })
@@ -39,7 +36,7 @@ in {
       stylix.targets.firefox = {
         enable = true;
         firefoxGnomeTheme.enable = true; # https://github.com/rafaelmardojai/firefox-gnome-theme
-        profileNames = [cfg.profile];
+        profileNames = ["default" "work"];
       };
     };
   };

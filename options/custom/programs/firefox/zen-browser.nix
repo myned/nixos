@@ -10,8 +10,7 @@ with lib; let
   hm = config.home-manager.users.${config.custom.username};
 in {
   options.custom.programs.zen-browser = {
-    enable = mkOption {default = false;};
-    profile = mkOption {default = "default";};
+    enable = mkEnableOption "zen-browser";
   };
 
   config = mkIf cfg.enable {
@@ -21,14 +20,13 @@ in {
       programs.zen-browser = mkMerge [
         (import ./.common.nix {
           inherit config inputs lib pkgs;
-          profile = cfg.profile;
           theme = false;
         })
 
         {
           enable = true;
 
-          profiles.${cfg.profile} = {
+          profiles.default = {
             settings = {
               "browser.toolbars.bookmarks.visibility" = mkForce "always";
 
@@ -122,15 +120,15 @@ in {
           ".zen/profiles.ini".force = true;
 
           #!! Imperative synced files
-          ".zen/${cfg.profile}/zen-keyboard-shortcuts.json" = sync "linux/config/zen/zen-keyboard-shortcuts.json";
-          ".zen/${cfg.profile}/zen-themes.json" = sync "linux/config/zen/zen-themes.json";
+          ".zen/default/zen-keyboard-shortcuts.json" = sync "linux/config/zen/zen-keyboard-shortcuts.json";
+          ".zen/default/zen-themes.json" = sync "linux/config/zen/zen-themes.json";
         };
       };
 
       # https://nix-community.github.io/stylix/options/modules/zen-browser.html
       # stylix.targets.zen-browser = {
       #   enable = true;
-      #   profileNames = [cfg.profile];
+      #   profileNames = ["default" "work"];
       # };
     };
   };

@@ -143,6 +143,10 @@ in {
             "^org\.remmina\.Remmina$"
             "^.*virt-manager.*$"
           ];
+
+          work = app-ids [
+            "^.*work$"
+          ];
         in [
           ### Defaults
           {
@@ -313,6 +317,14 @@ in {
           {
             # Virtual machines
             matches = vms;
+          }
+
+          {
+            # Work style
+            matches = work;
+
+            border.active.color = "#cb4b16";
+            focus-ring.active.color = "#cb4b16";
           }
 
           ### Overrides

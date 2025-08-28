@@ -128,6 +128,7 @@ in {
           (key "A" "Mod+Shift" move-column-left-or-to-monitor-left)
           (key "B" "Ctrl+Alt" (spawn [pkill config.custom.browser.command]))
           (key "B" "Mod" (spawn config.custom.browser.command))
+          (key "B" "Mod+Shift" (spawn [config.custom.browser.command "-P" "work" "--name" "firefox-work" "--no-remote"]))
           (key "C" "Mod" (spawn config.custom.menus.clipboard.show))
           (key "C" "Mod+Shift" (spawn config.custom.menus.clipboard.clear))
           (key "D" "Ctrl+Alt" (spawn [waydroid "session" "stop"]))

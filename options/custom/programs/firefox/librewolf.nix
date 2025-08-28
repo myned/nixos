@@ -9,8 +9,7 @@ with lib; let
   cfg = config.custom.programs.librewolf;
 in {
   options.custom.programs.librewolf = {
-    enable = mkOption {default = false;};
-    profile = mkOption {default = "default";};
+    enable = mkEnableOption "librewolf";
   };
 
   config = mkIf cfg.enable {
@@ -20,7 +19,6 @@ in {
       programs.librewolf = mkMerge [
         (import ./.common.nix {
           inherit config inputs lib pkgs;
-          profile = cfg.profile;
           theme = true;
         })
 
@@ -37,7 +35,7 @@ in {
       stylix.targets.librewolf = {
         enable = true;
         firefoxGnomeTheme.enable = true; # https://github.com/rafaelmardojai/firefox-gnome-theme
-        profileNames = [cfg.profile];
+        profileNames = ["default" "work"];
       };
     };
   };
