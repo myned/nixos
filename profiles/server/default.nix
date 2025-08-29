@@ -10,6 +10,7 @@
       enable = true;
       boot = true;
       actualbudget.enable = true;
+      affine.enable = true;
       beszel.enable = true;
       #// conduwuit.enable = true;
       #// dashdot.enable = true;

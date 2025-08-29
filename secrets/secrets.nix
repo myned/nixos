@@ -61,6 +61,8 @@ in {
   "myork/users/root.pass" = key myork;
   "myork/vm/myndows.pass" = key myork;
 
+  "myosh/affine/.env" = key myosh;
+  "myosh/affine/db.env" = key myosh;
   "myosh/borgmatic/borgbase" = key myosh;
   "myosh/conduwuit/conduwuit.toml" = key myosh;
   "myosh/directus/.env" = key myosh;
