@@ -32,5 +32,5 @@
 	# https://tailscale.com/kb/1015/100.x-addresses
 	# https://tailscale.com/kb/1121/ipv6
 	#// bind {system.hostname}.{$TAILNET} # FQDN
-	bind {$TAILSCALE_IPV4} [{$TAILSCALE_IPV6}]
+	#// bind {$TAILSCALE_IPV4} [{$TAILSCALE_IPV6}]
 }
