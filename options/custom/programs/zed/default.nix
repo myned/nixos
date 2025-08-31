@@ -6,6 +6,7 @@
 }:
 with lib; let
   cfg = config.custom.programs.zed;
+  hm = config.home-manager.users.${config.custom.username};
 
   hujsonfmt = getExe pkgs.hujsonfmt;
 in {
@@ -147,7 +148,6 @@ in {
         userSettings = {
           always_treat_brackets_as_autoclosed = true;
           auto_install_extensions = false;
-          auto_signature_help_after_edits = true;
           base_keymap = "VSCode";
 
           # BUG: Font variations are not currently supported
@@ -198,10 +198,10 @@ in {
           preferred_line_length = 120;
 
           project_panel = {
-            auto_fold_dirs = false;
-            auto_reveal_entries = false;
+            auto_fold_dirs = true;
+            auto_reveal_entries = true;
             default_width = 300;
-            entry_spacing = "standard";
+            entry_spacing = "comfortable";
             indent_guides.show = "never";
             indent_size = 10;
             scrollbar.show = "never";
@@ -209,7 +209,7 @@ in {
 
           seed_search_query_from_cursor = "selection";
           show_edit_predictions = false;
-          show_user_picture = false;
+          show_signature_help_after_edits = true;
 
           # TODO: Show trailing whitespace when supported
           # https://github.com/zed-industries/zed/issues/5237
@@ -235,6 +235,16 @@ in {
             env = {
               EDITOR = "zeditor --wait";
             };
+          };
+
+          title_bar = {
+            show_branch_icon = true;
+            show_branch_name = true;
+            show_onboarding_banner = false;
+            show_project_items = true;
+            show_sign_in = false;
+            show_user_picture = false;
+            show_menus = false;
           };
 
           ui_font_size = mkForce 19;
@@ -339,14 +349,15 @@ in {
             };
 
             default_width = 500;
-            version = "2";
           };
 
           # https://zed.dev/docs/completions#edit-predictions
           features.edit_prediction_provider = "zed";
 
           # https://zed.dev/docs/assistant/configuration
-          language_models.api_url = "http://${config.custom.services.ollama.server}:11434";
+          language_models = {
+            ollama.api_url = "http://${config.custom.services.ollama.server}:11434";
+          };
 
           # TODO: Add missing syntax in highlights.scm
           # Theme overrides
@@ -491,8 +502,16 @@ in {
         };
       };
 
-      # BUG: Language-specific snippets break with certain files, so use global snippets.json
-      # https://github.com/zed-industries/zed/issues/22726
+      # HACK: Delete mutable config files to enforce module settings
+      # https://github.com/nix-community/home-manager/pull/6993
+      home.activation = {
+        enforce-zed-editor-config = hm.lib.dag.entryAfter ["writeBoundary"] ''
+          run rm \
+            "$XDG_CONFIG_HOME/zed/settings.json" \
+            "$XDG_CONFIG_HOME/zed/keymap.json"
+        '';
+      };
+
       # https://zed.dev/docs/snippets
       #?? snippets: configure snippets
       xdg.configFile = {
