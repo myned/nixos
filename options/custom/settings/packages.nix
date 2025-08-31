@@ -178,7 +178,7 @@ in {
           mission-center # System monitor
           #// monitorets # System monitor
           newsflash # RSS feed
-          nicotine-plus # SoulSeek client
+          #// nicotine-plus # SoulSeek client
           obsidian # Knowledge base
           pantheon.switchboard-with-plugs # System settings
           papers # Document viewer
@@ -206,7 +206,7 @@ in {
           snoop # File content finder
           sourcegit # Git client
           #// spotify # Spotify client
-          stremio # Streaming client
+          #// stremio # Streaming client
           #// syncthingtray # Syncthing client
           tagger # Music tagger
           teams-for-linux # Microsoft Teams client
@@ -214,13 +214,13 @@ in {
           #// variety # Wallpaper changer
           ventoy-full-gtk # Image writer
           virt-viewer # Virtual machine viewer
-          vorta # Borg backup client
-          webex # Conferencing client
+          #// vorta # Borg backup client
+          #// webex # Conferencing client
           wildcard # Regex tester
           #// wowup-cf # World of Warcraft addon manager
           #// xivlauncher # Final Fantasy XIV launcher
           youtube-music # YouTube Music client
-          zrythm # Digital audio workstation
+          #// zrythm # Digital audio workstation
 
           #!! Must be downloaded manually due to licensing
           # BUG: Dangling symlinks, remove workaround when merged into unstable
