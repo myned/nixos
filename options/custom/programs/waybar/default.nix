@@ -365,8 +365,8 @@ in {
                 format = "{player_icon} {dynamic}";
                 format-paused = "{status_icon} {dynamic}";
                 artist-len = 32; # Characters
-                title-len = 32; # Characters
-                dynamic-len = 64; # Characters
+                title-len = 16; # Characters
+                dynamic-len = 32; # Characters
                 dynamic-importance-order = ["artist" "title"];
                 dynamic-order = ["artist" "title"];
                 dynamic-separator = " 󰧟 ";
