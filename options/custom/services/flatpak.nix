@@ -31,6 +31,7 @@ in {
           ++ optionals config.custom.full [
 
             # TODO: Check if in nixpkgs
+            "io.github.brunofin.Cohesion" # Notion client
             "re.sonny.Workbench" # GTK prototyper
           ];
 
