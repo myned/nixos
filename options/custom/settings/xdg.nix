@@ -23,7 +23,9 @@ with lib; let
   papers = "org.gnome.Papers.desktop";
   showtime = "org.gnome.Showtime.desktop";
 in {
-  options.custom.settings.xdg.enable = mkOption {default = false;};
+  options.custom.settings.xdg = {
+    enable = mkEnableOption "xdg";
+  };
 
   config = mkIf cfg.enable {
     # https://wiki.archlinux.org/title/XDG_Desktop_Portal
@@ -148,6 +150,12 @@ in {
             "x-scheme-handler/http" = config.custom.browser.desktop;
             "x-scheme-handler/https" = config.custom.browser.desktop;
           };
+        };
+
+        # https://gitlab.freedesktop.org/xdg/xdg-specs/-/merge_requests/46
+        terminal-exec = {
+          enable = true;
+          settings.default = [config.custom.terminal.desktop];
         };
 
         userDirs = {

@@ -47,6 +47,11 @@ in {
       desktop = mkOption {default = "firefox.desktop";};
     };
 
+    terminal = {
+      command = mkOption {default = getExe hm.programs.ghostty.package;};
+      desktop = mkOption {default = "com.mitchellh.ghostty.desktop";};
+    };
+
     time = mkOption {
       default = "24h";
       type = types.enum ["12h" "24h"];
