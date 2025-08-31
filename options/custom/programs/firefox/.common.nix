@@ -436,6 +436,13 @@ with lib; {
             urls = [{template = "https://kagi.com/search?q={searchTerms}";}];
           };
 
+          kagi-assistant = {
+            definedAliases = ["ka"];
+            icon = "https://kagi.com/favicon-assistant-32x32.png";
+            name = "Kagi Assistant";
+            urls = [{template = "https://kagi.com/assistant?q={searchTerms}";}];
+          };
+
           lutris = {
             definedAliases = ["l"];
             icon = "https://lutris.net/favicon.ico";

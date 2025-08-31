@@ -179,6 +179,12 @@ in {
           }
 
           {
+            name = "Kagi Assistant";
+            shortcut = "k";
+            url = "https://kagi.com/assistant?q={searchTerms}";
+          }
+
+          {
             name = "Lutris";
             shortcut = "l";
             url = "https://lutris.net/games?q={searchTerms}";
