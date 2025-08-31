@@ -60,7 +60,7 @@
     niri = flake "github:YaLTeR/niri" // follows "unstable";
     niri-flake = flake "github:sodiboo/niri-flake" // follows "unstable";
     nix-alien = flake "github:thiagokokada/nix-alien" // follows "unstable";
-    nix-flatpak = flake "github:gmodena/nix-flatpak?ref=v0.5.1";
+    nix-flatpak = flake "github:gmodena/nix-flatpak?ref=v0.6.0";
     nix-index-database-unstable = flake "github:nix-community/nix-index-database" // follows "unstable";
     nix-vscode-extensions = flake "github:nix-community/nix-vscode-extensions" // follows "unstable";
     nixd = flake "github:nix-community/nixd" // follows "unstable";

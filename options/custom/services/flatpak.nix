@@ -17,8 +17,10 @@ in {
       services.flatpak = {
         enable = true;
         uninstallUnmanaged = true; # Immutable flatpaks
+        uninstallUnused = true;
         update.auto.enable = true; # Auto update flatpaks weekly
 
+        # TODO: Check if in nixpkgs
         #!! Installation occurs during activation
         #?? flatpak search NAME
         packages =
@@ -29,8 +31,6 @@ in {
             "net.retrodeck.retrodeck" # Game emulator
           ]
           ++ optionals config.custom.full [
-
-            # TODO: Check if in nixpkgs
             "io.github.brunofin.Cohesion" # Notion client
             "re.sonny.Workbench" # GTK prototyper
           ];

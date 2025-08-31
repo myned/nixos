@@ -72,7 +72,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:thiagokokada/nix-alien";
     };
-    nix-flatpak.url = "github:gmodena/nix-flatpak?ref=v0.5.1";
+    nix-flatpak.url = "github:gmodena/nix-flatpak?ref=v0.6.0";
     nix-index-database-stable = {
       inputs.nixpkgs.follows = "nixpkgs-stable";
       url = "github:nix-community/nix-index-database";
