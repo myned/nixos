@@ -58,7 +58,14 @@ in {
       targets = {
         gtk.enable = true; # https://nix-community.github.io/stylix/options/modules/gtk.html
         gtksourceview.enable = true; # https://nix-community.github.io/stylix/options/modules/gtksourceview.html
-        qt.enable = true; # https://nix-community.github.io/stylix/options/modules/qt.html
+
+        # https://nix-community.github.io/stylix/options/modules/qt.html
+        qt = {
+          enable = true;
+
+          # TODO: Use adwaita when supported
+          platform = mkForce "qtct";
+        };
       };
     };
 
@@ -81,7 +88,6 @@ in {
         # https://github.com/danth/stylix/issues/402
         targets = {
           gtksourceview.enable = true;
-          qt.enable = true;
 
           gtk = {
             enable = true;
@@ -94,6 +100,11 @@ in {
               @define-color borders #073642;
               @define-color unfocused_borders #073642;
             '';
+          };
+
+          qt = {
+            enable = true;
+            platform = "qtct";
           };
         };
       };
