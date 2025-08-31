@@ -461,7 +461,7 @@ with lib; {
             definedAliases = ["m"];
             icon = "https://www.google.com/images/branding/product/ico/maps15_bnuw3a_32dp.ico";
             name = "Maps";
-            urls = [{template = "https://www.google.com/maps/place/{searchTerms}/";}];
+            urls = [{template = "https://www.google.com/maps/search/{searchTerms}";}];
           };
 
           mdn-web-docs = {

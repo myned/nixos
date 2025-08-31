@@ -199,7 +199,7 @@ in {
           {
             name = "Maps";
             shortcut = "m";
-            url = "https://www.google.com/maps/place/{searchTerms}/";
+            url = "https://www.google.com/maps/search/{searchTerms}";
           }
 
           {
