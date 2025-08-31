@@ -44,11 +44,12 @@ in {
       nixgl-offload = offload;
     };
 
-    # FIXME: Supposed to be transparently supported in NixOS
+    # HACK: Flutter needs to be wrapped for GPU offloading
     #?? <package> = hm.lib.nixGL.wrap prev.<package>;
     nixpkgs.overlays = [
       (final: prev: {
         keyguard = hm.lib.nixGL.wrap prev.keyguard;
+        rustdesk-flutter = hm.lib.nixGL.wrap prev.rustdesk-flutter;
       })
     ];
 
