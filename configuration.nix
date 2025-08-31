@@ -182,12 +182,7 @@ in {
         programs.home-manager.enable = true;
         systemd.user.startServices = true;
         home.stateVersion = config.system.stateVersion;
-
-        nix.gc = {
-          automatic = config.nix.gc.automatic;
-          frequency = toString config.nix.gc.dates;
-          options = config.nix.gc.options;
-        };
+        nix.gc = with config.nix.gc; {inherit automatic dates options;};
       }
     ];
   };
