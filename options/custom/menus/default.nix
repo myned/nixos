@@ -29,6 +29,7 @@ in {
       anyrun.enable = config.custom.menu == "anyrun";
       fuzzel.enable = config.custom.menu == "fuzzel";
       rofi.enable = config.custom.menu == "rofi";
+      sherlock.enable = config.custom.menu == "sherlock";
       walker.enable = config.custom.menu == "walker";
       wofi.enable = config.custom.menu == "wofi";
     };
