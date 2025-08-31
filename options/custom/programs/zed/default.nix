@@ -300,10 +300,11 @@ in {
               };
             };
 
+            # FIXME: Applies to JSON files
             # https://zed.dev/docs/languages/json
-            JSONC = {
-              formatter.external.command = hujsonfmt;
-            };
+            # JSONC = {
+            #   formatter.external.command = hujsonfmt;
+            # };
 
             # https://zed.dev/docs/languages/markdown
             Markdown = {
@@ -317,21 +318,21 @@ in {
               language_servers = ["nil" "!nixd"];
             };
 
-            YAML = {
-              language_servers = ["ansible" "ansible-lint"];
-            };
+            # YAML = {
+            #   language_servers = ["ansible" "ansible-lint"];
+            # };
           };
 
           # Language servers
           # https://zed.dev/docs/configuring-languages#configuring-language-servers
           lsp = {
             # https://github.com/tailscale/hujson?tab=readme-ov-file#visual-studio-code-association
-            json-language-server.settings.json.schemas = [
-              {
-                fileMatch = ["*.hujson"];
-                schema.allowTrailingCommas = true;
-              }
-            ];
+            # json-language-server.settings.json.schemas = [
+            #   {
+            #     fileMatch = ["*.hujson"];
+            #     schema.allowTrailingCommas = true;
+            #   }
+            # ];
 
             # https://github.com/oxalica/nil/blob/main/docs/configuration.md
             nil.initialization_options = {
