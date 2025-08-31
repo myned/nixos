@@ -21,5 +21,9 @@ in {
         GOLDWARDEN_SOCKET_PATH = "%h/.var/app/com.quexten.Goldwarden/data/goldwarden.sock";
       };
     };
+
+    home-manager.users.${config.custom.username} = {
+      services.flatpak.packages = mkIf cfg.flatpak ["com.quexten.Goldwarden"];
+    };
   };
 }

@@ -29,13 +29,6 @@ in {
             "net.retrodeck.retrodeck" # Game emulator
           ]
           ++ optionals config.custom.full [
-            (
-              # Bitwarden client
-              with config.custom.programs.goldwarden;
-                if enable && flatpak
-                then "com.quexten.Goldwarden"
-                else ""
-            )
 
             # TODO: Check if in nixpkgs
             "re.sonny.Workbench" # GTK prototyper
