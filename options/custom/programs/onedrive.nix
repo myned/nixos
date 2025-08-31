@@ -36,8 +36,9 @@ in {
           # https://github.com/OneDrive/onedrive-api-docs/issues/935
           disable_upload_validation = "true";
 
+          disable_notifications = "true";
           local_first = "true"; # Use local files as source of truth
-          upload_only = "true";
+          #// upload_only = "true";
           sync_dir = cfg.syncDir;
         };
       };
