@@ -37,8 +37,6 @@ in {
           disable_upload_validation = "true";
 
           disable_notifications = "true"; # Initialization notification on every start :(
-          local_first = "true"; # Use local files as source of truth
-          #// upload_only = "true";
           skip_dotfiles = "true";
           sync_dir = cfg.syncDir;
         };
