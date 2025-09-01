@@ -8,7 +8,7 @@ with lib; let
   cfg = config.custom.services.tuned;
 in {
   options.custom.services.tuned = {
-    enable = mkOption {default = false;};
+    enable = mkEnableOption "tuned";
   };
 
   config = mkIf cfg.enable {
@@ -23,6 +23,12 @@ in {
         settings = {
           # https://github.com/redhat-performance/tuned/blob/master/doc/manual/modules/performance/con_static-and-dynamic-tuning-in-tuned.adoc
           dynamic_tuning = true;
+        };
+
+        ppdSettings.profiles = mkIf (config.custom.profile == "laptop") {
+          balanced = "balanced-battery";
+          performance = "balanced";
+          power-saver = "powersave";
         };
       };
 
