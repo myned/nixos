@@ -29,7 +29,10 @@
 
     services = {
       auto-cpufreq.max.battery = 3.5; # GHz
-      fw-fanctrl.enable = true;
+
+      # TODO: Enable when build is fixed
+      # https://github.com/TamtamHero/fw-fanctrl/issues/159
+      #//fw-fanctrl.enable = true;
 
       tailscale = {
         ipv4 = "100.112.11.240";
