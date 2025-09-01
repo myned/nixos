@@ -32,13 +32,14 @@ in {
           delay_inotify_processing = "true";
           force_session_upload = "true";
 
-          #!! SharePoint "file enrichment" modifies uploads
+          #!! SharePoint "file enrichment" modifies uploads >:(
           # https://github.com/OneDrive/onedrive-api-docs/issues/935
           disable_upload_validation = "true";
 
-          disable_notifications = "true";
+          disable_notifications = "true"; # Initialization notification on every start :(
           local_first = "true"; # Use local files as source of truth
           #// upload_only = "true";
+          skip_dotfiles = "true";
           sync_dir = cfg.syncDir;
         };
       };
