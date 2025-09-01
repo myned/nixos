@@ -137,7 +137,7 @@ with lib; {
           "browser.search.widget.inNavBar" = false;
           "browser.sessionstore.restore_hidden_tabs" = false;
           "browser.sessionstore.restore_on_demand" = true;
-          "browser.sessionstore.restore_pinned_tabs_on_demand" = false;
+          "browser.sessionstore.restore_pinned_tabs_on_demand" = true;
           "browser.sessionstore.restore_tabs_lazily" = true;
           "browser.shell.checkDefaultBrowser" = false;
           "browser.startup.homepage" = "about:home";
