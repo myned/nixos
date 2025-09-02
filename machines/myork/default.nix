@@ -49,7 +49,33 @@
         igpu.driver = "amdgpu";
         rocm = "11.0.2"; # 11.0.3
 
-        outputs = with config.custom; {
+        outputs = with config.custom; let
+          left = {
+            x = width / scale;
+            y = 0;
+            width = 1920;
+            height = 1080;
+            scale = 1;
+            refresh = 75;
+            finalRefresh = 74.977;
+            force = true;
+            main = true;
+            vrr = false;
+          };
+
+          right = {
+            x = width / scale + 1920;
+            y = 0;
+            width = 1920;
+            height = 1080;
+            scale = 1;
+            refresh = 75;
+            finalRefresh = 74.977;
+            force = true;
+            main = true;
+            vrr = false;
+          };
+        in {
           eDP-1 = {
             inherit width height refresh scale vrr;
             x = 0;
@@ -59,31 +85,16 @@
             main = true;
           };
 
-          DP-9 = {
-            x = width / scale;
-            y = 0;
-            width = 1920;
-            height = 1080;
-            refresh = 75;
-            scale = 1;
-            vrr = false;
-            finalRefresh = 74.977;
-            force = true;
-            main = true;
-          };
-
-          DP-10 = {
-            x = width / scale + 1920;
-            y = 0;
-            width = 1920;
-            height = 1080;
-            refresh = 75;
-            finalRefresh = 74.977;
-            scale = 1;
-            force = true;
-            main = true;
-            vrr = false;
-          };
+          # HACK: Work around outputs not being removed when disconnected
+          # https://github.com/YaLTeR/niri/issues/1722
+          DP-9 = left;
+          DP-10 = right;
+          DP-11 = left;
+          DP-12 = right;
+          DP-13 = left;
+          DP-14 = right;
+          DP-15 = left;
+          DP-16 = right;
         };
       };
 
