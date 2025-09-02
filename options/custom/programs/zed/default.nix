@@ -337,7 +337,7 @@ in {
             # https://github.com/oxalica/nil/blob/main/docs/configuration.md
             nil.initialization_options = {
               formatting.command = ["alejandra"];
-              nix.flake.autoArchive = true;
+              #// nix.flake.autoArchive = true;
             };
           };
 
