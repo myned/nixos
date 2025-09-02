@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -8,8 +9,10 @@ with lib; let
 in {
   options.custom.services.pipewire = {
     enable = mkOption {default = false;};
-    pulseaudio = mkOption {default = true;};
-    system = mkOption {default = false;};
+    enableAlsa = mkOption {default = true;};
+    enableJack = mkOption {default = true;};
+    enablePulseaudio = mkOption {default = true;};
+    systemWide = mkOption {default = false;};
   };
 
   config = mkIf cfg.enable ({
@@ -21,10 +24,11 @@ in {
         # https://gitlab.freedesktop.org/pipewire/pipewire
         pipewire = {
           enable = true;
-          systemWide = cfg.system;
-          pulse.enable = cfg.pulseaudio;
+          systemWide = cfg.systemWide;
+          jack.enable = cfg.enableJack;
+          pulse.enable = cfg.enablePulseaudio;
 
-          alsa = {
+          alsa = mkIf cfg.enableAlsa {
             enable = true;
             support32Bit = true;
           };
@@ -44,6 +48,9 @@ in {
           };
         };
       };
+
+      #?? alsamixer
+      environment.systemPackages = optionals cfg.enableAlsa [pkgs.alsa-utils];
     }
     // (
       if versionAtLeast version "25.05"
