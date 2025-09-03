@@ -12,7 +12,6 @@ with lib; {
       geoclue2.enable = true;
       glances.enable = true;
       #// kmscon.enable = true;
-      logind.enable = true;
       #// netbird.enable = true;
       #// postfix.enable = true;
       scrutiny.enable = true;
@@ -27,6 +26,7 @@ with lib; {
       flatpak.enable = true;
       fwupd.enable = true;
       libinput.enable = true;
+      logind.enable = true;
       openrazer.enable = true;
       pipewire.enable = true;
       playerctld.enable = true;
