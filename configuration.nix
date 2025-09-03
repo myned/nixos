@@ -79,6 +79,19 @@ in {
           # https://github.com/NixOS/nixpkgs/pull/390171
           rustdesk-flutter = stable.rustdesk-flutter;
 
+          # HACK: Ignore tests to fix build
+          # https://github.com/tailscale/tailscale/issues/16966
+          tailscale = prev.tailscale.overrideAttrs (old: {
+            checkFlags =
+              builtins.map (
+                flag:
+                  if prev.lib.hasPrefix "-skip=" flag
+                  then flag + "|^TestGetList$|^TestIgnoreLocallyBoundPorts$|^TestPoller$"
+                  else flag
+              )
+              old.checkFlags;
+          });
+
           # TODO: Use official package when available
           # https://github.com/NixOS/nixpkgs/issues/327982
           zen-browser = inputs.zen-browser.packages.${prev.system}.zen-browser;
