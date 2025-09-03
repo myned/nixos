@@ -58,7 +58,7 @@
             vrr = false;
           };
 
-          DP-2 = {
+          DP-4 = {
             inherit width height refresh scale;
             x = 0;
             y = 0;
@@ -116,6 +116,9 @@
   boot.kernelParams = [
     # https://wiki.archlinux.org/title/AMDGPU#Frozen_or_unresponsive_display_(flip_done_timed_out)
     #// "amdgpu.dcdebugmask=0x10" # Attempt to fix random freezes by disabling panel self refresh
+
+    # https://wiki.archlinux.org/title/AMDGPU#Issues_with_power_management_/_dynamic_re-activation_of_a_discrete_amdgpu_graphics_card
+    "amdgpu.runpm=0"
   ];
 
   # Work around performance issues with amdgpu power scaling
