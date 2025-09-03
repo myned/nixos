@@ -195,7 +195,20 @@ in {
         programs.home-manager.enable = true;
         systemd.user.startServices = true;
         home.stateVersion = config.system.stateVersion;
-        nix.gc = with config.nix.gc; {inherit automatic dates options;};
+
+        nix.gc = with config.nix.gc;
+          {
+            inherit automatic options;
+          }
+          // (
+            if (versionAtLeast version "25.11")
+            then {
+              inherit dates;
+            }
+            else {
+              frequency = toString dates;
+            }
+          );
       }
     ];
   };

@@ -13,23 +13,26 @@ in {
   config = mkIf cfg.enable {
     home-manager.sharedModules = [
       {
-        programs.ssh = {
-          enable = true;
-          enableDefaultConfig = false;
+        programs.ssh =
+          {
+            enable = true;
 
-          matchBlocks = {
-            "*" = {
-              setEnv = {
-                # https://ghostty.org/docs/help/terminfo#configure-ssh-to-fall-back-to-a-known-terminfo-entry
-                TERM = "xterm-256color";
-              };
+            matchBlocks = {
+              "*" = {
+                setEnv = {
+                  # https://ghostty.org/docs/help/terminfo#configure-ssh-to-fall-back-to-a-known-terminfo-entry
+                  TERM = "xterm-256color";
+                };
 
-              extraOptions = {
-                StrictHostKeyChecking = "accept-new";
+                extraOptions = {
+                  StrictHostKeyChecking = "accept-new";
+                };
               };
             };
+          }
+          // optionalAttrs (versionAtLeast version "25.11") {
+            enableDefaultConfig = false;
           };
-        };
 
         # Work around FHS permissions
         # https://github.com/nix-community/home-manager/issues/322#issuecomment-1856128020

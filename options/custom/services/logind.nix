@@ -13,14 +13,21 @@ in {
   config = mkIf cfg.enable {
     # https://wiki.nixos.org/wiki/Systemd/logind
     # https://wiki.archlinux.org/title/Power_management#ACPI_events
-    services.logind = {
-      settings = {
-        Login = {
-          HandleLidSwitch = "suspend";
-          HandleLidSwitchDocked = "ignore";
-          HandleLidSwitchExternalPower = "ignore";
+    services.logind =
+      if (versionAtLeast version "25.11")
+      then {
+        settings = {
+          Login = {
+            HandleLidSwitch = "suspend";
+            HandleLidSwitchDocked = "ignore";
+            HandleLidSwitchExternalPower = "ignore";
+          };
         };
+      }
+      else {
+        lidSwitch = "suspend";
+        lidSwitchDocked = "ignore";
+        lidSwitchExternalPower = "ignore";
       };
-    };
   };
 }
