@@ -22,7 +22,7 @@ in {
     kernel = mkOption {
       default =
         if config.custom.full
-        then pkgs.linuxPackages_latest
+        then pkgs.linuxPackages # _latest
         else pkgs.linuxPackages;
 
       type = types.attrs;
