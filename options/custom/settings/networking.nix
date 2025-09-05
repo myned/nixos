@@ -110,11 +110,22 @@ in {
     networking = {
       hostName = config.custom.hostname;
       useNetworkd = cfg.networkd;
-      wireless.iwd.enable = cfg.wifi;
+      #// wireless.iwd.enable = cfg.wifi;
 
       firewall = mkIf cfg.firewall {
         enable = true;
-        allowedUDPPorts = mkIf cfg.dnsmasq [53 67];
+
+        allowedTCPPorts = optionals cfg.dnsmasq [
+          7236 # Miracast
+          7250 # Miracast
+        ];
+
+        allowedUDPPorts = optionals cfg.dnsmasq [
+          53 # DNS
+          67 # DHCP
+          5353 # mDNS
+          7236 # Miracast
+        ];
       };
 
       # Prefer tailscale address over 127.0.0.2 for machine hostname
@@ -125,11 +136,11 @@ in {
       networkmanager = mkIf cfg.networkmanager {
         enable = true;
         plugins = [pkgs.networkmanager-openvpn];
-        wifi.backend = mkIf cfg.wifi "iwd";
+        #// wifi.backend = mkIf cfg.wifi "iwd";
       };
     };
 
-    users.users.${config.custom.username}.extraGroups = mkIf cfg.networkmanager ["networkmanager"];
+    users.users.${config.custom.username}.extraGroups = optionals cfg.networkmanager ["networkmanager"];
 
     # Declarative networking
     # https://wiki.nixos.org/wiki/Systemd/networkd
@@ -224,13 +235,13 @@ in {
 
       # Multicast DNS causes single name resolution to hang and prevents libvirt NSS from functioning
       # https://github.com/NixOS/nixpkgs/issues/322022
-      extraConfig = "MulticastDNS=false"; # mDNS
-      llmnr = "false";
+      #// extraConfig = "MulticastDNS=false"; # mDNS
+      #// llmnr = "false";
 
       # TODO: Add testing command
       # https://quad9.net/support/faq#testing
       # https://quad9.net/service/service-addresses-and-features
-      fallbackDns = mkIf cfg.dns [
+      fallbackDns = optionals cfg.dns [
         "9.9.9.9#dns.quad9.net"
         "149.112.112.112#dns.quad9.net"
         "2620:fe::fe#dns.quad9.net"
@@ -249,16 +260,16 @@ in {
     # https://github.com/NixOS/nixpkgs/issues/132646
     # Default: mymachines resolve [!UNAVAIL=return] files myhostname libvirt_guest libvirt dns
     # TODO: Remove elements from final list instead of forcing
-    system.nssDatabases.hosts = mkIf config.custom.full (mkForce [
-      "files"
-      "myhostname"
-      "mymachines"
-      "libvirt_guest"
-      "libvirt"
-      #// "wins"
-      "resolve"
-      "dns"
-    ]);
+    # system.nssDatabases.hosts = mkIf config.custom.full (mkForce [
+    #   "files"
+    #   "myhostname"
+    #   "mymachines"
+    #   "libvirt_guest"
+    #   "libvirt"
+    #   #// "wins"
+    #   "resolve"
+    #   "dns"
+    # ]);
 
     # Wireless regulatory domain
     # https://github.com/NixOS/nixpkgs/issues/25378
