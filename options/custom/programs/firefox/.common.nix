@@ -121,6 +121,7 @@ with lib; {
           "browser.newtabpage.activity-stream.feeds.topsites" = false;
           "browser.newtabpage.activity-stream.showSearch" = false;
           "browser.newtabpage.activity-stream.showSponsored" = false;
+          "browser.newtabpage.activity-stream.showSponsoredCheckboxes" = false;
           "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
           "browser.newtabpage.activity-stream.showWeather" = false;
           "browser.newtabpage.enabled" = true;
@@ -212,7 +213,7 @@ with lib; {
           "layout.css.backdrop-filter.enabled" = true;
           "layout.forms.reveal-password-button.enabled" = false;
           "layout.forms.reveal-password-context-menu.enabled" = false;
-          "layout.spellcheckDefault" = 1; # Enabled
+          "layout.spellcheckDefault" = 0; # Disabled
           "media.autoplay.blocking_policy" = 1; # Transient
           "media.eme.enabled" = true; # DRM
           "media.ffmpeg.vaapi.enabled" = true;
@@ -237,6 +238,7 @@ with lib; {
           "network.dns.disablePrefetchFromHTTPS" = true;
           "network.http.referer.XOriginPolicy" = 0; # Relaxed
           "network.predictor.enabled" = false;
+          "network.trr.mode" = 5; # DoH off, default: 0
           "pref.privacy.disable_button.view_passwords" = false;
           "privacy.clearOnShutdown.downloads" = true;
           "privacy.clearOnShutdown.formdata" = true;
@@ -269,8 +271,7 @@ with lib; {
           "webgl.disabled" = false;
           "widget.gtk.overlay-scrollbars.enabled" = true;
           "widget.gtk.rounded-bottom-corners.enabled" = true;
-        }
-        // {
+
           #!! Telemetry
           "browser.crashReports.unsubmittedCheck.autoSubmit2" = telemetry;
           "browser.newtabpage.activity-stream.feeds.telemetry" = telemetry;
