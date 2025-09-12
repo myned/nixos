@@ -6,7 +6,7 @@
 with lib; {
   config.custom.services = mkMerge [
     (mkIf config.custom.default {
-      automatic-timezoned.enable = true;
+      #// automatic-timezoned.enable = true;
       earlyoom.enable = true;
       fail2ban.enable = true;
       geoclue2.enable = true;
@@ -18,7 +18,7 @@ with lib; {
       smartd.enable = !config.custom.vm;
       sshd.enable = true;
       tailscale.enable = true;
-      #// tzupdate.enable = true;
+      tzupdate.enable = true;
     })
 
     (mkIf config.custom.minimal {
