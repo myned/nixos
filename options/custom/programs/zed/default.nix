@@ -507,7 +507,7 @@ in {
       # https://github.com/nix-community/home-manager/pull/6993
       home.activation = {
         enforce-zed-editor-config = hm.lib.dag.entryAfter ["writeBoundary"] ''
-          run rm \
+          run rm --force \
             "$XDG_CONFIG_HOME/zed/settings.json" \
             "$XDG_CONFIG_HOME/zed/keymap.json"
         '';
