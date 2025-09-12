@@ -8,6 +8,13 @@ with lib; let
 in {
   options.custom.services.gammastep = {
     enable = mkEnableOption "gammastep";
+
+    autoBrightness = mkOption {
+      default = !config.custom.services.wluma.enable;
+      description = "Whether to enable automatic brightness control";
+      example = false;
+      type = types.bool;
+    };
   };
 
   config = mkIf cfg.enable {
@@ -28,7 +35,7 @@ in {
         };
 
         # TODO: Add keybinds
-        settings.general = {
+        settings.general = mkIf cfg.autoBrightness {
           brightness-day = 1;
           brightness-night = 0.6;
         };
