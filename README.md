@@ -154,7 +154,7 @@ cd -
 # On machine
 echo -n '<passphrase>' > /tmp/secret.key
 sudo mkdir -p /key
-sudo mount /dev/<device> /key
+sudo mount /dev/disk/by-*/<device> /key
 ```
 
 14. Create a temporary password for the nixos user (or use SSH keys)
@@ -167,7 +167,7 @@ passwd
 15. Execute [nixos-anywhere](https://github.com/nix-community/nixos-anywhere) to install remotely
 
 ```sh
-nixos-anywhere --extra-files tmp/ --flake .#<machine> nixos@<ip>
+nixos-anywhere --flake .#<machine> nixos@<ip> --extra-files tmp/
 ```
 
 16. Remove temporary files
