@@ -31,7 +31,10 @@ with lib; {
       pipewire.enable = true;
       playerctld.enable = true;
       ratbagd.enable = true;
+
+      # FIXME: Use hm module
       syncthing.enable = true;
+
       udev.enable = true;
       upower.enable = true;
     })
@@ -44,7 +47,11 @@ with lib; {
       #// cliphist.enable = true;
       #// clipmenu.enable = true;
       easyeffects.enable = true;
-      envfs.enable = true;
+
+      # BUG: Prevents activation of /usr, causing systemd to halt after installation or with Impermanence
+      # https://github.com/NixOS/nixpkgs/issues/375376
+      #// envfs.enable = true;
+
       gammastep.enable = true;
       gdm.enable = true;
       gnome-keyring.enable = true;
