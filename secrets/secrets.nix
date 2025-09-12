@@ -19,7 +19,7 @@ let
   myeye = "";
   mynix = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBKKqfRtKZ+8Qm9DjurAJ8Ob4IZjAWZQjNGQXgQVRr8M root@mynix";
   myore = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBn/6eJvcDsjphoqFrGlPqMUf3wya3LYgFf2RoutpRVu root@myore";
-  myork = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDMhK3IdmV57jEtvUeEQn+NrWP5Wlh4sYlxq2eDi39nW root@myork";
+  myork = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBsJT7qVAarFGBE7i2DJfMsRlY0T95ZPRAG9WNXejmgc root@myork";
   myosh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIENq879QYYHnC8542PB+nzrU0SyWiAEkzWhTFrZxJ5n6 root@myosh";
   mypi3 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHfJT4DX8pakYra4CDSTksFG1RCPkuoGt2YC3MNF2H1f root@mypi3";
 
