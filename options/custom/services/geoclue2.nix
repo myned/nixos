@@ -14,7 +14,7 @@ in {
 
     apps = mkOption {
       default = [];
-      description = "Desktop ids of user apps to allow access to geolocation without authorization";
+      description = "Desktop ids of apps to allow access to geolocation without authorization";
       example = ["firefox"];
       type = with types; listOf str;
     };
@@ -34,13 +34,19 @@ in {
       {
         enable = true;
 
+        # HACK: Set to empty to allow all requests
+        # https://gitlab.freedesktop.org/geoclue/geoclue/-/commit/521df77f5bca2eb3ece0048f466b93e28a16e236
+        #// whitelistedAgents = [];
+
+        # HACK: Does not entirely work as it relies on the demo agent
+        # https://gitlab.freedesktop.org/geoclue/geoclue/-/issues/74
         # https://man.archlinux.org/man/extra/geoclue/geoclue.5.en#APPLICATION_CONFIGURATION_OPTIONS
         appConfig = listToAttrs (forEach cfg.apps (name: {
           inherit name;
 
           value = {
             isAllowed = true;
-            isSystem = false;
+            isSystem = mkDefault false;
           };
         }));
       }
