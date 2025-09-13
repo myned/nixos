@@ -8,6 +8,9 @@
     hostname = "myeye";
 
     services = {
+      scrutiny.enable = true;
+      smartd.enable = true;
+
       tailscale = {
         ipv4 = "";
         ipv6 = "";

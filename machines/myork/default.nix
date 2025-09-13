@@ -29,6 +29,8 @@
 
     services = {
       auto-cpufreq.max.battery = 3.5; # GHz
+      scrutiny.enable = true;
+      smartd.enable = true;
 
       # TODO: Enable when build is fixed
       # https://github.com/TamtamHero/fw-fanctrl/issues/159

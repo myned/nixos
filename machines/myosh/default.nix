@@ -8,6 +8,9 @@
     hostname = "myosh";
 
     services = {
+      scrutiny.enable = true;
+      smartd.enable = true;
+
       tailscale = {
         ipv4 = "100.99.79.37";
         ipv6 = "fd7a:115c:a1e0:406b:e350:a66:dafd:585b";

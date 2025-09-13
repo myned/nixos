@@ -7,6 +7,9 @@
     hostname = "myeck";
 
     services = {
+      scrutiny.enable = true;
+      smartd.enable = true;
+
       tailscale = {
         ipv4 = "100.111.194.165";
         ipv6 = "fd7a:115c:a1e0:4fcf:3e5f:1be0:1108:3c3f";

@@ -31,6 +31,9 @@
     };
 
     services = {
+      scrutiny.enable = true;
+      smartd.enable = true;
+
       tailscale = {
         ipv4 = "100.71.53.26";
         ipv6 = "fd7a:115c:a1e0:e166:b2d9:e5cf:82e4:63a4";
