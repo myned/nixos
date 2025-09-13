@@ -97,7 +97,7 @@ in {
                 # https://starship.rs/config/#command-duration
                 cmd_duration = {
                   format = "[󱎫 $duration](#586e75)";
-                  min_time = 5 * 1000; # Milliseconds
+                  min_time = 1 * 1000; # Milliseconds
                 };
 
                 # https://starship.rs/config/#directory
