@@ -29,10 +29,7 @@ with lib; {
       pipewire.enable = true;
       playerctld.enable = true;
       ratbagd.enable = true;
-
-      # FIXME: Use hm module
       syncthing.enable = true;
-
       udev.enable = true;
       upower.enable = true;
     })

@@ -66,15 +66,9 @@
 
       syncthing = {
         enable = true;
-
-        # TODO: Use passthru?
-        configDir = "/var/lib/syncthing";
-        dataDir = "/mnt/local/syncthing";
-
         mount = "mnt-local.mount";
+        path = "/mnt/local/syncthing";
         type = "receiveonly";
-        user = "syncthing";
-        group = "syncthing";
       };
     };
   };
