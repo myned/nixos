@@ -25,7 +25,7 @@ in {
       # https://1password.com/
       _1password-gui = {
         enable = true;
-        package = pkgs._1password-gui-beta;
+        #// package = pkgs._1password-gui-beta;
         polkitPolicyOwners = [config.custom.username]; # Desktop integration
       };
     };
@@ -55,9 +55,7 @@ in {
 
       serviceConfig = {
         Type = "simple";
-
-        # FIXME: 1password clipboard does not work in wayland
-        ExecStart = "${_1password} --silent --ozone-platform=x11";
+        ExecStart = "${_1password} --silent";
       };
     };
 

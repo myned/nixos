@@ -46,7 +46,7 @@ with lib; {
     })
 
     (mkIf config.custom.full {
-      #// _1password.enable = true;
+      _1password.enable = true;
       adb.enable = true;
       #// ags.enable = true;
       #// bitwarden-menu.enable = true;
