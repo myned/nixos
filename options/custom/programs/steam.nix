@@ -25,7 +25,7 @@ in {
 
         # HACK: Work around black main window with xwayland-satellite
         # https://github.com/ValveSoftware/steam-for-linux/issues/10543 et al.
-        package = mkIf config.custom.services.xwayland-satellite.enable (
+        package = (
           pkgs.steam.override {
             extraArgs = "-system-composer";
 

@@ -41,13 +41,7 @@ in {
         # HACK: Inherit home-manager environment variables in lieu of upstream fix
         # https://github.com/nix-community/home-manager/issues/2659
         # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsenvironment
-        environment =
-          mapAttrs (name: value: toString value) hm.home.sessionVariables
-          // {
-            # TODO: Use xwayland-satellite integration next release
-            # https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#xwayland-satellite
-            DISPLAY = ":0";
-          };
+        environment = mapAttrs (name: value: toString value) hm.home.sessionVariables;
 
         # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingshotkey-overlayskip-at-startup
         hotkey-overlay.skip-at-startup = true;

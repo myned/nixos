@@ -8,11 +8,12 @@
 with lib; let
   cfg = config.custom.desktops.niri;
   hm = config.home-manager.users.${config.custom.username};
+
+  xwayland-satellite = getExe pkgs.xwayland-satellite;
 in {
   options.custom.desktops.niri = {
     enable = mkOption {default = false;};
     polkit = mkOption {default = false;};
-    xwayland = mkOption {default = true;};
   };
 
   config = mkIf cfg.enable {
@@ -33,11 +34,6 @@ in {
       programs = {
         # Enable custom polkit agent
         polkit.agent = !cfg.polkit;
-      };
-
-      services = {
-        # Enable rootless Xwayland
-        xwayland-satellite.enable = cfg.xwayland;
       };
     };
 
@@ -62,22 +58,30 @@ in {
       programs.niri = {
         package = config.programs.niri.package;
 
-        # https://github.com/YaLTeR/niri/wiki/Configuration:-Debug-Options
-        # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsdebug
-        settings.debug =
-          {
-            # TODO: Enable next release
-            #// deactivate-unfocused-windows = [];
+        settings = {
+          # https://github.com/YaLTeR/niri/wiki/Configuration:-Debug-Options
+          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsdebug
+          debug =
+            {
+              # TODO: Enable next release
+              #// deactivate-unfocused-windows = [];
 
-            #// disable-cursor-plane = []; # Software cursor
-            #// disable-direct-scanout = [];
-            #// enable-overlay-planes = [];
-            honor-xdg-activation-with-invalid-serial = [];
-            keep-laptop-panel-on-when-lid-is-closed = [];
-          }
-          // optionalAttrs config.custom.vrr {
-            skip-cursor-only-updates-during-vrr = [];
+              #// disable-cursor-plane = []; # Software cursor
+              #// disable-direct-scanout = [];
+              #// enable-overlay-planes = [];
+              honor-xdg-activation-with-invalid-serial = [];
+              keep-laptop-panel-on-when-lid-is-closed = [];
+            }
+            // optionalAttrs config.custom.vrr {
+              skip-cursor-only-updates-during-vrr = [];
+            };
+
+          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsxwayland-satellite
+          xwayland-satellite = {
+            enable = true;
+            path = xwayland-satellite;
           };
+        };
       };
 
       # https://github.com/sodiboo/niri-flake/blob/main/docs.md#homemodulesstylix

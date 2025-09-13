@@ -24,10 +24,7 @@ in {
 
       unitConfig = {
         Description = "Sync clipboard between Wayland and X11";
-
-        After =
-          ["graphical-session.target"]
-          ++ optionals config.custom.services.xwayland-satellite.enable ["xwayland-satellite.service"];
+        After = ["graphical-session.target"];
       };
 
       serviceConfig = {

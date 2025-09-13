@@ -44,10 +44,7 @@ in {
 
       unitConfig = {
         Description = "Launch 1Password in the background";
-
-        After =
-          ["graphical-session.target"]
-          ++ optionals config.custom.services.xwayland-satellite.enable ["xwayland-satellite.service"];
+        After = ["graphical-session.target"];
       };
 
       serviceConfig = {
