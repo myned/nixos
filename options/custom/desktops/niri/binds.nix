@@ -190,7 +190,7 @@ in {
           #// (key "Shift_L" "Mod" focus-workspace-previous)
           # TODO: Use "Super_L" when fixed
           (key "Space" "Mod" (spawn config.custom.menus.default.show))
-          (key "Space" "Mod+Alt" (spawn config.custom.menus.vault.show))
+          (key "Space" "Mod+Alt" (spawn [_1password "--quick-access"]))
           (key "Space" "Mod+Ctrl" (spawn config.custom.menus.calculator.show))
           (key "Space" "Mod+Ctrl+Shift" (spawn networkmanager_dmenu))
           (key "Space" "Mod+Shift" (spawn config.custom.menus.search.show))
