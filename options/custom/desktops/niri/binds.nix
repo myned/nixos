@@ -150,7 +150,7 @@ in {
           (key "M" "Mod" (spawn youtube-music))
           (key "O" "Mod" (spawn [hyprpicker "--autocopy"]))
           (key "O" "Mod+Shift" (spawn [hyprpicker "--autocopy --format rgb"]))
-          (key "P" "Ctrl+Alt" (spawn [pkill "1Password"]))
+          (key "P" "Ctrl+Alt" (spawn [pkill "1password"]))
           (key "P" "Mod" (spawn _1password))
           (key "Q" "Ctrl+Alt" (spawn [bash "-c" ''${kill} -9 "$(${niri} msg -j windows | ${jq} '.[] | select(.is_focused == true).pid')"'']))
           (key "Q" "Mod" close-window)
