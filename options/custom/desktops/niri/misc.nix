@@ -8,6 +8,7 @@ with lib; let
   cfg = config.custom.desktops.niri.misc;
   hm = config.home-manager.users.${config.custom.username};
 
+  _1password = getExe config.programs._1password-gui.package;
   audio = config.home-manager.users.${config.custom.username}.home.file.".local/bin/audio".source;
   bash = "${pkgs.bash}/bin/bash";
   chromium = getExe hm.programs.chromium.package;
@@ -60,6 +61,7 @@ in {
         spawn-at-startup = [
           {command = [audio "--init"];} # Enforce audio profile state
           {command = [config.custom.menus.clipboard.clear-silent];} # Clear clipboard history
+          {command = [_1password "--silent"];}
         ];
 
         # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsswitch-eventslid-close

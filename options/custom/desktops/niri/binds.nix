@@ -8,6 +8,7 @@ with lib; let
   cfg = config.custom.desktops.niri.binds;
   hm = config.home-manager.users.${config.custom.username};
 
+  _1password = getExe config.programs._1password-gui.package;
   audio = config.home-manager.users.${config.custom.username}.home.file.".local/bin/audio".source;
   bash = "${pkgs.bash}/bin/bash";
   bitwarden = "${pkgs.bitwarden-desktop}/bin/bitwarden";
@@ -148,8 +149,8 @@ in {
           (key "M" "Mod" (spawn youtube-music))
           (key "O" "Mod" (spawn [hyprpicker "--autocopy"]))
           (key "O" "Mod+Shift" (spawn [hyprpicker "--autocopy --format rgb"]))
-          (key "P" "Ctrl+Alt" (spawn [pkill "Bitwarden"]))
-          (key "P" "Mod" (spawn bitwarden))
+          (key "P" "Ctrl+Alt" (spawn [pkill "1Password"]))
+          (key "P" "Mod" (spawn _1password))
           (key "Q" "Ctrl+Alt" (spawn [bash "-c" ''${kill} -9 "$(${niri} msg -j windows | ${jq} '.[] | select(.is_focused == true).pid')"'']))
           (key "Q" "Mod" close-window)
           (key "R" "Mod" focus-window-or-workspace-down)

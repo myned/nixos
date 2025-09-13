@@ -13,7 +13,7 @@ in {
     enable = mkOption {default = false;};
     agent = mkOption {default = true;};
     browser = mkOption {default = null;};
-    service = mkOption {default = true;};
+    service = mkOption {default = false;};
   };
 
   config = mkIf cfg.enable {
@@ -34,10 +34,7 @@ in {
     environment.etc = mkIf (isString cfg.browser) {
       "1password/custom_allowed_browsers" = {
         mode = "0755";
-
-        text = ''
-          ${cfg.browser}
-        '';
+        text = cfg.browser;
       };
     };
 
