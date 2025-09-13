@@ -20,7 +20,6 @@ in {
         ++ optionals config.custom.default (with config.boot.kernelPackages; [
           ### CLI applications
           cpupower # Processor utilities
-          perf # Performance analyzer
         ])
         ++ optionals config.custom.default [
           bluetui # Bluetooth manager
@@ -47,6 +46,7 @@ in {
           nvd # Nix diff viewer
           openssl # Certificate utility
           pciutils # PCI device information
+          perf # Performance analyzer
           progress # Coreutils progress viewer
           q # DNS tester
           rclone # File sync
