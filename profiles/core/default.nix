@@ -9,7 +9,7 @@
     containers = {
       enable = true;
       boot = true;
-      adguardhome.enable = true;
+      #// adguardhome.enable = true;
       beszel.enable = true;
       beszel.server = true;
       coturn.enable = true;
