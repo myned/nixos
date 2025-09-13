@@ -109,6 +109,30 @@ in {
 
               c = "clear";
 
+              cz = "chezmoi";
+              cza = "chezmoi add";
+              czaf = "chezmoi add --follow";
+              czc = "chezmoi cat";
+              czcd = "chezmoi cd";
+              czd = "chezmoi diff";
+              czdoc = "chezmoi doctor";
+              cze = "chezmoi edit";
+              czew = "chezmoi edit --watch";
+              czey = "chezmoi edit --apply";
+              czg = "chezmoi git";
+              czi = "chezmoi init";
+              czia = "chezmoi init --apply";
+              cziam = "chezmoi init --apply myned";
+              czm = "chezmoi merge";
+              czma = "chezmoi merge-all";
+              czr = "chezmoi re-add";
+              czs = "chezmoi status";
+              czt = "chezmoi chattr --recursive";
+              cztn = "chezmoi chattr --recursive noexecutable,noreadonly";
+              czu = "chezmoi update";
+              czx = "chezmoi execute-template";
+              czy = "chezmoi apply";
+
               d = "docker";
               dc = "docker compose";
               dcd = "docker compose down";
