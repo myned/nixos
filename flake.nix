@@ -28,10 +28,6 @@
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
     flakegen.url = "github:jorsn/flakegen";
-    fw-fanctrl = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:TamtamHero/fw-fanctrl/packaging/nix";
-    };
     home-manager-stable = {
       inputs.nixpkgs.follows = "nixpkgs-stable";
       url = "github:nix-community/home-manager/release-25.05";

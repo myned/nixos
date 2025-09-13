@@ -47,7 +47,7 @@
     #// compose2nix = flake "github:aksiksi/compose2nix" // follows "unstable";
     #// conduwuit = flake "github:Myned/conduwuit" // follows "unstable";
     disko = flake "github:nix-community/disko" // follows "unstable";
-    fw-fanctrl = flake "github:TamtamHero/fw-fanctrl/packaging/nix" // follows "unstable";
+    #// fw-fanctrl = flake "github:TamtamHero/fw-fanctrl/packaging/nix" // follows "unstable";
     home-manager-unstable = flake "github:nix-community/home-manager" // follows "unstable";
     hypridle = flake "github:hyprwm/hypridle" // follows "unstable";
     #// hyprland = flake "github:hyprwm/Hyprland?ref=v0.45.2" // follows "unstable";
@@ -181,7 +181,6 @@
                       inputs.agenix.nixosModules.default
                       inputs.arion.nixosModules.arion
                       inputs.disko.nixosModules.disko
-                      inputs.fw-fanctrl.nixosModules.default
                       inputs.niri-flake.nixosModules.niri
                       inputs.nixvirt.nixosModules.default
                     ];

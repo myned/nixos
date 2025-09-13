@@ -10,7 +10,7 @@ in {
 
   config = mkIf cfg.enable {
     # https://github.com/TamtamHero/fw-fanctrl/tree/packaging/nix
-    programs.fw-fanctrl = {
+    hardware.fw-fanctrl = {
       enable = true;
 
       # https://github.com/TamtamHero/fw-fanctrl/blob/packaging/nix/doc/configuration.md
