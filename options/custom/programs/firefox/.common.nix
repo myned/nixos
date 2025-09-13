@@ -107,9 +107,14 @@ with lib; {
           "browser.engagement.library-button.has-used" = true;
           "browser.engagement.sidebar-button.has-used" = true;
           "browser.formfill.enable" = false;
-          "browser.link.open_newwindow.restriction" = 0; # Popups in new tab
           "browser.link.open_newwindow" = 3; # New tab
+          "browser.link.open_newwindow.restriction" = 0; # Popups in new tab
           "browser.messaging-system.whatsNewPanel.enabled" = false;
+          "browser.ml.chat.page" = false;
+          "browser.ml.linkPreview.collapsed" = false;
+          "browser.ml.linkPreview.enabled" = false;
+          "browser.ml.linkPreview.longPress" = false;
+          "browser.ml.linkPreview.shift" = false;
           "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons" = false;
           "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" = false;
           "browser.newtabpage.activity-stream.discoverystream.onboardingExperience.enabled" = false;
@@ -145,7 +150,7 @@ with lib; {
           "browser.startup.page" = 3; # Previous session
           "browser.tabs.allowTabDetach" = true;
           "browser.tabs.closeTabByDblclick" = true;
-          "browser.tabs.closeWindowWithLastTab" = true;
+          "browser.tabs.closeWindowWithLastTab" = false;
           "browser.tabs.groups.enabled" = true;
           "browser.tabs.groups.smart.userEnabled" = false; # Tab group suggestions
           "browser.tabs.insertAfterCurrent" = false;
