@@ -11,15 +11,14 @@ with lib; let
   _1password = getExe config.programs._1password-gui.package;
   audio = config.home-manager.users.${config.custom.username}.home.file.".local/bin/audio".source;
   bash = "${pkgs.bash}/bin/bash";
-  bitwarden = "${pkgs.bitwarden-desktop}/bin/bitwarden";
   cat = "${pkgs.coreutils}/bin/cat";
   codium = "${config.home-manager.users.${config.custom.username}.programs.vscode.package}/bin/codium";
   ghostty = "${hm.programs.ghostty.package}/bin/ghostty";
   gnome-text-editor = "${pkgs.gnome-text-editor}/bin/gnome-text-editor";
+  gradia = getExe pkgs.gradia;
   hyprpicker = "${pkgs.hyprpicker}/bin/hyprpicker";
   inhibit = config.home-manager.users.${config.custom.username}.home.file.".local/bin/inhibit".source;
   jq = "${pkgs.jq}/bin/jq";
-  keyguard = "${pkgs.keyguard}/bin/Keyguard";
   kill = "${pkgs.coreutils}/bin/kill";
   loginctl = "${pkgs.systemd}/bin/loginctl";
   nautilus = "${pkgs.nautilus}/bin/nautilus";
@@ -36,6 +35,7 @@ with lib; let
   swayosd-client = "${pkgs.swayosd}/bin/swayosd-client";
   virt-manager = "${config.programs.virt-manager.package}/bin/virt-manager";
   waydroid = "${pkgs.waydroid}/bin/waydroid";
+  wl-paste = getExe' pkgs.wl-clipboard "wl-paste";
   youtube-music = "${pkgs.youtube-music}/bin/youtube-music";
   zeditor = getExe hm.programs.zed-editor.package;
 in {
@@ -73,7 +73,8 @@ in {
           # https://github.com/YaLTeR/niri/discussions/267
           #?? niri msg action focus-window --id (niri msg -j windows | jq '.[] | select(.app_id == "").id')
           (key "Apostrophe" "Mod" (screenshot {show-pointer = false;}))
-          (key "Apostrophe" "Mod+Shift" screenshot-window)
+          (key "Apostrophe" "Mod+Ctrl" screenshot-window)
+          (key "Apostrophe" "Mod+Shift" (spawn-sh "${wl-paste} | ${gradia}"))
           (key "Backslash" "Mod" (spawn inhibit))
           (key "Backslash" "Mod+Shift" (spawn power))
           (key "Backspace" "Mod" center-column)
