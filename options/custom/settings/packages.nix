@@ -162,6 +162,7 @@ in {
           #// gradience # GTK theme editor
           gtk4.dev # GTK4 icon browser
           gtkterm # Serial terminal
+          gradia # Screenshot tool
           helvum # Pipewire patchbay
           heroic # Game library
           icon-library # Icon viewer
