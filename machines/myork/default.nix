@@ -37,8 +37,8 @@
       #//fw-fanctrl.enable = true;
 
       tailscale = {
-        ipv4 = "100.112.11.240";
-        ipv6 = "fd7a:115c:a1e0:6c8f:94e8:19c0:afdb:9837";
+        ipv4 = "100.71.22.19";
+        ipv6 = "fd7a:115c:a1e0::3101:1613";
       };
     };
 
