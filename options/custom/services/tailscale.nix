@@ -18,7 +18,7 @@ in {
     ipv4 = mkOption {default = "";};
     ipv6 = mkOption {default = "";};
     firewall = mkOption {default = true;};
-    tailnet = mkOption {default = "vpn";};
+    tailnet = mkOption {default = "fenrir-musical.ts.net";};
     tray = mkOption {default = false;};
   };
 

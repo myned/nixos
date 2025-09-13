@@ -14,7 +14,7 @@
       beszel.server = true;
       coturn.enable = true;
       #// grafana.enable = true;
-      headscale.enable = true;
+      #// headscale.enable = true;
       kener.enable = true;
       #// netdata.enable = true;
       ntfy.enable = true;
