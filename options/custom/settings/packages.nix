@@ -208,6 +208,7 @@ in {
           sourcegit # Git client
           #// spotify # Spotify client
           #// stremio # Streaming client
+          switcheroo # Image converter
           #// syncthingtray # Syncthing client
           tagger # Music tagger
           teams-for-linux # Microsoft Teams client
