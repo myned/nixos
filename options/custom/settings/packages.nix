@@ -20,6 +20,8 @@ in {
         ++ optionals config.custom.default (with config.boot.kernelPackages; [
           ### CLI applications
           cpupower # Processor utilities
+
+          # TODO: Move to global when nixpkgs stable >= 25.11
           perf # Performance analyzer
         ])
         ++ optionals config.custom.default [
