@@ -79,6 +79,11 @@ in {
           # https://github.com/NixOS/nixpkgs/pull/390171
           rustdesk-flutter = stable.rustdesk-flutter;
 
+          # TODO: Remove when in unstable
+          # https://github.com/nix-community/home-manager/issues/7803
+          # https://nixpk.gs/pr-tracker.html?pr=442482
+          sd-switch = master.sd-switch;
+
           # HACK: Ignore tests to fix build
           # https://github.com/tailscale/tailscale/issues/16966
           tailscale = prev.tailscale.overrideAttrs (old: {
