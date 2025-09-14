@@ -6,11 +6,13 @@
 with lib; let
   cfg = config.custom.services.fw-fanctrl;
 in {
-  options.custom.services.fw-fanctrl.enable = mkOption {default = false;};
+  options.custom.services.fw-fanctrl = {
+    enable = mkEnableOption "fw-fanctrl";
+  };
 
-  config = mkIf cfg.enable {
+  config = let
     # https://github.com/TamtamHero/fw-fanctrl/tree/packaging/nix
-    hardware.fw-fanctrl = {
+    fw-fanctrl = {
       enable = true;
 
       # https://github.com/TamtamHero/fw-fanctrl/blob/packaging/nix/doc/configuration.md
@@ -39,5 +41,10 @@ in {
         };
       };
     };
-  };
+  in
+    mkIf cfg.enable (
+      if versionAtLeast version "25.11"
+      then {hardware.fw-fanctrl = fw-fanctrl;}
+      else {}
+    );
 }
