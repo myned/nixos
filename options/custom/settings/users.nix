@@ -22,7 +22,7 @@ in {
           ]
           else [];
       };
-      linger = mkOption {default = false;};
+      linger = mkOption {default = true;};
       packages = mkOption {default = [];};
     };
   };
