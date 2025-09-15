@@ -362,6 +362,8 @@ in {
               y = config.custom.gap;
               relative-to = "bottom-right";
             };
+
+            open-focused = false;
           }
         ];
       };
