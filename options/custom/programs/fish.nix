@@ -381,7 +381,8 @@ in {
               tn = "tailscale netcheck";
               ts = "tailscale status";
               tss = "tailscale ssh";
-              tw = "tailscale switch";
+              tw = "sudo tailscale switch";
+              twl = "sudo tailscale switch --list";
               tt = "tailscale set";
               tu = "tailscale up";
               tuu = "sudo tailscale up --reset --ssh --advertise-exit-node --accept-dns --accept-routes --qr --auth-key=%";
