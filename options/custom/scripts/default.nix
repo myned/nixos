@@ -172,6 +172,11 @@ in {
               coreutils
               procps
             ])
+            (bash "ssh-copy-agent" [
+              coreutils
+              gnugrep
+              openssh
+            ])
             (bash "toggle" [
               gnugrep
               hyprland
