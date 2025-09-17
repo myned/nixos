@@ -57,6 +57,7 @@ in {
           tcpdump # Network analyzer
           testdisk # Data recovery tool
           trashy # CLI trash
+          uv # Python package manager
           waypipe # Wayland proxy
           wev # Wayland keysym tester
           wget # Download utility
