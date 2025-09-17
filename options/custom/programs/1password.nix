@@ -6,6 +6,7 @@
 }:
 with lib; let
   cfg = config.custom.programs._1password;
+  hm = config.home-manager.users.${config.custom.username};
 
   _1password = getExe config.programs._1password-gui.package;
 in {
@@ -53,10 +54,17 @@ in {
       };
     };
 
-    home-manager.users.${config.custom.username} = {
-      programs.ssh.extraConfig = mkIf cfg.agent ''
+    home-manager.users.${config.custom.username} = mkIf cfg.agent {
+      # https://developer.1password.com/docs/ssh/get-started#step-4-configure-your-ssh-or-git-client
+      home.sessionVariables = {
+        # For CLI usage
+        SSH_AUTH_SOCK = "${hm.home.homeDirectory}/.1password/agent.sock";
+      };
+
+      # For agent usage
+      programs.ssh.extraConfig = ''
         Host *
-          IdentityAgent ~/.1password/agent.sock
+          IdentityAgent ${hm.home.homeDirectory}/.1password/agent.sock
       '';
     };
   };
