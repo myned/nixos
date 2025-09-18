@@ -32,8 +32,7 @@ in {
       };
 
       programs = {
-        # Enable custom polkit agent
-        polkit.agent = !cfg.polkit;
+        polkit.agent = pkgs.pantheon.pantheon-agent-polkit;
       };
     };
 
