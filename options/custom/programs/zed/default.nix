@@ -315,7 +315,7 @@ in {
             Nix = {
               # https://github.com/oxalica/nil
               # https://github.com/nix-community/nixd
-              language_servers = ["nil" "!nixd"];
+              language_servers = ["!nil" "nixd"];
             };
 
             # YAML = {
@@ -338,6 +338,10 @@ in {
             nil.initialization_options = {
               formatting.command = ["alejandra"];
               #// nix.flake.autoArchive = true;
+            };
+
+            nixd.initialization_options = {
+              formatting.command = ["alejandra"];
             };
           };
 
