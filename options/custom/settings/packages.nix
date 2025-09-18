@@ -38,6 +38,7 @@ in {
           inotify-tools # File notify
           jq # JSON parser
           killport # Kill processes on port
+          lazygit # Git client
           lf # Terminal file manager
           lm_sensors # System sensors
           lsof # List open files
