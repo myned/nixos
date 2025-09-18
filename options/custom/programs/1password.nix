@@ -14,6 +14,7 @@ in {
     enable = mkOption {default = false;};
     agent = mkOption {default = true;};
     browser = mkOption {default = null;};
+    git = mkOption {default = true;};
     service = mkOption {default = false;};
   };
 
@@ -57,15 +58,18 @@ in {
     home-manager.users.${config.custom.username} = mkIf cfg.agent {
       # https://developer.1password.com/docs/ssh/get-started#step-4-configure-your-ssh-or-git-client
       home.sessionVariables = {
-        # For CLI usage
         SSH_AUTH_SOCK = "${hm.home.homeDirectory}/.1password/agent.sock";
       };
 
-      # For agent usage
-      programs.ssh.extraConfig = ''
-        Host *
-          IdentityAgent ${hm.home.homeDirectory}/.1password/agent.sock
-      '';
+      programs = {
+        # https://github.com/NixOS/nixpkgs/issues/230357
+        git.signing.signer = mkIf cfg.git "${config.programs._1password-gui.package}/share/1password/op-ssh-sign";
+
+        ssh.extraConfig = ''
+          Host *
+            IdentityAgent ${hm.home.homeDirectory}/.1password/agent.sock
+        '';
+      };
     };
   };
 }

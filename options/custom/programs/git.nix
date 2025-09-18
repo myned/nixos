@@ -27,11 +27,10 @@ in {
           signing =
             {
               signByDefault = true;
-              key = "C7224454F7881A34";
+              key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ4hPmotFnneRItm9sU9SrxUTRRLrmB+XnCCywt+lWj6";
             }
             // optionalAttrs (versionAtLeast version "25.05") {
-              # TODO: Use ssh signing
-              format = "openpgp";
+              format = "ssh";
             };
 
           # https://git-scm.com/docs/git-config
