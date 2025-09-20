@@ -154,8 +154,9 @@ in {
           # https://github.com/zed-industries/zed/issues/5028
           #// buffer_font_family = "monospace";
           buffer_font_family = mkForce "IosevkaTermSlab Nerd Font Propo";
-
           buffer_line_height.custom = 1.5;
+          ui_font_size = mkForce 18;
+
           chat_panel.default_width = 300;
 
           collaboration_panel = {
@@ -230,7 +231,10 @@ in {
           };
 
           terminal = {
+            default_width = 500;
+            default_height = 200;
             line_height = "standard";
+            minimum_contrast = 0;
 
             env = {
               EDITOR = "zeditor --wait";
@@ -246,8 +250,6 @@ in {
             show_user_picture = false;
             show_menus = false;
           };
-
-          ui_font_size = mkForce 19;
 
           # Filetype associations
           # https://zed.dev/docs/configuring-languages#file-associations
@@ -335,12 +337,13 @@ in {
             # ];
 
             # https://github.com/oxalica/nil/blob/main/docs/configuration.md
-            nil.initialization_options = {
+            nil.settings = {
               formatting.command = ["alejandra"];
               #// nix.flake.autoArchive = true;
             };
 
-            nixd.initialization_options = {
+            # https://github.com/nix-community/nixd/blob/main/nixd/docs/configuration.md
+            nixd.settings = {
               formatting.command = ["alejandra"];
             };
           };
