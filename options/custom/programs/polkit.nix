@@ -45,29 +45,31 @@ in {
     };
 
     # https://wiki.nixos.org/wiki/Polkit#Authentication_agents
-    systemd.user.services.${cfg.agent.pname} = mkIf (!isNull cfg.agent) {
-      enable = true;
-      wantedBy = ["graphical-session.target"];
+    systemd.user.services = mkIf (!isNull cfg.agent) {
+      ${cfg.agent.pname} = {
+        enable = true;
+        wantedBy = ["graphical-session.target"];
 
-      unitConfig = {
-        Description = cfg.agent.pname;
-        After = ["graphical-session.target"];
-        Wants = ["graphical-session.target"];
-      };
+        unitConfig = {
+          Description = cfg.agent.pname;
+          After = ["graphical-session.target"];
+          Wants = ["graphical-session.target"];
+        };
 
-      serviceConfig = let
-        agent =
-          if cfg.agent == pkgs.pantheon.pantheon-agent-polkit
-          then "policykit-1-pantheon/io.elementary.desktop.agent-polkit"
-          else if cfg.agent == pkgs.polkit_gnome
-          then "polkit-gnome-authentication-agent-1"
-          else "";
-      in {
-        Type = "simple";
-        ExecStart = "${cfg.agent}/libexec/${agent}";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
+        serviceConfig = let
+          agent =
+            if cfg.agent == pkgs.pantheon.pantheon-agent-polkit
+            then "policykit-1-pantheon/io.elementary.desktop.agent-polkit"
+            else if cfg.agent == pkgs.polkit_gnome
+            then "polkit-gnome-authentication-agent-1"
+            else "";
+        in {
+          Type = "simple";
+          ExecStart = "${cfg.agent}/libexec/${agent}";
+          Restart = "on-failure";
+          RestartSec = 1;
+          TimeoutStopSec = 10;
+        };
       };
     };
   };
