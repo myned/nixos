@@ -311,8 +311,8 @@ with lib; {
       # https://searchfox.org/mozilla-central/rev/669329e284f8e8e2bb28090617192ca9b4ef3380/toolkit/components/search/SearchEngine.jsm#1138-1177
       search = {
         force = true;
-        default = "kagi";
-        privateDefault = "ddg";
+        default = "brave";
+        privateDefault = "brave";
 
         engines = {
           ### Builtins
@@ -349,6 +349,13 @@ with lib; {
             icon = "https://cdn.search.brave.com/serp/v2/_app/immutable/assets/favicon.c09fe1a1.ico";
             name = "Brave";
             urls = [{template = "https://search.brave.com/search?q={searchTerms}";}];
+          };
+
+          brave-summary = {
+            definedAliases = ["bs"];
+            icon = "https://cdn.search.brave.com/serp/v2/_app/immutable/assets/favicon.c09fe1a1.ico";
+            name = "Brave Summary";
+            urls = [{template = "https://search.brave.com/search?summary=1&q={searchTerms}";}];
           };
 
           docker-hub = {

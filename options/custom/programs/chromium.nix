@@ -59,14 +59,10 @@ in {
 
         # https://chromeenterprise.google/policies/#DefaultSearchProvider
         DefaultSearchProviderEnabled = true;
-        DefaultSearchProviderKeyword = "k";
-        DefaultSearchProviderName = "Kagi";
-        DefaultSearchProviderSearchURL = "https://kagi.com/search?q={searchTerms}";
-        DefaultSearchProviderSuggestURL = "https://kagi.com/api/autosuggest?q={searchTerms}";
-        # DefaultSearchProviderKeyword = "g";
-        # DefaultSearchProviderName = "Google";
-        # DefaultSearchProviderSearchURL = "{google:baseURL}search?q={searchTerms}&{google:RLZ}{google:originalQueryForSuggestion}{google:assistedQueryStats}{google:searchFieldtrialParameter}{google:searchClient}{google:sourceId}ie={inputEncoding}";
-        # DefaultSearchProviderSuggestURL = "{google:baseURL}complete/search?output=chrome&q={searchTerms}";
+        DefaultSearchProviderKeyword = "b";
+        DefaultSearchProviderName = "Brave";
+        DefaultSearchProviderSearchURL = "https://search.brave.com/search?q={searchTerms}";
+        DefaultSearchProviderSuggestURL = "https://search.brave.com/api/suggest?q={searchTerms}";
 
         # https://chromeenterprise.google/policies/#SiteSearchSettings
         SiteSearchSettings = [
@@ -92,6 +88,12 @@ in {
             name = "Brave";
             shortcut = "b";
             url = "https://search.brave.com/search?q={searchTerms}";
+          }
+
+          {
+            name = "Brave Summary";
+            shortcut = "bs";
+            url = "https://search.brave.com/search?summary=1&q={searchTerms}";
           }
 
           {
@@ -186,7 +188,7 @@ in {
 
           {
             name = "Kagi Assistant";
-            shortcut = "k";
+            shortcut = "ka";
             url = "https://kagi.com/assistant?q={searchTerms}";
           }
 
