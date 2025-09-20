@@ -149,6 +149,7 @@ in {
     systemd = mkIf (!cfg.networkmanager) {
       network = {
         enable = true;
+        wait-online.timeout = 60; # Seconds, default: 120
 
         # https://www.freedesktop.org/software/systemd/man/latest/systemd.link.html
         links."10-links" = {
@@ -173,11 +174,13 @@ in {
               "${cfg.ipv6.address}${cfg.ipv6.prefix}"
             ];
 
+          # BUG: Interface sometimes gets stuck in "configuring" state when using Gateway= shorthand
+          # https://github.com/systemd/systemd/issues/18222#issuecomment-2298382751
           gateway =
-            optionals (!isNull cfg.ipv4.gateway) [
+            optionals (!isNull cfg.ipv4.gateway && !cfg.ipv4.ppp) [
               cfg.ipv4.gateway
             ]
-            ++ optionals (!isNull cfg.ipv6.gateway) [
+            ++ optionals (!isNull cfg.ipv6.gateway && !cfg.ipv6.ppp) [
               cfg.ipv6.gateway
             ];
 
