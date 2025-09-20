@@ -8,8 +8,9 @@ let
   #!! Imperative client key generation
   #?? ssh-keygen -f ~/.ssh/id_ed25519 -N ''
   users = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINm04th+wJ+J6uQy4FOEo1YNpV9Mxxi+luGzCAN5YmA+"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKcKnHQnd75sTQa8EchKbanEb8w26g53TY9QAp5NZxUa myned@mynix"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM/IWN11WX5MbDNwgD1LA1U1iv31yNjoS44Hzgf4xe7d myned@myork"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPZrCubtks2MMzzSIKx4FkTZQdnZse3LqYIM+JFxXg3P myned@myork"
   ];
 
   # Machines that decrypt age files during activation
