@@ -8,8 +8,14 @@ with lib; let
   cfg = config.custom.programs.chromium;
 in {
   options.custom.programs.chromium = {
-    enable = mkOption {default = false;};
-    package = mkOption {default = pkgs.google-chrome;};
+    enable = mkEnableOption "chromium";
+
+    package = mkOption {
+      default = pkgs.brave;
+      description = "Chromium package to use";
+      example = pkgs.google-chrome;
+      type = types.package;
+    };
   };
 
   config = mkIf cfg.enable {
@@ -368,7 +374,7 @@ in {
     };
 
     # https://nix-community.github.io/stylix/options/modules/chromium.html
-    stylix.targets.chromium.enable = true;
+    stylix.targets.chromium.enable = false;
 
     home-manager.users.${config.custom.username} = {
       programs.chromium = {
@@ -384,13 +390,10 @@ in {
             # https://wiki.archlinux.org/title/Chromium#Touchpad_Gestures_for_Navigation
             "TouchpadOverscrollHistoryNavigation"
           ];
-        in
-          [
-            "--enable-features=${features}"
-          ]
-          ++ optionals (cfg.package.pname == "brave") [
-            "--password-store=auto" # Fix secrets defaulting to kwallet
-          ];
+        in [
+          "--enable-features=${features}"
+          "--password-store=auto"
+        ];
       };
     };
   };
