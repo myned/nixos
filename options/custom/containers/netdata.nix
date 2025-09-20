@@ -25,15 +25,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    age.secrets = let
-      secret = filename: {
-        file = "${inputs.self}/secrets/${filename}";
-      };
-    in
-      optionalAttrs (!isNull cfg.role) {
-        "${config.custom.hostname}/netdata/${cfg.role}.conf" = secret "${config.custom.hostname}/netdata/${cfg.role}.conf";
-      };
-
     #?? arion-netdata pull
     environment.shellAliases.arion-netdata = "sudo arion --prebuilt-file ${config.virtualisation.arion.projects.netdata.settings.out.dockerComposeYaml}";
 
@@ -44,7 +35,7 @@ in {
         # https://learn.netdata.cloud/docs/netdata-agent/installation/docker
         netdata.service = {
           container_name = "netdata";
-          image = "ghcr.io/netdata/netdata:v2.6.1"; # https://github.com/netdata/netdata/pkgs/container/netdata
+          image = "ghcr.io/netdata/netdata:v2.6.3"; # https://github.com/netdata/netdata/pkgs/container/netdata
           network_mode = "service:vpn"; # 19999/tcp
           privileged = true;
           restart = "unless-stopped";
@@ -75,11 +66,16 @@ in {
         # https://tailscale.com/kb/1282/docker
         vpn.service = {
           container_name = "netdata-vpn";
+          devices = ["/dev/net/tun:/dev/net/tun"];
           env_file = [config.age.secrets."common/tailscale/container.env".path];
           hostname = "${config.custom.hostname}-netdata";
           image = "ghcr.io/tailscale/tailscale:v1.84.3"; # https://github.com/tailscale/tailscale/pkgs/container/tailscale
           restart = "unless-stopped";
           volumes = ["${config.custom.containers.directory}/netdata/vpn:/var/lib/tailscale"];
+
+          capabilities = {
+            NET_ADMIN = true;
+          };
         };
       };
 
@@ -93,5 +89,13 @@ in {
         };
       };
     };
+
+    age.secrets = mkIf (!isNull cfg.role) (listToAttrs (map (name: {
+        inherit name;
+        value = {file = "${inputs.self}/secrets/${name}";};
+      })
+      [
+        "${config.custom.hostname}/netdata/${cfg.role}.conf"
+      ]));
   };
 }

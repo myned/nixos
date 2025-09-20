@@ -25,7 +25,7 @@
       miniflux.enable = true;
       mullvad.enable = true;
       #// netbox.enable = true;
-      #// netdata.enable = true;
+      netdata.enable = true;
       #// nextcloud.enable = true;
       nextcloudaio.enable = true;
       opengist.enable = true;

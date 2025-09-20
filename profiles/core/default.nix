@@ -16,7 +16,7 @@
       #// grafana.enable = true;
       #// headscale.enable = true;
       kener.enable = true;
-      #// netdata.enable = true;
+      netdata.enable = true;
       ntfy.enable = true;
       openspeedtest.enable = true;
       portainer.enable = true;
