@@ -289,15 +289,15 @@ in {
           }
 
           {
-            name = "Piped";
-            shortcut = "p";
-            url = "https://piped.vpn.${config.custom.domain}/results?search_query={searchTerms}";
-          }
-
-          {
             name = "PCGamingWiki";
             shortcut = "pc";
             url = "https://www.pcgamingwiki.com/w/index.php?search={searchTerms}";
+          }
+
+          {
+            name = "Perplexity";
+            shortcut = "p";
+            url = "https://perplexity.ai/?q={searchTerms}";
           }
 
           {
@@ -364,6 +364,12 @@ in {
             name = "YouTube";
             shortcut = "y";
             url = "https://www.youtube.com/results?search_query={searchTerms}";
+          }
+
+          {
+            name = "Piped";
+            shortcut = "yp";
+            url = "https://piped.vpn.${config.custom.domain}/results?search_query={searchTerms}";
           }
 
           {

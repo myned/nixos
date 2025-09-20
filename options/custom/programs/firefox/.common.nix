@@ -567,18 +567,18 @@ with lib; {
             urls = [{template = "https://ollama.com/search?q={searchTerms}";}];
           };
 
-          piped = {
-            definedAliases = ["p"];
-            icon = "https://piped.vpn.${config.custom.domain}/favicon.ico";
-            name = "Piped";
-            urls = [{template = "https://piped.vpn.${config.custom.domain}/results?search_query={searchTerms}";}];
-          };
-
           pcgamingwiki = {
             definedAliases = ["pc"];
             icon = "https://static.pcgamingwiki.com/favicons/pcgamingwiki.png";
             name = "PCGamingWiki";
             urls = [{template = "https://www.pcgamingwiki.com/w/index.php?search={searchTerms}";}];
+          };
+
+          perplexity = {
+            definedAliases = ["p"];
+            icon = "https://www.perplexity.ai/favicon.svg";
+            name = "Perplexity";
+            urls = [{template = "https://perplexity.ai/?q={searchTerms}";}];
           };
 
           protondb = {
@@ -642,6 +642,13 @@ with lib; {
             icon = "https://www.youtube.com/s/desktop/f8c8418d/img/favicon.ico";
             name = "YouTube";
             urls = [{template = "https://www.youtube.com/results?search_query={searchTerms}";}];
+          };
+
+          piped = {
+            definedAliases = ["yp"];
+            icon = "https://piped.vpn.${config.custom.domain}/favicon.ico";
+            name = "Piped";
+            urls = [{template = "https://piped.vpn.${config.custom.domain}/results?search_query={searchTerms}";}];
           };
 
           zed-issues = {
