@@ -30,6 +30,8 @@ in {
 
     virtualisation.arion.projects.netdata.settings = {
       services = {
+        #!! Imperative claiming to cloud
+        #?? http://<hostname>-netdata:19999/
         # https://www.netdata.cloud/
         # https://github.com/netdata/netdata
         # https://learn.netdata.cloud/docs/netdata-agent/installation/docker
@@ -42,6 +44,7 @@ in {
 
           volumes =
             [
+              "${config.custom.containers.directory}/netdata/cache:/var/cache/netdata"
               "${config.custom.containers.directory}/netdata/config:/etc/netdata"
               "${config.custom.containers.directory}/netdata/data:/var/lib/netdata"
               "/:/host/root:ro,rslave"
