@@ -260,6 +260,12 @@ in {
               k = "kill -9";
               kj = "kill -9 (jobs --pid)";
 
+              lg = "lazygit";
+              lgb = "lazygit branch";
+              lgl = "lazygit log";
+              lgt = "lazygit stash";
+              lgs = "lazygit status";
+
               m = "mosh";
 
               n = "nix";
@@ -325,26 +331,26 @@ in {
 
               rs = "rsync --verbose --info=progress2";
 
-              sc = "systemctl";
-              scp = "systemctl poweroff";
-              scr = "systemctl reboot";
-              scs = "systemctl --system";
-              scsd = "systemctl --system disable";
-              scsdn = "systemctl --system disable --now";
-              scse = "systemctl --system reenable";
-              scsen = "systemctl --system reenable --now";
-              scsld = "systemctl --system list-dependencies";
-              scsls = "systemctl --system list-sockets";
-              scslt = "systemctl --system list-timers";
-              scslu = "systemctl --system list-units";
-              scsluf = "systemctl --system list-unit-files";
-              scsm = "systemctl --system mask";
-              scsr = "systemctl --system restart";
-              scsrr = "systemctl --system reload-or-restart";
-              scss = "systemctl --system status";
-              scssh = "systemctl --system show";
-              scst = "systemctl --system stop";
-              scsu = "systemctl --system unmask";
+              sc = "sudo systemctl";
+              scp = "sudo systemctl poweroff";
+              scr = "sudo systemctl reboot";
+              scs = "sudo systemctl --system";
+              scsd = "sudo systemctl --system disable";
+              scsdn = "sudo systemctl --system disable --now";
+              scse = "sudo systemctl --system reenable";
+              scsen = "sudo systemctl --system reenable --now";
+              scsld = "sudo systemctl --system list-dependencies";
+              scsls = "sudo systemctl --system list-sockets";
+              scslt = "sudo systemctl --system list-timers";
+              scslu = "sudo systemctl --system list-units";
+              scsluf = "sudo systemctl --system list-unit-files";
+              scsm = "sudo systemctl --system mask";
+              scsr = "sudo systemctl --system restart";
+              scsrr = "sudo systemctl --system reload-or-restart";
+              scss = "sudo systemctl --system status";
+              scssh = "sudo systemctl --system show";
+              scst = "sudo systemctl --system stop";
+              scsu = "sudo systemctl --system unmask";
               scu = "systemctl --user";
               scud = "systemctl --user disable";
               scudn = "systemctl --user disable --now";
