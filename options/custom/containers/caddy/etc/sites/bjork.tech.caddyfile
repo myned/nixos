@@ -80,7 +80,7 @@ bjork.tech {
 	import proxy slskd.admin.bjork.tech myosh:5030 # slskd
 	import proxy sonarr.admin.bjork.tech myosh:8989 # Sonarr
 	import proxy statping.admin.bjork.tech {system.hostname}-statping:8080 # Statping-ng
-	#// import proxy uptimekuma.admin.bjork.tech {system.hostname}-uptimekuma:3001 # Uptime Kuma
+	import proxy uptimekuma.admin.bjork.tech {system.hostname}-uptimekuma:3001 # Uptime Kuma
 
 	# Headplane
 	@headscale host headscale.admin.bjork.tech
