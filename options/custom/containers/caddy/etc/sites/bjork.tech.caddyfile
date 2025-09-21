@@ -65,6 +65,7 @@ bjork.tech {
 	import proxy beszel.admin.bjork.tech {system.hostname}-beszel:8090 # Beszel
 	#// import proxy-insecure cockpit.admin.bjork.tech {system.hostname}:9090 # Cockpit
 	#// import proxy dash.admin.bjork.tech myosh:3001 # dash.
+	#// import proxy gatus.admin.bjork.tech {system.hostname}:8484 # Gatus
 	#// import proxy grafana.admin.bjork.tech {system.hostname}-grafana:3000 # Grafana
 	#// import proxy jackett.admin.bjork.tech myosh:9117 # Jackett
 	import proxy-insecure kasm.admin.bjork.tech myosh:3443 # Kasm
