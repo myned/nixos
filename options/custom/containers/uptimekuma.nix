@@ -21,7 +21,7 @@ in {
       uptimekuma.service = {
         container_name = "uptimekuma";
         depends_on = ["vpn"];
-        image = "ghcr.io/louislam/uptime-kuma:2.0.0-beta.3"; # https://github.com/louislam/uptime-kuma/pkgs/container/uptime-kuma
+        image = "ghcr.io/louislam/uptime-kuma:2.0.0-beta.4"; # https://github.com/louislam/uptime-kuma/pkgs/container/uptime-kuma
         network_mode = "service:vpn"; # 3001/tcp
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/uptimekuma/data:/app/data"];
