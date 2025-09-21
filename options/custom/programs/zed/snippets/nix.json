@@ -56,6 +56,7 @@
       "    enable = mkEnableOption \"$1\";",
       "  };",
       "",
+      "  config = mkIf cfg.enable {",
       "    #?? arion-$1 pull",
       "    environment.shellAliases.arion-$1 = \"sudo arion --prebuilt-file \\${config.virtualisation.arion.projects.$1.settings.out.dockerComposeYaml}\";",
       "",
