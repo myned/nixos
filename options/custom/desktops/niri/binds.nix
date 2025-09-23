@@ -130,7 +130,12 @@ in {
           (key "A" "Mod+Shift" move-column-left-or-to-monitor-left)
           (key "B" "Ctrl+Alt" (spawn [pkill config.custom.browser.command]))
           (key "B" "Mod" (spawn config.custom.browser.command))
-          (key "B" "Mod+Shift" (spawn [config.custom.browser.command "-P" "work" "--name" "firefox-work" "--no-remote"]))
+          #// (key "B" "Mod+Shift" (spawn [config.custom.browser.command "-P" "work" "--name" "firefox-work" "--no-remote"]))
+
+          # HACK: Spawn work "profile" in separate data directory for app-id to take effect
+          # https://issues.chromium.org/issues/40172351
+          (key "B" "Mod+Shift" (spawn [config.custom.browser.command "--class=google-chrome-work" "--user-data-dir=${hm.xdg.configHome}/google-chrome-work"]))
+
           (key "D" "Ctrl+Alt" (spawn [waydroid "session" "stop"]))
           (key "D" "Mod" (spawn [waydroid "app" "launch" "com.YoStarEN.Arknights"]))
           (key "E" "Ctrl+Alt" (spawn [pkill "gnome-text-editor"]))

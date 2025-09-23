@@ -46,13 +46,13 @@ in {
           ];
 
           browsers = app-ids [
-            "^brave-browser$"
-            "^chromium-browser$"
+            "^brave-browser.*$"
+            "^chromium-browser.*$"
             "^firefox.*$"
-            "^google-chrome$"
-            "^librewolf$"
+            "^google-chrome.*$"
+            "^librewolf.*$"
             "^vivaldi.*$"
-            "^zen$"
+            "^zen.*$"
           ];
 
           chats = app-ids [

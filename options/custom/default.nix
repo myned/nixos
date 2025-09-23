@@ -42,14 +42,42 @@ in {
     menu = mkOption {default = "rofi";};
 
     browser = {
-      # TODO: Use lib.getExe' instead of /bin/ where possible
-      command = mkOption {default = getExe hm.programs.firefox.finalPackage;};
-      desktop = mkOption {default = "firefox.desktop";};
+      command = mkOption {
+        # HACK: Get hm finalPackage from package list
+        default = getExe (lib.findFirst (p:
+            if hasAttr "pname" p
+            then p.pname == "google-chrome"
+            else false)
+          null
+          hm.home.packages);
+
+        description = "Path to the executable that launches the default browser";
+        example = getExe pkgs.firefox;
+        type = types.path;
+      };
+
+      desktop = mkOption {
+        default = "google-chrome.desktop";
+        description = "Name of the desktop file for the default browser";
+        example = "firefox.desktop";
+        type = types.str;
+      };
     };
 
     terminal = {
-      command = mkOption {default = getExe hm.programs.ghostty.package;};
-      desktop = mkOption {default = "com.mitchellh.ghostty.desktop";};
+      command = mkOption {
+        default = getExe hm.programs.ghostty.package;
+        description = "Path to the executable that launches the default terminal";
+        example = getExe pkgs.kitty;
+        type = types.path;
+      };
+
+      desktop = mkOption {
+        default = "com.mitchellh.ghostty.desktop";
+        description = "Name of the desktop file for the default terminal";
+        example = "kitty.desktop";
+        type = types.str;
+      };
     };
 
     time = mkOption {

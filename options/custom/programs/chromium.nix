@@ -11,7 +11,7 @@ in {
     enable = mkEnableOption "chromium";
 
     package = mkOption {
-      default = pkgs.brave;
+      default = pkgs.google-chrome;
       description = "Chromium package to use";
       example = pkgs.google-chrome;
       type = types.package;
@@ -41,7 +41,7 @@ in {
               "ddkjiahejlhfcafbddmgiahcphecmpfh" # uBlock Origin Lite
             ]
             ++ optionals config.custom.full [
-              #// "khgocmkkpikpnmmkgmdnfckapcdkgfaf" # 1Password Beta
+              #// "aeblfdkhhhdcdjpifhhbdiojplfjncoa" # 1Password
               #// "ajopnjidmegmdimjlfnijceegpefgped" # BetterTTV
               #// "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
               #// "enamippconapkdmgfgjchkhakpfinmaj" # DeArrow
@@ -59,10 +59,10 @@ in {
 
         # https://chromeenterprise.google/policies/#DefaultSearchProvider
         DefaultSearchProviderEnabled = true;
-        DefaultSearchProviderKeyword = "b";
-        DefaultSearchProviderName = "Brave";
-        DefaultSearchProviderSearchURL = "https://search.brave.com/search?q={searchTerms}";
-        DefaultSearchProviderSuggestURL = "https://search.brave.com/api/suggest?q={searchTerms}";
+        DefaultSearchProviderKeyword = "g";
+        DefaultSearchProviderName = "Google";
+        DefaultSearchProviderSearchURL = "{google:baseURL}search?q={searchTerms}&{google:RLZ}{google:originalQueryForSuggestion}{google:assistedQueryStats}{google:searchFieldtrialParameter}{google:searchClient}{google:sourceId}ie={inputEncoding}";
+        DefaultSearchProviderSuggestURL = "{google:baseURL}complete/search?output=chrome&q={searchTerms}";
 
         # https://chromeenterprise.google/policies/#SiteSearchSettings
         SiteSearchSettings = [
@@ -392,14 +392,20 @@ in {
         # https://stackoverflow.com/questions/69363637/how-to-write-argument-for-chrome-chromiums-enable-features-flag
         #?? https://source.chromium.org/chromium/chromium/src/+/main:chrome/browser/about_flags.cc
         commandLineArgs = let
-          features = concatStringsSep "," [
+          enable-features = concatStringsSep "," [
             "FluentOverlayScrollbar"
 
             # https://wiki.archlinux.org/title/Chromium#Touchpad_Gestures_for_Navigation
             "TouchpadOverscrollHistoryNavigation"
           ];
+
+          disable-features = concatStringsSep "," [
+            # https://wiki.archlinux.org/title/Chromium#Gnome_%22Global_Shortcuts%22_menu_appears_on_startup
+            "GlobalShortcutsPortal"
+          ];
         in [
-          "--enable-features=${features}"
+          "--enable-features=${enable-features}"
+          "--disable-features=${disable-features}"
           "--password-store=auto"
         ];
       };
