@@ -33,7 +33,7 @@ in {
     };
 
     # https://wiki.nixos.org/wiki/1Password#Unlocking_browser_extensions
-    environment.etc = mkIf (isString cfg.browser) {
+    environment.etc = mkIf (!isNull cfg.browser) {
       "1password/custom_allowed_browsers" = {
         mode = "0755";
         text = cfg.browser;
@@ -63,13 +63,18 @@ in {
 
       programs = {
         # https://github.com/NixOS/nixpkgs/issues/230357
-        git.signing.signer = mkIf cfg.git "${config.programs._1password-gui.package}/share/1password/op-ssh-sign";
+        git.signing.signer = mkIf cfg.git (getExe' config.programs._1password-gui.package "op-ssh-sign");
 
         ssh.extraConfig = ''
           Host *
             IdentityAgent ${hm.home.homeDirectory}/.1password/agent.sock
         '';
       };
+
+      # HACK: Create symlink to generated native-messaging-hosts file
+      systemd.user.tmpfiles.rules = [
+        "L+ ${hm.xdg.configHome}/google-chrome-work/NativeMessagingHosts/com.1password.1password.json - - - - ${hm.xdg.configHome}/google-chrome/NativeMessagingHosts/com.1password.1password.json"
+      ];
     };
   };
 }
