@@ -384,10 +384,9 @@ in {
     # https://nix-community.github.io/stylix/options/modules/chromium.html
     stylix.targets.chromium.enable = false;
 
-    home-manager.users.${config.custom.username} = {
-      programs.chromium = {
+    home-manager.users.${config.custom.username} = let
+      module = {
         enable = true;
-        package = cfg.package;
 
         # https://stackoverflow.com/questions/69363637/how-to-write-argument-for-chrome-chromiums-enable-features-flag
         #?? https://source.chromium.org/chromium/chromium/src/+/main:chrome/browser/about_flags.cc
@@ -409,6 +408,15 @@ in {
           "--password-store=auto"
         ];
       };
+    in {
+      programs =
+        mapAttrs (
+          name: value:
+            value // module
+        ) {
+          brave = {};
+          chromium = {package = cfg.package;};
+        };
     };
   };
 }
