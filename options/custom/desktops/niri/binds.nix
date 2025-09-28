@@ -137,7 +137,8 @@ in {
           (key "B" "Mod+Shift" (spawn [config.custom.browser.command "--class=google-chrome-work" "--user-data-dir=${hm.xdg.configHome}/google-chrome-work"]))
 
           (key "D" "Ctrl+Alt" (spawn [waydroid "session" "stop"]))
-          (key "D" "Mod" (spawn [waydroid "app" "launch" "com.YoStarEN.Arknights"]))
+          (key "D" "Mod" (spawn [waydroid "show-full-ui"]))
+          (key "D" "Mod+Shift" (spawn [waydroid "app" "launch" "com.YoStarEN.Arknights"]))
           (key "E" "Ctrl+Alt" (spawn [pkill "gnome-text-editor"]))
           (key "E" "Mod" (spawn [gnome-text-editor "--new-window"]))
           (key "F" "Mod" (spawn [nautilus "--new-window"]))
