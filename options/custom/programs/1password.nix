@@ -70,11 +70,6 @@ in {
             IdentityAgent ${hm.home.homeDirectory}/.1password/agent.sock
         '';
       };
-
-      # HACK: Create symlink to generated native-messaging-hosts file
-      systemd.user.tmpfiles.rules = [
-        "L+ ${hm.xdg.configHome}/google-chrome-work/NativeMessagingHosts/com.1password.1password.json - - - - ${hm.xdg.configHome}/google-chrome/NativeMessagingHosts/com.1password.1password.json"
-      ];
     };
   };
 }

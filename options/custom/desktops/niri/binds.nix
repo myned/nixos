@@ -132,9 +132,9 @@ in {
           (key "B" "Mod" (spawn config.custom.browser.command))
           #// (key "B" "Mod+Shift" (spawn [config.custom.browser.command "-P" "work" "--name" "firefox-work" "--no-remote"]))
 
-          # HACK: Spawn work "profile" in separate data directory for app-id to take effect
+          # HACK: Spawn chromium work "profile" in separate data directory for app-id to take effect
           # https://issues.chromium.org/issues/40172351
-          (key "B" "Mod+Shift" (spawn [config.custom.browser.command "--class=google-chrome-work" "--user-data-dir=${hm.xdg.configHome}/google-chrome-work"]))
+          (key "B" "Mod+Shift" (spawn [config.custom.browser.command "--class=${config.custom.browser.appId}-work" "--user-data-dir=${config.custom.programs.chromium.dataDir}-Work"]))
 
           (key "D" "Ctrl+Alt" (spawn [waydroid "session" "stop"]))
           (key "D" "Mod" (spawn [waydroid "show-full-ui"]))

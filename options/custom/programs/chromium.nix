@@ -6,15 +6,23 @@
 }:
 with lib; let
   cfg = config.custom.programs.chromium;
+  hm = config.home-manager.users.${config.custom.username};
 in {
   options.custom.programs.chromium = {
     enable = mkEnableOption "chromium";
 
     package = mkOption {
-      default = pkgs.google-chrome;
+      default = pkgs.brave;
       description = "Chromium package to use";
       example = pkgs.google-chrome;
       type = types.package;
+    };
+
+    dataDir = mkOption {
+      default = "${hm.xdg.configHome}/BraveSoftware/Brave-Browser";
+      description = "Path to user data directory";
+      example = "${hm.xdg.configHome}/google-chrome";
+      type = types.path;
     };
   };
 
@@ -59,23 +67,17 @@ in {
 
         # https://chromeenterprise.google/policies/#DefaultSearchProvider
         DefaultSearchProviderEnabled = true;
-        DefaultSearchProviderKeyword = "g";
-        DefaultSearchProviderName = "Google";
-        DefaultSearchProviderSearchURL = "{google:baseURL}search?q={searchTerms}&{google:RLZ}{google:originalQueryForSuggestion}{google:assistedQueryStats}{google:searchFieldtrialParameter}{google:searchClient}{google:sourceId}ie={inputEncoding}";
-        DefaultSearchProviderSuggestURL = "{google:baseURL}complete/search?output=chrome&q={searchTerms}";
+        DefaultSearchProviderKeyword = "b";
+        DefaultSearchProviderName = "Brave";
+        DefaultSearchProviderSearchURL = "https://search.brave.com/search?q={searchTerms}";
+        DefaultSearchProviderSuggestURL = "https://search.brave.com/api/suggest?q={searchTerms}";
 
         # https://chromeenterprise.google/policies/#SiteSearchSettings
         SiteSearchSettings = [
           {
             name = "Amazon";
-            shortcut = "a";
+            shortcut = "az";
             url = "https://www.amazon.com/s?k={searchTerms}";
-          }
-
-          {
-            name = "Open WebUI";
-            shortcut = "ai";
-            url = "https://ai.vpn.${config.custom.domain}/?temporary-chat=true&q={searchTerms}";
           }
 
           {
@@ -284,8 +286,14 @@ in {
 
           {
             name = "Ollama";
-            shortcut = "o";
+            shortcut = "ol";
             url = "https://ollama.com/search?q={searchTerms}";
+          }
+
+          {
+            name = "Open WebUI";
+            shortcut = "ow";
+            url = "https://ai.vpn.${config.custom.domain}/?temporary-chat=true&q={searchTerms}";
           }
 
           {
@@ -415,8 +423,13 @@ in {
             value // module
         ) {
           brave = {};
-          chromium = {package = cfg.package;};
+          chromium = {package = pkgs.google-chrome;};
         };
+
+      # HACK: Create symlink to generated native-messaging-hosts file in custom profile
+      systemd.user.tmpfiles.rules = optionals config.programs._1password.enable [
+        "L+ ${cfg.dataDir}-Work/NativeMessagingHosts/com.1password.1password.json - - - - ${cfg.dataDir}/NativeMessagingHosts/com.1password.1password.json"
+      ];
     };
   };
 }
