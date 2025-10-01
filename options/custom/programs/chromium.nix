@@ -75,6 +75,12 @@ in {
         # https://chromeenterprise.google/policies/#SiteSearchSettings
         SiteSearchSettings = [
           {
+            name = "Google AI Mode";
+            shortcut = "a";
+            url = "https://google.com/aimode?q={searchTerms}";
+          }
+
+          {
             name = "Amazon";
             shortcut = "az";
             url = "https://www.amazon.com/s?k={searchTerms}";
@@ -400,8 +406,6 @@ in {
         #?? https://source.chromium.org/chromium/chromium/src/+/main:chrome/browser/about_flags.cc
         commandLineArgs = let
           enable-features = concatStringsSep "," [
-            "FluentOverlayScrollbar"
-
             # https://wiki.archlinux.org/title/Chromium#Touchpad_Gestures_for_Navigation
             "TouchpadOverscrollHistoryNavigation"
           ];

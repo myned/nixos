@@ -323,6 +323,13 @@ with lib; {
           wikipedia.metaData.alias = "w";
 
           ### Custom
+          google-ai = {
+            definedAliases = ["a"];
+            icon = "https://www.gstatic.com/images/branding/searchlogo/ico/favicon.ico";
+            name = "Google AI Mode";
+            urls = [{template = "https://google.com/aimode?q={searchTerms}";}];
+          };
+
           amazon = {
             definedAliases = ["az"];
             icon = "https://www.amazon.com/favicon.ico";
