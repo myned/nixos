@@ -9,7 +9,7 @@ in {
   options.custom.settings.waydroid.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
-    # https://wiki.nixos.org/wiki/WayDroid
+    # https://wiki.nixos.org/wiki/Waydroid
     # https://wiki.archlinux.org/title/Waydroid
     #!! Configuration is imperative
     # Optionally update image
