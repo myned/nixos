@@ -324,17 +324,10 @@ with lib; {
 
           ### Custom
           amazon = {
-            definedAliases = ["a"];
+            definedAliases = ["az"];
             icon = "https://www.amazon.com/favicon.ico";
             name = "Amazon";
             urls = [{template = "https://www.amazon.com/s?k={searchTerms}";}];
-          };
-
-          ai = {
-            definedAliases = ["ai"];
-            icon = "https://ai.vpn.${config.custom.domain}/static/favicon.ico";
-            name = "Open WebUI";
-            urls = [{template = "https://ai.vpn.${config.custom.domain}/?temporary-chat=true&q={searchTerms}";}];
           };
 
           arch-wiki = {
@@ -565,6 +558,13 @@ with lib; {
             icon = "https://ollama.com/public/icon-64x64.png";
             name = "Ollama";
             urls = [{template = "https://ollama.com/search?q={searchTerms}";}];
+          };
+
+          open-webui = {
+            definedAliases = ["ow"];
+            icon = "https://ai.vpn.${config.custom.domain}/static/favicon.ico";
+            name = "Open WebUI";
+            urls = [{template = "https://ai.vpn.${config.custom.domain}/?temporary-chat=true&q={searchTerms}";}];
           };
 
           pcgamingwiki = {
