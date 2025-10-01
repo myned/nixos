@@ -44,7 +44,7 @@ in {
         # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsinputtouchpadaccel-profile
         touchpad = {
           accel-profile = "adaptive";
-          accel-speed = 0.3;
+          accel-speed = 0.2;
           click-method = "clickfinger"; # Multi-finger click
           dwt = true; # Disable while typing
           dwtp = true; # Disable while trackpointing
