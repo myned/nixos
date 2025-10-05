@@ -50,7 +50,7 @@
 
         outputs = with config.custom; let
           left = {
-            x = width / scale;
+            x = width / scale - 1920;
             y = 0;
             width = 1920;
             height = 1080;
@@ -63,7 +63,7 @@
           };
 
           right = {
-            x = width / scale + 1920;
+            x = width / scale;
             y = 0;
             width = 1920;
             height = 1080;
