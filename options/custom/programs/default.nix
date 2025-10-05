@@ -50,6 +50,7 @@ with lib; {
       adb.enable = true;
       #// ags.enable = true;
       #// bitwarden-menu.enable = true;
+      capacities.enable = true;
       #// clipse.enable = true;
       discord.enable = true;
       distrobox.enable = true;
