@@ -202,6 +202,7 @@ in {
           pwvucontrol # Pipewire volume controller
           qdiskinfo # Disk information
           remmina # Remote desktop client
+          rewaita # Adwaita themer
           rustdesk-flutter # Remote desktop client
           showtime # Video player
           signal-desktop-bin # Signal client
