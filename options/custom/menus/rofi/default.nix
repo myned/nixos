@@ -34,7 +34,8 @@ in {
         vault.show = "${pkill} --exact rofi || ${rofi-rbw}";
 
         clipboard = {
-          show = "${pkill} --exact rofi || ${rofi} -modes clipboard -show clipboard -show-icons";
+          #// show = "${pkill} --exact rofi || ${rofi} -modes clipboard -show clipboard -show-icons";
+          show = "${pkill} --exact rofi || ${cliphist} list | ${rofi} -dmenu -display-columns 2 | ${cliphist} decode | ${wl-copy}";
           clear = "${cliphist} wipe && ${notify-send} '> cliphist' 'Clipboard cleared' --urgency low";
           clear-silent = "${cliphist} wipe";
         };
@@ -55,9 +56,6 @@ in {
       # https://github.com/davatorium/rofi
       programs.rofi = {
         enable = true;
-
-        # https://github.com/lbonn/rofi
-        package = pkgs.rofi-wayland; # Wayland fork
 
         plugins = with pkgs; [
           rofi-calc # https://github.com/svenstaro/rofi-calc
@@ -82,8 +80,8 @@ in {
           display-run = "";
           display-ssh = "";
           #// drun-display-format = "{name}";
-          drun-match-fields = "name,generic";
-          matching = "prefix";
+          #// drun-match-fields = "name,generic";
+          matching = "fuzzy";
           sort = true;
           sorting-method = "fzf"; # https://github.com/jhawthorn/fzy/blob/master/ALGORITHM.md
         };
@@ -102,17 +100,17 @@ in {
         # https://davatorium.github.io/rofi/current/rofi-script.5/
         # https://github.com/sentriz/cliphist?tab=readme-ov-file#picker-examples
         "rofi/scripts/clipboard" = {
-          #// source = getExe' hm.services.cliphist.package "cliphist-rofi-img";
+          source = getExe' hm.services.cliphist.package "cliphist-rofi-img";
 
           # HACK: Cannot easily hide index via display-columns without dmenu mode
           # https://github.com/sentriz/cliphist/issues/130
           # https://github.com/davatorium/rofi/discussions/1993#discussioncomment-9971764
           # https://github.com/sentriz/cliphist/pull/124
-          source = getExe (pkgs.writeShellApplication {
-            name = "clipboard.sh";
-            runtimeInputs = with pkgs; [coreutils gnused wl-clipboard];
-            text = readFile ./clipboard.sh;
-          });
+          # source = getExe (pkgs.writeShellApplication {
+          #   name = "clipboard.sh";
+          #   runtimeInputs = with pkgs; [coreutils gnused wl-clipboard];
+          #   text = readFile ./clipboard.sh;
+          # });
         };
       };
 
