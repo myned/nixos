@@ -197,17 +197,17 @@ in {
                   disabled = false;
                   style = "bold";
 
-                  bash_indicator = " ";
-                  cmd_indicator = " ";
-                  elvish_indicator = "󰲋 ";
-                  fish_indicator = " ";
-                  ion_indicator = " ";
-                  nu_indicator = "󰟢 ";
-                  powershell_indicator = " ";
-                  tcsh_indicator = " ";
-                  unknown_indicator = " ";
-                  xonsh_indicator = " ";
-                  zsh_indicator = " ";
+                  bash_indicator = "";
+                  cmd_indicator = "";
+                  elvish_indicator = "󰲋";
+                  fish_indicator = "";
+                  ion_indicator = "";
+                  nu_indicator = "󰟢";
+                  powershell_indicator = "";
+                  tcsh_indicator = "";
+                  unknown_indicator = "";
+                  xonsh_indicator = "";
+                  zsh_indicator = "";
                 };
 
                 # https://starship.rs/config/#time
