@@ -86,26 +86,15 @@ in {
 
         #!! Accent colors are not the same globally, so override each target individually
         # https://github.com/danth/stylix/issues/402
-        targets = {
-          gtksourceview.enable = true;
+        targets = with config.stylix.targets; {
+          inherit gtksourceview qt;
 
-          gtk = {
-            enable = true;
-            flatpakSupport.enable = true;
-
-            extraCss = ''
-              @define-color accent_color #d33682;
-              @define-color accent_bg_color #d33682;
-              @define-color window_bg_color #073642;
-              @define-color borders #073642;
-              @define-color unfocused_borders #073642;
-            '';
-          };
-
-          qt = {
-            enable = true;
-            platform = "qtct";
-          };
+          gtk =
+            gtk
+            // {
+              flatpakSupport.enable = true;
+              extraCss = readFile ./gtk/style.css;
+            };
         };
       };
 
