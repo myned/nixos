@@ -61,6 +61,7 @@ with lib; {
       #// network-manager-applet.enable = true;
       ntfy.enable = true;
       ollama.enable = true;
+      printing.enable = true;
       samba.enable = true;
       swayidle.enable = true;
       swaync.enable = true;
