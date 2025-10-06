@@ -67,35 +67,9 @@ in {
           # https://github.com/NixOS/nixpkgs/issues/384555
           bottles = prev.bottles.override {removeWarningPopup = true;};
 
-          # TODO: Remove when in stable
-          btrfs-list = unstable.btrfs-list;
-
           # TODO: Remove when merged into unstable
           # https://github.com/NixOS/nixpkgs/pull/424156
           gitbutler = gitbutler.gitbutler;
-
-          # TODO: Remove when fixed
-          # https://github.com/NixOS/nixpkgs/issues/389638
-          # https://github.com/NixOS/nixpkgs/pull/390171
-          rustdesk-flutter = stable.rustdesk-flutter;
-
-          # TODO: Remove when in unstable
-          # https://github.com/nix-community/home-manager/issues/7803
-          # https://nixpk.gs/pr-tracker.html?pr=442482
-          sd-switch = master.sd-switch;
-
-          # HACK: Ignore tests to fix build
-          # https://github.com/tailscale/tailscale/issues/16966
-          tailscale = prev.tailscale.overrideAttrs (old: {
-            checkFlags =
-              builtins.map (
-                flag:
-                  if prev.lib.hasPrefix "-skip=" flag
-                  then flag + "|^TestGetList$|^TestIgnoreLocallyBoundPorts$|^TestPoller$|^TestRTT$|^TestXDP$"
-                  else flag
-              )
-              old.checkFlags;
-          });
 
           # TODO: Use official package when available
           # https://github.com/NixOS/nixpkgs/issues/327982
