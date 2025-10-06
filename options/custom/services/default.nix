@@ -48,10 +48,10 @@ with lib; {
       #// envfs.enable = true;
 
       gammastep.enable = true;
-      gdm.enable = true;
+      #// gdm.enable = true;
       gnome-keyring.enable = true;
       gpg-agent.enable = true;
-      #// greetd.enable = true;
+      greetd.enable = true;
       #// hypridle.enable = true;
       #// hyprpaper.enable = true;
       kdeconnect.enable = true;
