@@ -19,7 +19,7 @@ in {
     environment.systemPackages = with pkgs; [
       alejandra # nix
       ansible # ansible
-      ansible-language-server # ansible
+      #// ansible-language-server # ansible
       ansible-lint # ansible
       astro-language-server # astro
       basedpyright # basedpyright
@@ -209,7 +209,7 @@ in {
           };
 
           seed_search_query_from_cursor = "selection";
-          show_edit_predictions = false;
+          show_edit_predictions = true;
           show_signature_help_after_edits = true;
 
           # TODO: Show trailing whitespace when supported
