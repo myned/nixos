@@ -74,7 +74,6 @@ in {
           ];
 
           editors = app-ids [
-            "^obsidian$"
             "^org\.gnome\.TextEditor$"
             "^org\.wireshark\.Wireshark$"
           ];
@@ -92,9 +91,11 @@ in {
           ];
 
           ides = app-ids [
+            "^Capacities$"
             "^codium$"
             "^dev\.zed\.Zed$"
             "^GitHub Desktop$"
+            "^obsidian$"
           ];
 
           media = app-ids [
@@ -122,6 +123,10 @@ in {
 
           steam = app-ids [
             "^steam$"
+          ];
+
+          tasks = app-ids [
+            "^Todoist$"
           ];
 
           terminals = app-ids [
@@ -297,6 +302,13 @@ in {
           {
             # Steam
             matches = steam;
+          }
+
+          {
+            # Tasks
+            matches = tasks;
+
+            default-column-width.proportion = 0.2;
           }
 
           {

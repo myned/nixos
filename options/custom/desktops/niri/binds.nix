@@ -11,6 +11,7 @@ with lib; let
   _1password = getExe config.programs._1password-gui.package;
   audio = config.home-manager.users.${config.custom.username}.home.file.".local/bin/audio".source;
   bash = "${pkgs.bash}/bin/bash";
+  capacities = getExe pkgs.capacities;
   cat = "${pkgs.coreutils}/bin/cat";
   codium = "${config.home-manager.users.${config.custom.username}.programs.vscode.package}/bin/codium";
   ghostty = "${hm.programs.ghostty.package}/bin/ghostty";
@@ -33,6 +34,7 @@ with lib; let
   steam = "${config.programs.steam.package}/bin/steam";
   sushi = "${pkgs.sushi}/bin/sushi";
   swayosd-client = "${pkgs.swayosd}/bin/swayosd-client";
+  todoist-electron = getExe pkgs.todoist-electron;
   virt-manager = "${config.programs.virt-manager.package}/bin/virt-manager";
   waydroid = "${pkgs.waydroid}/bin/waydroid";
   wl-paste = getExe' pkgs.wl-clipboard "wl-paste";
@@ -146,12 +148,14 @@ in {
           (key "G" "Mod" (spawn steam))
           (key "I" "Ctrl+Alt" (spawn [pkill "zed"]))
           (key "I" "Mod" (spawn zeditor))
-          (key "K" "Ctrl+Alt" (spawn [pkill "obsidian"]))
-          (key "K" "Mod" (spawn obsidian))
+          (key "K" "Ctrl+Alt" (spawn [pkill "todoist-electron"]))
+          (key "K" "Mod" (spawn todoist-electron))
           (key "L" "Mod" (spawn [bash "-c" "${loginctl} lock-session && ${niri} msg action power-off-monitors"]))
           (key "L" "Mod+Shift" suspend)
           (key "M" "Ctrl+Alt" (spawn [pkill "youtube-music"]))
           (key "M" "Mod" (spawn youtube-music))
+          (key "N" "Ctrl+Alt" (spawn [pkill "capacities"]))
+          (key "N" "Mod" (spawn capacities))
           (key "O" "Mod" (spawn [hyprpicker "--autocopy"]))
           (key "O" "Mod+Shift" (spawn [hyprpicker "--autocopy --format rgb"]))
           (key "P" "Ctrl+Alt" (spawn [pkill "1password"]))
