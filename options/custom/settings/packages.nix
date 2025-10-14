@@ -114,6 +114,7 @@ in {
           #// cinny-desktop # Matrix client
 
           #// clapper # Video player
+          clickup # Project/task manager
           concessio # Permissions converter
           czkawka # Duplicate file finder
           d-spy # D-Bus introspection
