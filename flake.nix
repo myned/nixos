@@ -119,10 +119,6 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:danth/stylix";
     };
-    virtio-win = {
-      flake = false;
-      url = "https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.271-1/virtio-win.iso";
-    };
     zen-browser = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:youwen5/zen-browser-flake";

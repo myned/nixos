@@ -268,11 +268,11 @@ in {
 
       tmpfiles.settings.vm = {
         # HACK: Manually link image to default directory
-        "/var/lib/libvirt/images/virtio-win.iso" = {
-          "L+" = {
-            argument = inputs.nixvirt.lib.guest-install.virtio-win.iso.outPath;
-          };
-        };
+        # "/var/lib/libvirt/images/virtio-win.iso" = {
+        #   "L+" = {
+        #     argument = inputs.nixvirt.lib.guest-install.virtio-win.iso.outPath;
+        #   };
+        # };
 
         # TODO: Revisit when merged
         # https://github.com/NixOS/nixpkgs/pull/421549

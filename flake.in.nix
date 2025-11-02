@@ -90,7 +90,7 @@
     #// steamtinkerlaunch = source "github:sonic2kk/steamtinkerlaunch";
     #// swaynotificationcenter = source "github:ErikReider/SwayNotificationCenter?ref=v0.11.0";
     #// thunderbird-gnome-theme = source "github:rafaelmardojai/thunderbird-gnome-theme";
-    virtio-win = source "https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.271-1/virtio-win.iso";
+    #// virtio-win = source "https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.271-1/virtio-win.iso";
   };
 
   # https://flake.parts/
