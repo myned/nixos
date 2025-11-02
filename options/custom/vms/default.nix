@@ -209,13 +209,13 @@ in {
           #// vhostUserPackages = with pkgs; [virtiofsd]; # virtiofs support
 
           # Build OVMF with Windows 11 support
-          ovmf.packages = with pkgs; [
-            (OVMF.override {
-              secureBoot = true;
-              tpmSupport = true;
-            })
-            .fd
-          ];
+          # ovmf.packages = with pkgs; [
+          #   (OVMF.override {
+          #     secureBoot = true;
+          #     tpmSupport = true;
+          #   })
+          #   .fd
+          # ];
         };
 
         # Guest hostname resolution
@@ -279,15 +279,15 @@ in {
         # HACK: Fix libvirt not automatically locating firmware
         # https://github.com/NixOS/nixpkgs/issues/115996#issuecomment-2224296279
         # https://libvirt.org/formatdomain.html#bios-bootloader
-        "/var/lib/qemu/firmware" = {
-          "L+" = {
-            argument = "${pkgs.runCommandLocal "qemu-firmware" {} ''
-              mkdir $out
-              cp ${pkgs.qemu}/share/qemu/firmware/*.json $out
-              substituteInPlace $out/*.json --replace ${pkgs.qemu} /run/current-system/sw
-            ''}";
-          };
-        };
+        # "/var/lib/qemu/firmware" = {
+        #   "L+" = {
+        #     argument = "${pkgs.runCommandLocal "qemu-firmware" {} ''
+        #       mkdir $out
+        #       cp ${pkgs.qemu}/share/qemu/firmware/*.json $out
+        #       substituteInPlace $out/*.json --replace ${pkgs.qemu} /run/current-system/sw
+        #     ''}";
+        #   };
+        # };
       };
     };
 
