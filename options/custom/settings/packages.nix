@@ -252,7 +252,6 @@ in {
           libnotify # Notification tester
           linux-wifi-hotspot # Wi-Fi hotspot
           nixos-anywhere # NixOS installer
-          nvtopPackages.full # GPU monitor
           playerctl # Media controller
           #// satty # Screenshot editor
           usbutils # USB bus utilities
