@@ -133,12 +133,14 @@ in {
           (key "A" "Mod+Ctrl+Shift" {move-column-to-first = [];})
           (key "A" "Mod+Shift" {move-column-left-or-to-monitor-left = [];})
           (key "B" "Ctrl+Alt" {spawn = [pkill config.custom.browser.command];})
-          (key "B" "Mod" {spawn = config.custom.browser.command;})
+          (key "B" "Mod" {spawn = [config.custom.browser.command "-P" "default"];})
           #// (key "B" "Mod+Shift" {spawn = [config.custom.browser.command "-P" "work" "--name" "firefox-work" "--no-remote"];})
+          (key "B" "Mod" {spawn = [config.custom.browser.command "--profile-directory=Default"];})
+          (key "B" "Mod+Shift" {spawn = [config.custom.browser.command "--profile-directory=Profile 2" "--class=${config.custom.browser.appId}-work"];})
 
           # HACK: Spawn chromium work "profile" in separate data directory for app-id to take effect
           # https://issues.chromium.org/issues/40172351
-          #// (key "B" "Mod+Shift" {spawn = [config.custom.browser.command "--class=${config.custom.browser.appId}-work" "--user-data-dir=${config.custom.programs.chromium.dataDir}-Work"];})
+          #// (key "B" "Mod+Shift" {spawn = [config.custom.browser.command "--user-data-dir=${config.custom.programs.chromium.dataDir}-Work" "--class=${config.custom.browser.appId}-work"];})
 
           (key "D" "Ctrl+Alt" {spawn = [waydroid "session" "stop"];})
           (key "D" "Mod" {spawn = [waydroid "show-full-ui"];})
