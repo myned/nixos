@@ -43,7 +43,7 @@ in {
 
     browser = {
       appId = mkOption {
-        default = "brave-browser";
+        default = "google-chrome";
         description = "App ID / class of the browser as seen by the window manager";
         example = "google-chrome";
         type = types.str;
@@ -53,7 +53,7 @@ in {
         # HACK: Get hm finalPackage from package list
         default = getExe (lib.findFirst (p:
             if hasAttr "pname" p
-            then p.pname == "brave"
+            then p.pname == "google-chrome"
             else false)
           null
           hm.home.packages);
@@ -64,7 +64,7 @@ in {
       };
 
       desktop = mkOption {
-        default = "brave-browser.desktop";
+        default = "google-chrome.desktop";
         description = "Name of the desktop file for the default browser";
         example = "firefox.desktop";
         type = types.str;
