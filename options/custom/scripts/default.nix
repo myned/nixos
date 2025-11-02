@@ -149,7 +149,7 @@ in {
             (bash "remote" [
               argc
               coreutils
-              freerdp3
+              freerdp
               iputils
               libnotify
               libvirt

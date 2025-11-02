@@ -26,7 +26,7 @@ in {
       blueprint-compiler # blueprint
       caddy # caddyfile
       docker-compose-language-service # docker-compose
-      dockerfile-language-server-nodejs # dockerfile
+      dockerfile-language-server # dockerfile
       jdt-language-server # java
       nginx-language-server # nginx
       nil # nix

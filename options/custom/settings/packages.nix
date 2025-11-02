@@ -32,7 +32,6 @@ in {
           ethtool # Network device configuration
           fd # File finder
           fzf # Fuzzy search
-          glxinfo # Graphics tester
           hwloc # CPU topology viewer
           inetutils # Network utilities
           inotify-info # File notify lister
@@ -44,6 +43,7 @@ in {
           lm_sensors # System sensors
           lsof # List open files
           lz4 # Compression utility
+          mesa-demos # Graphics tester
           nix-output-monitor # Nix build parser
           nix-tree # Nix store explorer
           nmap # Network scanner
@@ -157,7 +157,6 @@ in {
           gnome-obfuscate # Image redacter
           gnome-online-accounts-gtk # GNOME accounts
           gnome-podcasts # Podcast feed
-          gnome-resources # System monitor
           gnome-software # Flatpak manager
           gnome-sound-recorder # Sound recorder
           gnome-system-monitor # System monitor
@@ -200,6 +199,7 @@ in {
           pwvucontrol # Pipewire volume controller
           qdiskinfo # Disk information
           remmina # Remote desktop client
+          resources # System monitor
           rewaita # Adwaita themer
           rustdesk-flutter # Remote desktop client
           showtime # Video player
@@ -245,7 +245,7 @@ in {
           devbox # Development environment
           er-patcher # Elden Ring fixes
           #// firefoxpwa # Firefox web apps
-          freerdp3 # RDP client
+          freerdp # RDP client
           #// grimblast # Screenshots
           imagemagick # Image editor
           libinput # Libinput commands

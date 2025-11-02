@@ -40,8 +40,12 @@ in {
 
         profiles.default = {
           #?? nixos-rebuild repl > pkgs.REPO.*
+          #!! Some extensions go missing from open-vsx, so use official marketplace
+          # https://github.com/nix-community/nix-vscode-extensions?tab=readme-ov-file#note
           extensions = with pkgs.open-vsx;
             [
+            ]
+            ++ (with pkgs.vscode-marketplace; [
               aaron-bond.better-comments
               #// antfu.iconify
               #// antfu.unocss
@@ -49,7 +53,9 @@ in {
               #// bilelmoussaoui.flatpak-vscode
               bmalehorn.vscode-fish
               #// bmewburn.vscode-intelephense-client
+              #// bodil.blueprint-gtk
               bradlc.vscode-tailwindcss
+              cormoran.disable-default-keybinding
               #// csstools.postcss
               dbaeumer.vscode-eslint
               detachhead.basedpyright
@@ -66,22 +72,16 @@ in {
               ms-python.black-formatter
               ms-python.debugpy
               ms-python.isort
+              ms-python.python
               ms-vscode.powershell
               natizyskunk.sftp
               pkief.material-icon-theme
               pkief.material-product-icons
+              sirmspencer.vscode-autohide
               sketchbuch.vsc-workspace-sidebar
               #// svelte.svelte-vscode
               timonwong.shellcheck
               vincaslt.highlight-matching-tag
-            ]
-            ++ (with pkgs.vscode-marketplace; [
-              #!! Some extensions go missing from open-vsx, so use official marketplace as fallback
-              # https://github.com/nix-community/nix-vscode-extensions?tab=readme-ov-file#note
-              #// bodil.blueprint-gtk
-              cormoran.disable-default-keybinding
-              ms-python.python
-              sirmspencer.vscode-autohide
             ]);
         };
       };
@@ -95,7 +95,7 @@ in {
 
       home.sessionVariables = {
         # https://github.com/nix-community/nixd/blob/main/nixd/docs/features.md
-        NIXD_FLAGS = "--inlay-hints=false"; # Disable package versions in the editor
+        #// NIXD_FLAGS = "--inlay-hints=false"; # Disable package versions in the editor
       };
 
       xdg.configFile = let
