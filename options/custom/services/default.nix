@@ -57,7 +57,7 @@ with lib; {
       kdeconnect.enable = true;
       keyd.enable = true;
       #// mako.enable = true;
-      mullvad.enable = true;
+      #// mullvad.enable = true;
       #// network-manager-applet.enable = true;
       ntfy.enable = true;
       ollama.enable = true;

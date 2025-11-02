@@ -30,7 +30,7 @@ with lib; {
 
     (mkIf config.custom.minimal {
       #// alacritty.enable = true;
-      appimage.enable = true;
+      #// appimage.enable = true;
       chromium.enable = true;
       dconf.enable = true;
       firefox.enable = true;
@@ -68,13 +68,13 @@ with lib; {
       mangohud.enable = true;
       networkmanager-dmenu.enable = true;
       #// nheko.enable = true;
-      nix-ld.enable = true;
+      #// nix-ld.enable = true;
       obs-studio.enable = true;
-      onedrive.enable = true;
+      #// onedrive.enable = true;
       onlyoffice.enable = true;
       #// onedrive.enable = true;
       #// path-of-building.enable = true;
-      rbw.enable = true;
+      #// rbw.enable = true;
       remmina.enable = true;
       seahorse.enable = true;
       #// slurp.enable = true;
