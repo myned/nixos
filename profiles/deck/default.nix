@@ -59,7 +59,6 @@
         xivlauncher
 
         # CLI applications
-        er-patcher # Elden Ring fixes
         winetricks
       ];
     };

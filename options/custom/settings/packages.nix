@@ -243,7 +243,6 @@ in {
           bitwarden-cli # Bitwarden client
           brightnessctl # Backlight changer
           devbox # Development environment
-          er-patcher # Elden Ring fixes
           #// firefoxpwa # Firefox web apps
           freerdp # RDP client
           #// grimblast # Screenshots
