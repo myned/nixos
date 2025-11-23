@@ -24,7 +24,7 @@ in {
         # https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html
         settings = {
           Public.path = "/home/${config.custom.username}/Public";
-          SYNC.path = config.custom.sync;
+          SYNC.path = config.custom.syncDir;
 
           global = {
             "acl allow execute always" = "yes"; # Required for execution on Windows

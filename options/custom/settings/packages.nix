@@ -130,13 +130,13 @@ in {
           feishin # Jellyfin client
           file-roller # Archive utility
           #// flare-signal # Signal client
-          fluffychat # Matrix client
+          #// fluffychat # Matrix client
           footage # Video editor
           #// fractal # Matrix client
           fragments # Torrent downloader
           gcolor3 # Color picker
           gimp # Image editor
-          gitbutler # Git client
+          #// gitbutler # Git client
           #// gitg # Git client
           github-desktop # Git client
           gitnuro # Git client
@@ -165,7 +165,7 @@ in {
           gnome-usage # System monitor
           gparted # Disk utility
           #// gradience # GTK theme editor
-          gtk4.dev # GTK4 icon browser
+          #// gtk4.dev # GTK4 icon browser
           gtkterm # Serial terminal
           gradia # Screenshot tool
           helvum # Pipewire patchbay
@@ -193,7 +193,7 @@ in {
           pika-backup # Borg backup manager
           planify # Task manager
           pods # Podman manager
-          protonplus # Wine updater
+          #// protonplus # Wine updater
           #// protonvpn-gui # Proton VPN client
           #// ptyxis # Terminal
           pwvucontrol # Pipewire volume controller
@@ -214,7 +214,7 @@ in {
           switcheroo # Image converter
           #// syncthingtray # Syncthing client
           tagger # Music tagger
-          teams-for-linux # Microsoft Teams client
+          #// teams-for-linux # Microsoft Teams client
           #// telegram-desktop # Telegram client
           #// variety # Wallpaper changer
           ventoy-full-gtk # Image writer
@@ -240,7 +240,7 @@ in {
           ### CLI applications
           inputs.agenix.packages.${system}.default
 
-          bitwarden-cli # Bitwarden client
+          #// bitwarden-cli # Bitwarden client
           brightnessctl # Backlight changer
           devbox # Development environment
           #// firefoxpwa # Firefox web apps
@@ -260,10 +260,6 @@ in {
 
           ### Dependencies
           wineWowPackages.unstableFull # WoW64, not World of Warcraft
-
-          # TODO: Use home.gtk.theme.package when fixed upstream
-          # https://github.com/nix-community/home-manager/issues/5133
-          adw-gtk3
 
           ### Python packages
           # TODO: Separate into standalone package for absolute path reference

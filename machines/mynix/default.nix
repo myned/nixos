@@ -31,8 +31,8 @@
     };
 
     services = {
-      scrutiny.enable = true;
-      smartd.enable = true;
+      #// scrutiny.enable = true;
+      #// smartd.enable = true;
 
       tailscale = {
         ipv4 = "100.67.212.39";
@@ -48,20 +48,20 @@
         rocm = "10.3.0"; # 10.3.1
 
         outputs = with config.custom; {
-          DP-1 = {
-            x = width;
-            y = 0;
-            width = 1920;
-            height = 1200;
-            refresh = 60;
-            finalRefresh = 60;
-            scale = 1;
-            force = false;
-            main = false;
-            vrr = false;
-          };
+          # DP-1 = {
+          #   x = width;
+          #   y = 0;
+          #   width = 1920;
+          #   height = 1200;
+          #   refresh = 60;
+          #   finalRefresh = 60;
+          #   scale = 1;
+          #   force = false;
+          #   main = false;
+          #   vrr = false;
+          # };
 
-          DP-4 = {
+          DP-1 = {
             inherit width height refresh scale;
             x = 0;
             y = 0;

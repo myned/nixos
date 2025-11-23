@@ -11,7 +11,6 @@ with lib; {
       direnv.enable = true;
       fastfetch.enable = true;
       fish.enable = true;
-      ghostty.enable = true;
       git.enable = true;
       htop.enable = true;
       man.enable = true;
@@ -36,6 +35,7 @@ with lib; {
       firefox.enable = true;
       #// foot.enable = true;
       #// gamescope.enable = true;
+      ghostty.enable = true;
       #// gnome-terminal.enable = true;
       #// kitty.enable = true;
       #// librewolf.enable = true;
@@ -62,7 +62,7 @@ with lib; {
       #// gns3.enable = true;
       #// gtklock.enable = true;
       #// hyprlock.enable = true;
-      libreoffice.enable = true;
+      #// libreoffice.enable = true;
       localsend.enable = true;
       #// logseq.enable = true;
       mangohud.enable = true;
@@ -87,7 +87,7 @@ with lib; {
       wireshark.enable = true;
       #// wpaperd.enable = true;
       #// ydotool.enable = true;
-      zed.enable = true;
+      #// zed.enable = true;
     })
   ];
 }

@@ -26,7 +26,7 @@ in {
     enable = mkEnableOption "wallpaper";
 
     directory = mkOption {
-      default = "${config.custom.sync}/owo/unsorted";
+      default = "${config.custom.syncDir}/owo/unsorted";
       type = types.path;
     };
   };

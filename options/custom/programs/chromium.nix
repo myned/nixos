@@ -67,10 +67,10 @@ in {
 
         # https://chromeenterprise.google/policies/#DefaultSearchProvider
         DefaultSearchProviderEnabled = true;
-        DefaultSearchProviderKeyword = "b";
-        DefaultSearchProviderName = "Brave";
-        DefaultSearchProviderSearchURL = "https://search.brave.com/search?q={searchTerms}";
-        DefaultSearchProviderSuggestURL = "https://search.brave.com/api/suggest?q={searchTerms}";
+        DefaultSearchProviderKeyword = "g";
+        DefaultSearchProviderName = "Google";
+        DefaultSearchProviderSearchURL = "{google:baseURL}search?q={searchTerms}&{google:RLZ}{google:originalQueryForSuggestion}{google:assistedQueryStats}{google:searchFieldtrialParameter}{google:searchClient}{google:sourceId}ie={inputEncoding}";
+        DefaultSearchProviderSuggestURL = "{google:baseURL}complete/search?output=chrome&q={searchTerms}";
 
         # https://chromeenterprise.google/policies/#SiteSearchSettings
         SiteSearchSettings = [
@@ -153,9 +153,15 @@ in {
           }
 
           {
-            name = "Google Fonts";
-            shortcut = "gf";
-            url = "https://fonts.google.com/?query={searchTerms}";
+            name = "GitHub";
+            shortcut = "gh";
+            url = "https://github.com/search?q={searchTerms}";
+          }
+
+          {
+            name = "Google";
+            shortcut = "g";
+            url = "{google:baseURL}search?q={searchTerms}&{google:RLZ}{google:originalQueryForSuggestion}{google:assistedQueryStats}{google:searchFieldtrialParameter}{google:searchClient}{google:sourceId}ie={inputEncoding}";
           }
 
           {

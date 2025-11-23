@@ -19,7 +19,7 @@ in {
     ];
 
     systemd.user.tmpfiles.rules = [
-      "L+ ${config.custom.games.steamDir}/1245620/pfx/drive_c/users/steamuser/AppData/Roaming/EldenRing/${config.custom.games.steamID64} - - - - ${config.custom.sync}/game/saves/elden-ring/${config.custom.username}/${config.custom.games.steamID64}"
+      "L+ ${config.custom.games.steamDir}/1245620/pfx/drive_c/users/steamuser/AppData/Roaming/EldenRing/${config.custom.games.steamID64} - - - - ${config.custom.syncDir}/game/saves/elden-ring/${config.custom.username}/${config.custom.games.steamID64}"
     ];
   };
 }

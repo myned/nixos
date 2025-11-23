@@ -7,7 +7,7 @@
 with lib; let
   git = config.home-manager.users.${config.custom.username}.programs.git.package;
   hyprland = config.programs.hyprland.package;
-  #// walker = config.home-manager.users.${config.custom.username}.programs.walker.package;
+  #// walker = config.home-manager.users.${config.custom.username}.services.walker.package;
   wofi = config.home-manager.users.${config.custom.username}.programs.wofi.package;
 in {
   config.home-manager.users.${config.custom.username}.home.file = let

@@ -13,6 +13,6 @@ in {
     # https://github.com/obsproject/obs-studio
     programs.obs-studio.enable = true;
 
-    xdg.configFile."obs-studio".source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/common/config/obs-studio";
+    xdg.configFile."obs-studio".source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.syncDir}/common/config/obs-studio";
   };
 }

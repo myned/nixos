@@ -15,7 +15,7 @@ in {
     # https://www.protondb.com/app/736260
     # https://www.pcgamingwiki.com/wiki/Baba_Is_You
     systemd.user.tmpfiles.rules = [
-      "L+ ${hm.xdg.dataHome}/Baba_Is_You - - - - ${config.custom.sync}/game/saves/baba-is-you/${config.custom.username}/Baba_Is_You"
+      "L+ ${hm.xdg.dataHome}/Baba_Is_You - - - - ${config.custom.syncDir}/game/saves/baba-is-you/${config.custom.username}/Baba_Is_You"
     ];
   };
 }

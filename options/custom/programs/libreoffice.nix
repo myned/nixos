@@ -37,7 +37,7 @@ in {
       #!! Options not available, files synced
       xdg.configFile = {
         "libreoffice/4/user" = {
-          source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/linux/config/libreoffice/user";
+          source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.syncDir}/linux/config/libreoffice/user";
           force = true;
         };
       };

@@ -7,11 +7,9 @@ with lib; {
   config.custom.services = mkMerge [
     (mkIf config.custom.default {
       #// automatic-timezoned.enable = true;
-      earlyoom.enable = true;
+      #// earlyoom.enable = true;
       fail2ban.enable = true;
-      geoclue2.enable = true;
-      glances.enable = true;
-      #// kmscon.enable = true;
+      #// glances.enable = true;
       #// netbird.enable = true;
       #// postfix.enable = true;
       sshd.enable = true;
@@ -23,12 +21,12 @@ with lib; {
       dbus.enable = true;
       flatpak.enable = true;
       fwupd.enable = true;
+      geoclue2.enable = true;
+      #// kmscon.enable = true;
       libinput.enable = true;
       logind.enable = true;
-      openrazer.enable = true;
       pipewire.enable = true;
       playerctld.enable = true;
-      ratbagd.enable = true;
       syncthing.enable = true;
       udev.enable = true;
       upower.enable = true;
@@ -60,8 +58,10 @@ with lib; {
       #// mullvad.enable = true;
       #// network-manager-applet.enable = true;
       ntfy.enable = true;
-      ollama.enable = true;
+      #// ollama.enable = true;
+      openrazer.enable = true;
       printing.enable = true;
+      ratbagd.enable = true;
       samba.enable = true;
       swayidle.enable = true;
       swaync.enable = true;

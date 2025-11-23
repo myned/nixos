@@ -8,16 +8,6 @@
 with lib; let
   hm = config.home-manager.users.${config.custom.username};
 in {
-  age.secrets = let
-    secret = filename: {
-      file = "${inputs.self}/secrets/${filename}";
-      owner = config.custom.username;
-      group = config.users.users.${config.custom.username}.group;
-    };
-  in {
-    "common/nix/access-tokens.conf" = secret "common/nix/access-tokens.conf";
-  };
-
   ### NixOS
   nixpkgs = let
     config = {
@@ -57,7 +47,6 @@ in {
           unstable = nixpkgs "unstable";
           master = nixpkgs "master";
           myned = nixpkgs "myned";
-          gitbutler = nixpkgs "gitbutler";
         in {
           # Overlay nixpkgs branches
           #?? nixpkgs.BRANCH.PACKAGE
@@ -66,33 +55,6 @@ in {
           ### Packages
           # https://github.com/NixOS/nixpkgs/issues/384555
           bottles = prev.bottles.override {removeWarningPopup = true;};
-
-          # TODO: Remove when merged into unstable
-          # https://github.com/NixOS/nixpkgs/pull/424156
-          gitbutler = gitbutler.gitbutler;
-
-          # TODO: Remove when fixed
-          # https://github.com/NixOS/nixpkgs/issues/389638
-          # https://github.com/NixOS/nixpkgs/pull/390171
-          rustdesk-flutter = stable.rustdesk-flutter;
-
-          # TODO: Remove when in unstable
-          # https://github.com/nix-community/home-manager/issues/7803
-          # https://nixpk.gs/pr-tracker.html?pr=442482
-          sd-switch = master.sd-switch;
-
-          # HACK: Ignore tests to fix build
-          # https://github.com/tailscale/tailscale/issues/16966
-          # tailscale = prev.tailscale.overrideAttrs (old: {
-          #   checkFlags =
-          #     builtins.map (
-          #       flag:
-          #         if prev.lib.hasPrefix "-skip=" flag
-          #         then flag + "|^TestGetList$|^TestIgnoreLocallyBoundPorts$|^TestPoller$|^TestRTT$|^TestXDP$"
-          #         else flag
-          #     )
-          #     old.checkFlags;
-          # });
 
           # TODO: Use official package when available
           # https://github.com/NixOS/nixpkgs/issues/327982
@@ -116,22 +78,22 @@ in {
   nix = {
     #!! Override upstream nix
     # https://git.lix.systems/lix-project/lix
-    package = pkgs.lix;
+    #// package = pkgs.lix;
 
     # BUG: Absolute paths are forbidden in pure mode
     # https://github.com/NixOS/nix/issues/11030
     #// package = pkgs.nixVersions.latest;
 
-    #// optimise.automatic = true; # Run storage optimizer periodically
+    optimise.automatic = true; # Run storage optimizer periodically
 
     # https://nix.dev/manual/nix/latest/command-ref/conf-file.html
     # https://nix.dev/manual/nix/2.18/command-ref/conf-file.html for Lix
     settings = {
-      auto-optimise-store = true; # Run optimizer during build
-      fallback = true; # Build from source if cache timeout reached
+      #// auto-optimise-store = true; # Run optimizer during build
+      #// fallback = true; # Build from source if cache timeout reached
       log-lines = 1000; # Build failure log length
       min-free = 1024 * 1024 * 1024; # Trigger garbage collection at 1 GB space remaining
-      trusted-users = ["@wheel"]; # Binary caches
+      trusted-users = ["@wheel"]; # Binary cache users
       warn-dirty = false; # Git tree is usually dirty
 
       experimental-features = [
@@ -164,7 +126,7 @@ in {
       # BUG: Does not support +N period
       # https://github.com/NixOS/nix/issues/9455
       # https://github.com/NixOS/nix/pull/10426
-      options = "--delete-older-than 7d";
+      options = "--delete-older-than 30d";
     };
 
     # API access tokens to increase rate limits
@@ -214,4 +176,17 @@ in {
       }
     ];
   };
+
+  age.secrets = listToAttrs (map (name: {
+      inherit name;
+
+      value = {
+        file = "${inputs.self}/secrets/${name}";
+        owner = config.custom.username;
+        group = config.users.users.${config.custom.username}.group;
+      };
+    })
+    [
+      "common/nix/access-tokens.conf"
+    ]);
 }

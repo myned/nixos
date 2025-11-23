@@ -95,12 +95,12 @@ in {
 
       home.sessionVariables = {
         # https://github.com/nix-community/nixd/blob/main/nixd/docs/features.md
-        #// NIXD_FLAGS = "--inlay-hints=false"; # Disable package versions in the editor
+        NIXD_FLAGS = "--inlay-hints=false"; # Disable package versions in the editor
       };
 
       xdg.configFile = let
         sync = source: {
-          source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/${source}";
+          source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.syncDir}/${source}";
           force = true;
         };
       in {

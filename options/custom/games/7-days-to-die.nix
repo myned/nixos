@@ -33,7 +33,7 @@ in {
     };
 
     systemd.user.tmpfiles.rules = [
-      "L+ ${config.custom.games.steamDir}/251570/pfx/drive_c/users/steamuser/AppData/Roaming/7DaysToDie/Saves - - - - ${config.custom.sync}/game/saves/7-days-to-die/${config.custom.username}/Saves"
+      "L+ ${config.custom.games.steamDir}/251570/pfx/drive_c/users/steamuser/AppData/Roaming/7DaysToDie/Saves - - - - ${config.custom.syncDir}/game/saves/7-days-to-die/${config.custom.username}/Saves"
     ];
   };
 }

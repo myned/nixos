@@ -38,7 +38,7 @@ with lib; let
   virt-manager = "${config.programs.virt-manager.package}/bin/virt-manager";
   vm = config.home-manager.users.${config.custom.username}.home.file.".local/bin/vm".source;
   vrr = config.home-manager.users.${config.custom.username}.home.file.".local/bin/vrr".source;
-  walker = "${config.home-manager.users.${config.custom.username}.programs.walker.package}/bin/walker";
+  walker = "${config.home-manager.users.${config.custom.username}.services.walker.package}/bin/walker";
   waydroid = "${pkgs.waydroid}/bin/waydroid";
   window = config.home-manager.users.${config.custom.username}.home.file.".local/bin/window".source;
   workspace = config.home-manager.users.${config.custom.username}.home.file.".local/bin/workspace".source;

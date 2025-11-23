@@ -19,7 +19,7 @@ in {
     hostname = mkOption {};
     realname = mkOption {default = "Myned";};
     username = mkOption {default = "myned";};
-    sync = mkOption {default = "${hm.home.homeDirectory}/SYNC";};
+    syncDir = mkOption {default = "${hm.home.homeDirectory}/SYNC";};
 
     ### Hardware
     width = mkOption {default = 1920.0;};
@@ -39,7 +39,7 @@ in {
     ### Misc
     desktop = mkOption {default = null;};
     lockscreen = mkOption {default = "swaylock";};
-    menu = mkOption {default = "rofi";};
+    menu = mkOption {default = "walker";};
 
     browser = {
       appId = mkOption {

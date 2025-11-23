@@ -8,7 +8,7 @@ with lib; let
   cfg = config.custom.programs.bitwarden-menu;
   hm = config.home-manager.users.${config.custom.username};
 
-  walker = getExe hm.programs.walker.package;
+  walker = getExe hm.services.walker.package;
 in {
   options.custom.programs.bitwarden-menu = {
     enable = mkOption {default = false;};

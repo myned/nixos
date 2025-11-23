@@ -50,7 +50,7 @@ in {
               "/hp" = "~/Pictures/%";
               "/hps" = "~/Pictures/Screenshots/%";
               "/hpub" = "~/Public/%";
-              "/hs" = "~/${config.custom.sync}/%";
+              "/hs" = "~/${config.custom.syncDir}/%";
               "/hv" = "~/Videos/%";
               "/m" = "/mnt/%";
               "/ml" = "/mnt/local/%";

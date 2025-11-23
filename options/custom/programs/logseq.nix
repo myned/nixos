@@ -13,7 +13,7 @@ in {
     #!! Synced imperative configuration
     home.file.".logseq/" = {
       force = true;
-      source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/common/config/logseq/";
+      source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.syncDir}/common/config/logseq/";
     };
   };
 }

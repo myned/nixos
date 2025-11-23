@@ -11,7 +11,7 @@ with lib; let
 
   notify-send = getExe pkgs.libnotify;
   rm = getExe' pkgs.coreutils "rm";
-  walker = getExe hm.programs.walker.package;
+  walker = getExe hm.services.walker.package;
 in {
   options.custom.menus.walker = {
     enable = mkOption {default = false;};
@@ -41,22 +41,19 @@ in {
     };
 
     home-manager.users.${config.custom.username} = {
-      imports = [inputs.walker.homeManagerModules.default];
-
       # https://github.com/abenz1267/walker
       # https://github.com/abenz1267/walker?tab=readme-ov-file#building-from-source
       # https://github.com/abenz1267/walker/blob/master/nix/hm-module.nix
-      programs.walker = {
+      services.walker = {
         enable = true;
-        package = pkgs.walker;
 
         #!! Service must be restarted for changes to take effect
         #?? systemctl --user restart walker.service
-        runAsService = true;
+        systemd.enable = true;
 
         # https://github.com/abenz1267/walker/wiki/Basic-Configuration
         # https://github.com/abenz1267/walker/blob/master/internal/config/config.default.toml
-        config = {
+        settings = {
           activation_mode.disabled = true; # Key chords
           close_when_open = true;
           disable_click_to_close = true;
@@ -201,6 +198,8 @@ in {
 
         # https://github.com/abenz1267/walker/wiki/Theming
         theme = {
+          name = "custom";
+
           style = ''
             #box {
               border: ${toString config.custom.border}px #073642 solid;
@@ -249,6 +248,14 @@ in {
           };
         };
       };
+
+      # HACK: Allow child processes to live, otherwise applications launched through service are killed on stop
+      # https://www.freedesktop.org/software/systemd/man/latest/systemd.kill.html#KillMode=
+      systemd.user.services.walker = {
+        Service = {
+          KillMode = "process";
+        };
+      };
     };
 
     # # HACK: Create theme files for module prompt icons
@@ -258,21 +265,17 @@ in {
     #   icon: [
     #     {
     #       name = "walker/themes/icon-${icon}.css";
-    #       value = {text = hm.programs.walker.theme.style;};
+    #       value = {text = hm.services.walker.theme.style;};
     #     }
     #     {
     #       name = "walker/themes/icon-${icon}.json";
     #       value = {
-    #         text = generators.toJSON {} (recursiveUpdate hm.programs.walker.theme.layout {
+    #         text = generators.toJSON {} (recursiveUpdate hm.services.walker.theme.layout {
     #           ui.window.box.search.prompt.icon = icon;
     #         });
     #       };
     #     }
     #   ]
     # )));
-
-    # HACK: Allow child processes to live, otherwise applications launched through service are killed on stop
-    # https://www.freedesktop.org/software/systemd/man/latest/systemd.kill.html#KillMode=
-    systemd.user.services.walker.Service.KillMode = "process";
   };
 }

@@ -14,7 +14,7 @@ in {
       #!! Imperative configuration
       xdg.configFile."remmina/remmina.pref" = {
         force = true;
-        source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/linux/config/remmina/remmina.pref";
+        source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.syncDir}/linux/config/remmina/remmina.pref";
       };
     };
   };

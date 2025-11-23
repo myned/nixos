@@ -16,9 +16,9 @@ in {
 
     ### PRESETS ###
     # https://github.com/Digitalone1/EasyEffects-Presets
-    xdg.configFile = let
+    xdg.dataFile = let
       sync = source: {
-        source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/${source}";
+        source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.syncDir}/${source}";
         force = true;
       };
     in {

@@ -10,10 +10,8 @@ with lib; {
       environment.enable = true;
       hardware.enable = true;
       networking.enable = true;
-      nixgl.enable = true;
       packages.enable = true;
       storage.enable = true;
-      stylix.enable = true;
       users.enable = true;
     })
 
@@ -22,7 +20,9 @@ with lib; {
       fonts.enable = true;
       #// gtk.enable = true;
       #// icons.enable = true;
+      nixgl.enable = true;
       #// qt.enable = true;
+      stylix.enable = true;
       xdg.enable = true;
     })
 

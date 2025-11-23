@@ -43,7 +43,7 @@ in {
       xdg.configFile = mkIf (cfg.client == "betterdiscord") {
         "BetterDiscord" = {
           force = true;
-          source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.sync}/common/config/discord/BetterDiscord";
+          source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.syncDir}/common/config/discord/BetterDiscord";
         };
       };
 

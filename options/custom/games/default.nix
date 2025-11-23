@@ -42,7 +42,7 @@ in {
     };
 
     retroDir = mkOption {
-      default = "${config.custom.sync}/game/retrodeck/saves";
+      default = "${config.custom.syncDir}/game/retrodeck/saves";
       description = "Path to RetroDeck's saves directory";
       example = "Games/RetroDeck/saves";
       type = types.path;

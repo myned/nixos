@@ -68,13 +68,11 @@
     nixvirt = flake "github:AshleyYakeley/NixVirt/v0.6.0" // follows "unstable";
     nur-unstable = flake "github:nix-community/NUR" // follows "unstable";
     stylix-unstable = flake "github:danth/stylix" // follows "unstable";
-    #// walker = flake "github:abenz1267/walker?ref=v0.12.8" // follows "unstable";
     zen-browser = flake "github:youwen5/zen-browser-flake" // follows "unstable";
 
     ### Branches
     nixpkgs-master = flake "github:NixOS/nixpkgs/master";
     nixpkgs-myned = flake "github:myned/nixpkgs/master";
-    nixpkgs-gitbutler = flake "github:25huizengek1/nixpkgs/gitbutler";
 
     ### Source code
     #// cisco-packettracer8 = source "file:///home/myned/SYNC/linux/config/cisco/CiscoPacketTracer822_amd64_signed.deb";

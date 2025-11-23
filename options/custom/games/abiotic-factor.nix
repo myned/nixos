@@ -27,7 +27,7 @@ in {
     };
 
     systemd.user.tmpfiles.rules = [
-      "L+ ${config.custom.games.steamDir}/../common/Abiotic Factor Dedicated Server/AbioticFactor/Saved/SaveGames/Server/Worlds - - - - ${config.custom.sync}/game/saves/abiotic-factor/${config.custom.username}/Worlds"
+      "L+ ${config.custom.games.steamDir}/../common/Abiotic Factor Dedicated Server/AbioticFactor/Saved/SaveGames/Server/Worlds - - - - ${config.custom.syncDir}/game/saves/abiotic-factor/${config.custom.username}/Worlds"
     ];
   };
 }

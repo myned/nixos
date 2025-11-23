@@ -14,7 +14,7 @@ in {
     # https://www.protondb.com/app/553420
     # https://www.pcgamingwiki.com/wiki/Tunic
     systemd.user.tmpfiles.rules = [
-      "L+ '${config.custom.games.itchDir}/tunic/drive_c/users/steamuser/AppData/LocalLow/Andrew Shouldice/Secret Legend/SAVES' - - - - ${config.custom.sync}/game/saves/tunic/${config.custom.username}/SAVES"
+      "L+ '${config.custom.games.itchDir}/tunic/drive_c/users/steamuser/AppData/LocalLow/Andrew Shouldice/Secret Legend/SAVES' - - - - ${config.custom.syncDir}/game/saves/tunic/${config.custom.username}/SAVES"
     ];
   };
 }

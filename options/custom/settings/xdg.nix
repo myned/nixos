@@ -161,7 +161,7 @@ in {
         userDirs = {
           enable = true;
           createDirectories = true;
-          templates = "${config.custom.sync}/linux/config/templates";
+          templates = "${config.custom.syncDir}/linux/config/templates";
 
           extraConfig = {
             XDG_GAMES_DIR = "${hm.home.homeDirectory}/Games";

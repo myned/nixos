@@ -60,12 +60,12 @@ in {
         gtksourceview.enable = true; # https://nix-community.github.io/stylix/options/modules/gtksourceview.html
 
         # https://nix-community.github.io/stylix/options/modules/qt.html
-        qt = {
-          enable = true;
+        # qt = {
+        #   enable = true;
 
-          # TODO: Use adwaita when supported
-          platform = mkForce "qtct";
-        };
+        #   # TODO: Use adwaita when supported
+        #   platform = mkForce "qtct";
+        # };
       };
     };
 
