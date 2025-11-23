@@ -68,7 +68,7 @@ with lib; {
       mangohud.enable = true;
       networkmanager-dmenu.enable = true;
       #// nheko.enable = true;
-      #// nix-ld.enable = true;
+      nix-ld.enable = true;
       obs-studio.enable = true;
       #// onedrive.enable = true;
       onlyoffice.enable = true;

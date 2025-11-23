@@ -22,6 +22,6 @@ in {
     environment.systemPackages = mkIf cfg.nix-alien [pkgs.nix-alien];
 
     # https://github.com/thiagokokada/nix-alien?tab=readme-ov-file#nixos-installation-with-flakes
-    nixpkgs.overlays = [inputs.nix-alien.overlays.default];
+    nixpkgs.overlays = mkIf cfg.nix-alien [inputs.nix-alien.overlays.default];
   };
 }
