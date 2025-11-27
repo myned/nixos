@@ -22,11 +22,6 @@ in {
           niri.enable = config.custom.desktop == "niri";
           sway.enable = config.custom.desktop == "sway";
         })
-
-      (mkIf config.custom.full {
-        gnome.enable = true;
-        niri.enable = true;
-      })
     ];
   };
 }
