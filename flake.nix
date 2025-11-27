@@ -8,7 +8,7 @@
     };
     aagl-gtk-on-nix-unstable = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:ezKEa/aagl-gtk-on-nix";
+      url = "github:ezKEa/aagl-gtk-on-nix/release-25.11";
     };
     agenix = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -34,19 +34,7 @@
     };
     home-manager-unstable = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:nix-community/home-manager";
-    };
-    hypridle = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:hyprwm/hypridle";
-    };
-    hyprlock = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:hyprwm/hyprlock";
-    };
-    hyprpicker = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:hyprwm/hyprpicker";
+      url = "github:nix-community/home-manager/release-25.11";
     };
     jovian-nixos = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -97,7 +85,7 @@
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs-myned.url = "github:myned/nixpkgs/master";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixvirt = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:AshleyYakeley/NixVirt/v0.6.0";
@@ -112,11 +100,11 @@
     };
     stylix-stable = {
       inputs.nixpkgs.follows = "nixpkgs-stable";
-      url = "github:danth/stylix/release-25.05";
+      url = "github:nix-community/stylix/release-25.05";
     };
     stylix-unstable = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:danth/stylix";
+      url = "github:nix-community/stylix/release-25.11";
     };
     zen-browser = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";

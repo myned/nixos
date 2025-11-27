@@ -102,11 +102,11 @@ diff() {
 generate() {
   if [[ "${argc_nuke:-}" ]]; then
     rm --force flake.nix
-    nix flake init --template github:jorsn/flakegen
-  else
-    nix run .#genflake flake.nix
-    git add .
+    nix flake init --template github:myned/flakegen
   fi
+
+  nix run .#genflake flake.nix
+  git add .
 }
 
 # @cmd List NixOS generations

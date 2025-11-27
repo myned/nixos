@@ -1,95 +1,81 @@
 #!! Generate flake.nix
 # https://github.com/jorsn/flakegen
-#?? rm flake.nix
-#?? nix flake init -t github:jorsn/flakegen
-#?? git add .
-#?? nix run .#genflake flake.nix
-# TODO: Remove flakegen hook when nix expressions are officially implemented
+# HACK: Remove flakegen if nix expressions are officially implemented
 # https://github.com/NixOS/nix/issues/3966
+#?? rm flake.nix
+#?? nix flake init -t github:myned/flakegen
+#?? nix run .#genflake flake.nix
+#?? git add .
 {
   # https://wiki.nixos.org/wiki/Flakes
   # https://nix.dev/manual/nix/2.18/command-ref/new-cli/nix3-flake.html
+  #?? branch = "git+https://<repo>?ref=<branch>"
+  #?? commit = "git+https://<repo>?ref=<branch>&rev=<commit>"
+  #?? tag = "git+https://<repo>?ref=refs/tags/<tag>"
   inputs = let
-    flake = url: {inherit url;};
-    follows = branch: {inputs.nixpkgs.follows = "nixpkgs-${branch}";};
-
-    source = url: {
-      inherit url;
+    stable = "25.05";
+    unstable = "25.11";
+  in
+    builtins.mapAttrs (name: value: {url = value;}) {
+      ### Standalone
+      flake-parts = "github:hercules-ci/flake-parts";
+      nix-flatpak = "github:gmodena/nix-flatpak?ref=v0.6.0";
+      nixos-hardware = "github:NixOS/nixos-hardware";
+      nixpkgs-master = "github:NixOS/nixpkgs/master";
+      nixpkgs-myned = "github:myned/nixpkgs/master";
+      nixpkgs-stable = "github:NixOS/nixpkgs/nixos-${stable}";
+      nixpkgs-unstable = "github:NixOS/nixpkgs/nixos-${unstable}";
+    }
+    // builtins.mapAttrs (name: value: {url = value;} // {inputs.nixpkgs.follows = "nixpkgs-stable";}) {
+      ### Stable
+      aagl-gtk-on-nix-stable = "github:ezKEa/aagl-gtk-on-nix/release-${stable}";
+      home-manager-stable = "github:nix-community/home-manager/release-${stable}";
+      nix-index-database-stable = "github:nix-community/nix-index-database";
+      nixgl-stable = "github:nix-community/nixGL";
+      nur-stable = "github:nix-community/NUR";
+      stylix-stable = "github:nix-community/stylix/release-${stable}";
+    }
+    // builtins.mapAttrs (name: value: {url = value;} // {inputs.nixpkgs.follows = "nixpkgs-unstable";}) {
+      ### Unstable
+      aagl-gtk-on-nix-unstable = "github:ezKEa/aagl-gtk-on-nix/release-${unstable}";
+      agenix = "github:ryantm/agenix";
+      ags = "github:Aylur/ags";
+      arion = "github:hercules-ci/arion";
+      disko = "github:nix-community/disko";
+      home-manager-unstable = "github:nix-community/home-manager/release-${unstable}";
+      jovian-nixos = "github:Jovian-Experiments/Jovian-NixOS";
+      niri = "github:YaLTeR/niri";
+      niri-flake = "github:sodiboo/niri-flake";
+      nix-alien = "github:thiagokokada/nix-alien";
+      nix-index-database-unstable = "github:nix-community/nix-index-database";
+      nix-vscode-extensions = "github:nix-community/nix-vscode-extensions";
+      nixd = "github:nix-community/nixd";
+      nixgl-unstable = "github:nix-community/nixGL";
+      nixvirt = "github:AshleyYakeley/NixVirt/v0.6.0";
+      nur-unstable = "github:nix-community/NUR";
+      stylix-unstable = "github:nix-community/stylix/release-${unstable}";
+      zen-browser = "github:youwen5/zen-browser-flake";
+    }
+    // builtins.mapAttrs (name: value: {
+      url = value;
       flake = false;
+    }) {
+      ### Source code
+      #// cisco-packettracer8 = "file:///home/myned/SYNC/linux/config/cisco/CiscoPacketTracer822_amd64_signed.deb";
+      #// freshrss-autorefresh = "github:Eisa01/FreshRSS---Auto-Refresh-Extension";
+      #// freshrss-cntools = "github:cn-tools/cntools_FreshRssExtensions";
+      #// freshrss-comicsinfeed = "github:giventofly/freshrss-comicsinfeed";
+      #// freshrss-dateformat = "github:aledeg/xExtension-DateFormat";
+      #// freshrss-extensions = "github:FreshRSS/Extensions";
+      #// freshrss-kagisummarizer = "git+https://code.sitosis.com/rudism/freshrss-kagi-summarizer";
+      #// freshrss-kapdap = "github:kapdap/freshrss-extensions";
+      #// freshrss-markpreviousasread = "github:kalvn/freshrss-mark-previous-as-read";
+      lifx-cli = "github:Rawa/lifx-cli";
+      #// steamtinkerlaunch = "github:sonic2kk/steamtinkerlaunch";
+      #// swaynotificationcenter = "github:ErikReider/SwayNotificationCenter?ref=v0.11.0";
+      #// thunderbird-gnome-theme = "github:rafaelmardojai/thunderbird-gnome-theme";
+      #// virtio-win = "https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.271-1/virtio-win.iso";
     };
-  in {
-    #?? branch = "git+https://REPO?ref=BRANCH"
-    #?? commit = "git+https://REPO?ref=BRANCH&rev=COMMIT"
-    #?? tag = "git+https://REPO?ref=refs/tags/TAG"
-
-    ### Standalone
-    flake-parts = flake "github:hercules-ci/flake-parts";
-    nixos-hardware = flake "github:NixOS/nixos-hardware";
-
-    ### Stable
-    nixpkgs-stable = flake "github:NixOS/nixpkgs/nixos-25.05";
-
-    aagl-gtk-on-nix-stable = flake "github:ezKEa/aagl-gtk-on-nix/release-25.05" // follows "stable";
-    home-manager-stable = flake "github:nix-community/home-manager/release-25.05" // follows "stable";
-    nix-index-database-stable = flake "github:nix-community/nix-index-database" // follows "stable";
-    nixgl-stable = flake "github:nix-community/nixGL" // follows "stable";
-    nur-stable = flake "github:nix-community/NUR" // follows "stable";
-    stylix-stable = flake "github:danth/stylix/release-25.05" // follows "stable";
-
-    ### Unstable
-    nixpkgs-unstable = flake "github:NixOS/nixpkgs/nixos-unstable";
-
-    aagl-gtk-on-nix-unstable = flake "github:ezKEa/aagl-gtk-on-nix" // follows "unstable";
-    agenix = flake "github:ryantm/agenix" // follows "unstable";
-    ags = flake "github:Aylur/ags" // follows "unstable";
-    arion = flake "github:hercules-ci/arion" // follows "unstable";
-    #// bitwarden-menu = flake "github:firecat53/bitwarden-menu" // follows "unstable";
-    #// compose2nix = flake "github:aksiksi/compose2nix" // follows "unstable";
-    #// conduwuit = flake "github:Myned/conduwuit" // follows "unstable";
-    disko = flake "github:nix-community/disko" // follows "unstable";
-    #// fw-fanctrl = flake "github:TamtamHero/fw-fanctrl/packaging/nix" // follows "unstable";
-    home-manager-unstable = flake "github:nix-community/home-manager" // follows "unstable";
-    hypridle = flake "github:hyprwm/hypridle" // follows "unstable";
-    #// hyprland = flake "github:hyprwm/Hyprland?ref=v0.45.2" // follows "unstable";
-    #// hyprland-contrib = flake "github:hyprwm/contrib" // follows "unstable";
-    #// hyprland-plugins = flake "github:hyprwm/hyprland-plugins" // follows "unstable" // follows "hyprland";
-    hyprlock = flake "github:hyprwm/hyprlock" // follows "unstable";
-    #// hyprpaper = flake "github:hyprwm/hyprpaper" // follows "unstable";
-    hyprpicker = flake "github:hyprwm/hyprpicker" // follows "unstable";
-    jovian-nixos = flake "github:Jovian-Experiments/Jovian-NixOS" // follows "unstable";
-    niri = flake "github:YaLTeR/niri" // follows "unstable";
-    niri-flake = flake "github:sodiboo/niri-flake" // follows "unstable";
-    nix-alien = flake "github:thiagokokada/nix-alien" // follows "unstable";
-    nix-flatpak = flake "github:gmodena/nix-flatpak?ref=v0.6.0";
-    nix-index-database-unstable = flake "github:nix-community/nix-index-database" // follows "unstable";
-    nix-vscode-extensions = flake "github:nix-community/nix-vscode-extensions" // follows "unstable";
-    nixd = flake "github:nix-community/nixd" // follows "unstable";
-    nixgl-unstable = flake "github:nix-community/nixGL" // follows "unstable";
-    nixvirt = flake "github:AshleyYakeley/NixVirt/v0.6.0" // follows "unstable";
-    nur-unstable = flake "github:nix-community/NUR" // follows "unstable";
-    stylix-unstable = flake "github:danth/stylix" // follows "unstable";
-    zen-browser = flake "github:youwen5/zen-browser-flake" // follows "unstable";
-
-    ### Branches
-    nixpkgs-master = flake "github:NixOS/nixpkgs/master";
-    nixpkgs-myned = flake "github:myned/nixpkgs/master";
-
-    ### Source code
-    #// cisco-packettracer8 = source "file:///home/myned/SYNC/linux/config/cisco/CiscoPacketTracer822_amd64_signed.deb";
-    #// freshrss-autorefresh = source "github:Eisa01/FreshRSS---Auto-Refresh-Extension";
-    #// freshrss-cntools = source "github:cn-tools/cntools_FreshRssExtensions";
-    #// freshrss-comicsinfeed = source "github:giventofly/freshrss-comicsinfeed";
-    #// freshrss-dateformat = source "github:aledeg/xExtension-DateFormat";
-    #// freshrss-extensions = source "github:FreshRSS/Extensions";
-    #// freshrss-kagisummarizer = source "git+https://code.sitosis.com/rudism/freshrss-kagi-summarizer";
-    #// freshrss-kapdap = source "github:kapdap/freshrss-extensions";
-    #// freshrss-markpreviousasread = source "github:kalvn/freshrss-mark-previous-as-read";
-    lifx-cli = source "github:Rawa/lifx-cli";
-    #// steamtinkerlaunch = source "github:sonic2kk/steamtinkerlaunch";
-    #// swaynotificationcenter = source "github:ErikReider/SwayNotificationCenter?ref=v0.11.0";
-    #// thunderbird-gnome-theme = source "github:rafaelmardojai/thunderbird-gnome-theme";
-    #// virtio-win = source "https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.271-1/virtio-win.iso";
-  };
 
   # https://flake.parts/
   # https://wiki.nixos.org/wiki/Flake_Parts
