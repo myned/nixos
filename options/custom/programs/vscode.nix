@@ -87,7 +87,7 @@ in {
       };
 
       # TODO: Use stylix
-      # https://stylix.danth.me/options/modules/vscode.html
+      # https://nix-community.github.io/stylix/options/modules/vscode.html
       stylix.targets.vscode = {
         enable = false;
         profileNames = ["default"];

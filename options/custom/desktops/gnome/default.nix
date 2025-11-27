@@ -28,27 +28,24 @@ in {
   config = mkIf cfg.enable {
     # https://wiki.nixos.org/wiki/GNOME
     # FIXME: xdg-desktop-portal-[gnome|gtk] not working through steam
-    services =
-      {
-        # Minimal installation
-        gnome = mkIf cfg.minimal {
-          core-os-services.enable = true;
-        };
+    services = {
+      # Minimal installation
+      gnome = mkIf cfg.minimal {
+        core-os-services.enable = true;
+      };
 
-        displayManager.autoLogin = {
-          enable = cfg.autoLogin;
-          user = config.custom.username;
-        };
-      }
-      // (
-        if (versionAtLeast version "25.11")
-        then {
-          desktopManager.gnome.enable = true;
-        }
-        else {
-          xserver.desktopManager.gnome.enable = true;
-        }
-      );
+      displayManager.autoLogin = {
+        enable = cfg.autoLogin;
+        user = config.custom.username;
+      };
+
+      ${
+        if versionAtLeast version "25.11"
+        then "desktopManager"
+        else "xserver.desktopManager"
+      }.gnome.enable =
+        true;
+    };
 
     # https://github.com/mjakeman/extension-manager
     environment.systemPackages = optionals (!cfg.minimal) [pkgs.gnome-extension-manager];

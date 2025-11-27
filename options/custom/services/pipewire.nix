@@ -15,50 +15,44 @@ in {
     systemWide = mkOption {default = false;};
   };
 
-  config = mkIf cfg.enable ({
-      #!! Realtime priority may cause desync
-      #// security.rtkit.enable = true;
+  config = mkIf cfg.enable {
+    #!! Realtime priority may cause desync
+    #// security.rtkit.enable = true;
 
-      services = {
-        # https://wiki.nixos.org/wiki/PipeWire
-        # https://gitlab.freedesktop.org/pipewire/pipewire
-        pipewire = {
+    services = {
+      #!! Conflicts with pipewire
+      pulseaudio.enable = false;
+
+      # https://wiki.nixos.org/wiki/PipeWire
+      # https://gitlab.freedesktop.org/pipewire/pipewire
+      pipewire = {
+        enable = true;
+        systemWide = cfg.systemWide;
+        jack.enable = cfg.enableJack;
+        pulse.enable = cfg.enablePulseaudio;
+
+        alsa = mkIf cfg.enableAlsa {
           enable = true;
-          systemWide = cfg.systemWide;
-          jack.enable = cfg.enableJack;
-          pulse.enable = cfg.enablePulseaudio;
+          support32Bit = true;
+        };
 
-          alsa = mkIf cfg.enableAlsa {
-            enable = true;
-            support32Bit = true;
-          };
-
-          # Avoid resampling if possible
-          # https://wiki.archlinux.org/title/PipeWire#Changing_the_allowed_sample_rate(s)
-          extraConfig.pipewire = {
-            "10-sample-rate"."context.properties"."default.clock.allowed-rates" = [
-              32000
-              44100
-              48000
-              88200
-              96000
-              176400
-              192000
-            ];
-          };
+        # Avoid resampling if possible
+        # https://wiki.archlinux.org/title/PipeWire#Changing_the_allowed_sample_rate(s)
+        extraConfig.pipewire = {
+          "10-sample-rate"."context.properties"."default.clock.allowed-rates" = [
+            32000
+            44100
+            48000
+            88200
+            96000
+            176400
+            192000
+          ];
         };
       };
+    };
 
-      #?? alsamixer
-      environment.systemPackages = optionals cfg.enableAlsa [pkgs.alsa-utils];
-    }
-    // (
-      if versionAtLeast version "25.05"
-      then {
-        services.pulseaudio.enable = false;
-      }
-      else {
-        hardware.pulseaudio.enable = false;
-      }
-    ));
+    #?? alsamixer
+    environment.systemPackages = optionals cfg.enableAlsa [pkgs.alsa-utils];
+  };
 }

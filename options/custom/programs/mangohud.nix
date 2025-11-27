@@ -62,7 +62,7 @@ in {
       };
 
       # TODO: Use stylix
-      # https://stylix.danth.me/options/modules/mangohud.html
+      # https://nix-community.github.io/stylix/options/modules/mangohud.html
       stylix.targets.mangohud.enable = false;
     };
   };

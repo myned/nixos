@@ -32,7 +32,7 @@ in {
         ".mozilla/firefox/profiles.ini".force = true;
       };
 
-      # https://stylix.danth.me/options/modules/firefox.html
+      # https://nix-community.github.io/stylix/options/modules/firefox.html
       stylix.targets.firefox = {
         enable = true;
         firefoxGnomeTheme.enable = true; # https://github.com/rafaelmardojai/firefox-gnome-theme

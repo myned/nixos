@@ -115,7 +115,7 @@ in {
       };
 
       # TODO: Use stylix
-      # https://stylix.danth.me/options/modules/rofi.html
+      # https://nix-community.github.io/stylix/options/modules/rofi.html
       stylix.targets.rofi.enable = false;
     };
   };

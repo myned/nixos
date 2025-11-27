@@ -106,7 +106,7 @@ in {
       };
 
       # TODO: Use stylix
-      # https://stylix.danth.me/options/modules/hyprlock.html
+      # https://nix-community.github.io/stylix/options/modules/hyprlock.html
       stylix.targets.hyprlock.enable = false;
     };
   };

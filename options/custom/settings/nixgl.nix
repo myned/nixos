@@ -58,7 +58,7 @@ in {
         # https://github.com/nix-community/nixGL
         # https://github.com/nix-community/nixGL/issues/114
         # https://nix-community.github.io/home-manager/index.xhtml#sec-usage-gpu-non-nixos
-        nixGL = {
+        targets.genericLinux.nixGL = {
           vulkan.enable = true;
           packages = pkgs.nixgl; # Overlay
           defaultWrapper = cfg.wrapper;

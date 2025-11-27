@@ -69,7 +69,7 @@ in {
       };
     };
 
-    # https://stylix.danth.me/options/modules/swaync.html
+    # https://nix-community.github.io/stylix/options/modules/swaync.html
     stylix.targets.swaync.enable = false;
   };
 }

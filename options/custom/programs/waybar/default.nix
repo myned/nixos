@@ -682,7 +682,7 @@ in {
       };
 
       # TODO: Use stylix
-      # https://stylix.danth.me/options/modules/waybar.html
+      # https://nix-community.github.io/stylix/options/modules/waybar.html
       stylix.targets.waybar.enable = false;
     };
   };

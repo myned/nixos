@@ -10,9 +10,9 @@ in {
     enable = mkEnableOption "fw-fanctrl";
   };
 
-  config = let
+  config = mkIf (cfg.enable && versionAtLeast version "25.11") {
     # https://github.com/TamtamHero/fw-fanctrl/tree/packaging/nix
-    fw-fanctrl = {
+    hardware.fw-fanctrl = {
       enable = true;
 
       # https://github.com/TamtamHero/fw-fanctrl/blob/packaging/nix/doc/configuration.md
@@ -41,10 +41,5 @@ in {
         };
       };
     };
-  in
-    mkIf cfg.enable (
-      if versionAtLeast version "25.11"
-      then {hardware.fw-fanctrl = fw-fanctrl;}
-      else {}
-    );
+  };
 }

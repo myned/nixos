@@ -13,8 +13,8 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # https://stylix.danth.me/
-    # https://stylix.danth.me/configuration.html
+    # https://nix-community.github.io/stylix/
+    # https://nix-community.github.io/stylix/configuration.html
     stylix = {
       enable = true;
 
@@ -22,19 +22,19 @@ in {
       # https://github.com/nix-community/stylix/issues/543
       autoEnable = false;
 
-      # https://stylix.danth.me/configuration.html#color-scheme
+      # https://nix-community.github.io/stylix/configuration.html#color-scheme
       # https://github.com/tinted-theming/schemes
       # https://github.com/tinted-theming/schemes/blob/spec-0.11/base16/solarized-dark.yaml
       base16Scheme = "${pkgs.base16-schemes}/share/themes/solarized-dark.yaml";
 
-      # https://stylix.danth.me/configuration.html#overriding
+      # https://nix-community.github.io/stylix/configuration.html#overriding
       # https://github.com/SenchoPens/base16.nix
       override = {};
 
-      # https://stylix.danth.me/options/platforms/nixos.html#stylixpolarity
+      # https://nix-community.github.io/stylix/options/platforms/nixos.html#stylixpolarity
       polarity = "dark";
 
-      # https://stylix.danth.me/options/platforms/nixos.html#stylixcursor
+      # https://nix-community.github.io/stylix/options/platforms/nixos.html#stylixcursor
       cursor = {
         # https://github.com/ful1e5/Google_Cursor
         name = "GoogleDot-Black";
@@ -42,11 +42,11 @@ in {
         size = 24;
       };
 
-      # https://stylix.danth.me/options/platforms/nixos.html#stylixfontsemoji
+      # https://nix-community.github.io/stylix/options/platforms/nixos.html#stylixfontsemoji
       fonts = with config.custom.settings.fonts; {
         inherit emoji monospace sansSerif serif;
 
-        # https://stylix.danth.me/options/platforms/nixos.html#stylixfontssizesapplications
+        # https://nix-community.github.io/stylix/options/platforms/nixos.html#stylixfontssizesapplications
         sizes = {
           applications = 12;
           desktop = 12;
@@ -56,6 +56,7 @@ in {
       };
 
       targets = {
+        gnome.enable = true; # https://nix-community.github.io/stylix/options/modules/gnome.html
         gtk.enable = true; # https://nix-community.github.io/stylix/options/modules/gtk.html
         gtksourceview.enable = true; # https://nix-community.github.io/stylix/options/modules/gtksourceview.html
 
@@ -70,9 +71,9 @@ in {
     };
 
     home-manager.users.${config.custom.username} = {
-      # https://stylix.danth.me/options/platforms/home_manager.html
+      # https://nix-community.github.io/stylix/options/platforms/home_manager.html
       stylix = {
-        # https://stylix.danth.me/options/platforms/home_manager.html#stylixiconthemedark
+        # https://nix-community.github.io/stylix/options/platforms/home_manager.html#stylixiconthemedark
         iconTheme = {
           # BUG: GTK4 apps start slower with Papirus
           # https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/issues/3860

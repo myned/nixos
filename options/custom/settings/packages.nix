@@ -17,14 +17,17 @@ in {
     with pkgs; {
       environment.systemPackages =
         cfg.extra
-        ++ optionals config.custom.default (with config.boot.kernelPackages; [
-          ### CLI applications
-          cpupower # Processor utilities
+        ++ [
+          ### CLI applications optionals config.custom.default [
+          config.boot.kernelPackages.cpupower # Processor utilities
 
-          # TODO: Move to global when nixpkgs stable >= 25.11
-          perf # Performance analyzer
-        ])
-        ++ optionals config.custom.default [
+          (
+            # Performance analyzer
+            if versionAtLeast version "25.11"
+            then perf
+            else config.boot.kernelPackages.perf
+          )
+
           bluetui # Bluetooth manager
           btrfs-list # btrfs subvolume lister
           disko # Declarative disk management
