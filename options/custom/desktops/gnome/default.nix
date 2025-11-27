@@ -18,9 +18,9 @@ in {
     };
 
     minimal = mkOption {
-      default = !config.services.desktopManager.gnome.enable;
+      default = false;
       description = "Whether to enable the minimum amount of GNOME services";
-      example = false;
+      example = true;
       type = types.bool;
     };
   };
@@ -44,7 +44,7 @@ in {
         then "desktopManager"
         else "xserver.desktopManager"
       }.gnome.enable =
-        true;
+        !cfg.minimal;
     };
 
     # https://github.com/mjakeman/extension-manager

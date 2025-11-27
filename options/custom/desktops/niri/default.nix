@@ -29,6 +29,11 @@ in {
           output.enable = true;
           rules.enable = true;
         };
+
+        gnome = {
+          enable = true;
+          minimal = true;
+        };
       };
 
       programs = {

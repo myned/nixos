@@ -56,7 +56,6 @@ in {
       };
 
       targets = {
-        gnome.enable = true; # https://nix-community.github.io/stylix/options/modules/gnome.html
         gtk.enable = true; # https://nix-community.github.io/stylix/options/modules/gtk.html
         gtksourceview.enable = true; # https://nix-community.github.io/stylix/options/modules/gtksourceview.html
 
