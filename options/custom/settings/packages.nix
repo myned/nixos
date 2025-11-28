@@ -206,7 +206,7 @@ in {
           rewaita # Adwaita themer
           rustdesk-flutter # Remote desktop client
           showtime # Video player
-          signal-desktop-bin # Signal client
+          signal-desktop # Signal client
           slack # Slack client
           smile # Emoji picker
           snapshot # Camera
