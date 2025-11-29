@@ -600,6 +600,26 @@
         "type": "github"
       }
     },
+    "fprint-clear": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1734469765,
+        "narHash": "sha256-PQiPKpr+kd7lTTNCl0hdEsoSscQ25j90ZRY+RZtNwE4=",
+        "owner": "Lehmanator",
+        "repo": "fprint-clear",
+        "rev": "f06801d890b0b8eba4a749e7b82286f69d9979a2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Lehmanator",
+        "repo": "fprint-clear",
+        "type": "github"
+      }
+    },
     "fromYaml": {
       "flake": false,
       "locked": {
@@ -1347,6 +1367,7 @@
         "disko": "disko",
         "flake-parts": "flake-parts_2",
         "flakegen": "flakegen",
+        "fprint-clear": "fprint-clear",
         "home-manager-stable": "home-manager-stable",
         "home-manager-unstable": "home-manager-unstable",
         "jovian-nixos": "jovian-nixos",
