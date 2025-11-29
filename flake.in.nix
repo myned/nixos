@@ -42,6 +42,7 @@
       ags = "github:Aylur/ags";
       arion = "github:hercules-ci/arion";
       disko = "github:nix-community/disko";
+      fprint-clear = "github:Lehmanator/fprint-clear";
       home-manager-unstable = "github:nix-community/home-manager/release-${unstable}";
       jovian-nixos = "github:Jovian-Experiments/Jovian-NixOS";
       niri = "github:YaLTeR/niri";

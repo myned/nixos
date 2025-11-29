@@ -28,6 +28,10 @@
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
     flakegen.url = "github:jorsn/flakegen";
+    fprint-clear = {
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "github:Lehmanator/fprint-clear";
+    };
     home-manager-stable = {
       inputs.nixpkgs.follows = "nixpkgs-stable";
       url = "github:nix-community/home-manager/release-25.05";

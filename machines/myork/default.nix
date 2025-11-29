@@ -1,6 +1,7 @@
 {
   config,
   inputs,
+  pkgs,
   ...
 }: {
   imports = [
@@ -41,6 +42,7 @@
 
     settings = {
       boot.systemd-boot.enable = true;
+      packages.extra = [inputs.fprint-clear.packages.${pkgs.system}.default];
 
       hardware = {
         cpu = "amd";
