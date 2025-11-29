@@ -10,7 +10,7 @@ with lib; let
   hm = config.home-manager.users.${config.custom.username};
 in {
   options.custom.programs.vscode = {
-    enable = mkOption {default = false;};
+    enable = mkEnableOption "vscode";
   };
 
   config = mkIf cfg.enable {
@@ -36,7 +36,7 @@ in {
       programs.vscode = {
         enable = true;
         mutableExtensionsDir = false;
-        package = pkgs.vscodium;
+        #// package = pkgs.vscodium;
 
         profiles.default = {
           #?? nixos-rebuild repl > pkgs.REPO.*
@@ -105,6 +105,11 @@ in {
         };
       in {
         #!! Imperative synced files
+        "Code/User/keybindings.json" = sync "dev/config/vscode/keybindings.json";
+        "Code/User/profiles/" = sync "dev/config/vscode/profiles/";
+        "Code/User/settings.json" = sync "dev/config/vscode/settings.json";
+        "Code/User/snippets/" = sync "dev/config/vscode/snippets/";
+
         "VSCodium/User/keybindings.json" = sync "dev/config/vscode/keybindings.json";
         "VSCodium/User/profiles/" = sync "dev/config/vscode/profiles/";
         "VSCodium/User/settings.json" = sync "dev/config/vscode/settings.json";

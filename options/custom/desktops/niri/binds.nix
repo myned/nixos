@@ -13,7 +13,7 @@ with lib; let
   bash = "${pkgs.bash}/bin/bash";
   capacities = getExe pkgs.capacities;
   cat = "${pkgs.coreutils}/bin/cat";
-  codium = "${config.home-manager.users.${config.custom.username}.programs.vscode.package}/bin/codium";
+  code = getExe hm.programs.vscode.package;
   ghostty = "${hm.programs.ghostty.package}/bin/ghostty";
   gnome-text-editor = "${pkgs.gnome-text-editor}/bin/gnome-text-editor";
   gradia = getExe pkgs.gradia;
@@ -151,7 +151,7 @@ in {
           (key "G" "Ctrl+Alt" {spawn = [pkill "steam"];})
           (key "G" "Mod" {spawn = steam;})
           (key "I" "Ctrl+Alt" {spawn = [pkill "zed"];})
-          (key "I" "Mod" {spawn = codium;})
+          (key "I" "Mod" {spawn = code;})
           (key "K" "Ctrl+Alt" {spawn = [pkill "todoist-electron"];})
           (key "K" "Mod" {spawn = todoist-electron;})
           (key "L" "Mod" {spawn = [bash "-c" "${loginctl} lock-session && ${niri} msg action power-off-monitors"];})
