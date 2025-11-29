@@ -38,7 +38,7 @@ in {
 
     ### Misc
     desktop = mkOption {default = null;};
-    lockscreen = mkOption {default = "swaylock";};
+    lockscreen = mkOption {default = "hyprlock";};
     menu = mkOption {default = "walker";};
 
     browser = {

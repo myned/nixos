@@ -5,7 +5,7 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.services.systemd-lock-handler;
+  cfg = config.custom.lockscreens.systemd-lock-handler;
   hm = config.home-manager.users.${config.custom.username};
 
   gtklock = getExe pkgs.gtklock;
@@ -15,7 +15,7 @@ with lib; let
   sleep = getExe' pkgs.coreutils "sleep";
   swaylock = getExe hm.programs.swaylock.package;
 in {
-  options.custom.services.systemd-lock-handler = {
+  options.custom.lockscreens.systemd-lock-handler = {
     enable = mkEnableOption "systemd-lock-handler";
 
     delay = mkOption {

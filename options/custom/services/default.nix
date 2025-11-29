@@ -67,7 +67,6 @@ with lib; {
       swaync.enable = true;
       swayosd.enable = true;
       sysprof.enable = true;
-      systemd-lock-handler.enable = true;
       usbmuxd.enable = true;
       #// wlsunset.enable = true;
       #// xembed-sni-proxy.enable = true;

@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.programs.swaylock;
+  cfg = config.custom.lockscreens.swaylock;
 in {
-  options.custom.programs.swaylock = {
+  options.custom.lockscreens.swaylock = {
     enable = mkEnableOption "swaylock";
 
     effects = mkOption {

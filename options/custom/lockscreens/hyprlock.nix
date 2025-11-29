@@ -4,9 +4,9 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.programs.hyprlock;
+  cfg = config.custom.lockscreens.hyprlock;
 in {
-  options.custom.programs.hyprlock = {
+  options.custom.lockscreens.hyprlock = {
     enable = mkOption {default = false;};
   };
 
@@ -22,16 +22,16 @@ in {
         settings = {
           # https://wiki.hyprland.org/Hypr-Ecosystem/hyprlock/#general
           general = {
-            disable_loading_bar = true;
             #// hide_cursor = true;
             #// ignore_empty_input = true;
-            #// immediate_render = true;
+            immediate_render = true;
+            #// screencopy_mode = 1; # CPU
           };
 
           # https://wiki.hyprland.org/Hypr-Ecosystem/hyprlock/#authentication
           auth = {
             #!! Keeps fingerprint device active despite display off
-            "fingerprint:enabled" = false;
+            "fingerprint:enabled" = true;
             "fingerprint:present_message" = "<span foreground='##d33682'>󰈷</span>";
             "fingerprint:ready_message" = "󰈷";
             "fingerprint:retry_delay" = 500; # Milliseconds

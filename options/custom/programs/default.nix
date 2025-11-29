@@ -60,8 +60,6 @@ with lib; {
       #// goldwarden.enable = true;
       gpg.enable = true;
       #// gns3.enable = true;
-      #// gtklock.enable = true;
-      #// hyprlock.enable = true;
       #// libreoffice.enable = true;
       localsend.enable = true;
       #// logseq.enable = true;
@@ -79,7 +77,6 @@ with lib; {
       seahorse.enable = true;
       #// slurp.enable = true;
       steam.enable = true;
-      swaylock.enable = true;
       #// thunderbird.enable = true;
       tio.enable = true;
       vscode.enable = true;

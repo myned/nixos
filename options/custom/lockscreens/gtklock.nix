@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.programs.gtklock;
+  cfg = config.custom.lockscreens.gtklock;
 in {
-  options.custom.programs.gtklock = {
+  options.custom.lockscreens.gtklock = {
     enable = mkOption {default = false;};
   };
 
