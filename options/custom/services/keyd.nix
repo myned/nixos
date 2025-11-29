@@ -22,6 +22,7 @@ in {
       keyboards.default = {
         ids = [
           "*"
+          "-1234:5678:b980a419" # extest
           "-2333:6666:69419150" # ydotool
         ];
 
