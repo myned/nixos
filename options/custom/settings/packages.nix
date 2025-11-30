@@ -40,6 +40,7 @@ in {
           inotify-info # File notify lister
           inotify-tools # File notify
           jq # JSON parser
+          killall # Kill processes by name
           killport # Kill processes on port
           lazygit # Git client
           lf # Terminal file manager
