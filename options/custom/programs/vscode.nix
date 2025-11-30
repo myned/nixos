@@ -35,7 +35,7 @@ in {
       #!! Configuration is imperative
       programs.vscode = {
         enable = true;
-        mutableExtensionsDir = false;
+        #// mutableExtensionsDir = false;
         #// package = pkgs.vscodium;
 
         profiles.default = {
