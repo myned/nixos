@@ -412,13 +412,13 @@ in {
         #?? https://source.chromium.org/chromium/chromium/src/+/main:chrome/browser/about_flags.cc
         commandLineArgs = let
           enable-features = concatStringsSep "," [
-            # https://wiki.archlinux.org/title/Chromium#Touchpad_Gestures_for_Navigation
-            "TouchpadOverscrollHistoryNavigation"
+            "FluentOverlayScrollbar" # Enable overlay scrollbars
+            "TouchpadOverscrollHistoryNavigation" # https://wiki.archlinux.org/title/Chromium#Touchpad_Gestures_for_Navigation
           ];
 
           disable-features = concatStringsSep "," [
-            # https://wiki.archlinux.org/title/Chromium#Gnome_%22Global_Shortcuts%22_menu_appears_on_startup
-            "GlobalShortcutsPortal"
+            "EnableTabMuting" # Disable tab mute button
+            "GlobalShortcutsPortal" # https://wiki.archlinux.org/title/Chromium#Gnome_%22Global_Shortcuts%22_menu_appears_on_startup
           ];
         in [
           "--enable-features=${enable-features}"
