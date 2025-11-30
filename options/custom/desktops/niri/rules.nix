@@ -92,6 +92,7 @@ in {
 
           ides = app-ids [
             "^Capacities$"
+            "^code$"
             "^codium$"
             "^dev\.zed\.Zed$"
             "^GitHub Desktop$"
