@@ -252,10 +252,15 @@ in {
       ];
     };
 
-    # https://wiki.archlinux.org/title/IPv6#Prefer_IPv4_over_IPv6
-    environment.etc."gai.conf".text = ''
-      precedence ::ffff:0:0/96 100
-    '';
+    environment = {
+      # https://wiki.nixos.org/wiki/Firewall#Temporary_firewall_rules
+      systemPackages = optionals config.networking.firewall.enable [pkgs.nixos-firewall-tool];
+
+      # https://wiki.archlinux.org/title/IPv6#Prefer_IPv4_over_IPv6
+      etc."gai.conf".text = ''
+        precedence ::ffff:0:0/96 100
+      '';
+    };
 
     #!! Override nsswitch.conf resolution order
     #!! nss-resolve blocks some modules after [!UNAVAIL=return]
