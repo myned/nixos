@@ -32,6 +32,7 @@ with lib; let
   power = config.home-manager.users.${config.custom.username}.home.file.".local/bin/power".source;
   remote = config.home-manager.users.${config.custom.username}.home.file.".local/bin/remote".source;
   steam = "${config.programs.steam.package}/bin/steam";
+  steam-gamescope = getExe (findFirst (p: p.name == "steam-gamescope") "" config.environment.systemPackages);
   sushi = "${pkgs.sushi}/bin/sushi";
   swayosd-client = "${pkgs.swayosd}/bin/swayosd-client";
   todoist-electron = getExe pkgs.todoist-electron;
@@ -150,6 +151,7 @@ in {
           (key "F" "Mod" {spawn = [nautilus "--new-window"];})
           (key "G" "Ctrl+Alt" {spawn = [pkill "steam"];})
           (key "G" "Mod" {spawn = steam;})
+          (key "G" "Mod+Shift" {spawn = steam-gamescope;})
           (key "I" "Ctrl+Alt" {spawn = [pkill "zed"];})
           (key "I" "Mod" {spawn = code;})
           (key "K" "Ctrl+Alt" {spawn = [pkill "todoist-electron"];})

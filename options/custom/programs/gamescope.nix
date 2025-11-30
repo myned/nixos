@@ -6,7 +6,30 @@
 with lib; let
   cfg = config.custom.programs.gamescope;
 in {
-  options.custom.programs.gamescope.enable = mkOption {default = false;};
+  options.custom.programs.gamescope = {
+    enable = mkEnableOption "gamescope";
+
+    width = mkOption {
+      default = 1280;
+      description = "Width of the gamescope output display";
+      example = 1920;
+      type = types.int;
+    };
+
+    height = mkOption {
+      default = 800;
+      description = "Height of the gamescope output display";
+      example = 1080;
+      type = types.int;
+    };
+
+    refresh = mkOption {
+      default = 60;
+      description = "Refresh rate of the gamescope nested window";
+      example = 120;
+      type = types.int;
+    };
+  };
 
   config = mkIf cfg.enable {
     # https://github.com/ValveSoftware/gamescope
@@ -16,13 +39,11 @@ in {
       enable = true;
       capSysNice = true; # Allow renice
 
-      #!! Align default window size with Steam Deck resolution
-      # args = [
-      #   "--rt"
-      #   "--output-width 1280"
-      #   "--output-height 800"
-      #   "--nested-refresh 60"
-      # ];
+      args = [
+        "--output-width=${toString cfg.width}"
+        "--output-height=${toString cfg.height}"
+        "--nested-refresh=${toString cfg.refresh}"
+      ];
     };
   };
 }

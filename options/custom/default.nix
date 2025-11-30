@@ -51,7 +51,7 @@ in {
 
       command = mkOption {
         # HACK: Get hm finalPackage from package list
-        default = getExe (lib.findFirst (p:
+        default = getExe (findFirst (p:
             if hasAttr "pname" p
             then p.pname == "google-chrome"
             else false)

@@ -50,7 +50,7 @@ in {
       # BUG: home.pointerCursor breaks XCURSOR_PATH for some child windows, so avoid that workaround
       # https://github.com/nix-community/home-manager/blob/59a4c43e9ba6db24698c112720a58a334117de83/modules/config/home-cursor.nix#L154
       home.sessionVariables = with cfg.cursor; {
-        XCURSOR_SIZE = size;
+        XCURSOR_SIZE = toString size;
         XCURSOR_THEME = name;
       };
 

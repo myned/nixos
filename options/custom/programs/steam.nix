@@ -13,9 +13,9 @@ in {
     enable = mkEnableOption "steam";
 
     extest = mkOption {
-      default = true;
-      description = "Whether to enable Wayland cursor compatibility hack";
-      example = false;
+      default = false;
+      description = "Whether to enable Xwayland input translation hack";
+      example = true;
       type = types.bool;
     };
   };
@@ -23,11 +23,19 @@ in {
   config = mkIf cfg.enable {
     programs.steam = {
       enable = true;
-      protontricks.enable = true;
       extest.enable = cfg.extest;
-      extraCompatPackages = [pkgs.proton-ge-bin];
+      protontricks.enable = true;
       localNetworkGameTransfers.openFirewall = true; # 27040/tcp 27036/udp
       remotePlay.openFirewall = true; # 27036/tcp/udp 27031-27035/udp
+      extraCompatPackages = [pkgs.proton-ge-bin];
+
+      gamescopeSession = {
+        enable = true;
+
+        env = {
+          PROTON_ENABLE_WAYLAND = "0"; # Gamescope is X11-only
+        };
+      };
 
       # HACK: Work around black main window with xwayland-satellite
       # https://github.com/ValveSoftware/steam-for-linux/issues/10543 et al.
@@ -36,11 +44,16 @@ in {
           extraArgs = "-system-composer";
 
           extraEnv = {
+            GDK_SCALE = toString config.custom.scale; # Fractional scaling
+
             # HACK: Force XInput controller so only Steam Input is used, requires Proton GE
             # https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/issues/4168
             # https://github.com/GloriousEggroll/proton-ge-custom/wiki/Changelog#ge-proton10-7-hotfix
-            PROTON_DISABLE_HIDRAW = 1;
-            PROTON_PREFER_SDL = 1;
+            PROTON_DISABLE_HIDRAW = "1";
+            PROTON_PREFER_SDL = "1";
+
+            # https://github.com/GloriousEggroll/proton-ge-custom?tab=readme-ov-file#enabling-native-wayland
+            PROTON_ENABLE_WAYLAND = "1";
           };
         }
       );
@@ -58,11 +71,5 @@ in {
       #// (steamtinkerlaunch.overrideAttrs {src = inputs.steamtinkerlaunch;})
       #// p7zip # steamtinkerlaunch (Special K)
     ];
-
-    home-manager.users.${config.custom.username} = {
-      home.sessionVariables = {
-        GDK_SCALE = toString config.custom.scale; # Steam HiDPI
-      };
-    };
   };
 }

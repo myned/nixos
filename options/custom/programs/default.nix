@@ -34,7 +34,7 @@ with lib; {
       dconf.enable = true;
       firefox.enable = true;
       #// foot.enable = true;
-      #// gamescope.enable = true;
+      gamescope.enable = true;
       ghostty.enable = true;
       #// gnome-terminal.enable = true;
       #// kitty.enable = true;
