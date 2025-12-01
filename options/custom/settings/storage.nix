@@ -1,11 +1,14 @@
 {
   config,
+  inputs,
   lib,
   ...
 }:
 with lib; let
   cfg = config.custom.settings.storage;
 in {
+  imports = [inputs.disko.nixosModules.disko];
+
   options.custom.settings.storage = {
     enable = mkEnableOption "storage";
 

@@ -1,119 +1,332 @@
-# Do not modify! This file is generated.
-
 {
+  # https://wiki.nixos.org/wiki/Flakes
+  #!! Inputs do not support most nix features
+  # https://github.com/NixOS/nix/issues/4945
   inputs = {
-    aagl-gtk-on-nix-stable = {
-      inputs.nixpkgs.follows = "nixpkgs-stable";
-      url = "github:ezKEa/aagl-gtk-on-nix/release-25.05";
-    };
-    aagl-gtk-on-nix-unstable = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:ezKEa/aagl-gtk-on-nix/release-25.11";
-    };
-    agenix = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:ryantm/agenix";
-    };
-    ags = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:Aylur/ags";
-    };
-    arion = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:hercules-ci/arion";
-    };
-    disko = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:nix-community/disko";
-    };
+    # https://nix.dev/manual/nix/2.18/command-ref/new-cli/nix3-flake.html
+    #?? branch = "git+https://<repo>?ref=<branch>"
+    #?? commit = "git+https://<repo>?ref=<branch>&rev=<commit>"
+    #?? tag = "git+https://<repo>?ref=refs/tags/<tag>"
+
+    ### Standalone
     flake-parts.url = "github:hercules-ci/flake-parts";
-    flakegen.url = "github:jorsn/flakegen";
-    fprint-clear = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:Lehmanator/fprint-clear";
-    };
-    home-manager-stable = {
-      inputs.nixpkgs.follows = "nixpkgs-stable";
-      url = "github:nix-community/home-manager/release-25.05";
-    };
-    home-manager-unstable = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:nix-community/home-manager/release-25.11";
-    };
-    jovian-nixos = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:Jovian-Experiments/Jovian-NixOS";
-    };
-    lifx-cli = {
-      flake = false;
-      url = "github:Rawa/lifx-cli";
-    };
-    niri = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:YaLTeR/niri";
-    };
-    niri-flake = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:sodiboo/niri-flake";
-    };
-    nix-alien = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:thiagokokada/nix-alien";
-    };
     nix-flatpak.url = "github:gmodena/nix-flatpak?ref=v0.6.0";
-    nix-index-database-stable = {
-      inputs.nixpkgs.follows = "nixpkgs-stable";
-      url = "github:nix-community/nix-index-database";
-    };
-    nix-index-database-unstable = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:nix-community/nix-index-database";
-    };
-    nix-vscode-extensions = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:nix-community/nix-vscode-extensions";
-    };
-    nixd = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:nix-community/nixd";
-    };
-    nixgl-stable = {
-      inputs.nixpkgs.follows = "nixpkgs-stable";
-      url = "github:nix-community/nixGL";
-    };
-    nixgl-unstable = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:nix-community/nixGL";
-    };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs-myned.url = "github:myned/nixpkgs/master";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-25.11";
-    nixvirt = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:AshleyYakeley/NixVirt/v0.6.0";
+
+    ### Stable
+    # https://github.com/ezKEa/aagl-gtk-on-nix
+    aagl-gtk-on-nix-stable = {
+      url = "github:ezKEa/aagl-gtk-on-nix/release-25.05";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
+
+    # https://github.com/nix-community/home-manager
+    home-manager-stable = {
+      url = "github:nix-community/home-manager/release-25.05";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
+
+    # https://github.com/nix-community/nix-index-database
+    nix-index-database-stable = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
+
+    # https://github.com/nix-community/nixGL
+    nixgl-stable = {
+      url = "github:nix-community/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
+
+    # https://github.com/nix-community/NUR
     nur-stable = {
+      url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs-stable";
-      url = "github:nix-community/NUR";
     };
-    nur-unstable = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:nix-community/NUR";
-    };
+
+    # https://github.com/nix-community/stylix
     stylix-stable = {
-      inputs.nixpkgs.follows = "nixpkgs-stable";
       url = "github:nix-community/stylix/release-25.05";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
+
+    ### Unstable
+    # https://github.com/ezKEa/aagl-gtk-on-nix
+    aagl-gtk-on-nix-unstable = {
+      url = "github:ezKEa/aagl-gtk-on-nix/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    # https://github.com/ryantm/agenix
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    # https://github.com/Aylur/ags
+    ags = {
+      url = "github:Aylur/ags";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    # https://github.com/hercules-ci/arion
+    arion = {
+      url = "github:hercules-ci/arion";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    # https://github.com/nix-community/disko
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    # https://github.com/abenz1267/elephant
+    elephant = {
+      url = "github:abenz1267/elephant/v2.16.1";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    # https://github.com/Lehmanator/fprint-clear
+    fprint-clear = {
+      url = "github:Lehmanator/fprint-clear";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    # https://github.com/nix-community/home-manager
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    # https://github.com/Jovian-Experiments/Jovian-NixOS
+    jovian-nixos = {
+      url = "github:Jovian-Experiments/Jovian-NixOS";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    # https://github.com/YaLTeR/niri
+    niri = {
+      url = "github:YaLTeR/niri";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    # https://github.com/sodiboo/niri-flake
+    niri-flake = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    # https://github.com/thiagokokada/nix-alien
+    nix-alien = {
+      url = "github:thiagokokada/nix-alien";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    # https://github.com/nix-community/nix-index-database
+    nix-index-database-unstable = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    # https://github.com/nix-community/nix-vscode-extensions
+    nix-vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    # https://github.com/nix-community/nixd
+    nixd = {
+      url = "github:nix-community/nixd";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    # https://github.com/nix-community/nixGL
+    nixgl-unstable = {
+      url = "github:nix-community/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    # https://github.com/AshleyYakeley/NixVirt
+    nixvirt = {
+      url = "github:AshleyYakeley/NixVirt/v0.6.0";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    # https://github.com/nix-community/NUR
+    nur-unstable = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    # https://github.com/nix-community/stylix
     stylix-unstable = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:nix-community/stylix/release-25.11";
-    };
-    zen-browser = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:youwen5/zen-browser-flake";
     };
+
+    # https://github.com/abenz1267/walker
+    walker = {
+      url = "github:abenz1267/walker/v2.11.3";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.elephant.follows = "elephant";
+    };
+
+    # https://github.com/youwen5/zen-browser-flake
+    zen-browser = {
+      url = "github:youwen5/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    ### Source code
+    # https://github.com/
+    # cisco-packettracer8 = {
+    #   url = "file:///home/myned/SYNC/linux/config/cisco/CiscoPacketTracer822_amd64_signed.deb";
+    #   flake = false;
+    # };
+
+    # https://github.com/Eisa01/FreshRSS---Auto-Refresh-Extension
+    # freshrss-autorefresh = {
+    #   url = "github:Eisa01/FreshRSS---Auto-Refresh-Extension";
+    #   flake = false;
+    # };
+
+    # https://github.com/cn-tools/cntools_FreshRssExtensions
+    # freshrss-cntools = {
+    #   url = "github:cn-tools/cntools_FreshRssExtensions";
+    #   flake = false;
+    # };
+
+    # https://github.com/giventofly/freshrss-comicsinfeed
+    # freshrss-comicsinfeed = {
+    #   url = "github:giventofly/freshrss-comicsinfeed";
+    #   flake = false;
+    # };
+
+    # https://github.com/aledeg/xExtension-DateFormat
+    # freshrss-dateformat = {
+    #   url = "github:aledeg/xExtension-DateFormat";
+    #   flake = false;
+    # };
+
+    # https://github.com/FreshRSS/Extensions
+    # freshrss-extensions = {
+    #   url = "github:FreshRSS/Extensions";
+    #   flake = false;
+    # };
+
+    # https://code.sitosis.com/rudism/freshrss-kagi-summarizer
+    # freshrss-kagisummarizer = {
+    #   url = "git+https://code.sitosis.com/rudism/freshrss-kagi-summarizer";
+    #   flake = false;
+    # };
+
+    # https://github.com/kapdap/freshrss-extensions
+    # freshrss-kapdap = {
+    #   url = "github:kapdap/freshrss-extensions";
+    #   flake = false;
+    # };
+
+    # https://github.com/kalvn/freshrss-mark-previous-as-read
+    # freshrss-markpreviousasread = {
+    #   url = "github:kalvn/freshrss-mark-previous-as-read";
+    #   flake = false;
+    # };
+
+    # https://github.com/Rawa/lifx-cli
+    lifx-cli = {
+      url = "github:Rawa/lifx-cli";
+      flake = false;
+    };
+
+    # https://github.com/sonic2kk/steamtinkerlaunch
+    # steamtinkerlaunch = {
+    #   url = "github:sonic2kk/steamtinkerlaunch";
+    #   flake = false;
+    # };
+
+    # https://github.com/ErikReider/SwayNotificationCenter
+    # swaynotificationcenter = {
+    #   url = "github:ErikReider/SwayNotificationCenter?ref=v0.11.0";
+    #   flake = false;
+    # };
+
+    # https://github.com/rafaelmardojai/thunderbird-gnome-theme
+    # thunderbird-gnome-theme = {
+    #   url = "github:rafaelmardojai/thunderbird-gnome-theme";
+    #   flake = false;
+    # };
+
+    # https://fedorapeople.org/groups/virt/virtio-win/
+    # virtio-win = {
+    #   url = "https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.271-1/virtio-win.iso";
+    #   flake = false;
+    # };
   };
-  outputs = inputs: inputs.flakegen ./flake.in.nix inputs;
+
+  # https://flake.parts/
+  # https://wiki.nixos.org/wiki/Flake_Parts
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+      # https://flake.parts/options/flake-parts.html#opt-systems
+      systems = [
+        "aarch64-linux"
+        "x86_64-linux"
+      ];
+
+      # https://flake.parts/options/flake-parts.html#opt-perSystem
+      perSystem = {pkgs, ...}: {
+        # https://nix.dev/manual/nix/2.18/command-ref/new-cli/nix3-fmt
+        # https://github.com/kamadorueda/alejandra/blob/main/STYLE.md
+        formatter = pkgs.alejandra;
+      };
+
+      # https://flake.parts/options/flake-parts.html#opt-flake
+      flake = let
+        #!! Avoid globally importing modules that are not guarded by .enable
+        # https://github.com/NixOS/nixpkgs/issues/137168
+        commonModules = [
+          ./options
+          ./configuration.nix
+        ];
+      in {
+        # NixOS systems
+        #!! There is no default nixpkgs, inputs.nixpkgs-<branch> must exist
+        nixosConfigurations = let
+          nixos = branch: system: modules:
+            inputs."nixpkgs-${branch}".lib.nixosSystem {
+              inherit system;
+              modules = commonModules ++ modules;
+
+              # TODO: Use inline modules instead of specialArgs
+              # https://jade.fyi/blog/flakes-arent-real#nixos-modules
+              specialArgs = {inherit branch inputs;};
+            };
+        in {
+          myeck = nixos "unstable" "x86_64-linux" [./profiles/deck ./machines/myeck];
+          myeye = nixos "stable" "x86_64-linux" [./profiles/compute ./machines/myeye];
+          mynix = nixos "unstable" "x86_64-linux" [./profiles/desktop ./machines/mynix];
+          myore = nixos "stable" "x86_64-linux" [./profiles/core ./machines/myore];
+          myork = nixos "unstable" "x86_64-linux" [./profiles/laptop ./machines/myork];
+          myosh = nixos "stable" "x86_64-linux" [./profiles/server ./machines/myosh];
+          mypi3 = nixos "stable" "aarch64-linux" [./profiles/sbc ./machines/mypi3];
+        };
+
+        # Standalone home-manager configurations
+        # https://nix-community.github.io/home-manager/#sec-upgrade-release-understanding-flake
+        homeConfigurations = let
+          home = branch: system: modules:
+            inputs."home-manager-${branch}".lib.homeManagerConfiguration {
+              modules = commonModules ++ modules;
+              pkgs = inputs."nixpkgs-${branch}".legacyPackages.${system};
+            };
+        in {
+          myned = home "stable" "x86_64-linux" [];
+        };
+      };
+    };
 }

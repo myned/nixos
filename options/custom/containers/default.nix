@@ -8,6 +8,8 @@
 with lib; let
   cfg = config.custom.containers;
 in {
+  imports = [inputs.arion.nixosModules.arion];
+
   options.custom.containers = {
     enable = mkOption {default = false;};
     boot = mkOption {default = false;};

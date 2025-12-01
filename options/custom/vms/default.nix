@@ -10,6 +10,8 @@ with lib; let
 
   cfg = config.custom.vms;
 in {
+  imports = [inputs.nixvirt.nixosModules.default];
+
   options.custom.vms = {
     enable = mkOption {
       default = config.custom.full;

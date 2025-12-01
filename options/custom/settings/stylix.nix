@@ -1,5 +1,7 @@
 {
+  branch,
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -8,6 +10,8 @@ with lib; let
   cfg = config.custom.settings.stylix;
   hm = config.home-manager.users.${config.custom.username};
 in {
+  imports = [inputs."stylix-${branch}".nixosModules.stylix];
+
   options.custom.settings.stylix = {
     enable = mkOption {default = false;};
   };
@@ -69,40 +73,42 @@ in {
       };
     };
 
-    home-manager.users.${config.custom.username} = {
-      # https://nix-community.github.io/stylix/options/platforms/home_manager.html
-      stylix = {
-        # https://nix-community.github.io/stylix/options/platforms/home_manager.html#stylixiconthemedark
-        iconTheme = {
-          # BUG: GTK4 apps start slower with Papirus
-          # https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/issues/3860
-          # https://github.com/PapirusDevelopmentTeam/papirus-icon-theme
-          # https://github.com/vinceliuice/Tela-icon-theme
-          enable = true;
-          dark = "Tela-pink-dark";
-          light = "Tela-pink-light";
-          package = pkgs.tela-icon-theme;
+    home-manager.sharedModules = [
+      {
+        # https://nix-community.github.io/stylix/options/platforms/home_manager.html
+        stylix = {
+          # https://nix-community.github.io/stylix/options/platforms/home_manager.html#stylixiconthemedark
+          iconTheme = {
+            # BUG: GTK4 apps start slower with Papirus
+            # https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/issues/3860
+            # https://github.com/PapirusDevelopmentTeam/papirus-icon-theme
+            # https://github.com/vinceliuice/Tela-icon-theme
+            enable = true;
+            dark = "Tela-pink-dark";
+            light = "Tela-pink-light";
+            package = pkgs.tela-icon-theme;
+          };
+
+          #!! Accent colors are not the same globally, so override each target individually
+          # https://github.com/danth/stylix/issues/402
+          targets = with config.stylix.targets; {
+            inherit gtksourceview qt;
+
+            gtk =
+              gtk
+              // {
+                flatpakSupport.enable = true;
+                extraCss = readFile ./gtk/style.css;
+              };
+          };
         };
 
-        #!! Accent colors are not the same globally, so override each target individually
-        # https://github.com/danth/stylix/issues/402
-        targets = with config.stylix.targets; {
-          inherit gtksourceview qt;
-
-          gtk =
-            gtk
-            // {
-              flatpakSupport.enable = true;
-              extraCss = readFile ./gtk/style.css;
-            };
+        # BUG: home.pointerCursor breaks XCURSOR_PATH for some child windows, so avoid ${} bashism
+        # https://github.com/nix-community/home-manager/blob/59a4c43e9ba6db24698c112720a58a334117de83/modules/config/home-cursor.nix#L154
+        home.sessionVariables = {
+          XCURSOR_PATH = "$XCURSOR_PATH:${hm.home.profileDirectory}/share/icons";
         };
-      };
-
-      # BUG: home.pointerCursor breaks XCURSOR_PATH for some child windows, so avoid ${} bashism
-      # https://github.com/nix-community/home-manager/blob/59a4c43e9ba6db24698c112720a58a334117de83/modules/config/home-cursor.nix#L154
-      home.sessionVariables = {
-        XCURSOR_PATH = "$XCURSOR_PATH:${hm.home.profileDirectory}/share/icons";
-      };
-    };
+      }
+    ];
   };
 }

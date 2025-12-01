@@ -1,11 +1,15 @@
 {
+  branch,
   config,
+  inputs,
   lib,
   ...
 }:
 with lib; let
   cfg = config.custom.programs.nix-index;
 in {
+  imports = [inputs."nix-index-database-${branch}".nixosModules.nix-index];
+
   options.custom.programs.nix-index.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
@@ -18,6 +22,12 @@ in {
       command-not-found.enable = false;
     };
 
-    home-manager.users.${config.custom.username}.programs.nix-index.enable = true;
+    home-manager.sharedModules = [
+      {
+        imports = [inputs."nix-index-database-${branch}".homeModules.nix-index];
+
+        programs.nix-index.enable = true;
+      }
+    ];
   };
 }

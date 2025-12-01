@@ -91,12 +91,11 @@ nixos-generate-config --show-hardware-config --no-filesystems
 }
 ```
 
-7. Generate and lock `flake.nix` with [flakegen](https://github.com/jorsn/flakegen)
+7. Stage git files and lock `flake.nix`
 
 ```sh
 cd nixos
 git add .
-nix run .#genflake flake.nix
 nix flake lock
 ```
 

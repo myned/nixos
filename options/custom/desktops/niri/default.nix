@@ -11,6 +11,8 @@ with lib; let
 
   xwayland-satellite = getExe pkgs.xwayland-satellite;
 in {
+  imports = [inputs.niri-flake.nixosModules.niri];
+
   options.custom.desktops.niri = {
     enable = mkOption {default = false;};
     polkit = mkOption {default = false;};
@@ -58,67 +60,69 @@ in {
     # https://github.com/sodiboo/niri-flake?tab=readme-ov-file#additional-notes
     systemd.user.services.niri-flake-polkit.enable = cfg.polkit;
 
-    home-manager.users.${config.custom.username} = {
-      programs.niri = {
-        package = config.programs.niri.package;
+    home-manager.sharedModules = [
+      {
+        programs.niri = {
+          package = config.programs.niri.package;
 
-        settings = {
-          # https://github.com/YaLTeR/niri/wiki/Configuration:-Debug-Options
-          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsdebug
-          debug =
-            {
-              # TODO: Enable next release
-              #// deactivate-unfocused-windows = [];
+          settings = {
+            # https://github.com/YaLTeR/niri/wiki/Configuration:-Debug-Options
+            # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsdebug
+            debug =
+              {
+                # TODO: Enable next release
+                #// deactivate-unfocused-windows = [];
 
-              #// disable-cursor-plane = []; # Software cursor
-              #// disable-direct-scanout = [];
-              #// enable-overlay-planes = [];
-              honor-xdg-activation-with-invalid-serial = [];
-              keep-laptop-panel-on-when-lid-is-closed = [];
-            }
-            // optionalAttrs config.custom.vrr {
-              skip-cursor-only-updates-during-vrr = [];
+                #// disable-cursor-plane = []; # Software cursor
+                #// disable-direct-scanout = [];
+                #// enable-overlay-planes = [];
+                honor-xdg-activation-with-invalid-serial = [];
+                keep-laptop-panel-on-when-lid-is-closed = [];
+              }
+              // optionalAttrs config.custom.vrr {
+                skip-cursor-only-updates-during-vrr = [];
+              };
+
+            # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsxwayland-satellite
+            xwayland-satellite = {
+              enable = true;
+              path = xwayland-satellite;
             };
-
-          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsxwayland-satellite
-          xwayland-satellite = {
-            enable = true;
-            path = xwayland-satellite;
           };
         };
-      };
 
-      # https://github.com/sodiboo/niri-flake/blob/main/docs.md#homemodulesstylix
-      stylix.targets.niri.enable = true;
+        # https://github.com/sodiboo/niri-flake/blob/main/docs.md#homemodulesstylix
+        stylix.targets.niri.enable = true;
 
-      # HACK: Replace read-only finalConfig until extraConfig is supported
-      # https://github.com/sodiboo/niri-flake/issues/825
-      xdg.configFile = {
-        # https://github.com/sodiboo/niri-flake/blob/59ed19d431324af3fcebbf623c081eae2e67ab97/flake.nix#L395
-        niri-config.enable = mkForce false;
+        # HACK: Replace read-only finalConfig until extraConfig is supported
+        # https://github.com/sodiboo/niri-flake/issues/825
+        xdg.configFile = {
+          # https://github.com/sodiboo/niri-flake/blob/59ed19d431324af3fcebbf623c081eae2e67ab97/flake.nix#L395
+          niri-config.enable = mkForce false;
 
-        # TODO: Move to niri-flake when supported
-        # HACK: Merge kdl nodes into module config
-        # https://github.com/sodiboo/niri-flake/blob/main/settings.nix
-        # https://github.com/sodiboo/niri-flake/blob/main/default-config.kdl.nix
-        #?? :p config.home-manager.users.<user>.xdg.configFile."niri/config.kdl".text
-        #?? :p lib.findFirst (node: lib.isAttrs node && node.name == "<node>") [] config.home-manager.users.<user>.programs.niri.config
-        "niri/config.kdl".text = with inputs.niri-flake.lib.kdl;
-          serialize.nodes ((forEach hm.programs.niri.config (node: let
-              isNode = name: isAttrs node && node.name == name;
-              nodeWithChildren = children: node // {children = node.children ++ children;};
-            in
-              # Inject into existing nodes
-              if isNode "binds"
-              then
-                nodeWithChildren [
-                ]
-              else node))
-            ++ [
-              # Top-level nodes
-              (plain "overview" [(leaf "zoom" 0.5)])
-            ]);
-      };
-    };
+          # TODO: Move to niri-flake when supported
+          # HACK: Merge kdl nodes into module config
+          # https://github.com/sodiboo/niri-flake/blob/main/settings.nix
+          # https://github.com/sodiboo/niri-flake/blob/main/default-config.kdl.nix
+          #?? :p config.home-manager.users.<user>.xdg.configFile."niri/config.kdl".text
+          #?? :p lib.findFirst (node: lib.isAttrs node && node.name == "<node>") [] config.home-manager.users.<user>.programs.niri.config
+          "niri/config.kdl".text = with inputs.niri-flake.lib.kdl;
+            serialize.nodes ((forEach hm.programs.niri.config (node: let
+                isNode = name: isAttrs node && node.name == name;
+                nodeWithChildren = children: node // {children = node.children ++ children;};
+              in
+                # Inject into existing nodes
+                if isNode "binds"
+                then
+                  nodeWithChildren [
+                  ]
+                else node))
+              ++ [
+                # Top-level nodes
+                (plain "overview" [(leaf "zoom" 0.5)])
+              ]);
+        };
+      }
+    ];
   };
 }

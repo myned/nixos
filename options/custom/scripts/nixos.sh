@@ -16,7 +16,8 @@ cd /etc/nixos || exit 1
 # @alias b,bu,bui,buil
 # @option -b --builder[=nh|nixos] Use nh os (default) or nixos-rebuild to build
 # @option -t --target Remote machine to build with root, only nixos-rebuild is supported
-# @flag -n --no-generate Do not regenerate flake.nix before building
+# @flag -g --generate Generate flake.nix before building
+# @flag -n --no-stage Do not stage git files before building
 # @flag -p --poweroff Gracefully poweroff system after a successful build
 # @flag -r --reboot Gracefully reboot system after a successful build
 # @flag -u --update Update flake.lock before building
@@ -24,15 +25,19 @@ build() { :; }
 
 # Internal wrapper for subcommands
 _build() {
-  # Regenerate flake.nix and stage git files by default
-  if [[ ! "${argc_no_generate:-}" ]]; then
+  # Generate flake.nix
+  if [[ "${argc_generate:-}" ]]; then
     nix run .#genflake flake.nix
-    git add .
   fi
 
   # Update flake.lock
   if [[ "${argc_update:-}" ]]; then
     nix flake update
+  fi
+
+  # Stage git files
+  if [[ ! "${argc_no_stage:-}" ]]; then
+    git add .
   fi
 
   # Build current system
@@ -98,8 +103,13 @@ diff() {
 
 # @cmd Generate flake.nix from flake.in.nix with flakegen
 # @alias g,ge,gen,gene,gener,genera,generat
-# @flag -n --nuke Delete flake.nix and reinitialize
+# @flag -i --init Initialize flakegen
+# @flag -n --nuke Delete flake.nix and reinitialize flakegen
 generate() {
+  if [[ "${argc_init:-}" ]]; then
+    nix flake init --template github:myned/flakegen
+  fi
+
   if [[ "${argc_nuke:-}" ]]; then
     rm --force flake.nix
     nix flake init --template github:myned/flakegen
@@ -118,11 +128,10 @@ list() {
 
 # @cmd Enter an interactive NixOS read-eval-print loop with the current configuration
 # @alias r,re,rep
-# @flag -n --no-generate Do not regenerate flake.nix before entering loop
+# @flag -n --no-stage Do not stage git files before entering loop
 # @arg extra~ Pass extra arguments to nixos-rebuild
 repl() {
-  if [[ ! "${argc_no_generate:-}" ]]; then
-    nix run .#genflake flake.nix
+  if [[ ! "${argc_no_stage:-}" ]]; then
     git add .
   fi
 
