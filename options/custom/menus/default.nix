@@ -32,6 +32,9 @@ in {
       sherlock.enable = config.custom.menu == "sherlock";
       walker.enable = config.custom.menu == "walker";
       wofi.enable = config.custom.menu == "wofi";
+
+      #// bitwarden-menu.enable = true;
+      networkmanager-dmenu.enable = true;
     };
   };
 }

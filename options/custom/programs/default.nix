@@ -49,7 +49,6 @@ with lib; {
       _1password.enable = true;
       adb.enable = true;
       #// ags.enable = true;
-      #// bitwarden-menu.enable = true;
       capacities.enable = true;
       #// clipse.enable = true;
       discord.enable = true;
@@ -64,7 +63,6 @@ with lib; {
       localsend.enable = true;
       #// logseq.enable = true;
       mangohud.enable = true;
-      networkmanager-dmenu.enable = true;
       #// nheko.enable = true;
       nix-ld.enable = true;
       obs-studio.enable = true;

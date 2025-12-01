@@ -5,12 +5,10 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.programs.networkmanager-dmenu;
+  cfg = config.custom.menus.networkmanager-dmenu;
   hm = config.home-manager.users.${config.custom.username};
-
-  rofi = getExe hm.programs.rofi.package;
 in {
-  options.custom.programs.networkmanager-dmenu = {
+  options.custom.menus.networkmanager-dmenu = {
     enable = mkOption {default = false;};
   };
 
@@ -23,14 +21,14 @@ in {
         # https://github.com/firecat53/networkmanager-dmenu/blob/main/config.ini.example
         xdg.configFile = {
           "networkmanager-dmenu/config.ini".text = let
-            menu =
+            dmenu =
               if config.custom.menu == "rofi"
-              then "${rofi} -dmenu -p 󰛳"
-              else "";
+              then "${config.custom.menus.dmenu.show} -p 󰛳"
+              else config.custom.menus.dmenu.show;
           in ''
             [dmenu]
             compact = true
-            dmenu_command = ${menu}
+            dmenu_command = ${dmenu}
             active_chars = 
             highlight = true
             wifi_icons = 󰤯󰤟󰤢󰤥󰤨
