@@ -8,8 +8,12 @@ with lib; let
 in {
   options.custom.services.playerctld.enable = mkOption {default = false;};
 
-  config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
-    # https://github.com/altdesktop/playerctl
-    services.playerctld.enable = true;
+  config = mkIf cfg.enable {
+    home-manager.sharedModules = [
+      {
+        # https://github.com/altdesktop/playerctl
+        services.playerctld.enable = true;
+      }
+    ];
   };
 }

@@ -56,7 +56,9 @@ in {
     };
 
     home-manager.users = {
-      root.home.homeDirectory = config.users.users.root.home;
+      # TODO: Only allow a subset of home-manager modules for root user
+      #// root.home.homeDirectory = config.users.users.root.home;
+
       ${config.custom.username}.home.homeDirectory = config.users.users.${config.custom.username}.home;
     };
   };

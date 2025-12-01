@@ -9,7 +9,7 @@ with lib; let
 in {
   options.custom.programs.clipse.enable = mkOption {default = false;};
 
-  config = {
+  config = mkIf cfg.enable {
     # https://github.com/savedra1/clipse
     environment.systemPackages = with pkgs; [
       clipse
@@ -17,24 +17,26 @@ in {
       xclip
     ];
 
-    home-manager.users.${config.custom.username} = mkIf cfg.enable {
-      # https://github.com/savedra1/clipse?tab=readme-ov-file#configuration
-      xdg.configFile."clipse/config.json".text = ''
-        {
-          "historyFile": "clipboard_history.json",
-          "maxHistory": 50,
-          "allowDuplicates": false,
-          "themeFile": "custom_theme.json",
-          "tempDir": "tmp_files",
-          "logFile": "clipse.log",
-          "imageDisplay": {
-            "type": "kitty",
-            "scaleX": 9,
-            "scaleY": 9,
-            "heightCut": 2
+    home-manager.sharedModules = [
+      {
+        # https://github.com/savedra1/clipse?tab=readme-ov-file#configuration
+        xdg.configFile."clipse/config.json".text = ''
+          {
+            "historyFile": "clipboard_history.json",
+            "maxHistory": 50,
+            "allowDuplicates": false,
+            "themeFile": "custom_theme.json",
+            "tempDir": "tmp_files",
+            "logFile": "clipse.log",
+            "imageDisplay": {
+              "type": "kitty",
+              "scaleX": 9,
+              "scaleY": 9,
+              "heightCut": 2
+            }
           }
-        }
-      '';
-    };
+        '';
+      }
+    ];
   };
 }

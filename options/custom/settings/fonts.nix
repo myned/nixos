@@ -167,22 +167,24 @@ in {
       fontconfig.enable = true;
     };
 
-    home-manager.users.${config.custom.username} = {
-      # HACK: Some applications do not support fontconfig nor symlinks, so copy fonts to user directory
-      # https://github.com/ONLYOFFICE/DocumentServer/issues/1859 et al.
-      home.activation = {
-        # BUG: rsync sets directory permissions too early
-        # https://github.com/RsyncProject/rsync/issues/609
-        copy-fonts = hm.lib.dag.entryAfter ["writeBoundary"] ''
-          run ${rsync} --recursive --copy-links --times --delete \
-            /run/current-system/sw/share/X11/fonts "${hm.home.sessionVariables.XDG_DATA_HOME}/"
-        '';
-      };
+    home-manager.sharedModules = [
+      {
+        # HACK: Some applications do not support fontconfig nor symlinks, so copy fonts to user directory
+        # https://github.com/ONLYOFFICE/DocumentServer/issues/1859 et al.
+        home.activation = {
+          # BUG: rsync sets directory permissions too early
+          # https://github.com/RsyncProject/rsync/issues/609
+          copy-fonts = hm.lib.dag.entryAfter ["writeBoundary"] ''
+            run ${rsync} --recursive --copy-links --times --delete \
+              /run/current-system/sw/share/X11/fonts "${hm.home.sessionVariables.XDG_DATA_HOME}/"
+          '';
+        };
 
-      stylix.targets = {
-        font-packages.enable = true; # https://nix-community.github.io/stylix/options/modules/font-packages.html
-        fontconfig.enable = true; # https://nix-community.github.io/stylix/options/modules/fontconfig.html
-      };
-    };
+        stylix.targets = {
+          font-packages.enable = true; # https://nix-community.github.io/stylix/options/modules/font-packages.html
+          fontconfig.enable = true; # https://nix-community.github.io/stylix/options/modules/fontconfig.html
+        };
+      }
+    ];
   };
 }

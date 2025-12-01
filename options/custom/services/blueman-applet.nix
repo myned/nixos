@@ -8,8 +8,12 @@ with lib; let
 in {
   options.custom.services.blueman-applet.enable = mkOption {default = false;};
 
-  config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
-    # https://github.com/blueman-project/blueman
-    services.blueman-applet.enable = true;
+  config = mkIf cfg.enable {
+    home-manager.sharedModules = [
+      {
+        # https://github.com/blueman-project/blueman
+        services.blueman-applet.enable = true;
+      }
+    ];
   };
 }

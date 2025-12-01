@@ -19,11 +19,13 @@ in {
       package = cfg.package;
     };
 
-    home-manager.users.${config.custom.username} = {
-      services.kdeconnect = {
-        enable = true;
-        package = cfg.package;
-      };
-    };
+    home-manager.sharedModules = [
+      {
+        services.kdeconnect = {
+          enable = true;
+          package = cfg.package;
+        };
+      }
+    ];
   };
 }

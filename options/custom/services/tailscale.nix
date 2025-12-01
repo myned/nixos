@@ -57,9 +57,11 @@ in {
       };
     };
 
-    home-manager.users.${config.custom.username} = {
-      # https://github.com/DeedleFake/trayscale
-      services.trayscale.enable = cfg.tray;
-    };
+    home-manager.sharedModules = [
+      {
+        # https://github.com/DeedleFake/trayscale
+        services.trayscale.enable = cfg.tray;
+      }
+    ];
   };
 }

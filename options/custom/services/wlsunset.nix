@@ -11,18 +11,20 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home-manager.users.${config.custom.username} = {
-      # https://sr.ht/~kennylevinsen/wlsunset/
-      services.wlsunset = {
-        enable = true;
-        sunrise = "08:00";
-        sunset = "20:00";
+    home-manager.sharedModules = [
+      {
+        # https://sr.ht/~kennylevinsen/wlsunset/
+        services.wlsunset = {
+          enable = true;
+          sunrise = "08:00";
+          sunset = "20:00";
 
-        temperature = {
-          day = 5000;
-          night = 4000;
+          temperature = {
+            day = 5000;
+            night = 4000;
+          };
         };
-      };
-    };
+      }
+    ];
   };
 }

@@ -13,9 +13,11 @@ in {
   config = mkIf cfg.enable {
     services.desktopManager.plasma6.enable = true;
 
-    home-manager.users.${config.custom.username} = {
-      # https://nix-community.github.io/stylix/options/modules/kde.html
-      stylix.targets.kde.enable = true;
-    };
+    home-manager.sharedModules = [
+      {
+        # https://nix-community.github.io/stylix/options/modules/kde.html
+        stylix.targets.kde.enable = true;
+      }
+    ];
   };
 }

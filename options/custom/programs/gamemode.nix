@@ -18,14 +18,16 @@ in {
     # https://github.com/FeralInteractive/gamemode
     programs.gamemode.enable = true;
 
-    home-manager.users.${config.custom.username} = {
-      # https://github.com/FeralInteractive/gamemode?tab=readme-ov-file#note-for-hybrid-gpu-users
-      home.sessionVariables = {
-        GAMEMODERUNEXEC =
-          if with config.custom.vms.passthrough; (enable && blacklist)
-          then "${gpurun} ${config.custom.settings.hardware.dgpu.driver}"
-          else "${mangohud}";
-      };
-    };
+    home-manager.sharedModules = [
+      {
+        # https://github.com/FeralInteractive/gamemode?tab=readme-ov-file#note-for-hybrid-gpu-users
+        home.sessionVariables = {
+          GAMEMODERUNEXEC =
+            if with config.custom.vms.passthrough; (enable && blacklist)
+            then "${gpurun} ${config.custom.settings.hardware.dgpu.driver}"
+            else "${mangohud}";
+        };
+      }
+    ];
   };
 }

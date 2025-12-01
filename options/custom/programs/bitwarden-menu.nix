@@ -21,24 +21,26 @@ in {
       bitwarden-menu
     ];
 
-    home-manager.users.${config.custom.username} = {
-      # TODO: Check for official options
-      # https://github.com/firecat53/bitwarden-menu/blob/main/docs/configure.md
-      xdg.configFile."bwm/config.ini".text = generators.toINI {} {
-        dmenu = {
-          dmenu_command = "${walker} --dmenu --forceprint";
-        };
+    home-manager.sharedModules = [
+      {
+        # TODO: Check for official options
+        # https://github.com/firecat53/bitwarden-menu/blob/main/docs/configure.md
+        xdg.configFile."bwm/config.ini".text = generators.toINI {} {
+          dmenu = {
+            dmenu_command = "${walker} --dmenu --forceprint";
+          };
 
-        dmenu_passphrase = {
-          obscure = true;
-        };
+          dmenu_passphrase = {
+            obscure = true;
+          };
 
-        vault = {
-          server_1 = "https://vault.${config.custom.domain}";
-          login_1 = "${config.custom.username}@${config.custom.domain}";
-          twofactor_1 = 0;
+          vault = {
+            server_1 = "https://vault.${config.custom.domain}";
+            login_1 = "${config.custom.username}@${config.custom.domain}";
+            twofactor_1 = 0;
+          };
         };
-      };
-    };
+      }
+    ];
   };
 }

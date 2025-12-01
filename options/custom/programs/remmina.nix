@@ -10,12 +10,14 @@ in {
   options.custom.programs.remmina.enable = mkOption {default = false;};
 
   config = mkIf cfg.enable {
-    home-manager.users.${config.custom.username} = {
-      #!! Imperative configuration
-      xdg.configFile."remmina/remmina.pref" = {
-        force = true;
-        source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.syncDir}/linux/config/remmina/remmina.pref";
-      };
-    };
+    home-manager.sharedModules = [
+      {
+        #!! Imperative configuration
+        xdg.configFile."remmina/remmina.pref" = {
+          force = true;
+          source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.syncDir}/linux/config/remmina/remmina.pref";
+        };
+      }
+    ];
   };
 }

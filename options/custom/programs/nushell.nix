@@ -11,15 +11,17 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home-manager.users.${config.custom.username} = {
-      # TODO: Create config
-      # https://github.com/nushell/nushell
-      programs.nushell = {
-        enable = true;
-      };
+    home-manager.sharedModules = [
+      {
+        # TODO: Create config
+        # https://github.com/nushell/nushell
+        programs.nushell = {
+          enable = true;
+        };
 
-      # https://nix-community.github.io/stylix/options/modules/nushell.html
-      stylix.targets.nushell.enable = true;
-    };
+        # https://nix-community.github.io/stylix/options/modules/nushell.html
+        stylix.targets.nushell.enable = true;
+      }
+    ];
   };
 }

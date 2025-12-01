@@ -86,7 +86,7 @@ in {
     # https://nix-community.github.io/stylix/options/modules/chromium.html
     stylix.targets.chromium.enable = false;
 
-    home-manager.users.${config.custom.username} = let
+    home-manager.sharedModules = let
       module = {
         enable = true;
 
@@ -108,20 +108,22 @@ in {
           "--password-store=auto"
         ];
       };
-    in {
-      programs =
-        mapAttrs (
-          name: value:
-            value // module
-        ) {
-          brave = {};
-          chromium = {package = pkgs.google-chrome;};
-        };
+    in [
+      {
+        programs =
+          mapAttrs (
+            name: value:
+              value // module
+          ) {
+            brave = {};
+            chromium = {package = pkgs.google-chrome;};
+          };
 
-      # HACK: Create symlink to generated native-messaging-hosts file in custom profile
-      systemd.user.tmpfiles.rules = optionals config.programs._1password.enable [
-        "L+ ${cfg.dataDir}-Work/NativeMessagingHosts/com.1password.1password.json - - - - ${cfg.dataDir}/NativeMessagingHosts/com.1password.1password.json"
-      ];
-    };
+        # HACK: Create symlink to generated native-messaging-hosts file in custom profile
+        systemd.user.tmpfiles.rules = optionals config.programs._1password.enable [
+          "L+ ${cfg.dataDir}-Work/NativeMessagingHosts/com.1password.1password.json - - - - ${cfg.dataDir}/NativeMessagingHosts/com.1password.1password.json"
+        ];
+      }
+    ];
   };
 }

@@ -55,11 +55,13 @@ in {
       extraPortals = [pkgs.xdg-desktop-portal-gtk];
     };
 
-    home-manager.users.${config.custom.username} = {
-      wayland.windowManager.hyprland.enable = true;
+    home-manager.sharedModules = [
+      {
+        wayland.windowManager.hyprland.enable = true;
 
-      # https://nix-community.github.io/stylix/options/modules/hyprland.html
-      stylix.targets.hyprland.enable = true;
-    };
+        # https://nix-community.github.io/stylix/options/modules/hyprland.html
+        stylix.targets.hyprland.enable = true;
+      }
+    ];
   };
 }

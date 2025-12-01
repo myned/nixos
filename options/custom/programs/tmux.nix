@@ -17,9 +17,11 @@ in {
       terminal = "tmux-256color";
     };
 
-    home-manager.users.${config.custom.username} = {
-      # https://nix-community.github.io/stylix/options/modules/tmux.html
-      stylix.targets.tmux.enable = true;
-    };
+    home-manager.sharedModules = [
+      {
+        # https://nix-community.github.io/stylix/options/modules/tmux.html
+        stylix.targets.tmux.enable = true;
+      }
+    ];
   };
 }

@@ -55,21 +55,23 @@ in {
       };
     };
 
-    home-manager.users.${config.custom.username} = mkIf cfg.agent {
-      # https://developer.1password.com/docs/ssh/get-started#step-4-configure-your-ssh-or-git-client
-      home.sessionVariables = {
-        SSH_AUTH_SOCK = "${hm.home.homeDirectory}/.1password/agent.sock";
-      };
+    home-manager.sharedModules = mkIf cfg.agent [
+      {
+        # https://developer.1password.com/docs/ssh/get-started#step-4-configure-your-ssh-or-git-client
+        home.sessionVariables = {
+          SSH_AUTH_SOCK = "${hm.home.homeDirectory}/.1password/agent.sock";
+        };
 
-      programs = {
-        # https://github.com/NixOS/nixpkgs/issues/230357
-        git.signing.signer = mkIf cfg.git (getExe' config.programs._1password-gui.package "op-ssh-sign");
+        programs = {
+          # https://github.com/NixOS/nixpkgs/issues/230357
+          git.signing.signer = mkIf cfg.git (getExe' config.programs._1password-gui.package "op-ssh-sign");
 
-        ssh.extraConfig = ''
-          Host *
-            IdentityAgent ${hm.home.homeDirectory}/.1password/agent.sock
-        '';
-      };
-    };
+          ssh.extraConfig = ''
+            Host *
+              IdentityAgent ${hm.home.homeDirectory}/.1password/agent.sock
+          '';
+        };
+      }
+    ];
   };
 }

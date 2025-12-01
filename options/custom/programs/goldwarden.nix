@@ -22,8 +22,10 @@ in {
       };
     };
 
-    home-manager.users.${config.custom.username} = {
-      services.flatpak.packages = mkIf cfg.flatpak ["com.quexten.Goldwarden"];
-    };
+    home-manager.sharedModules = [
+      {
+        services.flatpak.packages = mkIf cfg.flatpak ["com.quexten.Goldwarden"];
+      }
+    ];
   };
 }

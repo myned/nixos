@@ -39,40 +39,42 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home-manager.users.${config.custom.username} = {
-      # https://github.com/swaywm/swayidle
-      # https://wiki.archlinux.org/title/Sway#Idle
-      services.swayidle = {
-        enable = true;
+    home-manager.sharedModules = [
+      {
+        # https://github.com/swaywm/swayidle
+        # https://wiki.archlinux.org/title/Sway#Idle
+        services.swayidle = {
+          enable = true;
 
-        # https://github.com/swaywm/swayidle/blob/master/swayidle.1.scd
-        #?? man swayidle
-        timeouts = [
-          {
-            # Turn off display if currently locked
-            command = ''${pgrep} ${config.custom.lockscreen} && ${cfg.dpmsCommand}'';
-            timeout = 10 * 60; # Seconds
-          }
+          # https://github.com/swaywm/swayidle/blob/master/swayidle.1.scd
+          #?? man swayidle
+          timeouts = [
+            {
+              # Turn off display if currently locked
+              command = ''${pgrep} ${config.custom.lockscreen} && ${cfg.dpmsCommand}'';
+              timeout = 10 * 60; # Seconds
+            }
 
-          {
-            # Turn off display
-            command = cfg.dpmsCommand;
-            timeout = 15 * 60; # Seconds
-          }
+            {
+              # Turn off display
+              command = cfg.dpmsCommand;
+              timeout = 15 * 60; # Seconds
+            }
 
-          {
-            # Lock session
-            command = "${loginctl} lock-session";
-            timeout = 20 * 60; # Seconds
-          }
+            {
+              # Lock session
+              command = "${loginctl} lock-session";
+              timeout = 20 * 60; # Seconds
+            }
 
-          {
-            # Suspend if no audio
-            command = "${pw-cli} info all | ${grep} running || ${systemctl} suspend";
-            timeout = 60 * 60; # Seconds
-          }
-        ];
-      };
-    };
+            {
+              # Suspend if no audio
+              command = "${pw-cli} info all | ${grep} running || ${systemctl} suspend";
+              timeout = 60 * 60; # Seconds
+            }
+          ];
+        };
+      }
+    ];
   };
 }

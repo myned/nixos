@@ -8,21 +8,25 @@ with lib; let
 in {
   options.custom.services.avizo.enable = mkOption {default = false;};
 
-  config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
-    # https://github.com/misterdanb/avizo
-    services.avizo = {
-      enable = true;
+  config = mkIf cfg.enable {
+    home-manager.sharedModules = [
+      {
+        # https://github.com/misterdanb/avizo
+        services.avizo = {
+          enable = true;
 
-      # https://github.com/misterdanb/avizo/blob/master/config.ini
-      settings = {
-        default = {
-          time = 1;
-          height = 150;
-          border-radius = 12;
-          background = "#93a1a1";
-          border-color = "#002b36";
+          # https://github.com/misterdanb/avizo/blob/master/config.ini
+          settings = {
+            default = {
+              time = 1;
+              height = 150;
+              border-radius = 12;
+              background = "#93a1a1";
+              border-color = "#002b36";
+            };
+          };
         };
-      };
-    };
+      }
+    ];
   };
 }

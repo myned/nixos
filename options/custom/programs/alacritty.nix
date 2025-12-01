@@ -11,27 +11,29 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home-manager.users.${config.custom.username} = {
-      # https://github.com/alacritty/alacritty
-      programs.alacritty = {
-        enable = true;
+    home-manager.sharedModules = [
+      {
+        # https://github.com/alacritty/alacritty
+        programs.alacritty = {
+          enable = true;
 
-        # https://alacritty.org/config-alacritty.html
-        settings = {
-          font = {
-            #// builtin_box_drawing = false;
-            size = 14;
-          };
+          # https://alacritty.org/config-alacritty.html
+          settings = {
+            font = {
+              #// builtin_box_drawing = false;
+              size = 14;
+            };
 
-          window = {
-            dynamic_padding = true;
-            resize_increments = true;
+            window = {
+              dynamic_padding = true;
+              resize_increments = true;
+            };
           };
         };
-      };
 
-      # https://nix-community.github.io/stylix/options/modules/alacritty.html
-      stylix.targets.alacritty.enable = true;
-    };
+        # https://nix-community.github.io/stylix/options/modules/alacritty.html
+        stylix.targets.alacritty.enable = true;
+      }
+    ];
   };
 }

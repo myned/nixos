@@ -8,14 +8,18 @@ with lib; let
 in {
   options.custom.programs.wpaperd.enable = mkOption {default = false;};
 
-  config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
-    # https://github.com/danyspin97/wpaperd
-    programs.wpaperd = {
-      enable = true;
+  config = mkIf cfg.enable {
+    home-manager.sharedModules = [
+      {
+        # https://github.com/danyspin97/wpaperd
+        programs.wpaperd = {
+          enable = true;
 
-      settings.default = {
-        path = "/tmp/altered.png";
-      };
-    };
+          settings.default = {
+            path = "/tmp/altered.png";
+          };
+        };
+      }
+    ];
   };
 }

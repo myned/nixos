@@ -9,11 +9,15 @@ with lib; let
 in {
   options.custom.programs.logseq.enable = mkOption {default = false;};
 
-  config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
-    #!! Synced imperative configuration
-    home.file.".logseq/" = {
-      force = true;
-      source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.syncDir}/common/config/logseq/";
-    };
+  config = mkIf cfg.enable {
+    home-manager.sharedModules = [
+      {
+        #!! Synced imperative configuration
+        home.file.".logseq/" = {
+          force = true;
+          source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.syncDir}/common/config/logseq/";
+        };
+      }
+    ];
   };
 }

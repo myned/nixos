@@ -8,7 +8,11 @@ with lib; let
 in {
   options.custom.services.xembed-sni-proxy.enable = mkOption {default = false;};
 
-  config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
-    services.xembed-sni-proxy.enable = true; # Support XEmbed tray icons
+  config = mkIf cfg.enable {
+    home-manager.sharedModules = [
+      {
+        services.xembed-sni-proxy.enable = true; # Support XEmbed tray icons
+      }
+    ];
   };
 }

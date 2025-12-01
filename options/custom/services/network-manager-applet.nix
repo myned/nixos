@@ -8,8 +8,12 @@ with lib; let
 in {
   options.custom.services.network-manager-applet.enable = mkOption {default = false;};
 
-  config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
-    # https://gitlab.gnome.org/GNOME/network-manager-applet
-    services.network-manager-applet.enable = true;
+  config = mkIf cfg.enable {
+    home-manager.sharedModules = [
+      {
+        # https://gitlab.gnome.org/GNOME/network-manager-applet
+        services.network-manager-applet.enable = true;
+      }
+    ];
   };
 }

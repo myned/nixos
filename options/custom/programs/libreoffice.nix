@@ -33,14 +33,16 @@ in {
         pkgs.hunspell
       ];
 
-    home-manager.users.${config.custom.username} = {
-      #!! Options not available, files synced
-      xdg.configFile = {
-        "libreoffice/4/user" = {
-          source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.syncDir}/linux/config/libreoffice/user";
-          force = true;
+    home-manager.sharedModules = [
+      {
+        #!! Options not available, files synced
+        xdg.configFile = {
+          "libreoffice/4/user" = {
+            source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.syncDir}/linux/config/libreoffice/user";
+            force = true;
+          };
         };
-      };
-    };
+      }
+    ];
   };
 }

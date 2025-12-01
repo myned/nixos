@@ -8,12 +8,16 @@ with lib; let
 in {
   options.custom.programs.gpg.enable = mkOption {default = false;};
 
-  config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
-    # https://wiki.archlinux.org/title/GnuPG
-    # https://gnupg.org
-    programs.gpg = {
-      enable = true;
-      settings.keyserver = "hkp://keyserver.ubuntu.com";
-    };
+  config = mkIf cfg.enable {
+    home-manager.sharedModules = [
+      {
+        # https://wiki.archlinux.org/title/GnuPG
+        # https://gnupg.org
+        programs.gpg = {
+          enable = true;
+          settings.keyserver = "hkp://keyserver.ubuntu.com";
+        };
+      }
+    ];
   };
 }

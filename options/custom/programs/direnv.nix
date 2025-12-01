@@ -19,14 +19,16 @@ in {
         silent = true;
       };
 
-    home-manager.users.${config.custom.username} = {
-      programs.direnv =
-        {
-          enable = true;
-        }
-        // optionalAttrs (versionAtLeast version "24.11") {
-          silent = true;
-        };
-    };
+    home-manager.sharedModules = [
+      {
+        programs.direnv =
+          {
+            enable = true;
+          }
+          // optionalAttrs (versionAtLeast version "24.11") {
+            silent = true;
+          };
+      }
+    ];
   };
 }

@@ -46,45 +46,47 @@ in {
       terminal = mkIf (isString cfg.terminal) cfg.terminal;
     };
 
-    home-manager.users.${config.custom.username} = {
-      # HACK: Partially fix startup delay with background service until module is available
-      # BUG: --gapplication-service always exits without a window
-      systemd.user.services = let
-        nautilus = "${pkgs.nautilus}/bin/nautilus";
-        turtle_service = "${pkgs.turtle}/bin/turtle_service";
-      in {
-        nautilus = mkIf cfg.service {
-          Unit.Description = "GNOME Files Background Service";
-          Install.WantedBy = ["graphical-session.target"];
+    home-manager.sharedModules = [
+      {
+        # HACK: Partially fix startup delay with background service until module is available
+        # BUG: --gapplication-service always exits without a window
+        systemd.user.services = let
+          nautilus = "${pkgs.nautilus}/bin/nautilus";
+          turtle_service = "${pkgs.turtle}/bin/turtle_service";
+        in {
+          nautilus = mkIf cfg.service {
+            Unit.Description = "GNOME Files Background Service";
+            Install.WantedBy = ["graphical-session.target"];
 
-          Service = {
-            BusName = "org.gnome.Nautilus";
-            ExecStart = "${nautilus} --gapplication-service";
-            ExecStop = "${nautilus} --quit";
-            Restart = "always"; #!! Exits when last window is closed
-            Type = "dbus";
+            Service = {
+              BusName = "org.gnome.Nautilus";
+              ExecStart = "${nautilus} --gapplication-service";
+              ExecStop = "${nautilus} --quit";
+              Restart = "always"; #!! Exits when last window is closed
+              Type = "dbus";
 
-            # HACK: Allow child processes to live, otherwise applications launched through service are killed on stop
-            # https://www.freedesktop.org/software/systemd/man/latest/systemd.kill.html#KillMode=
-            KillMode = "process";
+              # HACK: Allow child processes to live, otherwise applications launched through service are killed on stop
+              # https://www.freedesktop.org/software/systemd/man/latest/systemd.kill.html#KillMode=
+              KillMode = "process";
+            };
+          };
+
+          # TODO: Check for module
+          # BUG: Benign AttributeError when scanning on nautilus launch
+          # Git integration dependency
+          turtle = mkIf cfg.git {
+            Unit.Description = "Turtle Background Service";
+            Install.WantedBy = ["graphical-session.target"];
+
+            Service = {
+              BusName = "de.philippun1.turtle";
+              ExecStart = turtle_service;
+              Restart = "always";
+              Type = "dbus";
+            };
           };
         };
-
-        # TODO: Check for module
-        # BUG: Benign AttributeError when scanning on nautilus launch
-        # Git integration dependency
-        turtle = mkIf cfg.git {
-          Unit.Description = "Turtle Background Service";
-          Install.WantedBy = ["graphical-session.target"];
-
-          Service = {
-            BusName = "de.philippun1.turtle";
-            ExecStart = turtle_service;
-            Restart = "always";
-            Type = "dbus";
-          };
-        };
-      };
-    };
+      }
+    ];
   };
 }

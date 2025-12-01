@@ -14,11 +14,13 @@ in {
       style = "gtk2";
     };
 
-    home-manager.users.${config.custom.username} = {
-      qt = {
-        enable = true;
-        style.name = "gtk";
-      };
-    };
+    home-manager.sharedModules = [
+      {
+        qt = {
+          enable = true;
+          style.name = "gtk";
+        };
+      }
+    ];
   };
 }

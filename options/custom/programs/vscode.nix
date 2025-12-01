@@ -29,92 +29,94 @@ in {
       shfmt # shell-format
     ];
 
-    home-manager.users.${config.custom.username} = {
-      # https://wiki.nixos.org/wiki/VSCodium
-      # https://github.com/VSCodium/vscodium
-      #!! Configuration is imperative
-      programs.vscode = {
-        enable = true;
-        #// mutableExtensionsDir = false;
-        #// package = pkgs.vscodium;
+    home-manager.sharedModules = [
+      {
+        # https://wiki.nixos.org/wiki/VSCodium
+        # https://github.com/VSCodium/vscodium
+        #!! Configuration is imperative
+        programs.vscode = {
+          enable = true;
+          #// mutableExtensionsDir = false;
+          #// package = pkgs.vscodium;
 
-        profiles.default = {
-          #?? nixos-rebuild repl > pkgs.REPO.*
-          #!! Some extensions go missing from open-vsx, so use official marketplace
-          # https://github.com/nix-community/nix-vscode-extensions?tab=readme-ov-file#note
-          extensions = with pkgs.open-vsx;
-            [
-            ]
-            ++ (with pkgs.vscode-marketplace; [
-              aaron-bond.better-comments
-              #// antfu.iconify
-              #// antfu.unocss
-              #// bedsteler20.gnome-magic
-              #// bilelmoussaoui.flatpak-vscode
-              bmalehorn.vscode-fish
-              #// bmewburn.vscode-intelephense-client
-              #// bodil.blueprint-gtk
-              bradlc.vscode-tailwindcss
-              cormoran.disable-default-keybinding
-              #// csstools.postcss
-              dbaeumer.vscode-eslint
-              detachhead.basedpyright
-              #// eamodio.gitlens
-              esbenp.prettier-vscode
-              foxundermoon.shell-format
-              #// ginfuru.ginfuru-better-solarized-dark-theme
-              gruntfuggly.todo-tree
-              jnoortheen.nix-ide
-              #// koihik.vscode-lua-format
-              matthewpi.caddyfile-support
-              mhutchie.git-graph
-              mkhl.direnv
-              ms-python.black-formatter
-              ms-python.debugpy
-              ms-python.isort
-              ms-python.python
-              ms-vscode.powershell
-              natizyskunk.sftp
-              pkief.material-icon-theme
-              pkief.material-product-icons
-              sirmspencer.vscode-autohide
-              sketchbuch.vsc-workspace-sidebar
-              #// svelte.svelte-vscode
-              timonwong.shellcheck
-              vincaslt.highlight-matching-tag
-            ]);
+          profiles.default = {
+            #?? nixos-rebuild repl > pkgs.REPO.*
+            #!! Some extensions go missing from open-vsx, so use official marketplace
+            # https://github.com/nix-community/nix-vscode-extensions?tab=readme-ov-file#note
+            extensions = with pkgs.open-vsx;
+              [
+              ]
+              ++ (with pkgs.vscode-marketplace; [
+                aaron-bond.better-comments
+                #// antfu.iconify
+                #// antfu.unocss
+                #// bedsteler20.gnome-magic
+                #// bilelmoussaoui.flatpak-vscode
+                bmalehorn.vscode-fish
+                #// bmewburn.vscode-intelephense-client
+                #// bodil.blueprint-gtk
+                bradlc.vscode-tailwindcss
+                cormoran.disable-default-keybinding
+                #// csstools.postcss
+                dbaeumer.vscode-eslint
+                detachhead.basedpyright
+                #// eamodio.gitlens
+                esbenp.prettier-vscode
+                foxundermoon.shell-format
+                #// ginfuru.ginfuru-better-solarized-dark-theme
+                gruntfuggly.todo-tree
+                jnoortheen.nix-ide
+                #// koihik.vscode-lua-format
+                matthewpi.caddyfile-support
+                mhutchie.git-graph
+                mkhl.direnv
+                ms-python.black-formatter
+                ms-python.debugpy
+                ms-python.isort
+                ms-python.python
+                ms-vscode.powershell
+                natizyskunk.sftp
+                pkief.material-icon-theme
+                pkief.material-product-icons
+                sirmspencer.vscode-autohide
+                sketchbuch.vsc-workspace-sidebar
+                #// svelte.svelte-vscode
+                timonwong.shellcheck
+                vincaslt.highlight-matching-tag
+              ]);
+          };
         };
-      };
 
-      # TODO: Use stylix
-      # https://nix-community.github.io/stylix/options/modules/vscode.html
-      stylix.targets.vscode = {
-        enable = false;
-        profileNames = ["default"];
-      };
-
-      home.sessionVariables = {
-        # https://github.com/nix-community/nixd/blob/main/nixd/docs/features.md
-        NIXD_FLAGS = "--inlay-hints=false"; # Disable package versions in the editor
-      };
-
-      xdg.configFile = let
-        sync = source: {
-          source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.syncDir}/${source}";
-          force = true;
+        # TODO: Use stylix
+        # https://nix-community.github.io/stylix/options/modules/vscode.html
+        stylix.targets.vscode = {
+          enable = false;
+          profileNames = ["default"];
         };
-      in {
-        #!! Imperative synced files
-        "Code/User/keybindings.json" = sync "dev/config/vscode/keybindings.json";
-        "Code/User/profiles/" = sync "dev/config/vscode/profiles/";
-        "Code/User/settings.json" = sync "dev/config/vscode/settings.json";
-        "Code/User/snippets/" = sync "dev/config/vscode/snippets/";
 
-        "VSCodium/User/keybindings.json" = sync "dev/config/vscode/keybindings.json";
-        "VSCodium/User/profiles/" = sync "dev/config/vscode/profiles/";
-        "VSCodium/User/settings.json" = sync "dev/config/vscode/settings.json";
-        "VSCodium/User/snippets/" = sync "dev/config/vscode/snippets/";
-      };
-    };
+        home.sessionVariables = {
+          # https://github.com/nix-community/nixd/blob/main/nixd/docs/features.md
+          NIXD_FLAGS = "--inlay-hints=false"; # Disable package versions in the editor
+        };
+
+        xdg.configFile = let
+          sync = source: {
+            source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.syncDir}/${source}";
+            force = true;
+          };
+        in {
+          #!! Imperative synced files
+          "Code/User/keybindings.json" = sync "dev/config/vscode/keybindings.json";
+          "Code/User/profiles/" = sync "dev/config/vscode/profiles/";
+          "Code/User/settings.json" = sync "dev/config/vscode/settings.json";
+          "Code/User/snippets/" = sync "dev/config/vscode/snippets/";
+
+          "VSCodium/User/keybindings.json" = sync "dev/config/vscode/keybindings.json";
+          "VSCodium/User/profiles/" = sync "dev/config/vscode/profiles/";
+          "VSCodium/User/settings.json" = sync "dev/config/vscode/settings.json";
+          "VSCodium/User/snippets/" = sync "dev/config/vscode/snippets/";
+        };
+      }
+    ];
   };
 }

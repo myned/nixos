@@ -9,10 +9,14 @@ with lib; let
 in {
   options.custom.programs.path-of-building.enable = mkOption {default = false;};
 
-  config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
-    xdg.desktopEntries.path-of-building = {
-      name = "Path of Building";
-      exec = "${pkgs.path-of-building}/bin/pobfrontend";
-    };
+  config = mkIf cfg.enable {
+    home-manager.sharedModules = [
+      {
+        xdg.desktopEntries.path-of-building = {
+          name = "Path of Building";
+          exec = "${pkgs.path-of-building}/bin/pobfrontend";
+        };
+      }
+    ];
   };
 }

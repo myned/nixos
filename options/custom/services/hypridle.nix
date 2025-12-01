@@ -28,41 +28,45 @@ in {
     };
   };
 
-  config.home-manager.users.${config.custom.username} = mkIf cfg.enable {
-    # https://github.com/hyprwm/hypridle
-    # https://wiki.hyprland.org/Hypr-Ecosystem/hypridle
-    services.hypridle = {
-      enable = true;
+  config = mkIf cfg.enable {
+    home-manager.sharedModules = [
+      {
+        # https://github.com/hyprwm/hypridle
+        # https://wiki.hyprland.org/Hypr-Ecosystem/hypridle
+        services.hypridle = {
+          enable = true;
 
-      settings.listener = [
-        {
-          timeout = 1 * 60; # Seconds
-          on-timeout = ''${pgrep} ${config.custom.lockscreen} && ${cfg.dpmsCommand}''; # Turn off display if currently locked
-        }
+          settings.listener = [
+            {
+              timeout = 1 * 60; # Seconds
+              on-timeout = ''${pgrep} ${config.custom.lockscreen} && ${cfg.dpmsCommand}''; # Turn off display if currently locked
+            }
 
-        {
-          timeout = 15 * 60; # Seconds
-          on-timeout = cfg.dpmsCommand; # Turn off display
-        }
+            {
+              timeout = 15 * 60; # Seconds
+              on-timeout = cfg.dpmsCommand; # Turn off display
+            }
 
-        {
-          timeout = 20 * 60; # Seconds
-          on-timeout = "${loginctl} lock-session"; # Lock session
-        }
+            {
+              timeout = 20 * 60; # Seconds
+              on-timeout = "${loginctl} lock-session"; # Lock session
+            }
 
-        {
-          timeout = 60 * 60; # Seconds
-          on-timeout = "${pw-cli} info all | ${grep} running || ${systemctl} suspend"; # Suspend if no audio
-        }
-      ];
-    };
+            {
+              timeout = 60 * 60; # Seconds
+              on-timeout = "${pw-cli} info all | ${grep} running || ${systemctl} suspend"; # Suspend if no audio
+            }
+          ];
+        };
 
-    # BUG: graphical-session-pre.target may not have WAYLAND_DISPLAY set, so service is skipped
-    # https://github.com/nix-community/home-manager/issues/5899
-    systemd.user.services.hypridle = {
-      Unit = {
-        After = mkForce ["graphical-session.target"]; # graphical-session-pre.target
-      };
-    };
+        # BUG: graphical-session-pre.target may not have WAYLAND_DISPLAY set, so service is skipped
+        # https://github.com/nix-community/home-manager/issues/5899
+        systemd.user.services.hypridle = {
+          Unit = {
+            After = mkForce ["graphical-session.target"]; # graphical-session-pre.target
+          };
+        };
+      }
+    ];
   };
 }
