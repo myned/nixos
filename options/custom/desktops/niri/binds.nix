@@ -167,6 +167,7 @@ in {
             (key "O" "Mod+Shift" {spawn = [hyprpicker "--autocopy --format rgb"];})
             (key "P" "Ctrl+Alt" {spawn = [pkill "1password"];})
             (key "P" "Mod" {spawn = _1password;})
+            (key "P" "Mod+Shift" {spawn = [_1password "--quick-access"];})
             (key "Q" "Ctrl+Alt" {spawn = [bash "-c" ''${kill} -9 "$(${niri} msg -j windows | ${jq} '.[] | select(.is_focused == true).pid')"''];})
             (key "Q" "Mod" {close-window = [];})
             (key "R" "Mod" {focus-window-or-workspace-down = [];})
@@ -208,7 +209,6 @@ in {
             #// (key "Shift_L" "Mod" focus-workspace-previous)
             # TODO: Use "Super_L" when fixed
             (key "Space" "Mod" {spawn = config.custom.menus.default.show;})
-            (key "Space" "Mod+Alt" {spawn = [_1password "--quick-access"];})
             (key "Space" "Mod+Ctrl" {spawn = config.custom.menus.calculator.show;})
             (key "Space" "Mod+Ctrl+Shift" {spawn = networkmanager_dmenu;})
             (key "Space" "Mod+Shift" {spawn = config.custom.menus.search.show;})
