@@ -13,6 +13,7 @@ with lib; {
         shortcut = "g";
         iconUrl = "https://www.gstatic.com/images/branding/searchlogo/ico/favicon.ico";
         searchUrl = "https://google.com/search?q=%s";
+        suggestUrl = "https://www.google.com/complete/search?q=%s";
       };
     };
 
@@ -77,7 +78,7 @@ with lib; {
         title = "Ansible Galaxy";
         shortcut = "ag";
         iconUrl = "https://galaxy.ansible.com/favicon.ico";
-        searchUrl = "https://galaxy.ansible.com/ui/standalone/roles/?page=1&page_size=10&sort=-download_count&keywords=%s";
+        searchUrl = "https://galaxy.ansible.com/ui/standalone/roles/?page=1&page_size=100&sort=-download_count&keywords=%s";
       };
 
       arch-wiki = {
