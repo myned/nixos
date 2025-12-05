@@ -73,6 +73,13 @@ with lib; {
         searchUrl = "https://www.amazon.com/s?k=%s";
       };
 
+      ansible-galaxy = {
+        title = "Ansible Galaxy";
+        shortcut = "ag";
+        iconUrl = "https://galaxy.ansible.com/favicon.ico";
+        searchUrl = "https://galaxy.ansible.com/ui/standalone/roles/?page=1&page_size=10&sort=-download_count&keywords=%s";
+      };
+
       arch-wiki = {
         title = "Arch Wiki";
         shortcut = "aw";
