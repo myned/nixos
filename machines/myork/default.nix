@@ -88,14 +88,14 @@
 
           # HACK: Work around outputs not being removed when disconnected
           # https://github.com/YaLTeR/niri/issues/1722
-          DP-9 = left;
-          DP-10 = right;
-          DP-11 = left;
-          DP-12 = right;
-          DP-13 = left;
-          DP-14 = right;
-          DP-15 = left;
-          DP-16 = right;
+          DP-9 = right;
+          DP-10 = left;
+          DP-11 = right;
+          DP-12 = left;
+          DP-13 = right;
+          DP-14 = left;
+          DP-15 = right;
+          DP-16 = left;
         };
       };
 
