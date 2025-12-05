@@ -25,7 +25,7 @@ in {
             general = {
               #// hide_cursor = true;
               #// ignore_empty_input = true;
-              immediate_render = true;
+              #// immediate_render = true;
               #// screencopy_mode = 1; # CPU
             };
 
