@@ -11,7 +11,7 @@
       boot = true;
       beszel.enable = true;
       forgejo.enable = true;
-      portainer.enable = true;
+      #// portainer.enable = true;
     };
 
     services = {

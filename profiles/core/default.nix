@@ -16,17 +16,17 @@
       #// gatus.enable = true;
       #// grafana.enable = true;
       #// headscale.enable = true;
-      kener.enable = true;
-      netdata.enable = true;
-      ntfy.enable = true;
-      openspeedtest.enable = true;
-      portainer.enable = true;
-      portainer.server = true;
-      rustdesk.enable = true;
-      statping.enable = true;
+      #// kener.enable = true;
+      #// netdata.enable = true;
+      #// ntfy.enable = true;
+      #// openspeedtest.enable = true;
+      #// portainer.enable = true;
+      #// portainer.server = true;
+      #// rustdesk.enable = true;
+      #// statping.enable = true;
       #// syncthing.enable = true;
       #// syncthing.server = true;
-      uptimekuma.enable = true;
+      #// uptimekuma.enable = true;
 
       caddy = {
         enable = true;

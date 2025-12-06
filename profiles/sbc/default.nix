@@ -11,8 +11,8 @@
       boot = true;
       beszel.enable = true;
       homeassistant.enable = true;
-      netdata.enable = true;
-      portainer.enable = true;
+      #// netdata.enable = true;
+      #// portainer.enable = true;
     };
 
     services = {
