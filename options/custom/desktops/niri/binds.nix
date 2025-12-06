@@ -51,11 +51,12 @@ in {
       {
         # https://github.com/YaLTeR/niri/wiki/Configuration:-Key-Bindings
         # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsbinds
+        #?? niri msg action
         #?? Mod = Super/Win, Alt when nested; Mod5 = AltGr
         #?? wev
         programs.niri.settings.binds = let
           # Swap modifiers and key for alphabetical sorting
-          #?? (key "KEY" "MODIFIERS" (ACTION "ARGUMENT";})
+          #?? (key "<key>" "<modifiers>" {<action> = "<argument>";})
           key = key: modifiers: action: {
             name = "${
               if (isString modifiers)
@@ -129,10 +130,8 @@ in {
             (key "5" "Mod+Alt" {spawn = ["lifx" "state" "--kelvin" "5000"];})
             (key "9" "Mod" {spawn = audio;})
             (key "A" "Mod" {focus-column-or-monitor-left = [];})
-            (key "A" "Mod+Alt" {focus-monitor-left = [];})
-            (key "A" "Mod+Alt+Shift" {move-column-to-monitor-left = [];})
             (key "A" "Mod+Ctrl" {consume-or-expel-window-left = [];})
-            (key "A" "Mod+Ctrl+Shift" {move-column-to-first = [];})
+            (key "A" "Mod+Ctrl+Shift" {move-workspace-to-monitor-left = [];})
             (key "A" "Mod+Shift" {move-column-left-or-to-monitor-left = [];})
             (key "B" "Ctrl+Alt" {spawn = [pkill config.custom.browser.command];})
             #// (key "B" "Mod" {spawn = [config.custom.browser.command "-P" "default"];})
@@ -155,14 +154,12 @@ in {
             (key "G" "Mod+Shift" {spawn = steam-gamescope;})
             (key "I" "Ctrl+Alt" {spawn = [pkill "zed"];})
             (key "I" "Mod" {spawn = code;})
-            (key "K" "Ctrl+Alt" {spawn = [pkill "todoist-electron"];})
-            (key "K" "Mod" {spawn = todoist-electron;})
+            (key "K" "Ctrl+Alt" {spawn = [pkill "capacities"];})
+            (key "K" "Mod" {spawn = capacities;})
             (key "L" "Mod" {spawn = [bash "-c" "${loginctl} lock-session && ${niri} msg action power-off-monitors"];})
             (key "L" "Mod+Shift" {suspend = [];})
             (key "M" "Ctrl+Alt" {spawn = [pkill "youtube-music"];})
             (key "M" "Mod" {spawn = youtube-music;})
-            (key "N" "Ctrl+Alt" {spawn = [pkill "capacities"];})
-            (key "N" "Mod" {spawn = capacities;})
             (key "O" "Mod" {spawn = [hyprpicker "--autocopy"];})
             (key "O" "Mod+Shift" {spawn = [hyprpicker "--autocopy --format rgb"];})
             (key "P" "Ctrl+Alt" {spawn = [pkill "1password"];})
@@ -171,16 +168,12 @@ in {
             (key "Q" "Ctrl+Alt" {spawn = [bash "-c" ''${kill} -9 "$(${niri} msg -j windows | ${jq} '.[] | select(.is_focused == true).pid')"''];})
             (key "Q" "Mod" {close-window = [];})
             (key "R" "Mod" {focus-window-or-workspace-down = [];})
-            (key "R" "Mod+Alt" {focus-monitor-down = [];})
-            (key "R" "Mod+Alt+Shift" {move-column-to-monitor-down = [];})
-            (key "R" "Mod+Ctrl" {focus-workspace-down = [];})
-            (key "R" "Mod+Ctrl+Shift" {move-column-to-workspace-down = [];})
+            (key "R" "Mod+Ctrl" {move-column-to-workspace-down = [];})
+            (key "R" "Mod+Ctrl+Shift" {move-workspace-down = [];})
             (key "R" "Mod+Shift" {move-window-down-or-to-workspace-down = [];})
             (key "S" "Mod" {focus-column-or-monitor-right = [];})
-            (key "S" "Mod+Alt" {focus-monitor-right = [];})
-            (key "S" "Mod+Alt+Shift" {move-column-to-monitor-right = [];})
             (key "S" "Mod+Ctrl" {consume-or-expel-window-right = [];})
-            (key "S" "Mod+Ctrl+Shift" {move-column-to-last = [];})
+            (key "S" "Mod+Ctrl+Shift" {move-workspace-to-monitor-right = [];})
             (key "S" "Mod+Shift" {move-column-right-or-to-monitor-right = [];})
             (key "T" "Ctrl+Alt" {spawn = [pkill "ghostty"];})
             (key "T" "Mod" {spawn = ghostty;})
@@ -189,10 +182,8 @@ in {
             (key "V" "Mod" {spawn = config.custom.menus.clipboard.show;})
             (key "V" "Mod+Shift" {spawn = config.custom.menus.clipboard.clear;})
             (key "W" "Mod" {focus-window-or-workspace-up = [];})
-            (key "W" "Mod+Alt" {focus-monitor-up = [];})
-            (key "W" "Mod+Alt+Shift" {move-column-to-monitor-up = [];})
-            (key "W" "Mod+Ctrl" {focus-workspace-up = [];})
-            (key "W" "Mod+Ctrl+Shift" {move-column-to-workspace-up = [];})
+            (key "W" "Mod+Ctrl" {move-column-to-workspace-up = [];})
+            (key "W" "Mod+Ctrl+Shift" {move-workspace-up = [];})
             (key "W" "Mod+Shift" {move-window-up-or-to-workspace-up = [];})
             (key "X" "Mod" {set-column-width = "+10%";})
             (key "X" "Mod+Ctrl" {set-column-width = "100%";})
