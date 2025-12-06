@@ -1,7 +1,5 @@
 bjork.tech {
 	import global
-	import cloudflare
-	import cors
 
 	route {
 		import matrix
@@ -11,27 +9,26 @@ bjork.tech {
 
 *.bjork.tech {
 	import global
-	import cloudflare
 	import www bjork.tech
-	import proxy cloud.bjork.tech myosh:11000 # Nextcloud
-	import proxy feed.bjork.tech myosh:8808 # Miniflux
+	#// import proxy cloud.bjork.tech myosh:11000 # Nextcloud
+	#// import proxy feed.bjork.tech myosh:8808 # Miniflux
 	import proxy foundry.bjork.tech myosh:30000 # Foundry Virtual Tabletop
-	import proxy gist.bjork.tech myosh-opengist:6157 # Opengist
+	#// import proxy gist.bjork.tech myosh-opengist:6157 # Opengist
 	import proxy git.bjork.tech myosh-forgejo:3000 # Forgejo
 	#// import proxy net.bjork.tech myosh:8585 # Netbox
-	import proxy status.bjork.tech {system.hostname}-kener:3000 # Kener
-	import proxy ts.bjork.tech {system.hostname}:9999 # Headscale
-	import proxy vault.bjork.tech myosh:8088 # Vaultwarden
+	#// import proxy status.bjork.tech {system.hostname}-kener:3000 # Kener
+	#// import proxy ts.bjork.tech {system.hostname}:9999 # Headscale
+	#// import proxy vault.bjork.tech myosh:8088 # Vaultwarden
 
 	# AdGuard Home DNS-over-HTTPS
-	@dns host dns.bjork.tech
-	handle @dns {
-		#!! Requires trusted_proxies in AdGuardHome.yaml
-		#?? sudo nano /containers/adguardhome/config/AdGuardHome.yaml
-		reverse_proxy /dns-query/* {system.hostname}-adguardhome:80 {
-			header_up X-Real-IP {client_ip}
-		}
-	}
+	# @dns host dns.bjork.tech
+	# handle @dns {
+	# 	#!! Requires trusted_proxies in AdGuardHome.yaml
+	# 	#?? sudo nano /containers/adguardhome/config/AdGuardHome.yaml
+	# 	reverse_proxy /dns-query/* {system.hostname}-adguardhome:80 {
+	# 		header_up X-Real-IP {client_ip}
+	# 	}
+	# }
 
 	# Synapse
 	import handle matrix.bjork.tech {
@@ -49,96 +46,38 @@ bjork.tech {
 	# }
 }
 
-# AdGuard Home DNS-over-TLS
-*.dns.bjork.tech {
+*.bjork.tech {
 	import global
-	import cloudflare
-}
-
-*.admin.bjork.tech {
-	import global
-	import cloudflare
-	import cors
 	import vpn
-	import proxy adguardhome.admin.bjork.tech {system.hostname}-adguardhome:80 # AdGuard Home
-	import proxy affine.admin.bjork.tech myosh:3010 # AFFiNE
-	import proxy beszel.admin.bjork.tech {system.hostname}-beszel:8090 # Beszel
-	#// import proxy-insecure cockpit.admin.bjork.tech {system.hostname}:9090 # Cockpit
-	#// import proxy dash.admin.bjork.tech myosh:3001 # dash.
-	#// import proxy gatus.admin.bjork.tech {system.hostname}:8484 # Gatus
-	#// import proxy grafana.admin.bjork.tech {system.hostname}-grafana:3000 # Grafana
-	#// import proxy jackett.admin.bjork.tech myosh:9117 # Jackett
-	import proxy-insecure kasm.admin.bjork.tech myosh:3443 # Kasm
-	import proxy lidarr.admin.bjork.tech myosh:8686 # Lidarr
-	import proxy matrix.admin.bjork.tech myosh:8000 # Synapse Admin
-	import proxy-insecure nextcloud.admin.bjork.tech myosh:8080 # Nextcloud AIO
-	import proxy-insecure portainer.admin.bjork.tech {system.hostname}-portainer:9443 # Portainer
-	#// import proxy prometheus.admin.bjork.tech {system.hostname}-grafana:9090 # Prometheus
-	import proxy prowlarr.admin.bjork.tech myosh:9696 # Prowlarr
-	import proxy qbittorrent.admin.bjork.tech myosh:8881 # qBittorrent
-	import proxy radarr.admin.bjork.tech myosh:7878 # Radarr
-	import proxy scrutiny.admin.bjork.tech {system.hostname}:8282 # Scrutiny
-	import proxy slskd.admin.bjork.tech myosh:5030 # slskd
-	import proxy sonarr.admin.bjork.tech myosh:8989 # Sonarr
-	import proxy statping.admin.bjork.tech {system.hostname}-statping:8080 # Statping-ng
-	import proxy uptimekuma.admin.bjork.tech {system.hostname}-uptimekuma:3001 # Uptime Kuma
-
-	# Headplane
-	@headscale host headscale.admin.bjork.tech
-	handle @headscale {
-		redir / /admin
-		reverse_proxy /admin* {system.hostname}:3003
-	}
-
-	# Netdata
-	# import handle netdata.admin.bjork.tech {
-	# 	redir / /v3
-	# 	reverse_proxy {system.hostname}-netdata:19999
-	# }
-}
-
-vpn.bjork.tech {
-	import global
-	import cloudflare
-	import cors
-	import vpn
-	import serve vpn.bjork.tech
-}
-
-*.vpn.bjork.tech {
-	import global
-	import cloudflare
-	import cors
-	import vpn
-	import proxy ai.vpn.bjork.tech myosh-openwebui:8080 # Open WebUI
-	import proxy budget.vpn.bjork.tech myosh:5006 # Actual Budget
-	import proxy discover.vpn.bjork.tech myosh:5055 # Jellyseerr
-	import proxy home.vpn.bjork.tech mypi3:8123 # Home Assistant
-	import proxy matrix.vpn.bjork.tech myosh:8008 # Synapse
-	import proxy media.vpn.bjork.tech myosh:8096 # Jellyfin
-	import proxy media-next.vpn.bjork.tech myosh:8097 # Jellyfin Vue
-	import proxy notify.vpn.bjork.tech {system.hostname}:2586 # ntfy
-	import proxy reddit.vpn.bjork.tech myosh:8888 # Redlib
-	#// import proxy search.vpn.bjork.tech myosh:8888 # SearXNG
-	import proxy stream.vpn.bjork.tech myosh.{$TAILNET}:3333 # OvenMediaEngine
-	#// import proxy stream.vpn.bjork.tech myosh:8800 # Owncast
-	import proxy tv.vpn.bjork.tech myosh:8470 # Stremio Client
-	import proxy tv-api.vpn.bjork.tech myosh:11470 # Stremio Server
-	import proxy-insecure workspace.vpn.bjork.tech myosh:4443 # Kasm Workspaces
+	#// import proxy ai.bjork.tech myosh-openwebui:8080 # Open WebUI
+	#// import proxy budget.bjork.tech myosh:5006 # Actual Budget
+	import proxy discover.bjork.tech myosh:5055 # Jellyseerr
+	import proxy home.bjork.tech mypi3:8123 # Home Assistant
+	import proxy matrix.bjork.tech myosh:8008 # Synapse
+	import proxy media.bjork.tech myosh:8096 # Jellyfin
+	import proxy media-next.bjork.tech myosh:8097 # Jellyfin Vue
+	#// import proxy notify.bjork.tech {system.hostname}:2586 # ntfy
+	#// import proxy reddit.bjork.tech myosh:8888 # Redlib
+	#// import proxy search.bjork.tech myosh:8888 # SearXNG
+	import proxy stream.bjork.tech myosh.{$TAILNET}:3333 # OvenMediaEngine
+	#// import proxy stream.bjork.tech myosh:8800 # Owncast
+	#// import proxy tv.bjork.tech myosh:8470 # Stremio Client
+	#// import proxy tv-api.bjork.tech myosh:11470 # Stremio Server
+	#// import proxy-insecure workspace.bjork.tech myosh:4443 # Kasm Workspaces
 
 	# OpenSpeedTest
 	# https://github.com/openspeedtest/Speed-Test/issues/67
-	@speed host speed.vpn.bjork.tech
-	handle @speed {
-		reverse_proxy {system.hostname}-openspeedtest:3000 {
-			request_buffers 35MiB
-			response_buffers 35MiB
-			flush_interval -1
-		}
-	}
+	# @speed host speed.bjork.tech
+	# handle @speed {
+	# 	reverse_proxy {system.hostname}-openspeedtest:3000 {
+	# 		request_buffers 35MiB
+	# 		response_buffers 35MiB
+	# 		flush_interval -1
+	# 	}
+	# }
 
 	# Oryx
-	# import handle stream.vpn.bjork.tech {
+	# import handle stream.bjork.tech {
 	# 	reverse_proxy myosh:2022
 	# 	redir /flv {$ORYX_FLV}
 	# 	redir /hls {$ORYX_HLS}
@@ -147,9 +86,55 @@ vpn.bjork.tech {
 
 	# SRS
 	# https://ossrs.io/lts/en-us/docs/v6/doc/http-server#caddy-proxy
-	# import handle stream.vpn.bjork.tech {
+	# import handle stream.bjork.tech {
 	# 	reverse_proxy myosh:8800
 	# 	reverse_proxy /api/* myosh:1985
 	# 	reverse_proxy /rtc/* myosh:1985
+	# }
+}
+
+# AdGuard Home DNS-over-TLS
+# *.dns.bjork.tech {
+# 	import global
+# 	import cloudflare
+# }
+
+*.admin.bjork.tech {
+	import global
+	import vpn
+	#// import proxy adguardhome.admin.bjork.tech {system.hostname}-adguardhome:80 # AdGuard Home
+	#// import proxy affine.admin.bjork.tech myosh:3010 # AFFiNE
+	import proxy beszel.admin.bjork.tech {system.hostname}-beszel:8090 # Beszel
+	#// import proxy-insecure cockpit.admin.bjork.tech {system.hostname}:9090 # Cockpit
+	#// import proxy dash.admin.bjork.tech myosh:3001 # dash.
+	#// import proxy gatus.admin.bjork.tech {system.hostname}:8484 # Gatus
+	#// import proxy grafana.admin.bjork.tech {system.hostname}-grafana:3000 # Grafana
+	#// import proxy jackett.admin.bjork.tech myosh:9117 # Jackett
+	#// import proxy-insecure kasm.admin.bjork.tech myosh:3443 # Kasm
+	import proxy lidarr.admin.bjork.tech myosh:8686 # Lidarr
+	import proxy matrix.admin.bjork.tech myosh:8000 # Synapse Admin
+	#// import proxy-insecure nextcloud.admin.bjork.tech myosh:8080 # Nextcloud AIO
+	#// import proxy-insecure portainer.admin.bjork.tech {system.hostname}-portainer:9443 # Portainer
+	#// import proxy prometheus.admin.bjork.tech {system.hostname}-grafana:9090 # Prometheus
+	import proxy prowlarr.admin.bjork.tech myosh:9696 # Prowlarr
+	import proxy qbittorrent.admin.bjork.tech myosh:8881 # qBittorrent
+	import proxy radarr.admin.bjork.tech myosh:7878 # Radarr
+	#// import proxy scrutiny.admin.bjork.tech {system.hostname}:8282 # Scrutiny
+	import proxy slskd.admin.bjork.tech myosh:5030 # slskd
+	import proxy sonarr.admin.bjork.tech myosh:8989 # Sonarr
+	#// import proxy statping.admin.bjork.tech {system.hostname}-statping:8080 # Statping-ng
+	#// import proxy uptimekuma.admin.bjork.tech {system.hostname}-uptimekuma:3001 # Uptime Kuma
+
+	# Headplane
+	# @headscale host headscale.admin.bjork.tech
+	# handle @headscale {
+	# 	redir / /admin
+	# 	reverse_proxy /admin* {system.hostname}:3003
+	# }
+
+	# Netdata
+	# import handle netdata.admin.bjork.tech {
+	# 	redir / /v3
+	# 	reverse_proxy {system.hostname}-netdata:19999
 	# }
 }

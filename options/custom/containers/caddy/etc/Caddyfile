@@ -11,10 +11,13 @@
 	# https://letsencrypt.org/docs/staging-environment/
 	#// acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
 
+	# https://github.com/caddy-dns/cloudflare
+	dns cloudflare {$CLOUDFLARE_API_TOKEN}
+
 	# BUG: May not function on chromium browsers
 	# https://github.com/caddyserver/caddy/issues/6898
 	# https://caddyserver.com/docs/automatic-https#enabling-ech
-	#// ech ech.bjork.tech
+	ech ech.bjork.tech
 
 	# https://caddyserver.com/docs/logging
 	log {

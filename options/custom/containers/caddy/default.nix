@@ -101,6 +101,8 @@ in {
           arion --prebuilt-file "$ARION_PREBUILT" exec -- caddy \
             caddy reload --config /etc/caddy/Caddyfile
         '';
+
+        requires = ["tailscaled.service"];
       };
 
       #?? arion-caddy run -- --rm --entrypoint='id caddy' caddy
