@@ -23,9 +23,9 @@ in {
     };
 
     bypassPrompt = mkOption {
-      default = false;
+      default = true;
       description = "Whether to bypass the polkit password prompt";
-      example = true;
+      example = false;
       type = types.bool;
     };
   };
