@@ -87,12 +87,12 @@ with lib; {
     # https://github.com/NixOS/nix/issues/11030
     #// package = pkgs.nixVersions.latest;
 
-    optimise.automatic = true; # Run storage optimizer periodically
+    #// optimise.automatic = true; # Run storage optimizer periodically
 
     # https://nix.dev/manual/nix/latest/command-ref/conf-file.html
     # https://nix.dev/manual/nix/2.18/command-ref/conf-file.html for Lix
     settings = {
-      #// auto-optimise-store = true; # Run optimizer during build
+      auto-optimise-store = true; # Run optimizer during build
       #// fallback = true; # Build from source if cache timeout reached
       log-lines = 1000; # Build failure log length
       min-free = 1024 * 1024 * 1024; # Trigger garbage collection at 1 GB space remaining
