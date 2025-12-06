@@ -1,5 +1,4 @@
 {
-  branch,
   config,
   inputs,
   lib,
@@ -49,7 +48,7 @@ in {
     # HACK: Flutter needs to be wrapped for GPU offloading
     #?? <package> = hm.lib.nixGL.wrap prev.<package>;
     nixpkgs.overlays = [
-      inputs."nixgl-${branch}".overlays.default
+      inputs.nixgl.overlays.default
 
       (final: prev: {
         keyguard = hm.lib.nixGL.wrap prev.keyguard;

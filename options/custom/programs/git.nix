@@ -31,11 +31,7 @@ in {
           # https://git-scm.com/docs/git-config
           # https://git-scm.com/book/en/v2/
           # https://jvns.ca/blog/2024/02/16/popular-git-config-options/
-          ${
-            if versionAtLeast version "25.11"
-            then "settings"
-            else "extraConfig"
-          } = {
+          settings = {
             # https://git-scm.com/docs/git-config#Documentation/git-config.txt-alias
             #?? git <alias>
             alias = {

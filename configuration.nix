@@ -1,17 +1,14 @@
 {
-  branch,
   config,
   inputs,
   lib,
   pkgs,
   ...
 }:
-with lib; let
-  hm = config.home-manager.users.${config.custom.username};
-in {
+with lib; {
   imports = [
-    inputs."home-manager-${branch}".nixosModules.home-manager
-    inputs."nur-${branch}".modules.nixos.default
+    inputs.home-manager.nixosModules.home-manager
+    inputs.nur.modules.nixos.default
     inputs.agenix.nixosModules.default
   ];
 
@@ -50,14 +47,13 @@ in {
               system = prev.system;
             };
 
-          stable = nixpkgs "stable";
-          unstable = nixpkgs "unstable";
           master = nixpkgs "master";
           myned = nixpkgs "myned";
+          unstable = nixpkgs "unstable";
         in {
           # Overlay nixpkgs branches
-          #?? nixpkgs.BRANCH.PACKAGE
-          inherit stable unstable master myned;
+          #?? nixpkgs.<branch>.<package>
+          inherit master myned unstable;
 
           ### Packages
           # https://github.com/NixOS/nixpkgs/issues/384555
@@ -168,20 +164,7 @@ in {
         programs.home-manager.enable = true;
         systemd.user.startServices = true;
         home.stateVersion = config.system.stateVersion;
-
-        nix.gc = with config.nix.gc;
-          {
-            inherit automatic options;
-          }
-          // (
-            if (versionAtLeast version "25.11")
-            then {
-              inherit dates;
-            }
-            else {
-              frequency = toString dates;
-            }
-          );
+        nix.gc = config.nix.gc;
       }
     ];
   };

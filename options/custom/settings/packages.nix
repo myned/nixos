@@ -21,13 +21,6 @@ in {
           ### CLI applications optionals config.custom.default [
           config.boot.kernelPackages.cpupower # Processor utilities
 
-          (
-            # Performance analyzer
-            if versionAtLeast version "25.11"
-            then perf
-            else config.boot.kernelPackages.perf
-          )
-
           bluetui # Bluetooth manager
           btrfs-list # btrfs subvolume lister
           disko # Declarative disk management
@@ -55,6 +48,7 @@ in {
           nvd # Nix diff viewer
           openssl # Certificate utility
           pciutils # PCI device information
+          perf # Performance analyzer
           progress # Coreutils progress viewer
           q # DNS tester
           rclone # File sync

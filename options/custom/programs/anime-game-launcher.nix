@@ -1,5 +1,4 @@
 {
-  branch,
   config,
   inputs,
   lib,
@@ -8,7 +7,7 @@
 with lib; let
   cfg = config.custom.programs.anime-game-launcher;
 in {
-  imports = [inputs."aagl-gtk-on-nix-${branch}".nixosModules.default];
+  imports = [inputs.aagl-gtk-on-nix.nixosModules.default];
 
   options.custom.programs.anime-game-launcher = {
     enable = mkOption {default = false;};

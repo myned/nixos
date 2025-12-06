@@ -39,12 +39,7 @@ in {
         user = config.custom.username;
       };
 
-      ${
-        if versionAtLeast version "25.11"
-        then "desktopManager"
-        else "xserver.desktopManager"
-      }.gnome.enable =
-        !cfg.minimal;
+      desktopManager.gnome.enable = !cfg.minimal;
     };
 
     # https://github.com/mjakeman/extension-manager

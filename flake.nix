@@ -9,177 +9,140 @@
     #?? tag = "git+https://<repo>?ref=refs/tags/<tag>"
 
     ### Standalone
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    nix-flatpak.url = "github:gmodena/nix-flatpak?ref=v0.6.0";
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
-    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
-    nixpkgs-myned.url = "github:myned/nixpkgs/master";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-25.11";
+    flake-parts.url = "github:hercules-ci/flake-parts"; # https://github.com/hercules-ci/flake-parts
+    nix-flatpak.url = "github:gmodena/nix-flatpak?ref=v0.6.0"; # https://github.com/gmodena/nix-flatpak
+    nixos-hardware.url = "github:NixOS/nixos-hardware"; # https://github.com/NixOS/nixos-hardware
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11"; # https://github.com/NixOS/nixpkgs/tree/nixos-25.11
+    nixpkgs-master.url = "github:NixOS/nixpkgs/master"; # https://github.com/NixOS/nixpkgs
+    nixpkgs-myned.url = "github:myned/nixpkgs/master"; # https://github.com/myned/nixpkgs
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable"; # https://github.com/NixOS/nixpkgs/tree/nixos-unstable
 
-    ### Stable
+    ### Follows
     # https://github.com/ezKEa/aagl-gtk-on-nix
-    aagl-gtk-on-nix-stable = {
-      url = "github:ezKEa/aagl-gtk-on-nix/release-25.05";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
-    };
-
-    # https://github.com/nix-community/home-manager
-    home-manager-stable = {
-      url = "github:nix-community/home-manager/release-25.05";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
-    };
-
-    # https://github.com/nix-community/nix-index-database
-    nix-index-database-stable = {
-      url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
-    };
-
-    # https://github.com/nix-community/nixGL
-    nixgl-stable = {
-      url = "github:nix-community/nixGL";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
-    };
-
-    # https://github.com/nix-community/NUR
-    nur-stable = {
-      url = "github:nix-community/NUR";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
-    };
-
-    # https://github.com/nix-community/stylix
-    stylix-stable = {
-      url = "github:nix-community/stylix/release-25.05";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
-    };
-
-    ### Unstable
-    # https://github.com/ezKEa/aagl-gtk-on-nix
-    aagl-gtk-on-nix-unstable = {
+    aagl-gtk-on-nix = {
       url = "github:ezKEa/aagl-gtk-on-nix/release-25.11";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # https://github.com/ryantm/agenix
     agenix = {
       url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # https://github.com/Aylur/ags
     ags = {
       url = "github:Aylur/ags";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # https://github.com/hercules-ci/arion
     arion = {
       url = "github:hercules-ci/arion";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # https://github.com/nix-community/disko
     disko = {
       url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # https://github.com/abenz1267/elephant
     elephant = {
       url = "github:abenz1267/elephant/v2.16.1";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # https://github.com/Lehmanator/fprint-clear
     fprint-clear = {
       url = "github:Lehmanator/fprint-clear";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # https://github.com/nix-community/home-manager
-    home-manager-unstable = {
+    home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # https://github.com/Jovian-Experiments/Jovian-NixOS
     jovian-nixos = {
       url = "github:Jovian-Experiments/Jovian-NixOS";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # https://github.com/YaLTeR/niri
     niri = {
       url = "github:YaLTeR/niri";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # https://github.com/sodiboo/niri-flake
     niri-flake = {
       url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # https://github.com/thiagokokada/nix-alien
     nix-alien = {
       url = "github:thiagokokada/nix-alien";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # https://github.com/nix-community/nix-index-database
-    nix-index-database-unstable = {
+    nix-index-database = {
       url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # https://github.com/nix-community/nix-vscode-extensions
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # https://github.com/nix-community/nixd
     nixd = {
       url = "github:nix-community/nixd";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # https://github.com/nix-community/nixGL
-    nixgl-unstable = {
+    nixgl = {
       url = "github:nix-community/nixGL";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # https://github.com/AshleyYakeley/NixVirt
     nixvirt = {
       url = "github:AshleyYakeley/NixVirt/v0.6.0";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # https://github.com/nix-community/NUR
-    nur-unstable = {
+    nur = {
       url = "github:nix-community/NUR";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # https://github.com/nix-community/stylix
-    stylix-unstable = {
+    stylix = {
       url = "github:nix-community/stylix/release-25.11";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # https://github.com/abenz1267/walker
     walker = {
       url = "github:abenz1267/walker/v2.11.3";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
       inputs.elephant.follows = "elephant";
     };
 
     # https://github.com/youwen5/zen-browser-flake
     zen-browser = {
       url = "github:youwen5/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     ### Source code
@@ -295,37 +258,36 @@
         ];
       in {
         # NixOS systems
-        #!! There is no default nixpkgs, inputs.nixpkgs-<branch> must exist
         nixosConfigurations = let
-          nixos = branch: system: modules:
-            inputs."nixpkgs-${branch}".lib.nixosSystem {
+          nixos = system: modules:
+            inputs.nixpkgs.lib.nixosSystem {
               inherit system;
               modules = commonModules ++ modules;
 
               # TODO: Use inline modules instead of specialArgs
               # https://jade.fyi/blog/flakes-arent-real#nixos-modules
-              specialArgs = {inherit branch inputs;};
+              specialArgs = {inherit inputs;};
             };
         in {
-          myeck = nixos "unstable" "x86_64-linux" [./profiles/deck ./machines/myeck];
-          myeye = nixos "stable" "x86_64-linux" [./profiles/compute ./machines/myeye];
-          mynix = nixos "unstable" "x86_64-linux" [./profiles/desktop ./machines/mynix];
-          myore = nixos "stable" "x86_64-linux" [./profiles/core ./machines/myore];
-          myork = nixos "unstable" "x86_64-linux" [./profiles/laptop ./machines/myork];
-          myosh = nixos "stable" "x86_64-linux" [./profiles/server ./machines/myosh];
-          mypi3 = nixos "stable" "aarch64-linux" [./profiles/sbc ./machines/mypi3];
+          myeck = nixos "x86_64-linux" [./profiles/deck ./machines/myeck];
+          myeye = nixos "x86_64-linux" [./profiles/compute ./machines/myeye];
+          mynix = nixos "x86_64-linux" [./profiles/desktop ./machines/mynix];
+          myore = nixos "x86_64-linux" [./profiles/core ./machines/myore];
+          myork = nixos "x86_64-linux" [./profiles/laptop ./machines/myork];
+          myosh = nixos "x86_64-linux" [./profiles/server ./machines/myosh];
+          mypi3 = nixos "aarch64-linux" [./profiles/sbc ./machines/mypi3];
         };
 
         # Standalone home-manager configurations
         # https://nix-community.github.io/home-manager/#sec-upgrade-release-understanding-flake
         homeConfigurations = let
-          home = branch: system: modules:
-            inputs."home-manager-${branch}".lib.homeManagerConfiguration {
+          home = system: modules:
+            inputs.home-manager.lib.homeManagerConfiguration {
               modules = commonModules ++ modules;
-              pkgs = inputs."nixpkgs-${branch}".legacyPackages.${system};
+              pkgs = inputs.nixpkgs.legacyPackages.${system};
             };
         in {
-          myned = home "stable" "x86_64-linux" [];
+          myned = home "x86_64-linux" [];
         };
       };
     };
