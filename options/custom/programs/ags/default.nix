@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   ...
 }:
@@ -8,18 +9,20 @@ with lib; let
 in {
   options.custom.programs.ags.enable = mkOption {default = false;};
 
-  config = mkIf cfg.enable {
-    home-manager.sharedModules = [
-      {
-        imports = [inputs.ags.homeManagerModules.default];
+  config = mkMerge [
+    {home-manager.sharedModules = [inputs.ags.homeManagerModules.default];}
 
-        # https://aylur.github.io/ags-docs
-        # https://github.com/Aylur/ags
-        programs.ags = {
-          enable = true;
-          configDir = ./.;
-        };
-      }
-    ];
-  };
+    (mkIf cfg.enable {
+      home-manager.sharedModules = [
+        {
+          # https://aylur.github.io/ags-docs
+          # https://github.com/Aylur/ags
+          programs.ags = {
+            enable = true;
+            configDir = ./.;
+          };
+        }
+      ];
+    })
+  ];
 }
