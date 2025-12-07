@@ -151,9 +151,13 @@ in {
               "^.*virt-manager.*$"
             ];
 
-            work = app-ids [
-              "^.*work$"
-            ];
+            work =
+              app-ids [
+                "^.*work$"
+              ]
+              ++ titles [
+                "^.*[Ww]ork$"
+              ];
           in [
             ### Defaults
             {
