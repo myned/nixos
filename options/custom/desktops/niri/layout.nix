@@ -20,6 +20,9 @@ in {
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutalways-center-single-column
           always-center-single-column = true;
 
+          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutbackground-color
+          background-color = "#073642";
+
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutborder
           border = {
             enable = true;
@@ -29,11 +32,11 @@ in {
           };
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutcenter-focused-column
-          #// center-focused-column = mkIf config.custom.ultrawide "always";
+          #// center-focused-column = mkIf config.custom.display.default.ultrawide "always";
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutdefault-column-width
           default-column-width.proportion =
-            if config.custom.ultrawide
+            if config.custom.display.default.ultrawide
             then 0.3 # 30%
             else 0.6; # 60%
 

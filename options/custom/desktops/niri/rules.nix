@@ -198,7 +198,7 @@ in {
               excludes = picture-in-picture;
 
               default-column-width.proportion =
-                if config.custom.ultrawide
+                if config.custom.display.default.ultrawide
                 then 0.4
                 else 0.8;
             }
@@ -249,7 +249,7 @@ in {
               matches = ides;
 
               default-column-width.proportion =
-                if config.custom.ultrawide
+                if config.custom.display.default.ultrawide
                 then 0.4
                 else 0.8;
             }
@@ -265,7 +265,8 @@ in {
             }
 
             (let
-              pip = with config.custom; rec {
+              pip = with config.custom;
+              with config.custom.display.default; rec {
                 x = gap - border * 2;
                 y = gap;
                 w = builtins.floor (width * 0.25 - gap * 2 + border * 2 + border + 1); # 25%
@@ -293,7 +294,7 @@ in {
               matches = previewer;
 
               default-column-width.proportion =
-                if config.custom.ultrawide
+                if config.custom.display.default.ultrawide
                 then 0.4
                 else 0.8;
 
@@ -323,7 +324,7 @@ in {
               matches = vaults;
 
               default-column-width.proportion =
-                if config.custom.ultrawide
+                if config.custom.display.default.ultrawide
                 then 0.4
                 else 0.8;
             }
@@ -344,7 +345,7 @@ in {
             ### Overrides
             # TODO: Remove when switching 1Password to Wayland
             (let
-              height = builtins.floor (config.custom.height * 0.4); # 40%
+              height = builtins.floor (config.custom.display.default.height * 0.4); # 40%
             in {
               # 1Password Quick Access
               matches = [((app-id "^1Password") // (title "^Quick Access — 1Password$"))];

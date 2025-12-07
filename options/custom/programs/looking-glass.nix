@@ -16,7 +16,7 @@ in {
 
     # https://looking-glass.io/docs/B7/install_libvirt/#libvirt-determining-memory
     memory = mkOption {
-      default = with config.custom;
+      default = with config.custom.display.default;
         (
           if ultrawide
           then 128
@@ -120,7 +120,7 @@ in {
               borderless = true;
               fullScreen = true;
               quickSplash = true;
-              #// size = "${toString (config.custom.width / 2)}x${toString (config.custom.height / 2)}";
+              #// size = "${toString (config.custom.display.default.width / 2)}x${toString (config.custom.display.default.height / 2)}";
               uiFont = config.stylix.fonts.monospace.name;
               uiSize = 20;
             };

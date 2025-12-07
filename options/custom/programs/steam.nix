@@ -44,7 +44,7 @@ in {
           extraArgs = "-system-composer";
 
           extraEnv = {
-            GDK_SCALE = toString config.custom.scale; # Fractional scaling
+            GDK_SCALE = toString config.custom.display.default.scale; # Fractional scaling
 
             # HACK: Force XInput controller so only Steam Input is used, requires Proton GE
             # https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/issues/4168

@@ -95,7 +95,7 @@ in {
           ];
 
           vm = ''${remote} --vm --client xfreerdp --username Myned --password "$(${cat} ${config.age.secrets."${config.custom.hostname}/vm/myndows.pass".path})" ${
-              if config.custom.hidpi
+              if config.custom.display.default.hidpi
               then "--scale 140"
               else ""
             } myndows'';

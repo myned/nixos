@@ -11,9 +11,39 @@
 
   custom = {
     hostname = "myork";
-    width = 2256;
-    height = 1504;
-    scale = 1.5;
+
+    display.outputs = let
+      left = {
+        x = -1920;
+        width = 1920;
+        height = 1080;
+        refresh = 75;
+        force = true;
+      };
+
+      right =
+        left
+        // {
+          x = 0;
+        };
+    in {
+      eDP-1 = {
+        width = 2256;
+        height = 1504;
+        scale = 1.5;
+      };
+
+      # HACK: Work around outputs not being removed when disconnected
+      # https://github.com/YaLTeR/niri/issues/1722
+      DP-9 = right;
+      DP-10 = left;
+      DP-11 = right;
+      DP-12 = left;
+      DP-13 = right;
+      DP-14 = left;
+      DP-15 = right;
+      DP-16 = left;
+    };
 
     programs = {
       # BUG: Phoenix support not currently functional
@@ -49,54 +79,6 @@
         dgpu.driver = "amdgpu";
         igpu.driver = "amdgpu";
         rocm = "11.0.2"; # 11.0.3
-
-        outputs = with config.custom; let
-          left = {
-            x = width / scale - 1920;
-            y = 0;
-            width = 1920;
-            height = 1080;
-            scale = 1;
-            refresh = 75;
-            finalRefresh = 74.977;
-            force = true;
-            main = true;
-            vrr = false;
-          };
-
-          right = {
-            x = width / scale;
-            y = 0;
-            width = 1920;
-            height = 1080;
-            scale = 1;
-            refresh = 75;
-            finalRefresh = 74.977;
-            force = true;
-            main = true;
-            vrr = false;
-          };
-        in {
-          eDP-1 = {
-            inherit width height refresh scale vrr;
-            x = 0;
-            y = 0;
-            finalRefresh = refresh;
-            force = false;
-            main = true;
-          };
-
-          # HACK: Work around outputs not being removed when disconnected
-          # https://github.com/YaLTeR/niri/issues/1722
-          DP-9 = right;
-          DP-10 = left;
-          DP-11 = right;
-          DP-12 = left;
-          DP-13 = right;
-          DP-14 = left;
-          DP-15 = right;
-          DP-16 = left;
-        };
       };
 
       storage = {

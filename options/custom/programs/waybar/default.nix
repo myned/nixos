@@ -192,7 +192,7 @@ in {
               reload_style_on_change = true;
 
               output = let
-                mainOutputs = filterAttrs (n: v: v.main == true) config.custom.settings.hardware.outputs;
+                mainOutputs = filterAttrs (_: o: o.minimal == false) config.custom.display.outputs;
               in
                 mapAttrsToList (name: _: name) mainOutputs;
 

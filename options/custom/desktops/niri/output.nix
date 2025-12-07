@@ -8,37 +8,43 @@ with lib; let
 in {
   options.custom.desktops.niri.output = {
     enable = mkEnableOption "output";
+
+    kanshi = mkOption {
+      description = "Whether to enable kanshi for dynamic output management";
+      default = true;
+      example = false;
+      type = types.bool;
+    };
   };
 
   config = mkIf cfg.enable {
+    custom.services.kanshi.enable = cfg.kanshi;
+
     home-manager.sharedModules = [
       {
         # https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
         # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsoutputs
         #?? niri msg outputs
         programs.niri.settings.outputs = mapAttrs (_: output:
-          with output; {
-            backdrop-color = "#073642";
-            background-color = "#073642";
-            scale = scale + 0.0;
+          with output;
+            optionalAttrs (!cfg.kanshi) {
+              inherit enable scale;
 
-            mode = {
-              width = builtins.floor width;
-              height = builtins.floor height;
-              refresh = finalRefresh + 0.0;
-            };
+              mode = {
+                inherit width height;
+                refresh = finalRefresh;
+              };
 
-            position = {
-              x = builtins.floor x;
-              y = builtins.floor y;
-            };
+              position = {
+                inherit x y;
+              };
 
-            variable-refresh-rate =
-              if vrr
-              then "on-demand" #!! Requires window-rule
-              else false;
-          })
-        config.custom.settings.hardware.outputs;
+              variable-refresh-rate =
+                if vrr
+                then "on-demand" #!! Requires window-rule
+                else false;
+            })
+        config.custom.display.outputs;
       }
     ];
   };

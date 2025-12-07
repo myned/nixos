@@ -11,9 +11,20 @@
 
   custom = {
     hostname = "mynix";
-    width = 3440;
-    height = 1440;
-    refresh = 75;
+
+    display.outputs = {
+      DP-1 = {
+        width = 3440;
+        height = 1440;
+        refresh = 75;
+        #// finalRefresh = 74.979;
+        force = true;
+
+        # BUG: Cursor updates cause refresh rate fluctuation, so disable for now
+        # https://github.com/YaLTeR/niri/issues/1214
+        #// vrr = true;
+      };
+    };
 
     games = {
       steamDir = "/mnt/gaymes1/steam/steamapps/compatdata";
@@ -46,34 +57,6 @@
       hardware = {
         cpu = "intel";
         rocm = "10.3.0"; # 10.3.1
-
-        outputs = with config.custom; {
-          # DP-1 = {
-          #   x = width;
-          #   y = 0;
-          #   width = 1920;
-          #   height = 1200;
-          #   refresh = 60;
-          #   finalRefresh = 60;
-          #   scale = 1;
-          #   force = false;
-          #   main = false;
-          #   vrr = false;
-          # };
-
-          DP-1 = {
-            inherit width height refresh scale;
-            x = 0;
-            y = 0;
-            finalRefresh = 74.979;
-            main = true;
-            force = true;
-
-            # BUG: Cursor updates cause refresh rate fluctuation, so disable for now
-            # https://github.com/YaLTeR/niri/issues/1214
-            vrr = false;
-          };
-        };
 
         dgpu = {
           driver = "amdgpu";

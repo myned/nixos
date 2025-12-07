@@ -79,7 +79,7 @@ in {
                 honor-xdg-activation-with-invalid-serial = [];
                 keep-laptop-panel-on-when-lid-is-closed = [];
               }
-              // optionalAttrs config.custom.vrr {
+              // optionalAttrs config.custom.display.default.vrr {
                 skip-cursor-only-updates-during-vrr = [];
               };
 
@@ -119,7 +119,6 @@ in {
                 else node))
               ++ [
                 # Top-level nodes
-                (plain "overview" [(leaf "zoom" 0.5)])
               ]);
         };
       }

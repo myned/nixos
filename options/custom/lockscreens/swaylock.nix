@@ -78,7 +78,7 @@ in {
               indicator-idle-visible = true;
               indicator-radius = 100;
               font = config.stylix.fonts.monospace.name;
-              font-size = 24 * config.custom.scale;
+              font-size = 24 * config.custom.display.default.scale;
               #// image = mkIf config.custom.services.wallpaper.enable "/tmp/altered.png";
 
               bs-hl-color = "93a1a1";

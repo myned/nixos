@@ -122,7 +122,7 @@ in {
               "col.locked_inactive" = "rgba(cb4b1600)";
 
               font_size =
-                if config.custom.hidpi
+                if config.custom.display.default.hidpi
                 then 16
                 else 10;
 
@@ -164,7 +164,7 @@ in {
             slave_count_for_center_master = 0;
 
             orientation =
-              if config.custom.ultrawide
+              if config.custom.display.default.ultrawide
               then "center"
               else "top";
           };

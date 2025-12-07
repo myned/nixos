@@ -64,12 +64,12 @@ in {
               center_row_if_space_available = true;
 
               column_default_width =
-                if config.custom.ultrawide
+                if config.custom.display.default.ultrawide
                 then "threeeighths"
                 else "onethird";
 
               column_widths =
-                if config.custom.ultrawide
+                if config.custom.display.default.ultrawide
                 then "onefourth threeeighths onehalf fiveeighths threequarters one"
                 else "onethird onehalf twothirds one";
 

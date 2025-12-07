@@ -52,7 +52,8 @@ in {
 
           # https://wiki.hyprland.org/Configuring/Window-Rules
           #?? windowrulev2 = RULE, WINDOW
-          windowrulev2 = with config.custom; let
+          windowrulev2 = with config.custom;
+          with config.custom.display.default; let
             gaps_in = gap / 4;
 
             # HACK: Attempts to account for hypr-specific scale, gaps, borders, and bar padding

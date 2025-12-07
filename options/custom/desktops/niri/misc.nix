@@ -47,6 +47,12 @@ in {
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingshotkey-overlayskip-at-startup
           hotkey-overlay.skip-at-startup = true;
 
+          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsoverviewbackdrop-color
+          overview = {
+            backdrop-color = "#073642";
+            zoom = 0.5;
+          };
+
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsprefer-no-csd
           prefer-no-csd = true;
 

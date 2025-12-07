@@ -22,14 +22,6 @@ in {
     syncDir = mkOption {default = "${hm.home.homeDirectory}/SYNC";};
 
     ### Hardware
-    width = mkOption {default = 1920.0;};
-    height = mkOption {default = 1080.0;};
-    refresh = mkOption {default = 60.0;};
-    vrr = mkOption {default = false;};
-    ultrawide = mkOption {default = cfg.width * 9 / 16 > cfg.height;}; # Wider than 16:9
-    hdr = mkOption {default = false;};
-    hidpi = mkOption {default = cfg.scale > 1;};
-    scale = mkOption {default = 1.0;};
     border = mkOption {default = 3.0;};
     gap = mkOption {default = 10.0;};
     padding = mkOption {default = 51.0;}; # ?? journalctl --user -u waybar.service | grep height:
@@ -92,4 +84,17 @@ in {
       type = types.enum ["12h" "24h"];
     };
   };
+
+  config.custom = mkMerge [
+    (mkIf cfg.default {
+      })
+
+    (mkIf cfg.minimal {
+      })
+
+    (mkIf cfg.full {
+      display.enable = true;
+      search.enable = true;
+    })
+  ];
 }

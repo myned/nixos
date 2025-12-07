@@ -20,8 +20,8 @@ in {
           "*" = {
             adaptive_sync = "off"; # Explicitly use script/binds to toggle vrr
             background = "#073642 solid_color"; # Fallback color
-            resolution = "${toString config.custom.width}x${toString config.custom.height}@${toString config.custom.refresh}Hz";
-            scale = toString config.custom.scale;
+            resolution = "${toString config.custom.display.default.width}x${toString config.custom.display.default.height}@${toString config.custom.display.default.refresh}Hz";
+            scale = toString config.custom.display.default.scale;
           };
         };
       }

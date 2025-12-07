@@ -19,26 +19,32 @@ in {
           enable = true;
 
           # https://gitlab.freedesktop.org/emersion/kanshi/-/blob/master/doc/kanshi.5.scd
-          settings = with config.custom; [
+          settings = [
             {
               profile = {
                 name = "default";
 
-                outputs = [
-                  {
-                    status = "enable";
+                outputs =
+                  mapAttrsToList (
+                    name: output:
+                      with output; {
+                        criteria = name;
+                        adaptiveSync = vrr;
+                        scale = scale;
 
-                    # BUG: Wildcards do not match
-                    # https://gitlab.freedesktop.org/emersion/kanshi/-/issues/54
-                    criteria = "\\*";
+                        status =
+                          if enable
+                          then "enable"
+                          else "disable";
 
-                    # FIXME: Custom modes do not apply
-                    mode = "${toString width}x${toString height}@${toString refresh}";
-
-                    scale = scale;
-                    adaptiveSync = vrr;
-                  }
-                ];
+                        mode = "${
+                          if force && !config.custom.display.forceAtBoot
+                          then "--custom "
+                          else ""
+                        }${toString width}x${toString height}@${toString finalRefresh}";
+                      }
+                  )
+                  config.custom.display.outputs;
               };
             }
           ];

@@ -26,7 +26,7 @@ in {
             config.font = wezterm.font('${config.stylix.fonts.monospace.name}')
 
             -- # TODO: Remove when using Wayland
-            config.font_size = ${toString (14 * config.custom.scale)}
+            config.font_size = ${toString (14 * config.custom.display.default.scale)}
 
             ${readFile ./config.lua}
 
