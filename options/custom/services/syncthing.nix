@@ -144,7 +144,9 @@ in {
           settings = {
             # https://docs.syncthing.net/users/config.html
             options = {
+              localAnnounceEnabled = true; # 21027/udp
               globalAnnounceEnabled = false; # Global discovery allows device spoofing
+              relaysEnabled = false;
               urAccepted = 1; # Usage report enabled
               urSeen = 3; # Usage report version
             };
@@ -162,20 +164,22 @@ in {
             # Devices can be globally declared without issue
             # Syncthing seems to ignore entries that match the current machine's id
             devices = mapAttrs (name: value:
-              value
-              // {
-                # Add tailscale machines to static discovery
-                addresses = ["tcp://${name}:22000"];
-              }) {
+              {
+                addresses = [
+                  "dynamic"
+                  "tcp://${name}:22000" # Add tailscale machines to static discovery
+                ];
+              }
+              // value) {
               myosh = {
                 introducer = true;
                 id = "PTZV7ID-UYR37CU-GNRWHF3-JI3OVQ4-4YT7T4V-HB735JT-YIC5GLB-NPY36Q4";
               };
 
+              myeck.id = "77DCMIH-2O6C4TK-3VK5S27-GZ5IXXB-CTSZ3YG-LMPHZTT-L55WAPZ-SLX4LAI";
               mynix.id = "4VBPQMB-L2UIAQA-7IVLQUH-GXMY624-OECCFXN-JMCZI44-Q6MADRJ-4VPV6QK";
               myork.id = "L7CAFJP-NXNEZUY-V36HDXP-V6T5CHP-2YCYV3P-JCQV6ZH-JEDULBU-BABJLQP";
-              myxel.id = "6ER5UMP-KVYYKVY-AL5NAC6-W4KRXTB-UYRQG4R-AFWK66C-RWOULMW-EATTVQV";
-              myeck.id = "";
+              myxel.id = "JBNXW4H-WYAKVYR-7IGYUCP-4AAMX2F-EPE2NNH-PVN4CL7-P2Z2D6T-HC7JQAC";
               zendows.id = "4JS6YSF-OBZFPYW-B3OUF4G-R6DVOZ4-KFAVGFY-NT4J223-E44HK3D-GPYAFQP";
               zexel.id = "VYG4QAC-SY7ET5F-CHIPQUN-TP6P7WN-LQCT3HO-UBS73JG-ZGOKCLG-SHWZOAN";
             };
