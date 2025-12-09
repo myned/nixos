@@ -50,8 +50,9 @@ in {
           # https://github.com/Morzomb/All-jellyfin-media-server
           jellyfin.service = {
             container_name = "jellyfin";
+            depends_on = ["vpn"];
             image = "ghcr.io/jellyfin/jellyfin:10.10.7"; # https://github.com/jellyfin/jellyfin/pkgs/container/jellyfin
-            network_mode = "container:mullvad"; # 8096/tcp
+            network_mode = "service:vpn"; # 8096/tcp
             restart = "unless-stopped";
             user = "${cfg.uid}:${cfg.gid}";
 
@@ -67,8 +68,9 @@ in {
           # https://github.com/FlareSolverr/FlareSolverr
           # flaresolverr.service = {
           #   container_name = "jellyfin-flaresolverr";
+          #   depends_on = ["vpn"];
           #   image = "ghcr.io/flaresolverr/flaresolverr:v3.3.25"; # https://github.com/FlareSolverr/FlareSolverr/pkgs/container/flaresolverr
-          #   network_mode = "container:mullvad"; # 8191/tcp
+          #   network_mode = "service:vpn"; # 8191/tcp
           #   restart = "unless-stopped";
           #   user = "${cfg.uid}:${cfg.gid}";
           # };
@@ -77,8 +79,9 @@ in {
           # https://github.com/Fallenbagel/jellyseerr
           jellyseerr.service = {
             container_name = "jellyfin-jellyseerr";
+            depends_on = ["vpn"];
             image = "ghcr.io/fallenbagel/jellyseerr:2.7.2"; # https://github.com/fallenbagel/jellyseerr/pkgs/container/jellyseerr
-            network_mode = "container:mullvad"; # 5055/tcp
+            network_mode = "service:vpn"; # 5055/tcp
             restart = "unless-stopped";
             user = "${cfg.uid}:${cfg.gid}";
             volumes = ["${config.custom.containers.directory}/jellyfin/jellyseerr:/app/config"];
@@ -88,8 +91,9 @@ in {
           # https://github.com/Lidarr/Lidarr
           lidarr.service = {
             container_name = "jellyfin-lidarr";
+            depends_on = ["vpn"];
             image = "ghcr.io/linuxserver/lidarr:2.12.4"; # https://github.com/linuxserver/docker-lidarr/pkgs/container/lidarr
-            network_mode = "container:mullvad"; # 8686/tcp
+            network_mode = "service:vpn"; # 8686/tcp
             restart = "unless-stopped";
 
             volumes = [
@@ -107,8 +111,9 @@ in {
           # https://github.com/Prowlarr/Prowlarr
           prowlarr.service = {
             container_name = "jellyfin-prowlarr";
+            depends_on = ["vpn"];
             image = "ghcr.io/linuxserver/prowlarr:1.37.0"; # https://github.com/linuxserver/docker-prowlarr/pkgs/container/prowlarr
-            network_mode = "container:mullvad"; # 9696/tcp
+            network_mode = "service:vpn"; # 9696/tcp
             restart = "unless-stopped";
             volumes = ["${config.custom.containers.directory}/jellyfin/prowlarr:/config"];
 
@@ -122,8 +127,9 @@ in {
           # https://github.com/linuxserver/docker-qbittorrent
           qbittorrent.service = {
             container_name = "jellyfin-qbittorrent";
+            depends_on = ["vpn"];
             image = "ghcr.io/linuxserver/qbittorrent:5.1.2"; # https://github.com/linuxserver/docker-qbittorrent/pkgs/container/qbittorrent
-            network_mode = "container:mullvad"; # 8881/tcp
+            network_mode = "service:vpn"; # 8881/tcp
             restart = "unless-stopped";
 
             volumes = [
@@ -142,8 +148,9 @@ in {
           # https://github.com/Radarr/Radarr
           radarr.service = {
             container_name = "jellyfin-radarr";
+            depends_on = ["vpn"];
             image = "ghcr.io/linuxserver/radarr:5.26.2"; # https://github.com/linuxserver/docker-radarr/pkgs/container/radarr
-            network_mode = "container:mullvad"; # 7878/tcp
+            network_mode = "service:vpn"; # 7878/tcp
             restart = "unless-stopped";
 
             volumes = [
@@ -161,9 +168,10 @@ in {
           # https://github.com/slskd/slskd/blob/master/docs/docker.md
           slskd.service = {
             container_name = "jellyfin-slskd";
+            depends_on = ["vpn"];
             env_file = [config.age.secrets."${config.custom.hostname}/jellyfin/slskd.env".path];
             image = "ghcr.io/slskd/slskd:0.23.1"; # https://github.com/slskd/slskd/pkgs/container/slskd
-            network_mode = "container:mullvad"; # 5030/tcp 5031/tcp 50300/tcp
+            network_mode = "service:vpn"; # 5030/tcp 5031/tcp 50300/tcp
             restart = "unless-stopped";
             user = "${cfg.uid}:${cfg.gid}";
 
@@ -187,8 +195,9 @@ in {
           # https://github.com/Sonarr/Sonarr
           sonarr.service = {
             container_name = "jellyfin-sonarr";
+            depends_on = ["vpn"];
             image = "ghcr.io/linuxserver/sonarr:4.0.15"; # https://github.com/linuxserver/docker-sonarr/pkgs/container/sonarr
-            network_mode = "container:mullvad"; # 8989/tcp
+            network_mode = "service:vpn"; # 8989/tcp
             restart = "unless-stopped";
 
             volumes = [
@@ -206,9 +215,9 @@ in {
           # https://github.com/mrusse/soularr
           soularr.service = {
             container_name = "jellyfin-soularr";
-            depends_on = ["lidarr" "slskd"];
+            depends_on = ["lidarr" "slskd" "vpn"];
             image = "mrusse08/soularr:latest"; # https://hub.docker.com/r/mrusse08/soularr/tags
-            network_mode = "container:mullvad";
+            network_mode = "service:vpn";
             restart = "unless-stopped";
             user = "${cfg.uid}:${cfg.gid}";
 
@@ -218,20 +227,48 @@ in {
               "${config.age.secrets."${config.custom.hostname}/jellyfin/soularr.ini".path}:/data/config.ini:ro"
             ];
           };
+
+          # https://tailscale.com/kb/1282/docker
+          vpn.service = {
+            container_name = "jellyfin-vpn";
+            devices = ["/dev/net/tun:/dev/net/tun"];
+            env_file = [config.age.secrets."common/tailscale/vpn.env".path];
+            hostname = "${config.custom.hostname}-jellyfin";
+            image = "ghcr.io/tailscale/tailscale:v1.84.3"; # https://github.com/tailscale/tailscale/pkgs/container/tailscale
+            restart = "unless-stopped";
+            volumes = ["${config.custom.containers.directory}/jellyfin/vpn:/var/lib/tailscale"];
+
+            ports = [
+              "5030:5030/tcp"
+              "5055:5055/tcp"
+              "7878:7878/tcp"
+              "8096:8096/tcp"
+              "8097:80/tcp"
+              #// "8191:8191/tcp"
+              "8686:8686/tcp"
+              "8881:8881/tcp"
+              "8989:8989/tcp"
+              "9696:9696/tcp"
+            ];
+
+            capabilities = {
+              NET_ADMIN = true;
+            };
+          };
         }
         // optionalAttrs cfg.vue {
           # https://jellyfin.org/docs/general/clients/jellyfin-vue
           # https://github.com/jellyfin/jellyfin-vue
           vue.service = {
             container_name = "jellyfin-vue";
-            depends_on = ["jellyfin"];
+            depends_on = ["jellyfin" "vpn"];
             image = "ghcr.io/jellyfin/jellyfin-vue:unstable"; # https://github.com/jellyfin/jellyfin-vue/pkgs/container/jellyfin-vue
-            network_mode = "container:mullvad"; # 80/tcp
+            network_mode = "service:vpn"; # 80/tcp
             restart = "unless-stopped";
 
             # https://github.com/jellyfin/jellyfin-vue/wiki/Configuration
             environment = {
-              DEFAULT_SERVERS = "media.vpn.${config.custom.domain}";
+              DEFAULT_SERVERS = "media.${config.custom.domain}";
               DISABLE_SERVER_SELECTION = "1";
             };
           };
@@ -255,11 +292,11 @@ in {
                   -H "Title: Soularr" \
                   -H "Tags: warning" \
                   -d "Failed: $last_entry" \
-                  https://notify.vpn.${config.custom.domain}/status
+                  https://notify.${config.custom.domain}/status
               '';
             in [
               "${config.custom.containers.directory}/jellyfin/soularr:/data:ro"
-              "${notify}:/notify.sh"
+              "${notify}:/notify.sh:ro"
             ];
 
             # https://github.com/devodev/docker-inotify?tab=readme-ov-file#environment-variables
@@ -270,19 +307,6 @@ in {
             };
           };
         };
-
-      mullvad.settings.services.mullvad.service.ports = [
-        "5030:5030/tcp"
-        "5055:5055/tcp"
-        "7878:7878/tcp"
-        "8096:8096/tcp"
-        "8097:80/tcp"
-        #// "8191:8191/tcp"
-        "8686:8686/tcp"
-        "8881:8881/tcp"
-        "8989:8989/tcp"
-        "9696:9696/tcp"
-      ];
     };
 
     #?? arion-jellyfin run -- --rm --entrypoint=id jellyfin

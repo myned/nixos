@@ -153,6 +153,7 @@ in {
       })
       [
         "common/tailscale/container.env"
+        "common/tailscale/vpn.env"
       ]);
   };
 }

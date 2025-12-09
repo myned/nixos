@@ -34,6 +34,7 @@ in {
   "common/ntfy/token" = keys common;
   "common/syncthing/myned.pass" = keys common;
   "common/tailscale/container.env" = keys common;
+  "common/tailscale/vpn.env" = keys common;
 
   "myeck/users/myned.pass" = key myeck;
   "myeck/users/root.pass" = key myeck;
