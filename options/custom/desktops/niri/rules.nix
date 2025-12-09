@@ -50,7 +50,7 @@ in {
               "^brave-browser.*$"
               "^chromium-browser.*$"
               "^firefox.*$"
-              "^google-chrome.*$"
+              "^[Gg]oogle-chrome.*$"
               "^librewolf.*$"
               "^vivaldi.*$"
               "^zen.*$"

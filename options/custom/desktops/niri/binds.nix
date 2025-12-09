@@ -137,7 +137,7 @@ in {
             #// (key "B" "Mod" {spawn = [config.custom.browser.command "-P" "default"];})
             #// (key "B" "Mod+Shift" {spawn = [config.custom.browser.command "-P" "work" "--name" "firefox-work" "--no-remote"];})
             (key "B" "Mod" {spawn = [config.custom.browser.command "--profile-directory=Default"];})
-            (key "B" "Mod+Shift" {spawn = [config.custom.browser.command "--profile-directory=Profile 2" "--class=${config.custom.browser.appId}-work" "--window-name=Work"];})
+            (key "B" "Mod+Shift" {spawn = [config.custom.browser.command "--profile-directory=Profile 2" "--window-name=Work"];})
 
             # HACK: Spawn chromium work "profile" in separate data directory for app-id to take effect
             # https://issues.chromium.org/issues/40172351
