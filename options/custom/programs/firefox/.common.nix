@@ -90,7 +90,7 @@ with lib; {
           "browser.contentblocking.category" = "standard";
           "browser.contentblocking.report.hide_vpn_banner" = true;
           "browser.contentblocking.report.show_mobile_app" = false;
-          "browser.contentblocking.report.vpn.enabled" = false;
+          "browser.contentblocking.report.enabled" = false;
           "browser.ctrlTab.sortByRecentlyUsed" = false;
           "browser.dataFeatureRecommendations.enabled" = false;
           "browser.discovery.enabled" = false;

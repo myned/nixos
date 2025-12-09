@@ -28,7 +28,7 @@ in {
     };
 
     url = mkOption {
-      default = "https://notify.vpn.${config.custom.domain}";
+      default = "https://notify.${config.custom.domain}";
       type = types.str;
     };
   };

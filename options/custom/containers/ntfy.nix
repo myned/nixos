@@ -33,7 +33,7 @@ in {
           NTFY_ATTACHMENT_CACHE_DIR = "/var/lib/ntfy/attachments";
           NTFY_AUTH_DEFAULT_ACCESS = "read-write"; # https://docs.ntfy.sh/config/#example-unifiedpush
           NTFY_AUTH_FILE = "/var/lib/ntfy/auth.db";
-          NTFY_BASE_URL = "https://notify.vpn.${config.custom.domain}";
+          NTFY_BASE_URL = "https://notify.${config.custom.domain}";
           NTFY_BEHIND_PROXY = "true";
           NTFY_CACHE_DURATION = "7d";
           NTFY_CACHE_FILE = "/var/lib/ntfy/cache.db";

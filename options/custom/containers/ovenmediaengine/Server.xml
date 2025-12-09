@@ -27,7 +27,7 @@
   				<WorkerCount>1</WorkerCount>
   			</Signalling>
   			<IceCandidates>
-  				<IceCandidate>stream.vpn.bjork.tech:10000/udp</IceCandidate>
+  				<IceCandidate>stream.bjork.tech:10000/udp</IceCandidate>
   			</IceCandidates>
   		</WebRTC>
 			<RTMP>
@@ -42,7 +42,7 @@
   				<WorkerCount>1</WorkerCount>
   			</Signalling>
   			<IceCandidates>
-  				<IceCandidate>stream.vpn.bjork.tech:10000/udp</IceCandidate>
+  				<IceCandidate>stream.bjork.tech:10000/udp</IceCandidate>
   			</IceCandidates>
   		</WebRTC>
 			<LLHLS>

@@ -27,7 +27,7 @@ in {
         volumes = let
           # https://github.com/etkecc/synapse-admin/blob/main/docs/config.md
           configuration = pkgs.writeText "config.json" (generators.toJSON {} {
-            restrictBaseUrl = ["https://matrix.vpn.bjork.tech"];
+            restrictBaseUrl = ["https://matrix.bjork.tech"];
           });
         in [
           "${configuration}:/app/config.json:ro"

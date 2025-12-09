@@ -365,8 +365,8 @@ with lib; {
       open-webui = {
         title = "Open WebUI";
         shortcut = "ow";
-        iconUrl = "https://ai.vpn.${config.custom.domain}/static/favicon.ico";
-        searchUrl = "https://ai.vpn.${config.custom.domain}/?temporary-chat=true&q=%s";
+        iconUrl = "https://ai.${config.custom.domain}/static/favicon.ico";
+        searchUrl = "https://ai.${config.custom.domain}/?temporary-chat=true&q=%s";
       };
 
       pcgamingwiki = {
@@ -386,8 +386,8 @@ with lib; {
       piped = {
         title = "Piped";
         shortcut = "yp";
-        iconUrl = "https://piped.vpn.${config.custom.domain}/favicon.ico";
-        searchUrl = "https://piped.vpn.${config.custom.domain}/results?search_query=%s";
+        iconUrl = "https://piped.${config.custom.domain}/favicon.ico";
+        searchUrl = "https://piped.${config.custom.domain}/results?search_query=%s";
       };
 
       protondb = {
@@ -414,8 +414,8 @@ with lib; {
       searxng = {
         title = "SearXNG";
         shortcut = "s";
-        iconUrl = "https://search.vpn.${config.custom.domain}/static/themes/simple/img/favicon.png";
-        searchUrl = "https://search.vpn.${config.custom.domain}/search?q=%s";
+        iconUrl = "https://search.${config.custom.domain}/static/themes/simple/img/favicon.png";
+        searchUrl = "https://search.${config.custom.domain}/search?q=%s";
       };
 
       steamgriddb = {

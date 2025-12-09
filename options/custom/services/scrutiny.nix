@@ -36,7 +36,7 @@ in {
       # https://github.com/AnalogJ/scrutiny/blob/master/example.scrutiny.yaml
       settings = {
         #?? curl -X POST https://scrutiny.admin.<domain>/api/health/notify
-        notify.urls = ["ntfy://notify.vpn.${config.custom.domain}/status"];
+        notify.urls = ["ntfy://notify.${config.custom.domain}/status"];
 
         web.listen = {
           host = config.custom.services.tailscale.ipv4;

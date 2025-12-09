@@ -32,8 +32,8 @@ in {
           # TODO: Use internal server when implemented
           # https://github.com/tsaridas/stremio-docker/issues/78
           DISABLE_CACHING = 1;
-          SERVER_URL = "https://tv-api.vpn.${config.custom.domain}/";
-          WEBUI_LOCATION = "https://tv.vpn.${config.custom.domain}/";
+          SERVER_URL = "https://tv-api.${config.custom.domain}/";
+          WEBUI_LOCATION = "https://tv.${config.custom.domain}/";
         };
       };
     };

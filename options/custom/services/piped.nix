@@ -30,7 +30,7 @@ in {
               --no-align \
               --quiet \
               --command 'SELECT DISTINCT(channel) FROM users_subscribed' | \
-          ${parallel} ${curl} --silent --output /dev/null 'https://pipedapi.vpn.${config.custom.domain}/channel/{}'
+          ${parallel} ${curl} --silent --output /dev/null 'https://pipedapi.${config.custom.domain}/channel/{}'
         '';
       };
 
