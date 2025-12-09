@@ -5,7 +5,8 @@
   options,
   pkgs,
   ...
-}: {
+}:
+with lib; {
   imports = [
     inputs.jovian-nixos.nixosModules.default
   ];
@@ -36,8 +37,7 @@
         enable = true;
 
         folders =
-          lib.getAttrs [
-            "SYNC/common"
+          getAttrs [
             "SYNC/game"
           ]
           options.custom.services.syncthing.folders.default;

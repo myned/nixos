@@ -104,7 +104,7 @@ in {
         "SYNC/admin" = folder "l6odm-rmjep" [];
         "SYNC/android" = folder "y3omj-gpjch" ["myxel"];
         "SYNC/android/media/camera" = folder "udj03-5kwod" ["myxel"];
-        "SYNC/common" = folder "fcsij-g7cnw" ["myeck" "myxel"];
+        "SYNC/common" = folder "fcsij-g7cnw" ["myxel"];
         "SYNC/dev" = folder "fsmar-4wsd3" ["myxel"];
         "SYNC/edu" = folder "4nyqw-jfkq2" ["myxel"];
         "SYNC/game" = folder "xvdpp-mxlki" ["myeck" "zendows"];
@@ -214,7 +214,7 @@ in {
           tmpfiles.rules = let
             stignores = pkgs.writeText "stignores" (concatStringsSep "\n" cfg.ignores);
           in
-            forEach (attrNames cfg.folders) (folder: "L+ ${cfg.path}/${folder}/.stignore - - - - ${stignores}");
+            forEach (attrNames cfg.folders) (folder: "C ${cfg.path}/${folder}/.stignore - - - - ${stignores}");
         };
       }
     ];
