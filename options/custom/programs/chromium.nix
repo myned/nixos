@@ -103,9 +103,6 @@ in {
             "GlobalShortcutsPortal" # https://wiki.archlinux.org/title/Chromium#Gnome_%22Global_Shortcuts%22_menu_appears_on_startup
           ];
         in [
-          # HACK: Touchpad scrolling slow on Wayland
-          "--ozone-platform=x11"
-
           "--enable-features=${enable-features}"
           "--disable-features=${disable-features}"
         ];
