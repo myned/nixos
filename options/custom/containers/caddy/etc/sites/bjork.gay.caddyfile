@@ -1,16 +1,14 @@
 bjork.gay {
-	import global
+	import common
 	import proxy-insecure bjork.gay myosh:3000 # Mastodon
 }
 
 *.bjork.gay {
-	import global
+	import common
 	import www bjork.gay
 	import redirect status.bjork.gay status.bjork.tech
-}
 
-*.bjork.gay {
-	import global
-	import vpn
-	import serve-files wallpaper.bjork.gay /wallpaper.png
+	import private {
+		import serve-files wallpaper.bjork.gay /wallpaper.png
+	}
 }

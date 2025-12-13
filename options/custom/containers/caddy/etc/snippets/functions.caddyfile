@@ -6,7 +6,7 @@
 # BUG: Anonymous blocks are not supported when importing with a subdirective block
 # https://github.com/caddyserver/caddy/issues/7083
 
-#?? import handle <host> [host ...]
+#?? import handle <host> [host ...] {}
 (handle) {
 	@handle-{args[0]} host {args[:]}
 	handle @handle-{args[0]} {
@@ -14,21 +14,37 @@
 	}
 }
 
+#?? import private {}
+(private) {
+	# https://tailscale.com/kb/1015/100.x-addresses
+	# https://tailscale.com/kb/1033/ip-and-dns-addresses#tailscale-ipv6-local-address-prefix
+	# https://caddyserver.com/docs/caddyfile/matchers#client-ip
+	#?? private_ranges = 192.168.0.0/16 172.16.0.0/12 10.0.0.0/8 127.0.0.1/8 fd00::/8 ::1
+	@private client_ip 100.64.0.0/10 fd7a:115c:a1e0::/48
+	handle @private {
+		{block}
+	}
+}
+
 #?? import proxy <host> <upstream> [upstream ...]
 (proxy) {
 	@proxy-{args[0]} host {args[0]}
-	reverse_proxy @proxy-{args[0]} {args[1:]} {
-		header_up X-Real-IP {client_ip}
+	handle @proxy-{args[0]} {
+		reverse_proxy {args[1:]} {
+			header_up X-Real-IP {client_ip}
+		}
 	}
 }
 
 #?? import proxy-insecure <host> <upstream> [upstream ...]
 (proxy-insecure) {
 	@proxy-insecure-{args[0]} host {args[0]}
-	reverse_proxy @proxy-insecure-{args[0]} {args[1:]} {
-		header_up X-Real-IP {client_ip}
-		transport http {
-			tls_insecure_skip_verify
+	handle @proxy-insecure-{args[0]} {
+		reverse_proxy {args[1:]} {
+			header_up X-Real-IP {client_ip}
+			transport http {
+				tls_insecure_skip_verify
+			}
 		}
 	}
 }
@@ -36,7 +52,9 @@
 #?? import redirect <host> <to>
 (redirect) {
 	@redirect-{args[0]} host {args[0]}
-	redir @redirect-{args[0]} https://{args[1]}{uri}
+	handle @redirect-{args[0]} {
+		redir https://{args[1]}{uri}
+	}
 }
 
 #?? import serve <host>
@@ -62,5 +80,7 @@
 (www) {
 	# https://caddyserver.com/docs/caddyfile/patterns#redirect-www-subdomain
 	@www host www.{args[0]}
-	redir @www https://{args[0]}{uri}
+	handle @www {
+		redir https://{args[0]}{uri}
+	}
 }

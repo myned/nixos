@@ -42,12 +42,6 @@ in {
         restart = "unless-stopped";
         user = "239:239";
 
-        environment = {
-          TAILNET = config.custom.services.tailscale.tailnet;
-          TAILSCALE_IPV4 = config.custom.services.tailscale.ipv4;
-          TAILSCALE_IPV6 = config.custom.services.tailscale.ipv6;
-        };
-
         volumes = [
           "${config.custom.containers.directory}/caddy/config:/config"
           "${config.custom.containers.directory}/caddy/data:/data"
@@ -101,8 +95,6 @@ in {
           arion --prebuilt-file "$ARION_PREBUILT" exec -- caddy \
             caddy reload --config /etc/caddy/Caddyfile
         '';
-
-        requires = ["tailscaled.service"];
       };
 
       #?? arion-caddy run -- --rm --entrypoint='id caddy' caddy

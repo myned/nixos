@@ -1,17 +1,9 @@
 # https://caddyserver.com/docs/caddyfile/concepts#snippets
 
-(global) {
+(common) {
 	encode zstd gzip
-	header X-Robots-Tag "noindex, nofollow"
-
-	# Set CORS header if unset upstream
+	header ?X-Robots-Tag "noindex, nofollow"
 	header ?Access-Control-Allow-Origin *
-
-	# TODO: Use custom error pages
-	# https://caddyserver.com/docs/caddyfile/directives/handle_errors
-	handle_errors {
-		respond "{err.status_code} {err.status_text}"
-	}
 
 	# BUG: hostname appears in more than one automation policy
 	# https://github.com/caddyserver/caddy/issues/7354
@@ -21,6 +13,14 @@
 	# 	# https://github.com/caddy-dns/cloudflare/issues/28
 	# 	resolvers 1.1.1.1 1.0.0.1 2606:4700:4700::1111 2606:4700:4700::1001
 	# }
+
+	# TODO: Use custom error pages
+	# https://caddyserver.com/docs/caddyfile/directives/handle_errors
+	handle_errors {
+		respond "{err.status_code} {err.status_text}"
+	}
+
+	error 404 # Fallback
 }
 
 (matrix) {
@@ -31,13 +31,4 @@
 	respond /.well-known/matrix/server `{"m.server":"matrix.bjork.tech:443"}`
 	respond /.well-known/matrix/client `{"m.homeserver":{"base_url":"https://matrix.bjork.tech"}}`
 	respond /.well-known/matrix/support `{"contacts":[{"matrix_id":"@myned:bjork.tech","email_address":"admin@bjork.tech","role":"m.role.admin"}]}`
-}
-
-(vpn) {
-	# TODO: Use system resolver when AAAA records are supported
-	# https://github.com/tailscale/tailscale/issues/1152
-	# https://tailscale.com/kb/1015/100.x-addresses
-	# https://tailscale.com/kb/1121/ipv6
-	#// bind {system.hostname}.{$TAILNET} # FQDN
-	bind {$TAILSCALE_IPV4} [{$TAILSCALE_IPV6}]
 }
