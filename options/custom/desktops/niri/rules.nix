@@ -162,21 +162,20 @@ in {
             ### Defaults
             {
               # Global
+              clip-to-geometry = true;
+              draw-border-with-background = false;
+
               geometry-corner-radius = with config.custom; {
                 top-left = rounding;
                 top-right = rounding;
                 bottom-right = rounding;
                 bottom-left = rounding;
               };
-
-              clip-to-geometry = true;
-              draw-border-with-background = false;
             }
 
             {
               # Global floating
               matches = floating null;
-
               #// baba-is-float = true;
               border.enable = false;
               default-column-width = {};
@@ -200,7 +199,6 @@ in {
               # Browsers
               matches = browsers;
               excludes = picture-in-picture;
-
               default-column-width.proportion =
                 if config.custom.display.default.ultrawide
                 then 0.4
@@ -210,14 +208,12 @@ in {
             {
               # Chats
               matches = chats;
-
               default-column-display = "tabbed";
             }
 
             {
               # Dropdown terminal
               matches = dropdown;
-
               open-floating = true;
             }
 
@@ -234,24 +230,20 @@ in {
             {
               # Games
               matches = games;
-
               # BUG: Reapplies when moving windows, causing games to force resize to default-column-width
               #// open-floating = false;
-
               shadow.enable = false;
             }
 
             {
               # Games (focused)
               matches = focused games;
-
               variable-refresh-rate = true;
             }
 
             {
               # IDEs
               matches = ides;
-
               default-column-width.proportion =
                 if config.custom.display.default.ultrawide
                 then 0.4
@@ -279,29 +271,26 @@ in {
             in {
               # PiP
               matches = picture-in-picture;
+              baba-is-float = false;
+              default-column-width.fixed = pip.w;
+              default-window-height.fixed = pip.h;
+              open-floating = true;
+              open-focused = false;
 
               default-floating-position = {
                 relative-to = "top-right";
                 x = pip.x;
                 y = pip.y;
               };
-
-              baba-is-float = false;
-              default-column-width.fixed = pip.w;
-              default-window-height.fixed = pip.h;
-              open-floating = true;
-              open-focused = false;
             })
 
             {
               # Previewer
               matches = previewer;
-
               default-column-width.proportion =
                 if config.custom.display.default.ultrawide
                 then 0.4
                 else 0.8;
-
               default-window-height.proportion = 0.8;
               open-floating = true;
             }
@@ -314,7 +303,6 @@ in {
             {
               # Tasks
               matches = tasks;
-
               default-column-width.proportion = 0.2;
             }
 
@@ -326,7 +314,6 @@ in {
             {
               # Vaults
               matches = vaults;
-
               default-column-width.proportion =
                 if config.custom.display.default.ultrawide
                 then 0.4
@@ -341,7 +328,6 @@ in {
             {
               # Work style
               matches = work;
-
               border.active.color = "#cb4b16";
               focus-ring.active.color = "#cb4b16";
             }
@@ -353,9 +339,9 @@ in {
             in {
               # 1Password Quick Access
               matches = [((app-id "^1Password") // (title "^Quick Access — 1Password$"))];
-              open-floating = true;
               max-height = height;
               min-height = height;
+              open-floating = true;
             })
 
             {
@@ -367,7 +353,6 @@ in {
             {
               # Gamescope
               matches = app-ids ["^.*gamescope.*$"];
-
               default-column-width.fixed = config.custom.programs.gamescope.width;
               default-window-height.fixed = config.custom.programs.gamescope.height;
             }
@@ -377,7 +362,6 @@ in {
               # FIXME: Figure out why pinentry-rofi opens as a window
               # HACK: pinentry-rofi opens as a window, so attempt to style as a layer
               matches = app-ids ["^Rofi$"];
-
               border.enable = false;
               clip-to-geometry = false;
               focus-ring.enable = false;
@@ -389,14 +373,13 @@ in {
               # Steam notifications
               # https://github.com/YaLTeR/niri/wiki/Application-Issues#steam
               matches = [((app-id "^steam$") // (title "^notificationtoasts.*$"))];
+              open-focused = false;
 
               default-floating-position = {
                 x = config.custom.gap;
                 y = config.custom.gap;
                 relative-to = "bottom-right";
               };
-
-              open-focused = false;
             }
           ];
         };
