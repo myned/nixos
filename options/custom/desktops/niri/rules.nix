@@ -359,6 +359,12 @@ in {
             })
 
             {
+              # Chrome
+              matches = app-ids ["^[Gg]oogle-chrome.*$"];
+              scroll-factor = 1;
+            }
+
+            {
               # Gamescope
               matches = app-ids ["^.*gamescope.*$"];
 
