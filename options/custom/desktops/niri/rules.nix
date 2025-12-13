@@ -347,7 +347,7 @@ in {
             {
               # Chrome
               matches = app-ids ["^[Gg]oogle-chrome.*$"];
-              scroll-factor = 1.5;
+              scroll-factor = 1.25;
             }
 
             {
