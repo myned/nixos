@@ -18,14 +18,8 @@ in {
   options.custom.lockscreens.systemd-lock-handler = {
     enable = mkEnableOption "systemd-lock-handler";
 
-    delay = mkOption {
-      default = 1;
-      description = "Time in seconds to wait for the lockscreen before suspending";
-      example = 5;
-      type = types.int;
-    };
-
     lockCommand = mkOption {
+      description = "Command of the lockscreen to execute";
       default = with config.custom;
         if lockscreen == "gtklock"
         then gtklock
@@ -34,15 +28,30 @@ in {
         else if lockscreen == "swaylock"
         then swaylock
         else "";
-
-      description = "Command of the lockscreen to execute";
       example = getExe pkgs.swaylock;
       type = types.str;
     };
 
+    lockDelay = mkOption {
+      description = "Time in seconds to wait for the lockscreen before locking";
+      default =
+        if cfg.transition
+        then 1
+        else 0;
+      example = 5;
+      type = types.int;
+    };
+
+    suspendDelay = mkOption {
+      description = "Time in seconds to wait before suspending";
+      default = 5;
+      example = 5;
+      type = types.int;
+    };
+
     transition = mkOption {
-      default = false;
       description = "Whether to fade into the lockscreen";
+      default = false;
       example = false;
       type = types.bool;
     };
@@ -55,10 +64,14 @@ in {
     # https://sr.ht/~whynothugo/systemd-lock-handler/#usage
     # https://github.com/hyprwm/hypridle/issues/49
     systemd.user.services = {
-      handle-lock = {
+      handle-lock = let
+        delay = toString (cfg.lockDelay); # Seconds
+        delay-ms = toString (cfg.lockDelay * 1000); # Milliseconds
+      in {
+        requiredBy = ["lock.target" "sleep.target"];
+
         unitConfig = {
           Description = "Lockscreen";
-
           # Use Before, not After lock.target
           # https://todo.sr.ht/~whynothugo/systemd-lock-handler/4
           Before = ["lock.target"];
@@ -66,7 +79,7 @@ in {
 
         serviceConfig = {
           Type = "exec";
-
+          ExecStart = cfg.lockCommand;
           ExecCondition = pkgs.writeShellScript "lock-condition" ''
             if ${pgrep} ${config.custom.lockscreen}; then
               exit 1 # Lockscreen process already running
@@ -74,28 +87,23 @@ in {
               exit 0 # Lockscreen process not found
             fi
           '';
-
-          # HACK: Default red background immediately shows while lockscreen starts, so use transition
-          # https://github.com/YaLTeR/niri/issues/808
-          ExecStartPre = let
-            delay-ms = toString (cfg.delay * 1000); # Milliseconds
-          in
-            mkIf cfg.transition (
-              if config.custom.desktop == "niri"
-              then "${niri} msg action do-screen-transition --delay-ms ${delay-ms}"
-              else ""
-            );
-
-          ExecStart = cfg.lockCommand;
+          ExecStartPre =
+            if cfg.transition
+            then
+              (
+                if config.custom.desktop == "niri"
+                then "${niri} msg action do-screen-transition --delay-ms=${delay-ms}"
+                else ""
+              )
+            else "${sleep} ${delay}s";
         };
-
-        requiredBy = ["lock.target" "sleep.target"];
       };
 
       handle-sleep = let
-        # Transition time is about 1 second
-        delay = toString (cfg.delay + 1); # Seconds
+        delay = toString (cfg.suspendDelay); # Seconds
       in {
+        requiredBy = ["sleep.target"];
+
         unitConfig = {
           Description = "Delay sleep for ${delay}s";
           Before = ["sleep.target"];
@@ -105,8 +113,6 @@ in {
           Type = "oneshot";
           ExecStart = "${sleep} ${delay}s";
         };
-
-        requiredBy = ["sleep.target"];
       };
     };
   };
