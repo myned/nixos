@@ -46,22 +46,29 @@ in {
           NET_ADMIN = true;
         };
 
-        ports = [
-          #// "53:53/tcp" # DNS
-          #// "53:53/udp" # DNS
-          "853:853/tcp" # DNS-over-TLS
-          "853:853/udp" # DNS-over-QUIC
-          #// "3003:80/tcp" # Admin panel
-          #// "8443:443/tcp" # DNS-over-HTTPS
-        ];
+        # ports = [
+        #   "53:53/tcp" # DNS
+        #   "53:53/udp" # DNS
+        #   #// "853:853/tcp" # DNS-over-TLS
+        #   #// "853:853/udp" # DNS-over-QUIC
+        #   #// "3003:80/tcp" # Admin panel
+        #   #// "8443:443/tcp" # DNS-over-HTTPS
+        # ];
       };
     };
 
     # https://github.com/AdguardTeam/AdGuardHome/wiki/Encryption
-    networking.firewall = {
-      allowedTCPPorts = [853]; # DNS-over-TLS
-      allowedUDPPorts = [853]; # DNS-over-QUIC
-    };
+    # networking.firewall = {
+    #   allowedTCPPorts = [
+    #     53 # DNS
+    #     #// 853 # DNS-over-TLS
+    #   ];
+
+    #   allowedUDPPorts = [
+    #     53 # DNS
+    #     #// 853 # DNS-over-QUIC
+    #   ];
+    # };
 
     # https://adguard-dns.io/kb/adguard-home/faq/#bindinuse
     # services.resolved.extraConfig = ''

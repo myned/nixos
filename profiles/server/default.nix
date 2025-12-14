@@ -64,6 +64,17 @@
         ];
       };
 
+      caddy = {
+        enable = true;
+        layer4Config = ''
+          :443 {
+            route {
+              proxy myore:443
+            }
+          }
+        '';
+      };
+
       syncthing = {
         enable = true;
         mount = "mnt-local.mount";
