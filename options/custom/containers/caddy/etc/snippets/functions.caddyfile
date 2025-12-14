@@ -16,11 +16,9 @@
 
 #?? import private {}
 (private) {
-	# https://tailscale.com/kb/1015/100.x-addresses
-	# https://tailscale.com/kb/1033/ip-and-dns-addresses#tailscale-ipv6-local-address-prefix
 	# https://caddyserver.com/docs/caddyfile/matchers#client-ip
 	#?? private_ranges = 192.168.0.0/16 172.16.0.0/12 10.0.0.0/8 127.0.0.1/8 fd00::/8 ::1
-	@private client_ip 100.64.0.0/10 fd7a:115c:a1e0::/48
+	@private client_ip private_ranges 100.64.0.0/10 fd7a:115c:a1e0::/48
 	handle @private {
 		{block}
 	}
@@ -73,6 +71,16 @@
 		root * /srv/sites/{args[0]}
 		try_files {args[1:]}
 		file_server
+	}
+}
+
+#?? import vpn {}
+(vpn) {
+	# https://tailscale.com/kb/1015/100.x-addresses
+	# https://tailscale.com/kb/1033/ip-and-dns-addresses#tailscale-ipv6-local-address-prefix
+	@vpn client_ip 100.64.0.0/10 fd7a:115c:a1e0::/48
+	handle @vpn {
+		{block}
 	}
 }
 

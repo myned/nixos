@@ -94,8 +94,8 @@ bjork.tech {
 *.admin.bjork.tech {
 	import common
 
-	import private {
-		#// import proxy adguardhome.admin.bjork.tech {system.hostname}-adguardhome:80 # AdGuard Home
+	import vpn {
+		import proxy adguardhome.admin.bjork.tech {system.hostname}-adguardhome:80 # AdGuard Home
 		#// import proxy affine.admin.bjork.tech myosh:3010 # AFFiNE
 		import proxy beszel.admin.bjork.tech {system.hostname}-beszel:8090 # Beszel
 		#// import proxy-insecure cockpit.admin.bjork.tech {system.hostname}:9090 # Cockpit
