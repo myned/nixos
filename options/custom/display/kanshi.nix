@@ -4,9 +4,9 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.services.kanshi;
+  cfg = config.custom.display.kanshi;
 in {
-  options.custom.services.kanshi = {
+  options.custom.display.kanshi = {
     enable = mkEnableOption "kanshi";
   };
 
@@ -42,6 +42,34 @@ in {
                           then "--custom "
                           else ""
                         }${toString width}x${toString height}@${toString finalRefresh}";
+                      }
+                  )
+                  config.custom.display.outputs;
+              };
+            }
+
+            {
+              profile = {
+                name = "60";
+
+                outputs =
+                  mapAttrsToList (
+                    name: output:
+                      with output; {
+                        criteria = name;
+                        adaptiveSync = vrr;
+                        scale = scale;
+
+                        status =
+                          if enable
+                          then "enable"
+                          else "disable";
+
+                        mode = "${
+                          if force && !config.custom.display.forceAtBoot
+                          then "--custom "
+                          else ""
+                        }${toString width}x${toString height}@60";
                       }
                   )
                   config.custom.display.outputs;

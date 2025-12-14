@@ -18,7 +18,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    custom.services.kanshi.enable = cfg.kanshi;
+    custom.display.kanshi.enable = cfg.kanshi;
 
     home-manager.sharedModules = [
       {
