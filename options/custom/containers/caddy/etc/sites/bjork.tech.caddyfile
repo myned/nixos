@@ -56,7 +56,7 @@ bjork.tech {
 		import proxy notify.bjork.tech {system.hostname}:2586 # ntfy
 		#// import proxy reddit.bjork.tech myosh:8888 # Redlib
 		#// import proxy search.bjork.tech myosh:8888 # SearXNG
-		import proxy stream.bjork.tech myosh.{$TAILNET}:3333 # OvenMediaEngine
+		import proxy stream.bjork.tech myosh:3333 # OvenMediaEngine
 		#// import proxy stream.bjork.tech myosh:8800 # Owncast
 		#// import proxy tv.bjork.tech myosh:8470 # Stremio Client
 		#// import proxy tv-api.bjork.tech myosh:11470 # Stremio Server
