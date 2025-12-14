@@ -48,11 +48,11 @@ bjork.tech {
 	import private {
 		#// import proxy ai.bjork.tech myosh-openwebui:8080 # Open WebUI
 		#// import proxy budget.bjork.tech myosh:5006 # Actual Budget
-		import proxy discover.bjork.tech myosh:5055 # Jellyseerr
+		import proxy discover.bjork.tech myosh-jellyfin:5055 # Jellyseerr
 		import proxy home.bjork.tech mypi3:8123 # Home Assistant
 		import proxy matrix.bjork.tech myosh:8008 # Synapse
-		import proxy media.bjork.tech myosh:8096 # Jellyfin
-		import proxy media-next.bjork.tech myosh:8097 # Jellyfin Vue
+		import proxy media.bjork.tech myosh-jellyfin:8096 # Jellyfin
+		import proxy media-next.bjork.tech myosh-jellyfin:8097 # Jellyfin Vue
 		import proxy notify.bjork.tech {system.hostname}:2586 # ntfy
 		#// import proxy reddit.bjork.tech myosh:8888 # Redlib
 		#// import proxy search.bjork.tech myosh:8888 # SearXNG
@@ -102,19 +102,19 @@ bjork.tech {
 		#// import proxy dash.admin.bjork.tech myosh:3001 # dash.
 		#// import proxy gatus.admin.bjork.tech {system.hostname}:8484 # Gatus
 		#// import proxy grafana.admin.bjork.tech {system.hostname}-grafana:3000 # Grafana
-		#// import proxy jackett.admin.bjork.tech myosh:9117 # Jackett
+		#// import proxy jackett.admin.bjork.tech myosh-jellyfin:9117 # Jackett
 		#// import proxy-insecure kasm.admin.bjork.tech myosh:3443 # Kasm
-		import proxy lidarr.admin.bjork.tech myosh:8686 # Lidarr
+		import proxy lidarr.admin.bjork.tech myosh-jellyfin:8686 # Lidarr
 		import proxy matrix.admin.bjork.tech myosh:8000 # Synapse Admin
 		#// import proxy-insecure nextcloud.admin.bjork.tech myosh:8080 # Nextcloud AIO
 		#// import proxy-insecure portainer.admin.bjork.tech {system.hostname}-portainer:9443 # Portainer
 		#// import proxy prometheus.admin.bjork.tech {system.hostname}-grafana:9090 # Prometheus
-		import proxy prowlarr.admin.bjork.tech myosh:9696 # Prowlarr
-		import proxy qbittorrent.admin.bjork.tech myosh:8881 # qBittorrent
-		import proxy radarr.admin.bjork.tech myosh:7878 # Radarr
+		import proxy prowlarr.admin.bjork.tech myosh-jellyfin:9696 # Prowlarr
+		import proxy qbittorrent.admin.bjork.tech myosh-jellyfin:8881 # qBittorrent
+		import proxy radarr.admin.bjork.tech myosh-jellyfin:7878 # Radarr
 		#// import proxy scrutiny.admin.bjork.tech {system.hostname}:8282 # Scrutiny
-		import proxy slskd.admin.bjork.tech myosh:5030 # slskd
-		import proxy sonarr.admin.bjork.tech myosh:8989 # Sonarr
+		import proxy slskd.admin.bjork.tech myosh-jellyfin:5030 # slskd
+		import proxy sonarr.admin.bjork.tech myosh-jellyfin:8989 # Sonarr
 		#// import proxy statping.admin.bjork.tech {system.hostname}-statping:8080 # Statping-ng
 		#// import proxy uptimekuma.admin.bjork.tech {system.hostname}-uptimekuma:3001 # Uptime Kuma
 

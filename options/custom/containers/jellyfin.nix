@@ -238,18 +238,18 @@ in {
             restart = "unless-stopped";
             volumes = ["${config.custom.containers.directory}/jellyfin/vpn:/var/lib/tailscale"];
 
-            ports = [
-              "5030:5030/tcp"
-              "5055:5055/tcp"
-              "7878:7878/tcp"
-              "8096:8096/tcp"
-              "8097:80/tcp"
-              #// "8191:8191/tcp"
-              "8686:8686/tcp"
-              "8881:8881/tcp"
-              "8989:8989/tcp"
-              "9696:9696/tcp"
-            ];
+            # ports = [
+            #   "5030:5030/tcp"
+            #   "5055:5055/tcp"
+            #   "7878:7878/tcp"
+            #   "8096:8096/tcp"
+            #   "8097:80/tcp"
+            #   #// "8191:8191/tcp"
+            #   "8686:8686/tcp"
+            #   "8881:8881/tcp"
+            #   "8989:8989/tcp"
+            #   "9696:9696/tcp"
+            # ];
 
             capabilities = {
               NET_ADMIN = true;
