@@ -28,6 +28,7 @@ in {
           ethtool # Network device configuration
           fd # File finder
           fzf # Fuzzy search
+          host.dnsutils # DNS utils
           hwloc # CPU topology viewer
           inetutils # Network utilities
           inotify-info # File notify lister
@@ -41,6 +42,7 @@ in {
           lsof # List open files
           lz4 # Compression utility
           mesa-demos # Graphics tester
+          net-snmp # SNMP utils
           nix-output-monitor # Nix build parser
           nix-tree # Nix store explorer
           nmap # Network scanner
