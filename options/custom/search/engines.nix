@@ -230,6 +230,48 @@ with lib; {
         searchUrl = "https://kagi.com/assistant?q=%s";
       };
 
+      kagi-assistant-code = {
+        title = "Kagi Assistant Code";
+        shortcut = "kac";
+        iconUrl = "https://kagi.com/favicon-assistant-32x32.png";
+        searchUrl = "https://kagi.com/search?q=%21code+%s";
+      };
+
+      kagi-assistant-chef = {
+        title = "Kagi Assistant Chef";
+        shortcut = "kah";
+        iconUrl = "https://kagi.com/favicon-assistant-32x32.png";
+        searchUrl = "https://kagi.com/search?q=%21chef+%s";
+      };
+
+      kagi-assistant-news = {
+        title = "Kagi Assistant News";
+        shortcut = "kan";
+        iconUrl = "https://kagi.com/favicon-assistant-32x32.png";
+        searchUrl = "https://kagi.com/search?q=%21news+%s";
+      };
+
+      kagi-assistant-research = {
+        title = "Kagi Assistant Research";
+        shortcut = "kar";
+        iconUrl = "https://kagi.com/favicon-assistant-32x32.png";
+        searchUrl = "https://kagi.com/search?q=%21research+%s";
+      };
+
+      kagi-assistant-write = {
+        title = "Kagi Assistant Write";
+        shortcut = "kaw";
+        iconUrl = "https://kagi.com/favicon-assistant-32x32.png";
+        searchUrl = "https://kagi.com/search?q=%21write+%s";
+      };
+
+      kagi-fastgpt = {
+        title = "Kagi FastGPT";
+        shortcut = "kg";
+        iconUrl = "https://kagi.com/asset/v2/favicon-32x32.png";
+        searchUrl = "https://kagi.com/fastgpt?query=%s";
+      };
+
       kagi-forums = {
         title = "Kagi Forums";
         shortcut = "kf";
@@ -244,18 +286,81 @@ with lib; {
         searchUrl = "https://kagi.com/images?q=%s";
       };
 
+      kagi-maps = {
+        title = "Kagi Maps";
+        shortcut = "km";
+        iconUrl = "https://kagi.com/asset/v2/favicon-32x32.png";
+        searchUrl = "https://kagi.com/maps/search?q=%s";
+      };
+
+      kagi-news = {
+        title = "Kagi News";
+        shortcut = "kn";
+        iconUrl = "https://kagi.com/asset/v2/favicon-32x32.png";
+        searchUrl = "https://kagi.com/news?q=%s";
+      };
+
+      kagi-podcasts = {
+        title = "Kagi Podcasts";
+        shortcut = "kp";
+        iconUrl = "https://kagi.com/asset/v2/favicon-32x32.png";
+        searchUrl = "https://kagi.com/podcasts?q=%s";
+      };
+
+      kagi-summarizer = {
+        title = "Kagi Summarizer";
+        shortcut = "kz";
+        iconUrl = "https://kagi.com/asset/v2/favicon-32x32.png";
+        searchUrl = "https://kagi.com/summarizer?summary=takeaway#%s";
+      };
+
       kagi-summary = {
         title = "Kagi Summary";
         shortcut = "ks";
         iconUrl = "https://kagi.com/asset/v2/favicon-32x32.png";
-        searchUrl = "https://kagi.com/search?q=%s+%3F";
+        searchUrl = "https://kagi.com/search?q=%s%3F";
+      };
+
+      kagi-translate = {
+        title = "Kagi Translate";
+        shortcut = "kt";
+        iconUrl = "https://translate.kagi.com/icons/favicon.ico";
+        searchUrl = "https://translate.kagi.com/?from=auto&to=en&text=%s";
+      };
+
+      kagi-translate-dictionary = {
+        title = "Kagi Translate Dictionary";
+        shortcut = "ktd";
+        iconUrl = "https://translate.kagi.com/icons/favicon.ico";
+        searchUrl = "https://translate.kagi.com/dictionary?from=auto&word=%s";
+      };
+
+      kagi-translate-proofread = {
+        title = "Kagi Translate Proofread";
+        shortcut = "ktp";
+        iconUrl = "https://translate.kagi.com/icons/favicon.ico";
+        searchUrl = "https://translate.kagi.com/proofread?from=auto&text=%s";
+      };
+
+      kagi-translate-website = {
+        title = "Kagi Translate Website";
+        shortcut = "ktw";
+        iconUrl = "https://translate.kagi.com/icons/favicon.ico";
+        searchUrl = "https://translate.kagi.com/%s";
       };
 
       kagi-verbatim = {
         title = "Kagi Verbatim";
-        shortcut = "kv";
+        shortcut = "kvb";
         iconUrl = "https://kagi.com/asset/v2/favicon-32x32.png";
         searchUrl = "https://kagi.com/search?verbatim=1&q=%s";
+      };
+
+      kagi-videos = {
+        title = "Kagi Videos";
+        shortcut = "kv";
+        iconUrl = "https://kagi.com/asset/v2/favicon-32x32.png";
+        searchUrl = "https://kagi.com/videos?q=%s";
       };
 
       lix-issues = {
