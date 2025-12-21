@@ -260,6 +260,10 @@ in {
               k = "kill -9";
               kj = "kill -9 (jobs --pid)";
 
+              kc = "kanshictl";
+              kcs = "kanshictl switch";
+              kcsd = "kanshictl switch default";
+
               lg = "lazygit";
               lgb = "lazygit branch";
               lgl = "lazygit log";
