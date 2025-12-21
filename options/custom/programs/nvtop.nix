@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -11,6 +12,8 @@ in {
   };
 
   config = mkIf cfg.enable {
+    environment.systemPackages = [pkgs.nvtopPackages.full];
+
     home-manager.sharedModules = [
       {
         # https://github.com/Syllo/nvtop
