@@ -22,6 +22,7 @@ in {
 
       # https://docs.lizardbyte.dev/projects/sunshine/latest/md_docs_2configuration.html
       settings = {
+        adapter_name = "/dev/dri/by-path/${config.custom.settings.hardware.dgpu.node}-render";
         address_family = "both"; # IPv4+IPv6
         system_tray = "disabled";
         wan_encryption_mode = 2; # Require encryption
