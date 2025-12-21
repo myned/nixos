@@ -63,6 +63,7 @@ with lib; {
       printing.enable = true;
       ratbagd.enable = true;
       samba.enable = true;
+      sunshine.enable = true;
       swayidle.enable = true;
       swaync.enable = true;
       swayosd.enable = true;
