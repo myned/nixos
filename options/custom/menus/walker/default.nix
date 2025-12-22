@@ -39,10 +39,6 @@ in {
           search.show = "${walker} --provider=websearch";
           vault.show = "";
         };
-
-        services = {
-          clipnotify.enable = true;
-        };
       };
 
       home-manager.sharedModules = [
