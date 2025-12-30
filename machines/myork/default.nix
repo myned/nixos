@@ -12,8 +12,14 @@
   custom = {
     hostname = "myork";
 
-    display.outputs = let
-      left = {
+    display.outputs = {
+      eDP-1 = {
+        width = 2256;
+        height = 1504;
+        scale = 1.5;
+      };
+
+      DP-10 = {
         x = -1920;
         width = 1920;
         height = 1080;
@@ -21,28 +27,13 @@
         force = true;
       };
 
-      right =
-        left
-        // {
-          x = 0;
-        };
-    in {
-      eDP-1 = {
-        width = 2256;
-        height = 1504;
-        scale = 1.5;
+      DP-9 = {
+        x = 0;
+        width = 1920;
+        height = 1080;
+        refresh = 75;
+        force = true;
       };
-
-      # HACK: Work around outputs not being removed when disconnected
-      # https://github.com/YaLTeR/niri/issues/1722
-      DP-9 = right;
-      DP-10 = left;
-      DP-11 = right;
-      DP-12 = left;
-      DP-13 = right;
-      DP-14 = left;
-      DP-15 = right;
-      DP-16 = left;
     };
 
     programs = {
