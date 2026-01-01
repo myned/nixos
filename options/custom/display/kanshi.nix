@@ -76,6 +76,51 @@ in {
 
             {
               profile = {
+                name = "1440p";
+                outputs = mkOutputs (mapAttrs (
+                    _: output:
+                      recursiveUpdate output {
+                        width = 2560;
+                        height = 1440;
+                        finalRefresh = 60;
+                      }
+                  )
+                  config.custom.display.outputs);
+              };
+            }
+
+            {
+              profile = {
+                name = "1080p";
+                outputs = mkOutputs (mapAttrs (
+                    _: output:
+                      recursiveUpdate output {
+                        width = 1920;
+                        height = 1080;
+                        finalRefresh = 60;
+                      }
+                  )
+                  config.custom.display.outputs);
+              };
+            }
+
+            {
+              profile = {
+                name = "720p";
+                outputs = mkOutputs (mapAttrs (
+                    _: output:
+                      recursiveUpdate output {
+                        width = 1280;
+                        height = 720;
+                        finalRefresh = 60;
+                      }
+                  )
+                  config.custom.display.outputs);
+              };
+            }
+
+            {
+              profile = {
                 name = "phone";
                 outputs = mkOutputs (mapAttrs (
                     _: output:

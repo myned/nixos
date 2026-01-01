@@ -34,8 +34,7 @@ in {
           cursor = with config.stylix.cursor; {
             inherit size;
             theme = name;
-
-            #// hide-after-inactive-ms = 1000 * 15; # Milliseconds
+            hide-after-inactive-ms = 15 * 1000; # Milliseconds
             hide-when-typing = true;
           };
 
