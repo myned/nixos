@@ -66,6 +66,13 @@ in {
       type = with types; nullOr str;
     };
 
+    openFirewall = mkOption {
+      default = true;
+      description = "Allow syncthing through firewall";
+      example = false;
+      type = types.bool;
+    };
+
     path = mkOption {
       default = hm.home.homeDirectory;
       description = "Path to root directory of sync folder";
@@ -218,6 +225,11 @@ in {
         };
       }
     ];
+
+    networking.firewall = mkIf cfg.openFirewall {
+      allowedTCPPorts = [22000];
+      allowedUDPPorts = [22000];
+    };
 
     age.secrets = listToAttrs (map (name: {
         inherit name;
