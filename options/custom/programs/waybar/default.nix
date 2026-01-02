@@ -191,10 +191,10 @@ in {
               position = "bottom";
               reload_style_on_change = true;
 
-              output = let
-                mainOutputs = filterAttrs (_: o: o.minimal == false) config.custom.display.outputs;
-              in
-                mapAttrsToList (name: _: name) mainOutputs;
+              # output = let
+              #   mainOutputs = filterAttrs (_: o: o.minimal == false) config.custom.display.outputs;
+              # in
+              #   mapAttrsToList (name: _: name) mainOutputs;
 
               modules-left = [
                 "custom/power"
