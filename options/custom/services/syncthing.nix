@@ -175,6 +175,7 @@ in {
                 addresses = [
                   "dynamic"
                   "tcp://${name}:22000" # Add tailscale machines to static discovery
+                  "quic://${name}:22000"
                 ];
               }
               // value) {
