@@ -231,7 +231,7 @@ in {
               # Games
               matches = games;
               # BUG: Reapplies when moving windows, causing games to force resize to default-column-width
-              #// open-floating = false;
+              open-floating = false;
               open-focused = true;
               open-fullscreen = true;
               shadow.enable = false;
