@@ -5,7 +5,7 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.services.swayidle;
+  cfg = config.custom.lockscreens.swayidle;
 
   chayang = getExe pkgs.chayang;
   grep = getExe pkgs.gnugrep;
@@ -17,7 +17,7 @@ with lib; let
   swaymsg = getExe' config.programs.sway.package "swaymsg";
   systemctl = getExe' pkgs.systemd "systemctl";
 in {
-  options.custom.services.swayidle = {
+  options.custom.lockscreens.swayidle = {
     enable = mkEnableOption "swayidle";
 
     dpmsCommand = mkOption {
@@ -52,25 +52,25 @@ in {
             {
               # Turn off display if currently locked
               command = ''${pgrep} ${config.custom.lockscreen} && ${cfg.dpmsCommand}'';
-              timeout = 10 * 60; # Seconds
+              timeout = 1 * 60; # Minutes
             }
 
             {
               # Turn off display
               command = cfg.dpmsCommand;
-              timeout = 15 * 60; # Seconds
+              timeout = 15 * 60; # Minutes
             }
 
             {
               # Lock session
               command = "${loginctl} lock-session";
-              timeout = 20 * 60; # Seconds
+              timeout = 20 * 60; # Minutes
             }
 
             {
               # Suspend if no audio
               command = "${pw-cli} info all | ${grep} running || ${systemctl} suspend";
-              timeout = 60 * 60; # Seconds
+              timeout = 60 * 60; # Minutes
             }
           ];
         };

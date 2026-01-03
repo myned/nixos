@@ -12,6 +12,8 @@ in {
 
   config = mkIf cfg.enable {
     custom.lockscreens = {
+      hypridle.enable = true;
+      #// swayidle.enable = true;
       systemd-lock-handler.enable = true;
 
       gtklock.enable = config.custom.lockscreen == "gtklock";
