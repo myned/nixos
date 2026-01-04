@@ -22,9 +22,12 @@ in {
 
       # https://docs.lizardbyte.dev/projects/sunshine/latest/md_docs_2configuration.html
       settings = {
-        adapter_name = "/dev/dri/by-path/${config.custom.settings.hardware.dgpu.node}-render"; #!! Must match output renderer
+        adapter_name = "/dev/dri/by-path/${config.custom.settings.hardware.igpu.node}-render"; #!! Must match output renderer
         address_family = "both"; # IPv4+IPv6
+        capture = "kms"; # nvfbc|wlr|kms|x11|ddx|wgc
+        encoder = "vaapi"; # nvenc|quicksync|amdvce|vaapi|software
         system_tray = "disabled";
+        vaapi_strict_rc_buffer = "enabled"; # Less dropped frames
         wan_encryption_mode = 2; # Require encryption
 
         # BUG: NixOS option does not support submodule format
