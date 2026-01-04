@@ -13,7 +13,7 @@
     hostname = "mynix";
 
     display.outputs = {
-      DP-2 = {
+      DP-1 = {
         width = 3440;
         height = 1440;
         refresh = 75;

@@ -65,6 +65,7 @@ in {
     hardware =
       {
         enableAllFirmware = config.custom.default; # Non-free firmware
+        intel-gpu-tools.enable = cfg.cpu == "intel";
 
         # https://wiki.nixos.org/wiki/Bluetooth
         bluetooth = {

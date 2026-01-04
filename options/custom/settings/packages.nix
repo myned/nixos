@@ -82,6 +82,7 @@ in {
           ### CLI applications
           ffmpeg # Media converter
           firefoxpwa # Web app manager
+          libva-utils # VAAPI tools
           mesa-demos # <glx|vk>gears
           vulkan-tools # vkcube
         ]
