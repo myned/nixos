@@ -49,11 +49,11 @@ in {
             # HACK: Force XInput controller so only Steam Input is used, requires Proton GE
             # https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/issues/4168
             # https://github.com/GloriousEggroll/proton-ge-custom/wiki/Changelog#ge-proton10-7-hotfix
-            PROTON_DISABLE_HIDRAW = "1";
-            PROTON_PREFER_SDL = "1";
+            #// PROTON_DISABLE_HIDRAW = "1";
+            #// PROTON_PREFER_SDL = "1";
 
             # https://github.com/GloriousEggroll/proton-ge-custom?tab=readme-ov-file#enabling-native-wayland
-            PROTON_ENABLE_WAYLAND = "1";
+            #// PROTON_ENABLE_WAYLAND = "1";
           };
         }
       );
