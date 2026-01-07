@@ -150,6 +150,7 @@ in {
             (key "E" "Mod" {spawn = [gnome-text-editor "--new-window"];})
             (key "F" "Mod" {spawn = [nautilus "--new-window"];})
             (key "G" "Ctrl+Alt" {spawn = [pkill "steam"];})
+            (key "G" "Ctrl+Shift+Alt" {spawn = [pkill "gamescope"];})
             (key "G" "Mod" {spawn = steam;})
             (key "G" "Mod+Shift" {spawn = steam-gamescope;})
             (key "I" "Ctrl+Alt" {spawn = [pkill "zed"];})
