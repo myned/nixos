@@ -64,9 +64,9 @@ in {
           }
 
           {
-            name = "Steam Big Picture";
+            name = "Steam Gamescope";
             image-path = "steam.png";
-            detached = ["setsid steam steam://open/bigpicture"];
+            detached = ["steam-gamescope"];
             prep-cmd = [
               {
                 do = "kanshictl switch 16x9";
@@ -74,7 +74,7 @@ in {
               }
               {
                 do = "";
-                undo = "setsid steam steam://close/bigpicture";
+                undo = "steam -shutdown";
               }
             ];
           }
