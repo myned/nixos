@@ -174,8 +174,8 @@ in {
               {
                 addresses = [
                   "dynamic"
-                  "tcp://${name}:22000" # Add tailscale machines to static discovery
-                  "quic://${name}:22000"
+                  "tcp://${name}.${config.custom.services.tailscale.tailnet}:22000" # Add tailscale machines to static discovery
+                  "quic://${name}.${config.custom.services.tailscale.tailnet}:22000"
                 ];
               }
               // value) {
