@@ -223,6 +223,7 @@ with lib; {
         suggestUrl = "https://kagi.com/api/autosuggest?q=%s";
       };
 
+      # https://help.kagi.com/kagi/ai/assistant.html#url-parameters
       kagi-assistant = {
         title = "Kagi Assistant";
         shortcut = "ka";
@@ -249,6 +250,13 @@ with lib; {
         shortcut = "kan";
         iconUrl = "https://kagi.com/favicon-assistant-32x32.png";
         searchUrl = "https://kagi.com/search?q=%21news+%s";
+      };
+
+      kagi-assistant-quick = {
+        title = "Kagi Assistant Quick";
+        shortcut = "kaq";
+        iconUrl = "https://kagi.com/favicon-assistant-32x32.png";
+        searchUrl = "https://kagi.com/search?q=%21ki+%s";
       };
 
       kagi-assistant-research = {
