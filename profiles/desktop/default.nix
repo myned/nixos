@@ -31,7 +31,7 @@
       #// power-profiles-daemon.enable = true;
       sunshine.enable = true;
       tuned.enable = true;
-      wallpaper.enable = true;
+      #// wallpaper.enable = true;
     };
 
     settings = {
