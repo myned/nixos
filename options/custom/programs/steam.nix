@@ -12,9 +12,16 @@ in {
   options.custom.programs.steam = {
     enable = mkEnableOption "steam";
 
+    console = mkOption {
+      description = "Number of the virtual console to launch steam-gamescope";
+      default = 5;
+      example = 2;
+      type = types.int;
+    };
+
     extest = mkOption {
-      default = false;
       description = "Whether to enable Xwayland input translation hack";
+      default = false;
       example = true;
       type = types.bool;
     };
@@ -32,9 +39,9 @@ in {
       gamescopeSession = {
         enable = true;
 
-        env = {
-          PROTON_ENABLE_WAYLAND = "0"; # Gamescope is X11-only
-        };
+        # env = {
+        #   PROTON_ENABLE_WAYLAND = "0"; # Gamescope is X11-only
+        # };
       };
 
       # HACK: Work around black main window with xwayland-satellite
@@ -71,5 +78,13 @@ in {
       #// (steamtinkerlaunch.overrideAttrs {src = inputs.steamtinkerlaunch;})
       #// p7zip # steamtinkerlaunch (Special K)
     ];
+
+    # HACK: Launch steam-gamescope in assigned virtual console upon login
+    environment.loginShellInit = with config.programs.steam.gamescopeSession;
+      mkIf enable ''
+        if [ "$(tty)" = "/dev/tty${toString cfg.console}" ]; then
+          gamescope --steam ${toString args} --backend=drm -- steam ${toString steamArgs}
+        fi
+      '';
   };
 }

@@ -10,15 +10,15 @@ in {
     enable = mkEnableOption "gamescope";
 
     width = mkOption {
-      default = config.custom.display.default.height * 16 / 9;
       description = "Width of the gamescope output display";
+      default = config.custom.display.default.height * 16 / 9;
       example = 1920;
       type = types.int;
     };
 
     height = mkOption {
-      default = config.custom.display.default.height;
       description = "Height of the gamescope output display";
+      default = config.custom.display.default.height;
       example = 1080;
       type = types.int;
     };

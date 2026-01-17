@@ -29,15 +29,6 @@ in {
         system_tray = "disabled";
         vaapi_strict_rc_buffer = "enabled"; # Less dropped frames
         wan_encryption_mode = 2; # Require encryption
-
-        # BUG: NixOS option does not support submodule format
-        # https://github.com/NixOS/nixpkgs/issues/433058
-        # global_prep_cmd = [
-        #   {
-        #     do = "kanshictl switch 16x9";
-        #     undo = "kanshictl switch default";
-        #   }
-        # ];
       };
 
       # https://docs.lizardbyte.dev/projects/sunshine/latest/md_docs_2app__examples.html
@@ -49,7 +40,6 @@ in {
           {
             name = "Desktop";
             image-path = "desktop.png";
-            exclude-global-prep-cmd = true;
           }
 
           {
@@ -66,15 +56,10 @@ in {
           {
             name = "Steam Gamescope";
             image-path = "steam.png";
-            detached = ["steam-gamescope"];
             prep-cmd = [
               {
-                do = "kanshictl switch 16x9";
-                undo = "kanshictl switch default";
-              }
-              {
-                do = "";
-                undo = "steam -shutdown";
+                do = ''sh -c "sudo openvt -sfc ${toString config.custom.programs.steam.console} -- agetty -ca $USER - linux"'';
+                undo = ''sh -c "steam -shutdown && sudo pkill -9 -t tty${toString config.custom.programs.steam.console} && sudo chvt 1"'';
               }
             ];
           }
