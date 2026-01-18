@@ -32,6 +32,7 @@
 
     programs = {
       looking-glass.enable = true;
+      steam.gamescope.outputWidth = config.custom.display.default.height * 16 / 9;
 
       waybar = {
         temperature = {
