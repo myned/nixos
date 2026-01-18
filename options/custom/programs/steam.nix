@@ -12,18 +12,48 @@ in {
   options.custom.programs.steam = {
     enable = mkEnableOption "steam";
 
-    console = mkOption {
-      description = "Number of the virtual console to launch steam-gamescope";
-      default = 5;
-      example = 2;
-      type = types.int;
-    };
-
     extest = mkOption {
       description = "Whether to enable Xwayland input translation hack";
       default = false;
       example = true;
       type = types.bool;
+    };
+
+    gamescope = {
+      console = mkOption {
+        description = "Number of the virtual console to launch steam-gamescope";
+        default = 5;
+        example = 2;
+        type = types.int;
+      };
+
+      outputWidth = mkOption {
+        description = "Width of the gamescope output display";
+        default = config.custom.display.default.height;
+        example = 2560;
+        type = types.int;
+      };
+
+      outputHeight = mkOption {
+        description = "Height of the gamescope output display";
+        default = config.custom.display.default.height;
+        example = 1080;
+        type = types.int;
+      };
+
+      nestedWidth = mkOption {
+        description = "Width of the gamescope nested window";
+        default = cfg.gamescope.outputHeight * 16 / 9; # 16:9 aspect ratio
+        example = 1920;
+        type = types.int;
+      };
+
+      nestedHeight = mkOption {
+        description = "Height of the gamescope nested window";
+        default = cfg.gamescope.outputHeight;
+        example = 1080;
+        type = types.int;
+      };
     };
   };
 
@@ -38,6 +68,14 @@ in {
 
       gamescopeSession = {
         enable = true;
+
+        args = [
+          "--fullscreen"
+          "--output-width=${toString cfg.gamescope.outputWidth}"
+          "--output-height=${toString cfg.gamescope.outputHeight}"
+          "--nested-width=${toString cfg.gamescope.nestedWidth}"
+          "--nested-height=${toString cfg.gamescope.nestedHeight}"
+        ];
 
         # env = {
         #   PROTON_ENABLE_WAYLAND = "0"; # Gamescope is X11-only
@@ -82,7 +120,7 @@ in {
     # HACK: Launch steam-gamescope in assigned virtual console upon login
     environment.loginShellInit = with config.programs.steam.gamescopeSession;
       mkIf enable ''
-        if [ "$(tty)" = "/dev/tty${toString cfg.console}" ]; then
+        if [ "$(tty)" = "/dev/tty${toString cfg.gamescope.console}" ]; then
           gamescope --steam ${toString args} --backend=drm -- steam ${toString steamArgs}
         fi
       '';

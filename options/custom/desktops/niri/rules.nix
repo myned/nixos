@@ -353,13 +353,6 @@ in {
             }
 
             {
-              # Gamescope
-              matches = app-ids ["^.*gamescope.*$"];
-              default-column-width.fixed = config.custom.programs.gamescope.width;
-              default-window-height.fixed = config.custom.programs.gamescope.height;
-            }
-
-            {
               # Rofi
               # FIXME: Figure out why pinentry-rofi opens as a window
               # HACK: pinentry-rofi opens as a window, so attempt to style as a layer

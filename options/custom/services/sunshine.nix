@@ -56,10 +56,10 @@ in {
           {
             name = "Steam Gamescope";
             image-path = "steam.png";
-            prep-cmd = [
+            prep-cmd = with config.custom.programs.steam.gamescope; [
               {
-                do = ''sh -c "sudo openvt -sfc ${toString config.custom.programs.steam.console} -- agetty -ca $USER - linux"'';
-                undo = ''sh -c "steam -shutdown && sudo pkill -9 -t tty${toString config.custom.programs.steam.console} && sudo chvt 1"'';
+                do = ''sh -c "sudo openvt -sfc ${toString console} -- agetty -ca $USER - linux"'';
+                undo = ''sh -c "steam -shutdown && sudo pkill -9 -t tty${toString console} && sudo chvt 1"'';
               }
             ];
           }
