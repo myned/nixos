@@ -54,6 +54,13 @@ in {
         example = 1080;
         type = types.int;
       };
+
+      nestedRefresh = mkOption {
+        description = "Refresh rate of the gamescope nested window";
+        default = 60;
+        example = 120;
+        type = types.int;
+      };
     };
   };
 
@@ -69,12 +76,13 @@ in {
       gamescopeSession = {
         enable = true;
 
-        args = [
+        args = with cfg.gamescope; [
           "--fullscreen"
-          "--output-width=${toString cfg.gamescope.outputWidth}"
-          "--output-height=${toString cfg.gamescope.outputHeight}"
-          "--nested-width=${toString cfg.gamescope.nestedWidth}"
-          "--nested-height=${toString cfg.gamescope.nestedHeight}"
+          "--output-width=${toString outputWidth}"
+          "--output-height=${toString outputHeight}"
+          "--nested-width=${toString nestedWidth}"
+          "--nested-height=${toString nestedHeight}"
+          "--nested-refresh=${toString nestedRefresh}"
         ];
 
         # env = {
