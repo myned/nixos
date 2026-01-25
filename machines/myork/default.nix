@@ -62,7 +62,7 @@
     };
 
     settings = {
-      boot.systemd-boot.enable = true;
+      boot.lanzaboote.enable = true;
       packages.extra = [inputs.fprint-clear.packages.${pkgs.system}.default];
 
       hardware = {
