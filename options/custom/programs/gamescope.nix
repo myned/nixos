@@ -19,7 +19,6 @@ in {
       capSysNice = true; # Allow renice
 
       args = [
-        "--rt"
         "--force-grab-cursor"
         "--backend=sdl" # auto|drm|sdl|openvr|wayland
       ];
