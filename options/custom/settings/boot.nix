@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -9,6 +10,8 @@ with lib; let
 
   sed = getExe pkgs.gnused;
 in {
+  imports = [inputs.lanzaboote.nixosModules.lanzaboote];
+
   options.custom.settings.boot = {
     enable = mkEnableOption "boot";
 
@@ -26,6 +29,13 @@ in {
         else pkgs.linuxPackages;
 
       type = types.attrs;
+    };
+
+    lanzaboote = {
+      enable = mkOption {
+        default = false;
+        type = types.bool;
+      };
     };
 
     plymouth = mkOption {
@@ -99,8 +109,8 @@ in {
           enable = true;
         };
 
-        systemd-boot = mkIf cfg.systemd-boot.enable {
-          enable = true;
+        systemd-boot = mkIf (cfg.systemd-boot.enable || cfg.lanzaboote.enable) {
+          enable = !cfg.lanzaboote.enable;
           configurationLimit = 10;
           consoleMode = mkIf (!isInt cfg.systemd-boot.console-mode || cfg.systemd-boot.console-mode <= 2) cfg.systemd-boot.console-mode;
           editor = false; # Disable interactive cmdline
@@ -109,6 +119,21 @@ in {
           extraInstallCommands = mkIf (isInt cfg.systemd-boot.console-mode && cfg.systemd-boot.console-mode > 2) ''
             ${sed} -i 's|console-mode.*|console-mode ${toString cfg.systemd-boot.console-mode}|' /boot/loader/loader.conf
           '';
+        };
+      };
+
+      # https://wiki.nixos.org/wiki/Lanzaboote
+      # https://github.com/nix-community/lanzaboote/blob/master/docs/introduction.md
+      lanzaboote = mkIf cfg.lanzaboote.enable {
+        enable = true;
+        autoGenerateKeys.enable = true;
+        pkiBundle = "/var/lib/sbctl";
+
+        #!! Requires Secure Boot setup mode, dependent on UEFI firmware
+        #?? bootctl status
+        autoEnrollKeys = {
+          enable = true;
+          autoReboot = true; #!! Reboots after enrolling
         };
       };
 
@@ -126,6 +151,8 @@ in {
       # https://adeverteuil.github.io/linux-console-fonts-screenshots/
       #// font = "Lat2-Terminus16";
     };
+
+    environment.systemPackages = mkIf cfg.lanzaboote.enable [pkgs.sbctl];
 
     stylix.targets = {
       console.enable = true; # https://nix-community.github.io/stylix/options/modules/console.html

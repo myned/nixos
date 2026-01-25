@@ -72,6 +72,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # https://github.com/nix-community/lanzaboote
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v1.0.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # https://github.com/YaLTeR/niri
     niri = {
       url = "github:YaLTeR/niri";
