@@ -27,7 +27,7 @@ in {
         capture = "kms"; # nvfbc|wlr|kms|x11|ddx|wgc
         encoder = "vaapi"; # nvenc|quicksync|amdvce|vaapi|software
         system_tray = "disabled";
-        vaapi_strict_rc_buffer = "enabled"; # Less dropped frames
+        #// vaapi_strict_rc_buffer = "enabled"; # Less dropped frames
         wan_encryption_mode = 2; # Require encryption
       };
 
