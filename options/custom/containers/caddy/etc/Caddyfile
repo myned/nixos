@@ -12,6 +12,7 @@
 	#// acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
 
 	# https://github.com/caddy-dns/cloudflare
+	acme_dns cloudflare {$CLOUDFLARE_API_TOKEN}
 	dns cloudflare {$CLOUDFLARE_API_TOKEN}
 
 	# BUG: May not function on chromium browsers
