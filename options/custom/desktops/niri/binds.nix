@@ -35,6 +35,7 @@ with lib; let
   steam-gamescope = getExe (findFirst (p: p.name == "steam-gamescope") "" config.environment.systemPackages);
   sushi = "${pkgs.sushi}/bin/sushi";
   swayosd-client = "${pkgs.swayosd}/bin/swayosd-client";
+  systemctl = "${pkgs.systemd}/bin/systemctl";
   todoist-electron = getExe pkgs.todoist-electron;
   virt-manager = "${config.programs.virt-manager.package}/bin/virt-manager";
   waydroid = "${pkgs.waydroid}/bin/waydroid";
@@ -158,7 +159,7 @@ in {
             (key "K" "Ctrl+Alt" {spawn = [pkill "capacities"];})
             (key "K" "Mod" {spawn = capacities;})
             (key "L" "Mod" {spawn = [bash "-c" "${loginctl} lock-session && ${niri} msg action power-off-monitors"];})
-            (key "L" "Mod+Shift" {suspend = [];})
+            (key "L" "Mod+Shift" {spawn = [systemctl "sleep"];})
             (key "M" "Ctrl+Alt" {spawn = [pkill "youtube-music"];})
             (key "M" "Mod" {spawn = youtube-music;})
             (key "O" "Mod" {spawn = [hyprpicker "--autocopy"];})

@@ -68,8 +68,8 @@ in {
             }
 
             {
-              # Suspend if no audio
-              command = "${pw-cli} info all | ${grep} running || ${systemctl} suspend";
+              # Sleep if no audio
+              command = "${pw-cli} info all | ${grep} running || ${systemctl} sleep";
               timeout = 60 * 60; # Minutes
             }
           ];

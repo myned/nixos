@@ -15,7 +15,7 @@ in {
     # https://wiki.archlinux.org/title/Power_management#ACPI_events
     services.logind.settings = {
       Login = {
-        HandleLidSwitch = "suspend";
+        HandleLidSwitch = "sleep";
         HandleLidSwitchDocked = "ignore";
         HandleLidSwitchExternalPower = "ignore";
       };
