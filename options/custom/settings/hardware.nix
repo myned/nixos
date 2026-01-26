@@ -75,7 +75,7 @@ in {
       }
       // optionalAttrs (cfg.dgpu.driver == "amdgpu" || cfg.igpu.driver == "amdgpu") {
         # Fix initramfs boot resolution
-        #// amdgpu.initrd.enable = !(with config.custom.vms.passthrough; enable && blacklist);
+        amdgpu.initrd.enable = !(with config.custom.vms.passthrough; enable && blacklist);
       };
 
     nixpkgs.config =
