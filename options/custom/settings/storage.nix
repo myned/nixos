@@ -108,7 +108,37 @@ in {
   config = mkIf cfg.enable {
     boot = {
       initrd = {
-        systemd.enable = true;
+        systemd = {
+          enable = true;
+
+          # https://discourse.nixos.org/t/systemd-initrd-for-usb-based-luks-unlocking-root/59179/11
+          mounts = optionals cfg.key.enable [
+            {
+              what = cfg.key.device;
+              where = "/key";
+              options = "ro";
+
+              unitConfig = {
+                DefaultDependencies = false; # Otherwise decryption is attempted before mount
+              };
+            }
+          ];
+
+          # HACK: Override unit requiring keyfile, otherwise boot fails when key is missing
+          # services."systemd-cryptsetup@crypted" = {
+          #   overrideStrategy = "asDropin";
+
+          #   unitConfig = {
+          #     RequiresMountsFor = [];
+          #     WantsMountsFor = ["/key"];
+          #   };
+          # };
+
+          # https://github.com/NixOS/nixpkgs/issues/250003
+          settings.Manager = {
+            DefaultDeviceTimeoutSec = 15; # Reduce timeout
+          };
+        };
 
         # https://wiki.nixos.org/wiki/Full_Disk_Encryption#Unattended_Boot_via_USB
         kernelModules = optionals cfg.key.enable [
@@ -119,25 +149,6 @@ in {
           "usbcore"
           "vfat" # FAT32
           "exfat" # exFAT
-        ];
-
-        # FIXME: Does not work
-        # TODO: Wait for graphics driver to initialize before decryption prompt appears
-        systemd.mounts = optionals cfg.key.enable [
-          {
-            what = cfg.key.device;
-            where = "/key";
-
-            # FIXME: Does not take effect in key.mount
-            # Related: https://github.com/NixOS/nixpkgs/issues/250003
-            # mountConfig = {
-            #   TimeoutSec = 3;
-            # };
-
-            unitConfig = {
-              DefaultDependencies = false; # Otherwise decryption is attempted before mount
-            };
-          }
         ];
       };
     };
@@ -219,10 +230,10 @@ in {
                         inherit content;
                         type = "luks";
                         name = "crypted";
-                        passwordFile = "/tmp/secret.key"; # Only during installation
-                        additionalKeyFiles = [cfg.key.path];
+                        passwordFile = "/tmp/secret.key"; # Only used during formatting
 
                         settings = {
+                          keyFile = mkIf cfg.key.enable cfg.key.path;
                           allowDiscards = true; # https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)
                           bypassWorkqueues = true; # https://wiki.archlinux.org/title/Dm-crypt/Specialties#Disable_workqueue_for_increased_solid_state_drive_(SSD)_performance
                         };
