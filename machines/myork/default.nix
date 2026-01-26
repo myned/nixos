@@ -75,7 +75,7 @@
       storage = {
         defaultMounts = ["/dev/disk/by-label/myve"];
         swapSize = 32;
-        key.enable = true;
+        #// key.enable = true;
 
         root = {
           device = "/dev/disk/by-id/nvme-WD_BLACK_SN770_2TB_23414P805868";

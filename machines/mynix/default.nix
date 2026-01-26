@@ -77,7 +77,7 @@
 
       storage = {
         swapSize = 32;
-        key.enable = true;
+        #// key.enable = true;
 
         defaultMounts = [
           "/dev/disk/by-label/gaymes1"
