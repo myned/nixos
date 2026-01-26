@@ -50,13 +50,13 @@ in {
 
     systemd-boot = {
       enable = mkOption {
-        default = false;
+        default = cfg.lanzaboote.enable;
         type = types.bool;
       };
 
       console-mode = mkOption {
-        default = "max";
-        type = with types; either int str;
+        default = "keep";
+        type = types.str;
       };
     };
 
@@ -114,16 +114,11 @@ in {
           enable = true;
         };
 
-        systemd-boot = mkIf (cfg.systemd-boot.enable || cfg.lanzaboote.enable) {
-          enable = !cfg.lanzaboote.enable;
+        systemd-boot = mkIf (cfg.systemd-boot.enable) {
+          enable = !cfg.lanzaboote.enable; #!! Conflicts with lanzaboote
           configurationLimit = 10;
-          consoleMode = mkIf (!isInt cfg.systemd-boot.console-mode || cfg.systemd-boot.console-mode <= 2) cfg.systemd-boot.console-mode;
+          consoleMode = cfg.systemd-boot.console-mode;
           editor = false; # Disable interactive cmdline
-
-          # HACK: consoleMode does not accept undocumented device modes (e.g. 3 4 5)
-          extraInstallCommands = mkIf (isInt cfg.systemd-boot.console-mode && cfg.systemd-boot.console-mode > 2) ''
-            ${sed} -i 's|console-mode.*|console-mode ${toString cfg.systemd-boot.console-mode}|' /boot/loader/loader.conf
-          '';
         };
       };
 
@@ -149,12 +144,13 @@ in {
     };
 
     console = {
-      #// earlySetup = true;
+      enable = true;
+      earlySetup = true;
 
       # https://wiki.nixos.org/wiki/Console_Fonts
       # https://wiki.archlinux.org/title/Linux_console#Fonts
       # https://adeverteuil.github.io/linux-console-fonts-screenshots/
-      #// font = "Lat2-Terminus16";
+      font = "${pkgs.terminus_font}/share/consolefonts/ter-124b.psf.gz"; # https://terminus-font.sourceforge.net/
     };
 
     environment.systemPackages = mkIf cfg.lanzaboote.enable [pkgs.sbctl];
