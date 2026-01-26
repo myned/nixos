@@ -28,6 +28,7 @@ in {
     # https://wiki.archlinux.org/title/Greetd
     services.greetd = {
       enable = true;
+      useTextGreeter = true; # Prevent boot logs in TUI
 
       settings.default_session.command =
         # https://git.sr.ht/~kennylevinsen/gtkgreet
@@ -57,17 +58,5 @@ in {
 
     # Use password at login to unlock keyring
     security.pam.services.greetd.fprintAuth = false;
-
-    # Attempt to prevent bootlogs from polluting the tty
-    # https://github.com/apognu/tuigreet/issues/68
-    systemd.services.greetd.serviceConfig = {
-      Type = "idle";
-      StandardInput = "tty";
-      StandardOutput = "tty";
-      StandardError = "journal";
-      TTYReset = true;
-      TTYVHangup = true;
-      TTYVTDisallocate = true;
-    };
   };
 }
