@@ -82,6 +82,8 @@ in {
       # https://wiki.nixos.org/wiki/Linux_kernel
       kernelPackages = cfg.kernel;
 
+      kernelParams = optionals cfg.plymouth ["quiet"];
+
       kernel.sysctl = mkIf config.custom.default {
         # https://wiki.archlinux.org/title/Sysctl#Virtual_memory
         "vm.dirty_bytes" = 256 * 1024 * 1024; # 256 MiB
@@ -138,8 +140,15 @@ in {
       };
 
       # https://wiki.nixos.org/wiki/Plymouth
+      # https://wiki.archlinux.org/title/Plymouth
+      #?? plymouthd; plymouth --show-splash; sleep 5; plymouth --quit
       plymouth = optionalAttrs cfg.plymouth {
-        enable = true;
+        enable = false;
+        theme = "colorful_loop";
+        themePackages = [
+          # https://github.com/adi1090x/plymouth-themes
+          pkgs.adi1090x-plymouth-themes
+        ];
       };
     };
 
@@ -165,6 +174,7 @@ in {
       console.enable = true; # https://nix-community.github.io/stylix/options/modules/console.html
       grub.enable = cfg.grub.enable; # https://nix-community.github.io/stylix/options/modules/grub.html
       kmscon.enable = cfg.kmscon; # https://nix-community.github.io/stylix/options/modules/kmscon.html
+      #// plymouth.enable = cfg.plymouth; # https://nix-community.github.io/stylix/options/modules/plymouth.html
     };
   };
 }
