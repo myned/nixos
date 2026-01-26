@@ -28,14 +28,14 @@ in {
             curve = temp: speed: {inherit temp speed;};
           in [
             (curve 0 0) # Always active
-            (curve 30 10)
-            (curve 40 20)
-            (curve 50 30)
-            (curve 60 40)
-            (curve 70 50)
-            #!! Max fan speed of 50%
-            #// (curve 80 60)
-            #// (curve 90 70)
+            (curve 30 20)
+            (curve 40 30)
+            (curve 50 40)
+            (curve 60 50)
+            (curve 70 60)
+            #!! Max fan speed of 60%
+            #// (curve 80 70)
+            #// (curve 90 80)
             #// (curve 100 100)
           ];
         };
