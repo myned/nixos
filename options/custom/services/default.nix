@@ -39,6 +39,7 @@ with lib; {
       #// clipcat.enable = true;
       #// cliphist.enable = true;
       #// clipmenu.enable = true;
+      displaylink.enable = true;
       easyeffects.enable = true;
 
       # BUG: Prevents activation of /usr, causing systemd to halt after installation or with Impermanence
