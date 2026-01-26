@@ -31,6 +31,11 @@ in {
       type = types.attrs;
     };
 
+    kmscon = mkOption {
+      default = false;
+      type = types.bool;
+    };
+
     lanzaboote = {
       enable = mkOption {
         default = false;
@@ -154,10 +159,16 @@ in {
 
     environment.systemPackages = mkIf cfg.lanzaboote.enable [pkgs.sbctl];
 
+    # https://wiki.archlinux.org/title/KMSCON
+    services.kmscon = mkIf cfg.kmscon {
+      enable = true;
+      hwRender = true;
+    };
+
     stylix.targets = {
       console.enable = true; # https://nix-community.github.io/stylix/options/modules/console.html
       grub.enable = cfg.grub.enable; # https://nix-community.github.io/stylix/options/modules/grub.html
-      plymouth.enable = cfg.plymouth; # https://nix-community.github.io/stylix/options/modules/plymouth.html
+      kmscon.enable = cfg.kmscon; # https://nix-community.github.io/stylix/options/modules/kmscon.html
     };
   };
 }
