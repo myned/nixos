@@ -53,7 +53,7 @@
     };
 
     settings = {
-      boot.systemd-boot.enable = true;
+      boot.lanzaboote.enable = true;
 
       hardware = {
         cpu = "intel";
