@@ -194,7 +194,7 @@ in {
           pika-backup # Borg backup manager
           planify # Task manager
           pods # Podman manager
-          #// protonplus # Wine updater
+          pkgs.unstable.protonplus # Wine updater
           #// protonvpn-gui # Proton VPN client
           #// ptyxis # Terminal
           pwvucontrol # Pipewire volume controller
