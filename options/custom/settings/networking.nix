@@ -245,10 +245,8 @@ in {
       # https://controld.com/free-dns
       #?? https://controld.com/status
       fallbackDns = optionals cfg.dns [
-        "76.76.2.0#p0.freedns.controld.com"
-        "76.76.10.0#p0.freedns.controld.com"
-        "2606:1a40::#p0.freedns.controld.com"
-        "2606:1a40:1::#p0.freedns.controld.com"
+        "76.76.2.11#p0.freedns.controld.com"
+        "2606:1a40::11#p0.freedns.controld.com"
       ];
     };
 
