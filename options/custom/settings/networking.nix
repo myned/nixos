@@ -110,7 +110,7 @@ in {
     networking = {
       hostName = config.custom.hostname;
       useNetworkd = cfg.networkd;
-      #// wireless.iwd.enable = cfg.wifi;
+      wireless.iwd.enable = cfg.wifi;
 
       firewall = mkIf cfg.firewall {
         enable = true;
@@ -136,7 +136,7 @@ in {
       networkmanager = mkIf cfg.networkmanager {
         enable = true;
         plugins = [pkgs.networkmanager-openvpn];
-        #// wifi.backend = mkIf cfg.wifi "iwd";
+        wifi.backend = mkIf cfg.wifi "iwd";
       };
     };
 
