@@ -29,7 +29,7 @@ with lib; {
 
     (mkIf config.custom.minimal {
       #// alacritty.enable = true;
-      #// appimage.enable = true;
+      appimage.enable = true;
       chromium.enable = true;
       dconf.enable = true;
       firefox.enable = true;

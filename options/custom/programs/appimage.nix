@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -14,5 +15,13 @@ in {
       enable = true;
       binfmt = true;
     };
+
+    environment.systemPackages = [pkgs.gearlever];
+
+    home-manager.sharedModules = [
+      {
+        home.sessionPath = ["$HOME/AppImages"];
+      }
+    ];
   };
 }

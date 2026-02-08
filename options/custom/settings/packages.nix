@@ -137,7 +137,6 @@ in {
           #// fractal # Matrix client
           fragments # Torrent downloader
           gcolor3 # Color picker
-          gearlever # AppImage manager
           gimp # Image editor
           #// gitbutler # Git client
           #// gitg # Git client

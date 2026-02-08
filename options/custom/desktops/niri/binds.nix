@@ -11,7 +11,7 @@ with lib; let
   _1password = getExe config.programs._1password-gui.package;
   audio = config.home-manager.users.${config.custom.username}.home.file.".local/bin/audio".source;
   bash = "${pkgs.bash}/bin/bash";
-  capacities = getExe pkgs.capacities;
+  capacities = "capacities.appimage";
   cat = "${pkgs.coreutils}/bin/cat";
   code = getExe hm.programs.vscode.package;
   ghostty = "${hm.programs.ghostty.package}/bin/ghostty";
