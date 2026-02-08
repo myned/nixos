@@ -347,12 +347,6 @@ in {
             })
 
             {
-              # Chrome
-              matches = app-ids ["^[Gg]oogle-chrome.*$"];
-              scroll-factor = 1.25;
-            }
-
-            {
               # Rofi
               # FIXME: Figure out why pinentry-rofi opens as a window
               # HACK: pinentry-rofi opens as a window, so attempt to style as a layer
