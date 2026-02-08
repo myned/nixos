@@ -26,6 +26,14 @@ in {
 
     environment = {
       localBinInPath = true;
+
+      # HACK: _IM envvars should not be set for DEs that support Wayland IME
+      # TODO: Set `i18n.inputMethod.ibus.waylandFrontend = true` when in stable
+      # https://github.com/NixOS/nixpkgs/pull/384689
+      variables = {
+        GTK_IM_MODULE = mkForce null;
+        QT_IM_MODULE = mkForce null;
+      };
     };
 
     home-manager.sharedModules = [
