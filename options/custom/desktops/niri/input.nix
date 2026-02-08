@@ -18,7 +18,7 @@ in {
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsinputfocus-follows-mouseenable
           focus-follows-mouse = {
             enable = true;
-            max-scroll-amount = "100%";
+            max-scroll-amount = "50%";
           };
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsinputpower-key-handlingenable
