@@ -108,6 +108,7 @@ in {
           #// blackbox-terminal # Terminal
           blueberry # Bluetooth manager
           bottles # Wine manager
+          #// capacities # Knowledge base
           #// cartridges # Game library
 
           # BUG: lipsoup deprecated, uncomment when updated to Tauri v2

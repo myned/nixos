@@ -49,7 +49,6 @@ with lib; {
       _1password.enable = true;
       adb.enable = true;
       #// ags.enable = true;
-      capacities.enable = true;
       #// clipse.enable = true;
       discord.enable = true;
       distrobox.enable = true;

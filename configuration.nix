@@ -59,6 +59,8 @@ with lib; {
           # https://github.com/NixOS/nixpkgs/issues/384555
           bottles = prev.bottles.override {removeWarningPopup = true;};
 
+          capacities = unstable.capacities;
+
           # TODO: Use official package when available
           # https://github.com/NixOS/nixpkgs/issues/327982
           zen-browser = inputs.zen-browser.packages.${prev.system}.zen-browser;
