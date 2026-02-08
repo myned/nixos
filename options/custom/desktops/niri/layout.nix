@@ -86,7 +86,7 @@ in {
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutstruts
           struts = let
-            strut = gap;
+            strut = gap * 2;
           in {
             left = strut;
             right = strut;
