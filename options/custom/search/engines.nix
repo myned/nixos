@@ -106,7 +106,7 @@ with lib; {
         title = "Chrome Extensions";
         shortcut = "cex";
         iconUrl = "https://ssl.gstatic.com/chrome/webstore/images/icon_48px.png";
-        searchUrl = "https://chromewebstore.google.com/search/";
+        searchUrl = "https://chromewebstore.google.com/search/%s";
       };
 
       docker-hub = {
