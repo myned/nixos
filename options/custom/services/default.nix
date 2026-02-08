@@ -6,22 +6,22 @@
 with lib; {
   config.custom.services = mkMerge [
     (mkIf config.custom.default {
-      #// automatic-timezoned.enable = true;
+      automatic-timezoned.enable = true;
       #// earlyoom.enable = true;
       fail2ban.enable = true;
+      geoclue2.enable = true;
       #// glances.enable = true;
       #// netbird.enable = true;
       #// postfix.enable = true;
       sshd.enable = true;
       tailscale.enable = true;
-      tzupdate.enable = true;
+      #// tzupdate.enable = true;
     })
 
     (mkIf config.custom.minimal {
       dbus.enable = true;
       flatpak.enable = true;
       fwupd.enable = true;
-      geoclue2.enable = true;
       #// kmscon.enable = true;
       libinput.enable = true;
       logind.enable = true;
