@@ -66,11 +66,11 @@ in {
             ]));
 
         # https://chromeenterprise.google/policies/#DefaultSearchProvider
-        DefaultSearchProviderEnabled = false;
-        #// DefaultSearchProviderName = config.custom.search.default.name;
+        DefaultSearchProviderEnabled = true;
+        DefaultSearchProviderName = config.custom.search.default.name;
         #// DefaultSearchProviderKeyword = config.custom.search.default.shortcut;
-        #// DefaultSearchProviderSearchURL = replaceStrings ["%s"] ["{searchTerms}"] config.custom.search.default.searchUrl;
-        #// DefaultSearchProviderSuggestURL = replaceStrings ["%s"] ["{searchTerms}"] config.custom.search.default.suggestUrl;
+        DefaultSearchProviderSearchURL = replaceStrings ["%s"] ["{searchTerms}"] config.custom.search.default.searchUrl;
+        DefaultSearchProviderSuggestURL = replaceStrings ["%s"] ["{searchTerms}"] config.custom.search.default.suggestUrl;
 
         # https://chromeenterprise.google/policies/#SiteSearchSettings
         SiteSearchSettings =
