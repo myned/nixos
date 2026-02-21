@@ -13,10 +13,10 @@
     hostname = "mynix";
 
     display.outputs = {
-      DP-1 = {
-        width = 3440;
-        height = 1440;
-        refresh = 75;
+      HDMI-A-1 = {
+        width = 2560;
+        height = 1080;
+        refresh = 74;
         #// finalRefresh = 74.979;
         force = true;
 
