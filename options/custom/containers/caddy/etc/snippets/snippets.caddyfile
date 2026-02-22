@@ -3,7 +3,7 @@
 (common) {
 	encode zstd gzip
 	header ?X-Robots-Tag "noindex, nofollow"
-	header ?Access-Control-Allow-Origin *
+	header ?Access-Control-Allow-Origin "*"
 
 	# BUG: hostname appears in more than one automation policy
 	# https://github.com/caddyserver/caddy/issues/7354
@@ -28,7 +28,99 @@
 	# https://element-hq.github.io/synapse/latest/reverse_proxy.html#caddy-v2
 	header /.well-known/matrix/* Content-Type application/json
 	header /.well-known/matrix/* Access-Control-Allow-Origin *
-	respond /.well-known/matrix/server `{"m.server":"matrix.bjork.tech:443"}`
-	respond /.well-known/matrix/client `{"m.homeserver":{"base_url":"https://matrix.bjork.tech"},"org.matrix.msc4143.rtc_foci":[{"type":"livekit","livekit_service_url":"https://livekit-jwt.call.matrix.org"}]}`
-	respond /.well-known/matrix/support `{"contacts":[{"matrix_id":"@myned:bjork.tech","email_address":"admin@bjork.tech","role":"m.role.admin"}]}`
+
+	respond /.well-known/matrix/server <<JSON
+		{
+			"m.server": "matrix.bjork.tech:443"
+		}
+		JSON
+
+	# https://github.com/element-hq/lk-jwt-service?tab=readme-ov-file#-do-not-forget-to-update-your-matrix-sites-well-knownmatrixclient
+	respond /.well-known/matrix/client <<JSON
+		{
+			"m.homeserver": {
+				"base_url": "https://matrix.bjork.tech"
+			},
+			"org.matrix.msc4143.rtc_foci": [
+				{
+					"type": "livekit",
+					"livekit_service_url": "https://matrix-rtc.bjork.tech/livekit/jwt"
+				}
+			]
+		}
+		JSON
+
+	respond /.well-known/matrix/support <<JSON
+		{
+			"contacts": [
+				{
+					"matrix_id": "@myned:bjork.tech",
+					"email_address": "admin@bjork.tech",
+					"role": "m.role.admin"
+				}
+			]
+		}
+		JSON
+}
+
+# https://github.com/stoatchat/self-hosted/blob/main/Caddyfile
+(stoat) {
+	# api
+	route /api* {
+		uri strip_prefix /api
+		reverse_proxy http://myosh-stoat:14702 {
+			header_down Location "^/" "/api/"
+		}
+	}
+
+	# events
+	route /ws {
+		uri strip_prefix /ws
+		reverse_proxy http://myosh-stoat:14703 {
+			header_down Location "^/" "/ws/"
+		}
+	}
+
+	# autumn/file-server
+	route /media* {
+		uri strip_prefix /media
+		reverse_proxy http://myosh-stoat:14704 {
+			header_down Location "^/" "/media/"
+		}
+	}
+
+	# january/proxy
+	route /proxy* {
+		uri strip_prefix /proxy
+		reverse_proxy http://myosh-stoat:14705 {
+			header_down Location "^/" "/proxy/"
+		}
+	}
+
+	# gifbox
+	route /gifbox* {
+		uri strip_prefix /gifbox
+		reverse_proxy http://myosh-stoat:14706 {
+			header_down Location "^/" "/gifbox/"
+		}
+	}
+
+	# livekit
+	route /livekit* {
+		uri strip_prefix /livekit
+		reverse_proxy http://myosh-stoat:7880 {
+			header_down Location "^/" "/livekit/"
+		}
+	}
+
+	# voice-ingress
+	route /ingress* {
+		uri strip_prefix /ingress
+		reverse_proxy http://myosh-stoat:8500 {
+			header_down Location "^/" "/ingress/"
+		}
+	}
+
+	# for-web
+	reverse_proxy http://myosh-stoat:5000
 }

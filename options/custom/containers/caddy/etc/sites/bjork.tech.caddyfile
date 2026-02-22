@@ -10,12 +10,15 @@ bjork.tech {
 *.bjork.tech {
 	import common
 	import www bjork.tech
+	#// import redirect revolt.bjork.tech stoat.bjork.tech
 	#// import proxy cloud.bjork.tech myosh:11000 # Nextcloud
+	import proxy element.bjork.tech myosh-synapse:80 # Element Web
 	#// import proxy feed.bjork.tech myosh:8808 # Miniflux
 	import proxy foundry.bjork.tech myosh:30000 # Foundry Virtual Tabletop
 	#// import proxy gist.bjork.tech myosh-opengist:6157 # Opengist
 	import proxy git.bjork.tech myosh-forgejo:3000 # Forgejo
 	#// import proxy net.bjork.tech myosh:8585 # Netbox
+	import proxy notify.bjork.tech {system.hostname}:2586 # ntfy
 	#// import proxy status.bjork.tech {system.hostname}-kener:3000 # Kener
 	#// import proxy ts.bjork.tech {system.hostname}:9999 # Headscale
 	#// import proxy vault.bjork.tech myosh:8088 # Vaultwarden
@@ -32,8 +35,17 @@ bjork.tech {
 
 	# Synapse
 	import handle matrix.bjork.tech {
-		reverse_proxy /_matrix/* myosh:8008
-		reverse_proxy /_synapse/client/* myosh:8008
+		reverse_proxy / myosh-synapse:8008
+		reverse_proxy /_matrix/* myosh-synapse:8008
+		reverse_proxy /_synapse/client/* myosh-synapse:8008
+		reverse_proxy @private myosh-synapse:8008
+	}
+
+	# MatrixRTC
+	# https://github.com/element-hq/element-call/blob/livekit/docs/self-hosting.md?ref=element.io#matrix-site-endpoint-routing
+	# https://github.com/element-hq/lk-jwt-service?tab=readme-ov-file#-transport-layer-security-tls-setup-using-a-reverse-proxy
+	import handle matrix-rtc.bjork.tech {
+		reverse_proxy /livekit/jwt* myosh-synapse:8080 # JWT
 	}
 
 	# Syncthing Discovery
@@ -50,10 +62,9 @@ bjork.tech {
 		#// import proxy budget.bjork.tech myosh:5006 # Actual Budget
 		import proxy discover.bjork.tech myosh-jellyfin:5055 # Jellyseerr
 		import proxy home.bjork.tech mypi3:8123 # Home Assistant
-		import proxy matrix.bjork.tech myosh:8008 # Synapse
+		import proxy matrix.bjork.tech myosh-synapse:8008 # Synapse
 		import proxy media.bjork.tech myosh-jellyfin:8096 # Jellyfin
 		import proxy media-next.bjork.tech myosh-jellyfin:8097 # Jellyfin Vue
-		import proxy notify.bjork.tech {system.hostname}:2586 # ntfy
 		#// import proxy reddit.bjork.tech myosh:8888 # Redlib
 		#// import proxy search.bjork.tech myosh:8888 # SearXNG
 		import proxy stream.bjork.tech myosh:3333 # OvenMediaEngine
@@ -88,6 +99,11 @@ bjork.tech {
 		# 	reverse_proxy /api/* myosh:1985
 		# 	reverse_proxy /rtc/* myosh:1985
 		# }
+
+		# Stoat/Revolt
+		# import handle stoat.bjork.tech {
+		# 	import stoat
+		# }
 	}
 }
 
@@ -105,7 +121,7 @@ bjork.tech {
 		#// import proxy jackett.admin.bjork.tech myosh-jellyfin:9117 # Jackett
 		#// import proxy-insecure kasm.admin.bjork.tech myosh:3443 # Kasm
 		import proxy lidarr.admin.bjork.tech myosh-jellyfin:8686 # Lidarr
-		import proxy matrix.admin.bjork.tech myosh:8000 # Synapse Admin
+		import proxy synapse.admin.bjork.tech myosh-synapse:8080 # Synapse Admin
 		#// import proxy-insecure nextcloud.admin.bjork.tech myosh:8080 # Nextcloud AIO
 		#// import proxy-insecure portainer.admin.bjork.tech {system.hostname}-portainer:9443 # Portainer
 		#// import proxy prometheus.admin.bjork.tech {system.hostname}-grafana:9090 # Prometheus

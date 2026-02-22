@@ -15,4 +15,16 @@ layer4 {
 	#      proxy udp/localhost:8853
 	#    }
 	#  }
+
+	# tcp/:7881 {
+	# 	route {
+	# 		proxy tcp/myosh-stoat:7881
+	# 	}
+	# }
+
+	# udp/:7882 {
+	# 	route {
+	# 		proxy udp/myosh-stoat:7882
+	# 	}
+	# }
 }
