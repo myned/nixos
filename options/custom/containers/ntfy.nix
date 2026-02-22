@@ -20,7 +20,7 @@ in {
       ntfy.service = {
         command = "serve";
         container_name = "ntfy";
-        image = "binwiederhier/ntfy:v2.13.0"; # https://hub.docker.com/r/binwiederhier/ntfy/tags
+        image = "binwiederhier/ntfy:v2.17.0"; # https://hub.docker.com/r/binwiederhier/ntfy/tags
         ports = ["2586:80/tcp"];
         restart = "unless-stopped";
         volumes = ["${config.custom.containers.directory}/ntfy/db:/var/lib/ntfy"];
@@ -37,8 +37,8 @@ in {
           NTFY_BEHIND_PROXY = "true";
           NTFY_CACHE_DURATION = "7d";
           NTFY_CACHE_FILE = "/var/lib/ntfy/cache.db";
-          NTFY_ENABLE_LOGIN = "true";
           NTFY_LOG_LEVEL = "INFO";
+          NTFY_WEB_ROOT = "disable";
         };
       };
     };
