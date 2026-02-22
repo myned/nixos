@@ -56,6 +56,7 @@ in {
   "myore/headscale/ui.yaml" = key myore;
   "myore/kener/.env" = key myore;
   "myore/kener/db.env" = key myore;
+  "myore/livekit/livekit.yaml" = key myore;
   "myore/netdata/parent.conf" = key myore;
   "myore/users/myned.pass" = key myore;
   "myore/users/root.pass" = key myore;
