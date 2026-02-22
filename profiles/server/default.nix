@@ -42,13 +42,17 @@
       #// srs.enable = true;
       #// stoat.enable = true;
       #// stremio.enable = true;
-      synapse.enable = true;
       #// vaultwarden.enable = true;
       #// wikijs.enable = true;
 
       jellyfin = {
         enable = true;
         dataDir = "/mnt/local/jellyfin";
+      };
+
+      synapse = {
+        enable = true;
+        dataDir = "/mnt/local/synapse";
       };
     };
 

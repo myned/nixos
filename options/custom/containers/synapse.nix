@@ -10,6 +10,13 @@ with lib; let
 in {
   options.custom.containers.synapse = {
     enable = mkEnableOption "synapse";
+
+    dataDir = mkOption {
+      description = "Directory to store data subject to retention";
+      default = null;
+      example = "/mnt/synapse";
+      type = types.path;
+    };
   };
 
   config = mkIf cfg.enable {
@@ -29,11 +36,14 @@ in {
         network_mode = "service:vpn"; # 8008/tcp
         restart = "unless-stopped";
 
-        volumes = [
-          "/mnt/local/synapse/media:/data/media_store"
-          "${config.custom.containers.directory}/synapse/data:/data"
-          "${config.age.secrets."${config.custom.hostname}/synapse/homeserver.yaml".path}:/data/homeserver.yaml:ro"
-        ];
+        volumes =
+          [
+            "${config.custom.containers.directory}/synapse/data:/data"
+            "${config.age.secrets."${config.custom.hostname}/synapse/homeserver.yaml".path}:/data/homeserver.yaml:ro"
+          ]
+          ++ optionals (!isNull cfg.dataDir) [
+            "${cfg.dataDir}/media:/data/media_store"
+          ];
 
         environment = {
           #?? arion-synapse run -- --rm -e SYNAPSE_SERVER_NAME=matrix.example.com -e SYNAPSE_REPORT_STATS=yes synapse generate
@@ -124,17 +134,19 @@ in {
         user = "991"; # synapse
         group = "991"; # synapse
       };
-    in {
-      "/mnt/local/synapse" = {
-        d = owner "0700";
-        z = owner "0700";
+    in
+      {
+        "${config.custom.containers.directory}/synapse/data" = {
+          d = owner "0700";
+          z = owner "0700";
+        };
+      }
+      // optionalAttrs (!isNull cfg.dataDir) {
+        "${cfg.dataDir}" = {
+          d = owner "0700";
+          z = owner "0700";
+        };
       };
-
-      "${config.custom.containers.directory}/synapse/data" = {
-        d = owner "0700";
-        z = owner "0700";
-      };
-    };
 
     age.secrets = listToAttrs (map (name: {
         inherit name;
