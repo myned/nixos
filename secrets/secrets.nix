@@ -96,6 +96,10 @@ in {
   "myosh/rconfig/.env" = key myosh;
   "myosh/rconfig/db.env" = key myosh;
   "myosh/searxng/.env" = key myosh;
+  "myosh/stoat/mq.env" = key myosh;
+  "myosh/stoat/store.env" = key myosh;
+  "myosh/stoat/livekit.yaml" = key myosh;
+  "myosh/stoat/Revolt.toml" = key myosh;
   "myosh/synapse/db.env" = key myosh;
   "myosh/synapse/homeserver.yaml" = key myosh;
   "myosh/users/myned.pass" = key myosh;

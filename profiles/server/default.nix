@@ -40,6 +40,7 @@
       #// redlib.enable = true;
       #// searxng.enable = true;
       #// srs.enable = true;
+      #// stoat.enable = true;
       #// stremio.enable = true;
       synapse.enable = true;
       synapseadmin.enable = true;
