@@ -1,4 +1,9 @@
-{config, ...}: {
+{
+  config,
+  lib,
+  ...
+}:
+with lib; {
   custom = {
     profile = "core";
 
@@ -28,11 +33,6 @@
       #// syncthing.enable = true;
       #// syncthing.server = true;
       #// uptimekuma.enable = true;
-
-      caddy = {
-        enable = true;
-        public-key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBYspWeL1pBqX7Bl2pK/vnBE/B7VA93SYgz6O9YlrgNl";
-      };
     };
 
     services = {
@@ -49,6 +49,17 @@
           "/home"
           "/srv"
         ];
+      };
+
+      caddy = {
+        enable = true;
+        importEnvironment = true;
+        srvKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBYspWeL1pBqX7Bl2pK/vnBE/B7VA93SYgz6O9YlrgNl";
+        globalConfig = readFile ./caddy/global.caddyfile;
+        extraConfig = ''
+          import ${./caddy/snippets}/*.caddyfile
+          import ${./caddy/sites}/*.caddyfile
+        '';
       };
     };
   };

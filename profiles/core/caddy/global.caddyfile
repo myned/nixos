@@ -1,0 +1,18 @@
+# https://github.com/caddy-dns/cloudflare
+acme_dns cloudflare {$CLOUDFLARE_API_TOKEN}
+dns cloudflare {$CLOUDFLARE_API_TOKEN}
+
+# https://caddyserver.com/docs/caddyfile/options#cert-issuer
+cert_issuer acme {
+	#!! Record propagation may time out with external resolvers
+	# https://github.com/caddy-dns/cloudflare/issues/28
+	resolvers 1.1.1.1 1.0.0.1 2606:4700:4700::1111 2606:4700:4700::1001
+}
+
+# BUG: May not function on chromium browsers
+# https://github.com/caddyserver/caddy/issues/6898
+# https://caddyserver.com/docs/automatic-https#enabling-ech
+ech ech.bjork.tech
+
+# https://caddyserver.com/docs/caddyfile/directives#directive-order
+order bind first

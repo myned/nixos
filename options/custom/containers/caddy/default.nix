@@ -55,12 +55,10 @@ in {
       allowedTCPPorts = [
         80 # HTTP
         443 # HTTPS
-        7881 # LiveKit
       ];
 
       allowedUDPPorts = [
         443 # HTTP/3
-        7882 # LiveKit
       ];
     };
 
