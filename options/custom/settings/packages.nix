@@ -212,6 +212,7 @@ in {
           snoop # File content finder
           sourcegit # Git client
           #// spotify # Spotify client
+          unstable.stoat-desktop # Stoat/Revolt client
           #// stremio # Streaming client
           switcheroo # Image converter
           #// syncthingtray # Syncthing client
