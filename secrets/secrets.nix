@@ -101,6 +101,7 @@ in {
   "myosh/stoat/livekit.yaml" = key myosh;
   "myosh/stoat/Revolt.toml" = key myosh;
   "myosh/synapse/db.env" = key myosh;
+  "myosh/synapse/jwt.env" = key myosh;
   "myosh/synapse/homeserver.yaml" = key myosh;
   "myosh/users/myned.pass" = key myosh;
   "myosh/users/root.pass" = key myosh;

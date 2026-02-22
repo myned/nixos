@@ -43,7 +43,6 @@
       #// stoat.enable = true;
       #// stremio.enable = true;
       synapse.enable = true;
-      synapseadmin.enable = true;
       #// vaultwarden.enable = true;
       #// wikijs.enable = true;
 
