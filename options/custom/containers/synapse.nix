@@ -70,8 +70,8 @@ in {
           # https://github.com/element-hq/element-web/blob/develop/docs/config.md
           configuration = pkgs.writeText "config.json" (generators.toJSON {} {
             default_country_code = "US";
-            #// default_server_config."m.homeserver".base_url = "https://matrix.${config.custom.domain}";
-            default_server_name = config.custom.domain; #!! Requires .well-known
+            default_server_config."m.homeserver".base_url = "https://matrix.${config.custom.domain}";
+            #// default_server_name = config.custom.domain; #!! Requires .well-known
             default_theme = "dark";
             disable_custom_urls = true;
             disable_guests = true;

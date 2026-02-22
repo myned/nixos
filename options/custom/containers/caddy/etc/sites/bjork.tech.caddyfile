@@ -2,7 +2,52 @@ bjork.tech {
 	import common
 
 	route {
-		import matrix
+		# Delegation to matrix.bjork.tech
+		# https://element-hq.github.io/synapse/latest/reverse_proxy.html#caddy-v2
+		handle /.well-known/matrix* {
+			header {
+				# https://spec.matrix.org/latest/client-server-api/#web-browser-clients
+				Content-Type "application/json"
+				Access-Control-Allow-Origin "*"
+				Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+				Access-Control-Allow-Headers "X-Requested-With, Content-Type, Authorization"
+			}
+
+			respond /.well-known/matrix/server <<JSON
+				{
+					"m.server": "matrix.bjork.tech:443"
+				}
+				JSON
+
+			# https://github.com/element-hq/lk-jwt-service?tab=readme-ov-file#-do-not-forget-to-update-your-matrix-sites-well-knownmatrixclient
+			respond /.well-known/matrix/client <<JSON
+				{
+					"m.homeserver": {
+						"base_url": "https://matrix.bjork.tech"
+					},
+					"org.matrix.msc4143.rtc_foci": [
+						{
+							"type": "livekit",
+							"livekit_service_url": "https://matrix-rtc.bjork.tech/livekit/jwt"
+						}
+					]
+				}
+				JSON
+
+			respond /.well-known/matrix/support <<JSON
+				{
+					"contacts": [
+						{
+							"matrix_id": "@myned:bjork.tech",
+							"email_address": "admin@bjork.tech",
+							"role": "m.role.admin"
+						}
+					]
+				}
+				JSON
+		}
+
+		# Serve static site
 		import serve bjork.tech
 	}
 }
@@ -28,7 +73,7 @@ bjork.tech {
 	# handle @dns {
 	# 	#!! Requires trusted_proxies in AdGuardHome.yaml
 	# 	#?? sudo nano /containers/adguardhome/config/AdGuardHome.yaml
-	# 	reverse_proxy /dns-query/* {system.hostname}-adguardhome:80 {
+	# 	reverse_proxy /dns-query* {system.hostname}-adguardhome:80 {
 	# 		header_up X-Real-IP {client_ip}
 	# 	}
 	# }
@@ -36,8 +81,8 @@ bjork.tech {
 	# Synapse
 	import handle matrix.bjork.tech {
 		reverse_proxy / myosh-synapse:8008
-		reverse_proxy /_matrix/* myosh-synapse:8008
-		reverse_proxy /_synapse/client/* myosh-synapse:8008
+		reverse_proxy /_matrix* myosh-synapse:8008
+		reverse_proxy /_synapse/client* myosh-synapse:8008
 		reverse_proxy @private myosh-synapse:8008
 	}
 
@@ -45,7 +90,13 @@ bjork.tech {
 	# https://github.com/element-hq/element-call/blob/livekit/docs/self-hosting.md?ref=element.io#matrix-site-endpoint-routing
 	# https://github.com/element-hq/lk-jwt-service?tab=readme-ov-file#-transport-layer-security-tls-setup-using-a-reverse-proxy
 	import handle matrix-rtc.bjork.tech {
-		reverse_proxy /livekit/jwt* myosh-synapse:8080 # JWT
+		handle_path /livekit/jwt* {
+			reverse_proxy myosh-synapse:8888
+		}
+
+		handle {
+			reverse_proxy myore-livekit:7880
+		}
 	}
 
 	# Syncthing Discovery
@@ -62,7 +113,6 @@ bjork.tech {
 		#// import proxy budget.bjork.tech myosh:5006 # Actual Budget
 		import proxy discover.bjork.tech myosh-jellyfin:5055 # Jellyseerr
 		import proxy home.bjork.tech mypi3:8123 # Home Assistant
-		import proxy matrix.bjork.tech myosh-synapse:8008 # Synapse
 		import proxy media.bjork.tech myosh-jellyfin:8096 # Jellyfin
 		import proxy media-next.bjork.tech myosh-jellyfin:8097 # Jellyfin Vue
 		#// import proxy reddit.bjork.tech myosh:8888 # Redlib
@@ -96,14 +146,51 @@ bjork.tech {
 		# https://ossrs.io/lts/en-us/docs/v6/doc/http-server#caddy-proxy
 		# import handle stream.bjork.tech {
 		# 	reverse_proxy myosh:8800
-		# 	reverse_proxy /api/* myosh:1985
-		# 	reverse_proxy /rtc/* myosh:1985
+		# 	reverse_proxy /api* myosh:1985
+		# 	reverse_proxy /rtc* myosh:1985
 		# }
 
 		# Stoat/Revolt
-		# import handle stoat.bjork.tech {
-		# 	import stoat
-		# }
+		# https://github.com/stoatchat/self-hosted/blob/main/Caddyfile
+		import handle stoat.bjork.tech {
+			# api
+			handle_path /api* {
+				reverse_proxy http://myosh-stoat:14702
+			}
+
+			# events
+			handle_path /ws {
+				reverse_proxy http://myosh-stoat:14703
+			}
+
+			# autumn/file-server
+			handle_path /media* {
+				reverse_proxy http://myosh-stoat:14704
+			}
+
+			# january/proxy
+			handle_path /proxy* {
+				reverse_proxy http://myosh-stoat:14705
+			}
+
+			# gifbox
+			handle_path /gifbox* {
+				reverse_proxy http://myosh-stoat:14706
+			}
+
+			# livekit
+			handle_path /livekit* {
+				reverse_proxy http://myosh-stoat:7880
+			}
+
+			# voice-ingress
+			handle_path /ingress* {
+				reverse_proxy http://myosh-stoat:8500
+			}
+
+			# for-web
+			reverse_proxy http://myosh-stoat:5000
+		}
 	}
 }
 
