@@ -11,10 +11,10 @@ with lib; {
       fastfetch.greet = true;
     };
 
-    containers = {
+    arion = {
       enable = true;
       boot = true;
-      adguardhome.enable = true;
+      #// adguardhome.enable = true;
       beszel.enable = true;
       beszel.server = true;
       #// coturn.enable = true;
@@ -45,7 +45,7 @@ with lib; {
         repositories = ["ssh://ylnb45tz@ylnb45tz.repo.borgbase.com/./repo"];
 
         sources = [
-          config.custom.containers.directory
+          config.custom.arion.directory
           "/home"
           "/srv"
         ];

@@ -4,7 +4,7 @@
     profile = "desktop";
     desktop = "niri";
 
-    containers = {
+    arion = {
       enable = true;
       user = config.custom.username;
 

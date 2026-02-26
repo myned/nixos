@@ -1,0 +1,40 @@
+{
+  config,
+  inputs,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.arion.vaultwarden;
+in {
+  options.custom.arion.vaultwarden = {
+    enable = mkOption {default = false;};
+    menu = mkOption {default = true;};
+  };
+
+  config = mkIf cfg.enable {
+    age.secrets = let
+      secret = filename: {
+        file = "${inputs.self}/secrets/${filename}";
+      };
+    in {
+      "${config.custom.hostname}/vaultwarden/.env" = secret "${config.custom.hostname}/vaultwarden/.env";
+    };
+
+    #?? arion-vaultwarden pull
+    environment.shellAliases.arion-vaultwarden = "sudo arion --prebuilt-file ${config.virtualisation.arion.projects.vaultwarden.settings.out.dockerComposeYaml}";
+
+    virtualisation.arion.projects.vaultwarden.settings.services = {
+      # https://github.com/dani-garcia/vaultwarden
+      # https://github.com/dani-garcia/vaultwarden/wiki
+      vaultwarden.service = {
+        container_name = "vaultwarden";
+        env_file = [config.age.secrets."${config.custom.hostname}/vaultwarden/.env".path];
+        image = "vaultwarden/server:1.34.2"; # https://hub.docker.com/r/vaultwarden/server/tags
+        ports = ["8088:80/tcp"];
+        restart = "unless-stopped";
+        volumes = ["${config.custom.arion.directory}/vaultwarden/data:/data"];
+      };
+    };
+  };
+}

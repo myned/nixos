@@ -11,7 +11,7 @@ in {
 
     port = mkOption {
       default =
-        if config.custom.containers.forgejo.enable
+        if config.custom.arion.forgejo.enable
         then 2222
         else 22;
 

@@ -6,7 +6,7 @@
       fastfetch.greet = true;
     };
 
-    containers = {
+    arion = {
       enable = true;
       boot = true;
       #// actualbudget.enable = true;
@@ -62,7 +62,7 @@
         repositories = ["ssh://ysrll00y@ysrll00y.repo.borgbase.com/./repo"];
 
         sources = [
-          config.custom.containers.directory
+          config.custom.arion.directory
           "/home"
           "/mnt/local"
         ];

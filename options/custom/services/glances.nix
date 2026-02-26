@@ -56,7 +56,7 @@ in {
             left_menu = "network,wifi,connections,ports,diskio,fs,irq,folders,raid,smart,sensors,now";
           };
         }
-        // optionalAttrs config.custom.containers.enable {
+        // optionalAttrs config.custom.arion.enable {
           # https://glances.readthedocs.io/en/latest/aoa/containers.html
           containers = {
             disable = false;
