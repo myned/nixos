@@ -11,6 +11,7 @@
     ### Standalone
     flake-parts.url = "github:hercules-ci/flake-parts"; # https://github.com/hercules-ci/flake-parts
     nix-flatpak.url = "github:gmodena/nix-flatpak?ref=v0.6.0"; # https://github.com/gmodena/nix-flatpak
+    nix-net-lib.url = "github:0xCCF4/nix-net-lib"; # https://github.com/0xCCF4/nix-net-lib
     nixos-hardware.url = "github:NixOS/nixos-hardware"; # https://github.com/NixOS/nixos-hardware
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11"; # https://github.com/NixOS/nixpkgs/tree/nixos-25.11
     nixpkgs-master.url = "github:NixOS/nixpkgs/master"; # https://github.com/NixOS/nixpkgs
