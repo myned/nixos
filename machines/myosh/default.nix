@@ -20,6 +20,11 @@
     settings = {
       boot.systemd-boot.enable = true;
 
+      networking = {
+        ipv4.address = "192.168.6.123";
+        ipv6.address = "fe80::d250:99ff:fed0:a1aa";
+      };
+
       storage = {
         swapSize = 32;
         root.device = "/dev/disk/by-id/ata-KINGSTON_SUV500240G_50026B7682FAAC98";
