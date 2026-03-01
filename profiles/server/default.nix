@@ -60,12 +60,7 @@
       borgmatic = {
         enable = true;
         repositories = ["ssh://ysrll00y@ysrll00y.repo.borgbase.com/./repo"];
-
-        sources = [
-          config.custom.arion.directory
-          "/home"
-          "/mnt/local"
-        ];
+        sources = ["/home" "/mnt/local"];
       };
 
       syncthing = {

@@ -18,11 +18,7 @@
       borgmatic = {
         enable = true;
         repositories = ["ssh://z0jt1u64@z0jt1u64.repo.borgbase.com/./repo"];
-
-        sources = [
-          config.custom.arion.directory
-          "/home"
-        ];
+        sources = ["/home"];
       };
     };
   };

@@ -19,6 +19,8 @@ in {
   };
 
   config = mkIf cfg.enable {
+    custom.services.borgmatic.sources = [config.custom.arion.directory];
+
     virtualisation = {
       # https://github.com/hercules-ci/arion
       # https://docs.hercules-ci.com/arion/options

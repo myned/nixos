@@ -43,12 +43,7 @@ with lib; {
       borgmatic = {
         enable = true;
         repositories = ["ssh://ylnb45tz@ylnb45tz.repo.borgbase.com/./repo"];
-
-        sources = [
-          config.custom.arion.directory
-          "/home"
-          "/srv"
-        ];
+        sources = ["/home" "/srv"];
       };
 
       caddy = {
