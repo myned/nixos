@@ -73,6 +73,7 @@ in {
               "/ub" = "/usr/bin/%";
               "/v" = "/var/%";
               "/vl" = "/var/lib/%";
+              "/vlm" = "/var/lib/machines/%";
               "/vlo" = "/var/log/%";
               "/vr" = "/var/run/%";
             }
@@ -180,6 +181,7 @@ in {
               gco = "git commit";
               gd = "git diff";
               gf = "git fetch";
+              gh = "git show";
               gi = "git init";
               gk = "git checkout";
               gl = "git log";
@@ -193,7 +195,6 @@ in {
               grt = "git remote";
               grv = "git revert";
               gs = "git status";
-              gsh = "git show";
               gst = "git stash";
               gsw = "git switch";
               gy = "git cherrypick";
@@ -223,30 +224,33 @@ in {
 
               i = "ip -brief";
               ia = "ip -brief address";
-              ias = "ip -brief address show";
+              iah = "ip -brief address show";
               ir = "ip -brief route";
-              irs = "ip -brief route show";
-              irst = "ip -brief route show table";
-              irsta = "ip -brief route show table all";
+              irh = "ip -brief route show";
+              irht = "ip -brief route show table";
+              irhta = "ip -brief route show table all";
               i6 = "ip -6 -brief";
               i6a = "ip -6 -brief address";
-              i6as = "ip -6 -brief address show";
+              i6ah = "ip -6 -brief address show";
               i6r = "ip -6 -brief route";
-              i6rs = "ip -6 -brief route show";
-              i6rst = "ip -6 -brief route show table";
-              i6rsta = "ip -6 -brief route show table all";
+              i6rh = "ip -6 -brief route show";
+              i6rht = "ip -6 -brief route show table";
+              i6rhta = "ip -6 -brief route show table all";
 
-              jc = "journalctl";
-              jcei = "journalctl --pager-end --identifier";
-              jcfi = "journalctl --follow --identifier";
-              jci = "journalctl --identifier";
-              jcs = "journalctl --system";
-              jcse = "journalctl --system --pager-end";
-              jcsei = "journalctl --user --pager-end --identifier";
-              jcseu = "journalctl --system --pager-end --unit";
-              jcsf = "journalctl --system --follow";
-              jcsfu = "journalctl --system --follow --unit";
-              jcsu = "journalctl --system --unit";
+              jc = "sudo journalctl";
+              jcei = "sudo journalctl --pager-end --identifier";
+              jcfi = "sudo journalctl --follow --identifier";
+              jci = "sudo journalctl --identifier";
+              jcs = "sudo journalctl --system";
+              jcse = "sudo journalctl --system --pager-end";
+              jcsem = "sudo journalctl --system --pager-end --machine";
+              jcsei = "sudo journalctl --user --pager-end --identifier";
+              jcseu = "sudo journalctl --system --pager-end --unit";
+              jcsf = "sudo journalctl --system --follow";
+              jcsfm = "sudo journalctl --system --follow --machine";
+              jcsfu = "sudo journalctl --system --follow --unit";
+              jcsm = "sudo journalctl --system --machine";
+              jcsu = "sudo journalctl --system --unit";
               jcu = "journalctl --user";
               jcue = "journalctl --user --pager-end";
               jcuei = "journalctl --user --pager-end --identifier";
@@ -272,6 +276,33 @@ in {
 
               m = "mosh";
 
+              mc = "sudo machinectl";
+              mcb = "sudo machinectl bind";
+              mcc = "sudo machinectl clone";
+              mccpf = "sudo machinectl copy-from";
+              mccpt = "sudo machinectl copy-to";
+              mcd = "sudo machinectl disable";
+              mce = "sudo machinectl enable";
+              mcexr = "sudo machinectl export-raw";
+              mcext = "sudo machinectl export-tar";
+              mch = "sudo machinectl show";
+              mcis = "sudo machinectl image-status";
+              mcimr = "sudo machinectl import-raw";
+              mcimt = "sudo machinectl import-tar";
+              mck = "sudo machinectl kill";
+              mcl = "sudo machinectl list";
+              mcli = "sudo machinectl list-images";
+              mclo = "sudo machinectl login";
+              mclt = "sudo machinectl list-transfers";
+              mcp = "sudo machinectl poweroff";
+              mcpur = "sudo machinectl pull-raw";
+              mcput = "sudo machinectl pull-tar";
+              mcr = "sudo machinectl reboot";
+              mcre = "sudo machinectl rename";
+              mcrm = "sudo machinectl remove";
+              mcs = "sudo machinectl status";
+              mcsh = "sudo machinectl shell";
+
               n = "nix";
               nb = "nix build";
               nd = "nix develop";
@@ -286,6 +317,19 @@ in {
               nsgl = "nix shell github:nix-community/nixGL --impure";
               nsn = "nix shell nixpkgs#%";
               nt = "nix store";
+
+              noc = "sudo nixos-container";
+              nocd = "sudo nixos-container destroy";
+              noci = "sudo nixos-container show-ip";
+              nocl = "sudo nixos-container list";
+              noclo = "sudo nixos-container login";
+              nocn = "sudo nixos-container run";
+              nocr = "sudo nixos-container restart";
+              nocrlo = "sudo nixos-container root-login";
+              nocs = "sudo nixos-container status";
+              noct = "sudo nixos-container stop";
+              nocte = "sudo nixos-container terminate";
+              nocu = "sudo nixos-container update";
 
               ni = "niri";
               nim = "niri msg";
@@ -310,28 +354,37 @@ in {
               nimwkj = "niri msg --json workspaces";
 
               ol = "ollama";
+              olh = "ollama show";
               oll = "ollama list";
               olp = "ollama pull";
               olr = "ollama run";
               olrm = "ollama rm";
-              ols = "ollama show";
               olsrv = "ollama serve";
               olv = "ollama --version";
 
-              os = "nixos";
-              osb = "nixos build";
-              osbb = "nixos build boot";
-              osbbo = "nixos build boot -- --offline";
-              osbs = "nixos build switch";
-              osbso = "nixos build switch -- --offline";
-              osbt = "nixos build test";
-              osbto = "nixos build test -- --offline";
-              osd = "nixos diff";
-              osg = "nixos generate";
-              osl = "nixos list";
-              osr = "nixos repl";
+              no = "nixos";
+              nob = "nixos build";
+              nobb = "nixos build boot";
+              nobbo = "nixos build boot -- --offline";
+              nobs = "nixos build switch";
+              nobso = "nixos build switch -- --offline";
+              nobt = "nixos build test";
+              nobto = "nixos build test -- --offline";
+              nod = "nixos diff";
+              nog = "nixos generate";
+              nol = "nixos list";
+              nor = "nixos repl";
 
               r = "reset";
+
+              rc = "resolvectl";
+              rcd = "resolvectl dns";
+              rcf = "resolvectl flush-caches";
+              rcm = "resolvectl monitor";
+              rcq = "resolvectl query";
+              rcqc = "resolvectl query --cache=false";
+              rcr = "resolvectl revert";
+              rcs = "resolvectl status";
 
               rs = "rsync --verbose --info=progress2";
 
@@ -343,6 +396,7 @@ in {
               scsdn = "sudo systemctl --system disable --now";
               scse = "sudo systemctl --system reenable";
               scsen = "sudo systemctl --system reenable --now";
+              scsh = "sudo systemctl --system show";
               scsld = "sudo systemctl --system list-dependencies";
               scsls = "sudo systemctl --system list-sockets";
               scslt = "sudo systemctl --system list-timers";
@@ -352,7 +406,6 @@ in {
               scsr = "sudo systemctl --system restart";
               scsrr = "sudo systemctl --system reload-or-restart";
               scss = "sudo systemctl --system status";
-              scssh = "sudo systemctl --system show";
               scst = "sudo systemctl --system stop";
               scsu = "sudo systemctl --system unmask";
               scu = "systemctl --user";
@@ -360,6 +413,7 @@ in {
               scudn = "systemctl --user disable --now";
               scue = "systemctl --user reenable";
               scuen = "systemctl --user reenable --now";
+              scuh = "systemctl --user show";
               sculd = "systemctl --user list-dependencies";
               sculs = "systemctl --user list-sockets";
               scult = "systemctl --user list-timers";
@@ -369,7 +423,6 @@ in {
               scur = "systemctl --user restart";
               scurr = "systemctl --user reload-or-restart";
               scus = "systemctl --user status";
-              scush = "systemctl --user show";
               scut = "systemctl --user stop";
               scuu = "systemctl --user unmask";
 
@@ -407,7 +460,7 @@ in {
               waa = "waydroid app launch com.YoStarEN.Arknights"; # Arknights
               wap = "waydroid app launch com.android.vending"; # Play Store
               was = "waydroid app launch com.android.settings"; # Settings
-              wf = "waydroid show-full-ui";
+              wh = "waydroid show-full-ui";
               wi = "sudo waydroid init --force --system_type GAPPS";
               ws = "waydroid session";
               wsh = "sudo waydroid shell";
