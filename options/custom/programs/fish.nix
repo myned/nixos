@@ -243,13 +243,13 @@ in {
               jci = "sudo journalctl --identifier";
               jcs = "sudo journalctl --system";
               jcse = "sudo journalctl --system --pager-end";
-              jcsem = "sudo journalctl --system --pager-end --machine";
+              jcsem = "sudo journalctl --system --pager-end --machine=%";
               jcsei = "sudo journalctl --user --pager-end --identifier";
               jcseu = "sudo journalctl --system --pager-end --unit";
               jcsf = "sudo journalctl --system --follow";
-              jcsfm = "sudo journalctl --system --follow --machine";
+              jcsfm = "sudo journalctl --system --follow --machine=%";
               jcsfu = "sudo journalctl --system --follow --unit";
-              jcsm = "sudo journalctl --system --machine";
+              jcsm = "sudo journalctl --system --machine=%";
               jcsu = "sudo journalctl --system --unit";
               jcu = "journalctl --user";
               jcue = "journalctl --user --pager-end";
@@ -302,6 +302,7 @@ in {
               mcrm = "sudo machinectl remove";
               mcs = "sudo machinectl status";
               mcsh = "sudo machinectl shell";
+              mcshb = "sudo machinectl shell % /run/current-system/sw/bin/";
 
               n = "nix";
               nb = "nix build";
@@ -388,6 +389,9 @@ in {
 
               rs = "rsync --verbose --info=progress2";
 
+              s = "ssh";
+              si = "ssh -o KexAlgorithms=+diffie-hellman-group1-sha1 -o HostkeyAlgorithms=+ssh-rsa -o Ciphers=aes256-cbc";
+
               sc = "sudo systemctl";
               scp = "sudo systemctl poweroff";
               scr = "sudo systemctl reboot";
@@ -426,8 +430,10 @@ in {
               scut = "systemctl --user stop";
               scuu = "systemctl --user unmask";
 
-              s = "ssh";
-              si = "ssh -o KexAlgorithms=+diffie-hellman-group1-sha1 -o HostkeyAlgorithms=+ssh-rsa -o Ciphers=aes256-cbc";
+              sr = "sudo systemd-run";
+              srs = "sudo systemd-run --system";
+              srsm = "sudo systemd-run --system --pty --wait --machine=% /run/current-system/sw/bin/";
+              srsmsh = "sudo systemd-run --system --shell --machine=%";
 
               t = "tailscale";
               t4 = "tailscale ip --4";
