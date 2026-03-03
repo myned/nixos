@@ -46,7 +46,7 @@ in {
 
             enableTailscale = mkOption {
               description = "Whether to provision the container with a Tailscale sidecar, requires auth key via agenix";
-              default = hostCfg.custom.services.tailscale.enable;
+              default = hostCfg.custom.services.tailscale.enable && containerCfg.privateNetwork; # Assume host already has Tailscale running
               example = false;
               type = types.bool;
             };
@@ -57,6 +57,13 @@ in {
               example = "/mnt/container";
               type = types.path;
             };
+
+            dataDir = mkOption {
+              description = "Path to the directory in which to store stateful data, requires manual bind mount";
+              default = null;
+              example = "/mnt/container";
+              type = with types; nullOr path;
+            };
           };
 
           config = with inputs.nix-net-lib.lib; let
@@ -65,10 +72,10 @@ in {
             index = (builtins.fromTOML "i = 0x${substring 0 3 (builtins.hashString "md5" name)}").i;
           in {
             # Container defaults
-            autoStart = true;
-            ephemeral = true; #!! Stateful directories must be bind mounted to persist
-            privateNetwork = true;
-            privateUsers = "pick"; # https://www.freedesktop.org/software/systemd/man/latest/systemd-nspawn.html#User%20Namespacing%20Options
+            autoStart = mkDefault true;
+            ephemeral = mkDefault true; #!! Stateful directories must be bind mounted to persist
+            privateNetwork = mkDefault true;
+            privateUsers = mkDefault "pick"; # https://www.freedesktop.org/software/systemd/man/latest/systemd-nspawn.html#User%20Namespacing%20Options
             enableTun = containerCfg.enableTailscale;
 
             # TODO: Consider nixos-nspawn as alternative
@@ -80,10 +87,10 @@ in {
             extraFlags = ["--notify-ready=no"];
 
             # Generate addresses for all containers
-            hostAddress = optionalString containerCfg.privateNetwork (decompose (assignAddress' cfg.ipv4Network 1)).addressNoMask;
-            hostAddress6 = optionalString containerCfg.privateNetwork (decompose (assignAddress' cfg.ipv6Network 1)).addressNoMask;
-            localAddress = optionalString containerCfg.privateNetwork (decompose (assignAddress' cfg.ipv4Network index)).addressNoMask;
-            localAddress6 = optionalString containerCfg.privateNetwork (decompose (assignAddress' cfg.ipv6Network index)).addressNoMask;
+            hostAddress = mkIf containerCfg.privateNetwork (decompose (assignAddress' cfg.ipv4Network 1)).addressNoMask;
+            hostAddress6 = mkIf containerCfg.privateNetwork (decompose (assignAddress' cfg.ipv6Network 1)).addressNoMask;
+            localAddress = mkIf containerCfg.privateNetwork (decompose (assignAddress' cfg.ipv4Network index)).addressNoMask;
+            localAddress6 = mkIf containerCfg.privateNetwork (decompose (assignAddress' cfg.ipv6Network index)).addressNoMask;
 
             bindMounts =
               # Persist systemd service state with user namespace mapping
@@ -108,19 +115,29 @@ in {
               imports = optionals containerCfg.enableAgenix [inputs.agenix.nixosModules.default];
 
               system.stateVersion = mkForce hostCfg.system.stateVersion; #!! DO NOT MODIFY
+              i18n.defaultLocale = "C.UTF-8"; # Standardize locale
 
-              # Sane default networking
+              # Sane default networking with DoT
               systemd.network.enable = true; #?? networkctl
               systemd.network.wait-online.enable = false; # Unmanaged interfaces
               services.resolved.enable = true; #?? resolvectl
-              networking.nameservers = ["9.9.9.9" "149.112.112.112" "2620:fe::fe" "2620:fe::9"]; # https://quad9.net/service/service-addresses-and-features/
+              services.resolved.dnsovertls = "true";
+
+              # https://quad9.net/service/service-addresses-and-features/
+              networking.nameservers = [
+                "9.9.9.9#dns.quad9.net"
+                "149.112.112.112#dns.quad9.net"
+                "2620:fe::fe#dns.quad9.net"
+                "2620:fe::9#dns.quad9.net"
+              ];
 
               # BUG: Containers copy host resolv.conf despite privateNetwork, breaking DNS resolution
               # https://github.com/NixOS/nixpkgs/issues/162686
               networking.useHostResolvConf = false;
 
               # Enable and provision Tailscale
-              networking.hostName = optionalString containerCfg.enableTailscale "${hostCfg.custom.hostname}-${name}"; #?? <hostname>-<container>
+              networking.hostName = mkIf containerCfg.enableTailscale "${hostCfg.custom.hostname}-${name}"; #?? <hostname>-<container>
+              networking.firewall.trustedInterfaces = optionals containerCfg.enableTailscale [containerCfg.config.services.tailscale.interfaceName]; # Rely on Tailscale ACLs for firewall
 
               services.tailscale = mkIf containerCfg.enableTailscale {
                 enable = true;
@@ -134,13 +151,26 @@ in {
                 };
               };
 
-              age.secrets = mkIf (with containerCfg; enableAgenix && enableTailscale) (listToAttrs (map (name: {
-                  inherit name;
-                  value = {file = "${inputs.self}/secrets/${name}";};
-                })
-                [
-                  "common/tailscale/container.key"
-                ]));
+              # Create agenix users/groups if necessary
+              users = let
+                # Only create named users, ignore uid definitions
+                secrets = filterAttrs (_: secret: match "^[0-9]+$" secret.owner == null) containerCfg.config.age.secrets;
+              in
+                mkIf containerCfg.enableAgenix {
+                  users = mapAttrs' (_: secret:
+                    nameValuePair secret.owner {
+                      isSystemUser = mkDefault true;
+                      group = mkDefault secret.owner;
+                    })
+                  secrets;
+
+                  groups = mapAttrs' (_: secret: nameValuePair secret.owner {}) secrets;
+                };
+
+              age.secrets = mkIf (with containerCfg; enableAgenix && enableTailscale) (mapAttrs (name: value: recursiveUpdate {file = "${inputs.self}/secrets/${name}";} value)
+                {
+                  "common/tailscale/container.key" = {};
+                });
 
               # Use host ssh keys for decryption
               age.identityPaths = optionals containerCfg.enableAgenix hostCfg.age.identityPaths;
@@ -174,6 +204,7 @@ in {
         name: containerCfg:
           nameValuePair name {
             ${containerCfg.stateDir}.d = {mode = "0750";}; # -rwxr-x---
+            ${containerCfg.dataDir}.d = mkIf (containerCfg.dataDir != null) {mode = "0750";}; # -rwxr-x---
           }
       )
       config.containers;
