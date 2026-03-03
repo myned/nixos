@@ -57,6 +57,8 @@ in {
   "myore/headscale/ui.yaml" = key myore;
   "myore/kener/.env" = key myore;
   "myore/kener/db.env" = key myore;
+  "myore/livekit/ingress.env" = key myore;
+  "myore/livekit/keys.yaml" = key myore;
   "myore/livekit/livekit.yaml" = key myore;
   "myore/netdata/parent.conf" = key myore;
   "myore/users/myned.pass" = key myore;
@@ -102,8 +104,10 @@ in {
   "myosh/stoat/livekit.yaml" = key myosh;
   "myosh/stoat/Revolt.toml" = key myosh;
   "myosh/synapse/db.env" = key myosh;
-  "myosh/synapse/jwt.env" = key myosh;
+  "myosh/synapse/extra.yaml" = key myosh;
   "myosh/synapse/homeserver.yaml" = key myosh;
+  "myosh/synapse/jwt.env" = key myosh;
+  "myosh/synapse/livekit.key.yaml" = key myosh;
   "myosh/users/myned.pass" = key myosh;
   "myosh/users/root.pass" = key myosh;
   "myosh/vaultwarden/.env" = key myosh;
