@@ -49,6 +49,8 @@ with lib; {
 
       caddy = {
         enable = true;
+        enableElementWeb = true;
+        enableSynapseAdmin = true;
         importEnvironment = true;
         srvKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBYspWeL1pBqX7Bl2pK/vnBE/B7VA93SYgz6O9YlrgNl";
         globalConfig = readFile ./caddy/global.caddyfile;

@@ -11,6 +11,20 @@ in {
   options.custom.services.caddy = {
     enable = mkEnableOption "caddy";
 
+    enableElementWeb = mkOption {
+      description = "Whether to serve the static element-web client";
+      default = false;
+      example = true;
+      type = types.bool;
+    };
+
+    enableSynapseAdmin = mkOption {
+      description = "Whether to serve the static synapse-admin-etkecc client";
+      default = false;
+      example = true;
+      type = types.bool;
+    };
+
     openFirewall = mkOption {
       description = "Whether to open the firewall for ports 80/tcp and 443/tcp/udp";
       default = true;
@@ -108,6 +122,41 @@ in {
 
           ${cfg.globalConfig}
         '';
+
+        virtualHosts = {
+          # https://wiki.nixos.org/wiki/Matrix#Web_clients
+          "element.${config.custom.domain}".extraConfig = let
+            element-web = pkgs.element-web.override {
+              # https://github.com/element-hq/element-web/blob/develop/docs/config.md
+              conf = {
+                default_country_code = "US";
+                default_server_config."m.homeserver".base_url = "https://matrix.${config.custom.domain}";
+                #// default_server_name = config.custom.domain; #!! Requires .well-known
+                default_theme = "dark";
+                disable_custom_urls = true;
+                disable_guests = true;
+                element_call.use_exclusively = true;
+                permalink_prefix = "https://element.${config.custom.domain}";
+                show_labs_settings = true;
+              };
+            };
+          in
+            mkIf cfg.enableElementWeb ''
+              root * ${element-web}
+              file_server
+            '';
+
+          # https://wiki.nixos.org/wiki/Matrix#Synapse_Admin_with_Caddy
+          "synapse.admin.${config.custom.domain}".extraConfig = let
+            synapse-admin = pkgs.synapse-admin-etkecc.withConfig {
+              restrictBaseUrl = ["https://matrix.${config.custom.domain}"];
+            };
+          in
+            mkIf cfg.enableSynapseAdmin ''
+              root * ${synapse-admin}
+              file_server
+            '';
+        };
       };
     };
 

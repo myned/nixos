@@ -51,10 +51,15 @@
         dataDir = "/mnt/local/jellyfin";
       };
 
-      synapse = {
-        enable = true;
-        dataDir = "/mnt/local/synapse";
-      };
+      # synapse = {
+      #   enable = true;
+      #   dataDir = "/mnt/local/synapse";
+      # };
+    };
+
+    containers = {
+      enable = true;
+      synapse.enable = true;
     };
 
     services = {
@@ -72,4 +77,6 @@
       };
     };
   };
+
+  containers.synapse.dataDir = "/mnt/local/synapse";
 }

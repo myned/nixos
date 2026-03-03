@@ -57,7 +57,7 @@ bjork.tech {
 	import www bjork.tech
 	#// import redirect revolt.bjork.tech stoat.bjork.tech
 	#// import proxy cloud.bjork.tech myosh:11000 # Nextcloud
-	import proxy element.bjork.tech myosh-synapse:80 # Element Web
+	#// import proxy element.bjork.tech myosh-synapse:80 # Element Web
 	#// import proxy feed.bjork.tech myosh:8808 # Miniflux
 	import proxy foundry.bjork.tech myosh:30000 # Foundry Virtual Tabletop
 	#// import proxy gist.bjork.tech myosh-opengist:6157 # Opengist
@@ -95,7 +95,7 @@ bjork.tech {
 		}
 
 		handle {
-			reverse_proxy myore-livekit:7880
+			reverse_proxy {system.hostname}:7880
 		}
 	}
 
@@ -208,7 +208,7 @@ bjork.tech {
 		#// import proxy jackett.admin.bjork.tech myosh-jellyfin:9117 # Jackett
 		#// import proxy-insecure kasm.admin.bjork.tech myosh:3443 # Kasm
 		import proxy lidarr.admin.bjork.tech myosh-jellyfin:8686 # Lidarr
-		import proxy synapse.admin.bjork.tech myosh-synapse:8080 # Synapse Admin
+		#// import proxy synapse.admin.bjork.tech myosh-synapse:8080 # Synapse Admin
 		#// import proxy-insecure nextcloud.admin.bjork.tech myosh:8080 # Nextcloud AIO
 		#// import proxy-insecure portainer.admin.bjork.tech {system.hostname}-portainer:9443 # Portainer
 		#// import proxy prometheus.admin.bjork.tech {system.hostname}-grafana:9090 # Prometheus
