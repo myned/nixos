@@ -6,6 +6,7 @@
 with lib; {
   custom = {
     profile = "core";
+    server = true;
 
     programs = {
       fastfetch.greet = true;

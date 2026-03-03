@@ -13,6 +13,8 @@ in {
   };
 
   config = mkIf cfg.enable {
+    i18n.defaultLocale = mkIf config.custom.server "C.UTF-8"; # Recommended for consistency
+
     # https://wiki.nixos.org/wiki/Cross_Compiling
     boot.binfmt = {
       emulatedSystems = optionals cfg.builder ["aarch64-linux"];

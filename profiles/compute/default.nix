@@ -1,6 +1,7 @@
 {config, ...}: {
   custom = {
     profile = "compute";
+    server = true;
 
     programs = {
       fastfetch.greet = true;
