@@ -106,7 +106,7 @@ in {
                   resources = [
                     {
                       names = ["client" "federation"];
-                      compress = true;
+                      compress = false;
                     }
                   ];
                 }
@@ -140,7 +140,7 @@ in {
           lk-jwt-service = {
             enable = true;
             port = 8888; # TCP
-            livekitUrl = "wss://matrix-rtc.${hostCfg.custom.domain}";
+            livekitUrl = "wss://rtc.${hostCfg.custom.domain}";
             keyFile = mkIf containerCfg.enableAgenix containerCfg.config.age.secrets."${hostCfg.custom.hostname}/synapse/livekit.key.yaml".path;
           };
         };

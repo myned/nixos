@@ -23,7 +23,7 @@ with lib; {
       #// grafana.enable = true;
       #// headscale.enable = true;
       #// kener.enable = true;
-      livekit.enable = true;
+      #// livekit.enable = true;
       #// netdata.enable = true;
       ntfy.enable = true;
       #// openspeedtest.enable = true;
@@ -35,6 +35,12 @@ with lib; {
       #// syncthing.enable = true;
       #// syncthing.server = true;
       #// uptimekuma.enable = true;
+    };
+
+    containers = {
+      enable = true;
+      livekit.enable = true;
+      uptimekuma.enable = true;
     };
 
     services = {

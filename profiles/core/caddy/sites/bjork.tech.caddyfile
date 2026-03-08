@@ -28,7 +28,7 @@ bjork.tech {
 					"org.matrix.msc4143.rtc_foci": [
 						{
 							"type": "livekit",
-							"livekit_service_url": "https://matrix-rtc.bjork.tech/livekit/jwt"
+							"livekit_service_url": "https://rtc.bjork.tech/livekit/jwt"
 						}
 					]
 				}
@@ -89,7 +89,7 @@ bjork.tech {
 	# MatrixRTC
 	# https://github.com/element-hq/element-call/blob/livekit/docs/self-hosting.md?ref=element.io#matrix-site-endpoint-routing
 	# https://github.com/element-hq/lk-jwt-service?tab=readme-ov-file#-transport-layer-security-tls-setup-using-a-reverse-proxy
-	import handle matrix-rtc.bjork.tech {
+	import handle rtc.bjork.tech {
 		handle_path /livekit/jwt* {
 			reverse_proxy myosh-synapse:8888
 		}
