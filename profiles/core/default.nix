@@ -47,6 +47,7 @@ with lib; {
       # TODO: Revisit when addons are supported
       # https://github.com/NixOS/nixpkgs/issues/408699
       #// cockpit.enable = true;
+      sshd.enable = true;
 
       borgmatic = {
         enable = true;

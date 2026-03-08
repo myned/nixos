@@ -10,11 +10,7 @@ in {
     enable = mkEnableOption "sshd";
 
     port = mkOption {
-      default =
-        if config.custom.arion.forgejo.enable
-        then 2222
-        else 22;
-
+      default = 2222;
       type = types.int;
     };
   };
