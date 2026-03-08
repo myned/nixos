@@ -32,7 +32,7 @@
       #// opengist.enable = true;
       #// openwebui.enable = true;
       #// oryx.enable = true;
-      ovenmediaengine.enable = true;
+      #// ovenmediaengine.enable = true;
       #// owncast.enable = true;
       #// passbolt.enable = true;
       #// piped.enable = true;

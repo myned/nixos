@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- https://docs.ovenmediaengine.com/configuration -->
 <!-- https://github.com/AirenSoft/OvenMediaEngine/blob/master/misc/conf_examples/Server.xml -->
 <Server version="8">
 	<Name>OvenMediaEngine</Name>
 	<Type>origin</Type>
 	<IP>*</IP>
-	<PrivacyProtection>false</PrivacyProtection>
-	<StunServer>stun.bjork.tech:3478</StunServer>
+	<PrivacyProtection>false</PrivacyProtection> <!-- Client IP addresses in logs -->
 	<Modules>
 		<HTTP2>
 			<Enable>true</Enable>
@@ -21,121 +20,86 @@
 	</Modules>
 	<Bind>
 		<Providers>
-  		<WebRTC>
-  			<Signalling>
-  				<Port>3333</Port>
-  				<WorkerCount>1</WorkerCount>
-  			</Signalling>
-  			<IceCandidates>
-  				<IceCandidate>stream.bjork.tech:10000/udp</IceCandidate>
-  			</IceCandidates>
-  		</WebRTC>
 			<RTMP>
 				<Port>1935</Port>
 				<WorkerCount>1</WorkerCount>
 			</RTMP>
+			<SRT>
+				<Port>9999</Port>
+				<WorkerCount>1</WorkerCount>
+			</SRT>
+			<WebRTC>
+				<Signalling>
+					<Port>3333</Port>
+					<WorkerCount>1</WorkerCount>
+				</Signalling>
+				<IceCandidates>
+					<IceCandidate>*:10000/udp</IceCandidate>
+					<TcpRelay>*:3478</TcpRelay> <!-- Embedded TURN server -->
+					<TcpRelayWorkerCount>1</TcpRelayWorkerCount>
+				</IceCandidates>
+			</WebRTC>
 		</Providers>
 		<Publishers>
-      <WebRTC>
-  			<Signalling>
-  				<Port>3333</Port>
-  				<WorkerCount>1</WorkerCount>
-  			</Signalling>
-  			<IceCandidates>
-  				<IceCandidate>stream.bjork.tech:10000/udp</IceCandidate>
-  			</IceCandidates>
-  		</WebRTC>
 			<LLHLS>
 				<Port>3333</Port>
 				<WorkerCount>1</WorkerCount>
 			</LLHLS>
+			<WebRTC>
+				<Signalling>
+					<Port>3333</Port>
+					<WorkerCount>1</WorkerCount>
+				</Signalling>
+				<IceCandidates>
+					<IceCandidate>*:10000/udp</IceCandidate>
+					<TcpRelay>*:3478</TcpRelay>
+					<TcpRelayWorkerCount>1</TcpRelayWorkerCount>
+				</IceCandidates>
+			</WebRTC>
 		</Publishers>
 	</Bind>
+	<Defaults>
+		<CrossDomains>
+			<Url>*</Url>
+		</CrossDomains>
+	</Defaults>
 	<VirtualHosts>
 		<VirtualHost>
-			<Name>default</Name>
-			<Distribution>bjork.tech</Distribution>
+			<Name>origin</Name>
 			<Host>
 				<Names>
 					<Name>*</Name>
 				</Names>
 			</Host>
-			<CrossDomains>
-				<Url>*</Url>
-			</CrossDomains>
 			<Applications>
 				<Application>
 					<Name>live</Name>
 					<Type>live</Type>
 					<OutputProfiles>
-					  <Decodes>
-							<ThreadCount>3</ThreadCount>
-							<OnlyKeyframes>true</OnlyKeyframes>
-						</Decodes>
 						<OutputProfile>
-							<Name>default</Name>
+							<Name>stream</Name>
 							<OutputStreamName>stream</OutputStreamName>
-							<Playlist>
-								<Name>default</Name>
-								<FileName>adaptive</FileName>
-								<Options>
-									<WebRtcAutoAbr>true</WebRtcAutoAbr>
-									<EnableTsPackaging>true</EnableTsPackaging>
-								</Options>
-								<RenditionTemplate>
-									<Name>${Height}p, ${Bitrate}bps</Name>
-									<VideoTemplate>
-										<EncodingType>all</EncodingType>
-									</VideoTemplate>
-									<AudioTemplate>
-										<EncodingType>all</EncodingType>
-									</AudioTemplate>
-								</RenditionTemplate>
-							</Playlist>
-							<!-- TODO: Enable video transcoding when conditions are further developed -->
-							<!-- BUG: Framerate required for transcoding until next release -->
-							<!-- https://github.com/AirenSoft/OvenMediaEngine/issues/1793 -->
 							<Encodes>
-							  <Video>
+								<Video>
+									<Name>bypass</Name>
 									<Bypass>true</Bypass>
-								</Video>
-								<!-- <Video>
-									<Name>1080p</Name>
-									<Codec>h264</Codec>
-									<Bitrate>5000000</Bitrate>
-									<Height>1080</Height>
-									<Framerate>60</Framerate>
-									<BypassIfMatch>
-										<Codec>eq</Codec>
-										<Height>lte</Height>
-									</BypassIfMatch>
 								</Video>
 								<Video>
 									<Name>720p</Name>
 									<Codec>h264</Codec>
-									<Bitrate>4000000</Bitrate>
 									<Height>720</Height>
-									<Framerate>60</Framerate>
+									<Framerate>30</Framerate>
+									<Bitrate>4000000</Bitrate>
+									<Modules>x264</Modules>
 									<BypassIfMatch>
 										<Codec>eq</Codec>
 										<Height>lte</Height>
 									</BypassIfMatch>
 								</Video>
-								<Video>
-									<Name>480p</Name>
-									<Codec>h264</Codec>
-									<Bitrate>3000000</Bitrate>
-									<Height>480</Height>
-									<Framerate>60</Framerate>
-									<BypassIfMatch>
-										<Codec>eq</Codec>
-										<Height>lte</Height>
-									</BypassIfMatch>
-								</Video> -->
 								<Audio>
 									<Name>opus</Name>
 									<Codec>opus</Codec>
-									<Bitrate>192000</Bitrate>
+									<Bitrate>128000</Bitrate>
 									<Samplerate>48000</Samplerate>
 									<Channel>2</Channel>
 									<BypassIfMatch>
@@ -145,7 +109,7 @@
 								<Audio>
 									<Name>aac</Name>
 									<Codec>aac</Codec>
-									<Bitrate>192000</Bitrate>
+									<Bitrate>128000</Bitrate>
 									<Samplerate>48000</Samplerate>
 									<Channel>2</Channel>
 									<BypassIfMatch>
@@ -153,21 +117,43 @@
 									</BypassIfMatch>
 								</Audio>
 							</Encodes>
+							<Playlist>
+								<Name>default</Name>
+								<FileName>default</FileName>
+								<Options>
+									<WebRtcAutoAbr>true</WebRtcAutoAbr>
+									<HLSChunklistPathDepth>0</HLSChunklistPathDepth>
+									<EnableTsPackaging>true</EnableTsPackaging>
+								</Options>
+								<RenditionTemplate>
+									<Name>${Height}p (bypassed)</Name>
+									<VideoTemplate>
+										<EncodingType>bypassed</EncodingType>
+									</VideoTemplate>
+								</RenditionTemplate>
+								<RenditionTemplate>
+									<Name>${Height}p (transcoded)</Name>
+									<VideoTemplate>
+										<EncodingType>encoded</EncodingType>
+									</VideoTemplate>
+								</RenditionTemplate>
+							</Playlist>
 						</OutputProfile>
 					</OutputProfiles>
 					<Providers>
-						<WebRTC />
-						<RTMP />
+						<RTMP /> <!-- rtmp://<host>:1935/live with key: stream -->
+						<SRT /> <!-- srt://<host>:9999?streamid=origin/live/stream -->
+						<WebRTC /> <!-- http://<host>:3333/live/stream?direction=whip -->
 					</Providers>
 					<Publishers>
-						<AppWorkerCount>1</AppWorkerCount>
-						<StreamWorkerCount>8</StreamWorkerCount>
-						<WebRTC>
-  						<Rtx>true</Rtx>
-  						<Ulpfec>true</Ulpfec>
-  						<JitterBuffer>true</JitterBuffer>
-						</WebRTC>
+						<AppWorkerCount>2</AppWorkerCount>
+						<StreamWorkerCount>0</StreamWorkerCount>
 						<LLHLS />
+						<WebRTC>
+							<Rtx>true</Rtx> <!-- UDP retransmission -->
+							<Ulpfec>true</Ulpfec> <!-- UDP forward error correction -->
+							<JitterBuffer>true</JitterBuffer> <!-- A/V interleave to reduce player desync -->
+						</WebRTC>
 					</Publishers>
 				</Application>
 			</Applications>

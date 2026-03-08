@@ -27,6 +27,7 @@ with lib; {
       #// netdata.enable = true;
       ntfy.enable = true;
       #// openspeedtest.enable = true;
+      ovenmediaengine.enable = true;
       #// portainer.enable = true;
       #// portainer.server = true;
       #// rustdesk.enable = true;

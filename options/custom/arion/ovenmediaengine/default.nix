@@ -8,11 +8,6 @@ with lib; let
 in {
   options.custom.arion.ovenmediaengine = {
     enable = mkEnableOption "ovenmediaengine";
-
-    bind = mkOption {
-      default = config.custom.services.tailscale.ipv4;
-      type = types.str;
-    };
   };
 
   config = mkIf cfg.enable {
@@ -24,15 +19,9 @@ in {
       # https://docs.ovenmediaengine.com/getting-started/getting-started-with-docker
       ovenmediaengine.service = {
         container_name = "ovenmediaengine";
-        image = "airensoft/ovenmediaengine:0.18.0"; # https://hub.docker.com/r/airensoft/ovenmediaengine/tags
+        image = "airensoft/ovenmediaengine:v0.20.0"; # https://hub.docker.com/r/airensoft/ovenmediaengine/tags
         restart = "unless-stopped";
-
-        ports = [
-          "${cfg.bind}:3333:3333/tcp" # LLHLS / WebRTC Signaling
-          "${cfg.bind}:3333:3333/udp" # WebRTC Signaling
-          "${cfg.bind}:1935:1935/tcp" # RTMP
-          "${cfg.bind}:10000:10000/udp" # WebRTC Candidate
-        ];
+        network_mode = "host"; # https://docs.ovenmediaengine.com/getting-started#ports-used-by-default
 
         volumes = [
           # https://docs.ovenmediaengine.com/configuration
