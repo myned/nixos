@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   ...
 }:
@@ -18,12 +17,21 @@ in {
     containers.livekit = {
       privateNetwork = false;
 
+      agenix.secrets =
+        optionals containerCfg.agenix.enable
+        [
+          "${hostCfg.custom.hostname}/livekit/keys.yaml"
+        ]
+        ++ optionals (containerCfg.agenix.enable && cfg.enableIngress) [
+          "${hostCfg.custom.hostname}/livekit/ingress.env"
+        ];
+
       config = {
         # https://wiki.nixos.org/wiki/Matrix#Livekit
         services.livekit = {
           enable = true;
           openFirewall = true;
-          keyFile = mkIf containerCfg.enableAgenix containerCfg.config.age.secrets."${hostCfg.custom.hostname}/livekit/keys.yaml".path;
+          keyFile = mkIf containerCfg.agenix.enable hostCfg.age.secrets."${hostCfg.custom.hostname}/livekit/keys.yaml".path;
           redis.host = "localhost";
           redis.port = 6379; # TCP
 
@@ -50,7 +58,7 @@ in {
           openFirewall.rtc = true;
           openFirewall.rtmp = true;
           openFirewall.whip = true;
-          environmentFile = mkIf containerCfg.enableAgenix containerCfg.config.age.secrets."${hostCfg.custom.hostname}/livekit/ingress.env".path;
+          environmentFile = mkIf containerCfg.agenix.enable hostCfg.age.secrets."${hostCfg.custom.hostname}/livekit/ingress.env".path;
 
           # https://github.com/livekit/ingress?tab=readme-ov-file#config
           settings = {
@@ -64,17 +72,6 @@ in {
             ws_url = "ws://localhost:${toString containerCfg.config.services.livekit.settings.port}";
           };
         };
-
-        systemd.services = {
-          livekit.serviceConfig.User = "livekit"; # Statically assign DynamicUser
-          livekit-ingress.serviceConfig.User = mkIf cfg.enableIngress "livekit-ingress";
-        };
-
-        age.secrets = mkIf containerCfg.enableAgenix (mapAttrs (name: value: recursiveUpdate {file = "${inputs.self}/secrets/${name}";} value)
-          {
-            "${hostCfg.custom.hostname}/livekit/keys.yaml".owner = "livekit";
-            "${hostCfg.custom.hostname}/livekit/ingress.env".owner = mkIf cfg.enableIngress "livekit-ingress";
-          });
       };
     };
   };

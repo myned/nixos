@@ -37,20 +37,6 @@ in {
           containerCfg = config;
         in {
           options = {
-            enableAgenix = mkOption {
-              description = "Whether to prepare the container for decrypting agenix secrets";
-              default = hostCfg.custom.files.agenix.enable;
-              example = false;
-              type = types.bool;
-            };
-
-            enableTailscale = mkOption {
-              description = "Whether to provision the container with a Tailscale sidecar, requires auth key via agenix";
-              default = hostCfg.custom.services.tailscale.enable && containerCfg.privateNetwork; # Assume host already has Tailscale running
-              example = false;
-              type = types.bool;
-            };
-
             stateDir = mkOption {
               description = "Path to the directory on the host in which to persist systemd container state";
               default = "/var/lib/machines/${name}";
@@ -64,6 +50,28 @@ in {
               example = "/mnt/container";
               type = with types; nullOr path;
             };
+
+            agenix = {
+              enable = mkEnableOption "agenix";
+
+              secrets = mkOption {
+                description = "Agenix secrets to bind mount into the container, decrypted by the host";
+                default = [];
+                example = ["secret.key"];
+                type = with types; listOf str;
+              };
+            };
+
+            tailscale = {
+              enable = mkEnableOption "tailscale";
+
+              authKeySecret = mkOption {
+                description = "Name of the agenix secret to the auth-key for provisioning Tailscale within the container";
+                default = "common/tailscale/container.env";
+                example = "tailscale.key";
+                type = types.str;
+              };
+            };
           };
 
           config = with inputs.nix-net-lib.lib; let
@@ -76,7 +84,11 @@ in {
             ephemeral = mkDefault true; #!! Stateful directories must be bind mounted to persist
             privateNetwork = mkDefault true;
             privateUsers = mkDefault "pick"; # https://www.freedesktop.org/software/systemd/man/latest/systemd-nspawn.html#User%20Namespacing%20Options
-            enableTun = containerCfg.enableTailscale;
+            agenix.enable = mkDefault true;
+            tailscale.enable = mkDefault containerCfg.privateNetwork;
+            enableTun = mkDefault containerCfg.tailscale.enable;
+
+            agenix.secrets = optionals containerCfg.tailscale.enable [containerCfg.tailscale.authKeySecret];
 
             # TODO: Consider nixos-nspawn as alternative
             # https://github.com/fpletz/nixos-nspawn
@@ -92,7 +104,10 @@ in {
             localAddress = mkIf containerCfg.privateNetwork (decompose (assignAddress' cfg.ipv4Network index)).addressNoMask;
             localAddress6 = mkIf containerCfg.privateNetwork (decompose (assignAddress' cfg.ipv6Network index)).addressNoMask;
 
-            bindMounts =
+            bindMounts = let
+              # Gather secrets defined for the container
+              containerSecrets = filterAttrs (name: _: elem name containerCfg.agenix.secrets) hostCfg.age.secrets;
+            in
               # Persist systemd service state with user namespace mapping
               # https://github.com/NixOS/nixpkgs/issues/329530
               # https://www.freedesktop.org/software/systemd/man/latest/systemd-nspawn.html#Mount%20Options
@@ -102,18 +117,16 @@ in {
                   isReadOnly = false;
                 };
               }
-              # Mount host agenix keys in container
-              // optionalAttrs containerCfg.enableAgenix (listToAttrs (forEach containerCfg.config.age.identityPaths (
-                path:
-                  nameValuePair "${path}:rootidmap" {
-                    hostPath = path;
-                    isReadOnly = true;
-                  }
-              )));
+              # HACK: Agenix store paths are currently dependent on the host generation, so decrypt and bind mount from host, otherwise all containers with secrets are restarted with any system change
+              # https://github.com/ryantm/agenix/pull/132
+              // mapAttrs' (_: secret:
+                nameValuePair "${secret.path}:idmap" {
+                  hostPath = "/run/machines/${name}/${secret.name}"; # Original secret path can still be used in the container
+                  isReadOnly = true;
+                })
+              containerSecrets;
 
             config = {
-              imports = optionals containerCfg.enableAgenix [inputs.agenix.nixosModules.default];
-
               system.stateVersion = mkForce hostCfg.system.stateVersion; #!! DO NOT MODIFY
               i18n.defaultLocale = "C.UTF-8"; # Standardize locale
 
@@ -136,44 +149,17 @@ in {
               networking.useHostResolvConf = false;
 
               # Enable and provision Tailscale
-              networking.hostName = mkIf containerCfg.enableTailscale "${hostCfg.custom.hostname}-${name}"; #?? <hostname>-<container>
-              networking.firewall.trustedInterfaces = optionals containerCfg.enableTailscale [containerCfg.config.services.tailscale.interfaceName]; # Rely on Tailscale ACLs for firewall
+              networking.hostName = mkIf containerCfg.tailscale.enable "${hostCfg.custom.hostname}-${name}"; #?? <hostname>-<container>
+              networking.firewall.trustedInterfaces = optionals containerCfg.tailscale.enable [containerCfg.config.services.tailscale.interfaceName]; # Rely on Tailscale ACLs for firewall
 
-              services.tailscale = mkIf containerCfg.enableTailscale {
+              services.tailscale = mkIf containerCfg.tailscale.enable {
                 enable = true;
                 #// interfaceName = "userspace-networking";
                 extraUpFlags = ["--advertise-tags=tag:container"];
-                authKeyFile = mkIf containerCfg.enableAgenix containerCfg.config.age.secrets."common/tailscale/container.key".path;
-
-                authKeyParameters = {
-                  ephemeral = true;
-                  preauthorized = true;
-                };
+                authKeyFile = mkIf containerCfg.agenix.enable hostCfg.age.secrets.${containerCfg.tailscale.authKeySecret}.path;
+                authKeyParameters.ephemeral = true;
+                authKeyParameters.preauthorized = true;
               };
-
-              # Create agenix users/groups if necessary
-              users = let
-                # Only create named users, ignore uid definitions
-                secrets = filterAttrs (_: secret: match "^[0-9]+$" secret.owner == null) containerCfg.config.age.secrets;
-              in
-                mkIf containerCfg.enableAgenix {
-                  users = mapAttrs' (_: secret:
-                    nameValuePair secret.owner {
-                      isSystemUser = mkDefault true;
-                      group = mkDefault secret.owner;
-                    })
-                  secrets;
-
-                  groups = mapAttrs' (_: secret: nameValuePair secret.owner {}) secrets;
-                };
-
-              age.secrets = mkIf (with containerCfg; enableAgenix && enableTailscale) (mapAttrs (name: value: recursiveUpdate {file = "${inputs.self}/secrets/${name}";} value)
-                {
-                  "common/tailscale/container.key" = {};
-                });
-
-              # Use host ssh keys for decryption
-              age.identityPaths = optionals containerCfg.enableAgenix hostCfg.age.identityPaths;
             };
           };
         }));
@@ -181,7 +167,11 @@ in {
   };
 
   config = mkIf cfg.enable {
-    custom.services.borgmatic.sources = mapAttrsToList (name: containerCfg: containerCfg.stateDir) config.containers;
+    # Add container state directories to backup sources
+    custom.services.borgmatic.sources = mapAttrsToList (_: containerCfg: containerCfg.stateDir) hostCfg.containers;
+
+    # Add container secrets to host config
+    custom.files.agenix.secrets = flatten (mapAttrsToList (_: containerCfg: containerCfg.agenix.secrets) hostCfg.containers);
 
     # https://wiki.nixos.org/wiki/NixOS_Containers
     # https://wiki.archlinux.org/title/Systemd-nspawn
@@ -194,19 +184,33 @@ in {
       enableIPv6 = true;
       internalIPs = [cfg.ipv4Network];
       internalIPv6s = [cfg.ipv6Network];
-      externalIP = config.custom.settings.networking.ipv4.address;
-      externalIPv6 = config.custom.settings.networking.ipv6.address;
+      externalIP = hostCfg.custom.settings.networking.ipv4.address;
+      externalIPv6 = hostCfg.custom.settings.networking.ipv6.address;
     };
 
-    # Precreate container state directories
     systemd.tmpfiles.settings =
       mapAttrs' (
-        name: containerCfg:
-          nameValuePair name {
-            ${containerCfg.stateDir}.d = {mode = "0750";}; # -rwxr-x---
-            ${containerCfg.dataDir}.d = mkIf (containerCfg.dataDir != null) {mode = "0750";}; # -rwxr-x---
-          }
+        name: containerCfg: let
+          containerSecrets = filterAttrs (name: _: elem name containerCfg.agenix.secrets) hostCfg.age.secrets;
+        in
+          nameValuePair name ({
+              # Precreate container state directories
+              ${containerCfg.stateDir}.d = {mode = "0750";}; # -rwxr-x---
+              ${containerCfg.dataDir}.d = mkIf (containerCfg.dataDir != null) {mode = "0750";}; # -rwxr-x---
+            }
+            # HACK: Copy secrets content to support bind mounts with tmpfiles cleanup
+            # https://github.com/ryantm/agenix/issues/145
+            // mapAttrs' (_: secret:
+              nameValuePair "/run/machines/${name}/${secret.name}" {
+                "C+" = {
+                  mode = secret.mode;
+                  user = secret.owner;
+                  group = secret.group;
+                  argument = secret.path;
+                };
+              })
+            containerSecrets)
       )
-      config.containers;
+      hostCfg.containers;
   };
 }

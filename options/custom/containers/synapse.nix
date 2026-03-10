@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   pkgs,
   ...
@@ -16,8 +15,13 @@ in {
 
   config = mkIf cfg.enable {
     containers.synapse = {
+      agenix.secrets = optionals containerCfg.agenix.enable [
+        "${hostCfg.custom.hostname}/synapse/extra.yaml"
+        "${hostCfg.custom.hostname}/synapse/livekit.key.yaml"
+      ];
+
       # Mount data directory for media store
-      bindMounts = mkIf (!isNull containerCfg.dataDir) {
+      bindMounts = mkIf (containerCfg.dataDir != null) {
         "${containerCfg.config.services.matrix-synapse.dataDir}:idmap" = {
           hostPath = containerCfg.dataDir;
           isReadOnly = false;
@@ -30,7 +34,7 @@ in {
           # https://nixos.org/manual/nixos/stable/index.html#module-services-matrix-synapse
           matrix-synapse = {
             enable = true;
-            extraConfigFiles = optionals containerCfg.enableAgenix [containerCfg.config.age.secrets."${hostCfg.custom.hostname}/synapse/extra.yaml".path];
+            extraConfigFiles = optionals containerCfg.agenix.enable [hostCfg.age.secrets."${hostCfg.custom.hostname}/synapse/extra.yaml".path];
 
             # https://element-hq.github.io/synapse/latest/usage/configuration/config_documentation.html
             # https://github.com/element-hq/synapse/blob/develop/docs/sample_config.yaml
@@ -141,21 +145,16 @@ in {
             enable = true;
             port = 8888; # TCP
             livekitUrl = "wss://rtc.${hostCfg.custom.domain}";
-            keyFile = mkIf containerCfg.enableAgenix containerCfg.config.age.secrets."${hostCfg.custom.hostname}/synapse/livekit.key.yaml".path;
+            keyFile = mkIf containerCfg.agenix.enable hostCfg.age.secrets."${hostCfg.custom.hostname}/synapse/livekit.key.yaml".path;
           };
         };
 
         systemd.services.lk-jwt-service = {
-          serviceConfig.User = "lk-jwt-service"; # Statically assign DynamicUser
           environment.LIVEKIT_FULL_ACCESS_HOMESERVERS = hostCfg.custom.domain; # Restrict JWT access
         };
-
-        age.secrets = mkIf containerCfg.enableAgenix (mapAttrs (name: secret: recursiveUpdate {file = "${inputs.self}/secrets/${name}";} secret)
-          {
-            "${hostCfg.custom.hostname}/synapse/extra.yaml".owner = "matrix-synapse";
-            "${hostCfg.custom.hostname}/synapse/livekit.key.yaml".owner = "lk-jwt-service";
-          });
       };
     };
+
+    age.secrets."${hostCfg.custom.hostname}/synapse/extra.yaml".owner = "224"; # matrix-synapse
   };
 }
