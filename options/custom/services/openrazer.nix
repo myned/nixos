@@ -19,11 +19,11 @@ in {
       enable = true;
       users = [config.custom.username];
 
-      # batteryNotifier = {
-      #   enable = true;
-      #   frequency = 60 * 60; # Seconds
-      #   percentage = 15;
-      # };
+      batteryNotifier = {
+        enable = false;
+        frequency = 60 * 60; # Seconds
+        percentage = 15;
+      };
     };
 
     # https://polychromatic.app/
