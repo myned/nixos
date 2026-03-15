@@ -67,7 +67,7 @@ in {
 
               authKeySecret = mkOption {
                 description = "Name of the agenix secret to the auth-key for provisioning Tailscale within the container";
-                default = "common/tailscale/container.env";
+                default = "common/tailscale/container.key";
                 example = "tailscale.key";
                 type = types.str;
               };
