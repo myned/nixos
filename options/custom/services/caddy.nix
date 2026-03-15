@@ -11,6 +11,13 @@ in {
   options.custom.services.caddy = {
     enable = mkEnableOption "caddy";
 
+    enableCinny = mkOption {
+      description = "Whether to serve the static cinny client";
+      default = false;
+      example = true;
+      type = types.bool;
+    };
+
     enableElementWeb = mkOption {
       description = "Whether to serve the static element-web client";
       default = false;
@@ -124,6 +131,23 @@ in {
         '';
 
         virtualHosts = {
+          # https://github.com/cinnyapp/cinny?tab=readme-ov-file#self-hosting
+          "cinny.${config.custom.domain}".extraConfig = let
+            cinny = pkgs.cinny.override {
+              # https://github.com/cinnyapp/cinny/blob/dev/config.json
+              conf = {
+                allowCustomHomeservers = false;
+                defaultHomeserver = 0;
+                homeserverList = ["${config.custom.domain}"];
+              };
+            };
+          in
+            mkIf cfg.enableCinny ''
+              root * ${cinny}
+              try_files {path} /index.html
+              file_server
+            '';
+
           # https://wiki.nixos.org/wiki/Matrix#Web_clients
           "element.${config.custom.domain}".extraConfig = let
             element-web = pkgs.element-web.override {

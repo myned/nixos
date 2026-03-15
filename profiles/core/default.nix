@@ -57,6 +57,7 @@ with lib; {
 
       caddy = {
         enable = true;
+        enableCinny = true;
         enableElementWeb = true;
         enableSynapseAdmin = true;
         importEnvironment = true;
