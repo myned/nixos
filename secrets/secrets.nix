@@ -62,7 +62,7 @@ in {
   "myore/livekit/livekit.yaml" = key myore;
   "myore/netdata/parent.conf" = key myore;
   "myore/ovenmediaengine/.env" = key myore;
-  "myore/site/.env" = key mynix;
+  "myore/site/.env" = key myore;
   "myore/users/myned.pass" = key myore;
   "myore/users/root.pass" = key myore;
 
