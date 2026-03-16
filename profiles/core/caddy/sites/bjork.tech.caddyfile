@@ -47,8 +47,7 @@ bjork.tech {
 				JSON
 		}
 
-		# Serve static site
-		import serve bjork.tech
+		import proxy bjork.tech {system.hostname}-site:80 # Personal site
 	}
 }
 
@@ -65,6 +64,7 @@ bjork.tech {
 	#// import proxy net.bjork.tech myosh:8585 # Netbox
 	import proxy notify.bjork.tech {system.hostname}:2586 # ntfy
 	#// import proxy status.bjork.tech {system.hostname}-kener:3000 # Kener
+	import proxy stream.bjork.tech {system.hostname}:3333 # OvenMediaEngine
 	#// import proxy ts.bjork.tech {system.hostname}:9999 # Headscale
 	#// import proxy vault.bjork.tech myosh:8088 # Vaultwarden
 
@@ -117,7 +117,6 @@ bjork.tech {
 		import proxy media-next.bjork.tech myosh-jellyfin:8097 # Jellyfin Vue
 		#// import proxy reddit.bjork.tech myosh:8888 # Redlib
 		#// import proxy search.bjork.tech myosh:8888 # SearXNG
-		import proxy stream.bjork.tech {system.hostname}:3333 # OvenMediaEngine
 		#// import proxy stream.bjork.tech myosh:8800 # Owncast
 		#// import proxy tv.bjork.tech myosh:8470 # Stremio Client
 		#// import proxy tv-api.bjork.tech myosh:11470 # Stremio Server
