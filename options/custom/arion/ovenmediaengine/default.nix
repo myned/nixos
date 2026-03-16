@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   ...
 }:
@@ -19,6 +20,7 @@ in {
       # https://docs.ovenmediaengine.com/getting-started/getting-started-with-docker
       ovenmediaengine.service = {
         container_name = "ovenmediaengine";
+        env_file = [config.age.secrets."${config.custom.hostname}/ovenmediaengine/.env".path];
         image = "airensoft/ovenmediaengine:v0.20.0"; # https://hub.docker.com/r/airensoft/ovenmediaengine/tags
         restart = "unless-stopped";
         network_mode = "host"; # https://docs.ovenmediaengine.com/getting-started#ports-used-by-default
@@ -30,5 +32,11 @@ in {
         ];
       };
     };
+
+    age.secrets =
+      mapAttrs (name: value: recursiveUpdate {file = "${inputs.self}/secrets/${name}";} value)
+      {
+        "${config.custom.hostname}/ovenmediaengine/.env" = {};
+      };
   };
 }

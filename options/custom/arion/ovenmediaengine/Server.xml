@@ -157,6 +157,15 @@
 					</Publishers>
 				</Application>
 			</Applications>
+			<SignedPolicy>
+				<PolicyQueryKeyName>policy</PolicyQueryKeyName>
+				<SignatureQueryKeyName>signature</SignatureQueryKeyName>
+				<SecretKey>${env:OME_SECRET_KEY}</SecretKey>
+				<Enables>
+					<Providers>rtmp,webrtc,srt</Providers>
+					<Publishers>webrtc,llhls,thumbnail</Publishers>
+				</Enables>
+			</SignedPolicy>
 		</VirtualHost>
 	</VirtualHosts>
 </Server>
