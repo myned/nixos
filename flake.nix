@@ -133,6 +133,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # https://git.bjork.tech/myned/site
+    site = {
+      url = "git+https://git.bjork.tech/myned/site?ref=prod";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # https://github.com/nix-community/stylix
     stylix = {
       url = "github:nix-community/stylix/release-25.11";
