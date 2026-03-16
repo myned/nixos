@@ -47,10 +47,10 @@ in {
           };
 
           serviceConfig = {
-            Type = "notify";
+            Type = "exec";
+            ExecStart = getExe inputs.site.packages.${pkgs.system}.default;
             EnvironmentFile = hostCfg.age.secrets."${hostCfg.custom.hostname}/site/.env".path;
             WorkingDirectory = toString inputs.site.packages.${pkgs.system}.default;
-            ExecStart = getExe inputs.site.packages.${pkgs.system}.default;
             Restart = "on-failure";
 
             # https://wiki.nixos.org/wiki/Systemd/Hardening
