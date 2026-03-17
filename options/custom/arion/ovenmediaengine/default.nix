@@ -2,6 +2,7 @@
   config,
   inputs,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -32,6 +33,27 @@ in {
         ];
       };
     };
+
+    # https://github.com/OvenMediaLabs/OvenMediaEngine/blob/master/misc/signed_policy_url_generator.sh
+    environment.systemPackages = let
+      #?? ome-generate <url>
+      ome-generate = pkgs.writeShellApplication {
+        name = "ome-generate";
+        runtimeInputs = with pkgs; [coreutils python3];
+        text = ''
+          # shellcheck disable=1091
+          source ${config.age.secrets."${config.custom.hostname}/ovenmediaengine/.env".path}
+
+          url="''${1:-}"
+          test -n "$url" || exit 1
+
+          python ${inputs.ovenmediaengine}/misc/generate_signed_policy.py \
+            "$OME_SECRET_KEY" \
+            "$url" \
+            "$(( 365 * 24 ))" # 1 year in hours
+        '';
+      };
+    in [ome-generate];
 
     age.secrets =
       mapAttrs (name: value: recursiveUpdate {file = "${inputs.self}/secrets/${name}";} value)

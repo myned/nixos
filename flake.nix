@@ -219,6 +219,11 @@
       flake = false;
     };
 
+    ovenmediaengine = {
+      url = "github:OvenMediaLabs/OvenMediaEngine";
+      flake = false;
+    };
+
     # https://github.com/sonic2kk/steamtinkerlaunch
     # steamtinkerlaunch = {
     #   url = "github:sonic2kk/steamtinkerlaunch";
