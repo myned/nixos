@@ -1164,6 +1164,22 @@
         "type": "github"
       }
     },
+    "ovenmediaengine": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1773671073,
+        "narHash": "sha256-LlOeRlpiQwW3naasRgbkpdWftzJA/wx76juimp+4aCU=",
+        "owner": "OvenMediaLabs",
+        "repo": "OvenMediaEngine",
+        "rev": "6907a5fab9b64b261c8404c20ee7ff218807ed49",
+        "type": "github"
+      },
+      "original": {
+        "owner": "OvenMediaLabs",
+        "repo": "OvenMediaEngine",
+        "type": "github"
+      }
+    },
     "pre-commit": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -1217,6 +1233,7 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixvirt": "nixvirt",
         "nur": "nur",
+        "ovenmediaengine": "ovenmediaengine",
         "site": "site",
         "stylix": "stylix",
         "walker": "walker",
@@ -1291,11 +1308,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773608479,
-        "narHash": "sha256-uWCRKCFIIVUKD8cOkoF1hi0/61NTaHgZKqENPTTVdrM=",
+        "lastModified": 1773787429,
+        "narHash": "sha256-udx0GRBbWxuTzuzL82qLNnOqpJYVtv5ggNizAXtl/DQ=",
         "ref": "prod",
-        "rev": "72c0634b027d3eda10851c39ff272802b9e75830",
-        "revCount": 55,
+        "rev": "0d7f9c1659c2088c0b39548f4db07763160264c5",
+        "revCount": 64,
         "type": "git",
         "url": "https://git.bjork.tech/myned/site"
       },
