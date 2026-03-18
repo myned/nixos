@@ -87,7 +87,6 @@ in {
             agenix.enable = mkDefault true;
             tailscale.enable = mkDefault containerCfg.privateNetwork;
             enableTun = mkDefault containerCfg.tailscale.enable;
-
             agenix.secrets = optionals containerCfg.tailscale.enable [containerCfg.tailscale.authKeySecret];
 
             # TODO: Consider nixos-nspawn as alternative
@@ -106,7 +105,7 @@ in {
 
             bindMounts = let
               # Gather secrets defined for the container
-              containerSecrets = filterAttrs (name: _: elem name containerCfg.agenix.secrets) hostCfg.age.secrets;
+              containerSecrets = filterAttrs (n: _: elem n containerCfg.agenix.secrets) hostCfg.age.secrets;
             in
               # Persist systemd service state with user namespace mapping
               # https://github.com/NixOS/nixpkgs/issues/329530
@@ -121,7 +120,7 @@ in {
               # https://github.com/ryantm/agenix/pull/132
               // mapAttrs' (_: secret:
                 nameValuePair "${secret.path}:idmap" {
-                  hostPath = "/run/machines/${name}/${secret.name}"; # Original secret path can still be used in the container
+                  hostPath = secret.path;
                   isReadOnly = true;
                 })
               containerSecrets;
@@ -171,7 +170,13 @@ in {
     custom.services.borgmatic.sources = mapAttrsToList (_: containerCfg: containerCfg.stateDir) hostCfg.containers;
 
     # Add container secrets to host config
-    custom.files.agenix.secrets = flatten (mapAttrsToList (_: containerCfg: containerCfg.agenix.secrets) hostCfg.containers);
+    custom.files.agenix.secrets = concatMapAttrs (name: containerCfg:
+      listToAttrs (forEach containerCfg.agenix.secrets (secret:
+        nameValuePair secret {
+          path = "/run/machines/${name}/${secret}"; # Default /run/agenix is an incompatible fs type
+          symlink = false; # Symlinks unsupported by container bind mount
+        })))
+    hostCfg.containers;
 
     # https://wiki.nixos.org/wiki/NixOS_Containers
     # https://wiki.archlinux.org/title/Systemd-nspawn
@@ -190,26 +195,12 @@ in {
 
     systemd.tmpfiles.settings =
       mapAttrs' (
-        name: containerCfg: let
-          containerSecrets = filterAttrs (name: _: elem name containerCfg.agenix.secrets) hostCfg.age.secrets;
-        in
-          nameValuePair name ({
-              # Precreate container state directories
-              ${containerCfg.stateDir}.d = {mode = "0750";}; # -rwxr-x---
-              ${containerCfg.dataDir}.d = mkIf (containerCfg.dataDir != null) {mode = "0750";}; # -rwxr-x---
-            }
-            # HACK: Copy secrets content to support bind mounts with tmpfiles cleanup
-            # https://github.com/ryantm/agenix/issues/145
-            // mapAttrs' (_: secret:
-              nameValuePair "/run/machines/${name}/${secret.name}" {
-                "C+" = {
-                  mode = secret.mode;
-                  user = secret.owner;
-                  group = secret.group;
-                  argument = secret.path;
-                };
-              })
-            containerSecrets)
+        name: containerCfg:
+          nameValuePair name {
+            # Precreate container state directories
+            ${containerCfg.stateDir}.d = {mode = "0750";}; # -rwxr-x---
+            ${containerCfg.dataDir}.d = mkIf (containerCfg.dataDir != null) {mode = "0750";}; # -rwxr-x---
+          }
       )
       hostCfg.containers;
   };

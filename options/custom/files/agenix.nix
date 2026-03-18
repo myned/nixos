@@ -2,6 +2,7 @@
   config,
   inputs,
   lib,
+  options,
   ...
 }:
 with lib; let
@@ -11,10 +12,10 @@ in {
     enable = mkEnableOption "agenix";
 
     secrets = mkOption {
-      description = "List of secrets to add to config.age.secrets";
-      default = [];
-      example = ["secret.key"];
-      type = with types; listOf str;
+      description = "Attrset of secrets to add to config.age.secrets with overridable defaults";
+      default = {};
+      example = {"secret.key" = {};};
+      type = types.attrs;
     };
   };
 
@@ -23,11 +24,7 @@ in {
     # https://github.com/ryantm/agenix
     age = {
       identityPaths = ["/etc/ssh/id_ed25519"]; #!! Must be set without sshd
-
-      secrets = listToAttrs (forEach cfg.secrets (secret:
-        nameValuePair secret {
-          file = "${inputs.self}/secrets/${secret}";
-        }));
+      secrets = mapAttrs (name: value: {file = "${inputs.self}/secrets/${name}";} // value) cfg.secrets;
     };
   };
 }
