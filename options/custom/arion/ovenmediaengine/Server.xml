@@ -5,6 +5,7 @@
 	<Name>OvenMediaEngine</Name>
 	<Type>origin</Type>
 	<IP>*</IP>
+	<IP>::</IP>
 	<PrivacyProtection>false</PrivacyProtection> <!-- Client IP addresses in logs -->
 	<Modules>
 		<HTTP2>
@@ -35,7 +36,9 @@
 				</Signalling>
 				<IceCandidates>
 					<IceCandidate>*:10000/udp</IceCandidate>
+					<IceCandidate>[::]:10000/udp</IceCandidate>
 					<TcpRelay>*:3478</TcpRelay> <!-- Embedded TURN server -->
+					<TcpRelay>[::]:3478</TcpRelay>
 					<TcpRelayWorkerCount>1</TcpRelayWorkerCount>
 				</IceCandidates>
 			</WebRTC>
@@ -52,7 +55,9 @@
 				</Signalling>
 				<IceCandidates>
 					<IceCandidate>*:10000/udp</IceCandidate>
+					<IceCandidate>[::]:10000/udp</IceCandidate>
 					<TcpRelay>*:3478</TcpRelay>
+					<TcpRelay>[::]:3478</TcpRelay>
 					<TcpRelayWorkerCount>1</TcpRelayWorkerCount>
 				</IceCandidates>
 			</WebRTC>

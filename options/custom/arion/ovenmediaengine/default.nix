@@ -34,6 +34,18 @@ in {
       };
     };
 
+    networking.firewall = {
+      allowedTCPPorts = [
+        1935 # RTMP
+        3478 # TURN
+      ];
+
+      allowedUDPPorts = [
+        9999 # SRT
+        10000 # ICE
+      ];
+    };
+
     # https://github.com/OvenMediaLabs/OvenMediaEngine/blob/master/misc/signed_policy_url_generator.sh
     environment.systemPackages = let
       #?? ome-generate <url>
