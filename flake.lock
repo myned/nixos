@@ -1308,11 +1308,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773787429,
-        "narHash": "sha256-udx0GRBbWxuTzuzL82qLNnOqpJYVtv5ggNizAXtl/DQ=",
+        "lastModified": 1774207565,
+        "narHash": "sha256-oys2bQHa8BS+CIQ5+vsFrHgHTynlnhg6YazUAn59+0Y=",
         "ref": "prod",
-        "rev": "0d7f9c1659c2088c0b39548f4db07763160264c5",
-        "revCount": 64,
+        "rev": "b8ec94a465a62445557ad0b7f6e33433b7b65eee",
+        "revCount": 69,
         "type": "git",
         "url": "https://git.bjork.tech/myned/site"
       },
