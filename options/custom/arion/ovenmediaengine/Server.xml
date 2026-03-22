@@ -44,6 +44,9 @@
 			</WebRTC>
 		</Providers>
 		<Publishers>
+			<Thumbnail>
+				<Port>3333</Port>
+			</Thumbnail>
 			<LLHLS>
 				<Port>3333</Port>
 				<WorkerCount>1</WorkerCount>
@@ -82,19 +85,30 @@
 					<Type>live</Type>
 					<OutputProfiles>
 						<OutputProfile>
+							<Name>thumbnail</Name>
+							<OutputStreamName>${OriginStreamName}_preview</OutputStreamName>
+							<Encodes>
+								<Image>
+									<Codec>png</Codec>
+									<Height>720</Height>
+									<Framerate>1</Framerate>
+								</Image>
+							</Encodes>
+						</OutputProfile>
+						<OutputProfile>
 							<Name>stream</Name>
-							<OutputStreamName>stream</OutputStreamName>
+							<OutputStreamName>${OriginStreamName}</OutputStreamName>
 							<Encodes>
 								<Video>
 									<Name>bypass</Name>
 									<Bypass>true</Bypass>
 								</Video>
 								<Video>
-									<Name>720p</Name>
+									<Name>480p</Name>
 									<Codec>h264</Codec>
-									<Height>720</Height>
+									<Height>480</Height>
 									<Framerate>30</Framerate>
-									<Bitrate>4000000</Bitrate>
+									<Bitrate>3000000</Bitrate>
 									<Modules>x264</Modules>
 									<BypassIfMatch>
 										<Codec>eq</Codec>
@@ -130,18 +144,14 @@
 									<HLSChunklistPathDepth>0</HLSChunklistPathDepth>
 									<EnableTsPackaging>true</EnableTsPackaging>
 								</Options>
-								<RenditionTemplate>
-									<Name>${Height}p (bypassed)</Name>
-									<VideoTemplate>
-										<EncodingType>bypassed</EncodingType>
-									</VideoTemplate>
-								</RenditionTemplate>
-								<RenditionTemplate>
-									<Name>${Height}p (transcoded)</Name>
-									<VideoTemplate>
-										<EncodingType>encoded</EncodingType>
-									</VideoTemplate>
-								</RenditionTemplate>
+								<Rendition>
+									<Name>Bypassed</Name>
+									<Video>bypass</Video>
+								</Rendition>
+								<Rendition>
+									<Name>Transcoded 480p 30fps</Name>
+									<Video>480p</Video>
+								</Rendition>
 							</Playlist>
 						</OutputProfile>
 					</OutputProfiles>
@@ -153,6 +163,7 @@
 					<Publishers>
 						<AppWorkerCount>2</AppWorkerCount>
 						<StreamWorkerCount>0</StreamWorkerCount>
+						<Thumbnail />
 						<LLHLS />
 						<WebRTC>
 							<Rtx>true</Rtx> <!-- UDP retransmission -->
@@ -168,7 +179,7 @@
 				<SecretKey>${env:OME_SECRET_KEY}</SecretKey>
 				<Enables>
 					<Providers>rtmp,webrtc,srt</Providers>
-					<Publishers>webrtc,llhls,thumbnail</Publishers>
+					<Publishers>thumbnail,webrtc,llhls</Publishers>
 				</Enables>
 			</SignedPolicy>
 		</VirtualHost>
