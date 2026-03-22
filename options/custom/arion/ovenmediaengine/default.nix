@@ -39,7 +39,7 @@ in {
       #?? ome-generate <url>
       ome-generate = pkgs.writeShellApplication {
         name = "ome-generate";
-        runtimeInputs = with pkgs; [coreutils python3];
+        runtimeInputs = with pkgs; [coreutils openssl python3 xxd];
         text = ''
           # shellcheck disable=1091
           source ${config.age.secrets."${config.custom.hostname}/ovenmediaengine/.env".path}
@@ -47,10 +47,12 @@ in {
           url="''${1:-}"
           test -n "$url" || exit 1
 
-          python ${inputs.ovenmediaengine}/misc/generate_signed_policy.py \
+          bash ${inputs.ovenmediaengine}/misc/simple_signed_policy_url_generator.sh \
             "$OME_SECRET_KEY" \
             "$url" \
-            "$(( 365 * 24 ))" # 1 year in hours
+            signature \
+            policy \
+            "$(( 365 * 24 * 60 * 60 ))" # 1 year in seconds
         '';
       };
     in [ome-generate];
