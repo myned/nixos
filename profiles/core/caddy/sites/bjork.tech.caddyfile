@@ -47,7 +47,11 @@ bjork.tech {
 				JSON
 		}
 
-		import proxy bjork.tech {system.hostname}-site:80 # Personal site
+		# Personal site
+		import handle bjork.tech {
+			import owo /stream*
+			reverse_proxy {system.hostname}-site:80
+		}
 	}
 }
 
@@ -62,10 +66,9 @@ bjork.tech {
 	#// import proxy gist.bjork.tech myosh-opengist:6157 # Opengist
 	import proxy git.bjork.tech myosh-forgejo:3000 # Forgejo
 	#// import proxy net.bjork.tech myosh:8585 # Netbox
-	import proxy notify.bjork.tech {system.hostname}:2586 # ntfy
+	import proxy notify.bjork.tech localhost:2586 # ntfy
 	#// import proxy status.bjork.tech {system.hostname}-kener:3000 # Kener
-	import proxy stream.bjork.tech {system.hostname}:3333 # OvenMediaEngine
-	#// import proxy ts.bjork.tech {system.hostname}:9999 # Headscale
+	#// import proxy ts.bjork.tech localhost:9999 # Headscale
 	#// import proxy vault.bjork.tech myosh:8088 # Vaultwarden
 
 	# AdGuard Home DNS-over-HTTPS
@@ -95,7 +98,15 @@ bjork.tech {
 		}
 
 		handle {
-			reverse_proxy {system.hostname}:7880
+			reverse_proxy localhost:7880
+		}
+	}
+
+	# OvenMediaEngine
+	import handle stream.bjork.tech {
+		reverse_proxy localhost:3333 {
+			# https://github.com/OvenMediaLabs/OvenMediaEngine/issues/448#issuecomment-885447613
+			header_up Host "localhost:3333"
 		}
 	}
 
@@ -197,12 +208,12 @@ bjork.tech {
 	import common
 
 	import vpn {
-		import proxy adguardhome.admin.bjork.tech myore-adguardhome:80 # AdGuard Home
+		import proxy adguardhome.admin.bjork.tech {system.hostname}-adguardhome:80 # AdGuard Home
 		#// import proxy affine.admin.bjork.tech myosh:3010 # AFFiNE
 		import proxy beszel.admin.bjork.tech {system.hostname}-beszel:8090 # Beszel
-		#// import proxy-insecure cockpit.admin.bjork.tech {system.hostname}:9090 # Cockpit
+		#// import proxy-insecure cockpit.admin.bjork.tech localhost:9090 # Cockpit
 		#// import proxy dash.admin.bjork.tech myosh:3001 # dash.
-		#// import proxy gatus.admin.bjork.tech {system.hostname}:8484 # Gatus
+		#// import proxy gatus.admin.bjork.tech localhost:8484 # Gatus
 		#// import proxy grafana.admin.bjork.tech {system.hostname}-grafana:3000 # Grafana
 		#// import proxy jackett.admin.bjork.tech myosh-jellyfin:9117 # Jackett
 		#// import proxy-insecure kasm.admin.bjork.tech myosh:3443 # Kasm
@@ -214,7 +225,7 @@ bjork.tech {
 		import proxy prowlarr.admin.bjork.tech myosh-jellyfin:9696 # Prowlarr
 		import proxy qbittorrent.admin.bjork.tech myosh-jellyfin:8881 # qBittorrent
 		import proxy radarr.admin.bjork.tech myosh-jellyfin:7878 # Radarr
-		#// import proxy scrutiny.admin.bjork.tech {system.hostname}:8282 # Scrutiny
+		#// import proxy scrutiny.admin.bjork.tech localhost:8282 # Scrutiny
 		import proxy slskd.admin.bjork.tech myosh-jellyfin:5030 # slskd
 		import proxy sonarr.admin.bjork.tech myosh-jellyfin:8989 # Sonarr
 		#// import proxy statping.admin.bjork.tech {system.hostname}-statping:8080 # Statping-ng
@@ -224,7 +235,7 @@ bjork.tech {
 		# @headscale host headscale.admin.bjork.tech
 		# handle @headscale {
 		# 	redir / /admin
-		# 	reverse_proxy /admin* {system.hostname}:3003
+		# 	reverse_proxy /admin* localhost:3003
 		# }
 
 		# Netdata
