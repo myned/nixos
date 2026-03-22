@@ -12,6 +12,11 @@
   custom = {
     hostname = "mynix";
 
+    # arion = {
+    #   enable = true;
+    #   ovenmediaengine.enable = true;
+    # };
+
     display.outputs = {
       HDMI-A-1 = {
         width = 2560;
