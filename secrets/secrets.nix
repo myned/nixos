@@ -44,6 +44,7 @@ in {
   "myeye/users/myned.pass" = key myeye;
   "myeye/users/root.pass" = key myeye;
 
+  "mynix/ovenmediaengine/.env" = key mynix;
   "mynix/users/myned.pass" = key mynix;
   "mynix/users/root.pass" = key mynix;
   "mynix/vm/myndows.pass" = key mynix;
