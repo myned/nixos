@@ -5,6 +5,9 @@
 	header ?X-Robots-Tag "noindex, nofollow"
 	header ?Access-Control-Allow-Origin "*"
 
+	@private client_ip private_ranges 100.64.0.0/10 fd7a:115c:a1e0::/48
+	@vpn client_ip 100.64.0.0/10 fd7a:115c:a1e0::/48
+
 	# TODO: Use custom error pages
 	# https://caddyserver.com/docs/caddyfile/directives/handle_errors
 	error 404 # Fallback

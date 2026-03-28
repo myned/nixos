@@ -1,27 +1,13 @@
 # https://caddyserver.com/docs/caddyfile/directives/import
 
-# BUG: Unrecognized subdirective {block}, requires block when importing if defined
-# https://github.com/caddyserver/caddy/issues/6821
-
-# BUG: Anonymous blocks are not supported when importing with a subdirective block
-# https://github.com/caddyserver/caddy/issues/7083
-
-#?? import handle <host> [host ...] {}
-(handle) {
-	@handle-{args[0]} host {args[:]}
-	handle @handle-{args[0]} {
-		{block}
-	}
-}
-
-#?? import private {}
+#?? import private
 (private) {
 	# https://caddyserver.com/docs/caddyfile/matchers#client-ip
 	#?? private_ranges = 192.168.0.0/16 172.16.0.0/12 10.0.0.0/8 127.0.0.1/8 fd00::/8 ::1
-	@private client_ip private_ranges 100.64.0.0/10 fd7a:115c:a1e0::/48
-	handle @private {
-		{block}
+	@public {
+		not client_ip private_ranges 100.64.0.0/10 fd7a:115c:a1e0::/48
 	}
+	respond @public 401
 }
 
 #?? import proxy <host> <upstream> [upstream ...]
@@ -74,14 +60,14 @@
 	}
 }
 
-#?? import vpn {}
+#?? import vpn
 (vpn) {
 	# https://tailscale.com/kb/1015/100.x-addresses
 	# https://tailscale.com/kb/1033/ip-and-dns-addresses#tailscale-ipv6-local-address-prefix
-	@vpn client_ip 100.64.0.0/10 fd7a:115c:a1e0::/48
-	handle @vpn {
-		{block}
+	@notvpn {
+		not client_ip 100.64.0.0/10 fd7a:115c:a1e0::/48
 	}
+	respond @notvpn 401
 }
 
 #?? import www <domain>

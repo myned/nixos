@@ -48,7 +48,7 @@ bjork.tech {
 		}
 
 		# Personal site
-		import handle bjork.tech {
+		handle {
 			import owo /stream*
 			reverse_proxy {system.hostname}-site:80
 		}
@@ -82,7 +82,8 @@ bjork.tech {
 	# }
 
 	# Synapse
-	import handle matrix.bjork.tech {
+	@matrix.bjork.tech host matrix.bjork.tech
+	handle @matrix.bjork.tech {
 		reverse_proxy / myosh-synapse:8008
 		reverse_proxy /_matrix* myosh-synapse:8008
 		reverse_proxy /_synapse/client* myosh-synapse:8008
@@ -92,7 +93,8 @@ bjork.tech {
 	# MatrixRTC
 	# https://github.com/element-hq/element-call/blob/livekit/docs/self-hosting.md?ref=element.io#matrix-site-endpoint-routing
 	# https://github.com/element-hq/lk-jwt-service?tab=readme-ov-file#-transport-layer-security-tls-setup-using-a-reverse-proxy
-	import handle rtc.bjork.tech {
+	@rtc.bjork.tech host rtc.bjork.tech
+	handle @rtc.bjork.tech {
 		handle_path /livekit/jwt* {
 			reverse_proxy myosh-synapse:8888
 		}
@@ -103,7 +105,8 @@ bjork.tech {
 	}
 
 	# OvenMediaEngine
-	import handle stream.bjork.tech {
+	@stream.bjork.tech host stream.bjork.tech
+	handle @stream.bjork.tech {
 		reverse_proxy localhost:3333 {
 			# https://github.com/OvenMediaLabs/OvenMediaEngine/issues/448#issuecomment-885447613
 			header_up Host "localhost:3333"
@@ -119,7 +122,8 @@ bjork.tech {
 	# 	header_up X-Tls-Client-Cert-Der-Base64 {http.request.tls.client.certificate_der_base64}
 	# }
 
-	import private {
+	handle @private {
+		import private
 		#// import proxy ai.bjork.tech myosh-openwebui:8080 # Open WebUI
 		#// import proxy budget.bjork.tech myosh:5006 # Actual Budget
 		import proxy discover.bjork.tech myosh-jellyfin:5055 # Jellyseerr
@@ -145,7 +149,8 @@ bjork.tech {
 		# }
 
 		# Oryx
-		# import handle stream.bjork.tech {
+		# @stream.bjork.tech host stream.bjork.tech
+		# handle @stream.bjork.tech {
 		# 	reverse_proxy myosh:2022
 		# 	redir /flv {$ORYX_FLV}
 		# 	redir /hls {$ORYX_HLS}
@@ -154,7 +159,8 @@ bjork.tech {
 
 		# SRS
 		# https://ossrs.io/lts/en-us/docs/v6/doc/http-server#caddy-proxy
-		# import handle stream.bjork.tech {
+		# @stream.bjork.tech host stream.bjork.tech
+		# handle stream.bjork.tech {
 		# 	reverse_proxy myosh:8800
 		# 	reverse_proxy /api* myosh:1985
 		# 	reverse_proxy /rtc* myosh:1985
@@ -162,44 +168,45 @@ bjork.tech {
 
 		# Stoat/Revolt
 		# https://github.com/stoatchat/self-hosted/blob/main/Caddyfile
-		import handle stoat.bjork.tech {
+		@stoat.bjork.tech host stoat.bjork.tech
+		handle @stoat.bjork.tech {
 			# api
 			handle_path /api* {
-				reverse_proxy http://myosh-stoat:14702
+				reverse_proxy myosh-stoat:14702
 			}
 
 			# events
 			handle_path /ws {
-				reverse_proxy http://myosh-stoat:14703
+				reverse_proxy myosh-stoat:14703
 			}
 
 			# autumn/file-server
 			handle_path /media* {
-				reverse_proxy http://myosh-stoat:14704
+				reverse_proxy myosh-stoat:14704
 			}
 
 			# january/proxy
 			handle_path /proxy* {
-				reverse_proxy http://myosh-stoat:14705
+				reverse_proxy myosh-stoat:14705
 			}
 
 			# gifbox
 			handle_path /gifbox* {
-				reverse_proxy http://myosh-stoat:14706
+				reverse_proxy myosh-stoat:14706
 			}
 
 			# livekit
 			handle_path /livekit* {
-				reverse_proxy http://myosh-stoat:7880
+				reverse_proxy myosh-stoat:7880
 			}
 
 			# voice-ingress
 			handle_path /ingress* {
-				reverse_proxy http://myosh-stoat:8500
+				reverse_proxy myosh-stoat:8500
 			}
 
 			# for-web
-			reverse_proxy http://myosh-stoat:5000
+			reverse_proxy myosh-stoat:5000
 		}
 	}
 }
@@ -207,7 +214,8 @@ bjork.tech {
 *.admin.bjork.tech {
 	import common
 
-	import vpn {
+	handle @vpn {
+		import vpn
 		import proxy adguardhome.admin.bjork.tech {system.hostname}-adguardhome:80 # AdGuard Home
 		#// import proxy affine.admin.bjork.tech myosh:3010 # AFFiNE
 		import proxy beszel.admin.bjork.tech {system.hostname}-beszel:8090 # Beszel
@@ -239,7 +247,8 @@ bjork.tech {
 		# }
 
 		# Netdata
-		# import handle netdata.admin.bjork.tech {
+		# @netdata.admin.bjork.tech host netdata.admin.bjork.tech
+		# handle @netdata.admin.bjork.tech {
 		# 	redir / /v3
 		# 	reverse_proxy {system.hostname}-netdata:19999
 		# }
