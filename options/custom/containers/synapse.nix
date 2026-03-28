@@ -45,7 +45,7 @@ in {
               default_room_version = "12";
               delete_stale_devices_after = "1y";
               enable_registration = true;
-              encryption_enabled_by_default_for_room_type = "all";
+              encryption_enabled_by_default_for_room_type = "invite";
               forget_rooms_on_leave = true;
               forgotten_room_retention_period = "7d";
               include_profile_data_on_invite = false;
@@ -60,12 +60,19 @@ in {
               rc_delayed_event_mgmt.per_second = 1;
               rc_message.burst_count = 30;
               rc_message.per_second = 0.5;
+              redaction_retention_period = "0";
               registration_requires_token = true;
               registrations_require_3pid = ["email"];
               report_stats = true; #!! Telemetry
               require_auth_for_profile_requests = true;
               retention.enabled = true; # https://element-hq.github.io/synapse/latest/message_retention_policies.html
+              room_list_publication_rules = [{action = "allow";}];
               server_name = hostCfg.custom.domain; # https://element-hq.github.io/synapse/latest/federate.html
+              server_notices.auto_join = true; # https://element-hq.github.io/synapse/latest/server_notices.html
+              server_notices.room_name = "Nowotices";
+              server_notices.room_topic = "Notices from this homeserver";
+              server_notices.system_mxid_display_name = "System";
+              server_notices.system_mxid_localpart = "system";
               signing_key_path = "${containerCfg.config.services.matrix-synapse.dataDir}/matrix.${hostCfg.custom.domain}.signing.key";
               suppress_key_server_warning = true;
               trusted_key_servers = [{server_name = "matrix.org";}];
@@ -117,9 +124,13 @@ in {
               ];
 
               # https://element-hq.github.io/synapse/latest/admin_api/experimental_features.html
+              # https://github.com/element-hq/synapse/issues?q=state%3Aopen%20label%3AT-ExperimentalFeature
+              # https://github.com/element-hq/synapse/blob/develop/synapse/config/experimental.py#L369
+              # https://github.com/element-hq/element-web/blob/develop/docs/labs.md
+              # https://github.com/matrix-org/matrix-spec-proposals
               experimental_features = {
-                msc3266_enabled = true;
-                msc4222_enabled = true;
+                msc3266_enabled = true; # Room summary API
+                msc4222_enabled = true; # Adding state_after to /sync
               };
             };
           };
