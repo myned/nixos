@@ -108,7 +108,7 @@ in {
         # https://wiki.nixos.org/wiki/Caddy#Plug-ins
         #?? Copy hash/tag from failed build
         package = pkgs.caddy.withPlugins {
-          hash = "sha256-3vC+tM51Q41H62MunJIGG1DUotIHj5/lYh3WyUtgppA=";
+          hash = "sha256-2iagmic2U5OdGLX1SQ4At6409xKZV/gb1oAXqsPi6vU=";
 
           #?? <repo>@<tag>
           plugins = [
@@ -162,7 +162,7 @@ in {
               conf = {
                 default_country_code = "US";
                 default_server_config."m.homeserver".base_url = "https://matrix.${config.custom.domain}";
-                #// default_server_name = config.custom.domain; #!! Requires .well-known
+                default_server_name = config.custom.domain; #!! Requires .well-known
                 default_theme = "dark";
                 disable_custom_urls = true;
                 disable_guests = true;
