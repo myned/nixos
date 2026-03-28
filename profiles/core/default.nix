@@ -60,6 +60,7 @@ with lib; {
         enable = true;
         enableCinny = true;
         enableElementWeb = true;
+        enableFluffyChatWeb = true;
         enableSynapseAdmin = true;
         importEnvironment = true;
         srvKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBYspWeL1pBqX7Bl2pK/vnBE/B7VA93SYgz6O9YlrgNl";

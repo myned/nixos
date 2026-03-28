@@ -25,6 +25,13 @@ in {
       type = types.bool;
     };
 
+    enableFluffyChatWeb = mkOption {
+      description = "Whether to serve the static fluffychat client";
+      default = false;
+      example = true;
+      type = types.bool;
+    };
+
     enableSynapseAdmin = mkOption {
       description = "Whether to serve the static synapse-admin-etkecc client";
       default = false;
@@ -167,6 +174,24 @@ in {
           in
             mkIf cfg.enableElementWeb ''
               root * ${element-web}
+              file_server
+            '';
+
+          # https://github.com/krille-chan/fluffychat?tab=readme-ov-file#web
+          "fluffy.${config.custom.domain}".extraConfig = let
+            # https://github.com/krille-chan/fluffychat/blob/main/config.sample.json
+            conf = pkgs.writeTextDir "config.json" (builtins.toJSON {
+              defaultHomeserver = config.custom.domain;
+              presetHomeserver = config.custom.domain; # >= v2.5.0
+            });
+
+            fluffychat-web = pkgs.symlinkJoin {
+              name = "fluffychat-web";
+              paths = [pkgs.fluffychat-web conf];
+            };
+          in
+            mkIf cfg.enableFluffyChatWeb ''
+              root * ${fluffychat-web}
               file_server
             '';
 
