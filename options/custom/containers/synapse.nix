@@ -166,6 +166,9 @@ in {
       };
     };
 
-    age.secrets."${hostCfg.custom.hostname}/synapse/extra.yaml".owner = "224"; # matrix-synapse
+    age.secrets."${hostCfg.custom.hostname}/synapse/extra.yaml" = {
+      owner = "224"; # matrix-synapse
+      group = "224"; # matrix-synapse
+    };
   };
 }
