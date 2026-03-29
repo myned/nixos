@@ -1,4 +1,9 @@
-{config, ...}: {
+{
+  config,
+  lib,
+  ...
+}:
+with lib; {
   custom = {
     full = true;
     profile = "desktop";
@@ -7,6 +12,10 @@
     arion = {
       enable = true;
       user = config.custom.username;
+    };
+
+    containers = {
+      enable = true;
     };
 
     games = {
