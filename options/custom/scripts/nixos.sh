@@ -44,10 +44,10 @@ _build() {
   if [[ "${argc_builder:-}" == nh ]]; then
     if [[ "${argc_target:-}" ]]; then
       # Build and send closures to remote machine
-      nh os "$1" --hostname "${argc_target}" --target-host "root@${argc_target}" -- --show-trace ${argc_extra:+"${argc_extra[@]}"}
+      nh os "$1" --hostname "${argc_target}" --target-host "root@${argc_target}" --elevation-strategy=passwordless -- --show-trace ${argc_extra:+"${argc_extra[@]}"}
     else
       # Build local machine
-      nh os "$1" -- --show-trace ${argc_extra:+"${argc_extra[@]}"}
+      nh os "$1" --elevation-strategy=passwordless -- --show-trace ${argc_extra:+"${argc_extra[@]}"}
     fi
   elif [[ "${argc_builder:-}" == nixos ]]; then
     if [[ "${argc_target:-}" ]]; then
