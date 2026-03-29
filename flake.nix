@@ -145,6 +145,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # https://github.com/PierreBorine/vintagestory-nix
+    vintagestory-nix = {
+      url = "github:PierreBorine/vintagestory-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # https://github.com/abenz1267/walker
     walker = {
       url = "github:abenz1267/walker/v2.11.3";

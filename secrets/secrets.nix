@@ -66,6 +66,7 @@ in {
   "myore/site/.env" = key myore;
   "myore/users/myned.pass" = key myore;
   "myore/users/root.pass" = key myore;
+  "myore/vintagestory/serverconfig.json" = key myore;
 
   "myork/users/myned.pass" = key myork;
   "myork/users/root.pass" = key myork;

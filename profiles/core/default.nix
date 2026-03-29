@@ -42,6 +42,7 @@ with lib; {
       livekit.enable = true;
       site.enable = true;
       uptimekuma.enable = true;
+      vintagestory.enable = true;
     };
 
     services = {

@@ -19,6 +19,7 @@
       fist.enable = true;
       #// remnant.enable = true;
       tunic.enable = true;
+      vintagestory.enable = true;
     };
 
     services = {
