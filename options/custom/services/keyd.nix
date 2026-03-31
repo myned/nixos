@@ -100,8 +100,11 @@ in {
 
             compose = "layer(function)";
             leftmeta = "layer(alt)";
+            rightmeta = "layer(alt)";
             leftalt = "layer(meta)";
             rightalt = "layer(meta)";
+            leftcontrol = "layer(control)";
+            rightcontrol = "layer(control)";
 
             # Colemak default
             "w" = "w";

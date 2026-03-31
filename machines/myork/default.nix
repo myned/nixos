@@ -1,9 +1,11 @@
 {
   config,
   inputs,
+  lib,
   pkgs,
   ...
-}: {
+}:
+with lib; {
   imports = [
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
     ./hardware-configuration.nix
@@ -111,6 +113,11 @@
   ];
 
   services = {
-    keyd.keyboards.default.settings.main.rightcontrol = "layer(altgr)"; # Alt_R
+    keyd.keyboards.builtin = {
+      ids = ["0001:0001:70533846"];
+      settings = recursiveUpdate config.services.keyd.keyboards.default.settings {
+        main.rightcontrol = "layer(altgr)"; # Alt_R
+      };
+    };
   };
 }
