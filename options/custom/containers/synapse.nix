@@ -106,6 +106,13 @@ in {
                 "ff00::/8"
               ];
 
+              # https://unifiedpush.org/users/troubleshooting/self-hosted-with-matrix/
+              # https://docs.ntfy.sh/publish/#matrix-gateway
+              ip_range_whitelist = [
+                "100.64.0.0/10" # Tailscale IPv4
+                "fd7a:115c:a1e0::/48" # Tailscale IPv6
+              ];
+
               listeners = [
                 {
                   bind_addresses = ["::" "0.0.0.0"];
