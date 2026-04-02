@@ -37,7 +37,7 @@ in {
           NTFY_BEHIND_PROXY = "true";
           NTFY_CACHE_DURATION = "7d";
           NTFY_CACHE_FILE = "/var/lib/ntfy/cache.db";
-          NTFY_LOG_LEVEL = "INFO";
+          NTFY_LOG_LEVEL = "WARN";
           NTFY_WEB_ROOT = "disable";
         };
       };
