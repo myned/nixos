@@ -47,7 +47,7 @@ in {
               enable_registration = true;
               encryption_enabled_by_default_for_room_type = "invite";
               forget_rooms_on_leave = true;
-              forgotten_room_retention_period = "7d";
+              forgotten_room_retention_period = "5m";
               include_profile_data_on_invite = false;
               limit_profile_requests_to_users_who_share_rooms = true;
               max_event_delay_duration = "24h";
@@ -60,7 +60,7 @@ in {
               rc_delayed_event_mgmt.per_second = 1;
               rc_message.burst_count = 30;
               rc_message.per_second = 0.5;
-              redaction_retention_period = "0";
+              redaction_retention_period = "5m";
               registration_requires_token = true;
               registrations_require_3pid = ["email"];
               report_stats = true; #!! Telemetry
