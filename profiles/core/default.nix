@@ -39,6 +39,7 @@ with lib; {
 
     containers = {
       enable = true;
+      blocky.enable = true;
       livekit.enable = true;
       site.enable = true;
       uptimekuma.enable = true;
