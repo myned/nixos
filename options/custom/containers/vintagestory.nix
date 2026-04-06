@@ -85,11 +85,16 @@ in {
         };
 
         # HACK: Ensure state directory is created before service starts
-        systemd.tmpfiles.settings.vintagestory = {
-          "/var/lib/${containerCfg.config.services.vintagestory.dataPath}".d = {
-            mode = "0775"; # -rwxrwxr-x
+        systemd.tmpfiles.settings.vintagestory = let
+          settings = {
+            mode = "0755"; # -rwxr-xr-x
             user = "vintagestory";
             group = "vintagestory";
+          };
+        in {
+          "/var/lib/${containerCfg.config.services.vintagestory.dataPath}" = {
+            d = settings;
+            Z = settings; #!! Recursive
           };
         };
       };

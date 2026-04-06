@@ -198,8 +198,15 @@ in {
         name: containerCfg:
           nameValuePair name {
             # Precreate container state directories
-            ${containerCfg.stateDir}.d = {mode = "0770";}; # -rwxrwx---
-            ${containerCfg.dataDir}.d = mkIf (containerCfg.dataDir != null) {mode = "0770";}; # -rwxrwx---
+            ${containerCfg.stateDir} = {
+              d = {mode = "0755";}; # -rwxr-xr-x
+              z = {mode = "0755";}; # -rwxr-xr-x
+            };
+
+            ${containerCfg.dataDir} = mkIf (containerCfg.dataDir != null) {
+              d = {mode = "0755";}; # -rwxr-xr-x
+              z = {mode = "0755";}; # -rwxr-xr-x
+            };
           }
       )
       hostCfg.containers;
