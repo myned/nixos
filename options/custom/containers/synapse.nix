@@ -51,7 +51,7 @@ in {
               include_profile_data_on_invite = false;
               limit_profile_requests_to_users_who_share_rooms = true;
               max_event_delay_duration = "24h";
-              max_upload_size = "100M";
+              max_upload_size = "10M";
               media_retention.local_media_lifetime = null;
               media_retention.remote_media_lifetime = "7d";
               media_store_path = "${containerCfg.config.services.matrix-synapse.dataDir}/media_store";
