@@ -108,7 +108,7 @@ in {
         # https://wiki.nixos.org/wiki/Caddy#Plug-ins
         #?? Copy hash/tag from failed build
         package = pkgs.caddy.withPlugins {
-          hash = "sha256-2iagmic2U5OdGLX1SQ4At6409xKZV/gb1oAXqsPi6vU=";
+          hash = "sha256-2cwFbBuUfrgxJGbwGm+A4AqzuYMNGMui2rSMNjYjk9Y=";
 
           #?? <repo>@<tag>
           plugins = [
