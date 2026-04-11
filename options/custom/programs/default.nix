@@ -81,7 +81,7 @@ with lib; {
       wireshark.enable = true;
       #// wpaperd.enable = true;
       #// ydotool.enable = true;
-      #// zed.enable = true;
+      zed.enable = true;
     })
   ];
 }
