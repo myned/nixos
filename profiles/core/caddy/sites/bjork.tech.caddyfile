@@ -67,7 +67,7 @@ bjork.tech {
 	import proxy git.bjork.tech myosh-forgejo:3000 # Forgejo
 	#// import proxy net.bjork.tech myosh:8585 # Netbox
 	import proxy notify.bjork.tech localhost:2586 # ntfy
-	#// import proxy status.bjork.tech {system.hostname}-kener:3000 # Kener
+	import proxy status.bjork.tech {system.hostname}-uptimekuma:80 # Uptime Kuma
 	#// import proxy ts.bjork.tech localhost:9999 # Headscale
 	#// import proxy vault.bjork.tech myosh:8088 # Vaultwarden
 
