@@ -124,7 +124,7 @@ bjork.tech {
 
 	handle @private {
 		import private
-		#// import proxy ai.bjork.tech myosh-openwebui:8080 # Open WebUI
+		import proxy ai.bjork.tech {system.hostname}-openwebui:80 # Open WebUI
 		#// import proxy budget.bjork.tech myosh:5006 # Actual Budget
 		import proxy discover.bjork.tech myosh-jellyfin:5055 # Jellyseerr
 		import proxy home.bjork.tech mypi3:8123 # Home Assistant

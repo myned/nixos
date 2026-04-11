@@ -41,6 +41,7 @@ with lib; {
       enable = true;
       blocky.enable = true;
       livekit.enable = true;
+      openwebui.enable = true;
       site.enable = true;
       uptimekuma.enable = true;
       vintagestory.enable = true;
