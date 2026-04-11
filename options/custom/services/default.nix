@@ -58,7 +58,7 @@ with lib; {
       #// mullvad.enable = true;
       #// network-manager-applet.enable = true;
       ntfy.enable = true;
-      #// ollama.enable = true;
+      ollama.enable = true;
       openrazer.enable = true;
       printing.enable = true;
       ratbagd.enable = true;

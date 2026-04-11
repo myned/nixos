@@ -358,9 +358,11 @@ in {
               olh = "ollama show";
               oll = "ollama list";
               olp = "ollama pull";
+              olps = "ollama ps";
               olr = "ollama run";
               olrm = "ollama rm";
               olsrv = "ollama serve";
+              olt = "ollama stop";
               olv = "ollama --version";
 
               no = "nixos";

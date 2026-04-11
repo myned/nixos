@@ -12,14 +12,9 @@
     services = {
       #// auto-cpufreq.enable = true;
       colord.enable = true;
+      ollama.download = ["low" "uncensored"];
       tuned.enable = true;
       #// wluma.enable = true;
-
-      ollama = {
-        acceleration = false;
-        download = "medium";
-        server = "mynix";
-      };
 
       # power-profiles-daemon = {
       #   enable = true;
