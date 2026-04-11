@@ -18,7 +18,7 @@
       #// directus.enable = true;
       forgejo.enable = true;
       forgejo.server = true;
-      foundryvtt.enable = true;
+      #// foundryvtt.enable = true;
       #// freshrss.enable = true;
       #// ghost.enable = true;
       #// kasm.enable = true;
