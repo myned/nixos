@@ -11,13 +11,33 @@ in {
     enable = mkEnableOption "ollama";
 
     download = mkOption {
+      description = "List of model performance levels that contain models to download";
       default = null;
-      type = with types; listOf (enum ["low" "medium" "high" "uncensored"]);
+      example = ["low" "medium"];
+      type = with types; listOf (enum ["potato" "low" "medium" "high" "extreme"]);
     };
 
     server = mkOption {
+      description = "Host of the remote server that serves models, used in client modules";
       default = "localhost";
+      example = "127.0.0.1";
       type = types.str;
+    };
+
+    models = {
+      agent = mkOption {
+        description = "Default model used for multimodal agentic workflows";
+        default = findFirst (model: hasInfix "qwen" model) null (reverseList config.services.ollama.loadModels);
+        example = "qwen3.5:9b";
+        type = types.str;
+      };
+
+      completion = mkOption {
+        description = "Default model used for predictive text generation";
+        default = findFirst (model: hasInfix "qwen" model) null config.services.ollama.loadModels;
+        example = "qwen3.5:2b";
+        type = types.str;
+      };
     };
   };
 
@@ -34,45 +54,38 @@ in {
       #!! Downloads on activation
       # https://ollama.com/search
       # https://llm-stats.com/leaderboards/llm-leaderboard
-      loadModels =
-        # <= 4B parameters
-        optionals (elem "low" cfg.download) [
-          # General/reasoning
-          "gemma3:1b" # https://ollama.com/library/gemma3
-          "granite3.3:2b" # https://ollama.com/library/granite3.3
-
-          # Code/prediction
-          "codegemma:2b" # https://ollama.com/library/codegemma
-          "granite-code:3b" # https://ollama.com/library/granite-code
+      loadModels = naturalSort (
+        # < 2B parameters
+        optionals (elem "potato" cfg.download) [
+          "qwen3.5:0.8b"
         ]
-        # >= 4B <= 8B parameters
+        # >= 2B < 4B parameters
+        ++ optionals (elem "low" cfg.download) [
+          "qwen3.5:2b"
+        ]
+        # >= 4B < 8B parameters
         ++ optionals (elem "medium" cfg.download) [
-          # General/reasoning
-          "gemma3:4b" # https://ollama.com/library/gemma3
-          "granite3.3:8b" # https://ollama.com/library/granite3.3
-          "ministral-3:8b" # https://ollama.com/library/ministral-3
-          "mistral:7b" # https://ollama.com/library/mistral
-
-          # Code/prediction
-          "codegemma:7b" # https://ollama.com/library/codegemma
-          "granite-code:8b" # https://ollama.com/library/granite-code
+          "fluffy/l3-8b-stheno-v3.2:q4_K_S"
+          "qwen3.5:4b"
         ]
-        # >= 8B <= 16B parameters
+        # >= 8B < 16B parameters
         ++ optionals (elem "high" cfg.download) [
-          # General/reasoning
-          "gemma3:12b" # https://ollama.com/library/gemma3
+          "fluffy/l3-8b-stheno-v3.2:q8_0"
+          "qwen3.5:9b"
         ]
-        ++ optionals (elem "uncensored" cfg.download) [
-          # Uncensored/abliterated
-          "fluffy/l3-8b-stheno-v3.2:q4_K_M" # https://ollama.com/fluffy/l3-8b-stheno-v3.2
-        ];
+        # >= 16B parameters
+        ++ optionals (elem "extreme" cfg.download) [
+          "qwen3.5:27b"
+        ]
+      );
 
+      # https://docs.ollama.com/
       environmentVariables = {
-        OLLAMA_CONTEXT_LENGTH = "65536"; # https://docs.ollama.com/context-length
+        OLLAMA_CONTEXT_LENGTH = "16384"; # https://docs.ollama.com/context-length
         OLLAMA_FLASH_ATTENTION = "1"; # https://docs.ollama.com/faq#how-can-i-enable-flash-attention
         OLLAMA_KEEP_ALIVE = "1h"; # https://docs.ollama.com/faq#how-do-i-keep-a-model-loaded-in-memory-or-make-it-unload-immediately
         OLLAMA_KV_CACHE_TYPE = "q4_0"; # https://docs.ollama.com/faq#how-can-i-set-the-quantization-type-for-the-k/v-cache
-        OLLAMA_MAX_LOADED_MODELS = "1"; # https://docs.ollama.com/faq#how-does-ollama-handle-concurrent-requests
+        OLLAMA_MAX_LOADED_MODELS = "2"; # https://docs.ollama.com/faq#how-does-ollama-handle-concurrent-requests
         OLLAMA_NO_CLOUD = "1"; # https://docs.ollama.com/faq#how-do-i-disable-ollama%E2%80%99s-cloud-features
       };
     };

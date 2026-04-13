@@ -12,7 +12,7 @@
     services = {
       #// auto-cpufreq.enable = true;
       colord.enable = true;
-      ollama.download = ["low" "uncensored"];
+      ollama.download = ["potato" "medium"];
       tuned.enable = true;
       #// wluma.enable = true;
 

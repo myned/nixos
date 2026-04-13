@@ -32,7 +32,7 @@ with lib; {
     };
 
     services = {
-      ollama.download = ["medium" "uncensored"];
+      ollama.download = ["potato" "high"];
       #// power-profiles-daemon.enable = true;
       sunshine.enable = true;
       tuned.enable = true;
