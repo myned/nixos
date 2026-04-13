@@ -7,42 +7,12 @@
 with lib; let
   cfg = config.custom.programs.zed;
   hm = config.home-manager.users.${config.custom.username};
-
-  hujsonfmt = getExe pkgs.hujsonfmt;
 in {
   options.custom.programs.zed = {
-    enable = mkOption {default = false;};
+    enable = mkEnableOption "zed";
   };
 
   config = mkIf cfg.enable {
-    # Extension dependencies
-    environment.systemPackages = with pkgs; [
-      alejandra # nix
-      ansible # ansible
-      #// ansible-language-server # ansible
-      ansible-lint # ansible
-      astro-language-server # astro
-      basedpyright # basedpyright
-      blueprint-compiler # blueprint
-      caddy # caddyfile
-      docker-compose-language-service # docker-compose
-      dockerfile-language-server # dockerfile
-      jdt-language-server # java
-      nginx-language-server # nginx
-      nil # nix
-      nixd # nix
-      nushell # nu
-      phpactor # php
-      powershell # powershell
-      powershell-editor-services # powershell
-      shellcheck # basher
-      shfmt # basher
-      simple-completion-language-server # snippets
-      svelte-language-server # svelte
-      vscode-langservers-extracted # html
-      yaml-language-server # yaml
-    ];
-
     home-manager.sharedModules = [
       {
         # https://zed.dev/
@@ -51,6 +21,7 @@ in {
         #!! Mutable settings
         programs.zed-editor = {
           enable = true;
+          package = pkgs.unstable.zed-editor;
 
           # https://zed.dev/docs/extensions
           # https://github.com/zed-industries/extensions/tree/main/extensions
@@ -99,50 +70,87 @@ in {
 
             # BUG: unocss-language-server not packaged yet
             # https://github.com/NixOS/nixpkgs/issues/270993
-            "unocss" # https://github.com/bajrangCoder/zed-unocss
+            #// "unocss" # https://github.com/bajrangCoder/zed-unocss
 
             "xml" # https://github.com/sweetppro/zed-xml
           ];
 
+          # Dependencies
+          extraPackages = with pkgs; [
+            alejandra # nix
+            ansible # ansible
+            #// ansible-language-server # ansible
+            ansible-lint # ansible
+            astro-language-server # astro
+            basedpyright # basedpyright
+            blueprint-compiler # blueprint
+            caddy # caddyfile
+            docker-compose-language-service # docker-compose
+            dockerfile-language-server # dockerfile
+            jdt-language-server # java
+            nginx-language-server # nginx
+            nil # nix
+            nixd # nix
+            nushell # nu
+            phpactor # php
+            powershell # powershell
+            powershell-editor-services # powershell
+            shellcheck # basher
+            shfmt # basher
+            simple-completion-language-server # snippets
+            svelte-language-server # svelte
+            vscode-langservers-extracted # html
+            yaml-language-server # yaml
+          ];
+
           # https://zed.dev/docs/key-bindings
-          userKeymaps = let
-            global = bindings: {inherit bindings;};
-            context = context: bindings: {inherit context bindings;};
-          in [
-            (global {
-              "alt-\\" = "workspace::ToggleBottomDock";
-              "alt-a" = "agent::ToggleFocus";
-              "alt-c" = "collab_panel::ToggleFocus";
-              "alt-f" = "project_search::ToggleFocus";
-              "alt-g" = "git_panel::ToggleFocus";
-              "alt-p" = "project_panel::ToggleFocus";
-              "alt-t" = "terminal_panel::ToggleFocus";
+          userKeymaps = [
+            {
+              context = "global";
+              bindings = {
+                "alt-\\" = "workspace::ToggleBottomDock";
+                "alt-a" = "agent::ToggleFocus";
+                "alt-c" = "collab_panel::ToggleFocus";
+                "alt-f" = "project_search::ToggleFocus";
+                "alt-g" = "git_panel::ToggleFocus";
+                "alt-p" = "project_panel::ToggleFocus";
+                "alt-t" = "terminal_panel::ToggleFocus";
 
-              "alt-escape" = "workspace::CloseAllDocks";
-              "alt-space" = "command_palette::Toggle";
-              "alt-tab" = "workspace::ToggleLeftDock";
+                "alt-escape" = "workspace::CloseAllDocks";
+                "alt-space" = "command_palette::Toggle";
+                "alt-tab" = "workspace::ToggleLeftDock";
 
-              "alt-shift-tab" = "workspace::ToggleRightDock";
-            })
+                "alt-shift-tab" = "workspace::ToggleRightDock";
+              };
+            }
 
-            (context "Editor" {
-              "alt-backspace" = "editor::DeleteLine";
-              "alt-enter" = "editor::DuplicateLineDown";
-              "alt-left" = "editor::MoveToBeginningOfLine";
-              "alt-right" = "editor::MoveToEndOfLine";
-              "ctrl-enter" = "editor::NewlineBelow";
+            {
+              context = "Editor";
+              bindings = {
+                "alt-backspace" = "editor::DeleteLine";
+                "alt-enter" = "editor::DuplicateLineDown";
+                "alt-left" = "editor::MoveToBeginningOfLine";
+                "alt-right" = "editor::MoveToEndOfLine";
+                "ctrl-enter" = "editor::NewlineBelow";
 
-              "alt-shift-enter" = "editor::DuplicateLineUp";
-            })
+                "alt-shift-enter" = "editor::DuplicateLineUp";
+              };
+            }
 
-            (context "Editor && showing_completions" {
-              "enter" = "editor::Newline";
-            })
+            {
+              context = "Editor && showing_completions";
+              bindings = {
+                "enter" = "editor::Newline";
+              };
+            }
 
             # https://zed.dev/docs/key-bindings#forward-keys-to-terminal
-            (context "Terminal" {
-              "ctrl-s" = ["terminal::SendKeystroke" "ctrl-s"];
-            })
+            {
+              context = "Terminal";
+              bindings = {
+                "ctrl-s" = ["terminal::SendKeystroke" "ctrl-s"];
+              };
+            }
           ];
 
           # https://zed.dev/docs/configuring-zed
@@ -155,108 +163,85 @@ in {
             # https://github.com/zed-industries/zed/issues/5028
             #// buffer_font_family = "monospace";
             buffer_font_family = mkForce "IosevkaTermSlab Nerd Font Propo";
+
+            buffer_font_size = mkForce 16;
             buffer_line_height.custom = 1.5;
-            ui_font_size = mkForce 18;
-
-            chat_panel.default_width = 300;
-
-            collaboration_panel = {
-              button = false;
-              default_width = 300;
-              dock = "right";
-            };
-
+            collaboration_panel.button = false;
+            collaboration_panel.default_width = 300;
+            collaboration_panel.dock = "right";
             cursor_blink = false;
-
-            # BUG: Does not disable
-            edit_predictions.disabled_globs = [
-              "**/*.env"
-              "**/*.pem"
-              "**/*.key"
-              "**/*.cert"
-              "**/*.crt"
-              "**/.dev.vars"
-              "**/secrets.yml"
-              "**/secrets/**"
-              "**/tmp/**"
-            ];
-
-            edit_predictions_disabled_in = ["comment"];
-            git.inline_blame.enabled = false;
             git_panel.default_width = 300;
+            git.inline_blame.enabled = false;
             icon_theme = "Colored Zed Icons Theme Dark";
             indent_guides.active_line_width = 2;
             inlay_hints.enabled = true;
             load_direnv = "shell_hook";
             middle_click_paste = false;
             notification_panel.default_width = 300;
-
-            outline_panel = {
-              default_width = 300;
-              dock = "right";
-              indent_size = 10;
-            };
-
+            outline_panel.default_width = 300;
+            outline_panel.dock = "right";
+            outline_panel.indent_size = 10;
             preferred_line_length = 120;
-
-            project_panel = {
-              auto_fold_dirs = true;
-              auto_reveal_entries = true;
-              default_width = 300;
-              entry_spacing = "comfortable";
-              indent_guides.show = "never";
-              indent_size = 10;
-              scrollbar.show = "never";
-            };
-
+            project_panel.auto_fold_dirs = true;
+            project_panel.auto_reveal_entries = true;
+            project_panel.default_width = 300;
+            project_panel.entry_spacing = "comfortable";
+            project_panel.indent_guides.show = "never";
+            project_panel.indent_size = 10;
+            project_panel.scrollbar.show = "never";
             seed_search_query_from_cursor = "selection";
             show_edit_predictions = true;
             show_signature_help_after_edits = true;
-
-            # TODO: Show trailing whitespace when supported
-            # https://github.com/zed-industries/zed/issues/5237
-            show_whitespaces = "selection";
-
+            show_whitespaces = "trailing";
             #// soft_wrap = "preferred_line_length";
             tab_size = 2;
+            tabs.git_status = true;
+            tabs.show_diagnostics = "all";
+            telemetry.diagnostics = true; #!! Telemetry
+            telemetry.metrics = true;
+            terminal.default_height = 200;
+            terminal.default_width = 500;
+            terminal.env.EDITOR = "zeditor --wait";
+            terminal.line_height = "standard";
+            terminal.minimum_contrast = 0;
+            text_rendering_mode = "grayscale";
+            title_bar.show_branch_icon = true;
+            title_bar.show_branch_name = true;
+            title_bar.show_menus = false;
+            title_bar.show_onboarding_banner = false;
+            title_bar.show_project_items = true;
+            title_bar.show_sign_in = false;
+            title_bar.show_user_picture = false;
+            ui_font_size = mkForce 18;
 
-            tabs = {
-              git_status = true;
-              show_diagnostics = "all";
-            };
-
-            #!! Enable telemetry
-            telemetry = {
-              diagnostics = true;
-              metrics = true;
-            };
-
-            terminal = {
-              default_width = 500;
-              default_height = 200;
-              line_height = "standard";
-              minimum_contrast = 0;
-
-              env = {
-                EDITOR = "zeditor --wait";
-              };
-            };
-
-            title_bar = {
-              show_branch_icon = true;
-              show_branch_name = true;
-              show_onboarding_banner = false;
-              show_project_items = true;
-              show_sign_in = false;
-              show_user_picture = false;
-              show_menus = false;
-            };
+            # Language models
+            # https://zed.dev/docs/assistant/assistant
+            # https://zed.dev/docs/ai/llm-providers#ollama
+            # https://zed.dev/docs/ai/edit-prediction#self-hosted-openai-compatible-servers
+            # https://docs.ollama.com/api/openai-compatibility
+            agent.default_profile = "ask";
+            agent.default_model.model = config.custom.services.ollama.models.agent;
+            agent.default_model.provider = "ollama";
+            agent.default_width = 300;
+            agent.enable_feedback = false;
+            agent.enable_thinking = true;
+            edit_predictions.disabled_globs = ["**env**" "**key**" "**log**" "**secret**" "**tmp**"];
+            edit_predictions.mode = "subtle";
+            edit_predictions.ollama.model = config.custom.services.ollama.models.completion;
+            edit_predictions.ollama.prompt_format = "qwen";
+            edit_predictions.provider = "ollama";
+            edit_predictions_disabled_in = ["comment"];
+            language_models.ollama.api_url = "http://${config.custom.services.ollama.server}:11434";
+            language_models.ollama.auto_discover = true;
+            language_models.ollama.context_window = toInt config.services.ollama.environmentVariables.OLLAMA_CONTEXT_LENGTH;
 
             # Filetype associations
             # https://zed.dev/docs/configuring-languages#file-associations
             file_types = {
               # https://github.com/kartikvashistha/zed-ansible?tab=readme-ov-file#filetype-detection
               Ansible = [
+                "**.ansible.yaml"
+                "**.ansible.yml"
                 "**/defaults/*.yaml"
                 "**/defaults/*.yml"
                 "**/group_vars/*.yaml"
@@ -269,15 +254,8 @@ in {
                 "**/playbooks/*.yml"
                 "**/tasks/*.yaml"
                 "**/tasks/*.yml"
-                "*.ansible.yaml"
-                "*.ansible.yml"
-                "*playbook*.yaml"
-                "*playbook*.yml"
-              ];
-
-              # https://github.com/tailscale/hujson?tab=readme-ov-file#visual-studio-code-association
-              JSONC = [
-                "*.hujson"
+                "**playbook*.yaml"
+                "**playbook*.yml"
               ];
             };
 
@@ -303,16 +281,9 @@ in {
                 };
               };
 
-              # FIXME: Applies to JSON files
-              # https://zed.dev/docs/languages/json
-              # JSONC = {
-              #   formatter.external.command = hujsonfmt;
-              # };
-
               # https://zed.dev/docs/languages/markdown
               Markdown = {
                 format_on_save = "on";
-                remove_trailing_whitespace_on_save = false;
               };
 
               Nix = {
@@ -320,23 +291,11 @@ in {
                 # https://github.com/nix-community/nixd
                 language_servers = ["!nil" "nixd"];
               };
-
-              # YAML = {
-              #   language_servers = ["ansible" "ansible-lint"];
-              # };
             };
 
             # Language servers
             # https://zed.dev/docs/configuring-languages#configuring-language-servers
             lsp = {
-              # https://github.com/tailscale/hujson?tab=readme-ov-file#visual-studio-code-association
-              # json-language-server.settings.json.schemas = [
-              #   {
-              #     fileMatch = ["*.hujson"];
-              #     schema.allowTrailingCommas = true;
-              #   }
-              # ];
-
               # https://github.com/oxalica/nil/blob/main/docs/configuration.md
               nil.settings = {
                 formatting.command = ["alejandra"];
@@ -347,25 +306,6 @@ in {
               nixd.settings = {
                 formatting.command = ["alejandra"];
               };
-            };
-
-            # Language models
-            # https://zed.dev/docs/assistant/assistant
-            agent = {
-              default_model = {
-                model = "codegemma:7b";
-                provider = "ollama";
-              };
-
-              default_width = 500;
-            };
-
-            # https://zed.dev/docs/completions#edit-predictions
-            features.edit_prediction_provider = "zed";
-
-            # https://zed.dev/docs/assistant/configuration
-            language_models = {
-              ollama.api_url = "http://${config.custom.services.ollama.server}:11434";
             };
 
             # TODO: Add missing syntax in highlights.scm
@@ -513,19 +453,17 @@ in {
 
         # HACK: Delete mutable config files to enforce module settings
         # https://github.com/nix-community/home-manager/pull/6993
-        home.activation = {
-          enforce-zed-editor-config = hm.lib.dag.entryAfter ["writeBoundary"] ''
-            run rm --force \
-              "$XDG_CONFIG_HOME/zed/settings.json" \
-              "$XDG_CONFIG_HOME/zed/keymap.json"
-          '';
-        };
+        home.activation.enforce-zed-editor-config = hm.lib.dag.entryAfter ["writeBoundary"] ''
+          run rm --force \
+            "$XDG_CONFIG_HOME/zed/debug.json" \
+            "$XDG_CONFIG_HOME/zed/keymap.json" \
+            "$XDG_CONFIG_HOME/zed/settings.json" \
+            "$XDG_CONFIG_HOME/zed/tasks.json"
+        '';
 
         # https://zed.dev/docs/snippets
         #?? snippets: configure snippets
-        xdg.configFile = {
-          "zed/snippets/".source = ./snippets;
-        };
+        xdg.configFile."zed/snippets/".source = ./snippets;
 
         # https://nix-community.github.io/stylix/options/modules/zed.html
         stylix.targets.zed.enable = true;
