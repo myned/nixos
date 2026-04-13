@@ -14,9 +14,7 @@ in {
     home-manager.sharedModules = [
       {
         # https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
-        programs.niri.settings.layout = let
-          gap = config.custom.gap / 2;
-        in {
+        programs.niri.settings.layout = {
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutalways-center-single-column
           always-center-single-column = true;
 
@@ -28,7 +26,7 @@ in {
             enable = true;
             width = config.custom.border;
             active.color = "#d33682";
-            inactive.color = "#073642";
+            inactive.color = "#002b36";
           };
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutcenter-focused-column
@@ -47,11 +45,11 @@ in {
             enable = false;
             width = config.custom.border;
             active.color = "#d33682";
-            inactive.color = "#073642";
+            inactive.color = "#002b36";
           };
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutgaps
-          gaps = gap;
+          gaps = config.custom.gap;
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutinsert-hint
           insert-hint = {
@@ -86,7 +84,7 @@ in {
 
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingslayoutstruts
           struts = let
-            strut = gap * 2;
+            strut = config.custom.gap / 2;
           in {
             left = strut;
             right = strut;
@@ -103,6 +101,7 @@ in {
             inactive.color = "#d3368240";
             length.total-proportion = 0.95;
             place-within-column = true;
+            position = "bottom";
             width = config.custom.border + 3;
           };
         };
