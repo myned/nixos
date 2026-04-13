@@ -248,7 +248,7 @@ in {
               matches = ides;
               default-column-width.proportion =
                 if config.custom.display.default.ultrawide
-                then 0.4
+                then 0.5
                 else 0.8;
             }
 
