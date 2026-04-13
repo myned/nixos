@@ -470,7 +470,7 @@ with lib; {
 
       ollama = {
         title = "Ollama";
-        shortcut = "o";
+        shortcut = "ol";
         iconUrl = "https://ollama.com/public/icon-64x64.png";
         searchUrl = "https://ollama.com/search?q=%s";
       };
