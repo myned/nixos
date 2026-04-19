@@ -8,7 +8,6 @@ with lib; let
   cfg = config.custom.desktops.niri.binds;
   hm = config.home-manager.users.${config.custom.username};
 
-  _1password = getExe config.programs._1password-gui.package;
   audio = config.home-manager.users.${config.custom.username}.home.file.".local/bin/audio".source;
   bash = "${pkgs.bash}/bin/bash";
   capacities = "capacities.appimage";
@@ -30,6 +29,7 @@ with lib; let
   pkill = "${pkgs.procps}/bin/pkill";
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   power = config.home-manager.users.${config.custom.username}.home.file.".local/bin/power".source;
+  proton-pass = getExe pkgs.${config.custom.programs.proton.branch}.proton-pass;
   remote = config.home-manager.users.${config.custom.username}.home.file.".local/bin/remote".source;
   steam = "${config.programs.steam.package}/bin/steam";
   steam-gamescope = getExe (findFirst (p: p.name == "steam-gamescope") "" config.environment.systemPackages);
@@ -164,9 +164,8 @@ in {
             (key "M" "Mod" {spawn = youtube-music;})
             (key "O" "Mod" {spawn = [hyprpicker "--autocopy"];})
             (key "O" "Mod+Shift" {spawn = [hyprpicker "--autocopy --format rgb"];})
-            (key "P" "Ctrl+Alt" {spawn = [pkill "1password"];})
-            (key "P" "Mod" {spawn = _1password;})
-            (key "P" "Mod+Shift" {spawn = [_1password "--quick-access"];})
+            (key "P" "Ctrl+Alt" {spawn = [pkill "proton-pass"];})
+            (key "P" "Mod" {spawn = proton-pass;})
             (key "Q" "Ctrl+Alt" {spawn = [bash "-c" ''${kill} -9 "$(${niri} msg -j windows | ${jq} '.[] | select(.is_focused == true).pid')"''];})
             (key "Q" "Mod" {close-window = [];})
             (key "R" "Mod" {focus-window-or-workspace-down = [];})

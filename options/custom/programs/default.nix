@@ -69,6 +69,7 @@ with lib; {
       onlyoffice.enable = true;
       #// onedrive.enable = true;
       #// path-of-building.enable = true;
+      proton.enable = true;
       #// rbw.enable = true;
       remmina.enable = true;
       seahorse.enable = true;

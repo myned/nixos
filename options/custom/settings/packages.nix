@@ -196,7 +196,6 @@ in {
           planify # Task manager
           pods # Podman manager
           pkgs.unstable.protonplus # Wine updater
-          #// protonvpn-gui # Proton VPN client
           #// ptyxis # Terminal
           pwvucontrol # Pipewire volume controller
           qdiskinfo # Disk information

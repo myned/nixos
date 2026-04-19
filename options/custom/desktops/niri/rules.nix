@@ -138,11 +138,15 @@ in {
               "^org\.wezfurlong\.wezterm$"
             ];
 
-            vaults = app-ids [
-              "^1Password$"
-              "^Bitwarden$"
-              "^com-artemchep-keyguard-MainKt$"
-            ];
+            vaults =
+              app-ids [
+                "^1Password$"
+                "^Bitwarden$"
+                "^com-artemchep-keyguard-MainKt$"
+              ]
+              ++ titles [
+                "^Proton Pass$"
+              ];
 
             vms = app-ids [
               "^(sdl-|wl|x)freerdp$"
