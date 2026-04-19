@@ -5,7 +5,12 @@
 	header ?X-Robots-Tag "noindex, nofollow"
 	header ?Access-Control-Allow-Origin "*"
 
+	# https://caddyserver.com/docs/caddyfile/matchers#client-ip
+	#?? private_ranges = 192.168.0.0/16 172.16.0.0/12 10.0.0.0/8 127.0.0.1/8 fd00::/8 ::1
 	@private client_ip private_ranges 100.64.0.0/10 fd7a:115c:a1e0::/48
+
+	# https://tailscale.com/kb/1015/100.x-addresses
+	# https://tailscale.com/kb/1033/ip-and-dns-addresses#tailscale-ipv6-local-address-prefix
 	@vpn client_ip 100.64.0.0/10 fd7a:115c:a1e0::/48
 
 	# TODO: Use custom error pages
@@ -14,4 +19,18 @@
 	handle_errors {
 		respond "{err.status_code} {err.status_text}"
 	}
+}
+
+(private) {
+	@public {
+		not client_ip private_ranges 100.64.0.0/10 fd7a:115c:a1e0::/48
+	}
+	respond @public 401
+}
+
+(vpn) {
+	@notvpn {
+		not client_ip 100.64.0.0/10 fd7a:115c:a1e0::/48
+	}
+	respond @notvpn 401
 }
