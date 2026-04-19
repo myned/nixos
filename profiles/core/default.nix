@@ -39,6 +39,7 @@ with lib; {
 
     containers = {
       enable = true;
+      actualbudget.enable = true;
       blocky.enable = true;
       livekit.enable = true;
       openwebui.enable = true;
