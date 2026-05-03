@@ -135,9 +135,10 @@ in {
               argc
               coreutils
               git
-              nh
-              nix
-              nixos-rebuild
+              # FIXME: Dependencies mismatched with running system versions
+              #// nh
+              #// nix
+              #// nixos-rebuild
               nvd
               openssh
               systemd
