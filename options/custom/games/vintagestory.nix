@@ -24,7 +24,7 @@ in {
         # https://github.com/XurxoMF/vs-launcher
         programs.vs-launcher = {
           enable = true;
-          settings.gameVersions = with pkgs.vintagestoryPackages; [v1-21-6];
+          settings.gameVersions = [inputs.vintagestory-nix.packages.${pkgs.system}.v1-22-0];
         };
       }
     ];

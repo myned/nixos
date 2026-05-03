@@ -17,6 +17,7 @@
     nixpkgs-master.url = "github:NixOS/nixpkgs/master"; # https://github.com/NixOS/nixpkgs
     nixpkgs-myned.url = "github:myned/nixpkgs/master"; # https://github.com/myned/nixpkgs
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable"; # https://github.com/NixOS/nixpkgs/tree/nixos-unstable
+    vintagestory-nix.url = "github:PierreBorine/vintagestory-nix"; # https://github.com/PierreBorine/vintagestory-nix
 
     ### Follows
     # https://github.com/ezKEa/aagl-gtk-on-nix
@@ -142,12 +143,6 @@
     # https://github.com/nix-community/stylix
     stylix = {
       url = "github:nix-community/stylix/release-25.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # https://github.com/PierreBorine/vintagestory-nix
-    vintagestory-nix = {
-      url = "github:PierreBorine/vintagestory-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
