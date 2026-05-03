@@ -159,7 +159,7 @@ in {
       # https://wiki.nixos.org/wiki/Console_Fonts
       # https://wiki.archlinux.org/title/Linux_console#Fonts
       # https://adeverteuil.github.io/linux-console-fonts-screenshots/
-      font = "${pkgs.terminus_font}/share/consolefonts/ter-124b.psf.gz"; # https://terminus-font.sourceforge.net/
+      #// font = "${pkgs.terminus_font}/share/consolefonts/ter-124b.psf.gz"; # https://terminus-font.sourceforge.net/
     };
 
     environment.systemPackages = mkIf cfg.lanzaboote.enable [pkgs.sbctl];
