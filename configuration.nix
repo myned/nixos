@@ -81,13 +81,8 @@ with lib; {
   };
 
   nix = {
-    #!! Override upstream nix
-    # https://git.lix.systems/lix-project/lix
-    #// package = pkgs.lix;
-
-    # BUG: Absolute paths are forbidden in pure mode
-    # https://github.com/NixOS/nix/issues/11030
-    #// package = pkgs.nixVersions.latest;
+    package = pkgs.nixVersions.latest;
+    #// package = pkgs.lix; # https://git.lix.systems/lix-project/lix
 
     #// optimise.automatic = true; # Run storage optimizer periodically
 
@@ -95,7 +90,7 @@ with lib; {
     # https://nix.dev/manual/nix/2.18/command-ref/conf-file.html for Lix
     settings = {
       auto-optimise-store = true; # Run optimizer during build
-      #// fallback = true; # Build from source if cache timeout reached
+      fallback = false; # Build from source if cache timeout reached
       log-lines = 1000; # Build failure log length
       min-free = 1024 * 1024 * 1024; # Trigger garbage collection at 1 GB space remaining
       trusted-users = ["@wheel"]; # Binary cache users
