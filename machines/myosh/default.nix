@@ -21,7 +21,7 @@
       boot.systemd-boot.enable = true;
 
       networking = {
-        ipv4.address = "192.168.6.123";
+        ipv4.address = "192.168.4.27";
         ipv6.address = "fe80::d250:99ff:fed0:a1aa";
       };
 
