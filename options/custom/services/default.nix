@@ -59,7 +59,7 @@ with lib; {
       #// network-manager-applet.enable = true;
       ntfy.enable = true;
       ollama.enable = true;
-      openrazer.enable = true;
+      #// openrazer.enable = true;
       printing.enable = true;
       ratbagd.enable = true;
       samba.enable = true;
