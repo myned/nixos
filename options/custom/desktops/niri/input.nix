@@ -61,10 +61,10 @@ in {
             natural-scroll = true;
           };
 
-          # warp-mouse-to-focus = {
-          #   enable = true;
-          #   #// mode = "center-xy-always";
-          # };
+          warp-mouse-to-focus = {
+            enable = true;
+            #// mode = "center-xy-always";
+          };
         };
       }
     ];
