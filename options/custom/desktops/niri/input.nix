@@ -38,7 +38,7 @@ in {
           # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsinputmouseaccel-profile
           mouse = {
             accel-profile = "adaptive"; # flat
-            accel-speed = -0.7;
+            accel-speed = -0.8;
             scroll-factor = 1.2;
           };
 
