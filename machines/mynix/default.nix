@@ -18,12 +18,13 @@
     # };
 
     display.outputs = {
-      HDMI-A-1 = {
-        width = 2560;
-        height = 1080;
-        refresh = 74;
+      DP-1 = {
+        width = 3440;
+        height = 1440;
+        refresh = 100;
         #// finalRefresh = 74.979;
-        force = true;
+        scale = 1.15;
+        #// force = true;
 
         # BUG: Cursor updates cause refresh rate fluctuation, so disable for now
         # https://github.com/YaLTeR/niri/issues/1214
