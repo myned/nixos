@@ -2,7 +2,7 @@
   config,
   inputs,
   lib,
-  options,
+  pkgs,
   ...
 }:
 with lib; let
@@ -20,11 +20,15 @@ in {
   };
 
   config = mkIf cfg.enable {
+    # TODO: Consider alternatives
+    #?? https://github.com/yaxitech/ragenix
     # https://wiki.nixos.org/wiki/Agenix
     # https://github.com/ryantm/agenix
     age = {
       identityPaths = ["/etc/ssh/id_ed25519"]; #!! Must be set without sshd
       secrets = mapAttrs (name: value: {file = "${inputs.self}/secrets/${name}";} // value) cfg.secrets;
     };
+
+    environment.systemPackages = [inputs.agenix.packages.${pkgs.system}.default];
   };
 }

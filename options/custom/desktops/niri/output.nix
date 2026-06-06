@@ -18,33 +18,21 @@ in {
   };
 
   config = mkIf cfg.enable {
-    custom.display.kanshi.enable = cfg.kanshi;
+    custom.displays.kanshi.enable = cfg.kanshi;
 
     home-manager.sharedModules = [
       {
         # https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
-        # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsoutputs
         #?? niri msg outputs
-        programs.niri.settings.outputs = mapAttrs (_: output:
-          with output;
-            optionalAttrs (!cfg.kanshi) {
-              inherit enable scale;
-
-              mode = {
-                inherit width height;
-                refresh = finalRefresh;
-              };
-
-              position = {
-                inherit x y;
-              };
-
-              variable-refresh-rate =
-                if vrr
-                then "on-demand" #!! Requires window-rule
-                else false;
-            })
-        config.custom.display.outputs;
+        wayland.windowManager.niri.settings.output = mkIf (!cfg.kanshi) (mapAttrsToList (connector: output:
+          with output; {
+            _args = [connector];
+            inherit scale;
+            mode = "${width}x${height}@${finalRefresh}";
+            position._props = {inherit x y;};
+            variable-refresh-rate = mkIf vrr {_props.on-demand = true;}; #!! Requires window-rule
+          })
+        config.custom.displays.outputs);
       }
     ];
   };

@@ -3,7 +3,13 @@
   lib,
   ...
 }:
-with lib; {
+with lib; let
+  cfg = config.custom.services;
+in {
+  options.custom.services = {
+    enable = mkEnableOption "services";
+  };
+
   config.custom.services = mkMerge [
     (mkIf config.custom.default {
       automatic-timezoned.enable = true;
@@ -11,11 +17,13 @@ with lib; {
       fail2ban.enable = true;
       geoclue2.enable = true;
       #// glances.enable = true;
-      #// netbird.enable = true;
       #// postfix.enable = true;
+
+      # TODO: Figure out hardware conditions (error on boot w/o compatible disk)
+      #// smartd.enable = true;
+
       sshd.enable = true;
       tailscale.enable = true;
-      #// tzupdate.enable = true;
     })
 
     (mkIf config.custom.minimal {
@@ -34,11 +42,7 @@ with lib; {
 
     (mkIf config.custom.full {
       avahi.enable = true;
-      #// avizo.enable = true;
-      #// blueman-applet.enable = true;
-      #// clipcat.enable = true;
-      #// cliphist.enable = true;
-      #// clipmenu.enable = true;
+      blueman.enable = true;
       displaylink.enable = true;
       easyeffects.enable = true;
 
@@ -51,12 +55,8 @@ with lib; {
       gnome-keyring.enable = true;
       gpg-agent.enable = true;
       greetd.enable = true;
-      #// hyprpaper.enable = true;
       kdeconnect.enable = true;
       keyd.enable = true;
-      #// mako.enable = true;
-      #// mullvad.enable = true;
-      #// network-manager-applet.enable = true;
       ntfy.enable = true;
       ollama.enable = true;
       #// openrazer.enable = true;
@@ -67,9 +67,6 @@ with lib; {
       swayosd.enable = true;
       sysprof.enable = true;
       usbmuxd.enable = true;
-      #// wlsunset.enable = true;
-      #// xembed-sni-proxy.enable = true;
-      #// zerotierone.enable = true;
     })
   ];
 }

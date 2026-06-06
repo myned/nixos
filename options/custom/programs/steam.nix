@@ -29,14 +29,14 @@ in {
 
       outputWidth = mkOption {
         description = "Width of the gamescope output display";
-        default = config.custom.display.default.height;
+        default = config.custom.displays.default.height;
         example = 2560;
         type = types.int;
       };
 
       outputHeight = mkOption {
         description = "Height of the gamescope output display";
-        default = config.custom.display.default.height;
+        default = config.custom.displays.default.height;
         example = 1080;
         type = types.int;
       };
@@ -97,7 +97,7 @@ in {
           extraArgs = "-system-composer";
 
           extraEnv = {
-            GDK_SCALE = toString config.custom.display.default.scale; # Fractional scaling
+            GDK_SCALE = toString config.custom.displays.default.scale; # Fractional scaling
 
             # HACK: Force XInput controller so only Steam Input is used, requires Proton GE
             # https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/issues/4168
@@ -116,13 +116,6 @@ in {
       adwsteamgtk # https://github.com/Foldex/AdwSteamGtk
       sgdboop # https://github.com/SteamGridDB/SGDBoop
       steam-rom-manager # https://github.com/SteamGridDB/steam-rom-manager
-
-      # https://github.com/sonic2kk/steamtinkerlaunch
-      # TODO: Remove when v14 released on nixpkgs
-      # https://github.com/sonic2kk/steamtinkerlaunch/issues/992
-      # Build from latest commit
-      #// (steamtinkerlaunch.overrideAttrs {src = inputs.steamtinkerlaunch;})
-      #// p7zip # steamtinkerlaunch (Special K)
     ];
 
     # HACK: Launch steam-gamescope in assigned virtual console upon login

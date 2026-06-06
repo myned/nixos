@@ -6,9 +6,9 @@
   ...
 }:
 with lib; let
-  virsh = "${config.virtualisation.libvirtd.package}/bin/virsh";
-
   cfg = config.custom.vms;
+
+  virsh = "${config.virtualisation.libvirtd.package}/bin/virsh";
 in {
   imports = [inputs.nixvirt.nixosModules.default];
 
@@ -209,15 +209,6 @@ in {
           # https://github.com/virtio-win/kvm-guest-drivers-windows/issues/950
           # https://virtio-win.github.io/Knowledge-Base/Virtiofs:-Shared-file-system
           #// vhostUserPackages = with pkgs; [virtiofsd]; # virtiofs support
-
-          # Build OVMF with Windows 11 support
-          # ovmf.packages = with pkgs; [
-          #   (OVMF.override {
-          #     secureBoot = true;
-          #     tpmSupport = true;
-          #   })
-          #   .fd
-          # ];
         };
 
         # Guest hostname resolution
@@ -266,30 +257,6 @@ in {
         libvirt-guests.serviceConfig = {
           StandardOutput = "journal";
         };
-      };
-
-      tmpfiles.settings.vm = {
-        # HACK: Manually link image to default directory
-        # "/var/lib/libvirt/images/virtio-win.iso" = {
-        #   "L+" = {
-        #     argument = inputs.nixvirt.lib.guest-install.virtio-win.iso.outPath;
-        #   };
-        # };
-
-        # TODO: Revisit when merged
-        # https://github.com/NixOS/nixpkgs/pull/421549
-        # HACK: Fix libvirt not automatically locating firmware
-        # https://github.com/NixOS/nixpkgs/issues/115996#issuecomment-2224296279
-        # https://libvirt.org/formatdomain.html#bios-bootloader
-        # "/var/lib/qemu/firmware" = {
-        #   "L+" = {
-        #     argument = "${pkgs.runCommandLocal "qemu-firmware" {} ''
-        #       mkdir $out
-        #       cp ${pkgs.qemu}/share/qemu/firmware/*.json $out
-        #       substituteInPlace $out/*.json --replace ${pkgs.qemu} /run/current-system/sw
-        #     ''}";
-        #   };
-        # };
       };
     };
 

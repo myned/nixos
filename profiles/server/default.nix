@@ -8,7 +8,6 @@
     };
 
     arion = {
-      enable = true;
       boot = true;
       #// actualbudget.enable = true;
       #// affine.enable = true;
@@ -58,7 +57,6 @@
     };
 
     containers = {
-      enable = true;
       synapse.enable = true;
     };
 

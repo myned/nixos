@@ -5,16 +5,16 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.display;
+  cfg = config.custom.displays;
 in {
-  options.custom.display = {
-    enable = mkEnableOption "display";
+  options.custom.displays = {
+    enable = mkEnableOption "displays";
 
     default = mkOption {
       description = "Default display output";
       default = (head (attrsToList cfg.outputs)).value; # First defined output
       example = cfg.outputs.DP-1;
-      type = options.custom.display.outputs.type.nestedTypes.elemType;
+      type = options.custom.displays.outputs.type.nestedTypes.elemType;
     };
 
     forceAtBoot = mkOption {

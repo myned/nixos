@@ -7,64 +7,34 @@ with lib; let
   cfg = config.custom.desktops.niri.input;
 in {
   options.custom.desktops.niri.input = {
-    enable = mkOption {default = false;};
+    enable = mkEnableOption "input";
   };
 
   config = mkIf cfg.enable {
     home-manager.sharedModules = [
       {
         # https://github.com/YaLTeR/niri/wiki/Configuration:-Input
-        programs.niri.settings.input = {
-          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsinputfocus-follows-mouseenable
-          focus-follows-mouse = {
-            enable = true;
-            #// max-scroll-amount = "50%";
-          };
-
-          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsinputpower-key-handlingenable
-          power-key-handling.enable = false;
-
-          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsinputworkspace-auto-back-and-forth
-          workspace-auto-back-and-forth = true;
-
-          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsinputkeyboardrepeat-delay
-          keyboard = {
-            repeat-delay = 400;
-            repeat-rate = 40;
-          };
-
-          # TODO: Update when per-device configuration is supported
-          # https://github.com/YaLTeR/niri/issues/371
-          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsinputmouseaccel-profile
-          mouse = {
-            accel-profile = "adaptive"; # flat
-            accel-speed = -0.8;
-            scroll-factor = 1.2;
-          };
-
-          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsinputtouchpadaccel-profile
-          touchpad = {
-            accel-profile = "adaptive";
-            accel-speed = 0.2;
-            click-method = "clickfinger"; # Multi-finger click
-            dwt = true; # Disable while typing
-            dwtp = true; # Disable while trackpointing
-            scroll-factor = 0.3;
-          };
-
-          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsinputtrackballaccel-profile
-          trackball = {
-            accel-profile = "adaptive";
-            accel-speed = -0.7;
-            left-handed = true;
-            middle-emulation = true;
-            natural-scroll = true;
-          };
-
-          warp-mouse-to-focus = {
-            enable = true;
-            #// mode = "center-xy-always";
-          };
+        wayland.windowManager.niri.settings.input = {
+          disable-power-key-handling = [];
+          focus-follows-mouse = [];
+          keyboard.repeat-delay = 400;
+          keyboard.repeat-rate = 40;
+          mouse.accel-profile = "adaptive"; # flat
+          mouse.accel-speed = -0.8;
+          mouse.scroll-factor = 1.2;
+          touchpad.accel-profile = "adaptive";
+          touchpad.accel-speed = 0.2;
+          touchpad.click-method = "clickfinger"; # Multi-finger click
+          touchpad.dwt = []; # Disable while typing
+          touchpad.dwtp = []; # Disable while trackpointing
+          touchpad.scroll-factor = 0.3;
+          trackball.accel-profile = "adaptive";
+          trackball.accel-speed = -0.7;
+          trackball.left-handed = [];
+          trackball.middle-emulation = [];
+          trackball.natural-scroll = [];
+          #// warp-mouse-to-focus = [];
+          workspace-auto-back-and-forth = [];
         };
       }
     ];

@@ -7,8 +7,7 @@
     hostname = "myeck";
 
     services = {
-      scrutiny.enable = true;
-      smartd.enable = true;
+      #// smartd.enable = true;
 
       tailscale = {
         ipv4 = "100.111.194.165";

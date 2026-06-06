@@ -233,7 +233,6 @@ in {
     # https://wiki.nixos.org/wiki/Systemd-resolved
     services.resolved = mkIf cfg.dns {
       enable = true;
-      dnsovertls = "opportunistic";
       #// domains = [ "~." ]; # All interfaces
 
       # Multicast DNS causes single name resolution to hang and prevents libvirt NSS from functioning
@@ -241,13 +240,19 @@ in {
       #// extraConfig = "MulticastDNS=false"; # mDNS
       #// llmnr = "false";
 
-      # TODO: Add testing command
-      # https://controld.com/free-dns
-      #?? https://controld.com/status
-      fallbackDns = optionals cfg.dns [
-        "76.76.2.11#p0.freedns.controld.com"
-        "2606:1a40::11#p0.freedns.controld.com"
-      ];
+      settings = {
+        Resolve = {
+          DNSOverTLS = "opportunistic";
+
+          # TODO: Add testing command
+          FallbackDNS = optionals cfg.dns [
+            "9.9.9.9#dns.quad9.net"
+            "149.112.112.112#dns.quad9.net"
+            "2620:fe::fe#dns.quad9.net"
+            "2620:fe::9#dns.quad9.net"
+          ];
+        };
+      };
     };
 
     environment = {

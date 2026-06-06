@@ -40,183 +40,176 @@ with lib; let
   virt-manager = "${config.programs.virt-manager.package}/bin/virt-manager";
   waydroid = "${pkgs.waydroid}/bin/waydroid";
   wl-paste = getExe' pkgs.wl-clipboard "wl-paste";
-  youtube-music = "${pkgs.youtube-music}/bin/youtube-music";
+  pear-desktop = "${pkgs.pear-desktop}/bin/pear-desktop";
   zeditor = getExe hm.programs.zed-editor.package;
 in {
   options.custom.desktops.niri.binds = {
-    enable = mkOption {default = false;};
+    enable = mkEnableOption "binds";
   };
 
   config = mkIf cfg.enable {
     home-manager.sharedModules = [
       {
-        # https://github.com/YaLTeR/niri/wiki/Configuration:-Key-Bindings
-        # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsbinds
-        #?? niri msg action
-        #?? Mod = Super/Win, Alt when nested; Mod5 = AltGr
-        #?? wev
-        programs.niri.settings.binds = let
-          # Swap modifiers and key for alphabetical sorting
-          #?? (key "<key>" "<modifiers>" {<action> = "<argument>";})
-          key = key: modifiers: action: {
-            name = "${
-              if (isString modifiers)
-              then "${modifiers}+"
-              else ""
-            }${key}";
-            value = {inherit action;};
+        wayland.windowManager.niri.settings = {
+          # https://github.com/niri-wm/niri/wiki/Configuration:-Switch-Events
+          switch-events = mkIf (config.custom.profile == "laptop") {
+            # Toggle only lid display
+            lid-close.spawn = [niri "msg" "output" "eDP-1" "off"];
+            lid-open.spawn = [niri "msg" "output" "eDP-1" "on"];
           };
 
-          # Launch VM
-          vm = [
-            bash
-            "-c"
-            ''${remote} --vm --client=remmina --username=Myned --password="$(${cat} ${config.age.secrets."${config.custom.hostname}/vm/myndows.pass".path})" myndows''
-          ];
-        in
-          listToAttrs [
+          # https://github.com/YaLTeR/niri/wiki/Configuration:-Key-Bindings
+          #?? niri msg action
+          #?? Mod = Super/Win, Alt when nested; Mod5 = AltGr
+          #?? wev
+          binds = let
+            # Launch VM
+            vm = [
+              bash
+              "-c"
+              ''${remote} --vm --client=remmina --username=Myned --password="$(${cat} ${config.age.secrets."${config.custom.hostname}/vm/myndows.pass".path})" myndows''
+            ];
+          in {
             # TODO: Focus window if already launched
             # https://github.com/YaLTeR/niri/discussions/267
             #?? niri msg action focus-window --id (niri msg -j windows | jq '.[] | select(.app_id == "";}.id')
-            # BUG: lib.niri.actions syntactic sugar is borked, use `action.<action> = [];` instead
-            # https://github.com/sodiboo/niri-flake/issues/1380
-            (key "Apostrophe" "Mod" {screenshot.show-pointer = false;})
-            (key "Apostrophe" "Mod+Ctrl" {screenshot-window = [];})
-            (key "Apostrophe" "Mod+Shift" {spawn-sh = "${wl-paste} | ${gradia}";})
-            (key "Backslash" "Mod" {spawn = inhibit;})
-            (key "Backslash" "Mod+Shift" {spawn = power;})
-            (key "Backspace" "Mod" {center-column = [];})
-            (key "Backspace" "Mod+Ctrl" {toggle-column-tabbed-display = [];})
-            (key "Bracketleft" "Mod" {switch-layout = "prev";})
-            (key "Bracketright" "Mod" {switch-layout = "next";})
-            (key "Delete" "Ctrl+Alt" {spawn = [loginctl "terminate-user" config.custom.username];})
-            (key "Delete" "Mod" {spawn = [playerctl "play-pause"];})
-            (key "Down" "Mod" {spawn = [swayosd-client "--brightness" "lower"];})
-            (key "Equal" "Mod" {spawn = [swayosd-client "--output-volume" "raise"];})
-            (key "Escape" "Mod" {toggle-overview = [];})
-            (key "Escape" "Mod+Alt" {spawn = ["lifx" "state" "--color" "red"];})
-            (key "Grave" "Mod" {focus-monitor-next = [];})
-            (key "Grave" "Mod+Shift" {focus-monitor-previous = [];})
-            (key "Left" "Mod" {spawn = [playerctl "previous"];})
-            (key "Minus" "Mod" {spawn = [swayosd-client "--output-volume" "lower"];})
-            (key "Return" "Mod" {maximize-column = [];})
-            (key "Return" "Mod+Shift" {fullscreen-window = [];})
-            (key "Right" "Mod" {spawn = [playerctl "next"];})
-            (key "Slash" "Mod" {spawn = [sushi "/tmp/wallpaper.png"];})
-            (key "Slash" "Mod+Shift" {show-hotkey-overlay = [];})
-            (key "Space" "Ctrl+Alt" {spawn = ["lifx" "toggle"];})
-            (key "Tab" "Mod" {focus-window-previous = [];})
-            (key "Tab" "Mod+Ctrl" {toggle-window-floating = [];})
-            (key "Tab" "Mod+Shift" {switch-focus-between-floating-and-tiling = [];})
-            (key "Up" "Mod" {spawn = [swayosd-client "--brightness" "raise"];})
-            (key "WheelScrollDown" "Mod" {focus-window-or-workspace-down = [];})
-            (key "WheelScrollDown" "Mod+Shift" {move-window-down-or-to-workspace-down = [];})
-            (key "WheelScrollLeft" "Mod" {focus-column-or-monitor-left = [];})
-            (key "WheelScrollLeft" "Mod+Shift" {move-column-left-or-to-monitor-left = [];})
-            (key "WheelScrollRight" "Mod" {focus-column-or-monitor-right = [];})
-            (key "WheelScrollRight" "Mod+Shift" {move-column-right-or-to-monitor-right = [];})
-            (key "WheelScrollUp" "Mod" {focus-window-or-workspace-up = [];})
-            (key "WheelScrollUp" "Mod+Shift" {move-window-up-or-to-workspace-up = [];})
+            "Ctrl+Alt+1".spawn = ["lifx" "state" "--brightness" "0.01"];
+            "Ctrl+Alt+2".spawn = ["lifx" "state" "--brightness" "0.25"];
+            "Ctrl+Alt+3".spawn = ["lifx" "state" "--brightness" "0.50"];
+            "Ctrl+Alt+4".spawn = ["lifx" "state" "--brightness" "0.75"];
+            "Ctrl+Alt+5".spawn = ["lifx" "state" "--brightness" "1.00"];
+            "Ctrl+Alt+B".spawn = [pkill config.custom.browser.command];
+            "Ctrl+Alt+D".spawn = [waydroid "session" "stop"];
+            "Ctrl+Alt+Delete".spawn = [loginctl "terminate-user" config.custom.username];
+            "Ctrl+Alt+E".spawn = [pkill "gnome-text-editor"];
+            "Ctrl+Alt+G".spawn = [pkill "steam"];
+            "Ctrl+Alt+I".spawn = [pkill "zed"];
+            "Ctrl+Alt+K".spawn = [pkill "capacities"];
+            "Ctrl+Alt+M".spawn = [pkill "pear-desktop"];
+            "Ctrl+Alt+P".spawn = [pkill "proton-pass"];
+            "Ctrl+Alt+Q".spawn = [bash "-c" ''${kill} -9 "$(${niri} msg -j windows | ${jq} '.[] | select(.is_focused == true).pid')"''];
+            "Ctrl+Alt+Space".spawn = ["lifx" "toggle"];
+            "Ctrl+Alt+T".spawn = [pkill "ghostty"];
+            "Ctrl+Shift+Alt+G".spawn = [pkill "gamescope"];
+            "Mod+0".spawn = [swayosd-client "--output-volume" "mute-toggle"];
+            "Mod+9".spawn = audio;
+            "Mod+A".focus-column-or-monitor-left = [];
+            "Mod+Alt+1".spawn = ["lifx" "state" "--kelvin" "1500"];
+            "Mod+Alt+2".spawn = ["lifx" "state" "--kelvin" "2500"];
+            "Mod+Alt+3".spawn = ["lifx" "state" "--kelvin" "3000"];
+            "Mod+Alt+4".spawn = ["lifx" "state" "--kelvin" "4000"];
+            "Mod+Alt+5".spawn = ["lifx" "state" "--kelvin" "5000"];
+            "Mod+Alt+Escape".spawn = ["lifx" "state" "--color" "red"];
+            "Mod+Apostrophe".screenshot._props.show-pointer = false;
+            "Mod+B".spawn = [config.custom.browser.command "--profile-directory=Default"];
+            "Mod+Backslash".spawn = inhibit;
+            "Mod+Backspace".center-column = [];
+            "Mod+Bracketleft".switch-layout = "prev";
+            "Mod+Bracketright".switch-layout = "next";
+            "Mod+Ctrl+A".consume-or-expel-window-left = [];
+            "Mod+Ctrl+Apostrophe".screenshot-window = [];
+            "Mod+Ctrl+Backspace".toggle-column-tabbed-display = [];
+            "Mod+Ctrl+R".move-column-to-workspace-down = [];
+            "Mod+Ctrl+S".consume-or-expel-window-right = [];
+            "Mod+Ctrl+Shift+A".move-workspace-to-monitor-left = [];
+            "Mod+Ctrl+Shift+R".move-workspace-down = [];
+            "Mod+Ctrl+Shift+S".move-workspace-to-monitor-right = [];
+            "Mod+Ctrl+Shift+W".move-workspace-up = [];
+            "Mod+Ctrl+Shift+X".set-window-height = "100%";
+            "Mod+Ctrl+Shift+Z".set-window-height = "30%";
+            "Mod+Ctrl+Tab".toggle-window-floating = [];
+            "Mod+Ctrl+U".spawn = vm;
+            "Mod+Ctrl+W".move-column-to-workspace-up = [];
+            "Mod+Ctrl+X".set-column-width = "100%";
+            "Mod+Ctrl+Z".set-column-width = "30%";
+            "Mod+D".spawn = [waydroid "show-full-ui"];
+            "Mod+Delete".spawn = [playerctl "play-pause"];
+            "Mod+Down".spawn = [swayosd-client "--brightness" "lower"];
+            "Mod+E".spawn = [gnome-text-editor "--new-window"];
+            "Mod+Equal".spawn = [swayosd-client "--output-volume" "raise"];
+            "Mod+Escape".toggle-overview = [];
+            "Mod+F".spawn = [nautilus "--new-window"];
+            "Mod+G".spawn = steam;
+            "Mod+Grave".focus-monitor-next = [];
+            "Mod+I".spawn = code;
+            "Mod+K".spawn = capacities;
+            "Mod+L".spawn = [bash "-c" "${loginctl} lock-session && ${niri} msg action power-off-monitors"];
+            "Mod+Left".spawn = [playerctl "previous"];
+            "Mod+M".spawn = pear-desktop;
+            "Mod+Minus".spawn = [swayosd-client "--output-volume" "lower"];
+            "Mod+O".spawn = [hyprpicker "--autocopy"];
+            "Mod+P".spawn = proton-pass;
+            "Mod+Q".close-window = [];
+            "Mod+R".focus-window-or-workspace-down = [];
+            "Mod+Return".maximize-column = [];
+            "Mod+Right".spawn = [playerctl "next"];
+            "Mod+S".focus-column-or-monitor-right = [];
+            "Mod+Shift+A".move-column-left-or-to-monitor-left = [];
+            "Mod+Shift+Apostrophe".spawn-sh = "${wl-paste} | ${gradia}";
+            "Mod+Shift+B".spawn = [config.custom.browser.command "--profile-directory=Profile 2" "--window-name=Work"];
+            "Mod+Shift+Backslash".spawn = power;
+            "Mod+Shift+D".spawn = [waydroid "app" "launch" "com.YoStarEN.Arknights"];
+            "Mod+Shift+G".spawn = steam-gamescope;
+            "Mod+Shift+Grave".focus-monitor-previous = [];
+            "Mod+Shift+L".spawn = [systemctl "sleep"];
+            "Mod+Shift+O".spawn = [hyprpicker "--autocopy --format rgb"];
+            "Mod+Shift+R".move-window-down-or-to-workspace-down = [];
+            "Mod+Shift+Return".fullscreen-window = [];
+            "Mod+Shift+S".move-column-right-or-to-monitor-right = [];
+            "Mod+Shift+Slash".show-hotkey-overlay = [];
+            "Mod+Shift+Tab".switch-focus-between-floating-and-tiling = [];
+            "Mod+Shift+V".spawn = config.custom.menus.clipboard.clear;
+            "Mod+Shift+W".move-window-up-or-to-workspace-up = [];
+            "Mod+Shift+WheelScrollDown".move-window-down-or-to-workspace-down = [];
+            "Mod+Shift+WheelScrollLeft".move-column-left-or-to-monitor-left = [];
+            "Mod+Shift+WheelScrollRight".move-column-right-or-to-monitor-right = [];
+            "Mod+Shift+WheelScrollUp".move-window-up-or-to-workspace-up = [];
+            "Mod+Shift+X".set-window-height = "+10%";
+            "Mod+Shift+Z".set-window-height = "-10%";
+            "Mod+Slash".spawn = [sushi "/tmp/wallpaper.png"];
+            "Mod+T".spawn = ghostty;
+            "Mod+Tab".focus-window-previous = [];
+            "Mod+U".spawn = virt-manager;
+            "Mod+Up".spawn = [swayosd-client "--brightness" "raise"];
+            "Mod+V".spawn = config.custom.menus.clipboard.show;
+            "Mod+W".focus-window-or-workspace-up = [];
+            "Mod+WheelScrollDown".focus-window-or-workspace-down = [];
+            "Mod+WheelScrollLeft".focus-column-or-monitor-left = [];
+            "Mod+WheelScrollRight".focus-column-or-monitor-right = [];
+            "Mod+WheelScrollUp".focus-window-or-workspace-up = [];
+            "Mod+X".set-column-width = "+10%";
+            "Mod+Z".set-column-width = "-10%";
 
-            (key "0" "Mod" {spawn = [swayosd-client "--output-volume" "mute-toggle"];})
-            (key "1" "Ctrl+Alt" {spawn = ["lifx" "state" "--brightness" "0.01"];})
-            (key "1" "Mod+Alt" {spawn = ["lifx" "state" "--kelvin" "1500"];})
-            (key "2" "Ctrl+Alt" {spawn = ["lifx" "state" "--brightness" "0.25"];})
-            (key "2" "Mod+Alt" {spawn = ["lifx" "state" "--kelvin" "2500"];})
-            (key "3" "Ctrl+Alt" {spawn = ["lifx" "state" "--brightness" "0.50"];})
-            (key "3" "Mod+Alt" {spawn = ["lifx" "state" "--kelvin" "3000"];})
-            (key "4" "Ctrl+Alt" {spawn = ["lifx" "state" "--brightness" "0.75"];})
-            (key "4" "Mod+Alt" {spawn = ["lifx" "state" "--kelvin" "4000"];})
-            (key "5" "Ctrl+Alt" {spawn = ["lifx" "state" "--brightness" "1.00"];})
-            (key "5" "Mod+Alt" {spawn = ["lifx" "state" "--kelvin" "5000"];})
-            (key "9" "Mod" {spawn = audio;})
-            (key "A" "Mod" {focus-column-or-monitor-left = [];})
-            (key "A" "Mod+Ctrl" {consume-or-expel-window-left = [];})
-            (key "A" "Mod+Ctrl+Shift" {move-workspace-to-monitor-left = [];})
-            (key "A" "Mod+Shift" {move-column-left-or-to-monitor-left = [];})
-            (key "B" "Ctrl+Alt" {spawn = [pkill config.custom.browser.command];})
-            #// (key "B" "Mod" {spawn = [config.custom.browser.command "-P" "default"];})
-            #// (key "B" "Mod+Shift" {spawn = [config.custom.browser.command "-P" "work" "--name" "firefox-work" "--no-remote"];})
-            (key "B" "Mod" {spawn = [config.custom.browser.command "--profile-directory=Default"];})
-            (key "B" "Mod+Shift" {spawn = [config.custom.browser.command "--profile-directory=Profile 2" "--window-name=Work"];})
+            #// "Mod+B".spawn = [config.custom.browser.command "-P" "default"];
+            #// "Mod+Shift+B".spawn = [config.custom.browser.command "-P" "work" "--name" "firefox-work" "--no-remote"];
 
             # HACK: Spawn chromium work "profile" in separate data directory for app-id to take effect
             # https://issues.chromium.org/issues/40172351
-            #// (key "B" "Mod+Shift" {spawn = [config.custom.browser.command "--user-data-dir=${config.custom.programs.chromium.dataDir}-Work" "--class=${config.custom.browser.appId}-work"];})
-
-            (key "D" "Ctrl+Alt" {spawn = [waydroid "session" "stop"];})
-            (key "D" "Mod" {spawn = [waydroid "show-full-ui"];})
-            (key "D" "Mod+Shift" {spawn = [waydroid "app" "launch" "com.YoStarEN.Arknights"];})
-            (key "E" "Ctrl+Alt" {spawn = [pkill "gnome-text-editor"];})
-            (key "E" "Mod" {spawn = [gnome-text-editor "--new-window"];})
-            (key "F" "Mod" {spawn = [nautilus "--new-window"];})
-            (key "G" "Ctrl+Alt" {spawn = [pkill "steam"];})
-            (key "G" "Ctrl+Shift+Alt" {spawn = [pkill "gamescope"];})
-            (key "G" "Mod" {spawn = steam;})
-            (key "G" "Mod+Shift" {spawn = steam-gamescope;})
-            (key "I" "Ctrl+Alt" {spawn = [pkill "zed"];})
-            (key "I" "Mod" {spawn = code;})
-            (key "K" "Ctrl+Alt" {spawn = [pkill "capacities"];})
-            (key "K" "Mod" {spawn = capacities;})
-            (key "L" "Mod" {spawn = [bash "-c" "${loginctl} lock-session && ${niri} msg action power-off-monitors"];})
-            (key "L" "Mod+Shift" {spawn = [systemctl "sleep"];})
-            (key "M" "Ctrl+Alt" {spawn = [pkill "youtube-music"];})
-            (key "M" "Mod" {spawn = youtube-music;})
-            (key "O" "Mod" {spawn = [hyprpicker "--autocopy"];})
-            (key "O" "Mod+Shift" {spawn = [hyprpicker "--autocopy --format rgb"];})
-            (key "P" "Ctrl+Alt" {spawn = [pkill "proton-pass"];})
-            (key "P" "Mod" {spawn = proton-pass;})
-            (key "Q" "Ctrl+Alt" {spawn = [bash "-c" ''${kill} -9 "$(${niri} msg -j windows | ${jq} '.[] | select(.is_focused == true).pid')"''];})
-            (key "Q" "Mod" {close-window = [];})
-            (key "R" "Mod" {focus-window-or-workspace-down = [];})
-            (key "R" "Mod+Ctrl" {move-column-to-workspace-down = [];})
-            (key "R" "Mod+Ctrl+Shift" {move-workspace-down = [];})
-            (key "R" "Mod+Shift" {move-window-down-or-to-workspace-down = [];})
-            (key "S" "Mod" {focus-column-or-monitor-right = [];})
-            (key "S" "Mod+Ctrl" {consume-or-expel-window-right = [];})
-            (key "S" "Mod+Ctrl+Shift" {move-workspace-to-monitor-right = [];})
-            (key "S" "Mod+Shift" {move-column-right-or-to-monitor-right = [];})
-            (key "T" "Ctrl+Alt" {spawn = [pkill "ghostty"];})
-            (key "T" "Mod" {spawn = ghostty;})
-            (key "U" "Mod" {spawn = virt-manager;})
-            (key "U" "Mod+Ctrl" {spawn = vm;})
-            (key "V" "Mod" {spawn = config.custom.menus.clipboard.show;})
-            (key "V" "Mod+Shift" {spawn = config.custom.menus.clipboard.clear;})
-            (key "W" "Mod" {focus-window-or-workspace-up = [];})
-            (key "W" "Mod+Ctrl" {move-column-to-workspace-up = [];})
-            (key "W" "Mod+Ctrl+Shift" {move-workspace-up = [];})
-            (key "W" "Mod+Shift" {move-window-up-or-to-workspace-up = [];})
-            (key "X" "Mod" {set-column-width = "+10%";})
-            (key "X" "Mod+Ctrl" {set-column-width = "100%";})
-            (key "X" "Mod+Ctrl+Shift" {set-window-height = "100%";})
-            (key "X" "Mod+Shift" {set-window-height = "+10%";})
-            (key "Z" "Mod" {set-column-width = "-10%";})
-            (key "Z" "Mod+Ctrl" {set-column-width = "30%";})
-            (key "Z" "Mod+Ctrl+Shift" {set-window-height = "30%";})
-            (key "Z" "Mod+Shift" {set-window-height = "-10%";})
+            #// "Mod+Shift+B".spawn = [config.custom.browser.command "--user-data-dir=${config.custom.programs.chromium.dataDir}-Work" "--class=${config.custom.browser.appId}-work"];
 
             # BUG: Release binds execute with all binds involving that modifier
             # https://github.com/YaLTeR/niri/issues/605
             # TODO: Uncomment when fixed
-            #// (key "Shift_L" "Mod" focus-workspace-previous)
+            #// "Mod+Shift_L" focus-workspace-previous)
             # TODO: Use "Super_L" when fixed
-            (key "Space" "Mod" {spawn = config.custom.menus.default.show;})
-            (key "Space" "Mod+Ctrl" {spawn = config.custom.menus.calculator.show;})
-            (key "Space" "Mod+Ctrl+Shift" {spawn = networkmanager_dmenu;})
-            (key "Space" "Mod+Shift" {spawn = config.custom.menus.search.show;})
+            "Mod+Space".spawn = config.custom.menus.default.show;
+            "Mod+Ctrl+Space".spawn = config.custom.menus.calculator.show;
+            "Mod+Ctrl+Shift+Space".spawn = networkmanager_dmenu;
+            "Mod+Shift+Space".spawn = config.custom.menus.search.show;
 
             # Media keys
             # https://github.com/xkbcommon/libxkbcommon/blob/master/include/xkbcommon/xkbcommon-keysyms.h
-            (key "XF86AudioMute" null {spawn = [swayosd-client "--output-volume" "mute-toggle"];}) # F1
-            (key "XF86AudioLowerVolume" null {spawn = [swayosd-client "--output-volume" "lower"];}) # F2
-            (key "XF86AudioRaiseVolume" null {spawn = [swayosd-client "--output-volume" "raise"];}) # F3
-            (key "XF86AudioPrev" null {spawn = [playerctl "previous"];}) # F4
-            (key "XF86AudioPlay" null {spawn = [playerctl "play-pause"];}) # F5
-            (key "XF86AudioNext" null {spawn = [playerctl "next"];}) # F6
-            (key "XF86MonBrightnessDown" null {spawn = [swayosd-client "--brightness" "lower"];}) # F7
-            (key "XF86MonBrightnessUp" null {spawn = [swayosd-client "--brightness" "raise"];}) # F8
-            (key "XF86AudioMedia" null {spawn = [notify-send "test"];}) # F12
-          ];
+            "XF86AudioMute".spawn = [swayosd-client "--output-volume" "mute-toggle"]; # F1
+            "XF86AudioLowerVolume".spawn = [swayosd-client "--output-volume" "lower"]; # F2
+            "XF86AudioRaiseVolume".spawn = [swayosd-client "--output-volume" "raise"]; # F3
+            "XF86AudioPrev".spawn = [playerctl "previous"]; # F4
+            "XF86AudioPlay".spawn = [playerctl "play-pause"]; # F5
+            "XF86AudioNext".spawn = [playerctl "next"]; # F6
+            "XF86MonBrightnessDown".spawn = [swayosd-client "--brightness" "lower"]; # F7
+            "XF86MonBrightnessUp".spawn = [swayosd-client "--brightness" "raise"]; # F8
+            "XF86AudioMedia".spawn = [notify-send "test"]; # F12
+          };
+        };
       }
     ];
   };

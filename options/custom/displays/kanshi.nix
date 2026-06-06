@@ -4,9 +4,9 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.display.kanshi;
+  cfg = config.custom.displays.kanshi;
 in {
-  options.custom.display.kanshi = {
+  options.custom.displays.kanshi = {
     enable = mkEnableOption "kanshi";
   };
 
@@ -34,7 +34,7 @@ in {
                       else "disable";
 
                     mode = "${
-                      if force && !config.custom.display.forceAtBoot
+                      if force && !config.custom.displays.forceAtBoot
                       then "--custom "
                       else ""
                     }${toString width}x${toString height}@${toString finalRefresh}";
@@ -45,7 +45,7 @@ in {
             {
               profile = {
                 name = "default";
-                outputs = mkOutputs config.custom.display.outputs;
+                outputs = mkOutputs config.custom.displays.outputs;
               };
             }
 
@@ -56,7 +56,7 @@ in {
                     _: output:
                       recursiveUpdate output {finalRefresh = 60;}
                   )
-                  config.custom.display.outputs);
+                  config.custom.displays.outputs);
               };
             }
 
@@ -70,7 +70,7 @@ in {
                         finalRefresh = 60;
                       }
                   )
-                  config.custom.display.outputs);
+                  config.custom.displays.outputs);
               };
             }
 
@@ -85,7 +85,7 @@ in {
                         finalRefresh = 60;
                       }
                   )
-                  config.custom.display.outputs);
+                  config.custom.displays.outputs);
               };
             }
 
@@ -100,7 +100,7 @@ in {
                         finalRefresh = 60;
                       }
                   )
-                  config.custom.display.outputs);
+                  config.custom.displays.outputs);
               };
             }
 
@@ -115,7 +115,7 @@ in {
                         finalRefresh = 60;
                       }
                   )
-                  config.custom.display.outputs);
+                  config.custom.displays.outputs);
               };
             }
 
@@ -130,7 +130,7 @@ in {
                         finalRefresh = 60;
                       }
                   )
-                  config.custom.display.outputs);
+                  config.custom.displays.outputs);
               };
             }
           ];

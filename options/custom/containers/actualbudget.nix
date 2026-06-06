@@ -23,7 +23,7 @@ in {
         #?? <setting>._secret = "<path>";
         settings = {
           hostname = "::";
-          port = 80; # TCP
+          port = 80; # tcp
           trustedProxies = [
             "192.168.0.0/16"
             "172.16.0.0/12"

@@ -6,9 +6,10 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.programs.firefox;
+  cfg = config.custom.browsers.firefox;
+  hm = config.home-manager.users.${config.custom.username};
 in {
-  options.custom.programs.firefox = {
+  options.custom.browsers.firefox = {
     enable = mkEnableOption "firefox";
   };
 
@@ -26,11 +27,12 @@ in {
           {
             enable = true;
             #// package = pkgs.firefox-devedition-bin;
+            configPath = "${hm.xdg.configHome}/mozilla/firefox";
           }
         ];
 
         home.file = {
-          ".mozilla/firefox/profiles.ini".force = true;
+          "${hm.xdg.configHome}/mozilla/firefox/profiles.ini".force = true;
         };
 
         # https://nix-community.github.io/stylix/options/modules/firefox.html

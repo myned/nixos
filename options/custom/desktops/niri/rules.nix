@@ -7,294 +7,258 @@ with lib; let
   cfg = config.custom.desktops.niri.rules;
 in {
   options.custom.desktops.niri.rules = {
-    enable = mkOption {default = false;};
+    enable = mkEnableOption "rules";
   };
 
   config = mkIf cfg.enable {
     home-manager.sharedModules = [
       {
         # https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
-        programs.niri.settings = {
-          # HACK: Name workspaces after index to use open-on-workspace rule
-          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsworkspaces
-          #?? niri msg workspaces
-          # workspaces = {
-          #   "1" = {};
-          #   "2" = {};
-          #   "3" = {};
-          # };
-
-          # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingswindow-rules
+        wayland.windowManager.niri.settings = {
           #?? niri msg windows
-          window-rules = let
-            forEachMatch = matches: rule:
-              if isNull matches
-              then [rule]
-              else forEach matches (match: match // rule);
-
-            floating = matches: forEachMatch matches {is-floating = true;};
-            focused = matches: forEachMatch matches {is-focused = true;};
-            startup = matches: forEachMatch matches {at-startup = true;};
-
-            app-id = app-id: {inherit app-id;};
-            title = title: {inherit title;};
-
-            app-ids = ids: forEach ids (id: app-id id);
-            titles = ids: forEach ids (id: title id);
-
-            android = app-ids [
-              "^[Ww]aydroid.*$"
+          window-rule = let
+            android = [
+              {_props.app-id = "^[Ww]aydroid.*$";}
             ];
 
-            browsers = app-ids [
-              "^brave-browser.*$"
-              "^chromium-browser.*$"
-              "^firefox.*$"
-              "^[Gg]oogle-chrome.*$"
-              "^librewolf.*$"
-              "^vivaldi.*$"
-              "^zen.*$"
+            browsers = [
+              {_props.app-id = "^brave-browser.*$";}
+              {_props.app-id = "^chromium-browser.*$";}
+              {_props.app-id = "^firefox.*$";}
+              {_props.app-id = "^[Gg]oogle-chrome.*$";}
+              {_props.app-id = "^librewolf.*$";}
+              {_props.app-id = "^vivaldi.*$";}
+              {_props.app-id = "^zen.*$";}
             ];
 
-            chats = app-ids [
-              "^cinny$"
-              "^de\.schmidhuberj\.Flare$"
-              "^discord$"
-              "^Element$"
-              "^fluffychat$"
-              "^nheko$"
-              "^org\.gnome\.Fractal$"
-              "^org\.telegram\.desktop$"
-              "^signal$"
-              "^so\.libdb\.dissent$"
-              "^vesktop$"
+            chats = [
+              {_props.app-id = "^cinny$";}
+              {_props.app-id = "^de\.schmidhuberj\.Flare$";}
+              {_props.app-id = "^discord$";}
+              {_props.app-id = "^Element$";}
+              {_props.app-id = "^fluffychat$";}
+              {_props.app-id = "^nheko$";}
+              {_props.app-id = "^org\.gnome\.Fractal$";}
+              {_props.app-id = "^org\.telegram\.desktop$";}
+              {_props.app-id = "^signal$";}
+              {_props.app-id = "^so\.libdb\.dissent$";}
+              {_props.app-id = "^vesktop$";}
             ];
 
-            dropdown = app-ids [
-              "^dropdown$"
+            dropdown = [
+              {_props.app-id = "^dropdown$";}
             ];
 
-            editors = app-ids [
-              "^org\.gnome\.TextEditor$"
-              "^org\.wireshark\.Wireshark$"
+            editors = [
+              {_props.app-id = "^org\.gnome\.TextEditor$";}
+              {_props.app-id = "^org\.wireshark\.Wireshark$";}
             ];
 
-            files = app-ids [
-              "^org\.gnome\.Nautilus$"
+            files = [
+              {_props.app-id = "^org\.gnome\.Nautilus$";}
             ];
 
-            games = app-ids [
-              "^.*\.(exe|x86_64)$"
-              "^love$" # vrrtest
-              "^moe\.launcher\..+$" # Anime Game Launcher
-              "^net\.retrodeck\.retrodeck$"
-              "^steam_app_.+$"
+            games = [
+              {_props.app-id = "^.*\.(exe|x86_64)$";}
+              {_props.app-id = "^love$";} # vrrtest
+              {_props.app-id = "^moe\.launcher\..+$";} # Anime Game Launcher
+              {_props.app-id = "^net\.retrodeck\.retrodeck$";}
+              {_props.app-id = "^steam_app_.+$";}
             ];
 
-            ides = app-ids [
-              "^Capacities$"
-              "^code$"
-              "^codium$"
-              "^dev\.zed\.Zed$"
-              "^GitHub Desktop$"
-              "^obsidian$"
+            ides = [
+              {_props.app-id = "^Capacities$";}
+              {_props.app-id = "^code$";}
+              {_props.app-id = "^codium$";}
+              {_props.app-id = "^dev\.zed\.Zed$";}
+              {_props.app-id = "^GitHub Desktop$";}
+              {_props.app-id = "^obsidian$";}
             ];
 
-            media = app-ids [
-              "^com\.github\.th_ch\.youtube_music$"
-              "^org\.gnome\.Loupe$"
-              "^Spotify$"
-              "^totem$"
-              "^YouTube Music$"
+            media = [
+              {_props.app-id = "^com\.github\.th_ch\.youtube_music$";}
+              {_props.app-id = "^org\.gnome\.Loupe$";}
+              {_props.app-id = "^Spotify$";}
+              {_props.app-id = "^totem$";}
+              {_props.app-id = "^YouTube Music$";}
             ];
 
-            office = app-ids [
-              "^draw\.io$"
-              "^libreoffice.*$"
-              "^ONLYOFFICE$"
-              "^org\.gnome\.Papers$"
+            office = [
+              {_props.app-id = "^draw\.io$";}
+              {_props.app-id = "^libreoffice.*$";}
+              {_props.app-id = "^ONLYOFFICE$";}
+              {_props.app-id = "^org\.gnome\.Papers$";}
             ];
 
-            picture-in-picture = titles [
-              "^Picture.in.[Pp]icture$"
+            picture-in-picture = [
+              {_props.title = "^Picture.in.[Pp]icture$";}
             ];
 
-            previewer = app-ids [
-              "^org\.gnome\.NautilusPreviewer$"
+            previewer = [
+              {_props.app-id = "^org\.gnome\.NautilusPreviewer$";}
             ];
 
-            steam = app-ids [
-              "^steam$"
+            steam = [
+              {_props.app-id = "^steam$";}
             ];
 
-            tasks = app-ids [
-              "^Todoist$"
+            tasks = [
+              {_props.app-id = "^Todoist$";}
             ];
 
-            terminals = app-ids [
-              "^com\.mitchellh\.ghostty$"
-              "^foot$"
-              "^kitty$"
-              "^org\.wezfurlong\.wezterm$"
+            terminals = [
+              {_props.app-id = "^com\.mitchellh\.ghostty$";}
+              {_props.app-id = "^foot$";}
+              {_props.app-id = "^kitty$";}
+              {_props.app-id = "^org\.wezfurlong\.wezterm$";}
             ];
 
-            vaults =
-              app-ids [
-                "^1Password$"
-                "^Bitwarden$"
-                "^com-artemchep-keyguard-MainKt$"
-              ]
-              ++ titles [
-                "^Proton Pass$"
-              ];
-
-            vms = app-ids [
-              "^(sdl-|wl|x)freerdp$"
-              "^looking-glass-client$"
-              "^org\.remmina\.Remmina$"
-              "^.*virt-manager.*$"
+            vaults = [
+              {_props.app-id = "^1Password$";}
+              {_props.app-id = "^Bitwarden$";}
+              {_props.app-id = "^com-artemchep-keyguard-MainKt$";}
+              {
+                _props = {
+                  app-id = "^electron$";
+                  title = "^Proton Pass$";
+                };
+              }
             ];
 
-            work =
-              app-ids [
-                "^.*work$"
-              ]
-              ++ titles [
-                "^.*[Ww]ork$"
-              ];
+            vms = [
+              {_props.app-id = "^(sdl-|wl|x)freerdp$";}
+              {_props.app-id = "^looking-glass-client$";}
+              {_props.app-id = "^org\.remmina\.Remmina$";}
+              {_props.app-id = "^.*virt-manager.*$";}
+            ];
+
+            work = [
+              {_props.app-id = "^.*work$";}
+              {_props.title = "^.*[Ww]ork$";}
+            ];
           in [
             ### Defaults
             {
               # Global
               clip-to-geometry = true;
               draw-border-with-background = false;
-
-              geometry-corner-radius = with config.custom; {
-                top-left = rounding;
-                top-right = rounding;
-                bottom-right = rounding;
-                bottom-left = rounding;
-              };
+              geometry-corner-radius = config.custom.rounding;
             }
 
             {
               # Global floating
-              matches = floating null;
-              #// baba-is-float = true;
-              border.enable = false;
+              match._props.is-floating = true;
+              baba-is-float = true;
+              border.off = [];
               default-column-width = {};
               default-window-height = {};
-              focus-ring.enable = false;
-              shadow.enable = true;
+              focus-ring.off = [];
+              shadow.on = [];
             }
 
             {
               # Global startup
               #?? <= 60 secs after niri launches
-              matches = startup null;
+              match._props.at-startup = true;
             }
 
             {
               # Android
-              matches = android;
+              match = android;
             }
 
             {
               # Browsers
-              matches = browsers;
-              excludes = picture-in-picture;
+              match = browsers;
+              exclude = picture-in-picture;
               default-column-width.proportion =
-                if config.custom.display.default.ultrawide
+                if config.custom.displays.default.ultrawide
                 then 0.4
                 else 0.8;
             }
 
             {
               # Chats
-              matches = chats;
+              match = chats;
               default-column-display = "tabbed";
             }
 
             {
               # Dropdown terminal
-              matches = dropdown;
+              match = dropdown;
               open-floating = true;
             }
 
             {
               # Editors
-              matches = editors;
+              match = editors;
             }
 
             {
               # Files
-              matches = files;
+              match = files;
             }
 
             {
               # Games
-              matches = games;
-              # BUG: Reapplies when moving windows, causing games to force resize to default-column-width
+              match = games;
               open-floating = false;
               open-focused = true;
               open-fullscreen = true;
-              shadow.enable = false;
+              shadow.off = [];
             }
 
             {
               # Games (focused)
-              matches = focused games;
+              match = forEach games (game: recursiveUpdate game {_props.is-focused = true;});
               variable-refresh-rate = true;
             }
 
             {
               # IDEs
-              matches = ides;
+              match = ides;
               default-column-width.proportion =
-                if config.custom.display.default.ultrawide
+                if config.custom.displays.default.ultrawide
                 then 0.5
                 else 0.8;
             }
 
             {
               # Media
-              matches = media;
+              match = media;
             }
 
             {
               # Office
-              matches = office;
+              match = office;
             }
 
             (let
               pip = with config.custom;
-              with config.custom.display.default; rec {
+              with config.custom.displays.default; rec {
                 x = gap - border * 2;
                 y = gap;
-                w = builtins.floor (width * 0.25 - gap * 2 + border * 2 + border + 1); # 25%
+                w = builtins.floor (width * 0.2 - gap * 2 + border * 2 + border + 1); # 20%
                 h = builtins.floor (w * 9 / 16); # 16:9
               };
             in {
               # PiP
-              matches = picture-in-picture;
+              match = picture-in-picture;
               baba-is-float = false;
               default-column-width.fixed = pip.w;
               default-window-height.fixed = pip.h;
+              default-floating-position._props.relative-to = "top-right";
+              default-floating-position._props.x = pip.x;
+              default-floating-position._props.y = pip.y;
               open-floating = true;
               open-focused = false;
-
-              default-floating-position = {
-                relative-to = "top-right";
-                x = pip.x;
-                y = pip.y;
-              };
             })
 
             {
               # Previewer
-              matches = previewer;
+              match = previewer;
               default-column-width.proportion =
-                if config.custom.display.default.ultrawide
+                if config.custom.displays.default.ultrawide
                 then 0.4
                 else 0.8;
               default-window-height.proportion = 0.8;
@@ -303,76 +267,54 @@ in {
 
             {
               # Steam
-              matches = steam;
+              match = steam;
             }
 
             {
               # Tasks
-              matches = tasks;
+              match = tasks;
               default-column-width.proportion = 0.2;
             }
 
             {
               # Terminals
-              matches = terminals;
+              match = terminals;
             }
 
             {
               # Vaults
-              matches = vaults;
+              match = vaults;
               default-column-width.proportion =
-                if config.custom.display.default.ultrawide
+                if config.custom.displays.default.ultrawide
                 then 0.4
                 else 0.8;
             }
 
             {
               # Virtual machines
-              matches = vms;
+              match = vms;
             }
 
             {
-              # Work style
-              matches = work;
-              border.active.color = "#cb4b16";
-              focus-ring.active.color = "#cb4b16";
+              # Work
+              match = work;
+              border.active-color = "#cb4b16";
+              focus-ring.active-color = "#cb4b16";
             }
 
             ### Overrides
-            # TODO: Remove when switching 1Password to Wayland
-            (let
-              height = builtins.floor (config.custom.display.default.height * 0.4); # 40%
-            in {
-              # 1Password Quick Access
-              matches = [((app-id "^1Password") // (title "^Quick Access — 1Password$"))];
-              max-height = height;
-              min-height = height;
-              open-floating = true;
-            })
-
-            {
-              # Rofi
-              # FIXME: Figure out why pinentry-rofi opens as a window
-              # HACK: pinentry-rofi opens as a window, so attempt to style as a layer
-              matches = app-ids ["^Rofi$"];
-              border.enable = false;
-              clip-to-geometry = false;
-              focus-ring.enable = false;
-              open-floating = true;
-              shadow.enable = false;
-            }
-
             {
               # Steam notifications
               # https://github.com/YaLTeR/niri/wiki/Application-Issues#steam
-              matches = [((app-id "^steam$") // (title "^notificationtoasts.*$"))];
-              open-focused = false;
-
-              default-floating-position = {
-                x = config.custom.gap;
-                y = config.custom.gap;
-                relative-to = "bottom-right";
+              match._props = {
+                app-id = "^steam$";
+                title = "^notificationtoasts.*$";
               };
+
+              default-floating-position._props.x = config.custom.gap;
+              default-floating-position._props.y = config.custom.gap;
+              default-floating-position._props.relative-to = "bottom-right";
+              open-focused = false;
             }
           ];
         };

@@ -3,7 +3,13 @@
   lib,
   ...
 }:
-with lib; {
+with lib; let
+  cfg = config.custom.settings;
+in {
+  options.custom.settings = {
+    enable = mkEnableOption "settings";
+  };
+
   config.custom.settings = mkMerge [
     (mkIf config.custom.default {
       boot.enable = true;
@@ -16,18 +22,13 @@ with lib; {
     })
 
     (mkIf config.custom.minimal {
-      dconf.enable = true;
       fonts.enable = true;
-      #// gtk.enable = true;
-      #// icons.enable = true;
       nixgl.enable = true;
-      #// qt.enable = true;
       stylix.enable = true;
       xdg.enable = true;
     })
 
     (mkIf config.custom.full {
-      accounts.enable = true;
       waydroid.enable = true;
     })
   ];

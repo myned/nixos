@@ -5,10 +5,10 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.programs.chromium;
+  cfg = config.custom.browsers.chromium;
   hm = config.home-manager.users.${config.custom.username};
 in {
-  options.custom.programs.chromium = {
+  options.custom.browsers.chromium = {
     enable = mkEnableOption "chromium";
 
     package = mkOption {

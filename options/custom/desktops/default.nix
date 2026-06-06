@@ -16,11 +16,11 @@ in {
       (mkDefault
         {
           gnome.enable = config.custom.desktop == "gnome";
-          hyprland.enable = config.custom.desktop == "hyprland";
-          kde.enable = config.custom.desktop == "kde";
-          kodi.enable = config.custom.desktop == "kodi";
+          # hyprland.enable = config.custom.desktop == "hyprland";
+          # kde.enable = config.custom.desktop == "kde";
+          # kodi.enable = config.custom.desktop == "kodi";
           niri.enable = config.custom.desktop == "niri";
-          sway.enable = config.custom.desktop == "sway";
+          # sway.enable = config.custom.desktop == "sway";
         })
     ];
   };

@@ -8,119 +8,65 @@
 with lib; let
   cfg = config.custom.desktops.niri;
   hm = config.home-manager.users.${config.custom.username};
-
-  xwayland-satellite = getExe pkgs.xwayland-satellite;
 in {
-  imports = [inputs.niri-flake.nixosModules.niri];
+  imports = [inputs.niri-nix.nixosModules.default];
 
   options.custom.desktops.niri = {
-    enable = mkOption {default = false;};
-    polkit = mkOption {default = false;};
+    enable = mkEnableOption "niri";
   };
 
   config = mkIf cfg.enable {
-    custom = {
-      desktops = {
-        tiling = true;
-
-        niri = mkIf config.custom.full {
-          binds.enable = true;
-          input.enable = true;
-          layout.enable = true;
-          misc.enable = true;
-          output.enable = true;
-          rules.enable = true;
-        };
-
-        gnome = {
-          enable = true;
-          minimal = true;
-        };
-      };
-
-      programs = {
-        polkit.agent = pkgs.pantheon.pantheon-agent-polkit;
-      };
+    custom.desktops = {
+      tiling = true;
+      dms.enable = true;
+      gnome.enable = true;
+      gnome.minimal = true;
+      niri.binds.enable = true;
+      niri.input.enable = true;
+      niri.layout.enable = true;
+      niri.misc.enable = true;
+      niri.output.enable = true;
+      niri.rules.enable = true;
     };
 
     # https://github.com/YaLTeR/niri
-    # https://github.com/sodiboo/niri-flake
+    # https://codeberg.org/BANanaD3V/niri-nix
+    nixpkgs.overlays = [inputs.niri-nix.overlays.niri-nix];
+
     programs.niri = {
       enable = true;
       package = pkgs.niri;
-      #// package = inputs.niri.packages.${pkgs.system}.default;
+      #// package = niri-unstable;
     };
-
-    # BUG: Dependent on automatic home-manager module import via stylix.homeManagerIntegration.autoImport
-    # https://github.com/sodiboo/niri-flake/issues/135
-    #?? Attribute config.stylix.enable missing, used in niri-flake
-    nixpkgs.overlays = [inputs.niri-flake.overlays.niri];
-
-    # Disable bundled KDE polkit agent by default
-    # https://github.com/sodiboo/niri-flake?tab=readme-ov-file#additional-notes
-    systemd.user.services.niri-flake-polkit.enable = cfg.polkit;
 
     home-manager.sharedModules = [
       {
-        programs.niri = {
+        imports = [
+          inputs.niri-nix.homeModules.default
+          inputs.niri-nix.homeModules.stylix
+        ];
+
+        # https://codeberg.org/BANanaD3V/niri-nix#home-manager-module
+        wayland.windowManager.niri = {
+          enable = true;
           package = config.programs.niri.package;
 
-          settings = {
-            # https://github.com/YaLTeR/niri/wiki/Configuration:-Debug-Options
-            # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsdebug
-            debug =
-              {
-                # TODO: Enable next release
-                #// deactivate-unfocused-windows = [];
-
-                #// disable-cursor-plane = []; # Software cursor
-                #// disable-direct-scanout = [];
-                #// enable-overlay-planes = [];
-                honor-xdg-activation-with-invalid-serial = [];
-                keep-laptop-panel-on-when-lid-is-closed = [];
-              }
-              // optionalAttrs config.custom.display.default.vrr {
-                skip-cursor-only-updates-during-vrr = [];
-              };
-
-            # https://github.com/sodiboo/niri-flake/blob/main/docs.md#programsnirisettingsxwayland-satellite
-            xwayland-satellite = {
-              enable = true;
-              path = xwayland-satellite;
+          # https://codeberg.org/BANanaD3V/niri-nix/src/branch/main/home-options.md#wayland-windowmanager-niri-settings
+          # https://github.com/YaLTeR/niri/wiki/Configuration:-Debug-Options
+          settings.debug =
+            {
+              deactivate-unfocused-windows = [];
+              enable-overlay-planes = [];
+              honor-xdg-activation-with-invalid-serial = [];
+              keep-laptop-panel-on-when-lid-is-closed = [];
+            }
+            // optionalAttrs config.custom.displays.default.vrr {
+              skip-cursor-only-updates-during-vrr = [];
             };
-          };
         };
 
-        # https://github.com/sodiboo/niri-flake/blob/main/docs.md#homemodulesstylix
+        # https://codeberg.org/BANanaD3V/niri-nix/src/branch/main/modules/stylix.nix
         stylix.targets.niri.enable = true;
-
-        # HACK: Replace read-only finalConfig until extraConfig is supported
-        # https://github.com/sodiboo/niri-flake/issues/825
-        xdg.configFile = {
-          # https://github.com/sodiboo/niri-flake/blob/59ed19d431324af3fcebbf623c081eae2e67ab97/flake.nix#L395
-          niri-config.enable = mkForce false;
-
-          # TODO: Move to niri-flake when supported
-          # HACK: Merge kdl nodes into module config
-          # https://github.com/sodiboo/niri-flake/blob/main/settings.nix
-          # https://github.com/sodiboo/niri-flake/blob/main/default-config.kdl.nix
-          #?? :p config.home-manager.users.<user>.xdg.configFile."niri/config.kdl".text
-          #?? :p lib.findFirst (node: lib.isAttrs node && node.name == "<node>") [] config.home-manager.users.<user>.programs.niri.config
-          "niri/config.kdl".text = with inputs.niri-flake.lib.kdl;
-            serialize.nodes ((forEach hm.programs.niri.config (node: let
-                isNode = name: isAttrs node && node.name == name;
-                nodeWithChildren = children: node // {children = node.children ++ children;};
-              in
-                # Inject into existing nodes
-                if isNode "binds"
-                then
-                  nodeWithChildren [
-                  ]
-                else node))
-              ++ [
-                # Top-level nodes
-              ]);
-        };
       }
     ];
   };

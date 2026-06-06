@@ -10,12 +10,10 @@ with lib; {
     desktop = "niri";
 
     arion = {
-      enable = true;
       user = config.custom.username;
     };
 
     containers = {
-      enable = true;
     };
 
     games = {
@@ -33,16 +31,15 @@ with lib; {
 
     services = {
       ollama.download = ["potato" "high"];
-      #// power-profiles-daemon.enable = true;
+      power-profiles-daemon.enable = true;
       sunshine.enable = true;
-      tuned.enable = true;
-      #// wallpaper.enable = true;
-    };
 
-    settings = {
-      # TODO: Enable when profile is persisted across reboots
+      # BUG: Does not persist profile across reboots
       # https://github.com/pop-os/system76-power/issues/263
       #// system76.enable = true;
+
+      #// tuned.enable = true;
+      #// wallpaper.enable = true;
     };
 
     vms = {

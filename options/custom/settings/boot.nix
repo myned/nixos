@@ -7,8 +7,6 @@
 }:
 with lib; let
   cfg = config.custom.settings.boot;
-
-  sed = getExe pkgs.gnused;
 in {
   imports = [inputs.lanzaboote.nixosModules.lanzaboote];
 
@@ -162,7 +160,7 @@ in {
       #// font = "${pkgs.terminus_font}/share/consolefonts/ter-124b.psf.gz"; # https://terminus-font.sourceforge.net/
     };
 
-    environment.systemPackages = mkIf cfg.lanzaboote.enable [pkgs.sbctl];
+    environment.systemPackages = optionals cfg.lanzaboote.enable [pkgs.sbctl];
 
     # https://wiki.archlinux.org/title/KMSCON
     services.kmscon = mkIf cfg.kmscon {

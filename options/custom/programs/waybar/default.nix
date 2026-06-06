@@ -7,7 +7,7 @@
 }:
 with lib; let
   audio = config.home-manager.users.${config.custom.username}.home.file.".local/bin/audio".source;
-  blueberry = "${pkgs.blueberry}/bin/blueberry";
+  blueman-manager = getExe' pkgs.blueman "blueman-manager";
   bluetoothctl = "${pkgs.bluez}/bin/bluetoothctl";
   cat = "${pkgs.coreutils}/bin/cat";
   cut = "${pkgs.coreutils}/bin/cut";
@@ -192,7 +192,7 @@ in {
               reload_style_on_change = true;
 
               # output = let
-              #   mainOutputs = filterAttrs (_: o: o.minimal == false) config.custom.display.outputs;
+              #   mainOutputs = filterAttrs (_: o: o.minimal == false) config.custom.displays.outputs;
               # in
               #   mapAttrsToList (name: _: name) mainOutputs;
 
@@ -201,7 +201,7 @@ in {
                 "custom/inhibitor"
                 "custom/vpn"
                 "custom/vm"
-                (mkIf config.custom.desktops.hyprland.enable "hyprland/workspaces")
+                #// (mkIf config.custom.desktops.hyprland.enable "hyprland/workspaces")
                 (mkIf config.custom.desktops.niri.enable "niri/workspaces")
                 "gamemode"
                 "privacy"
@@ -267,7 +267,7 @@ in {
                   format-disabled = "󰂲";
                   format-off = "󰂲";
                   format-on = "󰂯";
-                  on-click = blueberry;
+                  on-click = blueman-manager;
                   on-click-middle = "${bluetoothctl} disconnect";
                   on-click-right = "${rfkill} toggle bluetooth";
                 };

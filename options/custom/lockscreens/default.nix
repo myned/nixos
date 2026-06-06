@@ -16,7 +16,7 @@ in {
       #// swayidle.enable = true;
       systemd-lock-handler.enable = true;
 
-      gtklock.enable = config.custom.lockscreen == "gtklock";
+      # gtklock.enable = config.custom.lockscreen == "gtklock";
       hyprlock.enable = config.custom.lockscreen == "hyprlock";
       swaylock.enable = config.custom.lockscreen == "swaylock";
     };

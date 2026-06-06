@@ -10,8 +10,8 @@ in {
     enable = mkEnableOption "gammastep";
 
     autoBrightness = mkOption {
-      default = !config.custom.services.wluma.enable;
       description = "Whether to enable automatic brightness control";
+      default = true;
       example = false;
       type = types.bool;
     };

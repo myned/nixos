@@ -71,7 +71,7 @@ in {
           package = inputs.vintagestory-nix.packages.${pkgs.system}.v1-22-0;
 
           dataPath = "vintagestory"; # /var/lib/vintagestory
-          port = 42420; # TCP/UDP
+          port = 42420; # tcp/UDP
           openFirewall = true;
 
           # TODO: Consider vs2nix packages

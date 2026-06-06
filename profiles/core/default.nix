@@ -13,7 +13,6 @@ with lib; {
     };
 
     arion = {
-      enable = true;
       boot = true;
       #// adguardhome.enable = true;
       beszel.enable = true;
@@ -38,7 +37,6 @@ with lib; {
     };
 
     containers = {
-      enable = true;
       actualbudget.enable = true;
       blocky.enable = true;
       livekit.enable = true;

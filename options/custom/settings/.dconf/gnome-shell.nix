@@ -31,7 +31,7 @@ in {
               "org.telegram.desktop.desktop:1"
               "signal-desktop.desktop:1"
               "steam.desktop:2"
-              "youtube-music.desktop:1"
+              "pear-desktop.desktop:1"
             ];
           };
 

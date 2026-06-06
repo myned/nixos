@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   pkgs,
   ...
@@ -14,9 +13,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # https://github.com/nix-community/nix-vscode-extensions
-    nixpkgs.overlays = [inputs.nix-vscode-extensions.overlays.default];
-
     # Extension dependencies
     environment.systemPackages = with pkgs; [
       alejandra # nix-ide
@@ -38,53 +34,6 @@ in {
           enable = true;
           #// mutableExtensionsDir = false;
           #// package = pkgs.vscodium;
-
-          profiles.default = {
-            #?? nixos-rebuild repl > pkgs.REPO.*
-            #!! Some extensions go missing from open-vsx, so use official marketplace
-            # https://github.com/nix-community/nix-vscode-extensions?tab=readme-ov-file#note
-            extensions = with pkgs.open-vsx;
-              [
-              ]
-              ++ (with pkgs.vscode-marketplace; [
-                aaron-bond.better-comments
-                #// antfu.iconify
-                #// antfu.unocss
-                #// bedsteler20.gnome-magic
-                #// bilelmoussaoui.flatpak-vscode
-                bmalehorn.vscode-fish
-                #// bmewburn.vscode-intelephense-client
-                #// bodil.blueprint-gtk
-                bradlc.vscode-tailwindcss
-                cormoran.disable-default-keybinding
-                #// csstools.postcss
-                dbaeumer.vscode-eslint
-                detachhead.basedpyright
-                #// eamodio.gitlens
-                esbenp.prettier-vscode
-                foxundermoon.shell-format
-                #// ginfuru.ginfuru-better-solarized-dark-theme
-                gruntfuggly.todo-tree
-                jnoortheen.nix-ide
-                #// koihik.vscode-lua-format
-                matthewpi.caddyfile-support
-                mhutchie.git-graph
-                mkhl.direnv
-                ms-python.black-formatter
-                ms-python.debugpy
-                ms-python.isort
-                ms-python.python
-                ms-vscode.powershell
-                natizyskunk.sftp
-                pkief.material-icon-theme
-                pkief.material-product-icons
-                sirmspencer.vscode-autohide
-                sketchbuch.vsc-workspace-sidebar
-                #// svelte.svelte-vscode
-                timonwong.shellcheck
-                vincaslt.highlight-matching-tag
-              ]);
-          };
         };
 
         # TODO: Use stylix

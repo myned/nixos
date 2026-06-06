@@ -17,7 +17,7 @@ with lib; let
   uwsm = getExe pkgs.uwsm;
   virt-manager = getExe pkgs.virt-manager;
   waydroid = getExe pkgs.waydroid;
-  youtube-music = getExe pkgs.youtube-music;
+  pear-desktop = getExe pkgs.pear-desktop;
 
   command = command: "${uwsm} app -- ${command}";
 in {
@@ -36,7 +36,7 @@ in {
           workspace = [
             "special:android, on-created-empty:${command "${launch} --workspace special:android --empty ${waydroid} app launch com.YoStarEN.Arknights"}"
             "special:game, on-created-empty:${command steam}"
-            "special:music, on-created-empty:${command youtube-music}"
+            "special:music, on-created-empty:${command pear-desktop}"
             "special:office, on-created-empty:${command "${launch} --workspace special:office --empty --tile -- ${libreoffice}"}"
             "special:terminal, on-created-empty:${command ghostty}"
             "special:vault, on-created-empty:${command "${launch} --workspace special:vault --empty ${bitwarden-desktop}"}"
@@ -53,7 +53,7 @@ in {
           # https://wiki.hyprland.org/Configuring/Window-Rules
           #?? windowrulev2 = RULE, WINDOW
           windowrulev2 = with config.custom;
-          with config.custom.display.default; let
+          with config.custom.displays.default; let
             gaps_in = gap / 4;
 
             # HACK: Attempts to account for hypr-specific scale, gaps, borders, and bar padding
