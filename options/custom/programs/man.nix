@@ -15,7 +15,7 @@ in {
       dev.enable = true; # Library manpages
 
       man = {
-        generateCaches = true; # Index manpages for search
+        cache.enable = true; # Index manpages for search
         man-db.enable = false; #!! Hangs on building man-cache
         mandoc.enable = true;
       };

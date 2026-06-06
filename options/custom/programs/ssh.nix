@@ -17,15 +17,13 @@ in {
           enable = true;
           enableDefaultConfig = false;
 
-          matchBlocks = {
+          settings = {
             "*" = {
-              setEnv = {
+              StrictHostKeyChecking = "accept-new";
+
+              SetEnv = {
                 # https://ghostty.org/docs/help/terminfo#configure-ssh-to-fall-back-to-a-known-terminfo-entry
                 TERM = "xterm-256color";
-              };
-
-              extraOptions = {
-                StrictHostKeyChecking = "accept-new";
               };
             };
           };

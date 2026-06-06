@@ -86,7 +86,7 @@ in {
           # https://nix-community.github.io/stylix/options/platforms/home_manager.html
           stylix = recursiveUpdate commonConfig {
             # https://nix-community.github.io/stylix/options/platforms/home_manager.html#stylixiconthemedark
-            iconTheme = {
+            icons = {
               # BUG: GTK4 apps start slower with Papirus
               # https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/issues/3860
               # https://github.com/PapirusDevelopmentTeam/papirus-icon-theme
@@ -102,7 +102,7 @@ in {
             targets = {
               gtk = {
                 flatpakSupport.enable = true;
-                extraCss = readFile ./gtk/style.css;
+                extraCss = readFile ./gtk.css;
               };
             };
           };

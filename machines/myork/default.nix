@@ -14,7 +14,7 @@ with lib; {
   custom = {
     hostname = "myork";
 
-    display.outputs = {
+    displays.outputs = {
       eDP-1 = {
         width = 2256;
         height = 1504;
@@ -54,8 +54,6 @@ with lib; {
     services = {
       auto-cpufreq.max.battery = 3.5; # GHz
       fw-fanctrl.enable = true;
-      scrutiny.enable = true;
-      smartd.enable = true;
 
       tailscale = {
         ipv4 = "100.71.22.19";

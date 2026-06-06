@@ -5,7 +5,6 @@
     desktop = "niri";
 
     arion = {
-      enable = true;
       user = config.custom.username;
     };
 
@@ -13,6 +12,7 @@
       #// auto-cpufreq.enable = true;
       colord.enable = true;
       ollama.download = ["potato" "medium"];
+      #// system76.enable = true;
       tuned.enable = true;
       #// wluma.enable = true;
 
@@ -20,10 +20,6 @@
       #   enable = true;
       #   auto = true;
       # };
-    };
-
-    settings = {
-      #// system76.enable = true;
     };
 
     vms = {

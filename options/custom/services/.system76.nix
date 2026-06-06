@@ -4,9 +4,9 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.settings.system76;
+  cfg = config.custom.services.system76;
 in {
-  options.custom.settings.system76 = {
+  options.custom.services.system76 = {
     enable = mkEnableOption "system76";
 
     enableAll = mkOption {

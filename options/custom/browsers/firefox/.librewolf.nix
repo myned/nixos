@@ -6,9 +6,9 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.programs.librewolf;
+  cfg = config.custom.browsers.librewolf;
 in {
-  options.custom.programs.librewolf = {
+  options.custom.browsers.librewolf = {
     enable = mkEnableOption "librewolf";
   };
 

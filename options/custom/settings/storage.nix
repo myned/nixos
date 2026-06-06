@@ -276,6 +276,7 @@ in {
       mergeAttrsList (forEach cfg.defaultMounts (device: {
         "/mnt/${baseNameOf device}" = {
           inherit device;
+          fsType = "auto";
 
           options = [
             "defaults"

@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -11,5 +12,7 @@ in {
   config = mkIf cfg.enable {
     # https://gitlab.gnome.org/GNOME/dconf
     programs.dconf.enable = true;
+
+    environment.systemPackages = [pkgs.dconf-editor];
   };
 }

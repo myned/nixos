@@ -8,7 +8,6 @@
     };
 
     arion = {
-      enable = true;
       boot = true;
       beszel.enable = true;
       forgejo.enable = true;

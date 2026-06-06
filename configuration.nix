@@ -8,7 +8,6 @@
 with lib; {
   imports = [
     inputs.home-manager.nixosModules.home-manager
-    inputs.nur.modules.nixos.default
     inputs.agenix.nixosModules.default
   ];
 
@@ -17,23 +16,11 @@ with lib; {
     config = {
       allowUnfree = true;
 
+      # HACK: Allow insecure packages
       allowInsecurePredicate = pkg: let
         name = getName pkg;
       in
-        # HACK: Allow all insecure electron versions
-        name
-        == "electron"
-        # HACK: Ventoy uses opaque binary blobs, causing security concerns
-        # https://github.com/NixOS/nixpkgs/issues/404663
-        || name == "ventoy-gtk3"
-        # HACK: Some Matrix clients rely on libolm, which is deprecated
-        # https://github.com/NixOS/nixpkgs/pull/334638
-        || name == "cinny"
-        || name == "cinny-unwrapped"
-        || name == "fluffychat-linux"
-        || name == "olm"
-        # Cisco Packet Tracer
-        || name == "openssl";
+        name == "ventoy-gtk3";
     };
   in {
     inherit config;
@@ -58,31 +45,14 @@ with lib; {
           ### Packages
           # https://github.com/NixOS/nixpkgs/issues/384555
           bottles = prev.bottles.override {removeWarningPopup = true;};
-
-          capacities = unstable.capacities;
-
-          # TODO: Use official package when available
-          # https://github.com/NixOS/nixpkgs/issues/327982
-          zen-browser = inputs.zen-browser.packages.${prev.system}.zen-browser;
-          zen-browser-unwrapped = inputs.zen-browser.packages.${prev.system}.zen-browser-unwrapped;
-
-          ### Python
-          # https://nixos.org/manual/nixpkgs/unstable/#how-to-override-a-python-package-for-all-python-versions-using-extensions
-          #?? PKG = pyprev.PKG.overridePythonAttrs {};
-          # pythonPackagesExtensions =
-          #   prev.pythonPackagesExtensions
-          #   ++ [
-          #     (pyfinal: pyprev: {
-          #     })
-          #   ];
         }
       )
     ];
   };
 
   nix = {
-    package = pkgs.nixVersions.latest;
-    #// package = pkgs.lix; # https://git.lix.systems/lix-project/lix
+    #// package = pkgs.nixVersions.latest;
+    package = pkgs.lix; # https://git.lix.systems/lix-project/lix
 
     #// optimise.automatic = true; # Run storage optimizer periodically
 
@@ -102,19 +72,13 @@ with lib; {
       ];
 
       trusted-substituters = [
-        "https://ezkea.cachix.org"
-        "https://hyprland.cachix.org"
+        #// "https://niri-nix.cachix.org"
         "https://nix-community.cachix.org"
-        "https://walker.cachix.org"
-        "https://walker-git.cachix.org"
       ];
 
       trusted-public-keys = [
-        "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
-        "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+        #// "niri-nix.cachix.org-1:SvFtqpDcf7Sm1SMJdby1/+Y+6f3Yt3/3PMcSTKPJNJ0="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        "walker.cachix.org-1:fG8q+uAaMqhsMxWjwvk0IMb4mFPFLqHjuvfwQxE4oJM="
-        "walker-git.cachix.org-1:vmC0ocfPWh0S/vRAQGtChuiZBTAe4wiKDeyyXM0/7pM="
       ];
     };
 
@@ -128,7 +92,7 @@ with lib; {
       # BUG: Does not support +N period
       # https://github.com/NixOS/nix/issues/9455
       # https://github.com/NixOS/nix/pull/10426
-      options = "--delete-older-than 30d";
+      options = "--delete-older-than 7d";
     };
 
     # API access tokens to increase rate limits
@@ -147,15 +111,12 @@ with lib; {
     #!! ############# ###
   };
 
-  ### Home Manager
   # https://nix-community.github.io/home-manager/index.xhtml#sec-install-nixos-module
   home-manager = {
     backupFileExtension = "bak";
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = {inherit inputs;};
-
-    # Common options for every user
     sharedModules = [
       {
         programs.home-manager.enable = true;
@@ -166,16 +127,8 @@ with lib; {
     ];
   };
 
-  age.secrets = listToAttrs (map (name: {
-      inherit name;
-
-      value = {
-        file = "${inputs.self}/secrets/${name}";
-        owner = config.custom.username;
-        group = config.users.users.${config.custom.username}.group;
-      };
-    })
-    [
-      "common/nix/access-tokens.conf"
-    ]);
+  custom.files.agenix.secrets."common/nix/access-tokens.conf" = {
+    owner = config.custom.username;
+    group = config.users.users.${config.custom.username}.group;
+  };
 }

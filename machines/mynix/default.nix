@@ -12,18 +12,12 @@
   custom = {
     hostname = "mynix";
 
-    # arion = {
-    #   enable = true;
-    #   ovenmediaengine.enable = true;
-    # };
-
-    display.outputs = {
+    displays.outputs = {
       DP-1 = {
         width = 3440;
         height = 1440;
-        refresh = 100;
+        refresh = 75;
         #// finalRefresh = 74.979;
-        scale = 1.15;
         #// force = true;
 
         # BUG: Cursor updates cause refresh rate fluctuation, so disable for now
@@ -38,7 +32,7 @@
 
     programs = {
       looking-glass.enable = true;
-      steam.gamescope.outputWidth = config.custom.display.default.height * 16 / 9;
+      steam.gamescope.outputWidth = config.custom.displays.default.height * 16 / 9;
 
       waybar = {
         temperature = {
@@ -49,7 +43,6 @@
     };
 
     services = {
-      #// scrutiny.enable = true;
       #// smartd.enable = true;
 
       tailscale = {

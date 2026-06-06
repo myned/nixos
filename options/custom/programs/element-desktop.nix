@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -10,6 +11,8 @@ in {
 
   config = mkIf cfg.enable {
     # https://github.com/element-hq/element-desktop
+    environment.systemPackages = [pkgs.element-desktop];
+
     # HACK: Fix Electron not finding password store on unusual desktops, requires services.gnome.gnome-keyring
     nixpkgs.overlays = [
       (final: prev: {

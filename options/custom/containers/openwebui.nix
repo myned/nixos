@@ -24,7 +24,7 @@ in {
         # https://github.com/open-webui/open-webui/discussions/2052
         host = "0.0.0.0";
 
-        port = 80; # TCP
+        port = 80; # tcp
 
         # https://docs.openwebui.com/reference/env-configuration
         # https://github.com/open-webui/open-webui/blob/main/.env.example

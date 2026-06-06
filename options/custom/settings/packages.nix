@@ -9,16 +9,22 @@ with lib; let
   cfg = config.custom.settings.packages;
 in {
   options.custom.settings.packages = {
-    enable = mkOption {default = false;};
-    extra = mkOption {default = [];};
+    enable = mkEnableOption "packages";
+
+    extra = mkOption {
+      description = "List of extra packages to install into the system environment";
+      default = [];
+      example = [pkgs.meow];
+      type = with types; listOf package;
+    };
   };
 
   config = mkIf cfg.enable (
     with pkgs; {
       environment.systemPackages =
         cfg.extra
-        ++ [
-          ### CLI applications optionals config.custom.default [
+        ++ optionals config.custom.default [
+          ### CLI applications
           config.boot.kernelPackages.cpupower # Processor utilities
 
           bluetui # Bluetooth manager
@@ -54,18 +60,13 @@ in {
           progress # Coreutils progress viewer
           q # DNS tester
           rclone # File sync
-          sshpass # SSH automation
           stress # CPU stress tester
           tcpdump # Network analyzer
           testdisk # Data recovery tool
           trashy # CLI trash
           uv # Python package manager
           waypipe # Wayland proxy
-          wev # Wayland keysym tester
           wget # Download utility
-          wl-clipboard # Wayland clipboard
-          xclip # X11 clipboard
-          xorg.xev # X11 keysym tester
           zip # Compression utility
 
           ### Dependencies
@@ -75,16 +76,18 @@ in {
         ++ optionals config.custom.minimal [
           ### GUI applications
           deskflow # Software KVM client
-          input-leap # Software KVM client
+          #// input-leap # Software KVM client
           kdiskmark # Must be system package for polkit
-          lan-mouse # Software KVM client
+          #// lan-mouse # Software KVM client
 
           ### CLI applications
           ffmpeg # Media converter
-          firefoxpwa # Web app manager
+          #// firefoxpwa # Web app manager
           libva-utils # VAAPI tools
           mesa-demos # <glx|vk>gears
           vulkan-tools # vkcube
+          wev # Wayland keysym tester
+          wl-clipboard # Wayland clipboard
         ]
         ++ optionals config.custom.minimal (with gst_all_1; [
           ### Dependencies
@@ -103,31 +106,25 @@ in {
           amberol # Audio player
           apostrophe # Markdown editor
           baobab # Disk usage analyzer
+          bazaar # Flatpak software center
           biblioteca # Documentation viewer
-          bitwarden-desktop # Password manager
+          #// bitwarden-desktop # Password manager
           #// blackbox-terminal # Terminal
-          blueberry # Bluetooth manager
           bottles # Wine manager
           #// capacities # Knowledge base
           #// cartridges # Game library
-
-          # BUG: lipsoup deprecated, uncomment when updated to Tauri v2
-          # https://github.com/cinnyapp/cinny-desktop/pull/429
-          #// cinny-desktop # Matrix client
-
+          cinny-desktop # Matrix client
           #// clapper # Video player
-          clickup # Project/task manager
+          #// clickup # Project/task manager
           concessio # Permissions converter
           czkawka # Duplicate file finder
           d-spy # D-Bus introspection
-          dconf-editor # GSettings editor
           decibels # Audio player
           decoder # QR code scanner
           drawing # Image editor
           drawio # Diagram maker
           eartag # Music tagger
           easyeffects # Audio filters
-          element-desktop # Matrix client
           eyedropper # Color picker
           feishin # Jellyfin client
           file-roller # Archive utility
@@ -141,7 +138,7 @@ in {
           #// gitbutler # Git client
           #// gitg # Git client
           github-desktop # Git client
-          gitnuro # Git client
+          #// gitnuro # Git client
           gnome-boxes # Virtual machine manager
           gnome-calculator # Calculator
           gnome-calendar # Calendar
@@ -149,7 +146,7 @@ in {
           gnome-connections # Remote desktop client
           gnome-contacts # Contact editor
           gnome-disk-utility # Disk utility
-          gnome-feeds # RSS feed client
+          #// gnome-feeds # RSS feed client
           gnome-firmware # Firmware updater
           gnome-font-viewer # Font viewer
           gnome-frog # Text extraction
@@ -158,19 +155,17 @@ in {
           gnome-network-displays # Miracast client
           gnome-obfuscate # Image redacter
           gnome-online-accounts-gtk # GNOME accounts
-          gnome-podcasts # Podcast feed
-          gnome-software # Flatpak manager
+          #// gnome-podcasts # Podcast feed
           gnome-sound-recorder # Sound recorder
-          gnome-system-monitor # System monitor
+          #// gnome-system-monitor # System monitor
           gnome-text-editor # Text editor
-          gnome-tweaks # GNOME extras
-          gnome-usage # System monitor
-          gparted # Disk utility
+          #// gnome-usage # System monitor
+          #// gparted # Disk utility
           #// gradience # GTK theme editor
           #// gtk4.dev # GTK4 icon browser
           gtkterm # Serial terminal
           gradia # Screenshot tool
-          helvum # Pipewire patchbay
+          #// helvum # Pipewire patchbay
           heroic # Game library
           icon-library # Icon viewer
           identity # Compare media
@@ -183,35 +178,36 @@ in {
           loupe # Image viewer
           lutris # Game library
           meld # Diff viewer
-          mission-center # System monitor
+          #// mission-center # System monitor
           #// monitorets # System monitor
           newsflash # RSS feed
           #// nicotine-plus # SoulSeek client
           obsidian # Knowledge base
-          pantheon.switchboard-with-plugs # System settings
+          #// pantheon.switchboard-with-plugs # System settings
           papers # Document viewer
           #// path-of-building # Path of Exile planner
+          pear-desktop # YouTube Music client
           picard # Music tagger
           pika-backup # Borg backup manager
-          planify # Task manager
-          pods # Podman manager
-          pkgs.unstable.protonplus # Wine updater
+          #// planify # Task manager
+          #// pods # Podman manager
+          protonplus # Wine updater
           #// ptyxis # Terminal
           pwvucontrol # Pipewire volume controller
           qdiskinfo # Disk information
           remmina # Remote desktop client
           resources # System monitor
-          rewaita # Adwaita themer
-          rustdesk-flutter # Remote desktop client
+          #// rewaita # Adwaita themer
+          #// rustdesk-flutter # Remote desktop client
           showtime # Video player
           signal-desktop # Signal client
           slack # Slack client
           smile # Emoji picker
           snapshot # Camera
           snoop # File content finder
-          sourcegit # Git client
+          #// sourcegit # Git client
           #// spotify # Spotify client
-          unstable.stoat-desktop # Stoat/Revolt client
+          #// unstable.stoat-desktop # Stoat/Revolt client
           #// stremio # Streaming client
           switcheroo # Image converter
           #// syncthingtray # Syncthing client
@@ -220,28 +216,16 @@ in {
           #// telegram-desktop # Telegram client
           #// variety # Wallpaper changer
           ventoy-full-gtk # Image writer
-          virt-viewer # Virtual machine viewer
+          #// virt-viewer # Virtual machine viewer
           #// vorta # Borg backup client
           #// webex # Conferencing client
           wildcard # Regex tester
           #// wowup-cf # World of Warcraft addon manager
           #// xivlauncher # Final Fantasy XIV launcher
-          youtube-music # YouTube Music client
           #// zrythm # Digital audio workstation
 
-          #!! Must be downloaded manually due to licensing
-          # BUG: Dangling symlinks, remove workaround when merged into unstable
-          # https://github.com/NixOS/nixpkgs/pull/380309
-          # ((ciscoPacketTracer8.overrideAttrs {
-          #     dontCheckForBrokenSymlinks = true;
-          #   })
-          #   .override {
-          #     packetTracerSource = inputs.cisco-packettracer8;
-          #   })
-
           ### CLI applications
-          inputs.agenix.packages.${system}.default
-
+          android-tools # adb/fastboot
           #// bitwarden-cli # Bitwarden client
           brightnessctl # Backlight changer
           devbox # Development environment
@@ -251,7 +235,7 @@ in {
           imagemagick # Image editor
           libinput # Libinput commands
           libnotify # Notification tester
-          linux-wifi-hotspot # Wi-Fi hotspot
+          #// linux-wifi-hotspot # Wi-Fi hotspot
           nixos-anywhere # NixOS installer
           playerctl # Media controller
           #// satty # Screenshot editor
@@ -261,13 +245,13 @@ in {
           xdg-utils # XDG utilities
 
           ### Dependencies
-          wineWowPackages.unstableFull # WoW64, not World of Warcraft
+          wineWow64Packages.unstableFull # WoW64, not World of Warcraft
 
           ### Python packages
           # TODO: Separate into standalone package for absolute path reference
           # https://wiki.nixos.org/wiki/Python#Package_unavailable_in_Nixpkgs
           # https://wiki.nixos.org/wiki/Packaging/Python
-          (python312.withPackages (
+          (python313.withPackages (
             ps:
               with ps; [
                 # lifx-cli

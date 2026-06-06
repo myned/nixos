@@ -1,12 +1,14 @@
 {lib, ...}:
 with lib; {
-  # Import all *.nix options from custom directory, excluding .*.nix
+  # Import all *.nix options from custom directory, excluding .*.nix and .*/
   imports =
     filter (
       file: let
-        f = builtins.baseNameOf file;
+        basename = builtins.baseNameOf file;
+        excludeHiddenNix = !hasPrefix "." basename && hasSuffix ".nix" basename;
+        excludeHiddenDirs = all (path: !hasPrefix "." path) (splitString "/" file);
       in
-        !hasPrefix "." f && hasSuffix ".nix" f
+        excludeHiddenNix && excludeHiddenDirs
     )
     (filesystem.listFilesRecursive ./custom);
 }

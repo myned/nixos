@@ -164,7 +164,7 @@ in {
               "signal-desktop.desktop"
               "org.telegram.desktop.desktop"
               "discord.desktop"
-              "youtube-music.desktop"
+              "pear-desktop.desktop"
               "steam.desktop"
               "codium.desktop"
               "obsidian.desktop"

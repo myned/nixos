@@ -142,7 +142,8 @@ in {
         services.syncthing = {
           enable = true;
           guiAddress = "${config.custom.services.tailscale.ipv4}:8384";
-          passwordFile = config.age.secrets."common/syncthing/${config.custom.username}.pass".path;
+          guiCredentials.username = config.custom.username;
+          guiCredentials.passwordFile = config.age.secrets."common/syncthing/${config.custom.username}.pass".path;
 
           # Syncthing no longer creates a default folder >= 2.0
           # https://github.com/syncthing/syncthing/releases/tag/v2.0.0

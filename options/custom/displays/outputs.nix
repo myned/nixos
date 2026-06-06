@@ -4,9 +4,9 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.display.outputs;
+  cfg = config.custom.displays.outputs;
 in {
-  options.custom.display.outputs = mkOption {
+  options.custom.displays.outputs = mkOption {
     description = "Submodules of display outputs";
     default = {};
 

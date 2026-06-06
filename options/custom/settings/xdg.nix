@@ -162,11 +162,12 @@ in {
           userDirs = {
             enable = true;
             createDirectories = true;
+            setSessionVariables = true;
             templates = "${config.custom.syncDir}/linux/config/templates";
 
             extraConfig = {
-              XDG_GAMES_DIR = "${hm.home.homeDirectory}/Games";
-              XDG_SCREENSHOTS_DIR = "${hm.xdg.userDirs.pictures}/Screenshots";
+              GAMES = "${hm.home.homeDirectory}/Games";
+              SCREENSHOTS = "${hm.xdg.userDirs.pictures}/Screenshots";
             };
           };
         };

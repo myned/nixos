@@ -26,12 +26,12 @@ in {
 
   config = mkIf cfg.enable {
     custom.menus = {
-      anyrun.enable = config.custom.menu == "anyrun";
-      fuzzel.enable = config.custom.menu == "fuzzel";
-      rofi.enable = config.custom.menu == "rofi";
-      sherlock.enable = config.custom.menu == "sherlock";
+      # anyrun.enable = config.custom.menu == "anyrun";
+      # fuzzel.enable = config.custom.menu == "fuzzel";
+      # rofi.enable = config.custom.menu == "rofi";
+      # sherlock.enable = config.custom.menu == "sherlock";
       walker.enable = config.custom.menu == "walker";
-      wofi.enable = config.custom.menu == "wofi";
+      # wofi.enable = config.custom.menu == "wofi";
 
       #// bitwarden-menu.enable = true;
       networkmanager-dmenu.enable = true;

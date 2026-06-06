@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   options,
   pkgs,
@@ -12,15 +11,13 @@ with lib; let
 
   notify-send = getExe pkgs.libnotify;
   rm = getExe' pkgs.coreutils "rm";
-  walker = getExe hm.programs.walker.package;
+  walker = getExe hm.services.walker.package;
 in {
   options.custom.menus.walker = {
     enable = mkEnableOption "walker";
   };
 
   config = mkMerge [
-    {home-manager.sharedModules = [inputs.walker.homeManagerModules.default];}
-
     (mkIf cfg.enable {
       custom = mkIf (config.custom.menu == "walker") {
         # TODO: Update commands
@@ -46,23 +43,17 @@ in {
           # https://benz.gitbook.io/walker/
           # https://github.com/abenz1267/walker
           # https://github.com/abenz1267/walker?tab=readme-ov-file#-install-using-nix-
-          programs.walker = {
+          services.walker = {
             enable = true;
-
-            #!! Service must be restarted for changes to take effect
-            #?? systemctl --user restart walker.service
-            runAsService = true;
+            systemd.enable = true; #?? systemctl --user restart walker.service
 
             # https://github.com/abenz1267/walker/blob/master/resources/config.toml
-            config =
-              # Inherit default config
-              (options.home-manager.users.type.getSubOptions []).programs.walker.config.default
-              // {
-                click_to_close = false;
-                close_when_open = true;
-                hide_quick_activation = true;
-                force_keyboard_focus = true;
-              };
+            settings = {
+              click_to_close = false;
+              close_when_open = true;
+              hide_quick_activation = true;
+              force_keyboard_focus = true;
+            };
           };
         }
       ];

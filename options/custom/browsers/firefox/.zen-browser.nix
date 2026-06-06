@@ -6,10 +6,10 @@
   ...
 }:
 with lib; let
-  cfg = config.custom.programs.zen-browser;
+  cfg = config.custom.browsers.zen-browser;
   hm = config.home-manager.users.${config.custom.username};
 in {
-  options.custom.programs.zen-browser = {
+  options.custom.browsers.zen-browser = {
     enable = mkEnableOption "zen-browser";
   };
 

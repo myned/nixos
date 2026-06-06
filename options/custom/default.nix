@@ -8,32 +8,26 @@ with lib; let
   hm = config.home-manager.users.${config.custom.username};
 in {
   options.custom = {
-    ### Profiles
     default = mkOption {default = true;};
-    full = mkOption {default = false;};
     minimal = mkOption {default = cfg.full;}; # TODO: Use "interactive" instead
+    full = mkOption {default = false;};
     server = mkOption {default = false;};
     profile = mkOption {};
-
-    ### Users
     domain = mkOption {default = "bjork.tech";};
     hostname = mkOption {};
     realname = mkOption {default = "Myned";};
     username = mkOption {default = "myned";};
     syncDir = mkOption {default = "${hm.home.homeDirectory}/SYNC";};
-
-    ### Hardware
     border = mkOption {default = 3.0;};
     gap = mkOption {default = 5.0;};
     padding = mkOption {default = 51.0;}; # ?? journalctl --user -u waybar.service | grep height:
     rounding = mkOption {default = 16.0;};
     vm = mkOption {default = false;};
-
-    ### Misc
     desktop = mkOption {default = null;};
     lockscreen = mkOption {default = "hyprlock";};
     menu = mkOption {default = "walker";};
 
+    # TODO: Move to browsers module
     browser = {
       appId = mkOption {
         default = "google-chrome";
@@ -88,14 +82,27 @@ in {
 
   config.custom = mkMerge [
     (mkIf cfg.default {
-      })
+      arion.enable = true;
+      containers.enable = true;
+      files.enable = true;
+      programs.enable = true;
+      scripts.enable = true;
+      services.enable = true;
+      settings.enable = true;
+    })
 
     (mkIf cfg.minimal {
       })
 
     (mkIf cfg.full {
-      display.enable = true;
+      browsers.enable = true;
+      desktops.enable = true;
+      displays.enable = true;
+      games.enable = true;
+      lockscreens.enable = true;
+      menus.enable = true;
       search.enable = true;
+      vms.enable = true;
     })
   ];
 }

@@ -13,7 +13,9 @@ in {
   };
 
   config = mkIf cfg.enable {
+    time.timeZone = mkIf config.custom.server "Etc/UTC";
     i18n.defaultLocale = mkIf config.custom.server "C.UTF-8"; # Recommended for consistency
+    i18n.inputMethod.ibus.waylandFrontend = true;
 
     # https://wiki.nixos.org/wiki/Cross_Compiling
     boot.binfmt = {
@@ -28,14 +30,6 @@ in {
 
     environment = {
       localBinInPath = true;
-
-      # HACK: _IM envvars should not be set for DEs that support Wayland IME
-      # TODO: Set `i18n.inputMethod.ibus.waylandFrontend = true` when in stable
-      # https://github.com/NixOS/nixpkgs/pull/384689
-      variables = {
-        GTK_IM_MODULE = mkForce null;
-        QT_IM_MODULE = mkForce null;
-      };
     };
 
     home-manager.sharedModules = [

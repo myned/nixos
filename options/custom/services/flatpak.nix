@@ -37,7 +37,7 @@ in {
               ]
               ++ optionals config.custom.full [
                 "io.anytype.anytype" # Knowledge base
-                "io.github.brunofin.Cohesion" # Notion client
+                #// "io.github.brunofin.Cohesion" # Notion client
                 "re.sonny.Workbench" # GTK prototyper
               ];
 

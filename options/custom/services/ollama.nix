@@ -48,7 +48,7 @@ in {
       enable = true;
       package = pkgs.unstable.ollama-vulkan; # Generic GPU support
       host = "[::]";
-      port = 11434; # TCP
+      port = 11434; # tcp
       syncModels = true; # Remove undeclared models
 
       #!! Downloads on activation

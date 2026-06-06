@@ -116,7 +116,7 @@ in {
               listeners = [
                 {
                   bind_addresses = ["::" "0.0.0.0"];
-                  port = 8008; # TCP
+                  port = 8008; # tcp
                   tls = false;
                   type = "http";
                   x_forwarded = true;
@@ -161,7 +161,7 @@ in {
           # https://github.com/element-hq/lk-jwt-service
           lk-jwt-service = {
             enable = true;
-            port = 8888; # TCP
+            port = 8888; # tcp
             livekitUrl = "wss://rtc.${hostCfg.custom.domain}";
             keyFile = mkIf containerCfg.agenix.enable hostCfg.age.secrets."${hostCfg.custom.hostname}/synapse/livekit.key.yaml".path;
           };

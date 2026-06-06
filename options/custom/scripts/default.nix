@@ -5,11 +5,17 @@
   ...
 }:
 with lib; let
+  cfg = config.custom.scripts;
+
   git = config.home-manager.users.${config.custom.username}.programs.git.package;
   hyprland = config.programs.hyprland.package;
   #// walker = config.home-manager.users.${config.custom.username}.services.walker.package;
   wofi = config.home-manager.users.${config.custom.username}.programs.wofi.package;
 in {
+  options.custom.scripts = {
+    enable = mkEnableOption "scripts";
+  };
+
   config.home-manager.users.${config.custom.username}.home.file = let
     # Place script.ext in the same directory as this file
     #?? pkg = (SHELL "NAME" [ DEPENDENCIES ])
@@ -51,14 +57,14 @@ in {
               easyeffects
               libnotify
             ])
-            (bash "calc" [
-              coreutils
-              libnotify
-              libqalculate
-              wl-clipboard
-              wofi
-              xclip
-            ])
+            # (bash "calc" [
+            #   coreutils
+            #   libnotify
+            #   libqalculate
+            #   wl-clipboard
+            #   wofi
+            #   xclip
+            # ])
             # TODO: Convert to options and disable clipboard.sh
             # (bash "clipboard" [
             #   cliphist
@@ -68,23 +74,23 @@ in {
             #   wofi
             #   xclip
             # ])
-            (bash "close" [
-              coreutils
-              hyprland
-              jq
-              libnotify
-            ])
+            # (bash "close" [
+            #   coreutils
+            #   hyprland
+            #   jq
+            #   libnotify
+            # ])
             (bash "fingerprints" [
               fprintd
               libnotify
             ])
-            (bash "gpurun" [
-              coreutils
-              kmod
-              libnotify
-              procps
-              systemd
-            ])
+            # (bash "gpurun" [
+            #   coreutils
+            #   kmod
+            #   libnotify
+            #   procps
+            #   systemd
+            # ])
             (bash "inhibit" [
               coreutils
               libnotify
@@ -95,24 +101,24 @@ in {
               findutils
               pciutils
             ])
-            (bash "launch" [
-              argc
-              coreutils
-              hyprland
-              jq
-            ])
-            (bash "left" [
-              argc
-              hyprland
-              jq
-              libnotify
-            ])
-            (bash "mark" [
-              coreutils
-              gnugrep
-              libnotify
-              sway
-            ])
+            # (bash "launch" [
+            #   argc
+            #   coreutils
+            #   hyprland
+            #   jq
+            # ])
+            # (bash "left" [
+            #   argc
+            #   hyprland
+            #   jq
+            #   libnotify
+            # ])
+            # (bash "mark" [
+            #   coreutils
+            #   gnugrep
+            #   libnotify
+            #   sway
+            # ])
             # (bash "menu" [
             #   argc
             #   coreutils
@@ -122,11 +128,11 @@ in {
             #   rofi-rbw
             #   walker
             # ])
-            (bash "minimize" [
-              hyprland
-              jq
-              libnotify
-            ])
+            # (bash "minimize" [
+            #   hyprland
+            #   jq
+            #   libnotify
+            # ])
             (bash "network" [
               libnotify
               networkmanager
@@ -156,34 +162,34 @@ in {
               libvirt
               remmina
             ])
-            (bash "scratchpad" [
-              coreutils
-              libnotify
-              sway
-            ])
-            (bash "screenshot" [
-              argc
-              coreutils
-              grimblast
-              imagemagick
-              libnotify
-              swappy
-            ])
-            (bash "socket" [
-              coreutils
-              procps
-            ])
+            # (bash "scratchpad" [
+            #   coreutils
+            #   libnotify
+            #   sway
+            # ])
+            # (bash "screenshot" [
+            #   argc
+            #   coreutils
+            #   grimblast
+            #   imagemagick
+            #   libnotify
+            #   swappy
+            # ])
+            # (bash "socket" [
+            #   coreutils
+            #   procps
+            # ])
             (bash "ssh-copy-agent" [
               coreutils
               gnugrep
               openssh
             ])
-            (bash "toggle" [
-              gnugrep
-              hyprland
-              jq
-              libnotify
-            ])
+            # (bash "toggle" [
+            #   gnugrep
+            #   hyprland
+            #   jq
+            #   libnotify
+            # ])
             # (bash "vault" [
             #   argc
             #   bitwarden-cli
@@ -199,40 +205,40 @@ in {
               libnotify
               tailscale
             ])
-            (bash "vrr-fs" [
-              jq
-              libnotify
-              sway
-            ])
-            (bash "vrr" [
-              hyprland
-              jq
-              libnotify
-            ])
-            (bash "window" [
-              argc
-              coreutils
-              hyprland
-              jq
-            ])
-            (bash "workspace-sway" [
-              jq
-              libnotify
-              sway
-            ])
-            (bash "workspace" [
-              argc
-              coreutils
-              hyprland
-              jq
-              libnotify
-            ])
-            (bash "zoom" [
-              argc
-              bc
-              hyprland
-              jq
-            ])
+            # (bash "vrr-fs" [
+            #   jq
+            #   libnotify
+            #   sway
+            # ])
+            # (bash "vrr" [
+            #   hyprland
+            #   jq
+            #   libnotify
+            # ])
+            # (bash "window" [
+            #   argc
+            #   coreutils
+            #   hyprland
+            #   jq
+            # ])
+            # (bash "workspace-sway" [
+            #   jq
+            #   libnotify
+            #   sway
+            # ])
+            # (bash "workspace" [
+            #   argc
+            #   coreutils
+            #   hyprland
+            #   jq
+            #   libnotify
+            # ])
+            # (bash "zoom" [
+            #   argc
+            #   bc
+            #   hyprland
+            #   jq
+            # ])
           ]
           ++ (with pkgs.python3Packages; [
             # Python files with extension .py

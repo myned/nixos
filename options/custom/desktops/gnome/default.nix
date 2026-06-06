@@ -43,7 +43,10 @@ in {
     };
 
     # https://github.com/mjakeman/extension-manager
-    environment.systemPackages = optionals (!cfg.minimal) [pkgs.gnome-extension-manager];
+    environment.systemPackages = optionals (!cfg.minimal) (with pkgs; [
+      gnome-extension-manager
+      gnome-tweaks
+    ]);
 
     # https://nix-community.github.io/stylix/options/modules/gnome.html
     stylix.targets.gnome.enable = true;
