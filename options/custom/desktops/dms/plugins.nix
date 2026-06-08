@@ -29,7 +29,7 @@ in {
           dankNotepadModule.enable = true;
 
           # Third-party
-          activateLinux.enable = true; # https://github.com/hthienloc/dms-activate-linux
+          #// activateLinux.enable = true; # https://github.com/hthienloc/dms-activate-linux
           bongoCat.enable = true; # https://github.com/hthienloc/dms-bongo-cat
           calculator.enable = true; # https://github.com/rochacbruno/DankCalculator
           dankDiskUsage.enable = true; # https://github.com/alcxyz/DankDiskUsage
@@ -37,13 +37,14 @@ in {
           dankTranslate.enable = true; # https://github.com/alcxyz/DankTranslate
           #// dankVault.enable = true; # https://github.com/alcxyz/DankVault
           dnsSwitcher.enable = true; # https://github.com/JDKamalakar/DMS-DNS_Switcher
-          floaty.enable = true; # https://github.com/hthienloc/dms-floaty
+          #// floaty.enable = true; # https://github.com/hthienloc/dms-floaty
           #// homeAssistantMonitor.enable = true; # https://github.com/xxyangyoulin/dms-plugin-hass
           ipIndicator.enable = true; # https://github.com/hthienloc/dms-ipIndicator
           kaomojiPicker.enable = true; # https://github.com/hthienloc/dms-kaomoji-picker
           nixPackageRunner.enable = true; # https://github.com/iahccc/NixPackageRunner
           ocrScanner.enable = true; # https://github.com/hthienloc/dms-ocr-scanner
-          quickCapture.enable = true; # https://github.com/hthienloc/dms-quick-capture
+          #// quickCapture.enable = true; # https://github.com/hthienloc/dms-quick-capture
+          #// screenCaptureToolbar.enable = true; # https://github.com/JDKamalakar/DMS-ScreenCapture_Toolbar
           stopwatch.enable = true; # https://github.com/hthienloc/dms-stopwatch
           tailscale.enable = true; # https://github.com/cglavin50/dms-tailscale
           timer.enable = true; # https://github.com/hthienloc/dms-timer
