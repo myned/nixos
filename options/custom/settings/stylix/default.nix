@@ -100,10 +100,12 @@ in {
             #!! Accent colors are not the same globally, so override each target individually
             # https://github.com/danth/stylix/issues/402
             targets = {
-              gtk = {
-                flatpakSupport.enable = true;
-                extraCss = readFile ./gtk.css;
-              };
+              gtk.flatpakSupport.enable = true;
+              gtk.extraCss =
+                if config.custom.desktops.dms.enable
+                then ''@import url("dank-colors.css");''
+                else readFile ./gtk.css;
+              xresources.enable = true;
             };
           };
 
@@ -112,6 +114,9 @@ in {
           home.sessionVariables = {
             XCURSOR_PATH = "$XCURSOR_PATH:${hm.home.profileDirectory}/share/icons";
           };
+
+          xdg.configFile."gtk-3.0/gtk.css".force = true;
+          xdg.configFile."gtk-4.0/gtk.css".force = true;
         }
       ];
     }))
