@@ -239,6 +239,7 @@ in {
           nixos-anywhere # NixOS installer
           playerctl # Media controller
           #// satty # Screenshot editor
+          tesseract # OCR engine
           usbutils # USB bus utilities
           vrrtest # VRR tester
           winetricks # Wine modifier
