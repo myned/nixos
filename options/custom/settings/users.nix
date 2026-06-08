@@ -21,6 +21,7 @@ in {
             "video"
           ]
           else [];
+        type = with types; listOf str;
       };
       linger = mkOption {default = true;};
       packages = mkOption {default = [];};
