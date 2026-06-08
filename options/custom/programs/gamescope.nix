@@ -16,7 +16,10 @@ in {
     # https://github.com/NixOS/nixpkgs/issues/162562#issuecomment-1523177264
     programs.gamescope = {
       enable = true;
-      capSysNice = true; # Allow renice
+
+      # BUG: bwrap: setuid use of bubblewrap is not supported in this build
+      # https://github.com/NixOS/nixpkgs/issues/523200
+      #// capSysNice = true; # Allow renice
 
       args = [
         "--force-grab-cursor"
