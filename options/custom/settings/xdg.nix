@@ -31,11 +31,7 @@ in {
     # https://wiki.archlinux.org/title/XDG_Desktop_Portal
     xdg.portal = {
       enable = true;
-
-      # Use portal for xdg-open
-      # https://github.com/NixOS/nixpkgs/issues/160923
-      # BUG: Window activation fails on niri
-      #// xdgOpenUsePortal = true;
+      xdgOpenUsePortal = true;
     };
 
     home-manager.sharedModules = [

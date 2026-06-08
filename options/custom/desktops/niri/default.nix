@@ -29,10 +29,10 @@ in {
       niri.rules.enable = true;
     };
 
-    # https://github.com/YaLTeR/niri
     # https://codeberg.org/BANanaD3V/niri-nix
     nixpkgs.overlays = [inputs.niri-nix.overlays.niri-nix];
 
+    # https://github.com/YaLTeR/niri
     programs.niri = {
       enable = true;
       package = pkgs.niri;
@@ -41,6 +41,9 @@ in {
 
     # https://github.com/niri-wm/niri/wiki/Xwayland
     environment.systemPackages = [pkgs.xwayland-satellite];
+
+    xdg.portal.wlr.enable = true;
+    xdg.portal.config.common.default = ["wlr" "gnome" "gtk"];
 
     home-manager.sharedModules = [
       {
