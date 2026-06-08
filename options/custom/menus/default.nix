@@ -7,7 +7,7 @@ with lib; let
   cfg = config.custom.menus;
 in {
   options.custom.menus = {
-    enable = mkOption {default = config.custom.full;};
+    enable = mkEnableOption "menus";
     default.show = mkOption {default = "";};
     calculator.show = mkOption {default = "";};
 
