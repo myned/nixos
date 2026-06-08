@@ -45,6 +45,17 @@ with lib; {
           ### Packages
           # https://github.com/NixOS/nixpkgs/issues/384555
           bottles = prev.bottles.override {removeWarningPopup = true;};
+
+          # TODO: Remove when shm is supported upstream
+          # https://github.com/niri-wm/niri/pull/1791
+          niri = prev.niri.overrideAttrs {
+            patches = [
+              (pkgs.fetchpatch {
+                url = "https://github.com/wrvsrx/niri/compare/tag_support-shm-sharing_4~19..tag_support-shm-sharing_4.patch"; # https://github.com/niri-wm/niri/pull/1791#issuecomment-4347668397
+                sha256 = "sha256-mfX0CVJWSFb/Hr1lDvlggphpXc2PI6C5CBa+aGwkVIM=";
+              })
+            ];
+          };
         }
       )
     ];
