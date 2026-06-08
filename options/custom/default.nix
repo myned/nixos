@@ -99,8 +99,8 @@ in {
       desktops.enable = true;
       displays.enable = true;
       games.enable = true;
-      lockscreens.enable = true;
-      menus.enable = true;
+      #// lockscreens.enable = true;
+      #// menus.enable = true;
       search.enable = true;
       vms.enable = true;
     })
