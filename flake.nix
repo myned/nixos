@@ -38,6 +38,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # https://github.com/AvengeMedia/danksearch
+    danksearch = {
+      url = "github:AvengeMedia/danksearch";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # https://github.com/AvengeMedia/DankMaterialShell
     dms = {
       url = "github:AvengeMedia/DankMaterialShell/stable";
