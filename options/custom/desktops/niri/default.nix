@@ -39,6 +39,9 @@ in {
       #// package = niri-unstable;
     };
 
+    # https://github.com/niri-wm/niri/wiki/Xwayland
+    environment.systemPackages = [pkgs.xwayland-satellite];
+
     home-manager.sharedModules = [
       {
         imports = [
