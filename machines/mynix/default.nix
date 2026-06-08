@@ -18,7 +18,7 @@
         height = 1440;
         refresh = 75;
         #// finalRefresh = 74.979;
-        #// force = true;
+        force = true;
 
         # BUG: Cursor updates cause refresh rate fluctuation, so disable for now
         # https://github.com/YaLTeR/niri/issues/1214
