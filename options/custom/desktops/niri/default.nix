@@ -66,6 +66,18 @@ in {
             // optionalAttrs config.custom.displays.default.vrr {
               skip-cursor-only-updates-during-vrr = [];
             };
+
+          # https://danklinux.com/docs/dankmaterialshell/compositors#niri-configuration
+          extraConfig = mkIf config.custom.desktops.dms.enable ''
+            include "dms/alttab.kdl"
+            include "dms/binds.kdl"
+            include "dms/colors.kdl"
+            include "dms/cursor.kdl"
+            // include "dms/layout.kdl"
+            include "dms/outputs.kdl"
+            include "dms/windowrules.kdl"
+            include "dms/wpblur.kdl"
+          '';
         };
 
         # https://codeberg.org/BANanaD3V/niri-nix/src/branch/main/modules/stylix.nix
