@@ -12,8 +12,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    custom.settings.users.${config.custom.username}.groups = ["lpadmin"];
-
     # https://wiki.nixos.org/wiki/Printing
     services.printing = {
       enable = true;
@@ -26,5 +24,6 @@ in {
     };
 
     environment.systemPackages = [pkgs.system-config-printer];
+    users.users.${config.custom.username}.extraGroups = ["lpadmin"];
   };
 }
