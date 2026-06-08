@@ -42,7 +42,7 @@ in {
 
     (mkIf config.custom.full {
       avahi.enable = true;
-      blueman.enable = true;
+      #// blueman.enable = true;
       displaylink.enable = true;
       easyeffects.enable = true;
 
@@ -54,7 +54,7 @@ in {
       #// gdm.enable = true;
       gnome-keyring.enable = true;
       gpg-agent.enable = true;
-      greetd.enable = true;
+      #// greetd.enable = true;
       kdeconnect.enable = true;
       keyd.enable = true;
       ntfy.enable = true;
@@ -63,8 +63,8 @@ in {
       printing.enable = true;
       ratbagd.enable = true;
       samba.enable = true;
-      swaync.enable = true;
-      swayosd.enable = true;
+      #// swaync.enable = true;
+      #// swayosd.enable = true;
       sysprof.enable = true;
       usbmuxd.enable = true;
     })

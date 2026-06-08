@@ -57,7 +57,7 @@ in {
       steam.enable = true;
       tio.enable = true;
       vscode.enable = true;
-      waybar.enable = true;
+      #// waybar.enable = true;
       wireshark.enable = true;
       #// ydotool.enable = true;
       zed.enable = true;
