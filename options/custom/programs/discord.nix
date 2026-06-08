@@ -12,7 +12,7 @@ in {
     enable = mkEnableOption "discord";
 
     client = mkOption {
-      default = null;
+      default = "vesktop";
       type = with types; nullOr (enum ["betterdiscord" "dissent" "vesktop"]);
     };
   };
@@ -35,6 +35,16 @@ in {
         programs.vesktop = mkIf (cfg.client == "vesktop") {
           enable = true;
           vencord.useSystem = true;
+
+          # https://github.com/Vencord/Vesktop/blob/main/src/shared/settings.d.ts
+          settings = {
+            customTitleBar = true;
+            disableMinSize = true;
+            enableSplashScreen = false;
+            hardwareAcceleration = true;
+            hardwareVideoAcceleration = true;
+            tray = false;
+          };
         };
 
         # https://betterdiscord.app/
@@ -49,7 +59,7 @@ in {
         };
 
         # https://nix-community.github.io/stylix/options/modules/discord.html
-        stylix.targets.vesktop.enable = cfg.client == "vesktop";
+        #// stylix.targets.vesktop.enable = cfg.client == "vesktop";
       }
     ];
   };
