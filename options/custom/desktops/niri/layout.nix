@@ -24,20 +24,20 @@ in {
           empty-workspace-above-first = [];
           focus-ring.active-color = "#d33682";
           focus-ring.inactive-color = "#002b36";
-          focus-ring.width = config.custom.border;
+          focus-ring.width = 0;
           gaps = config.custom.gap;
           insert-hint.color = "#d3368280";
           shadow.color = "#00000080";
           shadow.inactive-color = "#00000020";
           tab-indicator.active-color = "#d33682";
           tab-indicator.corner-radius = config.custom.rounding;
-          tab-indicator.gap = 2;
-          tab-indicator.gaps-between-tabs = 2;
+          tab-indicator.gap = config.custom.gap / 2;
+          tab-indicator.gaps-between-tabs = config.custom.gap / 2;
           tab-indicator.inactive-color = "#d3368240";
           tab-indicator.length._props.total-proportion = 0.95;
-          tab-indicator.place-within-column = [];
+          #// tab-indicator.place-within-column = [];
           tab-indicator.position = "bottom";
-          tab-indicator.width = config.custom.border + 3;
+          tab-indicator.width = config.custom.border + 2;
 
           default-column-width.proportion =
             if config.custom.displays.default.ultrawide
@@ -62,7 +62,7 @@ in {
           ];
 
           struts = let
-            strut = config.custom.gap / 2;
+            strut = config.custom.gap + 1;
           in {
             left = strut;
             right = strut;
