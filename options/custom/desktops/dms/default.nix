@@ -15,7 +15,10 @@ in {
 
   config = mkIf cfg.enable {
     custom.desktops.dms = {
-      #// plugins.enable = true;
+      greeter.enable = true;
+      plugins.enable = true;
+      search.enable = true;
+      #// settings.enable = true;
     };
 
     home-manager.sharedModules = [
@@ -37,6 +40,15 @@ in {
           systemd.restartIfChanged = true;
           package = pkgs.dms-shell;
           quickshell.package = pkgs.quickshell;
+        };
+
+        # TODO: Fix stylix colorscheme
+        #// stylix.targets.dank-material-shell.enable = true;
+
+        # TODO: Use settings module to set
+        xdg.configFile."DankMaterialShell/themes" = {
+          source = ./themes;
+          force = true;
         };
       }
     ];
