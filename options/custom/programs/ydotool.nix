@@ -11,9 +11,8 @@ in {
   };
 
   config = mkIf cfg.enable {
-    custom.settings.users.${config.custom.username}.groups = ["ydotool"];
-
     # https://github.com/ReimuNotMoe/ydotool
     programs.ydotool.enable = true;
+    users.users.${config.custom.username}.extraGroups = ["ydotool"];
   };
 }

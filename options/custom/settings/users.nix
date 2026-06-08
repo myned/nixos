@@ -11,21 +11,6 @@ in {
   options.custom.settings.users = {
     enable = mkOption {default = false;};
     shell = mkOption {default = pkgs.fish;};
-
-    ${config.custom.username} = {
-      groups = mkOption {
-        default =
-          if config.custom.full
-          then [
-            "input"
-            "video"
-          ]
-          else [];
-        type = with types; listOf str;
-      };
-      linger = mkOption {default = true;};
-      packages = mkOption {default = [];};
-    };
   };
 
   config = mkIf cfg.enable {
@@ -47,10 +32,8 @@ in {
 
         ${config.custom.username} = {
           isNormalUser = true;
-          extraGroups = ["wheel"] ++ cfg.${config.custom.username}.groups;
+          extraGroups = ["input" "video" "wheel"];
           hashedPasswordFile = config.age.secrets."${config.custom.hostname}/users/${config.custom.username}.pass".path;
-          linger = cfg.${config.custom.username}.linger;
-          packages = cfg.${config.custom.username}.packages;
           uid = 1000;
         };
       };
