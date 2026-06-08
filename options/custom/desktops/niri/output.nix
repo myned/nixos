@@ -11,7 +11,7 @@ in {
 
     kanshi = mkOption {
       description = "Whether to enable kanshi for dynamic output management";
-      default = true;
+      default = false;
       example = false;
       type = types.bool;
     };
@@ -28,7 +28,8 @@ in {
           with output; {
             _args = [connector];
             inherit scale;
-            mode = "${width}x${height}@${finalRefresh}";
+            mode._args = ["${toString width}x${toString height}@${toString finalRefresh}"];
+            mode._props.custom = force;
             position._props = {inherit x y;};
             variable-refresh-rate = mkIf vrr {_props.on-demand = true;}; #!! Requires window-rule
           })
