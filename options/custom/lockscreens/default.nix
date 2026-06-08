@@ -7,7 +7,7 @@ with lib; let
   cfg = config.custom.lockscreens;
 in {
   options.custom.lockscreens = {
-    enable = mkOption {default = config.custom.full;};
+    enable = mkEnableOption "lockscreens";
   };
 
   config = mkIf cfg.enable {

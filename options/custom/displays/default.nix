@@ -29,7 +29,7 @@ in {
     # https://wiki.archlinux.org/title/Kernel_mode_setting#Forcing_modes_and_EDID
     # https://docs.kernel.org/fb/modedb.html
     hardware.display.outputs = let
-      forcedOutputs = filterAttrs (_: o: o.force == true) cfg.outputs;
+      forcedOutputs = filterAttrs (_: o: o.force) cfg.outputs;
     in (mkIf cfg.forceAtBoot (mapAttrs (_: output:
       with output; {
         mode = "${toString width}x${toString height}MR@${toString refresh}";
