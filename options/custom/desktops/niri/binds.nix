@@ -56,7 +56,7 @@ in {
             "Ctrl+Alt+Space".spawn = ["lifx" "toggle"];
             "Ctrl+Alt+T".spawn = ["pkill" "ghostty"];
             "Ctrl+Shift+Alt+G".spawn = ["pkill" "gamescope"];
-            "Mod+0".spawn = ["dms" "ipc" "call" "volume" "mute"];
+            "Mod+0".spawn = ["dms" "ipc" "call" "audio" "mute"];
             "Mod+9".spawn = "audio";
             "Mod+A".focus-column-or-monitor-left = [];
             "Mod+Alt+1".spawn = ["lifx" "state" "--kelvin" "1500"];
@@ -93,7 +93,7 @@ in {
             "Mod+Ctrl+Delete".spawn = ["dms" "ipc" "call" "powermenu" "toggle"];
             "Mod+Down".spawn = ["dms" "ipc" "call" "brightness" "decrement" "5"];
             "Mod+E".spawn = ["gnome-text-editor" "--new-window"];
-            "Mod+Equal".spawn = ["dms" "ipc" "call" "volume" "increment" "5"];
+            "Mod+Equal".spawn = ["dms" "ipc" "call" "audio" "increment" "5"];
             "Mod+Escape".toggle-overview = [];
             "Mod+F".spawn = ["nautilus" "--new-window"];
             "Mod+G".spawn = "steam";
@@ -103,7 +103,7 @@ in {
             "Mod+L".spawn = ["loginctl" "lock-session"];
             "Mod+Left".spawn = ["dms" "ipc" "call" "mpris" "previous"];
             "Mod+M".spawn = "pear-desktop";
-            "Mod+Minus".spawn = ["dms" "ipc" "call" "volume" "decrement" "5"];
+            "Mod+Minus".spawn = ["dms" "ipc" "call" "audio" "decrement" "5"];
             "Mod+N".spawn = ["dms" "ipc" "call" "notepad" "toggle"];
             "Mod+O".spawn = ["dms" "color" "pick"];
             "Mod+P".spawn = "proton-pass";
