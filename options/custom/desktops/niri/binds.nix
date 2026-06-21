@@ -43,7 +43,7 @@ in {
             "Ctrl+Alt+3".spawn = ["lifx" "state" "--brightness" "0.50"];
             "Ctrl+Alt+4".spawn = ["lifx" "state" "--brightness" "0.75"];
             "Ctrl+Alt+5".spawn = ["lifx" "state" "--brightness" "1.00"];
-            "Ctrl+Alt+B".spawn = ["pkill" config.custom.browsers.default.command];
+            "Ctrl+Alt+B".spawn = ["pkill"] ++ config.custom.browsers.default.command;
             "Ctrl+Alt+D".spawn = ["waydroid" "session" "stop"];
             "Ctrl+Alt+Delete".spawn = ["loginctl" "terminate-user" config.custom.username];
             "Ctrl+Alt+E".spawn = ["pkill" "gnome-text-editor"];
@@ -55,6 +55,7 @@ in {
             "Ctrl+Alt+Q".spawn = ["bash" "-c" ''kill -9 "$(niri msg -j windows | jq '.[] | select(.is_focused == true).pid')"''];
             "Ctrl+Alt+Space".spawn = ["lifx" "toggle"];
             "Ctrl+Alt+T".spawn = ["pkill" "ghostty"];
+            "Ctrl+Shift+Alt+B".spawn = ["pkill"] ++ config.custom.browsers.default.commandWork;
             "Ctrl+Shift+Alt+G".spawn = ["pkill" "gamescope"];
             "Mod+0".spawn = ["dms" "ipc" "call" "audio" "mute"];
             "Mod+9".spawn = "audio";
@@ -66,7 +67,7 @@ in {
             "Mod+Alt+5".spawn = ["lifx" "state" "--kelvin" "5000"];
             "Mod+Alt+Escape".spawn = ["lifx" "state" "--color" "red"];
             "Mod+Apostrophe".spawn = ["dms" "screenshot"];
-            "Mod+B".spawn = [config.custom.browsers.default.command "--profile-directory=Default"];
+            "Mod+B".spawn = config.custom.browsers.default.command;
             "Mod+Backslash".spawn = ["dms" "ipc" "call" "inhibit" "toggle"];
             "Mod+Backspace".center-column = [];
             "Mod+Bracketleft".switch-layout = "prev";
@@ -114,7 +115,7 @@ in {
             "Mod+S".focus-column-or-monitor-right = [];
             "Mod+Shift+A".move-column-left-or-to-monitor-left = [];
             "Mod+Shift+Apostrophe".spawn-sh = "wl-paste | gradia";
-            "Mod+Shift+B".spawn = [config.custom.browsers.default.command "--profile-directory=Profile 2" "--window-name=Work"];
+            "Mod+Shift+B".spawn = config.custom.browsers.default.commandWork;
             "Mod+Shift+Backslash".spawn = "power";
             "Mod+Shift+D".spawn = ["waydroid" "app" "launch" "com.YoStarEN.Arknights"];
             "Mod+Shift+G".spawn = "steam-gamescope";
