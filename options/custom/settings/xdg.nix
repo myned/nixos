@@ -144,8 +144,8 @@ in {
               "text/x-scss" = gnome-text-editor;
               "video/mp4" = showtime;
               "video/x-matroska" = showtime;
-              "x-scheme-handler/http" = config.custom.browser.desktop;
-              "x-scheme-handler/https" = config.custom.browser.desktop;
+              "x-scheme-handler/http" = config.custom.browsers.default.desktop;
+              "x-scheme-handler/https" = config.custom.browsers.default.desktop;
             };
           };
 

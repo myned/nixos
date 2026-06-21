@@ -14,15 +14,22 @@ in {
   };
 
   config = mkIf cfg.enable {
+    custom.browsers.programs.firefox = {
+      appId = "firefox";
+      command = "firefox";
+      desktop = "firefox.desktop";
+    };
+
     home-manager.sharedModules = [
       {
         # https://www.mozilla.org/en-US/firefox/developer
         programs.firefox = mkMerge [
-          (import ./.common.nix {
-            inherit config inputs lib pkgs;
-            telemetry = true;
-            theme = true;
-          })
+          # TODO: Refactor into custom module
+          # (import ./.common.nix {
+          #   inherit config inputs lib pkgs;
+          #   telemetry = true;
+          #   theme = true;
+          # })
 
           {
             enable = true;

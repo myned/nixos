@@ -43,7 +43,7 @@ in {
             "Ctrl+Alt+3".spawn = ["lifx" "state" "--brightness" "0.50"];
             "Ctrl+Alt+4".spawn = ["lifx" "state" "--brightness" "0.75"];
             "Ctrl+Alt+5".spawn = ["lifx" "state" "--brightness" "1.00"];
-            "Ctrl+Alt+B".spawn = ["pkill" config.custom.browser.command];
+            "Ctrl+Alt+B".spawn = ["pkill" config.custom.browsers.default.command];
             "Ctrl+Alt+D".spawn = ["waydroid" "session" "stop"];
             "Ctrl+Alt+Delete".spawn = ["loginctl" "terminate-user" config.custom.username];
             "Ctrl+Alt+E".spawn = ["pkill" "gnome-text-editor"];
@@ -66,7 +66,7 @@ in {
             "Mod+Alt+5".spawn = ["lifx" "state" "--kelvin" "5000"];
             "Mod+Alt+Escape".spawn = ["lifx" "state" "--color" "red"];
             "Mod+Apostrophe".spawn = ["dms" "screenshot"];
-            "Mod+B".spawn = [config.custom.browser.command "--profile-directory=Default"];
+            "Mod+B".spawn = [config.custom.browsers.default.command "--profile-directory=Default"];
             "Mod+Backslash".spawn = ["dms" "ipc" "call" "inhibit" "toggle"];
             "Mod+Backspace".center-column = [];
             "Mod+Bracketleft".switch-layout = "prev";
@@ -114,7 +114,7 @@ in {
             "Mod+S".focus-column-or-monitor-right = [];
             "Mod+Shift+A".move-column-left-or-to-monitor-left = [];
             "Mod+Shift+Apostrophe".spawn-sh = "wl-paste | gradia";
-            "Mod+Shift+B".spawn = [config.custom.browser.command "--profile-directory=Profile 2" "--window-name=Work"];
+            "Mod+Shift+B".spawn = [config.custom.browsers.default.command "--profile-directory=Profile 2" "--window-name=Work"];
             "Mod+Shift+Backslash".spawn = "power";
             "Mod+Shift+D".spawn = ["waydroid" "app" "launch" "com.YoStarEN.Arknights"];
             "Mod+Shift+G".spawn = "steam-gamescope";
@@ -146,12 +146,12 @@ in {
             "Mod+X".set-column-width = "+10%";
             "Mod+Z".set-column-width = "-10%";
 
-            #// "Mod+B".spawn = [config.custom.browser.command "-P" "default"];
-            #// "Mod+Shift+B".spawn = [config.custom.browser.command "-P" "work" "--name" "firefox-work" "--no-remote"];
+            #// "Mod+B".spawn = [config.custom.browsers.default.command "-P" "default"];
+            #// "Mod+Shift+B".spawn = [config.custom.browsers.default.command "-P" "work" "--name" "firefox-work" "--no-remote"];
 
             # HACK: Spawn chromium work "profile" in separate data directory for app-id to take effect
             # https://issues.chromium.org/issues/40172351
-            #// "Mod+Shift+B".spawn = [config.custom.browser.command "--user-data-dir=${config.custom.programs.chromium.dataDir}-Work" "--class=${config.custom.browser.appId}-work"];
+            #// "Mod+Shift+B".spawn = [config.custom.browsers.default.command "--user-data-dir=${config.custom.programs.chromium.dataDir}-Work" "--class=${config.custom.browsers.default.appId}-work"];
 
             # BUG: Release binds execute with all binds involving that modifier
             # https://github.com/YaLTeR/niri/issues/605
