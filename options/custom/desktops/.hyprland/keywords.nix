@@ -77,18 +77,9 @@ in {
 
           # https://wiki.hyprland.org/Configuring/Keywords/#setting-the-environment
           #?? envd = VARIABLE, VALUE
-          # HACK: Mapped home-manager variables to envd in lieu of upstream fix
-          # https://github.com/nix-community/home-manager/issues/2659
-          envd = with builtins;
-            attrValues (
-              mapAttrs (
-                name: value: "${name}, ${toString value}"
-              )
-              hm.home.sessionVariables
-            )
-            ++ [
-              "EDITOR, ${gnome-text-editor}"
-            ];
+          envd = [
+            "EDITOR, ${gnome-text-editor}"
+          ];
 
           # https://wiki.hyprland.org/Configuring/Keywords/#executing
           exec = [

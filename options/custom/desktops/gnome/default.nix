@@ -16,37 +16,25 @@ in {
       example = true;
       type = types.bool;
     };
-
-    minimal = mkOption {
-      default = false;
-      description = "Whether to enable the minimum amount of GNOME services";
-      example = true;
-      type = types.bool;
-    };
   };
 
   config = mkIf cfg.enable {
     # https://wiki.nixos.org/wiki/GNOME
     # FIXME: xdg-desktop-portal-[gnome|gtk] not working through steam
     services = {
-      # Minimal installation
-      gnome = mkIf cfg.minimal {
-        core-os-services.enable = true;
-      };
+      desktopManager.gnome.enable = true;
 
       displayManager.autoLogin = {
         enable = cfg.autoLogin;
         user = config.custom.username;
       };
-
-      desktopManager.gnome.enable = !cfg.minimal;
     };
 
     # https://github.com/mjakeman/extension-manager
-    environment.systemPackages = optionals (!cfg.minimal) (with pkgs; [
+    environment.systemPackages = with pkgs; [
       gnome-extension-manager
       gnome-tweaks
-    ]);
+    ];
 
     # https://nix-community.github.io/stylix/options/modules/gnome.html
     stylix.targets.gnome.enable = true;

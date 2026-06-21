@@ -42,10 +42,6 @@ in {
             # https://wiki.nixos.org/wiki/GStreamer#nautilus:_%22Your_GStreamer_installation_is_missing_a_plug-in.%22
             GST_PLUGIN_PATH = "/run/current-system/sw/lib/gstreamer-1.0/";
           }
-          // optionalAttrs config.custom.desktops.tiling {
-            # https://github.com/krille-chan/fluffychat/wiki/Manual#i-use-tiling-wm-how-do-i-disable-the-title-bar
-            GTK_CSD = "0";
-          }
           // optionalAttrs cfg.wayland {
             # https://wiki.nixos.org/wiki/Wayland#Electron_and_Chromium
             ELECTRON_OZONE_PLATFORM_HINT = "auto";

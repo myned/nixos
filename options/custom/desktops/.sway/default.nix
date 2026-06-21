@@ -10,8 +10,6 @@ in {
 
   config = mkIf cfg.enable {
     custom.desktops = mkIf config.custom.full {
-      tiling = true;
-
       sway = {
         binds.enable = true;
         input.enable = true;
@@ -47,13 +45,7 @@ in {
           # HACK: Export mapped home-manager variables in lieu of upstream fix
           # https://github.com/nix-community/home-manager/issues/2659
           # https://nix-community.github.io/home-manager/options.xhtml#opt-wayland.windowManager.sway.extraSessionCommands
-          extraSessionCommands = with builtins;
-            concatStringsSep "\n" (attrValues
-              (
-                mapAttrs
-                (name: value: "export ${name}=${toString value}")
-                config.home-manager.users.${config.custom.username}.home.sessionVariables
-              ));
+          #// extraSessionCommands = '''';
 
           # Import some necessary variables from systemd
           # https://nix-community.github.io/home-manager/options.xhtml#opt-wayland.windowManager.sway.systemd.variables

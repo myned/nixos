@@ -31,9 +31,9 @@ in {
             xcursor-theme = name;
           };
 
-          # HACK: Inherit home-manager environment variables in lieu of upstream fix
-          # https://github.com/nix-community/home-manager/issues/2659
-          #// environment = mapAttrs (name: value: toString value) hm.home.sessionVariables;
+          environment = {
+            GTK_CSD = "0"; # https://github.com/krille-chan/fluffychat/wiki/Manual#i-use-tiling-wm-how-do-i-disable-the-title-bar
+          };
 
           #!! Not executed in a shell
           # https://github.com/YaLTeR/niri/wiki/Configuration:-Key-Bindings#spawn
