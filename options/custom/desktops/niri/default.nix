@@ -17,10 +17,7 @@ in {
 
   config = mkIf cfg.enable {
     custom.desktops = {
-      tiling = true;
       dms.enable = true;
-      gnome.enable = true;
-      gnome.minimal = true;
       niri.binds.enable = true;
       niri.input.enable = true;
       niri.layout.enable = true;
@@ -42,6 +39,7 @@ in {
     # https://github.com/niri-wm/niri/wiki/Xwayland
     environment.systemPackages = [pkgs.xwayland-satellite];
 
+    services.gnome.core-os-services.enable = true;
     xdg.portal.wlr.enable = true;
     xdg.portal.config.common.default = ["wlr" "gnome" "gtk"];
 
