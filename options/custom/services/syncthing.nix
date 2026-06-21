@@ -110,7 +110,6 @@ in {
         "SYNC/.backup" = folder "oxdvq-dfzjk" [];
         "SYNC/admin" = folder "l6odm-rmjep" [];
         "SYNC/android" = folder "y3omj-gpjch" ["myxel"];
-        "SYNC/android/media/camera" = folder "udj03-5kwod" ["myxel"];
         "SYNC/common" = folder "fcsij-g7cnw" ["myxel" "zendows" "zenix"];
         "SYNC/dev" = folder "fsmar-4wsd3" ["myxel"];
         "SYNC/edu" = folder "4nyqw-jfkq2" ["myxel"];
@@ -139,6 +138,8 @@ in {
   config = mkIf cfg.enable {
     home-manager.sharedModules = [
       {
+        #!! Imperative API configuration
+        #?? systemctl --user restart syncthing-init.service
         services.syncthing = {
           enable = true;
           guiAddress = "${config.custom.services.tailscale.ipv4}:8384";
@@ -162,7 +163,6 @@ in {
             # https://docs.syncthing.net/rest/config.html
             # Undocumented endpoints can be manually extended starting from /rest/config/*
             #?? "defaults/ignores" = {lines = [];};
-            gui.user = config.custom.username;
 
             # BUG: Defaults are not applied via API
             # https://github.com/syncthing/syncthing/issues/6748
