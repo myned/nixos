@@ -149,7 +149,7 @@ in {
                 "9+${super}+${shift}" = "move to workspace 9";
                 "a+${super}" = "[con_mark=android] scratchpad show";
                 "a+${super}+${shift}" = "exec ${waydroid} session stop";
-                "b+${super}" = "exec ${config.custom.browser.command}";
+                "b+${super}" = "exec ${config.custom.browsers.default.command}";
                 "backslash+${super}" = "split toggle";
                 "backslash+${super}+${shift}" = "split none";
                 "backspace+${super}" = "focus mode_toggle";

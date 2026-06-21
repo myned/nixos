@@ -189,7 +189,7 @@ in {
             (key "A" "Super" "scroller:movefocus" "l")
             (key "A" "Super+Ctrl" "scroller:alignwindow" "left")
             (key "A" "Super+Shift" "scroller:movewindow" "l")
-            (key "B" "Super" "exec" config.custom.browser.command)
+            (key "B" "Super" "exec" config.custom.browsers.default.command)
             (key "C" "Super" "exec" config.custom.menus.clipboard.show)
             (key "C" "Super+Shift" "exec" config.custom.menus.clipboard.clear)
             (key "D" "Super" "togglespecialworkspace" "android")
