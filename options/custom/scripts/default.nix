@@ -46,7 +46,7 @@ in {
         + "/bin/${name}";
     };
   in
-    mkIf config.custom.full (
+    mkIf cfg.enable (
       with pkgs;
         mkMerge (
           [
