@@ -18,10 +18,17 @@ in {
           };
 
           command = mkOption {
-            description = "Name of the executable that launches the browser";
-            default = name;
-            example = "firefox";
-            type = str;
+            description = "List of commands that launch the browser";
+            default = [name];
+            example = ["firefox"];
+            type = listOf str;
+          };
+
+          commandWork = mkOption {
+            description = "List of commands that launch the work browser profile";
+            default = [name];
+            example = ["chromium --profile-directory=Work"];
+            type = listOf str;
           };
 
           commandLineArgs = mkOption {

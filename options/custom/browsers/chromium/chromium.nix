@@ -14,7 +14,8 @@ in {
   config = mkIf cfg.enable {
     custom.browsers.programs.chromium = {
       appId = "chromium";
-      command = "chromium";
+      command = ["chromium" "--profile-directory=Default"];
+      commandWork = ["chromium" "--profile-directory=Profile 1" "--window-name=Work"];
       desktop = "chromium.desktop";
 
       # https://stackoverflow.com/questions/69363637/how-to-write-argument-for-chrome-chromiums-enable-features-flag
@@ -61,7 +62,7 @@ in {
               }
           ) (optionals config.custom.default [
               #// "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
-              "ddkjiahejlhfcafbddmgiahcphecmpfh" # uBlock Origin Lite
+              #// "ddkjiahejlhfcafbddmgiahcphecmpfh" # uBlock Origin Lite
             ]
             ++ optionals config.custom.full [
               #// "aeblfdkhhhdcdjpifhhbdiojplfjncoa" # 1Password

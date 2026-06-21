@@ -14,7 +14,8 @@ in {
   config = mkIf cfg.enable {
     custom.browsers.programs.brave = {
       appId = "brave";
-      command = "brave";
+      command = ["brave" "--profile-directory=Default"];
+      commandWork = ["brave" "--profile-directory=Profile 1" "--window-name=Work"];
       desktop = "brave.desktop";
     };
 

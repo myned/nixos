@@ -14,7 +14,8 @@ in {
   config = mkIf cfg.enable {
     custom.browsers.programs.google-chrome = {
       appId = "google-chrome";
-      command = "google-chrome";
+      command = ["google-chrome" "--profile-directory=Default"];
+      commandWork = ["google-chrome" "--profile-directory=Profile 1" "--window-name=Work"];
       desktop = "google-chrome.desktop";
     };
 
