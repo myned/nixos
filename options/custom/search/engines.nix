@@ -4,67 +4,6 @@
   ...
 }:
 with lib; {
-  options.custom.search.engines = mkOption {
-    description = "Submodules of search engines";
-
-    example = {
-      google = {
-        title = "Google";
-        shortcut = "g";
-        iconUrl = "https://www.gstatic.com/images/branding/searchlogo/ico/favicon.ico";
-        searchUrl = "https://google.com/search?q=%s";
-        suggestUrl = "https://www.google.com/complete/search?q=%s";
-      };
-    };
-
-    type = with types;
-      attrsOf (submodule ({name, ...}: {
-        options = {
-          name = mkOption {
-            description = "Name of the search engine";
-            default = name;
-            example = "google";
-            type = str;
-          };
-
-          title = mkOption {
-            description = "Title of the search engine";
-            default = "";
-            example = "Google";
-            type = str;
-          };
-
-          shortcut = mkOption {
-            description = "Shortcut keyword of the search engine";
-            default = "";
-            example = "g";
-            type = str;
-          };
-
-          iconUrl = mkOption {
-            description = "Icon URL of the search engine";
-            default = "";
-            example = "https://www.gstatic.com/images/branding/searchlogo/ico/favicon.ico";
-            type = str;
-          };
-
-          searchUrl = mkOption {
-            description = "Search URL of the search engine";
-            default = "";
-            example = "https://www.google.com/search?q=%s";
-            type = str;
-          };
-
-          suggestUrl = mkOption {
-            description = "Suggest URL of the search engine";
-            default = "";
-            example = "https://www.google.com/complete/search?q=%s";
-            type = str;
-          };
-        };
-      }));
-  };
-
   config = {
     custom.search.engines = {
       amazon = {
