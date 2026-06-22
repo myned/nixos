@@ -27,7 +27,9 @@ in {
           touchpad.click-method = "clickfinger"; # Multi-finger click
           touchpad.dwt = []; # Disable while typing
           touchpad.dwtp = []; # Disable while trackpointing
+          touchpad.natural-scroll = [];
           touchpad.scroll-factor = 0.3;
+          touchpad.tap = [];
           trackball.accel-profile = "adaptive";
           trackball.accel-speed = -0.7;
           trackball.left-handed = [];
