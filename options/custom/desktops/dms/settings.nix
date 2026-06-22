@@ -17,13 +17,24 @@ in {
         # https://danklinux.com/docs/dankmaterialshell/nixos-flake#settings-home-manager-only
         programs.dank-material-shell = {
           # https://raw.githubusercontent.com/AvengeMedia/DankMaterialShell/refs/heads/master/quickshell/Common/settings/SettingsSpec.js
-          settings = {
-            customThemeFile = ./themes/solarized.json; # https://danklinux.com/docs/dankmaterialshell/custom-themes
-          };
+          # settings = {
+          #   customThemeFile = ./themes/solarized.json; # https://danklinux.com/docs/dankmaterialshell/custom-themes
+          # };
 
           # https://raw.githubusercontent.com/AvengeMedia/DankMaterialShell/refs/heads/master/quickshell/Common/settings/SessionSpec.js
-          session = {};
+          #// session = {};
         };
+
+        #!! Imperative synced config files
+        xdg.configFile = listToAttrs (map (file:
+          nameValuePair "DankMaterialShell/${file}" {
+            source = hm.lib.file.mkOutOfStoreSymlink "${config.custom.syncDir}/linux/config/dms/${file}";
+            force = true;
+          }) [
+          "clsettings.json"
+          "plugin_settings.json"
+          "settings.json"
+        ]);
       }
     ];
   };

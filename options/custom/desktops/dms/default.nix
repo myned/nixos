@@ -18,7 +18,7 @@ in {
       greeter.enable = true;
       plugins.enable = true;
       search.enable = true;
-      #// settings.enable = true;
+      settings.enable = true;
     };
 
     home-manager.sharedModules = [
