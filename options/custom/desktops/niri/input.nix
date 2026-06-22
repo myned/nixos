@@ -32,7 +32,7 @@ in {
           touchpad.tap = [];
           trackball.accel-profile = "adaptive";
           trackball.accel-speed = -0.7;
-          trackball.left-handed = [];
+          #// trackball.left-handed = [];
           trackball.middle-emulation = [];
           trackball.natural-scroll = [];
           #// warp-mouse-to-focus = [];
