@@ -38,6 +38,7 @@ in {
       '';
     };
 
+    # TODO: Migrate to systemd oneshot service
     # Set power profile at boot/resume
     powerManagement = let
       set_profile = toString (pkgs.writeShellScript "set_profile" ''
