@@ -43,6 +43,7 @@ in {
           kaomojiPicker.enable = true; # https://github.com/hthienloc/dms-kaomoji-picker
           nixPackageRunner.enable = true; # https://github.com/iahccc/NixPackageRunner
           ocrScanner.enable = true; # https://github.com/hthienloc/dms-ocr-scanner
+          powerUsagePlugin.enable = true; # https://github.com/Daniel-42-z/dms-power-usage
           #// quickCapture.enable = true; # https://github.com/hthienloc/dms-quick-capture
           #// screenCaptureToolbar.enable = true; # https://github.com/JDKamalakar/DMS-ScreenCapture_Toolbar
           stopwatch.enable = true; # https://github.com/hthienloc/dms-stopwatch
