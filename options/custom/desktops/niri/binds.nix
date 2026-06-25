@@ -92,7 +92,7 @@ in {
             "Mod+D".spawn = ["waydroid" "show-full-ui"];
             "Mod+Delete".spawn = ["dms" "ipc" "call" "mpris" "playPause"];
             "Mod+Ctrl+Delete".spawn = ["dms" "ipc" "call" "powermenu" "toggle"];
-            "Mod+Down".spawn = ["dms" "ipc" "call" "brightness" "decrement" "5"];
+            "Mod+Down".spawn = ["dms" "ipc" "call" "brightness" "decrement" "5" ""];
             "Mod+E".spawn = ["gnome-text-editor" "--new-window"];
             "Mod+Equal".spawn = ["dms" "ipc" "call" "audio" "increment" "5"];
             "Mod+Escape".toggle-overview = [];
@@ -137,7 +137,7 @@ in {
             "Mod+T".spawn = "ghostty";
             "Mod+Tab".focus-window-previous = [];
             "Mod+U".spawn = "virt-manager";
-            "Mod+Up".spawn = ["dms" "ipc" "call" "brightness" "increment" "5"];
+            "Mod+Up".spawn = ["dms" "ipc" "call" "brightness" "increment" "5" ""];
             "Mod+V".spawn = ["dms" "ipc" "call" "clipboard" "toggle"];
             "Mod+W".focus-window-or-workspace-up = [];
             "Mod+WheelScrollDown".focus-window-or-workspace-down = [];
