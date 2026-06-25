@@ -28,13 +28,13 @@ in {
           touchpad.dwt = []; # Disable while typing
           touchpad.dwtp = []; # Disable while trackpointing
           touchpad.natural-scroll = [];
-          touchpad.scroll-factor = 0.3;
+          touchpad.scroll-factor = 0.5;
           touchpad.tap = [];
           trackball.accel-profile = "adaptive";
           trackball.accel-speed = -0.7;
           #// trackball.left-handed = [];
           trackball.middle-emulation = [];
-          trackball.natural-scroll = [];
+          #// trackball.natural-scroll = [];
           #// warp-mouse-to-focus = [];
           workspace-auto-back-and-forth = [];
         };
