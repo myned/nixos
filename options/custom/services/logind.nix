@@ -20,5 +20,9 @@ in {
         HandleLidSwitchExternalPower = "ignore";
       };
     };
+
+    systemd.sleep.settings.Sleep = {
+      AllowSuspendThenHibernate = "no"; # Disable suspend-then-hibernate as it causes unnecessary wakeups
+    };
   };
 }
