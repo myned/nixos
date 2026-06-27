@@ -213,7 +213,7 @@ in {
           #// syncthingtray # Syncthing client
           tagger # Music tagger
           #// teams-for-linux # Microsoft Teams client
-          #// telegram-desktop # Telegram client
+          telegram-desktop # Telegram client
           #// variety # Wallpaper changer
           ventoy-full-gtk # Image writer
           #// virt-viewer # Virtual machine viewer
