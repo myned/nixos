@@ -104,6 +104,7 @@ in {
           ### GUI applications
           alpaca # Ollama client
           amberol # Audio player
+          anytype # Knowledge base
           apostrophe # Markdown editor
           baobab # Disk usage analyzer
           bazaar # Flatpak software center
