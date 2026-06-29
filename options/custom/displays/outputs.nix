@@ -44,6 +44,13 @@ in {
             type = str;
           };
 
+          model = mkOption {
+            description = "Model of the output, preferred over connector name when supported";
+            default = null;
+            example = "Dell Inc. DELL P2422HE 6Z8G3V3";
+            type = nullOr str;
+          };
+
           enable = mkOption {
             description = "Whether to enable the output";
             default = true;

@@ -26,8 +26,18 @@ in {
         #?? niri msg outputs
         wayland.windowManager.niri.settings.output = mkIf (!cfg.kanshi) (mapAttrsToList (connector: output:
           with output; {
-            _args = [connector];
             inherit scale;
+            _args = [
+              (
+                if model != null
+                then model
+                else connector
+              )
+            ];
+            layout.default-column-width.proportion =
+              if ultrawide
+              then 0.3 # 30%
+              else 0.6; # 60%
             mode._args = ["${toString width}x${toString height}@${toString finalRefresh}"];
             mode._props.custom = force;
             position._props = {inherit x y;};
