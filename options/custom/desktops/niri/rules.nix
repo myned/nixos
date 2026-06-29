@@ -33,15 +33,15 @@ in {
 
             chats = [
               {_props.app-id = "^cinny$";}
-              {_props.app-id = "^de\.schmidhuberj\.Flare$";}
+              {_props.app-id = "^de\\.schmidhuberj\\.Flare$";}
               {_props.app-id = "^discord$";}
               {_props.app-id = "^Element$";}
               {_props.app-id = "^fluffychat$";}
               {_props.app-id = "^nheko$";}
-              {_props.app-id = "^org\.gnome\.Fractal$";}
-              {_props.app-id = "^org\.telegram\.desktop$";}
+              {_props.app-id = "^org\\.gnome\\.Fractal$";}
+              {_props.app-id = "^org\\.telegram\\.desktop$";}
               {_props.app-id = "^signal$";}
-              {_props.app-id = "^so\.libdb\.dissent$";}
+              {_props.app-id = "^so\\.libdb\\.dissent$";}
               {_props.app-id = "^vesktop$";}
             ];
 
@@ -50,19 +50,19 @@ in {
             ];
 
             editors = [
-              {_props.app-id = "^org\.gnome\.TextEditor$";}
-              {_props.app-id = "^org\.wireshark\.Wireshark$";}
+              {_props.app-id = "^org\\.gnome\\.TextEditor$";}
+              {_props.app-id = "^org\\.wireshark\\.Wireshark$";}
             ];
 
             files = [
-              {_props.app-id = "^org\.gnome\.Nautilus$";}
+              {_props.app-id = "^org\\.gnome\\.Nautilus$";}
             ];
 
             games = [
-              {_props.app-id = "^.*\.(exe|x86_64)$";}
+              {_props.app-id = "^.*\\.(exe|x86_64)$";}
               {_props.app-id = "^love$";} # vrrtest
-              {_props.app-id = "^moe\.launcher\..+$";} # Anime Game Launcher
-              {_props.app-id = "^net\.retrodeck\.retrodeck$";}
+              {_props.app-id = "^moe\\.launcher\\..+$";} # Anime Game Launcher
+              {_props.app-id = "^net\\.retrodeck\\.retrodeck$";}
               {_props.app-id = "^steam_app_.+$";}
             ];
 
@@ -70,24 +70,24 @@ in {
               {_props.app-id = "^Capacities$";}
               {_props.app-id = "^code$";}
               {_props.app-id = "^codium$";}
-              {_props.app-id = "^dev\.zed\.Zed$";}
+              {_props.app-id = "^dev\\.zed\\.Zed$";}
               {_props.app-id = "^GitHub Desktop$";}
               {_props.app-id = "^obsidian$";}
             ];
 
             media = [
-              {_props.app-id = "^com\.github\.th_ch\.youtube_music$";}
-              {_props.app-id = "^org\.gnome\.Loupe$";}
+              {_props.app-id = "^com\\.github\\.th_ch\\.youtube_music$";}
+              {_props.app-id = "^org\\.gnome\\.Loupe$";}
               {_props.app-id = "^Spotify$";}
               {_props.app-id = "^totem$";}
               {_props.app-id = "^YouTube Music$";}
             ];
 
             office = [
-              {_props.app-id = "^draw\.io$";}
+              {_props.app-id = "^draw\\.io$";}
               {_props.app-id = "^libreoffice.*$";}
               {_props.app-id = "^ONLYOFFICE$";}
-              {_props.app-id = "^org\.gnome\.Papers$";}
+              {_props.app-id = "^org\\.gnome\\.Papers$";}
             ];
 
             picture-in-picture = [
@@ -95,7 +95,7 @@ in {
             ];
 
             previewer = [
-              {_props.app-id = "^org\.gnome\.NautilusPreviewer$";}
+              {_props.app-id = "^org\\.gnome\\.NautilusPreviewer$";}
             ];
 
             steam = [
@@ -107,10 +107,10 @@ in {
             ];
 
             terminals = [
-              {_props.app-id = "^com\.mitchellh\.ghostty$";}
+              {_props.app-id = "^com\\.mitchellh\\.ghostty$";}
               {_props.app-id = "^foot$";}
               {_props.app-id = "^kitty$";}
-              {_props.app-id = "^org\.wezfurlong\.wezterm$";}
+              {_props.app-id = "^org\\.wezfurlong\\.wezterm$";}
             ];
 
             vaults = [
@@ -128,7 +128,7 @@ in {
             vms = [
               {_props.app-id = "^(sdl-|wl|x)freerdp$";}
               {_props.app-id = "^looking-glass-client$";}
-              {_props.app-id = "^org\.remmina\.Remmina$";}
+              {_props.app-id = "^org\\.remmina\\.Remmina$";}
               {_props.app-id = "^.*virt-manager.*$";}
             ];
 
@@ -171,10 +171,7 @@ in {
               # Browsers
               match = browsers;
               exclude = picture-in-picture;
-              default-column-width.proportion =
-                if config.custom.displays.default.ultrawide
-                then 0.4
-                else 0.8;
+              default-column-width.proportion = 0.5;
             }
 
             {
@@ -217,10 +214,7 @@ in {
             {
               # IDEs
               match = ides;
-              default-column-width.proportion =
-                if config.custom.displays.default.ultrawide
-                then 0.5
-                else 0.8;
+              default-column-width.proportion = 0.5;
             }
 
             {
@@ -257,10 +251,7 @@ in {
             {
               # Previewer
               match = previewer;
-              default-column-width.proportion =
-                if config.custom.displays.default.ultrawide
-                then 0.4
-                else 0.8;
+              default-column-width.proportion = 0.5;
               default-window-height.proportion = 0.8;
               open-floating = true;
             }
@@ -284,10 +275,6 @@ in {
             {
               # Vaults
               match = vaults;
-              default-column-width.proportion =
-                if config.custom.displays.default.ultrawide
-                then 0.4
-                else 0.8;
             }
 
             {
