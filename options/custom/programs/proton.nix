@@ -41,6 +41,11 @@ in {
         #   enable = true;
         #   package = pkgs.${cfg.branch}.protonmail-bridge;
         # };
+
+        home.sessionVariables = {
+          # https://github.com/NixOS/nixpkgs/issues/497155#issuecomment-4260612741
+          PROTON_PASS_LINUX_KEYRING = "dbus"; # Fix keyring access on wayland
+        };
       }
     ];
   };
