@@ -13,10 +13,8 @@ in {
   config = mkIf cfg.enable {
     custom.services = mkMerge [
       (mkIf config.custom.default {
-        automatic-timezoned.enable = true;
         #// earlyoom.enable = true;
         fail2ban.enable = true;
-        geoclue2.enable = true;
         #// glances.enable = true;
         #// postfix.enable = true;
 
@@ -31,6 +29,7 @@ in {
         dbus.enable = true;
         flatpak.enable = true;
         fwupd.enable = true;
+        geoclue2.enable = true;
         #// kmscon.enable = true;
         libinput.enable = true;
         logind.enable = true;

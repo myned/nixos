@@ -18,8 +18,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    custom.services.geoclue2.apps = ["gammastep"];
-
     home-manager.sharedModules = [
       {
         # https://gitlab.com/chinstrap/gammastep
