@@ -13,9 +13,10 @@ in {
   };
 
   config = mkIf cfg.enable {
-    time.timeZone = mkIf config.custom.server "Etc/UTC";
     i18n.defaultLocale = mkIf config.custom.server "C.UTF-8"; # Recommended for consistency
     i18n.inputMethod.ibus.waylandFrontend = true;
+    time.timeZone = mkIf config.custom.server "Etc/UTC";
+    services.automatic-timezoned.enable = !config.custom.server && config.custom.services.geoclue2.enable; # https://github.com/maxbrunet/automatic-timezoned
 
     # https://wiki.nixos.org/wiki/Cross_Compiling
     boot.binfmt = {

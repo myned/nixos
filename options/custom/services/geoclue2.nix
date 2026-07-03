@@ -17,9 +17,6 @@ in {
     # https://man.archlinux.org/man/extra/geoclue/geoclue.5.en
     services.geoclue2.enable = true;
 
-    # https://github.com/maxbrunet/automatic-timezoned
-    services.automatic-timezoned.enable = config.time.timeZone == null;
-
     # HACK: Command not part of package outputs
     #?? where-am-i
     environment.shellAliases = {
