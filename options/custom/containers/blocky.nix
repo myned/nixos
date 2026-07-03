@@ -38,7 +38,7 @@ in {
         };
       };
 
-      services.resolved.extraConfig = "DNSStubListener=false"; # Allow binding to :53
+      services.resolved.settings.Resolve.DNSStubListener = false; # Allow binding to :53
       services.tailscale.extraUpFlags = ["--accept-dns=false"]; # Do not use Tailscale resolvers because this is a resolver
     };
   };

@@ -108,7 +108,7 @@ in {
         # https://wiki.nixos.org/wiki/Caddy#Plug-ins
         #?? Copy hash/tag from failed build
         package = pkgs.caddy.withPlugins {
-          hash = "sha256-2cwFbBuUfrgxJGbwGm+A4AqzuYMNGMui2rSMNjYjk9Y=";
+          hash = "sha256-gp+Qn+/d+2LggIzagN2bUKdvaEMlDAn3JKit5OymNUA=";
 
           #?? <repo>@<tag>
           plugins = [
@@ -197,7 +197,7 @@ in {
 
           # https://wiki.nixos.org/wiki/Matrix#Synapse_Admin_with_Caddy
           "synapse.admin.${config.custom.domain}".extraConfig = let
-            synapse-admin = pkgs.synapse-admin-etkecc.withConfig {
+            synapse-admin = pkgs.ketesa.withConfig {
               restrictBaseUrl = ["https://matrix.${config.custom.domain}"];
             };
           in

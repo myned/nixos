@@ -16,7 +16,7 @@ in {
     home-manager.sharedModules = [
       {
         # https://github.com/AvengeMedia/dms-plugin-registry
-        imports = [inputs.dms-plugin-registry.modules.default];
+        imports = [inputs.dms-plugin-registry.homeModules.default];
 
         # https://danklinux.com/plugins
         # https://danklinux.com/docs/dankmaterialshell/plugins-overview
