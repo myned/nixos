@@ -22,6 +22,7 @@ in {
       #?? https://source.chromium.org/chromium/chromium/src/+/main:chrome/browser/about_flags.cc
       commandLineArgs = let
         enable-features = concatStringsSep "," [
+          "BrowserInitiatedAutomaticPictureInPicture" # PiP on tab switch
           "OverlayScrollbar" # Enable overlay scrollbars
         ];
 
