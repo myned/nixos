@@ -35,7 +35,7 @@ in {
           #// trackball.left-handed = [];
           trackball.middle-emulation = [];
           #// trackball.natural-scroll = [];
-          #// warp-mouse-to-focus = [];
+          warp-mouse-to-focus = [];
           workspace-auto-back-and-forth = [];
         };
       }
