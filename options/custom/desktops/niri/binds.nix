@@ -16,11 +16,11 @@ in {
       {
         wayland.windowManager.niri.settings = {
           # https://github.com/niri-wm/niri/wiki/Configuration:-Switch-Events
-          switch-events = mkIf (config.custom.profile == "laptop") {
-            # Toggle only lid display
-            lid-close.spawn = ["niri" "msg" "output" "eDP-1" "off"];
-            lid-open.spawn = ["niri" "msg" "output" "eDP-1" "on"];
-          };
+          # switch-events = mkIf (config.custom.profile == "laptop") {
+          #   # Toggle only lid display
+          #   lid-close.spawn = ["niri" "msg" "output" "eDP-1" "off"];
+          #   lid-open.spawn = ["niri" "msg" "output" "eDP-1" "on"];
+          # };
 
           # https://danklinux.com/docs/dankmaterialshell/keybinds-ipc
           # https://github.com/YaLTeR/niri/wiki/Configuration:-Key-Bindings

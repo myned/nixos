@@ -60,9 +60,9 @@ in {
           settings.debug =
             {
               deactivate-unfocused-windows = [];
-              enable-overlay-planes = [];
+              #// enable-overlay-planes = [];
               honor-xdg-activation-with-invalid-serial = [];
-              keep-laptop-panel-on-when-lid-is-closed = [];
+              #// keep-laptop-panel-on-when-lid-is-closed = [];
             }
             // optionalAttrs config.custom.displays.default.vrr {
               skip-cursor-only-updates-during-vrr = [];
