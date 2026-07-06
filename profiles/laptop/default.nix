@@ -1,8 +1,13 @@
-{
+{config, ...}: {
   custom = {
     full = true;
     profile = "laptop";
     desktop = "niri";
+
+    arion = {
+      enable = true;
+      user = config.custom.username;
+    };
 
     services = {
       #// auto-cpufreq.enable = true;

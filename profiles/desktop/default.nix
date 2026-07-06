@@ -1,19 +1,12 @@
-{
-  config,
-  lib,
-  ...
-}:
-with lib; {
+{config, ...}: {
   custom = {
     full = true;
     profile = "desktop";
     desktop = "niri";
 
     arion = {
+      enable = true;
       user = config.custom.username;
-    };
-
-    containers = {
     };
 
     games = {
