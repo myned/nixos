@@ -16,7 +16,7 @@ in {
     # https://github.com/fwupd/fwupd
     services.fwupd = {
       enable = true;
-      extraRemotes = ["lvfs-testing"];
+      #// extraRemotes = ["lvfs-testing"];
     };
   };
 }
