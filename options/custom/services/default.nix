@@ -34,7 +34,7 @@ in {
         libinput.enable = true;
         logind.enable = true;
         pipewire.enable = true;
-        playerctld.enable = true;
+        #// playerctld.enable = true;
         syncthing.enable = true;
         udev.enable = true;
         upower.enable = true;
@@ -53,19 +53,19 @@ in {
         gammastep.enable = true;
         #// gdm.enable = true;
         gnome-keyring.enable = true;
-        gpg-agent.enable = true;
+        #// gpg-agent.enable = true;
         #// greetd.enable = true;
-        kdeconnect.enable = true;
+        #// kdeconnect.enable = true;
         keyd.enable = true;
-        ntfy.enable = true;
-        ollama.enable = true;
+        #// ntfy.enable = true;
+        #// ollama.enable = true;
         #// openrazer.enable = true;
         printing.enable = true;
         ratbagd.enable = true;
-        samba.enable = true;
+        #// samba.enable = true;
         #// swaync.enable = true;
         #// swayosd.enable = true;
-        sysprof.enable = true;
+        #// sysprof.enable = true;
         usbmuxd.enable = true;
       })
     ];

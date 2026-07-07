@@ -220,20 +220,20 @@ in {
             # https://zed.dev/docs/ai/edit-prediction#self-hosted-openai-compatible-servers
             # https://docs.ollama.com/api/openai-compatibility
             agent.default_profile = "ask";
-            agent.default_model.model = config.custom.services.ollama.models.agent;
-            agent.default_model.provider = "ollama";
+            #// agent.default_model.model = config.custom.services.ollama.models.agent;
+            #// agent.default_model.provider = "ollama";
             agent.default_width = 300;
             agent.enable_feedback = false;
             agent.enable_thinking = true;
             edit_predictions.disabled_globs = ["**env**" "**key**" "**log**" "**secret**" "**tmp**"];
             edit_predictions.mode = "subtle";
-            edit_predictions.ollama.model = config.custom.services.ollama.models.completion;
-            edit_predictions.ollama.prompt_format = "qwen";
-            edit_predictions.provider = "ollama";
+            #// edit_predictions.ollama.model = config.custom.services.ollama.models.completion;
+            #// edit_predictions.ollama.prompt_format = "qwen";
+            #// edit_predictions.provider = "ollama";
             edit_predictions_disabled_in = ["comment"];
-            language_models.ollama.api_url = "http://${config.custom.services.ollama.server}:11434";
-            language_models.ollama.auto_discover = true;
-            language_models.ollama.context_window = toInt config.services.ollama.environmentVariables.OLLAMA_CONTEXT_LENGTH;
+            #// language_models.ollama.api_url = "http://${config.custom.services.ollama.server}:11434";
+            #// language_models.ollama.auto_discover = true;
+            #// language_models.ollama.context_window = toInt config.services.ollama.environmentVariables.OLLAMA_CONTEXT_LENGTH;
 
             # Filetype associations
             # https://zed.dev/docs/configuring-languages#file-associations
