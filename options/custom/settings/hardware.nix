@@ -62,6 +62,10 @@ in {
   };
 
   config = mkIf cfg.enable {
+    environment.systemPackages = optionals (cfg.cpu == "amd") (with pkgs; [
+      amd-debug-tools
+    ]);
+
     hardware =
       {
         enableAllFirmware = config.custom.default; # Non-free firmware
