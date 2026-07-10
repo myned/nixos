@@ -183,6 +183,7 @@ in {
           #// monitorets # System monitor
           newsflash # RSS feed
           #// nicotine-plus # SoulSeek client
+          notesnook # Encrypted notes
           obsidian # Knowledge base
           #// pantheon.switchboard-with-plugs # System settings
           papers # Document viewer
