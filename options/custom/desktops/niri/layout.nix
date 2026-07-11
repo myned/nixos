@@ -37,7 +37,7 @@ in {
           tab-indicator.length._props.total-proportion = 0.95;
           #// tab-indicator.place-within-column = [];
           tab-indicator.position = "bottom";
-          tab-indicator.width = config.custom.border + 2;
+          tab-indicator.width = config.custom.gap / 2;
 
           default-column-width.proportion =
             if config.custom.displays.default.ultrawide
