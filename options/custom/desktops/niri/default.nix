@@ -41,7 +41,7 @@ in {
 
     services.gnome.core-os-services.enable = true;
     xdg.portal.wlr.enable = true;
-    xdg.portal.config.common.default = ["wlr" "gnome" "gtk"];
+    xdg.portal.config.common.default = ["gnome" "gtk" "wlr"];
 
     home-manager.sharedModules = [
       {
