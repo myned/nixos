@@ -118,6 +118,8 @@ in {
           #// clapper # Video player
           #// clickup # Project/task manager
           concessio # Permissions converter
+          constrict # Video compressor
+          curtail # Image compressor
           czkawka # Duplicate file finder
           d-spy # D-Bus introspection
           decibels # Audio player
