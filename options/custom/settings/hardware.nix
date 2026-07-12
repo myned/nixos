@@ -62,10 +62,13 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = optionals (cfg.cpu == "amd") (with pkgs; [
-      amd-debug-tools
-      amdgpu_top
-    ]);
+    environment.systemPackages = with pkgs;
+      optionals (cfg.cpu == "amd") [
+        amd-debug-tools
+      ]
+      ++ optionals (cfg.dgpu.driver == "amdgpu" || cfg.igpu.driver == "amdgpu") [
+        amdgpu_top
+      ];
 
     hardware =
       {
