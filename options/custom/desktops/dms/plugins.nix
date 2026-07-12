@@ -30,6 +30,7 @@ in {
 
           # Third-party
           #// activateLinux.enable = true; # https://github.com/hthienloc/dms-activate-linux
+          amdGpuMonitor.enable = true; # https://github.com/navidagz/dms-amd-gpu-monitor
           bongoCat.enable = true; # https://github.com/hthienloc/dms-bongo-cat
           calculator.enable = true; # https://github.com/rochacbruno/DankCalculator
           dankDiskUsage.enable = true; # https://github.com/alcxyz/DankDiskUsage
