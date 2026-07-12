@@ -64,6 +64,7 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = optionals (cfg.cpu == "amd") (with pkgs; [
       amd-debug-tools
+      amdgpu_top
     ]);
 
     hardware =
