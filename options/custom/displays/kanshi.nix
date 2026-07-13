@@ -34,7 +34,7 @@ in {
                       else "disable";
 
                     mode = "${
-                      if force && !config.custom.displays.forceAtBoot
+                      if force && !forceAtBoot
                       then "--custom "
                       else ""
                     }${toString width}x${toString height}@${toString finalRefresh}";

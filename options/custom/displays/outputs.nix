@@ -58,8 +58,22 @@ in {
             type = bool;
           };
 
+          dynamic = mkOption {
+            description = "Whether the output is configured dynamically at runtime instead of statically via nix";
+            default = true;
+            example = false;
+            type = bool;
+          };
+
           force = mkOption {
             description = "Whether to force the mode of the output";
+            default = false;
+            example = true;
+            type = bool;
+          };
+
+          forceAtBoot = mkOption {
+            description = "Whether to force the mode of the output at boot";
             default = false;
             example = true;
             type = bool;
@@ -145,6 +159,13 @@ in {
             default = 1.0;
             example = 1.5;
             type = float;
+          };
+
+          transform = mkOption {
+            description = "Transformation to apply to the output";
+            default = "0";
+            example = "90";
+            type = types.enum ["0" "90" "180" "270" "-0" "-90" "-180" "-270"];
           };
         };
       }));
