@@ -14,34 +14,46 @@ with lib; {
   custom = {
     hostname = "myork";
 
-    displays.outputs = rec {
-      eDP-1 = rec {
-        model = "BOE 0x0BCA Unknown";
-        x = 0; # Leftmost
-        y = floor (DP-9.height / DP-9.scale - height / scale); # Bottom-aligned
-        width = 2256;
-        height = 1504;
-        scale = 1.5;
-      };
+    displays.outputs = {
+      # eDP-1 = rec {
+      #   model = "BOE 0x0BCA Unknown";
+      #   x = 0; # Left
+      #   y = floor (DP-9.height / DP-9.scale - height / scale); # Bottom-aligned with center
+      #   width = 2256;
+      #   height = 1504;
+      #   scale = 1.5;
+      #   forceAtBoot = true;
+      # };
 
-      DP-10 = rec {
-        model = "Dell Inc. DELL P2422HE 6Z8G3V3";
-        x = floor (eDP-1.width / eDP-1.scale); # Left
-        y = floor (DP-9.height / DP-9.scale - height); # Bottom-aligned
+      # DP-9 = rec {
+      #   model = "Dell Inc. DELL S3425DW 26M7GD4";
+      #   x = floor (eDP-1.width / eDP-1.scale); # Center
+      #   y = 0;
+      #   width = 3440;
+      #   height = 1440;
+      #   finalRefresh = 99.982;
+      #   scale = 1.1;
+      #   forceAtBoot = true;
+      # };
+
+      # DP-10 = rec {
+      #   model = "Dell Inc. DELL P2422HE 6Z8G3V3";
+      #   x = floor (eDP-1.width / eDP-1.scale + DP-9.width / DP-9.scale); # Right
+      #   y = floor (height - DP-9.height / DP-9.scale);
+      #   width = 1920;
+      #   height = 1080;
+      #   refresh = 75;
+      #   transform = "90";
+      #   force = true;
+      #   forceAtBoot = true;
+      # };
+
+      DP-10 = {
         width = 1920;
         height = 1080;
         refresh = 75;
         force = true;
-      };
-
-      DP-9 = {
-        model = "Dell Inc. DELL S3425DW 26M7GD4";
-        x = floor (eDP-1.width / eDP-1.scale + DP-10.width); # Center
-        y = 0;
-        width = 3440;
-        height = 1440;
-        finalRefresh = 99.982;
-        scale = 1.1;
+        forceAtBoot = true;
       };
     };
 
