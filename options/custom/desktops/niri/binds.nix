@@ -106,7 +106,7 @@ in {
             "Mod+M".spawn = "pear-desktop";
             "Mod+Minus".spawn = ["dms" "ipc" "call" "audio" "decrement" "5"];
             "Mod+N".spawn = ["dms" "ipc" "call" "notepad" "toggle"];
-            "Mod+O".spawn = ["dms" "color" "pick"];
+            "Mod+O".spawn = ["dms" "color" "pick" "--autocopy"];
             "Mod+P".spawn = "proton-pass";
             "Mod+Q".close-window = [];
             "Mod+R".focus-window-or-workspace-down = [];
