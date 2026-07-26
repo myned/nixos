@@ -36,15 +36,16 @@ in {
           enable = true;
           vencord.useSystem = true;
 
+          #!! Imperative cloud sync
           # https://github.com/Vencord/Vesktop/blob/main/src/shared/settings.d.ts
-          settings = {
-            customTitleBar = true;
-            disableMinSize = true;
-            enableSplashScreen = false;
-            hardwareAcceleration = true;
-            hardwareVideoAcceleration = true;
-            tray = false;
-          };
+          # settings = {
+          #   customTitleBar = true;
+          #   disableMinSize = true;
+          #   enableSplashScreen = false;
+          #   hardwareAcceleration = true;
+          #   hardwareVideoAcceleration = true;
+          #   tray = false;
+          # };
         };
 
         # https://betterdiscord.app/
