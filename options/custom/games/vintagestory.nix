@@ -19,10 +19,10 @@ in {
     home-manager.sharedModules = [
       {
         # https://github.com/PierreBorine/vintagestory-nix/tree/master/tools
-        imports = [inputs.vintagestory-nix.homeModules.vs-launcher];
+        imports = [inputs.vintagestory-nix.homeModules.mvl];
 
-        # https://github.com/XurxoMF/vs-launcher
-        programs.vs-launcher = {
+        # https://github.com/scgm0/MVL
+        programs.mvl = {
           enable = true;
           settings.gameVersions = [inputs.vintagestory-nix.packages.${pkgs.system}.v1-22-0];
         };
