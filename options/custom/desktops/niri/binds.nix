@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -28,6 +29,15 @@ in {
           #?? Mod = Super/Win, Alt when nested; Mod5 = AltGr
           #?? wev
           binds = let
+            # Toggle PPD profile
+            power = toString (pkgs.writeShellScript "power" ''
+              if [[ "$(powerprofilesctl get)" == 'power-saver' ]]; then
+                powerprofilesctl set balanced
+              else
+                powerprofilesctl set power-saver
+              fi
+            '');
+
             # Launch VM
             vm = [
               "bash"
@@ -68,7 +78,7 @@ in {
             "Mod+Alt+Escape".spawn = ["lifx" "state" "--color" "red"];
             "Mod+Apostrophe".spawn = ["dms" "screenshot"];
             "Mod+B".spawn = config.custom.browsers.default.command;
-            "Mod+Backslash".spawn = ["dms" "ipc" "call" "inhibit" "toggle"];
+            "Mod+Backslash".spawn = ["dms" "ipc" "call" "notifications" "toggle"];
             "Mod+Backspace".center-column = [];
             "Mod+Bracketleft".switch-layout = "prev";
             "Mod+Bracketright".switch-layout = "next";
@@ -108,6 +118,7 @@ in {
             "Mod+N".spawn = ["dms" "ipc" "call" "notepad" "toggle"];
             "Mod+O".spawn = ["dms" "color" "pick" "--autocopy"];
             "Mod+P".spawn = "proton-pass";
+            "Mod+Period".spawn = ["dms" "ipc" "call" "inhibit" "toggle"];
             "Mod+Q".close-window = [];
             "Mod+R".focus-window-or-workspace-down = [];
             "Mod+Return".maximize-column = [];
@@ -116,11 +127,12 @@ in {
             "Mod+Shift+A".move-column-left-or-to-monitor-left = [];
             "Mod+Shift+Apostrophe".spawn-sh = "wl-paste | gradia";
             "Mod+Shift+B".spawn = config.custom.browsers.default.commandWork;
-            "Mod+Shift+Backslash".spawn = "power";
+            "Mod+Shift+Backslash".spawn = ["dms" "ipc" "notifications" "toggleDoNotDisturb"];
             "Mod+Shift+D".spawn = ["waydroid" "app" "launch" "com.YoStarEN.Arknights"];
             "Mod+Shift+G".spawn = "steam-gamescope";
             "Mod+Shift+Grave".focus-monitor-previous = [];
             "Mod+Shift+L".spawn = ["systemctl" "sleep"];
+            "Mod+Shift+Period".spawn = power;
             "Mod+Shift+R".move-window-down-or-to-workspace-down = [];
             "Mod+Shift+Return".fullscreen-window = [];
             "Mod+Shift+S".move-column-right-or-to-monitor-right = [];
@@ -159,7 +171,6 @@ in {
             "Mod+Space".spawn = ["dms" "ipc" "call" "spotlight" "toggle"];
             "Mod+Ctrl+Space".spawn = ["dms" "ipc" "call" "control-center" "toggle"];
             "Mod+Ctrl+Shift+Space".spawn = ["dms" "ipc" "call" "processlist" "focusOrToggle"];
-            "Mod+Shift+Space".spawn = ["dms" "ipc" "call" "notifications" "toggle"];
 
             # Media keys
             # https://github.com/xkbcommon/libxkbcommon/blob/master/include/xkbcommon/xkbcommon-keysyms.h
