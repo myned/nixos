@@ -12,7 +12,7 @@ in {
     enable = mkEnableOption "discord";
 
     client = mkOption {
-      default = "vesktop";
+      default = null;
       type = with types; nullOr (enum ["betterdiscord" "dissent" "vesktop"]);
     };
   };
