@@ -116,7 +116,7 @@ in {
         "SYNC/game" = folder "xvdpp-mxlki" ["myeck" "zendows" "zenix"];
         "SYNC/linux" = folder "ieikk-bnm7u" [];
         "SYNC/mac" = folder "yjmt6-z7u4m" [];
-        "SYNC/pup" = folder "ervqc-ebnzz" [];
+        "SYNC/pup" = folder "ervqc-ebnzz" ["myxel"];
         "SYNC/windows" = folder "2hmna-vfap9" [];
         "SYNC/work" = folder "zjp26-nb3nd" ["myxel"];
         "ZEL/android" = folder "gn2l3-2hxtu" ["zendows" "zenix" "zexel"] // {type = "receiveonly";};
@@ -189,7 +189,7 @@ in {
               myeck.id = "77DCMIH-2O6C4TK-3VK5S27-GZ5IXXB-CTSZ3YG-LMPHZTT-L55WAPZ-SLX4LAI";
               mynix.id = "4VBPQMB-L2UIAQA-7IVLQUH-GXMY624-OECCFXN-JMCZI44-Q6MADRJ-4VPV6QK";
               myork.id = "L7CAFJP-NXNEZUY-V36HDXP-V6T5CHP-2YCYV3P-JCQV6ZH-JEDULBU-BABJLQP";
-              myxel.id = "47EJ5JW-XQGQBYV-ZW72UDF-J6MNFCG-BA3ETGS-KUY2SAT-G6L7AMN-6MWBLAB";
+              myxel.id = "G5NSHAX-HUINZXG-XSAZOX4-ZH5INKX-IZCZI4U-RXGPHDV-DXDT3X3-ITID7AK";
               zendows.id = "4JS6YSF-OBZFPYW-B3OUF4G-R6DVOZ4-KFAVGFY-NT4J223-E44HK3D-GPYAFQP";
               zenix.id = "NU4MRJM-KTD7SKM-D7ZBRBC-7KRBO7G-PTTIT2Y-LIYY7LW-2W3BAKF-TE2OPAX";
               zexel.id = "VYG4QAC-SY7ET5F-CHIPQUN-TP6P7WN-LQCT3HO-UBS73JG-ZGOKCLG-SHWZOAN";
