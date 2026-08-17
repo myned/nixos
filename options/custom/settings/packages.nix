@@ -48,6 +48,7 @@ in {
           lsof # List open files
           lz4 # Compression utility
           mesa-demos # Graphics tester
+          mtr # Ping/traceroute tester
           net-snmp # SNMP utils
           nix-output-monitor # Nix build parser
           nix-tree # Nix store explorer
