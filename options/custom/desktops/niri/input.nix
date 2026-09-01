@@ -13,7 +13,7 @@ in {
   config = mkIf cfg.enable {
     home-manager.sharedModules = [
       {
-        # https://github.com/YaLTeR/niri/wiki/Configuration:-Input
+        # https://github.com/niri-wm/niri/wiki/Configuration:-Input
         wayland.windowManager.niri.settings.input = {
           disable-power-key-handling = [];
           focus-follows-mouse = [];
@@ -21,7 +21,7 @@ in {
           keyboard.repeat-rate = 40;
           mouse.accel-profile = "adaptive"; # flat
           mouse.accel-speed = -0.8;
-          mouse.scroll-factor = 1.2;
+          mouse.scroll-factor = 1.1;
           touchpad.accel-profile = "adaptive";
           touchpad.accel-speed = 0.2;
           touchpad.click-method = "clickfinger"; # Multi-finger click

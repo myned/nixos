@@ -13,7 +13,7 @@ in {
   config = mkIf cfg.enable {
     home-manager.sharedModules = [
       {
-        # https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
+        # https://github.com/niri-wm/niri/wiki/Configuration:-Outputs
         #?? niri msg outputs
         wayland.windowManager.niri.settings.output = let
           # BUG: Outputs not merged with includes, so avoid defining outputs for dynamic config

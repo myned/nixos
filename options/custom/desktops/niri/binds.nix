@@ -24,7 +24,7 @@ in {
           # };
 
           # https://danklinux.com/docs/dankmaterialshell/keybinds-ipc
-          # https://github.com/YaLTeR/niri/wiki/Configuration:-Key-Bindings
+          # https://github.com/niri-wm/niri/wiki/Configuration:-Key-Bindings
           #?? niri msg action
           #?? Mod = Super/Win, Alt when nested; Mod5 = AltGr
           #?? wev
@@ -46,7 +46,7 @@ in {
             ];
           in {
             # TODO: Focus window if already launched
-            # https://github.com/YaLTeR/niri/discussions/267
+            # https://github.com/niri-wm/niri/discussions/267
             #?? niri msg action focus-window --id (niri msg -j windows | jq '.[] | select(.app_id == "";}.id')
             "Ctrl+Alt+1".spawn = ["lifx" "state" "--brightness" "0.01"];
             "Ctrl+Alt+2".spawn = ["lifx" "state" "--brightness" "0.25"];
@@ -75,7 +75,7 @@ in {
             "Mod+Alt+3".spawn = ["lifx" "state" "--kelvin" "3000"];
             "Mod+Alt+4".spawn = ["lifx" "state" "--kelvin" "4000"];
             "Mod+Alt+5".spawn = ["lifx" "state" "--kelvin" "5000"];
-            "Mod+Alt+Escape".spawn = ["lifx" "state" "--color" "red"];
+            "Mod+Alt+Grave".spawn = ["lifx" "state" "--color" "red"];
             "Mod+Apostrophe".spawn = ["dms" "screenshot"];
             "Mod+B".spawn = config.custom.browsers.default.command;
             "Mod+Backslash".spawn = ["dms" "ipc" "call" "notifications" "toggle"];
@@ -85,7 +85,10 @@ in {
             "Mod+Comma".spawn = ["dms" "ipc" "call" "settings" "focusOrToggle"];
             "Mod+Ctrl+A".consume-or-expel-window-left = [];
             "Mod+Ctrl+Apostrophe".screenshot-window = [];
+            "Mod+Ctrl+Backslash".spawn = ["dms" "ipc" "notifications" "toggleDoNotDisturb"];
             "Mod+Ctrl+Backspace".toggle-column-tabbed-display = [];
+            "Mod+Ctrl+Delete".spawn = ["dms" "ipc" "call" "powermenu" "toggle"];
+            "Mod+Ctrl+Escape".toggle-window-floating = [];
             "Mod+Ctrl+R".move-column-to-workspace-down = [];
             "Mod+Ctrl+S".consume-or-expel-window-right = [];
             "Mod+Ctrl+Shift+A".move-workspace-to-monitor-left = [];
@@ -94,21 +97,19 @@ in {
             "Mod+Ctrl+Shift+W".move-workspace-up = [];
             "Mod+Ctrl+Shift+X".set-window-height = "100%";
             "Mod+Ctrl+Shift+Z".set-window-height = "30%";
-            "Mod+Ctrl+Tab".toggle-window-floating = [];
             "Mod+Ctrl+U".spawn = vm;
             "Mod+Ctrl+W".move-column-to-workspace-up = [];
             "Mod+Ctrl+X".set-column-width = "100%";
             "Mod+Ctrl+Z".set-column-width = "30%";
             "Mod+D".spawn = ["waydroid" "show-full-ui"];
             "Mod+Delete".spawn = ["dms" "ipc" "call" "mpris" "playPause"];
-            "Mod+Ctrl+Delete".spawn = ["dms" "ipc" "call" "powermenu" "toggle"];
             "Mod+Down".spawn = ["dms" "ipc" "call" "brightness" "decrement" "5" ""];
             "Mod+E".spawn = ["gnome-text-editor" "--new-window"];
             "Mod+Equal".spawn = ["dms" "ipc" "call" "audio" "increment" "5"];
             "Mod+Escape".toggle-overview = [];
             "Mod+F".spawn = ["nautilus" "--new-window"];
             "Mod+G".spawn = "steam";
-            "Mod+Grave".focus-monitor-next = [];
+            "Mod+Grave".focus-workspace = "scratchpad";
             "Mod+I".spawn = "code";
             "Mod+K".spawn = "capacities";
             "Mod+L".spawn = ["loginctl" "lock-session"];
@@ -127,17 +128,18 @@ in {
             "Mod+Shift+A".move-column-left-or-to-monitor-left = [];
             "Mod+Shift+Apostrophe".spawn-sh = "wl-paste | gradia";
             "Mod+Shift+B".spawn = config.custom.browsers.default.commandWork;
-            "Mod+Shift+Backslash".spawn = ["dms" "ipc" "notifications" "toggleDoNotDisturb"];
+            "Mod+Shift+Backslash".spawn = ["dms" "ipc" "notifications" "clearAll"];
             "Mod+Shift+D".spawn = ["waydroid" "app" "launch" "com.YoStarEN.Arknights"];
+            "Mod+Shift+Escape".switch-focus-between-floating-and-tiling = [];
             "Mod+Shift+G".spawn = "steam-gamescope";
-            "Mod+Shift+Grave".focus-monitor-previous = [];
+            "Mod+Shift+Grave".focus-workspace = "work";
             "Mod+Shift+L".spawn = ["systemctl" "sleep"];
             "Mod+Shift+Period".spawn = power;
             "Mod+Shift+R".move-window-down-or-to-workspace-down = [];
             "Mod+Shift+Return".fullscreen-window = [];
             "Mod+Shift+S".move-column-right-or-to-monitor-right = [];
             "Mod+Shift+Slash".show-hotkey-overlay = [];
-            "Mod+Shift+Tab".switch-focus-between-floating-and-tiling = [];
+            "Mod+Shift+Tab".focus-monitor-previous = [];
             "Mod+Shift+W".move-window-up-or-to-workspace-up = [];
             "Mod+Shift+WheelScrollDown".move-window-down-or-to-workspace-down = [];
             "Mod+Shift+WheelScrollLeft".move-column-left-or-to-monitor-left = [];
@@ -167,7 +169,7 @@ in {
             #// "Mod+Shift+B".spawn = [config.custom.browsers.default.command "--user-data-dir=${config.custom.programs.chromium.dataDir}-Work" "--class=${config.custom.browsers.default.appId}-work"];
 
             # BUG: Release binds execute with all binds involving that modifier
-            # https://github.com/YaLTeR/niri/issues/605
+            # https://github.com/niri-wm/niri/issues/605
             "Mod+Space".spawn = ["dms" "ipc" "call" "spotlight" "toggle"];
             "Mod+Ctrl+Space".spawn = ["dms" "ipc" "call" "control-center" "toggle"];
             "Mod+Ctrl+Shift+Space".spawn = ["dms" "ipc" "call" "processlist" "focusOrToggle"];

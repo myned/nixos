@@ -16,7 +16,7 @@ in {
   config = mkIf cfg.enable {
     home-manager.sharedModules = [
       {
-        # https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous
+        # https://github.com/niri-wm/niri/wiki/Configuration:-Miscellaneous
         wayland.windowManager.niri.settings = {
           clipboard.disable-primary = [];
           hotkey-overlay.skip-at-startup = [];
@@ -36,7 +36,7 @@ in {
           };
 
           #!! Not executed in a shell
-          # https://github.com/YaLTeR/niri/wiki/Configuration:-Key-Bindings#spawn
+          # https://github.com/niri-wm/niri/wiki/Configuration:-Key-Bindings#spawn
           spawn-at-startup = [
             [audio "--init"] # Enforce audio profile state
             [config.custom.menus.clipboard.clear-silent] # Clear clipboard history

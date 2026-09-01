@@ -29,7 +29,7 @@ in {
     # https://codeberg.org/BANanaD3V/niri-nix
     nixpkgs.overlays = [inputs.niri-nix.overlays.niri-nix];
 
-    # https://github.com/YaLTeR/niri
+    # https://github.com/niri-wm/niri
     programs.niri = {
       enable = true;
       package = pkgs.niri;
@@ -56,7 +56,7 @@ in {
           package = config.programs.niri.package;
 
           # https://codeberg.org/BANanaD3V/niri-nix/src/branch/main/home-options.md#wayland-windowmanager-niri-settings
-          # https://github.com/YaLTeR/niri/wiki/Configuration:-Debug-Options
+          # https://github.com/niri-wm/niri/wiki/Configuration:-Debug-Options
           settings.debug =
             {
               deactivate-unfocused-windows = [];

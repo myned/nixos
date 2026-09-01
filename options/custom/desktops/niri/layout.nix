@@ -13,7 +13,7 @@ in {
   config = mkIf cfg.enable {
     home-manager.sharedModules = [
       {
-        # https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
+        # https://github.com/niri-wm/niri/wiki/Configuration:-Layout
         wayland.windowManager.niri.settings.layout = {
           always-center-single-column = [];
           background-color = "#073642";
