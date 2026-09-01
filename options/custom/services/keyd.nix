@@ -29,15 +29,16 @@ in {
         settings = {
           #// global.disable_modifier_guard = 1; # Disable extraneous Control injection
 
+          # FIXME: Does not disable with other modifiers
           control.esc = "toggle(qwerty)"; # Control+Esc toggles qwerty
           shift.shift = "capslock"; # Both Shifts toggle Capslock
 
-          "meta+control+shift" = {
-            # Mouse repeat macro
-            "," = "macro2(300, 100, leftmouse)";
-            "." = "macro2(300, 100, rightmouse)";
-            "/" = "macro2(300, 100, middlemouse)";
-          };
+          # meta.control.shift.esc = {
+          #   # Mouse repeat macro
+          #   "," = "macro2(300, 100, leftmouse)";
+          #   "." = "macro2(300, 100, rightmouse)";
+          #   "/" = "macro2(300, 100, middlemouse)";
+          # };
 
           # Emulate function keys
           function = {
