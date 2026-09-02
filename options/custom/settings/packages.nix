@@ -191,7 +191,7 @@ in {
           #// pantheon.switchboard-with-plugs # System settings
           papers # Document viewer
           #// path-of-building # Path of Exile planner
-          pear-desktop # YouTube Music client
+          #// pear-desktop # YouTube Music client
           picard # Music tagger
           pika-backup # Borg backup manager
           #// planify # Task manager
@@ -226,6 +226,7 @@ in {
           #// webex # Conferencing client
           wildcard # Regex tester
           #// wowup-cf # World of Warcraft addon manager
+          ytmdesktop # YouTube Music client
           #// xivlauncher # Final Fantasy XIV launcher
           #// zrythm # Digital audio workstation
 
