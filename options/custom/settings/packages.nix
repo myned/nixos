@@ -231,6 +231,7 @@ in {
           #// zrythm # Digital audio workstation
 
           ### CLI applications
+          adoptopenjdk-icedtea-web # javaws
           android-tools # adb/fastboot
           #// bitwarden-cli # Bitwarden client
           brightnessctl # Backlight changer
