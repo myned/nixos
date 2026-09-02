@@ -301,6 +301,7 @@ in {
       // optionalAttrs cfg.raid.enable {
         "/mnt/${cfg.raid.label}" = {
           device = "/dev/disk/by-label/${cfg.raid.label}";
+          fsType = "auto";
 
           options = [
             "compress=zstd"
