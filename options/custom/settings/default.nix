@@ -13,24 +13,24 @@ in {
   config = mkIf cfg.enable {
     custom.settings = mkMerge [
       (mkIf config.custom.default {
-        boot.enable = true;
-        environment.enable = true;
-        hardware.enable = true;
-        networking.enable = true;
-        packages.enable = true;
-        storage.enable = true;
-        users.enable = true;
+        boot.enable = mkDefault true;
+        environment.enable = mkDefault true;
+        hardware.enable = mkDefault true;
+        networking.enable = mkDefault true;
+        packages.enable = mkDefault true;
+        storage.enable = mkDefault true;
+        users.enable = mkDefault true;
       })
 
       (mkIf config.custom.minimal {
-        fonts.enable = true;
-        nixgl.enable = true;
-        stylix.enable = true;
-        xdg.enable = true;
+        fonts.enable = mkDefault true;
+        nixgl.enable = mkDefault true;
+        stylix.enable = mkDefault true;
+        xdg.enable = mkDefault true;
       })
 
       (mkIf config.custom.full {
-        waydroid.enable = true;
+        waydroid.enable = mkDefault true;
       })
     ];
   };

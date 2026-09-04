@@ -22,6 +22,7 @@ in {
     gap = mkOption {default = 10.0;};
     padding = mkOption {default = 51.0;}; # ?? journalctl --user -u waybar.service | grep height:
     rounding = mkOption {default = 16.0;};
+    container = mkOption {default = false;};
     vm = mkOption {default = false;};
     desktop = mkOption {default = null;};
     lockscreen = mkOption {default = "hyprlock";};

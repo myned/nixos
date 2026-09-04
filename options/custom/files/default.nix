@@ -12,10 +12,10 @@ in {
 
   config = mkIf cfg.enable {
     custom.files = {
-      agenix.enable = true;
-      dev.enable = true;
-      mnt.enable = true;
-      nixos.enable = true;
+      agenix.enable = mkDefault true;
+      dev.enable = mkDefault true;
+      mnt.enable = mkDefault true;
+      nixos.enable = mkDefault true;
     };
   };
 }

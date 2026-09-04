@@ -24,7 +24,7 @@ in {
       influxdb.enable = cfg.server == config.custom.hostname;
 
       collector = {
-        enable = !config.custom.vm;
+        enable = !config.custom.vm || !config.custom.container;
 
         # https://github.com/AnalogJ/scrutiny/blob/master/example.collector.yaml
         settings = {

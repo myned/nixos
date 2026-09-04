@@ -12,8 +12,8 @@ in {
 
   config = mkIf cfg.enable {
     custom.desktops = {
-      gnome.enable = config.custom.desktop == "gnome";
-      niri.enable = config.custom.desktop == "niri";
+      gnome.enable = mkDefault config.custom.desktop == "gnome";
+      niri.enable = mkDefault config.custom.desktop == "niri";
     };
   };
 }

@@ -63,11 +63,11 @@ in {
   };
 
   config = mkIf cfg.enable {
-    custom.browsers = mkDefault {
-      brave.enable = true;
-      chromium.enable = true;
-      google-chrome.enable = true;
-      #// firefox.enable = true;
+    custom.browsers = {
+      brave.enable = mkDefault true;
+      chromium.enable = mkDefault true;
+      google-chrome.enable = mkDefault true;
+      #// firefox.enable = mkDefault true;
     };
   };
 }
