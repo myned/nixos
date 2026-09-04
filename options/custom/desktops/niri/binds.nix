@@ -79,14 +79,14 @@ in {
             "Mod+Apostrophe".spawn = ["dms" "screenshot"];
             "Mod+B".spawn = config.custom.browsers.default.command;
             "Mod+Backslash".spawn = ["dms" "ipc" "call" "notifications" "toggle"];
-            "Mod+Backspace".center-column = [];
+            "Mod+Backspace".toggle-overview = [];
             "Mod+Bracketleft".switch-layout = "prev";
             "Mod+Bracketright".switch-layout = "next";
+            "Mod+C".center-column = [];
             "Mod+Comma".spawn = ["dms" "ipc" "call" "settings" "focusOrToggle"];
             "Mod+Ctrl+A".consume-or-expel-window-left = [];
             "Mod+Ctrl+Apostrophe".screenshot-window = [];
             "Mod+Ctrl+Backslash".spawn = ["dms" "ipc" "notifications" "toggleDoNotDisturb"];
-            "Mod+Ctrl+Backspace".toggle-column-tabbed-display = [];
             "Mod+Ctrl+Delete".spawn = ["dms" "ipc" "call" "powermenu" "toggle"];
             "Mod+Ctrl+Escape".toggle-window-floating = [];
             "Mod+Ctrl+R".move-column-to-workspace-down = [];
@@ -97,6 +97,7 @@ in {
             "Mod+Ctrl+Shift+W".move-workspace-up = [];
             "Mod+Ctrl+Shift+X".set-window-height = "100%";
             "Mod+Ctrl+Shift+Z".set-window-height = "30%";
+            "Mod+Ctrl+Tab".toggle-column-tabbed-display = [];
             "Mod+Ctrl+U".spawn = vm;
             "Mod+Ctrl+W".move-column-to-workspace-up = [];
             "Mod+Ctrl+X".set-column-width = "100%";
@@ -106,7 +107,7 @@ in {
             "Mod+Down".spawn = ["dms" "ipc" "call" "brightness" "decrement" "5" ""];
             "Mod+E".spawn = ["gnome-text-editor" "--new-window"];
             "Mod+Equal".spawn = ["dms" "ipc" "call" "audio" "increment" "5"];
-            "Mod+Escape".toggle-overview = [];
+            "Mod+Escape".switch-focus-between-floating-and-tiling = [];
             "Mod+F".spawn = ["nautilus" "--new-window"];
             "Mod+G".spawn = "steam";
             "Mod+Grave".focus-workspace = "scratchpad";
@@ -130,7 +131,6 @@ in {
             "Mod+Shift+B".spawn = config.custom.browsers.default.commandWork;
             "Mod+Shift+Backslash".spawn = ["dms" "ipc" "notifications" "clearAll"];
             "Mod+Shift+D".spawn = ["waydroid" "app" "launch" "com.YoStarEN.Arknights"];
-            "Mod+Shift+Escape".switch-focus-between-floating-and-tiling = [];
             "Mod+Shift+G".spawn = "steam-gamescope";
             "Mod+Shift+Grave".focus-workspace = "work";
             "Mod+Shift+L".spawn = ["systemctl" "sleep"];
