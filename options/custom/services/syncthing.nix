@@ -222,10 +222,14 @@ in {
             };
           };
 
+          # HACK: Manually replace .stignore files in configured sync folders
           tmpfiles.rules = let
             stignores = pkgs.writeText "stignores" (concatStringsSep "\n" cfg.ignores);
           in
-            forEach (attrNames cfg.folders) (folder: "C ${cfg.path}/${folder}/.stignore - - - - ${stignores}");
+            forEach (attrNames cfg.folders) (folder: ''
+              r ${cfg.path}/${folder}/.stignore - - - -
+              C ${cfg.path}/${folder}/.stignore - - - - ${stignores}
+            '');
         };
       }
     ];
