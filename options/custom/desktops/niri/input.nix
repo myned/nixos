@@ -21,7 +21,7 @@ in {
           keyboard.repeat-rate = 40;
           mouse.accel-profile = "adaptive"; # flat
           mouse.accel-speed = -0.8;
-          mouse.scroll-factor = 1.1;
+          mouse.scroll-factor = 1.2;
           touchpad.accel-profile = "adaptive";
           touchpad.accel-speed = 0.2;
           touchpad.click-method = "clickfinger"; # Multi-finger click
