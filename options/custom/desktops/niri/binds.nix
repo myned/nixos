@@ -139,7 +139,7 @@ in {
             "Mod+Shift+Return".fullscreen-window = [];
             "Mod+Shift+S".move-column-right-or-to-monitor-right = [];
             "Mod+Shift+Slash".show-hotkey-overlay = [];
-            "Mod+Shift+Tab".focus-monitor-previous = [];
+            "Mod+Shift+Tab".focus-window-previous = [];
             "Mod+Shift+W".move-window-up-or-to-workspace-up = [];
             "Mod+Shift+WheelScrollDown".move-window-down-or-to-workspace-down = [];
             "Mod+Shift+WheelScrollLeft".move-column-left-or-to-monitor-left = [];
@@ -149,7 +149,7 @@ in {
             "Mod+Shift+Z".set-window-height = "-10%";
             "Mod+Slash".spawn = ["sushi" "/tmp/wallpaper.png"];
             "Mod+T".spawn = "ghostty";
-            "Mod+Tab".focus-window-previous = [];
+            "Mod+Tab".focus-monitor-previous = [];
             "Mod+U".spawn = "virt-manager";
             "Mod+Up".spawn = ["dms" "ipc" "call" "brightness" "increment" "5" ""];
             "Mod+V".spawn = ["dms" "ipc" "call" "clipboard" "toggle"];
