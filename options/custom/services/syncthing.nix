@@ -22,7 +22,7 @@ in {
         "myork"
       ];
 
-      description = "List of devices to sync";
+      description = "List of devices to sync all folders";
       example = ["machine1" "machine2"];
       type = with types; listOf str;
     };
@@ -107,6 +107,7 @@ in {
       default = let
         folder = id: devices: {inherit id devices;};
       in {
+        "PACK" = folder "xqpgq-2inyd" ["echo-pc" "myxel"];
         "SYNC/.backup" = folder "oxdvq-dfzjk" [];
         "SYNC/admin" = folder "l6odm-rmjep" [];
         "SYNC/android" = folder "y3omj-gpjch" ["myxel"];
@@ -155,8 +156,8 @@ in {
             # https://docs.syncthing.net/users/config.html
             options = {
               localAnnounceEnabled = true; # 21027/udp
-              globalAnnounceEnabled = false; # Global discovery allows device spoofing
-              relaysEnabled = false;
+              globalAnnounceEnabled = true; # Global discovery allows device spoofing
+              relaysEnabled = true;
               urAccepted = 1; # Usage report enabled
               urSeen = 3; # Usage report version
             };
@@ -181,14 +182,12 @@ in {
                 ];
               }
               // value) {
-              myosh = {
-                introducer = true;
-                id = "PTZV7ID-UYR37CU-GNRWHF3-JI3OVQ4-4YT7T4V-HB735JT-YIC5GLB-NPY36Q4";
-              };
-
+              echo-pc.id = "QYL6DA6-3FBND4J-BV3BRHT-EOGKIZQ-G62Z46N-IJWD7QS-DV3CA3A-P32FDQT";
               myeck.id = "77DCMIH-2O6C4TK-3VK5S27-GZ5IXXB-CTSZ3YG-LMPHZTT-L55WAPZ-SLX4LAI";
               mynix.id = "4VBPQMB-L2UIAQA-7IVLQUH-GXMY624-OECCFXN-JMCZI44-Q6MADRJ-4VPV6QK";
               myork.id = "L7CAFJP-NXNEZUY-V36HDXP-V6T5CHP-2YCYV3P-JCQV6ZH-JEDULBU-BABJLQP";
+              myosh.id = "PTZV7ID-UYR37CU-GNRWHF3-JI3OVQ4-4YT7T4V-HB735JT-YIC5GLB-NPY36Q4";
+              myosh.introducer = true;
               myxel.id = "G5NSHAX-HUINZXG-XSAZOX4-ZH5INKX-IZCZI4U-RXGPHDV-DXDT3X3-ITID7AK";
               zendows.id = "4JS6YSF-OBZFPYW-B3OUF4G-R6DVOZ4-KFAVGFY-NT4J223-E44HK3D-GPYAFQP";
               zenix.id = "NU4MRJM-KTD7SKM-D7ZBRBC-7KRBO7G-PTTIT2Y-LIYY7LW-2W3BAKF-TE2OPAX";
