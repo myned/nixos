@@ -41,6 +41,7 @@ in {
       })
 
       (mkIf config.custom.full {
+        bitwig-studio.enable = mkDefault true;
         discord.enable = mkDefault true;
         distrobox.enable = mkDefault true;
         element-desktop.enable = mkDefault true;

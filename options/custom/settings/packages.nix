@@ -111,7 +111,6 @@ in {
           bazaar # Flatpak software center
           biblioteca # Documentation viewer
           #// bitwarden-desktop # Password manager
-          bitwig-studio # Digital audio workstation
           #// blackbox-terminal # Terminal
           bottles # Wine manager
           #// capacities # Knowledge base
