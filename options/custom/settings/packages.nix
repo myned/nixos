@@ -223,7 +223,7 @@ in {
           ventoy-full-gtk # Image writer
           #// virt-viewer # Virtual machine viewer
           #// vorta # Borg backup client
-          #// webex # Conferencing client
+          webex # Conferencing client
           wildcard # Regex tester
           #// wowup-cf # World of Warcraft addon manager
           ytmdesktop # YouTube Music client
