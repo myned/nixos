@@ -482,6 +482,26 @@
         "type": "github"
       }
     },
+    "musnix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1791575145,
+        "narHash": "sha256-A4dB6Yv1Q3ygHgYWefX2DLdbELN//mB+PbCxRMdjTeg=",
+        "owner": "musnix",
+        "repo": "musnix",
+        "rev": "6e86730c235db14e8cac6605dfc33f300ce9105e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "musnix",
+        "repo": "musnix",
+        "type": "github"
+      }
+    },
     "niri-nix": {
       "inputs": {
         "niri-unstable": "niri-unstable",
@@ -914,6 +934,7 @@
         "jovian-nixos": "jovian-nixos",
         "lanzaboote": "lanzaboote",
         "lifx-cli": "lifx-cli",
+        "musnix": "musnix",
         "niri-nix": "niri-nix",
         "nix-alien": "nix-alien",
         "nix-flatpak": "nix-flatpak",
