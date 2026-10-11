@@ -30,6 +30,7 @@ in {
       })
 
       (mkIf config.custom.full {
+        musnix.enable = mkDefault true;
         waydroid.enable = mkDefault true;
       })
     ];

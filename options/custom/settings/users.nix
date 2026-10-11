@@ -32,7 +32,7 @@ in {
 
         ${config.custom.username} = {
           isNormalUser = true;
-          extraGroups = ["input" "video" "wheel"];
+          extraGroups = ["audio" "input" "video" "wheel"];
           hashedPasswordFile = config.age.secrets."${config.custom.hostname}/users/${config.custom.username}.pass".path;
           uid = 1000;
         };

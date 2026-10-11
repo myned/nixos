@@ -68,6 +68,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # https://github.com/musnix/musnix
+    musnix = {
+      url = "github:musnix/musnix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # https://codeberg.org/BANanaD3V/niri-nix
     niri-nix = {
       url = "git+https://codeberg.org/BANanaD3V/niri-nix";
