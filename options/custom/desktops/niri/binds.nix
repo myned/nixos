@@ -54,7 +54,7 @@ in {
             "Ctrl+Alt+4".spawn = ["lifx" "state" "--brightness" "0.75"];
             "Ctrl+Alt+5".spawn = ["lifx" "state" "--brightness" "1.00"];
             "Ctrl+Alt+B".spawn = ["pkill"] ++ config.custom.browsers.default.command;
-            "Ctrl+Alt+D".spawn = ["waydroid" "session" "stop"];
+            "Ctrl+Alt+D".spawn = ["pkill" "bitwig-studio"];
             "Ctrl+Alt+Delete".spawn = ["loginctl" "terminate-user" config.custom.username];
             "Ctrl+Alt+E".spawn = ["pkill" "gnome-text-editor"];
             "Ctrl+Alt+G".spawn = ["pkill" "steam"];
@@ -96,7 +96,6 @@ in {
             "Mod+Ctrl+Apostrophe".screenshot-window = [];
             "Mod+Ctrl+Backslash".spawn = ["dms" "ipc" "notifications" "toggleDoNotDisturb"];
             "Mod+Ctrl+Delete".spawn = ["dms" "ipc" "call" "powermenu" "toggle"];
-            "Mod+Ctrl+Escape".toggle-window-floating = [];
             "Mod+Ctrl+R".move-column-to-workspace-down = [];
             "Mod+Ctrl+S".consume-or-expel-window-right = [];
             "Mod+Ctrl+Shift+A".move-workspace-to-monitor-left = [];
@@ -110,7 +109,7 @@ in {
             "Mod+Ctrl+W".move-column-to-workspace-up = [];
             "Mod+Ctrl+X".set-column-width = "100%";
             "Mod+Ctrl+Z".set-column-width = "30%";
-            "Mod+D".spawn = ["waydroid" "show-full-ui"];
+            "Mod+D".spawn = "bitwig-studio";
             "Mod+Delete".spawn = ["dms" "ipc" "call" "mpris" "playPause"];
             "Mod+Down".spawn = ["dms" "ipc" "call" "brightness" "decrement" "5" ""];
             "Mod+E".spawn = ["gnome-text-editor" "--new-window"];
@@ -118,7 +117,6 @@ in {
             "Mod+Escape".switch-focus-between-floating-and-tiling = [];
             "Mod+F".spawn = ["nautilus" "--new-window"];
             "Mod+G".spawn = "steam";
-            "Mod+Grave".focus-workspace = "scratchpad";
             "Mod+I".spawn = "code";
             "Mod+K".spawn = "capacities";
             "Mod+L".spawn = ["loginctl" "lock-session"];
@@ -138,9 +136,8 @@ in {
             "Mod+Shift+Apostrophe".spawn-sh = "wl-paste | gradia";
             "Mod+Shift+B".spawn = config.custom.browsers.default.commandWork;
             "Mod+Shift+Backslash".spawn = ["dms" "ipc" "notifications" "clearAll"];
-            "Mod+Shift+D".spawn = ["waydroid" "app" "launch" "com.YoStarEN.Arknights"];
+            "Mod+Shift+Escape".toggle-window-floating = [];
             "Mod+Shift+G".spawn = "steam-gamescope";
-            "Mod+Shift+Grave".focus-workspace = "work";
             "Mod+Shift+L".spawn = ["systemctl" "sleep"];
             "Mod+Shift+Period".spawn = power;
             "Mod+Shift+R".move-window-down-or-to-workspace-down = [];
