@@ -15,20 +15,20 @@ in {
       {
         wayland.windowManager.niri.settings = {
           # https://github.com/niri-wm/niri/wiki/Configuration:-Named-Workspaces
-          workspace = [
-            {_args = ["scratchpad"];}
+          # workspace = [
+          #   {_args = ["scratchpad"];}
 
-            {
-              _args = ["work"];
+          #   {
+          #     _args = ["work"];
 
-              layout = {
-                border.active-color = "#cb4b16";
-                focus-ring.active-color = "#cb4b16";
-                tab-indicator.active-color = "#cb4b16";
-                tab-indicator.inactive-color = "#cb4b1640";
-              };
-            }
-          ];
+          #     layout = {
+          #       border.active-color = "#cb4b16";
+          #       focus-ring.active-color = "#cb4b16";
+          #       tab-indicator.active-color = "#cb4b16";
+          #       tab-indicator.inactive-color = "#cb4b1640";
+          #     };
+          #   }
+          # ];
 
           # https://github.com/niri-wm/niri/wiki/Configuration:-Window-Rules
           #?? niri msg windows
@@ -164,7 +164,7 @@ in {
             {
               # Global floating
               match._props.is-floating = true;
-              baba-is-float = true;
+              #// baba-is-float = true;
               border.off = [];
               default-column-width = {};
               default-window-height = {};
