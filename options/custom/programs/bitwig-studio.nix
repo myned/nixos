@@ -13,6 +13,7 @@ in {
   };
 
   config = mkIf cfg.enable {
+    # https://www.bitwig.com/
     environment.systemPackages = [pkgs.unstable.bitwig-studio];
 
     home-manager.sharedModules = [
