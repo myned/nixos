@@ -109,9 +109,9 @@ with lib; {
     # https://wiki.archlinux.org/title/CPU_frequency_scaling#amd_pstate
     #// "amd_pstate=disable"
 
-    # Set maximum brightness adjustment
+    # Set maximum color depth adjustment with power saving
     # https://wiki.archlinux.org/title/Framework_Laptop_13#(AMD)_Washed-out_colors_when_using_power-profiles-daemon_in_power-saver_or_balanced_mode
-    "amdgpu.abmlevel=1" # 0-4
+    #// "amdgpu.abmlevel=4" # 0-4
 
     # Attempt to fix battery drain with suspend
     # https://wiki.archlinux.org/title/Framework_Laptop_13#Suspend-then-hibernate_on_AMD_version
