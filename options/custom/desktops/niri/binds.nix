@@ -94,7 +94,7 @@ in {
             "Mod+Comma".spawn = ["dms" "ipc" "call" "settings" "focusOrToggle"];
             "Mod+Ctrl+A".consume-or-expel-window-left = [];
             "Mod+Ctrl+Apostrophe".screenshot-window = [];
-            "Mod+Ctrl+Backslash".spawn = ["dms" "ipc" "notifications" "toggleDoNotDisturb"];
+            "Mod+Ctrl+Backslash".spawn = ["dms" "ipc" "notifications" "clearAll"];
             "Mod+Ctrl+Delete".spawn = ["dms" "ipc" "call" "powermenu" "toggle"];
             "Mod+Ctrl+R".move-column-to-workspace-down = [];
             "Mod+Ctrl+S".consume-or-expel-window-right = [];
@@ -119,7 +119,7 @@ in {
             "Mod+G".spawn = "steam";
             "Mod+I".spawn = "code";
             "Mod+K".spawn = "capacities";
-            "Mod+L".spawn = ["loginctl" "lock-session"];
+            "Mod+L".spawn-sh = "loginctl lock-session && niri msg action power-off-monitors";
             "Mod+Left".spawn = ["dms" "ipc" "call" "mpris" "previous"];
             "Mod+M".spawn = "pear-desktop";
             "Mod+Minus".spawn = ["dms" "ipc" "call" "audio" "decrement" "5"];
@@ -135,7 +135,7 @@ in {
             "Mod+Shift+A".move-column-left-or-to-monitor-left = [];
             "Mod+Shift+Apostrophe".spawn-sh = "wl-paste | gradia";
             "Mod+Shift+B".spawn = config.custom.browsers.default.commandWork;
-            "Mod+Shift+Backslash".spawn = ["dms" "ipc" "notifications" "clearAll"];
+            "Mod+Shift+Backslash".spawn = ["dms" "ipc" "notifications" "toggleDoNotDisturb"];
             "Mod+Shift+Escape".toggle-window-floating = [];
             "Mod+Shift+G".spawn = "steam-gamescope";
             "Mod+Shift+L".spawn = ["systemctl" "sleep"];
