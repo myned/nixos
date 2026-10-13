@@ -23,7 +23,7 @@
     };
 
     services = {
-      ollama.download = ["potato" "high"];
+      #// ollama.download = ["potato" "high"];
       power-profiles-daemon.enable = true;
       sunshine.enable = true;
 
