@@ -2,7 +2,6 @@
   config,
   inputs,
   lib,
-  pkgs,
   ...
 }:
 with lib; let
@@ -17,10 +16,5 @@ in {
 
   config = mkIf cfg.enable {
     musnix.enable = true;
-
-    # Plugins
-    environment.systemPackages = with pkgs.unstable; [
-      jc303 # https://github.com/midilab/jc303
-    ];
   };
 }

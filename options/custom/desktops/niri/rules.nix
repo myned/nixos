@@ -86,6 +86,7 @@ in {
               {_props.app-id = "^Capacities$";}
               {_props.app-id = "^code$";}
               {_props.app-id = "^codium$";}
+              {_props.app-id = "^com\\.bitwig\\.BitwigStudio$";}
               {_props.app-id = "^dev\\.zed\\.Zed$";}
               {_props.app-id = "^GitHub Desktop$";}
               {_props.app-id = "^obsidian$";}
