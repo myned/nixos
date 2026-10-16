@@ -115,6 +115,7 @@ in {
           bottles # Wine manager
           #// capacities # Knowledge base
           #// cartridges # Game library
+          cine # Video player
           cinny-desktop # Matrix client
           #// clapper # Video player
           #// clickup # Project/task manager
@@ -185,7 +186,7 @@ in {
           #// mission-center # System monitor
           #// monitorets # System monitor
           newsflash # RSS feed
-          #// nicotine-plus # SoulSeek client
+          nicotine-plus # SoulSeek client
           notesnook # Encrypted notes
           obsidian # Knowledge base
           #// pantheon.switchboard-with-plugs # System settings
@@ -204,7 +205,7 @@ in {
           resources # System monitor
           #// rewaita # Adwaita themer
           #// rustdesk-flutter # Remote desktop client
-          showtime # Video player
+          #// showtime # Video player
           signal-desktop # Signal client
           slack # Slack client
           smile # Emoji picker
