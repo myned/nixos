@@ -9,6 +9,7 @@ with lib; let
 
   #?? ls /run/current-system/sw/share/applications
   #?? ls /etc/profiles/per-user/myned/share/applications
+  amberol = "io.bassi.Amberol.desktop";
   apostrophe = "org.gnome.gitlab.somas.Apostrophe.desktop";
   clapper = "com.github.rafostar.Clapper.desktop";
   decibels = "org.gnome.Decibels.desktop";
@@ -94,14 +95,14 @@ in {
               "application/xml" = gnome-text-editor;
               "application/yaml" = gnome-text-editor;
               "application/zip" = file-roller;
-              "audio/aac" = decibels;
-              "audio/flac" = decibels;
-              "audio/midi" = decibels;
-              "audio/mpeg" = decibels;
-              "audio/ogg" = decibels;
-              "audio/opus" = decibels;
-              "audio/vnd.wave" = decibels;
-              "audio/vorbis" = decibels;
+              "audio/aac" = amberol;
+              "audio/flac" = amberol;
+              "audio/midi" = amberol;
+              "audio/mpeg" = amberol;
+              "audio/ogg" = amberol;
+              "audio/opus" = amberol;
+              "audio/vnd.wave" = amberol;
+              "audio/vorbis" = amberol;
               "audio/x-mod" = gnome-text-editor;
               "font/ttf" = font-viewer;
               "font/woff2" = font-viewer;
