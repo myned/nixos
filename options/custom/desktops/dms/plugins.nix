@@ -37,6 +37,7 @@ in {
       dankTranslate.enable = true; # https://github.com/alcxyz/DankTranslate
       #// dankVault.enable = true; # https://github.com/alcxyz/DankVault
       dnsSwitcher.enable = true; # https://github.com/JDKamalakar/DMS-DNS_Switcher
+      easyEffects.enable = true; # https://github.com/jonkristian/dms-easyeffects
       #// floaty.enable = true; # https://github.com/hthienloc/dms-floaty
       #// homeAssistantMonitor.enable = true; # https://github.com/xxyangyoulin/dms-plugin-hass
       ipIndicator.enable = true; # https://github.com/hthienloc/dms-ipIndicator

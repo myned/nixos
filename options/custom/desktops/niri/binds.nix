@@ -29,8 +29,39 @@ in {
           #?? Mod = Super/Win, Alt when nested; Mod5 = AltGr
           #?? wev
           binds = let
+            # Toggle EasyEffects bypass
+            toggle-easyeffects-bypass = toString (pkgs.writeShellScript "toggle-easyeffects-bypass" ''
+              if [[ "$(easyeffects -b 3)" == 1 ]]; then
+                easyeffects -b 2
+                notify-send "EasyEffects" "Bypass Disabled" --urgency low
+              else
+                easyeffects -b 1
+                notify-send "EasyEffects" "Bypass Enabled" --urgency low
+              fi
+            '');
+
+            # Toggle EasyEffects output profile
+            toggle-easyeffects-profile = toString (pkgs.writeShellScript "toggle-easyeffects-profile" ''
+              presets=($(easyeffects -p | sed '/Input presets:/,$d' | grep -P '\d+\t' | cut -f 2))
+              current="$(easyeffects -a output)"
+
+              for i in "''${!presets[@]}"; do
+                if [[ "''${presets[$i]}" == "$current" ]]; then
+                  # Loop from end back to start
+                  if [[ $i == $(( ''${#presets[@]} - 1 )) ]]; then
+                    n=0
+                  else
+                    n=$(( i + 1 ))
+                  fi
+
+                  easyeffects -l "''${presets[$n]}"
+                  notify-send "EasyEffects" "''${presets[$n]}" --urgency low
+                fi
+              done
+            '');
+
             # Toggle PPD profile
-            power = toString (pkgs.writeShellScript "power" ''
+            toggle-ppd-profile = toString (pkgs.writeShellScript "toggle-ppd-profile" ''
               if [[ "$(powerprofilesctl get)" == 'power-saver' ]]; then
                 powerprofilesctl set balanced
               else
@@ -39,7 +70,7 @@ in {
             '');
 
             # Launch VM
-            vm = [
+            launch-vm = [
               "bash"
               "-c"
               ''remote --vm --client=remmina --username=Myned --password="$(cat ${config.age.secrets."${config.custom.hostname}/vm/myndows.pass".path})" myndows''
@@ -76,7 +107,7 @@ in {
             "Mod+6".focus-workspace = 6;
             "Mod+7".focus-workspace = 7;
             "Mod+8".focus-workspace = 8;
-            "Mod+9".spawn = "audio";
+            "Mod+9".spawn = toggle-easyeffects-profile;
             "Mod+A".focus-column-or-monitor-left = [];
             "Mod+Alt+1".spawn = ["lifx" "state" "--kelvin" "1500"];
             "Mod+Alt+2".spawn = ["lifx" "state" "--kelvin" "2500"];
@@ -105,7 +136,7 @@ in {
             "Mod+Ctrl+Shift+X".set-window-height = "100%";
             "Mod+Ctrl+Shift+Z".set-window-height = "30%";
             "Mod+Ctrl+Tab".toggle-column-tabbed-display = [];
-            "Mod+Ctrl+U".spawn = vm;
+            "Mod+Ctrl+U".spawn = launch-vm;
             "Mod+Ctrl+W".move-column-to-workspace-up = [];
             "Mod+Ctrl+X".set-column-width = "100%";
             "Mod+Ctrl+Z".set-column-width = "30%";
@@ -132,6 +163,7 @@ in {
             "Mod+Return".maximize-column = [];
             "Mod+Right".spawn = ["dms" "ipc" "call" "mpris" "next"];
             "Mod+S".focus-column-or-monitor-right = [];
+            "Mod+Shift+9".spawn = toggle-easyeffects-bypass;
             "Mod+Shift+A".move-column-left-or-to-monitor-left = [];
             "Mod+Shift+Apostrophe".spawn-sh = "wl-paste | gradia";
             "Mod+Shift+B".spawn = config.custom.browsers.default.commandWork;
@@ -139,7 +171,7 @@ in {
             "Mod+Shift+Escape".toggle-window-floating = [];
             "Mod+Shift+G".spawn = "steam-gamescope";
             "Mod+Shift+L".spawn = ["systemctl" "sleep"];
-            "Mod+Shift+Period".spawn = power;
+            "Mod+Shift+Period".spawn = toggle-ppd-profile;
             "Mod+Shift+R".move-window-down-or-to-workspace-down = [];
             "Mod+Shift+Return".fullscreen-window = [];
             "Mod+Shift+S".move-column-right-or-to-monitor-right = [];
