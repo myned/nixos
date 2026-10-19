@@ -107,7 +107,7 @@ in {
       default = let
         folder = id: devices: {inherit id devices;};
       in {
-        "PACK" = folder "xqpgq-2inyd" ["echo-pc" "myxel"];
+        "PACK" = folder "xqpgq-2inyd" ["echo-pc" "myxel" "tonic-pc"];
         "SYNC/.backup" = folder "oxdvq-dfzjk" [];
         "SYNC/admin" = folder "l6odm-rmjep" [];
         "SYNC/android" = folder "y3omj-gpjch" ["myxel"];
@@ -189,6 +189,7 @@ in {
               myosh.id = "PTZV7ID-UYR37CU-GNRWHF3-JI3OVQ4-4YT7T4V-HB735JT-YIC5GLB-NPY36Q4";
               myosh.introducer = true;
               myxel.id = "G5NSHAX-HUINZXG-XSAZOX4-ZH5INKX-IZCZI4U-RXGPHDV-DXDT3X3-ITID7AK";
+              tonic-pc.id = "THXGWWW-KZ6QQVT-H2VCGC2-2PVQQZO-P4KJARG-SZG5E5H-YZ46HCH-PCJPFA7";
               zendows.id = "4JS6YSF-OBZFPYW-B3OUF4G-R6DVOZ4-KFAVGFY-NT4J223-E44HK3D-GPYAFQP";
               zenix.id = "NU4MRJM-KTD7SKM-D7ZBRBC-7KRBO7G-PTTIT2Y-LIYY7LW-2W3BAKF-TE2OPAX";
               zexel.id = "VYG4QAC-SY7ET5F-CHIPQUN-TP6P7WN-LQCT3HO-UBS73JG-ZGOKCLG-SHWZOAN";
