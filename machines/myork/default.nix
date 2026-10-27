@@ -116,7 +116,7 @@ with lib; {
     keyd.keyboards.builtin = {
       ids = ["0001:0001:09b4e68d"];
       settings = recursiveUpdate config.services.keyd.keyboards.default.settings {
-        main.rightcontrol = "layer(altgr)"; # Alt_R
+        main.rightcontrol = "layer(alt)"; # rightalt
       };
     };
   };

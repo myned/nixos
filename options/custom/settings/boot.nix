@@ -153,6 +153,7 @@ in {
     console = {
       enable = true;
       #// earlySetup = true;
+      useXkbConfig = true;
 
       # https://wiki.nixos.org/wiki/Console_Fonts
       # https://wiki.archlinux.org/title/Linux_console#Fonts

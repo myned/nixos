@@ -67,6 +67,7 @@ in {
         #// swayosd.enable = mkDefault true;
         #// sysprof.enable = mkDefault true;
         usbmuxd.enable = mkDefault true;
+        xserver.enable = mkDefault true;
       })
     ];
   };
