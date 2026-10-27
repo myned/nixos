@@ -211,6 +211,7 @@ in {
           smile # Emoji picker
           snapshot # Camera
           snoop # File content finder
+          soundconverter # Audio converter
           #// sourcegit # Git client
           #// spotify # Spotify client
           #// unstable.stoat-desktop # Stoat/Revolt client
