@@ -28,15 +28,8 @@ in {
 
     swapSize = mkOption {
       default = null;
-      description = "Size of the swapfile to create, in GiB";
+      description = "Size of the swapfile backing cache for Zswap, in GiB";
       example = 32;
-      type = with types; nullOr int;
-    };
-
-    zramSize = mkOption {
-      default = 100;
-      description = "Size of the zram device to create, in percentage of memory capacity";
-      example = 50;
       type = with types; nullOr int;
     };
 
@@ -371,14 +364,16 @@ in {
       }
     ];
 
-    # TODO: Use zswap module when available
-    # https://github.com/NixOS/nixpkgs/issues/119244
+    # https://wiki.nixos.org/wiki/Swap#Zswap_swap_cache
+    boot.zswap = optionalAttrs (!isNull cfg.swapSize) {
+      enable = true;
+    };
+
     # https://wiki.nixos.org/wiki/Swap#Enable_zram_swap
     # https://wiki.archlinux.org/title/Zram
     #?? zramctl
-    zramSwap = optionalAttrs (!isNull cfg.zramSize) {
+    zramSwap = optionalAttrs (isNull cfg.swapSize) {
       enable = true;
-      memoryPercent = cfg.zramSize;
     };
 
     # https://wiki.nixos.org/wiki/Btrfs#Scrubbing
