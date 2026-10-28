@@ -176,6 +176,7 @@
               specialArgs = {inherit inputs;};
             };
         in {
+          myber = nixos "x86_64-linux" [./profiles/laptop ./machines/myber];
           myeck = nixos "x86_64-linux" [./profiles/deck ./machines/myeck];
           myeye = nixos "x86_64-linux" [./profiles/compute ./machines/myeye];
           mynix = nixos "x86_64-linux" [./profiles/desktop ./machines/mynix];

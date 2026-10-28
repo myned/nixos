@@ -7,6 +7,7 @@ let
   # Users that imperatively encrypt age files
   #!! Imperative client key generation
   #?? ssh-keygen -f ~/.ssh/id_ed25519 -N ''
+  # FIXME: Rekey without old keys
   users = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINm04th+wJ+J6uQy4FOEo1YNpV9Mxxi+luGzCAN5YmA+"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKcKnHQnd75sTQa8EchKbanEb8w26g53TY9QAp5NZxUa myned@mynix"
@@ -16,6 +17,7 @@ let
   # Machines that decrypt age files during activation
   #!! Imperative host key generation without sshd service
   #?? sudo ssh-keygen -f /etc/ssh/id_ed25519 -N ''
+  myber = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL7nQx0MkiVdZZDHw6h8TjkZqrlRB5ZGyPRhi5/bNrpH root@myber";
   myeck = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJh8nTTOUsmKQa7zIftN2k8BgbQbXENc98KSJIyorMON root@myeck";
   myeye = "";
   mynix = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBKKqfRtKZ+8Qm9DjurAJ8Ob4IZjAWZQjNGQXgQVRr8M root@mynix";
@@ -24,7 +26,7 @@ let
   myosh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIENq879QYYHnC8542PB+nzrU0SyWiAEkzWhTFrZxJ5n6 root@myosh";
   mypi3 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHfJT4DX8pakYra4CDSTksFG1RCPkuoGt2YC3MNF2H1f root@mypi3";
 
-  common = [myeck myeye mynix myore myork myosh mypi3];
+  common = [myber myeck myeye mynix myore myork myosh mypi3];
 
   key = key: {publicKeys = users ++ [key];};
   keys = keys: {publicKeys = users ++ keys;};
@@ -36,6 +38,10 @@ in {
   "common/tailscale/container.env" = keys common;
   "common/tailscale/container.key" = keys common;
   "common/tailscale/vpn.env" = keys common;
+  "common/vm/myndows.pass" = keys common;
+
+  "myber/users/myned.pass" = key myber;
+  "myber/users/root.pass" = key myber;
 
   "myeck/users/myned.pass" = key myeck;
   "myeck/users/root.pass" = key myeck;
@@ -47,7 +53,6 @@ in {
   "mynix/ovenmediaengine/.env" = key mynix;
   "mynix/users/myned.pass" = key mynix;
   "mynix/users/root.pass" = key mynix;
-  "mynix/vm/myndows.pass" = key mynix;
 
   "myore/borgmatic/borgbase" = key myore;
   "myore/caddy/.env" = key myore;
@@ -70,7 +75,6 @@ in {
 
   "myork/users/myned.pass" = key myork;
   "myork/users/root.pass" = key myork;
-  "myork/vm/myndows.pass" = key myork;
 
   "myosh/affine/.env" = key myosh;
   "myosh/affine/db.env" = key myosh;

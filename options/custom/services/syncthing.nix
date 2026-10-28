@@ -17,6 +17,7 @@ in {
 
     devices = mkOption {
       default = [
+        "myber"
         "myosh"
         "mynix"
         "myork"
@@ -183,6 +184,7 @@ in {
               }
               // value) {
               echo-pc.id = "QYL6DA6-3FBND4J-BV3BRHT-EOGKIZQ-G62Z46N-IJWD7QS-DV3CA3A-P32FDQT";
+              myber.id = "26O6MNZ-HUTFEVU-2UXDEJ6-6Z4NYNS-3CGJUHP-GOHTZGE-2GRAZZ5-CD3KDQC";
               myeck.id = "77DCMIH-2O6C4TK-3VK5S27-GZ5IXXB-CTSZ3YG-LMPHZTT-L55WAPZ-SLX4LAI";
               mynix.id = "4VBPQMB-L2UIAQA-7IVLQUH-GXMY624-OECCFXN-JMCZI44-Q6MADRJ-4VPV6QK";
               myork.id = "L7CAFJP-NXNEZUY-V36HDXP-V6T5CHP-2YCYV3P-JCQV6ZH-JEDULBU-BABJLQP";
