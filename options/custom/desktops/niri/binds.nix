@@ -70,7 +70,7 @@ in {
             '');
 
             # Launch VM
-            launch-vm = [
+            launch-vm = optionals config.custom.vms.myndows.enable [
               "bash"
               "-c"
               ''remote --vm --client=remmina --username=Myned --password="$(cat ${config.age.secrets."${config.custom.hostname}/vm/myndows.pass".path})" myndows''

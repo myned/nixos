@@ -285,16 +285,6 @@ in {
       ];
     };
 
-    age.secrets = let
-      secret = filename: {
-        file = "${inputs.self}/secrets/${filename}";
-        owner = config.custom.username;
-        group = config.users.users.${config.custom.username}.group;
-      };
-    in {
-      "${config.custom.hostname}/vm/myndows.pass" = secret "${config.custom.hostname}/vm/myndows.pass";
-    };
-
     home-manager.sharedModules = [
       {
         home.sessionVariables =

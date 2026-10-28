@@ -21,7 +21,7 @@
 
     vms = {
       enable = true;
-      myndows.enable = true;
+      #// myndows.enable = true;
     };
   };
 

@@ -12,6 +12,16 @@ in {
   };
 
   config = mkIf cfg.enable {
+    age.secrets = let
+      secret = filename: {
+        file = "${inputs.self}/secrets/${filename}";
+        owner = config.custom.username;
+        group = config.users.users.${config.custom.username}.group;
+      };
+    in {
+      "${config.custom.hostname}/vm/myndows.pass" = secret "${config.custom.hostname}/vm/myndows.pass";
+    };
+
     #!! Allocates available storage
     # https://github.com/AshleyYakeley/NixVirt?tab=readme-ov-file#libvolumegetxml
     custom.vms.libvirt.images = [
