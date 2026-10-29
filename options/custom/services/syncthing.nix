@@ -90,8 +90,8 @@ in {
 
     versioning = mkOption {
       default = {
-        type = "trashcan";
-        params.cleanoutDays = "7";
+        type = "staggered";
+        params.maxAge = "7"; # Days
       };
 
       description = "Method in which to version modified files";
