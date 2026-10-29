@@ -258,6 +258,10 @@ in {
           StandardOutput = "journal";
         };
       };
+
+      tmpfiles.settings.libvirt = {
+        "/var/lib/libvirt/images".d = {};
+      };
     };
 
     boot = mkIf cfg.passthrough.enable {
