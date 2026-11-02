@@ -23,7 +23,7 @@ in {
     kernel = mkOption {
       default =
         if config.custom.full
-        then pkgs.linuxPackages # _latest
+        then pkgs.linuxPackages_zen # _latest
         else pkgs.linuxPackages;
 
       type = types.attrs;
