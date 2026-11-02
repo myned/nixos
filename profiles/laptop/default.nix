@@ -13,9 +13,9 @@
       #// auto-cpufreq.enable = true;
       #// colord.enable = true;
       #// ollama.download = ["potato" "medium"];
-      power-profiles-daemon.enable = true;
+      #// power-profiles-daemon.enable = true;
       #// power-profiles-daemon.auto = true;
-      #// tuned.enable = true;
+      tuned.enable = true;
       #// wluma.enable = true;
     };
 
