@@ -187,10 +187,12 @@ in {
     networking.nat = {
       enable = true;
       enableIPv6 = true;
-      internalIPs = [cfg.ipv4Network];
-      internalIPv6s = [cfg.ipv6Network];
-      externalIP = hostCfg.custom.settings.networking.ipv4.address;
-      externalIPv6 = hostCfg.custom.settings.networking.ipv6.address;
+      internalInterfaces = ["ve-+"]; # nftables: ve-*
+      externalInterface = "eth+";
+      # internalIPs = [cfg.ipv4Network];
+      # internalIPv6s = [cfg.ipv6Network];
+      # externalIP = hostCfg.custom.settings.networking.ipv4.address;
+      # externalIPv6 = hostCfg.custom.settings.networking.ipv6.address;
     };
 
     systemd.tmpfiles.settings =
