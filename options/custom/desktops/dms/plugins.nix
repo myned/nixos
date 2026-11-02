@@ -26,28 +26,29 @@ in {
       dankNotepadModule.enable = true;
 
       # Third-party
-      #// activateLinux.enable = true; # https://github.com/hthienloc/dms-activate-linux
-      amdGpuMonitor.enable = true; # https://github.com/navidagz/dms-amd-gpu-monitor
+      activateLinux.enable = true; # https://github.com/hthienloc/dms-activate-linux
+      #// amdGpuMonitor.enable = true; # https://github.com/navidagz/dms-amd-gpu-monitor
+      batteryPlus.enable = true; # https://github.com/arcatva/dms-battery-plus
       bongoCat.enable = true; # https://github.com/hthienloc/dms-bongo-cat
       calculator.enable = true; # https://github.com/rochacbruno/DankCalculator
       dankDiskUsage.enable = true; # https://github.com/alcxyz/DankDiskUsage
       dankQuickSearch.enable = true; # https://github.com/alcxyz/DankQuickSearch
       dankscale.enable = true; # https://github.com/cglavin50/dms-tailscale
-      dankStopwatch.enable = true; # https://github.com/hthienloc/dms-stopwatch
+      #// dankStopwatch.enable = true; # https://github.com/hthienloc/dms-stopwatch
       dankTranslate.enable = true; # https://github.com/alcxyz/DankTranslate
       #// dankVault.enable = true; # https://github.com/alcxyz/DankVault
-      dnsSwitcher.enable = true; # https://github.com/JDKamalakar/DMS-DNS_Switcher
+      #// dnsSwitcher.enable = true; # https://github.com/JDKamalakar/DMS-DNS_Switcher
       easyEffects.enable = true; # https://github.com/jonkristian/dms-easyeffects
       #// floaty.enable = true; # https://github.com/hthienloc/dms-floaty
-      #// homeAssistantMonitor.enable = true; # https://github.com/xxyangyoulin/dms-plugin-hass
+      homeAssistantMonitor.enable = true; # https://github.com/xxyangyoulin/dms-plugin-hass
       ipIndicator.enable = true; # https://github.com/hthienloc/dms-ipIndicator
-      kaomojiPicker.enable = true; # https://github.com/hthienloc/dms-kaomoji-picker
-      nixPackageRunner.enable = true; # https://github.com/iahccc/NixPackageRunner
+      #// kaomojiPicker.enable = true; # https://github.com/hthienloc/dms-kaomoji-picker
+      #// nixPackageRunner.enable = true; # https://github.com/iahccc/NixPackageRunner
       ocrScanner.enable = true; # https://github.com/hthienloc/dms-ocr-scanner
-      powerUsagePlugin.enable = true; # https://github.com/Daniel-42-z/dms-power-usage
+      #// powerUsagePlugin.enable = true; # https://github.com/Daniel-42-z/dms-power-usage
       #// quickCapture.enable = true; # https://github.com/hthienloc/dms-quick-capture
       #// screenCaptureToolbar.enable = true; # https://github.com/JDKamalakar/DMS-ScreenCapture_Toolbar
-      timer.enable = true; # https://github.com/hthienloc/dms-timer
+      #// timer.enable = true; # https://github.com/hthienloc/dms-timer
     };
   };
 }
