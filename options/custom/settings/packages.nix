@@ -61,6 +61,7 @@ in {
           progress # Coreutils progress viewer
           q # DNS tester
           rclone # File sync
+          speedtest-go # Ookla network speed tester
           stress # CPU stress tester
           tcpdump # Network analyzer
           testdisk # Data recovery tool
