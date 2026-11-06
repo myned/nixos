@@ -84,12 +84,14 @@ in {
 
       kernel.sysctl = mkDefault {
         # https://wiki.archlinux.org/title/Sysctl#Virtual_memory
-        "vm.dirty_bytes" = 256 * 1024 * 1024; # 256 MiB
-        "vm.dirty_background_bytes" = 128 * 1024 * 1024; # 128 MiB
+        #// "vm.dirty_bytes" = 256 * 1024 * 1024; # 256 MiB
+        #// "vm.dirty_background_bytes" = 128 * 1024 * 1024; # 128 MiB
+        "vm.dirty_ratio" = 5; # Default: 10
+        "vm.dirty_background_ratio" = 1; # Default: 5
         "vm.vfs_cache_pressure" = 50; # Default: 100
 
         # https://wiki.archlinux.org/title/Swap#Swappiness
-        "vm.swappiness" = 1; # Default: 60
+        "vm.swappiness" = 100; # Default: 60
 
         # https://redis.io/docs/latest/develop/get-started/faq/#background-saving-fails-with-a-fork-error-on-linux
         "vm.overcommit_memory" = 1;
