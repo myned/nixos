@@ -28,7 +28,6 @@ in {
 
       gnome =
         {
-          core-apps.enable = true;
           sushi.enable = true; # Quick preview with spacebar
         }
         // optionalAttrs (versionAtLeast version "24.11") {
@@ -37,6 +36,15 @@ in {
           tinysparql.enable = cfg.index;
         };
     };
+
+    # https://github.com/NixOS/nixpkgs/blob/f4a03c008967841f2a0b3cb7c436fc6fc31671f6/nixos/modules/services/desktop-managers/gnome.nix#L522
+    environment.sessionVariables = {
+      NAUTILUS_4_EXTENSION_DIR = "${config.system.path}/lib/nautilus/extensions-4";
+    };
+
+    # environment.pathsToLink = [
+    #   "/share/nautilus-python/extensions"
+    # ];
 
     # Alternative fix to services.gnome.core-apps.enable
     # https://github.com/NixOS/nixpkgs/pull/240780
