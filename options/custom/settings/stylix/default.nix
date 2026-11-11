@@ -115,6 +115,20 @@ in {
             XCURSOR_PATH = "$XCURSOR_PATH:${hm.home.profileDirectory}/share/icons";
           };
 
+          # File browser bookmarks
+          #?? file://<absolute path>
+          gtk.gtk3.bookmarks = [
+            "file://${hm.home.homeDirectory}/SYNC"
+            "file://${hm.home.homeDirectory}/PACK"
+            "file://${hm.home.homeDirectory}/ZEL"
+            "file://${hm.home.homeDirectory}/Desktop"
+            "file://${hm.home.homeDirectory}/Documents"
+            "file://${hm.home.homeDirectory}/Downloads"
+            "file://${hm.home.homeDirectory}/Music"
+            "file://${hm.home.homeDirectory}/Pictures"
+            "file://${hm.home.homeDirectory}/Videos"
+          ];
+
           xdg.configFile."gtk-3.0/gtk.css".force = true;
           xdg.configFile."gtk-4.0/gtk.css".force = true;
         }
