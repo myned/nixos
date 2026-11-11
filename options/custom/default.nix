@@ -55,6 +55,7 @@ in {
       arion.enable = true;
       containers.enable = true;
       files.enable = true;
+      incus.enable = true;
       programs.enable = true;
       scripts.enable = true;
       services.enable = true;
