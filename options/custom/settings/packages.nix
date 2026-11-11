@@ -105,7 +105,7 @@ in {
         ++ optionals config.custom.full [
           ### GUI applications
           alpaca # Ollama client
-          amberol # Audio player
+          #// amberol # Audio player
           anytype # Knowledge base
           apostrophe # Markdown editor
           baobab # Disk usage analyzer
@@ -132,7 +132,6 @@ in {
           eartag # Music tagger
           easyeffects # Audio filters
           eyedropper # Color picker
-          feishin # Jellyfin client
           file-roller # Archive utility
           #// flare-signal # Signal client
           #// fluffychat # Matrix client
@@ -148,6 +147,7 @@ in {
           gnome-boxes # Virtual machine manager
           gnome-calculator # Calculator
           gnome-calendar # Calendar
+          gnome-characters # Unicode selector
           gnome-clocks # Clock
           gnome-connections # Remote desktop client
           gnome-contacts # Contact editor
@@ -157,6 +157,7 @@ in {
           gnome-font-viewer # Font viewer
           gnome-frog # Text extraction
           gnome-graphs # Data plotter
+          gnome-logs # Syslog viewer
           gnome-maps # OpenStreetMap client
           gnome-network-displays # Miracast client
           gnome-obfuscate # Image redacter
@@ -166,6 +167,7 @@ in {
           #// gnome-system-monitor # System monitor
           gnome-text-editor # Text editor
           #// gnome-usage # System monitor
+          gnome-weather # Weather viewer
           #// gparted # Disk utility
           #// gradience # GTK theme editor
           #// gtk4.dev # GTK4 icon browser
@@ -188,6 +190,7 @@ in {
           #// monitorets # System monitor
           newsflash # RSS feed
           nicotine-plus # SoulSeek client
+          nocturne # Music client
           notesnook # Encrypted notes
           obsidian # Knowledge base
           #// pantheon.switchboard-with-plugs # System settings
@@ -208,6 +211,7 @@ in {
           #// rustdesk-flutter # Remote desktop client
           #// showtime # Video player
           signal-desktop # Signal client
+          simple-scan # Scanning client
           slack # Slack client
           smile # Emoji picker
           snapshot # Camera
