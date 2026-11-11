@@ -33,7 +33,8 @@ in {
         programs.vscode = {
           enable = true;
           #// mutableExtensionsDir = false;
-          #// package = pkgs.vscodium;
+          # BUG: https://github.com/NixOS/nixpkgs/issues/584492
+          package = pkgs.unstable.vscode;
         };
 
         # TODO: Use stylix
