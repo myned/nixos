@@ -23,7 +23,7 @@ with lib; {
         scale = 1.8;
       };
 
-      DP-7 = {
+      DP-6 = {
         model = "Dell Inc. DELL S3425DW 26M7GD4";
         width = 3440;
         height = 1440;
@@ -31,7 +31,7 @@ with lib; {
         scale = 1.1;
       };
 
-      DP-12 = {
+      DP-8 = {
         model = "Dell Inc. DELL P2422HE 6Z8G3V3";
         width = 1920;
         height = 1080;
