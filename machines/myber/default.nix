@@ -64,6 +64,12 @@ with lib; {
     };
   };
 
+  boot.kernelParams = [
+    # Attempt to fix frame drops/stuttering
+    # https://wiki.archlinux.org/title/Intel_graphics#Screen_flickering
+    "xe.enable_psr=0"
+  ];
+
   services = {
     keyd.keyboards.builtin = {
       ids = ["0001:0001:09b4e68d"];
